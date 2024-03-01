@@ -19,7 +19,7 @@ jobs:
         binary: [linux-binary]
         include:
           - os: windows-latest
-            build_type: Release
+            build_type: Debug
             binary: windows-binary
 
     steps:
