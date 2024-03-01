@@ -10,7 +10,7 @@ This is a [PTSD](https://github.com/ntut-open-source-club/practical-tools-for-si
 2. Clone your repository
 
    ```bash
-   git clone YOUR_GIT_URL --recursive
+   git clone git@github.com:onon1101/fuck-ptsd.git --recursive
    ```
 
 3. Build your project
