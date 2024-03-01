@@ -16,6 +16,8 @@ void App::Start() {
     m_Root.AddChild(m_Player1);
 
     m_StartBackground = std::make_shared<Background>(ASSETS_DIR"/mainmenu/mainmenu.png");
+    m_StartBackground->SetZIndex(3);
+
     m_Root.AddChild(m_StartBackground);
     m_CurrentState = State::UPDATE;
 }
