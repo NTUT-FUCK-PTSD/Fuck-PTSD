@@ -1,7 +1,11 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+// @/libs/include
+
 #include "Character.hpp"
+#include "Background.hpp"
+
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export
 
@@ -27,6 +31,7 @@ private:
 private:
     State m_CurrentState = State::START;
 
+    std::shared_ptr<Background> m_StartBackground;
     std::shared_ptr<Character> m_Player1;
     Util::Root m_Root;
 };
