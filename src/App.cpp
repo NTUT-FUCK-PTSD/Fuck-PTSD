@@ -34,6 +34,16 @@ void App::Start() {
 void App::Update() {
 
     m_Player1->SetVisible(true);
+
+
+
+    // detect any key press
+    for (int i = 0; i < 512; i++) {
+        if (Util::Input::IsKeyPressed((Util::Keycode)i)) {
+            m_Root.RemoveChild(m_Continue);
+            m_Root.RemoveChild(m_StartBackground);
+        }
+    }
     
     /*
      * Do not touch the code below as they serve the purpose for

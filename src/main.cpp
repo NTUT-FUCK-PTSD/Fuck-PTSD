@@ -6,6 +6,8 @@ int main(int, char**) {
     auto context = Core::Context::GetInstance();
     App app;
 
+    const App::State CurrentState = [App::State::START, App::State::UPDATE];
+
     while (!context->GetExit()) {
         switch (app.GetCurrentState()) {
             case App::State::START:
