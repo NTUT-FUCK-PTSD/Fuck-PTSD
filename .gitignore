@@ -490,7 +490,7 @@ FodyWeavers.xsd
 build/
 
 # Ignore 3rd party dependencies
-libs/
+#lib/
 
 # Doxygen generated files
 docs/html/
