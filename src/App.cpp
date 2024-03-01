@@ -1,6 +1,7 @@
 #include "App.hpp"
 #include "Background.hpp"
 #include "Character.hpp"
+#include "Begin.h"
 
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
@@ -10,24 +11,22 @@
 void App::Start() {
     LOG_TRACE("Start");
 
-    //init
+    // init background value
+    std::shared_ptr<Background> m_MainMenu = std::make_shared<Background>(ASSETS_DIR"/mainmenu/mainmenu.png");
+    std::shared_ptr<Background> m_Continue = std::make_shared<Background>(ASSETS_DIR"/mainmenu/continue.png");
 
+    // create
+    Begin::CreateBackground(m_Root, m_MainMenu, m_Continue);
 
-    // create background
+    // save it to App class
+    this->SaveBackground = {m_MainMenu, m_Continue};
+
+    // create giraffe
     m_Player1 = std::make_shared<Character>(RESOURCE_DIR"/entities/player1.png");
     m_Player1->SetPosition({-112.5f, -140.5f});
     m_Player1->SetZIndex(50);
     m_Root.AddChild(m_Player1);
 
-    m_StartBackground = std::make_shared<Background>(ASSETS_DIR"/mainmenu/mainmenu.png");
-    m_StartBackground->SetZIndex(3);
-
-    m_Continue = std::make_shared<Background>(ASSETS_DIR"/mainmenu/continue.png");
-    m_Continue->SetPosition({-0.5f, -365.5f});
-    m_Continue->SetZIndex(5);
-
-    m_Root.AddChild(m_StartBackground);
-    m_Root.AddChild(m_Continue);
     m_CurrentState = State::UPDATE;
 }
 
@@ -35,13 +34,10 @@ void App::Update() {
 
     m_Player1->SetVisible(true);
 
-
-
     // detect any key press
     for (int i = 0; i < 512; i++) {
         if (Util::Input::IsKeyPressed((Util::Keycode)i)) {
-            m_Root.RemoveChild(m_Continue);
-            m_Root.RemoveChild(m_StartBackground);
+            Begin::RemoveBackground(this->m_Root, this->SaveBackground[0], this->SaveBackground[1]);
         }
     }
     

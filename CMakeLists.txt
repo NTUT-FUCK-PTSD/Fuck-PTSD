@@ -23,6 +23,8 @@ add_executable(${PROJECT_NAME}
     ${SRC_FILES}
     ${HEADER_FILES}
     ${LIB_FILES}
+        include/Game/Begin.h
+        src/Game/Begin.cpp
 )
 
 if(MSVC)
@@ -42,6 +44,8 @@ endif()
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/Game)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/Settings)
 
 
 target_link_libraries(Framework

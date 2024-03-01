@@ -22,3 +22,8 @@ This is a [PTSD](https://github.com/ntut-open-source-club/practical-tools-for-si
    cmake -DCMAKE_BUILD_TYPE=Debug -B build # -G Ninja
    ```
    better read [PTSD README](https://github.com/ntut-open-source-club/practical-tools-for-simple-design)
+
+## Structure
+
+- Game 代表著遊戲機制，例如什麼時候當觸發時，遊戲就跳進下一關
+- Settings 代表著一些非機制類型，例如角色的設定。

@@ -29,8 +29,8 @@ private:
     State m_CurrentState = State::START;
 
     // Background
-    std::shared_ptr<Background> m_StartBackground;
-    std::shared_ptr<Background> m_Continue;
+    std::vector<std::shared_ptr<Background>> SaveBackground;
+
     std::shared_ptr<Character> m_Player1;
     Util::Root m_Root;
 };
