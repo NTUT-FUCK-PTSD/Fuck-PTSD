@@ -2,6 +2,7 @@
 #include "Background.hpp"
 #include "Character.hpp"
 #include "Begin.h"
+#include "ToolBoxs.h"
 
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
@@ -34,12 +35,9 @@ void App::Update() {
 
     m_Player1->SetVisible(true);
 
-    // detect any key press
-    for (int i = 0; i < 512; i++) {
-        if (Util::Input::IsKeyPressed((Util::Keycode)i)) {
-            Begin::RemoveBackground(this->m_Root, this->SaveBackground[0], this->SaveBackground[1]);
-        }
-    }
+    // detect any key press, and then remove begin background
+    if (ToolBoxs::IsAnyKeyPress()) { Begin::RemoveBackground(this->m_Root, this->SaveBackground[0], this->SaveBackground[1]); }
+
     
     /*
      * Do not touch the code below as they serve the purpose for
