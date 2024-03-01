@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         compiler: [{ cc: gcc, cxx: g++ }, { cc: clang, cxx: clang++ }]
-        build_type: [Release]
+        build_type: [Debug]
         binary: [linux-binary]
         include:
           - os: windows-latest
