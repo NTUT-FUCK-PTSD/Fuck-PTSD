@@ -24,6 +24,9 @@ private:
 
 private:
     State m_CurrentState = State::START;
+
+    std::shared_ptr<Character> m_Player1;
+    Util::Root m_Root;
 };
 
 #endif
