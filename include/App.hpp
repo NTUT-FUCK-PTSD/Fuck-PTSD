@@ -1,10 +1,7 @@
 #ifndef APP_HPP
 #define APP_HPP
-
-// @/libs/include
-
-#include "Character.hpp"
 #include "Background.hpp"
+#include "Character.hpp"
 
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export

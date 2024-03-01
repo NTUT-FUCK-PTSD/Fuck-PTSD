@@ -1,4 +1,6 @@
 #include "App.hpp"
+#include "Background.hpp"
+#include "Character.hpp"
 
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
@@ -13,20 +15,20 @@ void App::Start() {
     m_Player1->SetZIndex(50);
     m_Root.AddChild(m_Player1);
 
+    m_StartBackground = std::make_shared<Background>(ASSETS_DIR"/mainmenu/mainmenu.png");
+    m_Root.AddChild(m_StartBackground);
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
-    
-    //TODO: do your things here and delete this line <3
+
     m_Player1->SetVisible(true);
     
     /*
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-        Util::Input::IfExit()) {
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
 

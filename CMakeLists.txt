@@ -9,16 +9,20 @@ add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimple
 # include(files.cmake)
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs)
 list(TRANSFORM SRC_FILES PREPEND ${SRC_DIR}/)
 list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
+#list(TRANSFORM LIB_FILES PREPEND ${LIB_DIR}/)
 
 file(GLOB_RECURSE SRC_FILES src/*)
-file(GLOB_RECURSE HEADER_FILES include/*)
+file(GLOB_RECURSE LIB_FILES libs/*)
+file(GLOB_RECURSE HEADER_FILES include/* libs/include/*)
 
 add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
+    ${LIB_FILES}
 )
 
 if(MSVC)
@@ -29,6 +33,7 @@ endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Resources")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE ASSETS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets")
 else()
     message(FATAL_ERROR "relative RESOURCE_DIR is WIP, Please use `-DCMAKE_BUILD_TYPE=Debug` build for now.")
     # target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_INSTALL_PREFIX}/Resources")
@@ -37,6 +42,7 @@ endif()
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PRIVATE trash/Background/include)
 
 target_link_libraries(Framework
     ${DEPENDENCY_LINK_LIBRARIES}
