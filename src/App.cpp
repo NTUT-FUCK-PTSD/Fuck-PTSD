@@ -10,6 +10,10 @@
 void App::Start() {
     LOG_TRACE("Start");
 
+    //init
+
+
+    // create background
     m_Player1 = std::make_shared<Character>(RESOURCE_DIR"/entities/player1.png");
     m_Player1->SetPosition({-112.5f, -140.5f});
     m_Player1->SetZIndex(50);
@@ -18,7 +22,12 @@ void App::Start() {
     m_StartBackground = std::make_shared<Background>(ASSETS_DIR"/mainmenu/mainmenu.png");
     m_StartBackground->SetZIndex(3);
 
+    m_Continue = std::make_shared<Background>(ASSETS_DIR"/mainmenu/continue.png");
+    m_Continue->SetPosition({-0.5f, -365.5f});
+    m_Continue->SetZIndex(5);
+
     m_Root.AddChild(m_StartBackground);
+    m_Root.AddChild(m_Continue);
     m_CurrentState = State::UPDATE;
 }
 

@@ -11,6 +11,8 @@
 class Background: public Util::GameObject {
 public:
     explicit Background(const std::string& ImagePath);
+    void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
+    void SetScale(const glm::vec2& Ratio) { m_Transform.scale = Ratio; }
     void SetImage(const std::string& ImagePath);
 private:
     std::string m_ImagePath;

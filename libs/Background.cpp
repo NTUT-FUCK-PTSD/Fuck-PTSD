@@ -11,6 +11,6 @@ Background::Background(const std::string& ImagePath) {
 
 void Background::SetImage(const std::string& ImagePath) {
     this->m_ImagePath = ImagePath;
-
+    this->SetScale({3, 3});
     this->m_Drawable = std::make_shared<Util::Image>(m_ImagePath);
 }
