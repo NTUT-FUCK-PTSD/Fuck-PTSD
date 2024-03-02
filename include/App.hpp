@@ -2,7 +2,7 @@
 #define APP_HPP
 #include "Background.hpp"
 #include "Character.hpp"
-
+#include "SpriteSheet.hpp"
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export
 
@@ -29,7 +29,8 @@ private:
     State m_CurrentState = State::START;
 
     // Background
-    std::vector<std::shared_ptr<Background>> SaveBackground;
+    std::vector<std::shared_ptr<Background>> m_SaveBackground;
+    std::shared_ptr<SpriteSheet> m_SpriteSheet;
 
     std::shared_ptr<Character> m_Player1;
     std::shared_ptr<Character> m_Player2;
