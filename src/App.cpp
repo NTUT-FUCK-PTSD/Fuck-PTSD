@@ -23,16 +23,16 @@ void App::Start() {
     this->SaveBackground = {m_MainMenu, m_Continue};
 
     // create giraffe
-    m_Player1 = std::make_shared<Character>(RESOURCE_DIR"/entities/player1.png");
+    m_Player1 = std::make_shared<Character>(ASSETS_DIR"/entities/player1.png");
     m_Player1->SetPosition({-112.5f, -140.5f});
     m_Player1->SetZIndex(50);
     m_Root.AddChild(m_Player1);
 
-    m_Player2 = std::make_shared<Character>(RESOURCE_DIR"/entities/player1.png");
-    m_Player2->SetPosition({-112.5f, -140.5f});
-    m_Player2->SetZIndex(50);
-    m_Player2->SetVisible(false);
-    m_Root.AddChild(m_Player2);
+//    m_Player2 = std::make_shared<Character>(ASSETS_DIR"/entities/player1.png");
+//    m_Player2->SetPosition({-112.5f, -140.5f});
+//    m_Player2->SetZIndex(50);
+//    m_Player2->SetVisible(false);
+//    m_Root.AddChild(m_Player2);
 
     m_CurrentState = State::UPDATE;
 }
