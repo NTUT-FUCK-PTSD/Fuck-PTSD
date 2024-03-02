@@ -177,4 +177,4 @@ private:
     std::size_t m_Index;
 };
 
-#endif
+#endif // SPRITESHEET_HPP
