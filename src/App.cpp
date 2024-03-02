@@ -4,10 +4,16 @@
 #include "Begin.h"
 #include "ToolBoxs.h"
 
+#include "rusty_bridge/lib.h"
+
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+
+extern "C" {
+int32_t rusty_extern_c_integer();
+}
 
 void App::Start() {
     LOG_TRACE("Start");
@@ -45,8 +51,7 @@ void App::Update() {
     if (ToolBoxs::IsAnyKeyPress()) {
         Begin::RemoveBackground(this->m_Root, this->SaveBackground[0], this->SaveBackground[1]);
 
-        // show protagonist
-        m_Player2->SetVisible(true);
+        LOG_INFO(rusty_extern_c_integer());
     }
 
 
