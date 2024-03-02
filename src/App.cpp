@@ -28,6 +28,12 @@ void App::Start() {
     m_Player1->SetZIndex(50);
     m_Root.AddChild(m_Player1);
 
+    m_Player2 = std::make_shared<Character>(RESOURCE_DIR"/entities/player1.png");
+    m_Player2->SetPosition({-112.5f, -140.5f});
+    m_Player2->SetZIndex(50);
+    m_Player2->SetVisible(false);
+    m_Root.AddChild(m_Player2);
+
     m_CurrentState = State::UPDATE;
 }
 
@@ -36,9 +42,14 @@ void App::Update() {
     m_Player1->SetVisible(true);
 
     // detect any key press, and then remove begin background
-    if (ToolBoxs::IsAnyKeyPress()) { Begin::RemoveBackground(this->m_Root, this->SaveBackground[0], this->SaveBackground[1]); }
+    if (ToolBoxs::IsAnyKeyPress()) {
+        Begin::RemoveBackground(this->m_Root, this->SaveBackground[0], this->SaveBackground[1]);
 
-    
+        // show protagonist
+        m_Player2->SetVisible(true);
+    }
+
+
     /*
      * Do not touch the code below as they serve the purpose for
      * closing the window.

@@ -32,6 +32,7 @@ private:
     std::vector<std::shared_ptr<Background>> SaveBackground;
 
     std::shared_ptr<Character> m_Player1;
+    std::shared_ptr<Character> m_Player2;
     Util::Root m_Root;
 };
 
