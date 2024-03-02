@@ -2,6 +2,7 @@
 #define APP_HPP
 
 #include "Character.hpp"
+#include "SpriteSheet.hpp"
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export
 
@@ -28,6 +29,7 @@ private:
     State m_CurrentState = State::START;
 
     std::shared_ptr<Character> m_Player1;
+    std::shared_ptr<SpriteSheet> m_Test;
     Util::Root m_Root;
 };
 

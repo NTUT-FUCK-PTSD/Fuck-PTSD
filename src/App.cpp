@@ -8,7 +8,12 @@
 void App::Start() {
     LOG_TRACE("Start");
 
-    m_Player1 = std::make_shared<Character>(RESOURCE_DIR"/entities/player1.png");
+    m_Player1 =
+        std::make_shared<Character>(RESOURCE_DIR "/entities/player1.png");
+    m_Test = std::make_shared<SpriteSheet>(
+        RESOURCE_DIR "/entities/slime_green.png", glm::vec2(26.0f, 26.0f),
+        std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
+    m_Player1->SetDrawable(m_Test);
     m_Player1->SetPosition({-112.5f, -140.5f});
     m_Player1->SetZIndex(50);
     m_Root.AddChild(m_Player1);
@@ -17,16 +22,15 @@ void App::Start() {
 }
 
 void App::Update() {
-    
-    //TODO: do your things here and delete this line <3
+
+    // TODO: do your things here and delete this line <3
     m_Player1->SetVisible(true);
-    
+
     /*
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-        Util::Input::IfExit()) {
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
 
