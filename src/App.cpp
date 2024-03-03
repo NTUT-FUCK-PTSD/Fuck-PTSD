@@ -42,8 +42,6 @@ void App::Start() {
     m_Protagonist->SetZIndex(50);
     m_Root.AddChild(m_Protagonist);
 
-
-
     // change state to update
     m_CurrentState = State::UPDATE;
 }
