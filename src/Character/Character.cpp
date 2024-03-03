@@ -1,5 +1,5 @@
 
-#include "Character/Character.hpp"
+#include "Character.hpp"
 #include "SpriteSheet.hpp"
 #include "Util/Image.hpp"
 

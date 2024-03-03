@@ -26,8 +26,6 @@ public:
     // Is visible
     [[nodiscard]] bool GetVisibility() const { return m_Visible; }
 
-//    [[nodiscard]] bool IsPlaying() const { return std::dynamic_pointer_cast<Util::Animation>(m_Drawable)->GetState() == Util::Animation::State::PLAY; }
-
     void SetImage(const std::string& ImagePath);
 
     void SetPosition(const glm::vec2 &Position) {
@@ -44,7 +42,6 @@ public:
 
     void SetPause();
 
-    // TODO: Implement the collision detection
     [[nodiscard]] bool
     IfCollides(const std::shared_ptr<Character> &other) const {
         if (m_Transform.translation.x + GetScaledSize().x / 2 >=
@@ -63,13 +60,15 @@ public:
             return false;
     }
 
-    // TODO: Add and implement more methods and properties as needed to finish
     // Giraffe Adventure.
 private:
     void ResetPosition() { m_Transform.translation = {0, 0}; }
 
     std::string m_ImagePath;
     std::shared_ptr<SpriteSheet> m_Animation;
+
+    uint8_t ImageWidthNumber = 0;
+    uint8_t ImageHeightNumber = 0;
 };
 
 #endif // CHARACTER_HPP

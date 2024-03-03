@@ -13,5 +13,7 @@ public:
     Protagonist(std::string &Path);
 
     void AddToRoot(Util::Root m_Root);
+private:
+    std
 };
 #endif // FUCK_PTSD_PROTAGONIST_H
