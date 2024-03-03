@@ -45,7 +45,7 @@ public:
      * @brief Get the interval between frames.
      * @return Interval between frames in milliseconds.
      */
-    int GetInterval() const { return m_Interval; }
+    std::size_t GetInterval() const { return m_Interval; }
 
     /**
      * @brief Check if the animation loops.
@@ -57,7 +57,7 @@ public:
      * @brief Get the cooldown time.
      * @return Cooldown time in milliseconds.
      */
-    int GetCooldown() const { return m_Cooldown; }
+    std::size_t GetCooldown() const { return m_Cooldown; }
 
     /**
      * @brief Get the index of the current frame.
@@ -163,18 +163,18 @@ private:
     glm::vec2 m_Size;
     std::size_t m_col;
 
-    std::vector<std::size_t> m_Frames;
     glm::vec2 m_FrameSize;
+    std::vector<std::size_t> m_Frames;
     State m_State;
-    double m_Interval;
+    std::size_t m_Interval;
     bool m_Looping;
     std::size_t m_Cooldown;
     bool m_IsChangeFrame;
 
     unsigned long m_CooldownEndTime;
-    double m_TimeBetweenFrameUpdate;
+    double m_TimeBetweenFrameUpdate = 0;
 
     std::size_t m_Index;
 };
 
-#endif
+#endif // SPRITESHEET_HPP
