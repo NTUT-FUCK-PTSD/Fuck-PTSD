@@ -6,7 +6,7 @@
 
 #include "App.hpp"
 #include "Background.hpp"
-#include "Character.hpp"
+#include "Character/Character.hpp"
 
 #include "Util/Root.hpp"
 
