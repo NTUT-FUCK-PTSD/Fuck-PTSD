@@ -1,7 +1,7 @@
 #include "App.hpp"
 #include "Background.hpp"
 #include "Begin.h"
-#include "Character.hpp"
+#include "Character/Character.hpp"
 #include "ToolBoxs.h"
 
 #include "rusty_bridge/lib.h"
@@ -30,33 +30,25 @@ void App::Start() {
     // save it to App class
     this->m_SaveBackground = {m_MainMenu, m_Continue};
 
-    // create giraffe
-    m_Player1 = std::make_shared<Character>(ASSETS_DIR "/entities/player1.png");
-    m_Player1->SetPosition({-112.5f, -140.5f});
-    m_Player1->SetZIndex(50);
-    m_Root.AddChild(m_Player1);
-
-    // create slime
-
-    m_Player2 = std::make_shared<Character>( ASSETS_DIR "/entities/slime_green.png");
-    m_Player2->SetAnimation(glm::vec2(26.0f, 26.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
-
-    m_Player2->SetPosition({-200.0f, -250.0f});
-    m_Player2->SetZIndex(50);
-    m_Root.AddChild(m_Player2);
-
     m_Protagonist = std::make_shared<Character>(ASSETS_DIR"/entities/player1_armor_body.png");
-    m_Protagonist->SetAnimation(glm::vec2(26.0f, 26.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
+    m_Protagonist->SetAnimation(glm::vec2(24.0f, 24.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
     m_Protagonist->SetPosition({-200.0f, -250.0f});
     m_Protagonist->SetZIndex(50);
     m_Root.AddChild(m_Protagonist);
 
+    m_Protagonist = std::make_shared<Character>(ASSETS_DIR"/entities/player1_heads.png");
+    m_Protagonist->SetAnimation(glm::vec2(24.0f, 13.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
+    m_Protagonist->SetPosition({-200.0f, -250.0f});
+    m_Protagonist->SetZIndex(50);
+    m_Root.AddChild(m_Protagonist);
+
+    // change state to update
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
-    m_Player1->SetVisible(true);
-    m_Player2->SetVisible(true);
+//    m_Player1->SetVisible(true);
+//    m_Player2->SetVisible(true);
 
     // detect any key press, and then remove begin background
     if (ToolBoxs::IsAnyKeyPress()) {

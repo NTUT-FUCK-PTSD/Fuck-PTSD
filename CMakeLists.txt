@@ -7,18 +7,17 @@ set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(PTSD)
 add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
 
-# include(files.cmake)
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
-set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs)
-set(CMAKE_DIR ${PROJECT_SOURCE_DIR}/cmake)
+
 list(TRANSFORM SRC_FILES PREPEND ${SRC_DIR}/)
 list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
-#list(TRANSFORM LIB_FILES PREPEND ${LIB_DIR}/)
 
 file(GLOB_RECURSE SRC_FILES src/*)
-file(GLOB_RECURSE LIB_FILES libs/*)
 file(GLOB_RECURSE HEADER_FILES include/*)
+
+# import folder customize path
+include("${CMAKE_SOURCE_DIR}/files.cmake")
 
 add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
@@ -26,6 +25,7 @@ add_executable(${PROJECT_NAME}
     ${HEADER_FILES}
     ${LIB_FILES}
 )
+
 
 # download some plugin
 include("${CMAKE_DIR}/Dependencies.cmake")
@@ -53,9 +53,8 @@ endif()
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/Game)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/Settings)
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${CUSTOMIZE_PATH})
 
 target_link_libraries(Framework
     ${DEPENDENCY_LINK_LIBRARIES}
