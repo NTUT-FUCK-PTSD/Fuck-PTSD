@@ -1,31 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(FUCK_PTSD)
 
-include(FetchContent)
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 set(CMAKE_CXX_STANDARD 17)
-
-FetchContent_Declare(
-        Corrosion
-        GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
-        GIT_TAG master
-)
-FetchContent_MakeAvailable(Corrosion)
-
-find_program(CXXBRIDGE cxxbridge PATHS "$ENV{HOME}/.cargo/bin/")
-if (CXXBRIDGE STREQUAL "CXXBRIDGE-NOTFOUND")
-    message("Could not find cxxbridge, trying to install with `cargo install cxxbridge-cmd'")
-    find_program(CARGO cargo PATHS "$ENV{HOME}/.cargo/bin/")
-    if (CARGO STREQUAL "CARGO-NOTFOUND")
-        message(FATAL_ERROR "Requires cargo available in path, install via rustup https://rustup.rs/")
-    endif()
-    execute_process(COMMAND ${CARGO} install cxxbridge-cmd)
-    find_program(CXXBRIDGE cxxbridge PATHS "$ENV{HOME}/.cargo/bin/")
-endif()
-
-corrosion_import_crate(MANIFEST_PATH lib/rusty_code/Cargo.toml)
-corrosion_add_cxxbridge(rusty_bridge CRATE rusty_code MANIFEST_PATH rusty_code FILES lib.rs)
 
 add_subdirectory(PTSD)
 add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
@@ -34,13 +11,14 @@ add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimple
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs)
+set(CMAKE_DIR ${PROJECT_SOURCE_DIR}/cmake)
 list(TRANSFORM SRC_FILES PREPEND ${SRC_DIR}/)
 list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
 #list(TRANSFORM LIB_FILES PREPEND ${LIB_DIR}/)
 
 file(GLOB_RECURSE SRC_FILES src/*)
 file(GLOB_RECURSE LIB_FILES libs/*)
-file(GLOB_RECURSE HEADER_FILES include/* libs/include/*)
+file(GLOB_RECURSE HEADER_FILES include/*)
 
 add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
@@ -48,6 +26,13 @@ add_executable(${PROJECT_NAME}
     ${HEADER_FILES}
     ${LIB_FILES}
 )
+
+# download some plugin
+include("${CMAKE_DIR}/Dependencies.cmake")
+
+# include rust settings
+include("${CMAKE_DIR}/Rust.cmake")
+
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
