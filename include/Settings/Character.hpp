@@ -17,23 +17,30 @@ public:
 
     Character& operator=(Character&&) = delete;
 
+    // return Image Path
     [[nodiscard]] const std::string& GetImagePath() const { return m_ImagePath; }
 
+    // return Image's Position
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
 
+    // Is visible
     [[nodiscard]] bool GetVisibility() const { return m_Visible; }
+
+//    [[nodiscard]] bool IsPlaying() const { return std::dynamic_pointer_cast<Util::Animation>(m_Drawable)->GetState() == Util::Animation::State::PLAY; }
 
     void SetImage(const std::string& ImagePath);
 
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
 
+    void SetScale(const glm::vec2& Ratio) { m_Transform.scale = Ratio; }
+
+    // if animateion, then it will run.
     void SetAnimation(glm::vec2 size, const std::vector<std::size_t> &frames, bool play,
-                      std::size_t interval, bool looping, std::size_t cooldown) {
+                      std::size_t interval, bool looping, std::size_t cooldown);
 
-        std::shared_ptr<SpriteSheet> m_Animation = std::make_shared<SpriteSheet>(GetImagePath(), size, frames, play, interval, looping, cooldown);
+    void SetPlay();
 
-        this->SetDrawable(m_Animation);
-    }
+    void SetPause();
 
     // TODO: Implement the collision detection
     [[nodiscard]] bool IfCollides(const std::shared_ptr<Character>& other) const {
@@ -51,7 +58,7 @@ private:
     void ResetPosition() { m_Transform.translation = {0, 0}; }
 
     std::string m_ImagePath;
-//    std::shared_ptr<SpriteSheet> m_Animation;
+    std::shared_ptr<SpriteSheet> m_Animation;
 };
 
 

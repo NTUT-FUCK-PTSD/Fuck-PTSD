@@ -37,11 +37,6 @@ void App::Start() {
     m_Root.AddChild(m_Player1);
 
     // create slime
-//    m_Player2 = std::make_shared<Character>(ASSETS_DIR "/entities/player1.png");
-//    m_SpriteSheet = std::make_shared<SpriteSheet>(
-//        ASSETS_DIR "/entities/slime_green.png", glm::vec2(26.0f, 26.0f),
-//        std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
-//    m_Player2->SetDrawable(m_SpriteSheet);
 
     m_Player2 = std::make_shared<Character>( ASSETS_DIR "/entities/slime_green.png");
     m_Player2->SetAnimation(glm::vec2(26.0f, 26.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
@@ -49,6 +44,12 @@ void App::Start() {
     m_Player2->SetPosition({-200.0f, -250.0f});
     m_Player2->SetZIndex(50);
     m_Root.AddChild(m_Player2);
+
+    m_Protagonist = std::make_shared<Character>(ASSETS_DIR"/entities/player1_armor_body.png");
+    m_Protagonist->SetAnimation(glm::vec2(26.0f, 26.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
+    m_Protagonist->SetPosition({-200.0f, -250.0f});
+    m_Protagonist->SetZIndex(50);
+    m_Root.AddChild(m_Protagonist);
 
     m_CurrentState = State::UPDATE;
 }
