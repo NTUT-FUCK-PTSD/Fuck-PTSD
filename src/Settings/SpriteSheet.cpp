@@ -45,7 +45,7 @@ SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
         Core::SdlFormatToGlFormat(m_Surface->format->format), m_Surface->w,
         m_Surface->h, m_Surface->pixels);
     m_Size = {m_Surface->w, m_Surface->h};
-    m_col = m_Surface->w / m_FrameSize.x;
+    m_col = static_cast<int>(m_Surface->w / m_FrameSize.x);
 }
 
 void SpriteSheet::SetCurrentFrame(std::size_t index) {
@@ -107,7 +107,8 @@ void SpriteSheet::Update() {
 
     m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTime();
     unsigned int updateFrameCount =
-        m_TimeBetweenFrameUpdate / (m_Interval / 1000);
+        static_cast<int>(m_TimeBetweenFrameUpdate / (m_Interval / 1000.0));
+
     if (updateFrameCount <= 0)
         return;
 
