@@ -34,6 +34,7 @@ private:
 
     std::shared_ptr<Character> m_Player1;
     std::shared_ptr<Character> m_Player2;
+    std::shared_ptr<Character> m_Protagonist;
     Util::Root m_Root;
 };
 

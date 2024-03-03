@@ -2,7 +2,7 @@
 #define CHARACTER_HPP
 
 #include <string>
-
+#include "SpriteSheet.hpp"
 #include "Util/GameObject.hpp"
 
 class Character : public Util::GameObject {
@@ -27,6 +27,14 @@ public:
 
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
 
+    void SetAnimation(glm::vec2 size, const std::vector<std::size_t> &frames, bool play,
+                      std::size_t interval, bool looping, std::size_t cooldown) {
+
+        std::shared_ptr<SpriteSheet> m_Animation = std::make_shared<SpriteSheet>(GetImagePath(), size, frames, play, interval, looping, cooldown);
+
+        this->SetDrawable(m_Animation);
+    }
+
     // TODO: Implement the collision detection
     [[nodiscard]] bool IfCollides(const std::shared_ptr<Character>& other) const {
         if (    m_Transform.translation.x + GetScaledSize().x/2 >= other->m_Transform.translation.x - other->GetScaledSize().x/2 &&
@@ -43,6 +51,7 @@ private:
     void ResetPosition() { m_Transform.translation = {0, 0}; }
 
     std::string m_ImagePath;
+//    std::shared_ptr<SpriteSheet> m_Animation;
 };
 
 
