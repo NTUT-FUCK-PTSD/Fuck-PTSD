@@ -2,6 +2,7 @@
 #define APP_HPP
 #include "Background.hpp"
 #include "Character/Character.hpp"
+#include "Core/Context.hpp"
 #include "SpriteSheet.hpp"
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export
@@ -14,9 +15,11 @@ public:
         END,
     };
 
-    State GetCurrentState() const { return m_CurrentState; }
+    State GetCurrentState() const {
+        return m_CurrentState;
+    }
 
-    void Start();
+    void Start(std::shared_ptr<Core::Context> context);
 
     void Update();
 
@@ -30,12 +33,12 @@ private:
 
     // Background
     std::vector<std::shared_ptr<Background>> m_SaveBackground;
-    std::shared_ptr<SpriteSheet> m_SpriteSheet;
+    std::shared_ptr<SpriteSheet>             m_SpriteSheet;
 
     std::shared_ptr<Character> m_Player1;
     std::shared_ptr<Character> m_Player2;
     std::shared_ptr<Character> m_Protagonist;
-    Util::Root m_Root;
+    Util::Root                 m_Root;
 };
 
 #endif
