@@ -2,7 +2,7 @@
 #define CHARACTER_HPP
 
 #include <string>
-
+#include "SpriteSheet.hpp"
 #include "Util/GameObject.hpp"
 
 class Character : public Util::GameObject {
@@ -17,23 +17,31 @@ public:
 
     Character &operator=(Character &&) = delete;
 
-    [[nodiscard]] const std::string &GetImagePath() const {
-        return m_ImagePath;
-    }
+    // return Image Path
+    [[nodiscard]] const std::string& GetImagePath() const { return m_ImagePath; }
 
-    [[nodiscard]] const glm::vec2 &GetPosition() const {
-        return m_Transform.translation;
-    }
+    // return Image's Position
+    [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
 
+    // Is visible
     [[nodiscard]] bool GetVisibility() const { return m_Visible; }
 
-    void SetImage(const std::string &ImagePath);
+    void SetImage(const std::string& ImagePath);
 
     void SetPosition(const glm::vec2 &Position) {
         m_Transform.translation = Position;
     }
 
-    // TODO: Implement the collision detection
+    void SetScale(const glm::vec2& Ratio) { m_Transform.scale = Ratio; }
+
+    // if animateion, then it will run.
+    void SetAnimation(glm::vec2 size, const std::vector<std::size_t> &frames, bool play,
+                      std::size_t interval, bool looping, std::size_t cooldown);
+
+    void SetPlay();
+
+    void SetPause();
+
     [[nodiscard]] bool
     IfCollides(const std::shared_ptr<Character> &other) const {
         if (m_Transform.translation.x + GetScaledSize().x / 2 >=
@@ -52,12 +60,15 @@ public:
             return false;
     }
 
-    // TODO: Add and implement more methods and properties as needed to finish
     // Giraffe Adventure.
 private:
     void ResetPosition() { m_Transform.translation = {0, 0}; }
 
     std::string m_ImagePath;
+    std::shared_ptr<SpriteSheet> m_Animation;
+
+    uint8_t ImageWidthNumber = 0;
+    uint8_t ImageHeightNumber = 0;
 };
 
 #endif // CHARACTER_HPP

@@ -1,7 +1,7 @@
 #ifndef APP_HPP
 #define APP_HPP
 #include "Background.hpp"
-#include "Character.hpp"
+#include "Character/Character.hpp"
 #include "SpriteSheet.hpp"
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export
@@ -34,6 +34,7 @@ private:
 
     std::shared_ptr<Character> m_Player1;
     std::shared_ptr<Character> m_Player2;
+    std::shared_ptr<Character> m_Protagonist;
     Util::Root m_Root;
 };
 
