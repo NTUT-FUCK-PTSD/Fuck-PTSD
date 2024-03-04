@@ -11,5 +11,5 @@ if (CXXBRIDGE STREQUAL "CXXBRIDGE-NOTFOUND")
     find_program(CXXBRIDGE cxxbridge PATHS "$ENV{HOME}/.cargo/bin/")
 endif()
 
-corrosion_import_crate(MANIFEST_PATH lib/rusty_code/Cargo.toml)
+corrosion_import_crate(MANIFEST_PATH rust/rusty_code/Cargo.toml)
 corrosion_add_cxxbridge(rusty_bridge CRATE rusty_code MANIFEST_PATH rusty_code FILES lib.rs)

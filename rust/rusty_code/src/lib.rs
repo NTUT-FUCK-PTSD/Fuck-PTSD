@@ -5,6 +5,7 @@ mod ffi {
     }
 }
 
+
 pub fn rusty_cxxbridge_integer() -> i32 {
     42
 }
