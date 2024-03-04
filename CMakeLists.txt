@@ -70,7 +70,7 @@ target_link_libraries(Framework
 )
 
 target_link_libraries(${PROJECT_NAME}
-<<<<<<< HEAD
+
         SDL2::SDL2main
         Framework
         rusty_bridge
@@ -78,10 +78,10 @@ target_link_libraries(${PROJECT_NAME}
 )
 
 #target_link_libraries(${PROJECT_NAME} PRIVATE rusty_bridge)
-=======
+
     SDL2::SDL2main
     tinyxml2::tinyxml2
     Framework
     rusty_bridge
 )
->>>>>>> main
+
