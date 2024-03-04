@@ -1,7 +1,9 @@
 
 name: main
 
-on: [push]
+on:   
+  merge_group:
+  pull_request:
 
 jobs:
   build:
