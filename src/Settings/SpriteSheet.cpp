@@ -45,7 +45,7 @@ SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
         Core::SdlFormatToGlFormat(m_Surface->format->format), m_Surface->w,
         m_Surface->h, m_Surface->pixels);
     m_Size = {m_Surface->w, m_Surface->h};
-    m_col = static_cast<int>(m_Surface->w / m_FrameSize.x);
+    m_col = static_cast<size_t>(m_Surface->w / m_FrameSize.x);
 }
 
 void SpriteSheet::SetCurrentFrame(std::size_t index) {
@@ -106,8 +106,8 @@ void SpriteSheet::Update() {
     }
 
     m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTime();
-    unsigned int updateFrameCount =
-        static_cast<int>(m_TimeBetweenFrameUpdate / (m_Interval / 1000.0));
+    size_t updateFrameCount =
+        static_cast<size_t>(m_TimeBetweenFrameUpdate / (m_Interval / 1000.0));
 
     if (updateFrameCount <= 0)
         return;
@@ -115,7 +115,7 @@ void SpriteSheet::Update() {
     m_Index += updateFrameCount;
     m_TimeBetweenFrameUpdate = 0;
 
-    unsigned int const totalFramesCount = m_Frames.size();
+    size_t const totalFramesCount = m_Frames.size();
     if (m_Index >= totalFramesCount) {
         if (m_Looping) {
             m_CooldownEndTime = nowTime + m_Cooldown;
