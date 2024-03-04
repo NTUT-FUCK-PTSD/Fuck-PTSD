@@ -2,3 +2,7 @@
 ; 	path = PTSD
 ; 	url = https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design.git
 ; 	branch = submodule-ized
+[submodule "practical-tools-for-simple-design"]
+	path = practical-tools-for-simple-design
+	url = git@github.com:NTUT-FUCK-PTSD/practical-tools-for-simple-design.git
+	branch = submodule-ized
