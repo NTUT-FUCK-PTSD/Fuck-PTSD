@@ -7,7 +7,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Corrosion)
 
-message(STATUS "tinyxml2 NOT FOUND, fetching from source!")
+message(STATUS "Tinyxml2 NOT FOUND, fetching from source!")
 FetchContent_Declare(tinyxml2
         GIT_REPOSITORY     https://github.com/leethomason/TinyXML2
         GIT_TAG            9.0.0
