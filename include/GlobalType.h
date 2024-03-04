@@ -6,6 +6,7 @@
 #define FUCK_PTSD_GLOBALTYPE_H
 
 #include "Background.hpp"
+#include "MainCharacter.h"
 #include <iostream>
 #include <memory>
 
