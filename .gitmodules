@@ -1,0 +1,4 @@
+[submodule "PTSD"]
+	path = PTSD
+	url = git@github.com:NTUT-FUCK-PTSD/practical-tools-for-simple-design.git
+	branch = submodule-ized
