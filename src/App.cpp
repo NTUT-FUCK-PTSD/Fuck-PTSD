@@ -1,13 +1,14 @@
 #include "App.hpp"
 #include "Background.hpp"
 #include "Begin.h"
-#include "ToolBoxs.h"
-
 #include "GlobalType.h"
+#include "MainCharacter.h"
+#include "ToolBoxs.h"
 
 #include "rusty_bridge/lib.h"
 #include "tinyxml2.h"
 
+#include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
@@ -43,12 +44,16 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Root.RemoveChild(m_Background->m_MainMenu);
     m_Root.RemoveChild(m_Background->m_Continue);
 
-    LOG_INFO(rusty_extern_c_integer());
+    //    LOG_INFO(rusty_extern_c_integer());
 
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+
+    auto m_MainCharacter = new MainCharacter();
+    m_MainCharacter->Render(m_Root);
+
     //    m_Player1->SetVisible(true);
     //    m_Player2->SetVisible(true);
 

@@ -31,14 +31,7 @@ private:
 private:
     State m_CurrentState = State::START;
 
-    // Background
-    std::vector<std::shared_ptr<Background>> m_SaveBackground;
-    std::shared_ptr<SpriteSheet>             m_SpriteSheet;
-
-    std::shared_ptr<Character> m_Player1;
-    std::shared_ptr<Character> m_Player2;
-    std::shared_ptr<Character> m_Protagonist;
-    Util::Root                 m_Root;
+    Util::Root m_Root;
 };
 
 #endif
