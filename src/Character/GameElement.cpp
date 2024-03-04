@@ -5,9 +5,9 @@
 #include "GameElement.h"
 #include <iostream>
 
-Role::Role() {
+GameElement::GameElement() {
 }
 
-void Role::SetDisplay(std::shared_ptr<Core::Drawable> &m_Drawable) {
+void GameElement::SetDisplay(std::shared_ptr<Core::Drawable> &m_Drawable) {
     this->SetDrawable(m_Drawable);
 }
