@@ -64,6 +64,7 @@ target_link_libraries(${PROJECT_NAME}
     SDL2::SDL2main
     Framework
     rusty_bridge
+        tinyxml2::tinyxml2
 )
 
 #target_link_libraries(${PROJECT_NAME} PRIVATE rusty_bridge)

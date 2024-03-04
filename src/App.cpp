@@ -5,11 +5,14 @@
 #include "ToolBoxs.h"
 
 #include "rusty_bridge/lib.h"
+#include "tinyxml2.h"
 
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+
+using namespace tinyxml2;
 
 extern "C" {
 int32_t rusty_extern_c_integer();
