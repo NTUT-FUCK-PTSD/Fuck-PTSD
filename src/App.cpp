@@ -18,6 +18,10 @@ using namespace tinyxml2;
 extern "C" {
 int32_t rusty_extern_c_integer();
 }
+//
+// extern "C" {
+//     std::string Fuck_Fuck();
+//}
 
 // show the start background and listen the keypress
 void App::Start(std::shared_ptr<Core::Context>
@@ -32,8 +36,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(
-        m_Root, m_Background->m_MainMenu, m_Background->m_Continue);
+    Begin::CreateBackground(m_Root, m_Background->m_MainMenu,
+                            m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
@@ -41,26 +45,22 @@ void App::Start(std::shared_ptr<Core::Context>
         context->Update();
     }
 
+    // remove background
     m_Root.RemoveChild(m_Background->m_MainMenu);
     m_Root.RemoveChild(m_Background->m_Continue);
 
-    //    LOG_INFO(rusty_extern_c_integer());
+    // create MainCharacter
+    std::shared_ptr<MainCharacter> m_MainCharacter =
+        std::make_shared<MainCharacter>();
+    m_MainCharacter->Render(m_Root);
 
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
 
-    auto m_MainCharacter = new MainCharacter();
-//    auto m_MainCharacter = std::make_shared<MainCharacter>();
-//    m_MainCharacter->Render(m_Root);
-
-    //    m_Player1->SetVisible(true);
-    //    m_Player2->SetVisible(true);
-
-    // detect any key press, and then remove begin background
-    //    if (ToolBoxs::IsAnyKeyPress()) {
-    //    }
+    //    LOG_ERROR(Fuck_Fuck());
+    //    auto m_MainCharacter = new MainCharacter();
 
     /*
      * Do not touch the code below as they serve the purpose for
@@ -69,6 +69,8 @@ void App::Update() {
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
+
+    //    LOG_INFO(rusty_extern_c_integer());
 
     m_Root.Update();
 }

@@ -3,6 +3,7 @@
 #include "Background.hpp"
 #include "Character/Character.hpp"
 #include "Core/Context.hpp"
+#include "MainCharacter.h"
 #include "SpriteSheet.hpp"
 #include "Util/Root.hpp"
 #include "pch.hpp" // IWYU pragma: export
@@ -15,9 +16,7 @@ public:
         END,
     };
 
-    State GetCurrentState() const {
-        return m_CurrentState;
-    }
+    State GetCurrentState() const { return m_CurrentState; }
 
     void Start(std::shared_ptr<Core::Context> context);
 
