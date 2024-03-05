@@ -8,7 +8,7 @@
 
 #include "Core/Drawable.hpp"
 
-#include "Util/Image.hpp"
+#include "Util/SpriteSheet.hpp"
 
 /**
  * @class SpriteSheet
@@ -141,40 +141,31 @@ public:
     void SetDrawRect(const SDL_Rect displayRect);
 
 private:
-    void InitProgram();
-    void InitVertexArray();
-    void InitUniformBuffer();
-
-    static constexpr int UNIFORM_SURFACE_LOCATION = 0;
-
-    static std::unique_ptr<Core::Program> s_Program;
-    static std::unique_ptr<Core::VertexArray> s_VertexArray;
-    static std::unique_ptr<Core::UniformBuffer<Core::Matrices>> s_UniformBuffer;
     /**
      * @brief Update the animation frames.
      */
     void Update();
 
 private:
-    std::unique_ptr<Core::Texture> m_Texture = nullptr;
-
-    std::unique_ptr<SDL_Surface, std::function<void(SDL_Surface *)>> m_Surface;
-    std::string m_Path;
-    glm::vec2 m_Size;
-    std::size_t m_col;
-
-    glm::vec2 m_FrameSize;
+    /* Animation Part*/
     std::vector<std::size_t> m_Frames;
     State m_State;
     std::size_t m_Interval;
     bool m_Looping;
     std::size_t m_Cooldown;
-    bool m_IsChangeFrame;
+    bool m_IsChangeFrame = false;
 
-    unsigned long m_CooldownEndTime;
+    unsigned long m_CooldownEndTime = 0;
     double m_TimeBetweenFrameUpdate = 0;
 
-    std::size_t m_Index;
+    std::size_t m_Index = 0;
+
+    /* SpriteSheet Part*/
+    std::unique_ptr<Util::SpriteSheet> m_SpriteSheet;
+    std::string m_Path;
+    glm::vec2 m_Size;
+    std::size_t m_col;
+    glm::vec2 m_FrameSize;
 };
 
 #endif // SPRITESHEET_HPP
