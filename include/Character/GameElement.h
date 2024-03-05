@@ -17,6 +17,7 @@ private:
 
     std::string m_ImagePath;
 
+    /* ----- Setter and Getter ----- */
 public:
     void SetDisplay(std::shared_ptr<Core::Drawable> &m_Drawable);
 

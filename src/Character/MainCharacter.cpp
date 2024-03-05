@@ -7,17 +7,17 @@
 
 MainCharacter::MainCharacter() {
 
-    auto HeadImage = std::make_shared<SpriteSheet>(
-        ASSETS_DIR "/entities/player1_armor_body.png",
-        glm::vec2(24.0f, 24.0f),
-        std::vector<std::size_t>{0, 1, 2, 3},
-        true,
-        100,
-        true,
-        100);
+    auto HeadImage =
+        std::make_shared<SpriteSheet>(this->HeadImagePath,
+                                      glm::vec2(24.0f, 24.0f),
+                                      std::vector<std::size_t>{0, 1, 2, 3},
+                                      true,
+                                      100,
+                                      true,
+                                      100);
 
     auto BodyImage =
-        std::make_shared<SpriteSheet>(ASSETS_DIR "/entities/player1_heads.png",
+        std::make_shared<SpriteSheet>(BodyImagePath,
                                       glm::vec2(24.0f, 13.0f),
                                       std::vector<std::size_t>{0, 1, 2, 3},
                                       true,
@@ -27,14 +27,22 @@ MainCharacter::MainCharacter() {
     m_Body->SetDrawable(BodyImage);
     m_Head->SetDrawable(HeadImage);
 
-    m_Body->SetPosition(InitPosition);
-    m_Head->SetPosition(InitPosition);
+    m_MainCharacter->AddChild(m_Body);
+    m_MainCharacter->AddChild(m_Head);
 
-    m_Body->SetZIndex(ZIndex);
-    m_Head->SetZIndex(ZIndex);
+    m_MainCharacter->SetPosition(InitPosition);
+
+    m_MainCharacter->SetZIndex(ZIndex);
+
+    //    m_Body->SetPosition(InitPosition);
+    //    m_Head->SetPosition(InitPosition);
+    //
+    //    m_Body->SetZIndex(ZIndex);
+    //    m_Head->SetZIndex(ZIndex);
 }
 
 void MainCharacter::Render(Util::Root &m_Render) {
-    m_Render.AddChild(m_Body);
-    m_Render.AddChild(m_Head);
+    m_Render.AddChild(m_MainCharacter);
+    //    m_Render.AddChild(m_Body);
+    //    m_Render.AddChild(m_Head);
 }

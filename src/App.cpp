@@ -51,7 +51,8 @@ void App::Start(std::shared_ptr<Core::Context>
 
 void App::Update() {
 
-    auto m_MainCharacter = new MainCharacter();
+//    auto m_MainCharacter = new MainCharacter();
+    auto m_MainCharacter = std::make_shared<MainCharacter>();
     m_MainCharacter->Render(m_Root);
 
     //    m_Player1->SetVisible(true);
