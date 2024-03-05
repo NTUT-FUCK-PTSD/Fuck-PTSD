@@ -32,8 +32,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(*m_Camera.GetRenderer(), m_Background->m_MainMenu,
-                            m_Background->m_Continue);
+    Begin::CreateBackground(m_Camera.GetRenderer(),
+                            m_Background->m_MainMenu, m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
