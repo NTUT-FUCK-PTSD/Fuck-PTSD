@@ -9,14 +9,14 @@
 
 MainCharacter::MainCharacter() {
 
-    glm::vec2 HeadSize = ToolBoxs::CountImagePixel(this->HeadImagePath, 4, 2);
-    glm::vec2 BodySize = ToolBoxs::CountImagePixel(this->BodyImagePath, 4, 10);
+    auto HeadSize = ToolBoxs::CountImagePixel(this->HeadImagePath, 4, 2);
+    auto BodySize = ToolBoxs::CountImagePixel(this->BodyImagePath, 4, 10);
 
-    std::shared_ptr<SpriteSheet> HeadImage = std::make_shared<SpriteSheet>(
+    auto HeadImage = std::make_shared<SpriteSheet>(
         this->HeadImagePath, HeadSize, std::vector<std::size_t>{0, 1, 2, 3},
         true, 100, true, 100);
 
-    std::shared_ptr<SpriteSheet> BodyImage = std::make_shared<SpriteSheet>(
+    auto BodyImage = std::make_shared<SpriteSheet>(
         this->BodyImagePath, BodySize, std::vector<std::size_t>{0, 1, 2, 3},
         true, 100, true, 100);
 
