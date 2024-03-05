@@ -50,7 +50,6 @@ public:
 
 private:
     std::shared_ptr<Util::Renderer> m_Renderer;
-    std::vector<std::shared_ptr<Util::GameObject>> m_Children;
     glm::vec2 m_Position = {0, 0};
 };
 
