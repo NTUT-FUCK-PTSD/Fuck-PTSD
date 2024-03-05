@@ -1,7 +1,8 @@
 #include "App.hpp"
 #include "Background.hpp"
 #include "Begin.h"
-#include "Character/Character.hpp"
+#include "GlobalType.h"
+#include "MainCharacter.h"
 #include "ToolBoxs.h"
 
 #include "rusty_bridge/lib.h"
@@ -18,48 +19,44 @@ extern "C" {
 int32_t rusty_extern_c_integer();
 }
 
-void App::Start() {
+// show the start background and listen the keypress
+void App::Start(std::shared_ptr<Core::Context>
+                    context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
 
+    auto m_Background = std::make_shared<GlobalType::TBackground>();
+
     // init background value
-    std::shared_ptr<Background> m_MainMenu =
-        std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
-    std::shared_ptr<Background> m_Continue =
+    m_Background->m_Continue =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/continue.png");
+    m_Background->m_MainMenu =
+        std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    // create
-    Begin::CreateBackground(m_Root, m_MainMenu, m_Continue);
+    Begin::CreateBackground(m_Renderer, m_Background->m_MainMenu,
+                            m_Background->m_Continue);
 
-    // save it to App class
-    this->m_SaveBackground = {m_MainMenu, m_Continue};
+    // Wait any key click
+    while (!ToolBoxs::IsAnyKeyPress()) {
+        m_Renderer.Update();
+        context->Update();
+    }
 
-    m_Protagonist = std::make_shared<Character>(ASSETS_DIR"/entities/player1_armor_body.png");
-    m_Protagonist->SetAnimation(glm::vec2(24.0f, 24.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
-    m_Protagonist->SetPosition({-200.0f, -250.0f});
-    m_Protagonist->SetZIndex(50);
-    m_Root.AddChild(m_Protagonist);
+    // remove background
+    m_Renderer.RemoveChild(m_Background->m_MainMenu);
+    m_Renderer.RemoveChild(m_Background->m_Continue);
 
-    m_Protagonist = std::make_shared<Character>(ASSETS_DIR"/entities/player1_heads.png");
-    m_Protagonist->SetAnimation(glm::vec2(24.0f, 13.0f),std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true, 100);
-    m_Protagonist->SetPosition({-200.0f, -250.0f});
-    m_Protagonist->SetZIndex(50);
-    m_Root.AddChild(m_Protagonist);
+    // create MainCharacter
+    auto m_MainCharacter = std::make_shared<MainCharacter>();
 
-    // change state to update
+    m_Renderer.AddChild(m_MainCharacter->Render());
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
-//    m_Player1->SetVisible(true);
-//    m_Player2->SetVisible(true);
 
-    // detect any key press, and then remove begin background
-    if (ToolBoxs::IsAnyKeyPress()) {
-        Begin::RemoveBackground(this->m_Root, this->m_SaveBackground[0],
-                                this->m_SaveBackground[1]);
-
-        LOG_INFO(rusty_extern_c_integer());
-    }
+    //    LOG_ERROR(Fuck_Fuck());
+    //    auto m_MainCharacter = new MainCharacter();
 
     /*
      * Do not touch the code below as they serve the purpose for
@@ -69,7 +66,9 @@ void App::Update() {
         m_CurrentState = State::END;
     }
 
-    m_Root.Update();
+    //    LOG_INFO(rusty_extern_c_integer());
+
+    m_Renderer.Update();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)

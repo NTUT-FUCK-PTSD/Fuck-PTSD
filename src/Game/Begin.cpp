@@ -8,9 +8,9 @@
 #include "Background.hpp"
 #include "Character/Character.hpp"
 
-#include "Util/Root.hpp"
+#include "Util/Renderer.hpp"
 
-void Begin::CreateBackground(Util::Root& m_Root, std::shared_ptr<Background> m_MainMenu, std::shared_ptr<Background> m_Continue) {
+void Begin::CreateBackground(Util::Renderer& m_Root, std::shared_ptr<Background> m_MainMenu, std::shared_ptr<Background> m_Continue) {
 //    m_MainMenu = std::make_shared<Background>(ASSETS_DIR"/mainmenu/mainmenu.png");
     m_MainMenu->SetZIndex(3);
 
@@ -22,7 +22,7 @@ void Begin::CreateBackground(Util::Root& m_Root, std::shared_ptr<Background> m_M
     m_Root.AddChild(m_Continue);
 }
 
-void Begin::RemoveBackground(Util::Root& m_Root, std::shared_ptr<Background> m_MainMenu, std::shared_ptr<Background> m_Continue) {
+void Begin::RemoveBackground(Util::Renderer& m_Root, std::shared_ptr<Background> m_MainMenu, std::shared_ptr<Background> m_Continue) {
     m_Root.RemoveChild(m_MainMenu);
     m_Root.RemoveChild(m_Continue);
 }
