@@ -4,8 +4,8 @@ project(FUCK_PTSD)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(PTSD)
-add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
+#add_subdirectory(${CMAKE_BINARY_DIR}/_deps/ptsd-src/)
+#add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
@@ -51,14 +51,15 @@ endif()
 
 
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
+#target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/ptsd-src/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CUSTOMIZE_PATH})
 
-target_link_libraries(Framework
-    ${DEPENDENCY_LINK_LIBRARIES}
-)
+#target_link_libraries(Framework
+#    ${DEPENDENCY_LINK_LIBRARIES}
+#)
 
 target_link_libraries(${PROJECT_NAME}
     SDL2::SDL2main
