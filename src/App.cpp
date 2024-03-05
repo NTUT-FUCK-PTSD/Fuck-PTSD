@@ -76,7 +76,6 @@ void App::Update() {
         m_CameraPosition.x += 10;
     }
     m_Camera.SetPosition(m_CameraPosition);
-    LOG_INFO(m_CameraPosition);
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
