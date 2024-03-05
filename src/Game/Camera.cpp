@@ -24,23 +24,5 @@ void Camera::RemoveChild(std::shared_ptr<Util::GameObject> child) {
 }
 
 void Camera::Update() {
-    for (auto &child : m_Children) {
-        child->m_Transform.translation =
-            child->m_Transform.translation + m_Position;
-        for (auto &grandchild : child->GetChildren()) {
-            grandchild->m_Transform.translation =
-                grandchild->m_Transform.translation + m_Position;
-        }
-    }
-
-    m_Renderer->Update();
-
-    for (auto &child : m_Children) {
-        child->m_Transform.translation =
-            child->m_Transform.translation - m_Position;
-        for (auto &grandchild : child->GetChildren()) {
-            grandchild->m_Transform.translation =
-                grandchild->m_Transform.translation - m_Position;
-        }
-    }
+    m_Renderer->Update(m_Position);
 }
