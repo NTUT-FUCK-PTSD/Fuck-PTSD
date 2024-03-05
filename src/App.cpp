@@ -32,8 +32,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(*m_Camera.GetRenderer(), m_Background->m_MainMenu,
-                            m_Background->m_Continue);
+    Begin::CreateBackground(m_Camera.GetRenderer(),
+                            m_Background->m_MainMenu, m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
@@ -76,7 +76,6 @@ void App::Update() {
         m_CameraPosition.x += 10;
     }
     m_Camera.SetPosition(m_CameraPosition);
-    LOG_INFO(m_CameraPosition);
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;

@@ -12,10 +12,10 @@
 
 class Begin {
 public:
-    static void CreateBackground(Util::Renderer &m_Root,
+    static void CreateBackground(std::shared_ptr<Util::Renderer> m_Root,
                                  std::shared_ptr<Background> m_MainMenu,
                                  std::shared_ptr<Background> m_Continue);
-    static void RemoveBackground(Util::Renderer &m_Root,
+    static void RemoveBackground(std::shared_ptr<Util::Renderer> m_Root,
                                  std::shared_ptr<Background> m_MainMenu,
                                  std::shared_ptr<Background> m_Continue);
 };

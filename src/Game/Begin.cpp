@@ -7,7 +7,7 @@
 #include "App.hpp"
 #include "Character/Character.hpp"
 
-void Begin::CreateBackground(Util::Renderer &m_Root,
+void Begin::CreateBackground(std::shared_ptr<Util::Renderer> m_Root,
                              std::shared_ptr<Background> m_MainMenu,
                              std::shared_ptr<Background> m_Continue) {
     //    m_MainMenu =
@@ -19,13 +19,13 @@ void Begin::CreateBackground(Util::Renderer &m_Root,
     m_Continue->SetPosition({-0.5f, -365.5f});
     m_Continue->SetZIndex(5);
 
-    m_Root.AddChild(m_MainMenu);
-    m_Root.AddChild(m_Continue);
+    m_Root->AddChild(m_MainMenu);
+    m_Root->AddChild(m_Continue);
 }
 
-void Begin::RemoveBackground(Util::Renderer &m_Root,
+void Begin::RemoveBackground(std::shared_ptr<Util::Renderer> m_Root,
                              std::shared_ptr<Background> m_MainMenu,
                              std::shared_ptr<Background> m_Continue) {
-    m_Root.RemoveChild(m_MainMenu);
-    m_Root.RemoveChild(m_Continue);
+    m_Root->RemoveChild(m_MainMenu);
+    m_Root->RemoveChild(m_Continue);
 }
