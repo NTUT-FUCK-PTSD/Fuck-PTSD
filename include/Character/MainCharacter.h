@@ -28,13 +28,13 @@ private:
 public:
     explicit MainCharacter();
 
-    void Render(Util::Root &m_Render);
-
     /* ---- Setter and Getter ----- */
 public:
     void SetBodyImagePath(std::string &Path) { this->BodyImagePath = Path; };
 
     void SetHeadImagePath(std::string &Path) { this->HeadImagePath = Path; }
+
+    std::shared_ptr<GameElement> Render() { return this->m_MainCharacter; };
 };
 
 #endif // FUCK_PTSD_MAINCHARACTER_H

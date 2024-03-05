@@ -18,10 +18,6 @@ using namespace tinyxml2;
 extern "C" {
 int32_t rusty_extern_c_integer();
 }
-//
-// extern "C" {
-//     std::string Fuck_Fuck();
-//}
 
 // show the start background and listen the keypress
 void App::Start(std::shared_ptr<Core::Context>
@@ -52,7 +48,8 @@ void App::Start(std::shared_ptr<Core::Context>
     // create MainCharacter
     std::shared_ptr<MainCharacter> m_MainCharacter =
         std::make_shared<MainCharacter>();
-    m_MainCharacter->Render(m_Root);
+
+    m_Root.AddChild(m_MainCharacter->Render());
 
     m_CurrentState = State::UPDATE;
 }
