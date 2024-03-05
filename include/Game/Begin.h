@@ -5,17 +5,17 @@
 #ifndef FUCK_PTSD_BEGIN_H
 #define FUCK_PTSD_BEGIN_H
 
-#include "Util/Root.hpp"
+#include "Util/Renderer.hpp"
 
 #include "Background.hpp"
 #include <memory>
 
 class Begin {
 public:
-    static void CreateBackground(Util::Root &m_Root,
+    static void CreateBackground(Util::Renderer &m_Root,
                                  std::shared_ptr<Background> m_MainMenu,
                                  std::shared_ptr<Background> m_Continue);
-    static void RemoveBackground(Util::Root &m_Root,
+    static void RemoveBackground(Util::Renderer &m_Root,
                                  std::shared_ptr<Background> m_MainMenu,
                                  std::shared_ptr<Background> m_Continue);
 };

@@ -68,7 +68,7 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
-    m_Root.Update();
+    m_Renderer.Update();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)
