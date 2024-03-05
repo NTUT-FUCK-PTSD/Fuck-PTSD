@@ -46,8 +46,7 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Root.RemoveChild(m_Background->m_Continue);
 
     // create MainCharacter
-    std::shared_ptr<MainCharacter> m_MainCharacter =
-        std::make_shared<MainCharacter>();
+    auto m_MainCharacter = std::make_shared<MainCharacter>();
 
     m_Root.AddChild(m_MainCharacter->Render());
 

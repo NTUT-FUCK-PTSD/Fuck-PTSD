@@ -21,15 +21,13 @@ MainCharacter::MainCharacter() {
         true, 100, true, 100);
 
     m_Body->SetDrawable(BodyImage);
-    m_MainCharacter->SetDrawable(HeadImage);
-
     m_Body->SetPosition(InitPosition);
-    m_MainCharacter->SetPosition(InitPosition);
-
     m_Body->SetZIndex(ZIndex);
-    m_MainCharacter->SetZIndex(ZIndex);
     m_Body->SetScale({3, 3});
 
+    m_MainCharacter->SetDrawable(HeadImage);
+    m_MainCharacter->SetPosition(InitPosition);
+    m_MainCharacter->SetZIndex(ZIndex);
     m_MainCharacter->AddChild(m_Body);
     m_MainCharacter->SetScale({3, 3});
 }
