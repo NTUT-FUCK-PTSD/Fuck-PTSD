@@ -32,23 +32,23 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(m_Root, m_Background->m_MainMenu,
+    Begin::CreateBackground(m_Renderer, m_Background->m_MainMenu,
                             m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
-        m_Root.Update();
+        m_Renderer.Update();
         context->Update();
     }
 
     // remove background
-    m_Root.RemoveChild(m_Background->m_MainMenu);
-    m_Root.RemoveChild(m_Background->m_Continue);
+    m_Renderer.RemoveChild(m_Background->m_MainMenu);
+    m_Renderer.RemoveChild(m_Background->m_Continue);
 
     // create MainCharacter
     auto m_MainCharacter = std::make_shared<MainCharacter>();
 
-    m_Root.AddChild(m_MainCharacter->Render());
+    m_Renderer.AddChild(m_MainCharacter->Render());
 
     m_CurrentState = State::UPDATE;
 }

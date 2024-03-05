@@ -5,7 +5,8 @@
 #include "Core/Context.hpp"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
-#include "Util/Root.hpp"
+// #include "Util/Root.hpp"
+#include "Util/Renderer.hpp"
 #include "pch.hpp" // IWYU pragma: export
 
 class App {
@@ -30,7 +31,7 @@ private:
 private:
     State m_CurrentState = State::START;
 
-    Util::Root m_Root;
+    Util::Renderer m_Renderer;
 };
 
 #endif
