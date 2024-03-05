@@ -17,7 +17,7 @@ MainCharacter::MainCharacter() {
                                       100);
 
     auto BodyImage =
-        std::make_shared<SpriteSheet>(BodyImagePath,
+        std::make_shared<SpriteSheet>(ASSETS_DIR "/entities/player1_heads.png",
                                       glm::vec2(24.0f, 13.0f),
                                       std::vector<std::size_t>{0, 1, 2, 3},
                                       true,
@@ -25,14 +25,16 @@ MainCharacter::MainCharacter() {
                                       true,
                                       100);
     m_Body->SetDrawable(BodyImage);
-    m_Head->SetDrawable(HeadImage);
+//    m_Head->SetDrawable(HeadImage);
 
-    m_MainCharacter->AddChild(m_Body);
-    m_MainCharacter->AddChild(m_Head);
+//    m_MainCharacter->SetDrawable(HeadImage);
+//
+//    m_MainCharacter->AddChild(m_Body);
+//    m_MainCharacter->AddChild(m_Head);
 
-    m_MainCharacter->SetPosition(InitPosition);
-
-    m_MainCharacter->SetZIndex(ZIndex);
+//    m_MainCharacter->SetPosition(InitPosition);
+//
+//    m_MainCharacter->SetZIndex(ZIndex);
 
     //    m_Body->SetPosition(InitPosition);
     //    m_Head->SetPosition(InitPosition);
