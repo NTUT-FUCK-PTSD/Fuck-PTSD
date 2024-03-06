@@ -1,8 +1,9 @@
 
 name: main-before
 
-on: fork
-
+on: 
+  merge_group:
+  pull_request:
 
 jobs:
   build:
