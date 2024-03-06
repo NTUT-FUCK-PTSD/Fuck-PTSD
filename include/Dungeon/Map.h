@@ -5,15 +5,15 @@
 
 #include <memory>
 
-namespace Map {
+namespace Dungeon {
 
 class Map {
 public:
-    Map(std::string path, int levelNum = 0);
+    Map(std::string path, int levelNum = 1);
 
 private:
     std::unique_ptr<Level> m_Level;
 };
 
-} // namespace Map
+} // namespace Dungeon
 #endif // MAP_H

@@ -1,9 +1,9 @@
 #include "Dungeon/Map.h"
 
-namespace Map {
+namespace Dungeon {
 
 Map::Map(std::string path, int levelNum) {
     m_Level = std::make_unique<Level>(path, levelNum);
 }
 
-} // namespace Map
+} // namespace Dungeon
