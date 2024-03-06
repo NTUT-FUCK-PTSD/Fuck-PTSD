@@ -13,6 +13,8 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 
+#include "Dungeon/Level.h"
+
 using namespace tinyxml2;
 
 extern "C" {
@@ -24,6 +26,13 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
 
+    // Test the Dungeon::Level
+    Dungeon::Level Test(ASSETS_DIR "/level/test.xml");
+    for (auto &tile : Test.getTiles()) {
+        LOG_INFO("Tile: " + std::to_string(tile.x) + " " +
+                 std::to_string(tile.y) + " " + std::to_string(tile.type));
+    }
+
     auto m_Background = std::make_shared<GlobalType::TBackground>();
 
     // init background value
@@ -32,8 +41,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(m_Camera.GetRenderer(),
-                            m_Background->m_MainMenu, m_Background->m_Continue);
+    Begin::CreateBackground(m_Camera.GetRenderer(), m_Background->m_MainMenu,
+                            m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
