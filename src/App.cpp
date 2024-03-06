@@ -13,7 +13,7 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 
-#include "Dungeon/Level.h"
+#include "Dungeon/Map.h"
 
 using namespace tinyxml2;
 
@@ -26,12 +26,8 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
 
-    // Test the Dungeon::Level
-    Dungeon::Level Test(ASSETS_DIR "/level/test.xml");
-    for (auto &tile : Test.getTiles()) {
-        LOG_INFO("Tile: " + std::to_string(tile.x) + " " +
-                 std::to_string(tile.y) + " " + std::to_string(tile.type));
-    }
+    // Test the Dungeon::Map
+    Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 4);
 
     auto m_Background = std::make_shared<GlobalType::TBackground>();
 
@@ -58,6 +54,7 @@ void App::Start(std::shared_ptr<Core::Context>
     auto m_MainCharacter = std::make_shared<MainCharacter>();
 
     m_Camera.AddChild(m_MainCharacter->Render());
+    m_Camera.AddChildren(Test.GetChildren());
 
     m_CurrentState = State::UPDATE;
 }
