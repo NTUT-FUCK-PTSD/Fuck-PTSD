@@ -27,7 +27,7 @@ void App::Start(std::shared_ptr<Core::Context>
     LOG_TRACE("Start");
 
     // Test the Dungeon::Map
-    Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 4);
+    Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 1);
 
     auto m_Background = std::make_shared<GlobalType::TBackground>();
 
@@ -70,16 +70,16 @@ void App::Update() {
      */
 
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_CameraPosition.y += 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_CameraPosition.x -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
         m_CameraPosition.y -= 10;
     }
-    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
         m_CameraPosition.x += 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_CameraPosition.y += 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        m_CameraPosition.x -= 10;
     }
     m_Camera.SetPosition(m_CameraPosition);
 
