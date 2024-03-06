@@ -44,9 +44,10 @@ void Tile::Update() {
         (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
         -(m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE)};
 
-    m_SpriteSheet->SetDrawRect(
-        {static_cast<int>(ImgSize.x * m_Index), static_cast<int>(ImgSize.y * 0),
-         static_cast<int>(DUNGEON_TILE_WIDTH), static_cast<int>(ImgSize.y)});
+    m_SpriteSheet->SetDrawRect({static_cast<int>(ImgSize.x * m_Index),
+                                static_cast<int>(ImgSize.y * m_Index),
+                                static_cast<int>(DUNGEON_TILE_WIDTH),
+                                static_cast<int>(ImgSize.y)});
     m_Drawable = m_SpriteSheet;
 }
 
