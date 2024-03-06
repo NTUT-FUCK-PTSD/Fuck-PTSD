@@ -6,10 +6,10 @@ Level::Level(const std::string path, const int levelNum) {
         LOG_ERROR("Failed to load level file: " + path);
         throw std::runtime_error("Failed to load level file: " + path);
     }
-    loadLevel(levelNum);
+    LoadLevel(levelNum);
     m_NumLevels = m_XMLdungeon->FindAttribute("numLevels")->IntValue();
 }
-void Level::loadLevel(const int levelNum) {
+void Level::LoadLevel(const int levelNum) {
     m_XMLdungeon = m_doc.FirstChildElement("dungeon");
     for (auto child = m_XMLdungeon->FirstChildElement("level");
          child != nullptr; child = child->NextSiblingElement("level")) {

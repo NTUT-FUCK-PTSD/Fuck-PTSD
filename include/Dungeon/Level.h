@@ -12,19 +12,19 @@ namespace Dungeon {
 class Level {
 public:
     Level(const std::string path, const int levelNum = 1);
-    void loadLevel(const int levelNum);
+    void LoadLevel(const int levelNum);
 
-    int getNumLevels() { return m_NumLevels; }
-    int getBossNum() { return m_BossNum; }
-    int getMusic() { return m_Music; }
-    int getCurrentLevel() { return m_CurrentLevel; }
-    std::vector<tile> getTiles() { return m_Tiles; }
-    std::vector<trap> getTraps() { return m_Traps; }
-    std::vector<enemy> getEnemies() { return m_Enemies; }
-    std::vector<item> getItems() { return m_Items; }
-    std::vector<chest> getChests() { return m_Chests; }
-    std::vector<crate> getCrates() { return m_Crates; }
-    std::vector<shrine> getShrines() { return m_Shrines; }
+    int GetNumLevels() { return m_NumLevels; }
+    int GetBossNum() { return m_BossNum; }
+    int GetMusic() { return m_Music; }
+    int GetCurrentLevel() { return m_CurrentLevel; }
+    std::vector<tile> GetTiles() { return m_Tiles; }
+    std::vector<trap> GetTraps() { return m_Traps; }
+    std::vector<enemy> GetEnemies() { return m_Enemies; }
+    std::vector<item> GetItems() { return m_Items; }
+    std::vector<chest> GetChests() { return m_Chests; }
+    std::vector<crate> GetCrates() { return m_Crates; }
+    std::vector<shrine> GetShrines() { return m_Shrines; }
 
 private:
     int m_NumLevels;
