@@ -1,10 +1,19 @@
 #ifndef ELEMENTS_H
 #define ELEMENTS_H
 
+#include "config.hpp"
+#include "glm/glm.hpp"
 #include <map>
 #include <string>
 
 namespace Dungeon {
+
+constexpr double DUNGEON_TILE_WIDTH = 24.0;
+constexpr double DUNGEON_COL_NUMBER = 20.0;
+constexpr double DUNGEON_ROW_NUMBER =
+    (DUNGEON_COL_NUMBER * (WINDOW_WIDTH / WINDOW_HEIGHT));
+constexpr double DUNGEON_SCALE =
+    ((WINDOW_WIDTH / DUNGEON_COL_NUMBER) / DUNGEON_TILE_WIDTH);
 
 struct tile {
     int x, y;
@@ -45,7 +54,7 @@ struct shrine {
 };
 } // namespace Dungeon
 
-const std::map<int, std::string> tileTypes = {
+const std::map<int, std::string> DUNGEON_TILETYPES = {
     {0, "floor_dirt1"},
     {2, "stairs"},
     {3, "TEMP_shop_floor"},
@@ -86,5 +95,22 @@ const std::map<int, std::string> tileTypes = {
     {116, "necrodancer_stage_spearker2"},
     {117, "necrodancer_stage_spearker3"},
     {118, "wire_door"}};
+
+const std::map<int, glm::ivec2> DUNGEON_TILESIZES = {
+    {0, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},   {4, {3, 1}},
+    {5, {3, 1}},    {6, {1, 1}},   {7, {3, 1}},
+
+    {8, {3, 4}},    {9, {1, 1}},   {10, {3, 1}},  {11, {3, 1}},
+    {12, {3, 2}},   {13, {3, 1}},  {15, {1, 1}},
+
+    {16, {1, 1}},   {17, {3, 1}},  {18, {3, 5}},  {20, {16, 8}},
+
+    {100, {16, 1}}, {102, {8, 1}}, {103, {1, 1}}, {104, {1, 1}},
+    {105, {1, 1}},  {106, {1, 1}}, {107, {1, 1}},
+
+    {108, {1, 1}},  {109, {5, 1}}, {111, {2, 1}}, {112, {6, 1}},
+    {113, {6, 1}},  {114, {6, 1}}, {115, {6, 1}},
+
+    {116, {6, 1}},  {117, {6, 1}}, {118, {1, 1}}};
 
 #endif // ELEMENTS_H
