@@ -1,12 +1,11 @@
 #ifndef APP_HPP
 #define APP_HPP
 #include "Background.hpp"
+#include "Camera.h"
 #include "Character/Character.hpp"
 #include "Core/Context.hpp"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
-// #include "Util/Root.hpp"
-#include "Util/Renderer.hpp"
 #include "pch.hpp" // IWYU pragma: export
 
 class App {
@@ -31,7 +30,8 @@ private:
 private:
     State m_CurrentState = State::START;
 
-    Util::Renderer m_Renderer;
+    Camera m_Camera;
+    glm::vec2 m_CameraPosition = {0, 0};
 };
 
 #endif

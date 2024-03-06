@@ -32,23 +32,23 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(m_Renderer, m_Background->m_MainMenu,
-                            m_Background->m_Continue);
+    Begin::CreateBackground(m_Camera.GetRenderer(),
+                            m_Background->m_MainMenu, m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
-        m_Renderer.Update();
+        m_Camera.Update();
         context->Update();
     }
 
     // remove background
-    m_Renderer.RemoveChild(m_Background->m_MainMenu);
-    m_Renderer.RemoveChild(m_Background->m_Continue);
+    m_Camera.RemoveChild(m_Background->m_MainMenu);
+    m_Camera.RemoveChild(m_Background->m_Continue);
 
     // create MainCharacter
     auto m_MainCharacter = std::make_shared<MainCharacter>();
 
-    m_Renderer.AddChild(m_MainCharacter->Render());
+    m_Camera.AddChild(m_MainCharacter->Render());
 
     m_CurrentState = State::UPDATE;
 }
@@ -62,13 +62,28 @@ void App::Update() {
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
+
+    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+        m_CameraPosition.y += 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_CameraPosition.x -= 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_CameraPosition.y -= 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        m_CameraPosition.x += 10;
+    }
+    m_Camera.SetPosition(m_CameraPosition);
+
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
 
     //    LOG_INFO(rusty_extern_c_integer());
 
-    m_Renderer.Update();
+    m_Camera.Update();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)

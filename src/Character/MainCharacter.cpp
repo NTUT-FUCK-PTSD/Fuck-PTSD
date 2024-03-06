@@ -9,14 +9,14 @@
 
 MainCharacter::MainCharacter() {
 
-    auto HeadSize = ToolBoxs::CountImagePixel(this->HeadImagePath, 4, 2);
-    auto BodySize = ToolBoxs::CountImagePixel(this->BodyImagePath, 4, 10);
+    const auto HeadSize = ToolBoxs::CountImagePixel(this->HeadImagePath, 4, 2);
+    const auto BodySize = ToolBoxs::CountImagePixel(this->BodyImagePath, 4, 10);
 
-    auto HeadImage = std::make_shared<SpriteSheet>(
+    const auto HeadImage = std::make_shared<SpriteSheet>(
         this->HeadImagePath, HeadSize, std::vector<std::size_t>{0, 1, 2, 3},
         true, 100, true, 100);
 
-    auto BodyImage = std::make_shared<SpriteSheet>(
+    const auto BodyImage = std::make_shared<SpriteSheet>(
         this->BodyImagePath, BodySize, std::vector<std::size_t>{0, 1, 2, 3},
         true, 100, true, 100);
 
