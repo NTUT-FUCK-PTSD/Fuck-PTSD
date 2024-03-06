@@ -2,7 +2,7 @@
 
 namespace Dungeon {
 
-Map::Map(std::string path, int levelNum) {
+Map::Map(const std::string path, const int levelNum) {
     m_Level = std::make_unique<Level>(path, levelNum);
 }
 

@@ -9,7 +9,7 @@ namespace Dungeon {
 
 class Map {
 public:
-    Map(std::string path, int levelNum = 1);
+    Map(const std::string path, const int levelNum = 1);
 
 private:
     std::unique_ptr<Level> m_Level;

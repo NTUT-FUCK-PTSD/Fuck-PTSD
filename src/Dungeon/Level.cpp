@@ -1,7 +1,7 @@
 #include "Dungeon/Level.h"
 namespace Dungeon {
 
-Level::Level(std::string path, int levelNum) {
+Level::Level(const std::string path, const int levelNum) {
     if (m_doc.LoadFile(path.c_str()) != tinyxml2::XML_SUCCESS) {
         LOG_ERROR("Failed to load level file: " + path);
         throw std::runtime_error("Failed to load level file: " + path);
@@ -9,7 +9,7 @@ Level::Level(std::string path, int levelNum) {
     loadLevel(levelNum);
     m_NumLevels = m_XMLdungeon->FindAttribute("numLevels")->IntValue();
 }
-void Level::loadLevel(int levelNum) {
+void Level::loadLevel(const int levelNum) {
     m_XMLdungeon = m_doc.FirstChildElement("dungeon");
     for (auto child = m_XMLdungeon->FirstChildElement("level");
          child != nullptr; child = child->NextSiblingElement("level")) {

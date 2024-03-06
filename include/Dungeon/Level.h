@@ -11,14 +11,20 @@ namespace Dungeon {
 
 class Level {
 public:
-    Level(std::string path, int levelNum = 1);
-    void loadLevel(int levelNum);
+    Level(const std::string path, const int levelNum = 1);
+    void loadLevel(const int levelNum);
 
     int getNumLevels() { return m_NumLevels; }
     int getBossNum() { return m_BossNum; }
     int getMusic() { return m_Music; }
     int getCurrentLevel() { return m_CurrentLevel; }
     std::vector<tile> getTiles() { return m_Tiles; }
+    std::vector<trap> getTraps() { return m_Traps; }
+    std::vector<enemy> getEnemies() { return m_Enemies; }
+    std::vector<item> getItems() { return m_Items; }
+    std::vector<chest> getChests() { return m_Chests; }
+    std::vector<crate> getCrates() { return m_Crates; }
+    std::vector<shrine> getShrines() { return m_Shrines; }
 
 private:
     int m_NumLevels;
