@@ -1,34 +1,43 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <string>
+#include "Dungeon/Elements.h"
+#include "Util/Logger.hpp"
+
+#include "tinyxml2.h"
 #include <vector>
 
-namespace Map {
-struct tile {
-    int x, y;
-    int type, zone, torch, cracked;
-};
+namespace Dungeon {
 
 class Level {
 public:
-    Level(std::string path, int levelNum = 0);
+    Level(std::string path, int levelNum = 1);
     void loadLevel(int levelNum);
 
-    int getNumLevels() { return m_numLevels; }
-    int getBossNum() { return m_bossNum; }
-    int getMusic() { return m_music; }
-    int getCurrentLevel() { return m_currentLevel; }
-    std::vector<tile> getTiles() { return m_tiles; }
+    int getNumLevels() { return m_NumLevels; }
+    int getBossNum() { return m_BossNum; }
+    int getMusic() { return m_Music; }
+    int getCurrentLevel() { return m_CurrentLevel; }
+    std::vector<tile> getTiles() { return m_Tiles; }
 
 private:
-    int m_numLevels;
-    int m_bossNum;
-    int m_music;
-    int m_currentLevel;
+    int m_NumLevels;
+    int m_BossNum;
+    int m_Music;
+    int m_CurrentLevel;
 
-    std::vector<tile> m_tiles;
+    tinyxml2::XMLDocument m_doc;
+    tinyxml2::XMLElement *m_XMLdungeon;
+    tinyxml2::XMLElement *m_XMLlevel;
+
+    std::vector<tile> m_Tiles;
+    std::vector<trap> m_Traps;
+    std::vector<enemy> m_Enemies;
+    std::vector<item> m_Items;
+    std::vector<chest> m_Chests;
+    std::vector<crate> m_Crates;
+    std::vector<shrine> m_Shrines;
 }; // class Level
-} // namespace Map
+} // namespace Dungeon
 
 #endif // LEVEL_H
