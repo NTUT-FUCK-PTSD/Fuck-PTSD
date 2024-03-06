@@ -5,56 +5,70 @@ on:
   merge_group:
   pull_request:
 
+# linux-gcc
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        compiler: [{ cc: gcc, cxx: g++ }, { cc: clang, cxx: clang++ }]
-        build_type: [Debug]
-        binary: [linux-binary]
-        include:
-          - os: windows-latest
-            build_type: Debug
-            binary: windows-binary
-
+    runs-on: ubuntu-latest
     steps:
-      - if: matrix.os == 'ubuntu-latest'
-        name: Installing Dependencies
+      - uses: actions/checkout@v4
+
+      - name: Installing Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -y install ${{ matrix.compiler.cc }} cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
+          sudo apt-get -y install gcc cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+      - name:
+        
+# jobs:
+#   build:
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         os: [ubuntu-latest]
+#         compiler: [{ cc: gcc, cxx: g++ }, { cc: clang, cxx: clang++ }]
+#         build_type: [Debug]
+#         binary: [linux-binary]
+#         include:
+#           - os: windows-latest
+#             build_type: Debug
+#             binary: windows-binary
 
-      - name: Check Format
-        if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'clang'
-        run: |
-          find src/ include/ test/ assets/shaders/ -name "*.*" -print0 | \
-            xargs -0 clang-format --dry-run --Werror --ferror-limit=15
+#     steps:
+#       - if: matrix.os == 'ubuntu-latest'
+#         name: Installing Dependencies
+#         run: |
+#           sudo apt-get update
+#           sudo apt-get -y install ${{ matrix.compiler.cc }} cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
 
-      - name: Building Project
-        if: matrix.os == 'ubuntu-latest'
-        env:
-          CC: ${{ matrix.compiler.cc }}
-          CXX: ${{ matrix.compiler.cxx }}
-        run: |
-          cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          cmake --build build
+#       - name: Checkout Repository
+#         uses: actions/checkout@v3
+#         with:
+#           submodules: recursive
 
-      - name: Run Linter
-        if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'clang'
-        run: |
-          find src/ include/ test/ -name "*.*" -print0 | \
-            xargs -0 run-clang-tidy true -p build
+#       - name: Check Format
+#         if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'clang'
+#         run: |
+#           find src/ include/ test/ assets/shaders/ -name "*.*" -print0 | \
+#             xargs -0 clang-format --dry-run --Werror --ferror-limit=15
 
-      - name: Building Project
-        if: matrix.os == 'windows-latest'
-        run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          cmake --build build --config ${{ matrix.build_type }}
+#       - name: Building Project
+#         if: matrix.os == 'ubuntu-latest'
+#         env:
+#           CC: ${{ matrix.compiler.cc }}
+#           CXX: ${{ matrix.compiler.cxx }}
+#         run: |
+#           cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+#           cmake --build build
+
+#       - name: Run Linter
+#         if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'clang'
+#         run: |
+#           find src/ include/ test/ -name "*.*" -print0 | \
+#             xargs -0 run-clang-tidy true -p build
+
+#       - name: Building Project
+#         if: matrix.os == 'windows-latest'
+#         run: |
+#           cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+#           cmake --build build --config ${{ matrix.build_type }}
