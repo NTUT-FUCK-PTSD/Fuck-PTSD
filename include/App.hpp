@@ -30,6 +30,13 @@ private:
 private:
     State m_CurrentState = State::START;
 
+    MainCharacter::Direction m_PlayerMoveDirect =
+        MainCharacter::Direction::NONE;
+
+    std::shared_ptr<MainCharacter> m_MainCharacter;
+
+    int current_frame = 0;
+
     Camera m_Camera;
     glm::vec2 m_CameraPosition = {0, 0};
 };
