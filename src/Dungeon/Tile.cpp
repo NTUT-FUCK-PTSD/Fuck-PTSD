@@ -37,16 +37,16 @@ void Tile::Update() {
         ToolBoxs::CountImagePixel(m_filepath, m_TileSize.x, m_TileSize.y);
 
     if (m_Tile.type == 8) {
-        ImgSize = {m_TileSize.x, DUNGEON_TILE_WIDTH};
+        ImgSize = {ImgSize.x, DUNGEON_TILE_WIDTH};
     }
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     m_Transform.translation = {
         (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
         -(m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE)};
-
     m_SpriteSheet->SetDrawRect(
         {static_cast<int>(ImgSize.x *
-                          (m_Index % static_cast<int>(m_TileSize.x))),
+                              (m_Index % static_cast<int>(m_TileSize.x)) +
+                          (ImgSize.x - DUNGEON_TILE_WIDTH) / 2),
          static_cast<int>(ImgSize.y *
                           (m_Index / static_cast<int>(m_TileSize.x))),
          static_cast<int>(DUNGEON_TILE_WIDTH), static_cast<int>(ImgSize.y)});
