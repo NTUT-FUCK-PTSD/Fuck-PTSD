@@ -45,7 +45,22 @@
 			<tile x="-1" y="-3" type="7" zone="0" torch="0" cracked="0" />
 			<tile x="-1" y="-2" type="15" zone="0" torch="0" cracked="0" />
 			<tile x="-1" y="0" type="107" zone="0" torch="0" cracked="0" />
+			<tile x="1" y="0" type="104" zone="0" torch="0" cracked="0" />
+			<tile x="2" y="0" type="105" zone="0" torch="0" cracked="0" />
+			<tile x="3" y="0" type="106" zone="0" torch="0" cracked="0" />
+			<tile x="4" y="0" type="103" zone="0" torch="0" cracked="0" />
+			<tile x="5" y="0" type="111" zone="0" torch="0" cracked="0" />
+			<tile x="6" y="0" type="108" zone="0" torch="0" cracked="0" />
+			<tile x="7" y="0" type="107" zone="0" torch="0" cracked="0" />
 			<tile x="-1" y="1" type="115" zone="0" torch="0" cracked="0" />
+			<tile x="1" y="2" type="102" zone="0" torch="0" cracked="0" />
+			<tile x="2" y="2" type="100" zone="0" torch="0" cracked="0" />
+			<tile x="3" y="2" type="112" zone="0" torch="0" cracked="0" />
+			<tile x="4" y="2" type="113" zone="0" torch="0" cracked="0" />
+			<tile x="5" y="2" type="114" zone="0" torch="0" cracked="0" />
+			<tile x="-1" y="3" type="0" zone="0" torch="0" cracked="0" />
+			<tile x="1" y="3" type="0" zone="0" torch="0" cracked="0" />
+			<tile x="2" y="3" type="5" zone="0" torch="0" cracked="0" />
 		</tiles>
 		<traps />
 		<enemies />
