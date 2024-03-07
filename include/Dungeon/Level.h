@@ -18,13 +18,13 @@ public:
     int GetBossNum() { return m_BossNum; }
     int GetMusic() { return m_Music; }
     int GetCurrentLevel() { return m_CurrentLevel; }
-    std::vector<tile> GetTiles() { return m_Tiles; }
-    std::vector<trap> GetTraps() { return m_Traps; }
-    std::vector<enemy> GetEnemies() { return m_Enemies; }
-    std::vector<item> GetItems() { return m_Items; }
-    std::vector<chest> GetChests() { return m_Chests; }
-    std::vector<crate> GetCrates() { return m_Crates; }
-    std::vector<shrine> GetShrines() { return m_Shrines; }
+    std::vector<s_Tile> GetTiles() { return m_Tiles; }
+    std::vector<s_Trap> GetTraps() { return m_Traps; }
+    std::vector<s_Enemy> GetEnemies() { return m_Enemies; }
+    std::vector<s_Item> GetItems() { return m_Items; }
+    std::vector<s_Chest> GetChests() { return m_Chests; }
+    std::vector<s_Crate> GetCrates() { return m_Crates; }
+    std::vector<s_Shrine> GetShrines() { return m_Shrines; }
 
 private:
     int m_NumLevels;
@@ -36,13 +36,13 @@ private:
     tinyxml2::XMLElement *m_XMLdungeon;
     tinyxml2::XMLElement *m_XMLlevel;
 
-    std::vector<tile> m_Tiles;
-    std::vector<trap> m_Traps;
-    std::vector<enemy> m_Enemies;
-    std::vector<item> m_Items;
-    std::vector<chest> m_Chests;
-    std::vector<crate> m_Crates;
-    std::vector<shrine> m_Shrines;
+    std::vector<s_Tile> m_Tiles;
+    std::vector<s_Trap> m_Traps;
+    std::vector<s_Enemy> m_Enemies;
+    std::vector<s_Item> m_Items;
+    std::vector<s_Chest> m_Chests;
+    std::vector<s_Crate> m_Crates;
+    std::vector<s_Shrine> m_Shrines;
 }; // class Level
 } // namespace Dungeon
 

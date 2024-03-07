@@ -15,46 +15,46 @@ constexpr double DUNGEON_ROW_NUMBER =
 constexpr double DUNGEON_SCALE =
     ((WINDOW_WIDTH / DUNGEON_COL_NUMBER) / DUNGEON_TILE_WIDTH);
 
-struct tile {
+struct s_Tile {
     int x, y;
-    int type, zone, torch, cracked;
+    size_t type, zone, torch, cracked;
 };
 
-struct trap {
+struct s_Trap {
     int x, y;
-    int type, subtype;
+    size_t type, subtype;
 };
 
-struct enemy {
+struct s_Enemy {
     int x, y;
-    int type, beatDelay, lord;
+    size_t type, beatDelay, lord;
 };
 
-struct item {
+struct s_Item {
     int x, y;
     std::string type;
-    int bloodCost, saleCost, singleChoice;
+    size_t bloodCost, saleCost, singleChoice;
 };
 
-struct chest {
+struct s_Chest {
     int x, y;
-    int saleCost, singleChoice, color, hidden;
+    size_t saleCost, singleChoice, color, hidden;
     std::string contents;
 };
 
-struct crate {
+struct s_Crate {
     int x, y;
-    int type;
+    size_t type;
     std::string contents;
 };
 
-struct shrine {
+struct s_Shrine {
     int x, y;
-    int type;
+    size_t type;
 };
 } // namespace Dungeon
 
-const std::map<int, std::string> DUNGEON_TILETYPES = {
+const std::map<size_t, std::string> DUNGEON_TILETYPES = {
     {0, "floor_dirt1"},
     {2, "stairs"},
     {3, "TEMP_shop_floor"},
@@ -96,7 +96,7 @@ const std::map<int, std::string> DUNGEON_TILETYPES = {
     {117, "necrodancer_stage_spearker3"},
     {118, "wire_door"}};
 
-const std::map<int, glm::ivec2> DUNGEON_TILESIZES = {
+const std::map<size_t, glm::ivec2> DUNGEON_TILESIZES = {
     {0, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},   {4, {3, 1}},
     {5, {3, 1}},    {6, {1, 1}},   {7, {3, 1}},
 

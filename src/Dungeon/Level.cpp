@@ -22,7 +22,7 @@ void Level::LoadLevel(const int levelNum) {
     }
 
     // load tiles
-    tile t;
+    s_Tile t;
     m_Tiles.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("tiles")->FirstChildElement();
@@ -36,7 +36,7 @@ void Level::LoadLevel(const int levelNum) {
         m_Tiles.push_back(t);
     }
     // load traps
-    trap tr;
+    s_Trap tr;
     m_Traps.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("traps")->FirstChildElement();
@@ -48,7 +48,7 @@ void Level::LoadLevel(const int levelNum) {
         m_Traps.push_back(tr);
     }
     // load enemies
-    enemy e;
+    s_Enemy e;
     m_Enemies.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("enemies")->FirstChildElement();
@@ -61,7 +61,7 @@ void Level::LoadLevel(const int levelNum) {
         m_Enemies.push_back(e);
     }
     // load items
-    item i;
+    s_Item i;
     m_Items.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("items")->FirstChildElement();
@@ -75,7 +75,7 @@ void Level::LoadLevel(const int levelNum) {
         m_Items.push_back(i);
     }
     // load chests
-    chest c;
+    s_Chest c;
     m_Chests.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("chests")->FirstChildElement();
@@ -90,7 +90,7 @@ void Level::LoadLevel(const int levelNum) {
         m_Chests.push_back(c);
     }
     // load crates
-    crate cr;
+    s_Crate cr;
     m_Crates.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("crates")->FirstChildElement();
@@ -102,7 +102,7 @@ void Level::LoadLevel(const int levelNum) {
         m_Crates.push_back(cr);
     }
     // load shrines
-    shrine s;
+    s_Shrine s;
     m_Shrines.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("shrines")->FirstChildElement();

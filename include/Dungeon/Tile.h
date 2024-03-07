@@ -11,7 +11,7 @@ namespace Dungeon {
 
 class Tile : public Util::GameObject {
 public:
-    Tile(const tile &u_Tile);
+    Tile(const s_Tile &u_Tile);
 
     void SetIndex(std::size_t index);
     std::size_t GetIndex();
@@ -19,7 +19,7 @@ public:
     void Update();
 
 private:
-    tile m_Tile;
+    s_Tile m_Tile;
     glm::vec2 m_TileSize;
     std::string m_Filepath;
     std::shared_ptr<Util::SpriteSheet> m_SpriteSheet;
