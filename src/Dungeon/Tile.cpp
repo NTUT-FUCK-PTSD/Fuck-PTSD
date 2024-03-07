@@ -6,19 +6,19 @@ namespace Dungeon {
 Tile::Tile(const tile &u_Tile)
     : m_Tile(u_Tile) {
     SetZIndex(m_Tile.y);
-    m_filepath =
+    m_Filepath =
         (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(m_Tile.type) + ".png";
     if (m_Tile.type >= 100) {
         SetZIndex(m_Tile.y + 1);
     }
     if (m_Tile.type >= 112 && m_Tile.type <= 117) {
-        m_filepath = (ASSETS_DIR "/level/necrodancer_stage.png");
+        m_Filepath = (ASSETS_DIR "/level/necrodancer_stage.png");
         m_Index = m_Tile.type - 112;
     }
     else if (m_Tile.type == 118) {
-        m_filepath = (ASSETS_DIR "/level/door_front.png");
+        m_Filepath = (ASSETS_DIR "/level/door_front.png");
     }
-    m_SpriteSheet = std::make_shared<Util::SpriteSheet>(m_filepath);
+    m_SpriteSheet = std::make_shared<Util::SpriteSheet>(m_Filepath);
     Update();
 }
 
@@ -34,7 +34,7 @@ std::size_t Tile::GetIndex() {
 void Tile::Update() {
     m_TileSize = DUNGEON_TILESIZES.at(m_Tile.type);
     auto ImgSize =
-        ToolBoxs::CountImagePixel(m_filepath, m_TileSize.x, m_TileSize.y);
+        ToolBoxs::CountImagePixel(m_Filepath, m_TileSize.x, m_TileSize.y);
 
     if (m_Tile.type == 8) {
         ImgSize = {ImgSize.x, DUNGEON_TILE_WIDTH};

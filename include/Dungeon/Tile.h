@@ -21,7 +21,7 @@ public:
 private:
     tile m_Tile;
     glm::vec2 m_TileSize;
-    std::string m_filepath;
+    std::string m_Filepath;
     std::shared_ptr<Util::SpriteSheet> m_SpriteSheet;
     std::size_t m_Index = 0;
 };
