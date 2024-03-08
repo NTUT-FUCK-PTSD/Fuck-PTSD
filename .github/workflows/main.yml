@@ -1,8 +1,9 @@
 
-name: main
+name: main-before
 
-on: fork
-
+on: 
+  merge_group:
+  pull_request:
 
 # linux-gcc
 jobs:
