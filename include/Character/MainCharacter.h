@@ -12,10 +12,10 @@
 
 class MainCharacter {
 private:
-    std::string BodyImagePath = ASSETS_DIR "/entities/player1_armor_body.png";
+    std::string m_BodyImagePath = ASSETS_DIR "/entities/player1_armor_body.png";
 
-    std::string HeadImagePath = ASSETS_DIR "/entities/player1_heads.png";
-    std::shared_ptr<GameElement> m_MainCharacter =
+    std::string m_HeadImagePath = ASSETS_DIR "/entities/player1_heads.png";
+    std::shared_ptr<GameElement> m_MainGameObject =
         std::make_shared<GameElement>();
 
     std::shared_ptr<GameElement> m_Body = std::make_shared<GameElement>();
@@ -30,11 +30,11 @@ public:
 
     /* ---- Setter and Getter ----- */
 public:
-    void SetBodyImagePath(std::string &Path) { this->BodyImagePath = Path; };
+    void SetBodyImagePath(std::string &Path) { m_BodyImagePath = Path; };
 
-    void SetHeadImagePath(std::string &Path) { this->HeadImagePath = Path; }
+    void SetHeadImagePath(std::string &Path) { m_HeadImagePath = Path; }
 
-    std::shared_ptr<GameElement> Render() { return this->m_MainCharacter; };
+    std::shared_ptr<GameElement> GetGameObject() { return m_MainGameObject; };
 };
 
 #endif // FUCK_PTSD_MAINCHARACTER_H

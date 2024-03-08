@@ -9,15 +9,15 @@
 
 MainCharacter::MainCharacter() {
 
-    const auto HeadSize = ToolBoxs::CountImagePixel(this->HeadImagePath, 4, 2);
-    const auto BodySize = ToolBoxs::CountImagePixel(this->BodyImagePath, 4, 10);
+    const auto HeadSize = ToolBoxs::CountImagePixel(m_HeadImagePath, 4, 2);
+    const auto BodySize = ToolBoxs::CountImagePixel(m_BodyImagePath, 4, 10);
 
     const auto HeadImage = std::make_shared<SpriteSheet>(
-        this->HeadImagePath, HeadSize, std::vector<std::size_t>{0, 1, 2, 3},
+        m_HeadImagePath, HeadSize, std::vector<std::size_t>{0, 1, 2, 3},
         true, 100, true, 100);
 
     const auto BodyImage = std::make_shared<SpriteSheet>(
-        this->BodyImagePath, BodySize, std::vector<std::size_t>{0, 1, 2, 3},
+        m_BodyImagePath, BodySize, std::vector<std::size_t>{0, 1, 2, 3},
         true, 100, true, 100);
 
     m_Body->SetDrawable(BodyImage);
@@ -25,9 +25,13 @@ MainCharacter::MainCharacter() {
     m_Body->SetZIndex(ZIndex);
     m_Body->SetScale({3, 3});
 
-    m_MainCharacter->SetDrawable(HeadImage);
-    m_MainCharacter->SetPosition(InitPosition);
-    m_MainCharacter->SetZIndex(ZIndex);
-    m_MainCharacter->AddChild(m_Body);
-    m_MainCharacter->SetScale({3, 3});
+    m_Head->SetDrawable(HeadImage);
+    m_Head->SetPosition(InitPosition);
+    m_Head->SetZIndex(ZIndex);
+    m_Head->AddChild(m_Body);
+    m_Head->SetScale({3, 3});
+
+    m_MainGameObject->SetVisible(false);
+    m_MainGameObject->AddChild(m_Body);
+    m_MainGameObject->AddChild(m_Head);
 }

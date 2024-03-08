@@ -46,9 +46,9 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Camera.RemoveChild(m_Background->m_Continue);
 
     // create MainCharacter
-    auto m_MainCharacter = std::make_shared<MainCharacter>();
+    const auto m_Player = std::make_shared<MainCharacter>();
 
-    m_Camera.AddChild(m_MainCharacter->Render());
+    m_Camera.AddChild(m_Player->GetGameObject());
 
     m_CurrentState = State::UPDATE;
 }
