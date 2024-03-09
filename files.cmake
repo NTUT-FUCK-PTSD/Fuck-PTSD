@@ -6,6 +6,7 @@ list(APPEND CUSTOMIZE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Game
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Settings
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Character
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Dungeon
 )
 
 #target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/Game)
