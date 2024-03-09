@@ -13,6 +13,8 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 
+#include "Dungeon/Map.h"
+
 using namespace tinyxml2;
 
 extern "C" {
@@ -24,6 +26,9 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
 
+    // Test the Dungeon::Map
+    Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 1);
+
     auto m_Background = std::make_shared<GlobalType::TBackground>();
 
     // init background value
@@ -32,8 +37,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Background->m_MainMenu =
         std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
 
-    Begin::CreateBackground(m_Camera.GetRenderer(),
-                            m_Background->m_MainMenu, m_Background->m_Continue);
+    Begin::CreateBackground(m_Camera.GetRenderer(), m_Background->m_MainMenu,
+                            m_Background->m_Continue);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
@@ -49,6 +54,7 @@ void App::Start(std::shared_ptr<Core::Context>
     auto m_MainCharacter = std::make_shared<MainCharacter>();
 
     m_Camera.AddChild(m_MainCharacter->Render());
+    m_Camera.AddChildren(Test.GetChildren());
 
     m_CurrentState = State::UPDATE;
 }
@@ -64,16 +70,16 @@ void App::Update() {
      */
 
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_CameraPosition.y += 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_CameraPosition.x -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
         m_CameraPosition.y -= 10;
     }
-    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
         m_CameraPosition.x += 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_CameraPosition.y += 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        m_CameraPosition.x -= 10;
     }
     m_Camera.SetPosition(m_CameraPosition);
 
