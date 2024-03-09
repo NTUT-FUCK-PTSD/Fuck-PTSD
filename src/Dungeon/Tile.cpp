@@ -44,9 +44,9 @@ void Tile::Update() {
         else if (m_Tile.type == 103 || m_Tile.type == 106 ||
                  m_Tile.type == 111 || m_Tile.type == 118) {
             SetZIndex(m_Tile.y + 1);
-            m_Children.push_back(std::make_shared<Tile>(
-                s_Tile{m_Tile.x, m_Tile.y, 0, m_Tile.zone, m_Tile.torch,
-                       m_Tile.cracked}));
+            // m_Children.push_back(std::make_shared<Tile>(
+            //     s_Tile{m_Tile.x, m_Tile.y, 0, m_Tile.zone, m_Tile.torch,
+            //            m_Tile.cracked}));
             if (m_Tile.type == 111) {
                 magicNumber = -5;
             }
