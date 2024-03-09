@@ -8,7 +8,7 @@ namespace Dungeon {
 
 class Map {
 public:
-    Map(const std::string path, const int levelNum = 1);
+    Map(const std::string &path, const int levelNum = 1);
 
     /**
      * @brief Add a child to Renderer.

@@ -2,7 +2,7 @@
 
 namespace Dungeon {
 
-Map::Map(const std::string path, const int levelNum) {
+Map::Map(const std::string &path, const int levelNum) {
     m_Level = std::make_unique<Level>(path, levelNum);
     for (auto &tile : m_Level->GetTiles()) {
         m_Children.push_back(std::make_shared<Tile>(tile));
