@@ -39,7 +39,7 @@ void Tile::Update() {
         ImgSize.y -= 1;
 
         if (m_Tile.type >= 112 && m_Tile.type <= 117) {
-            magicNumber = 34;
+            magicNumber = 44;
         }
         else if (m_Tile.type == 103 || m_Tile.type == 106 ||
                  m_Tile.type == 111 || m_Tile.type == 118) {
