@@ -28,7 +28,7 @@ private:
     void ValidTask();
 
 private:
-    bool status = false;
+    std::size_t animationStartFrame = 0;
 
     State m_CurrentState = State::START;
 

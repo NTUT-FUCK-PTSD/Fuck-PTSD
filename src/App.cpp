@@ -1,10 +1,10 @@
 #include "App.hpp"
+#include "Animation.h"
 #include "Background.hpp"
 #include "Begin.h"
 #include "GlobalType.h"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
-
 #include "rusty_bridge/lib.h"
 #include "tinyxml2.h"
 
@@ -59,38 +59,39 @@ void App::Update() {
     //    LOG_DEBUG(current_frame);
     current_frame = ToolBoxs::FrameCounter(current_frame);
 
-    status = m_MainCharacter->player_move_animation(current_frame,
-                                                    m_PlayerMoveDirect, status);
+    auto isFinish = Animation::move_player(current_frame, animationStartFrame,
+                                           m_PlayerMoveDirect, m_MainCharacter);
 
-    if ((m_MainCharacter->GetStartMoveFrame() + 15 == current_frame) ||
-        (m_MainCharacter->GetStartMoveFrame() + 15 - 60 == current_frame)) {
-        LOG_DEBUG(m_MainCharacter->GetPosition());
-        status = false;
-        m_PlayerMoveDirect = MainCharacter::Direction::NONE;
+    //    LOG_DEBUG(m_MainCharacter->GetPosition());
+
+    if (isFinish) {
+        m_PlayerMoveDirect = MainCharacter::NONE;
     }
-
-    //    LOG_DEBUG(m_MainCharacter->GetStartMoveFrame());
-    //    LOG_DEBUG(status);
-
-    //    LOG_ERROR(Fuck_Fuck());
-    //    auto m_MainCharacter = new MainCharacter();
-
-    /*
-     * Do not touch the code below as they serve the purpose for
-     * closing the window.
-     */
 
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_CameraPosition.y += 10;
+
+        m_PlayerMoveDirect = MainCharacter::Direction::UP;
+        animationStartFrame = current_frame + 1;
+        m_MainCharacter->SetPosition({0, 0});
+        //        m_CameraPosition.y += 10;
     }
     if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_CameraPosition.x -= 10;
+        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
+        animationStartFrame = current_frame + 1;
+        m_MainCharacter->SetPosition({0, 0});
+
+        //        m_CameraPosition.x -= 10;
     }
     if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-        m_CameraPosition.y -= 10;
+        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
+        animationStartFrame = current_frame + 1;
+        m_MainCharacter->SetPosition({0, 0});
+        //        m_CameraPosition.y -= 10;
     }
     if (Util::Input::IsKeyDown(Util::Keycode::D)) {
         m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
+        animationStartFrame = current_frame + 1;
+        m_MainCharacter->SetPosition({0, 0});
 
         //        m_CameraPosition.x += 10;
     }

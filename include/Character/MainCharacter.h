@@ -28,7 +28,7 @@ private:
     uint16_t m_start_move_animation_frame = 0;
 
 public:
-    enum Direction { UP = 0, DOWN, RIGHT, LEFT, NONE };
+    enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
 
     explicit MainCharacter();
 
