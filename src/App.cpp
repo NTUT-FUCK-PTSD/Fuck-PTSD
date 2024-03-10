@@ -1,10 +1,7 @@
 #include "App.hpp"
 #include "Animation.h"
 #include "Background.hpp"
-#include "Event.h"
-#include "EventHandler.h"
 #include "MainCharacter.h"
-#include "PollHandler.h"
 #include "ToolBoxs.h"
 #include "rusty_bridge/lib.h"
 
@@ -52,52 +49,45 @@ void App::Update() {
 
     current_frame = ToolBoxs::FrameCounter(current_frame);
 
-    //    PollHandler poll;
-    //    poll.add(Event::isKeyDown_W, EventHandler::KeyDown_W);
-    //
-    //    poll.listen();
+    auto isFinish = Animation::move_player(current_frame, animationStartFrame,
+                                           m_PlayerMoveDirect, m_MainCharacter);
 
-    //    auto isFinish = Animation::move_player(current_frame,
-    //    animationStartFrame,
-    //                                           m_PlayerMoveDirect,
-    //                                           m_MainCharacter);
-    //
-    //    if (isFinish) {
-    //        m_PlayerMoveDirect = MainCharacter::NONE;
-    //    }
-    //
-    //    glm::vec2 currnet = {-m_CameraPosition.x, -m_CameraPosition.y};
-    //    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-    //        m_PlayerMoveDirect = MainCharacter::Direction::UP;
-    //        animationStartFrame = current_frame + 1;
-    //        currnet.y -= 10;
-    //        m_MainCharacter->SetPosition(currnet);
-    //
-    //        m_CameraPosition.y += 10;
-    //    }
-    //    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-    //        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
-    //        animationStartFrame = current_frame + 1;
-    //        currnet.x += 10;
-    //        m_MainCharacter->SetPosition(currnet);
-    //
-    //        m_CameraPosition.x -= 10;
-    //    }
-    //    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-    //        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
-    //        animationStartFrame = current_frame + 1;
-    //        currnet.y += 10;
-    //        m_MainCharacter->SetPosition(currnet);
-    //        m_CameraPosition.y -= 10;
-    //    }
-    //    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-    //        m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
-    //        animationStartFrame = current_frame + 1;
-    //        currnet.x -= 10;
-    //        m_MainCharacter->SetPosition(currnet);
-    //
-    //        m_CameraPosition.x += 10;
-    //    }
+    if (isFinish) {
+        m_PlayerMoveDirect = MainCharacter::NONE;
+    }
+
+    glm::vec2 currnet = {-m_CameraPosition.x, -m_CameraPosition.y};
+    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::UP;
+        animationStartFrame = current_frame + 1;
+        currnet.y -= 10;
+        m_MainCharacter->SetPosition(currnet);
+
+        m_CameraPosition.y += 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
+        animationStartFrame = current_frame + 1;
+        currnet.x += 10;
+        m_MainCharacter->SetPosition(currnet);
+
+        m_CameraPosition.x -= 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
+        animationStartFrame = current_frame + 1;
+        currnet.y += 10;
+        m_MainCharacter->SetPosition(currnet);
+        m_CameraPosition.y -= 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
+        animationStartFrame = current_frame + 1;
+        currnet.x -= 10;
+        m_MainCharacter->SetPosition(currnet);
+
+        m_CameraPosition.x += 10;
+    }
 
     m_Camera.SetPosition(m_CameraPosition);
 
