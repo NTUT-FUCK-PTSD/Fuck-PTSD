@@ -1,10 +1,10 @@
 #include "App.hpp"
+#include "Animation.h"
 #include "Background.hpp"
 #include "Begin.h"
 #include "GlobalType.h"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
-
 #include "rusty_bridge/lib.h"
 #include "tinyxml2.h"
 
@@ -46,14 +46,20 @@ void App::Start(std::shared_ptr<Core::Context>
         context->Update();
     }
 
+    // create MainCharacter
+    m_MainCharacter = std::make_shared<MainCharacter>();
+
+    //    m_Camera.AddChild(m_MainCharacter->Render());
+    m_Camera.AddChildren(m_MainCharacter->Render());
+
     // remove background
     m_Camera.RemoveChild(m_Background->m_MainMenu);
     m_Camera.RemoveChild(m_Background->m_Continue);
 
-    // create MainCharacter
-    auto m_MainCharacter = std::make_shared<MainCharacter>();
+    //    // create MainCharacter
+    //    auto m_MainCharacter = std::make_shared<MainCharacter>();
 
-    m_Camera.AddChild(m_MainCharacter->Render());
+    //    m_Camera.AddChildren(m_MainCharacter->Render());
     m_Camera.AddChildren(Test.GetChildren());
 
     m_CurrentState = State::UPDATE;
@@ -61,25 +67,47 @@ void App::Start(std::shared_ptr<Core::Context>
 
 void App::Update() {
 
-    //    LOG_ERROR(Fuck_Fuck());
-    //    auto m_MainCharacter = new MainCharacter();
+    //    LOG_DEBUG(current_frame);
+    current_frame = ToolBoxs::FrameCounter(current_frame);
 
-    /*
-     * Do not touch the code below as they serve the purpose for
-     * closing the window.
-     */
+    auto isFinish = Animation::move_player(current_frame, animationStartFrame,
+                                           m_PlayerMoveDirect, m_MainCharacter);
 
+    if (isFinish) {
+        m_PlayerMoveDirect = MainCharacter::NONE;
+    }
+
+    glm::vec2 currnet = {-m_CameraPosition.x, -m_CameraPosition.y};
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_CameraPosition.y -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_CameraPosition.x += 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::UP;
+        animationStartFrame = current_frame + 1;
+        currnet.y -= 10;
+        m_MainCharacter->SetPosition(currnet);
+
         m_CameraPosition.y += 10;
     }
-    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
+        animationStartFrame = current_frame + 1;
+        currnet.x += 10;
+        m_MainCharacter->SetPosition(currnet);
+
         m_CameraPosition.x -= 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
+        animationStartFrame = current_frame + 1;
+        currnet.y += 10;
+        m_MainCharacter->SetPosition(currnet);
+        m_CameraPosition.y -= 10;
+    }
+    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
+        animationStartFrame = current_frame + 1;
+        currnet.x -= 10;
+        m_MainCharacter->SetPosition(currnet);
+
+        m_CameraPosition.x += 10;
     }
     m_Camera.SetPosition(m_CameraPosition);
 
