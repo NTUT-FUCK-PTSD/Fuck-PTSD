@@ -28,6 +28,8 @@ private:
     void ValidTask();
 
 private:
+    bool status = false;
+
     State m_CurrentState = State::START;
 
     MainCharacter::Direction m_PlayerMoveDirect =

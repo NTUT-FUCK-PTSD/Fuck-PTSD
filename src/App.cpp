@@ -59,13 +59,18 @@ void App::Update() {
     //    LOG_DEBUG(current_frame);
     current_frame = ToolBoxs::FrameCounter(current_frame);
 
-    if (m_MainCharacter->GetStartMoveFrame() + 15 == current_frame) {
+    status = m_MainCharacter->player_move_animation(current_frame,
+                                                    m_PlayerMoveDirect, status);
+
+    if ((m_MainCharacter->GetStartMoveFrame() + 15 == current_frame) ||
+        (m_MainCharacter->GetStartMoveFrame() + 15 - 60 == current_frame)) {
+        LOG_DEBUG(m_MainCharacter->GetPosition());
+        status = false;
         m_PlayerMoveDirect = MainCharacter::Direction::NONE;
     }
 
-    LOG_DEBUG(m_MainCharacter->GetStartMoveFrame());
-
-    m_MainCharacter->player_move_animation(current_frame, m_PlayerMoveDirect);
+    //    LOG_DEBUG(m_MainCharacter->GetStartMoveFrame());
+    //    LOG_DEBUG(status);
 
     //    LOG_ERROR(Fuck_Fuck());
     //    auto m_MainCharacter = new MainCharacter();
@@ -87,7 +92,7 @@ void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::D)) {
         m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
 
-        m_CameraPosition.x += 10;
+        //        m_CameraPosition.x += 10;
     }
     m_Camera.SetPosition(m_CameraPosition);
 

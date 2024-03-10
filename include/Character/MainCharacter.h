@@ -39,13 +39,20 @@ public:
 
     void move_player(const glm::vec2 distance);
 
-    void player_move_animation(const int current_framesm, Direction direction);
+    bool player_move_animation(const int current_framesm, Direction direction,
+                               bool isAnimate);
 
     /* ---- Setter and Getter ----- */
 public:
     [[nodiscard]] uint16_t GetStartMoveFrame() const {
         return m_start_move_animation_frame;
     }
+
+    [[nodiscard]] glm::vec2 GetPosition() const {
+        return m_Head->GetPosition();
+    };
+
+    void SetPosition(const glm::vec2 &position);
 
     void SetBodyImagePath(const std::string &Path) { m_BodyImagePath = Path; };
 

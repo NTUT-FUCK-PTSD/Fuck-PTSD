@@ -41,6 +41,11 @@ MainCharacter::Render() const {
     return test03;
 };
 
+void MainCharacter::SetPosition(const glm::vec2 &position) {
+    m_Body->SetPosition(position);
+    m_Head->SetPosition(position);
+}
+
 void MainCharacter::move_player(const glm::vec2 distance) {
 
     const glm::vec2 body_position = m_Body->GetPosition();
@@ -53,10 +58,12 @@ void MainCharacter::move_player(const glm::vec2 distance) {
     m_Head->SetPosition(new_head_position);
 }
 
-void MainCharacter::player_move_animation(const int current_frames,
-                                          MainCharacter::Direction direction) {
+bool MainCharacter::player_move_animation(const int current_frames,
+                                          MainCharacter::Direction direction,
+                                          bool isAnimate) {
+
     if (direction == MainCharacter::Direction::NONE) {
-        return;
+        return false;
     }
 
     const int total_frame = 15;
@@ -68,21 +75,24 @@ void MainCharacter::player_move_animation(const int current_frames,
     const int X_axis_move_position = 12;
     const int Y_axis_move_position = 24;
 
-    if (m_start_move_animation_frame == 0) {
+    if (isAnimate == false) {
         m_start_move_animation_frame = current_frames;
-    }
-    else if (current_frames >= m_start_move_animation_frame + total_frame ||
-             current_frames ==
-                 m_start_move_animation_frame + total_frame - 60) {
-        m_start_move_animation_frame = 0;
-        return;
+        isAnimate = true;
     }
 
-    const int count_start_frame = current_frames - m_start_move_animation_frame;
+    std::size_t count_start_frame;
 
-    // 4
+    if ((m_start_move_animation_frame > 45) && (current_frames < 15)) {
+        count_start_frame =
+            current_frames + (60 - m_start_move_animation_frame);
+    }
+    else {
+        count_start_frame = current_frames - m_start_move_animation_frame;
+    }
+
+    // 5
     if (count_start_frame <= first_action_frame) {
-        const glm::vec2 move_distance = {-3, 0};
+        const glm::vec2 move_distance = {-2, 0};
 
         move_player(move_distance);
     }
@@ -99,4 +109,6 @@ void MainCharacter::player_move_animation(const int current_frames,
 
         move_player(move_distance);
     }
+
+    return true;
 }
