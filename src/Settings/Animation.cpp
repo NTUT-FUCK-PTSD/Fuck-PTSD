@@ -28,6 +28,7 @@ bool Animation::move_player(std::size_t current_frame, std::size_t firstFrame,
 
         if (count_frames <= action.first) {
             GameObject->move_player(action.second);
+            //            MoveGameObject();
             return false;
         }
     }

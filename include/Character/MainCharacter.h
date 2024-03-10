@@ -33,7 +33,7 @@ public:
     explicit MainCharacter();
 
     [[nodiscard]] const std::vector<std::shared_ptr<Util::GameObject>>
-    Render() const;
+    GetGameElement() const;
 
     void player_back(const int current_frames);
 

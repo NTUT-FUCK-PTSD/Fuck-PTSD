@@ -32,7 +32,7 @@ MainCharacter::MainCharacter() {
 }
 
 std::vector<std::shared_ptr<Util::GameObject>> const
-MainCharacter::Render() const {
+MainCharacter::GetGameElement() const {
     std::shared_ptr<Util::GameObject> test01 = m_Body;
     std::shared_ptr<Util::GameObject> test02 = m_Head;
 
@@ -56,59 +56,4 @@ void MainCharacter::move_player(const glm::vec2 distance) {
 
     m_Body->SetPosition(new_body_position);
     m_Head->SetPosition(new_head_position);
-}
-
-bool MainCharacter::player_move_animation(const int current_frames,
-                                          MainCharacter::Direction direction,
-                                          bool isAnimate) {
-
-    if (direction == MainCharacter::Direction::NONE) {
-        return false;
-    }
-
-    const int total_frame = 15;
-
-    const int first_action_frame = 4;
-    const int second_action_frame = 10;
-    const int third_action_frame = 14;
-
-    const int X_axis_move_position = 12;
-    const int Y_axis_move_position = 24;
-
-    if (isAnimate == false) {
-        m_start_move_animation_frame = current_frames;
-        isAnimate = true;
-    }
-
-    std::size_t count_start_frame;
-
-    if ((m_start_move_animation_frame > 45) && (current_frames < 15)) {
-        count_start_frame =
-            current_frames + (60 - m_start_move_animation_frame);
-    }
-    else {
-        count_start_frame = current_frames - m_start_move_animation_frame;
-    }
-
-    // 5
-    if (count_start_frame <= first_action_frame) {
-        const glm::vec2 move_distance = {-2, 0};
-
-        move_player(move_distance);
-    }
-
-    // 6
-    else if (count_start_frame <= second_action_frame) {
-        const glm::vec2 move_distance = {1, 4};
-
-        move_player(move_distance);
-    }
-    // 4
-    else if (count_start_frame <= third_action_frame) {
-        const glm::vec2 move_distance = {1, -6};
-
-        move_player(move_distance);
-    }
-
-    return true;
 }

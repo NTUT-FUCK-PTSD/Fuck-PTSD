@@ -1,14 +1,10 @@
 #include "App.hpp"
 #include "Animation.h"
 #include "Background.hpp"
-#include "Begin.h"
-#include "GlobalType.h"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
 #include "rusty_bridge/lib.h"
-#include "tinyxml2.h"
 
-#include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
@@ -29,16 +25,9 @@ void App::Start(std::shared_ptr<Core::Context>
     // Test the Dungeon::Map
     Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 1);
 
-    auto m_Background = std::make_shared<GlobalType::TBackground>();
-
-    // init background value
-    m_Background->m_Continue =
-        std::make_shared<Background>(ASSETS_DIR "/mainmenu/continue.png");
-    m_Background->m_MainMenu =
-        std::make_shared<Background>(ASSETS_DIR "/mainmenu/mainmenu.png");
-
-    Begin::CreateBackground(m_Camera.GetRenderer(), m_Background->m_MainMenu,
-                            m_Background->m_Continue);
+    // create background
+    const auto background = std::make_shared<Background>();
+    m_Camera.AddChild(background->GetGameElement());
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
@@ -48,18 +37,10 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();
-
-    //    m_Camera.AddChild(m_MainCharacter->Render());
-    m_Camera.AddChildren(m_MainCharacter->Render());
+    m_Camera.AddChildren(m_MainCharacter->GetGameElement());
 
     // remove background
-    m_Camera.RemoveChild(m_Background->m_MainMenu);
-    m_Camera.RemoveChild(m_Background->m_Continue);
-
-    //    // create MainCharacter
-    //    auto m_MainCharacter = std::make_shared<MainCharacter>();
-
-    //    m_Camera.AddChildren(m_MainCharacter->Render());
+    m_Camera.RemoveChild(background->GetGameElement());
     m_Camera.AddChildren(Test.GetChildren());
 
     m_CurrentState = State::UPDATE;
@@ -67,7 +48,6 @@ void App::Start(std::shared_ptr<Core::Context>
 
 void App::Update() {
 
-    //    LOG_DEBUG(current_frame);
     current_frame = ToolBoxs::FrameCounter(current_frame);
 
     auto isFinish = Animation::move_player(current_frame, animationStartFrame,
@@ -109,6 +89,7 @@ void App::Update() {
 
         m_CameraPosition.x += 10;
     }
+
     m_Camera.SetPosition(m_CameraPosition);
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {

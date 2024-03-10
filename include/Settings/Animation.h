@@ -33,11 +33,8 @@ struct triangle {
 };
 } // namespace MoveMode
 
-bool move_player(
-    std::size_t current_frame, std::size_t firstFrame,
-    MainCharacter::Direction direction,
-    //                 std::shared_ptr<Animation::MoveMode::triangle>
-    //                 animation_mode,
-    std::shared_ptr<MainCharacter> GameObject);
+bool move_player(std::size_t current_frame, std::size_t firstFrame,
+                 MainCharacter::Direction direction,
+                 std::shared_ptr<MainCharacter> GameObject);
 } // namespace Animation
 #endif // FUCK_PTSD_ANIMATION_H
