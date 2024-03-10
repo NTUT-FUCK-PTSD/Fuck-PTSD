@@ -11,13 +11,18 @@
 class PollHandler final {
 private:
     std::vector<std::function<void()>> func_list;
+    std::vector<std::function<bool()>> condition_list;
 
 public:
     explicit PollHandler();
 
-    void add(bool condition, std::function<void()> func) {
+    void add(const std::function<bool()> condition,
+             const std::function<void()> func) {
         func_list.push_back(func);
+        condition_list.push_back(condition);
     };
+
+    void listen();
 };
 
 #endif // FUCK_PTSD_EVENTLISTENER_H

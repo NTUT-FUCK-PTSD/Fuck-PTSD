@@ -24,6 +24,8 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
+    std::string Print(std::string s) { return s; }
+
 private:
     void ValidTask();
 
