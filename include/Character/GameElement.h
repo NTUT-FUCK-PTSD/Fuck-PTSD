@@ -19,7 +19,15 @@ private:
 
     /* ----- Setter and Getter ----- */
 public:
-    void SetDisplay(std::shared_ptr<Core::Drawable> &m_Drawable);
+    void SetDisplay(const std::shared_ptr<Core::Drawable> &m_Drawable) {
+        SetDrawable(m_Drawable);
+    };
+
+    void SetPosition(const glm::vec2 &Position) {
+        m_Transform.translation = Position;
+    }
+
+    void SetScale(const glm::vec2 &Ratio) { m_Transform.scale = Ratio; }
 
     // return Image Path
     [[nodiscard]] const std::string &GetImagePath() const {
@@ -32,17 +40,7 @@ public:
     }
 
     // Is visible
-    [[nodiscard]] bool GetVisibility() const {
-        return m_Visible;
-    }
-
-    void SetPosition(const glm::vec2 &Position) {
-        m_Transform.translation = Position;
-    }
-
-    void SetScale(const glm::vec2 &Ratio) {
-        m_Transform.scale = Ratio;
-    }
+    [[nodiscard]] bool GetVisibility() const { return m_Visible; }
 };
 
 #endif // I_LOVE_PTSD_ROLE_H

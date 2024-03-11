@@ -24,11 +24,22 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
+    std::string Print(std::string s) { return s; }
+
 private:
     void ValidTask();
 
 private:
+    std::size_t animationStartFrame = 0;
+
     State m_CurrentState = State::START;
+
+    MainCharacter::Direction m_PlayerMoveDirect =
+        MainCharacter::Direction::NONE;
+
+    std::shared_ptr<MainCharacter> m_MainCharacter;
+
+    int current_frame = 0;
 
     Camera m_Camera;
     glm::vec2 m_CameraPosition = {0, 0};
