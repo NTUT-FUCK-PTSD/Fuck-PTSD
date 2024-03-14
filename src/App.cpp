@@ -3,6 +3,7 @@
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
+#include "music.h"
 #include "rusty_bridge/lib.h"
 
 #include "Util/Input.hpp"
@@ -41,6 +42,8 @@ void App::Start(std::shared_ptr<Core::Context>
     // remove background
     m_Camera.RemoveChild(background->GetGameElement());
     m_Camera.AddChildren(Test.GetChildren());
+
+    music(ASSETS_DIR "/music/app.wav", 1.0, false);
 
     m_CurrentState = State::UPDATE;
 }

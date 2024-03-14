@@ -20,10 +20,12 @@ FetchContent_Declare(
         PTSD
         GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
         GIT_TAG submodule-ized
+        #        GIT_TAG test
 )
 FetchContent_MakeAvailable(PTSD)
 
-message(STATUS "PTSD: ${PTSD_SOURCE_DIR}")
+
+#message(STATUS "PTSD: ${PTSD_SOURCE_DIR}")
 
 #FetchContent_GetProperties(PTSD)
 #if(NOT PTSD_POPULATED)

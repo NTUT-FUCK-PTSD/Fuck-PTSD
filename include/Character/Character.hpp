@@ -1,9 +1,9 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include <string>
 #include "SpriteSheet.hpp"
 #include "Util/GameObject.hpp"
+#include <string>
 
 class Character : public Util::GameObject {
 public:
@@ -18,25 +18,30 @@ public:
     Character &operator=(Character &&) = delete;
 
     // return Image Path
-    [[nodiscard]] const std::string& GetImagePath() const { return m_ImagePath; }
+    [[nodiscard]] const std::string &GetImagePath() const {
+        return m_ImagePath;
+    }
 
     // return Image's Position
-    [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
+    [[nodiscard]] const glm::vec2 &GetPosition() const {
+        return m_Transform.translation;
+    }
 
     // Is visible
     [[nodiscard]] bool GetVisibility() const { return m_Visible; }
 
-    void SetImage(const std::string& ImagePath);
+    void SetImage(const std::string &ImagePath);
 
     void SetPosition(const glm::vec2 &Position) {
         m_Transform.translation = Position;
     }
 
-    void SetScale(const glm::vec2& Ratio) { m_Transform.scale = Ratio; }
+    void SetScale(const glm::vec2 &Ratio) { m_Transform.scale = Ratio; }
 
     // if animateion, then it will run.
-    void SetAnimation(glm::vec2 size, const std::vector<std::size_t> &frames, bool play,
-                      std::size_t interval, bool looping, std::size_t cooldown);
+    void SetAnimation(glm::vec2 size, const std::vector<std::size_t> &frames,
+                      bool play, std::size_t interval, bool looping,
+                      std::size_t cooldown);
 
     void SetPlay();
 
@@ -67,8 +72,8 @@ private:
     std::string m_ImagePath;
     std::shared_ptr<SpriteSheet> m_Animation;
 
-    uint8_t ImageWidthNumber = 0;
-    uint8_t ImageHeightNumber = 0;
+    //    uint8_t ImageWidthNumber = 0;
+    //    uint8_t ImageHeightNumber = 0;
 };
 
 #endif // CHARACTER_HPP
