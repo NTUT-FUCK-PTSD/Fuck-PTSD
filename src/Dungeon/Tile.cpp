@@ -61,7 +61,7 @@ void Tile::Update() {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     m_Transform.translation = {
         (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
-        -(m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE) +
+        -DUNGEON_TILE_WIDTH - (m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE) +
             (magicNumber / 2.0 * DUNGEON_SCALE)};
     if (ImgSize.x > DUNGEON_TILE_WIDTH) {
         m_SpriteSheet->SetDrawRect(
