@@ -104,7 +104,7 @@ void App::Update() {
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
                                       m_AniPlayerDestination.y -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
-            m_AniPlayerMotion = {-Dungeon::DUNGEON_TILE_WIDTH / 5,
+            m_AniPlayerMotion = {-Dungeon::DUNGEON_TILE_WIDTH / 4,
                                  Dungeon::DUNGEON_TILE_WIDTH};
             m_AniCameraDestination = {m_AniCameraDestination.x,
                                       m_AniCameraDestination.y +
