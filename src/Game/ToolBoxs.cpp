@@ -18,7 +18,7 @@ bool ToolBoxs::IsAnyKeyPress() {
     return false;
 }
 
-glm::vec2 ToolBoxs::CountImagePixel(const std::string &ImagePath,
+glm::vec2 ToolBoxs::CountImagePixel(std::string &ImagePath,
                                     uint16_t WidthNumber,
                                     uint16_t HeightNumber) {
     const auto ImageSize = Util::Image(ImagePath).GetSize();
@@ -27,18 +27,4 @@ glm::vec2 ToolBoxs::CountImagePixel(const std::string &ImagePath,
                                   ImageSize[1] / (double)HeightNumber);
 
     return result;
-}
-
-glm::vec2 ToolBoxs::AddVec2(const glm::vec2 &add01, const glm::vec2 &add02) {
-    glm::vec2 result = {add01[0] + add02[0], add01[1] + add02[1]};
-    return result;
-}
-
-int ToolBoxs::FrameCounter(const int current_frame) {
-    if (current_frame == 60) {
-        return 1;
-    }
-    else {
-        return current_frame + 1;
-    }
 }

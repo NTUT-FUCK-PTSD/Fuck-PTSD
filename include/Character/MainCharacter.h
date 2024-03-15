@@ -1,5 +1,5 @@
 //
-// Created b adven on 2024/3/4.
+// Created by adven on 2024/3/4.
 //
 
 #ifndef FUCK_PTSD_MAINCHARACTER_H
@@ -12,11 +12,11 @@
 
 class MainCharacter {
 private:
-    std::string m_BodyImagePath = ASSETS_DIR "/entities/player1_armor_body.png";
+    std::string BodyImagePath = ASSETS_DIR "/entities/player1_armor_body.png";
 
-    std::string m_HeadImagePath = ASSETS_DIR "/entities/player1_heads.png";
-    //    std::shared_ptr<GameElement> m_MainCharacter =
-    //        std::make_shared<GameElement>();
+    std::string HeadImagePath = ASSETS_DIR "/entities/player1_heads.png";
+    std::shared_ptr<GameElement> m_MainCharacter =
+        std::make_shared<GameElement>();
 
     std::shared_ptr<GameElement> m_Body = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Head = std::make_shared<GameElement>();
@@ -25,38 +25,16 @@ private:
 
     uint16_t ZIndex = 50;
 
-    uint16_t m_start_move_animation_frame = 0;
-
 public:
-    enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
-
     explicit MainCharacter();
-
-    [[nodiscard]] const std::vector<std::shared_ptr<Util::GameObject>>
-    GetGameElement() const;
-
-    void player_back(const int current_frames);
-
-    void move_player(const glm::vec2 distance);
-
-    bool player_move_animation(const int current_framesm, Direction direction,
-                               bool isAnimate);
 
     /* ---- Setter and Getter ----- */
 public:
-    [[nodiscard]] uint16_t GetStartMoveFrame() const {
-        return m_start_move_animation_frame;
-    }
+    void SetBodyImagePath(std::string &Path) { this->BodyImagePath = Path; };
 
-    [[nodiscard]] glm::vec2 GetPosition() const {
-        return m_Head->GetPosition();
-    };
+    void SetHeadImagePath(std::string &Path) { this->HeadImagePath = Path; }
 
-    void SetPosition(const glm::vec2 &position);
-
-    void SetBodyImagePath(const std::string &Path) { m_BodyImagePath = Path; };
-
-    void SetHeadImagePath(const std::string &Path) { m_HeadImagePath = Path; }
+    std::shared_ptr<GameElement> Render() { return this->m_MainCharacter; };
 };
 
 #endif // FUCK_PTSD_MAINCHARACTER_H

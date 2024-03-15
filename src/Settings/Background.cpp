@@ -5,29 +5,12 @@
 
 #include "Util/Image.hpp"
 
-Background::Background() {
-    const auto ContinueImage =
-        std::make_shared<Util::Image>(m_ContinueImagePath);
-    const auto MainMenuImage =
-        std::make_shared<Util::Image>(m_MainMenuImagePath);
-
-    const auto test = std::make_shared<Util::Image>(ASSETS_DIR "test.png");
-
-    m_MainMenu->SetDrawable(MainMenuImage);
-    m_MainMenu->SetZIndex(3);
-    m_MainMenu->SetScale({3, 3});
-
-    m_Continue->SetDrawable(ContinueImage);
-    m_Continue->SetPosition({-0.5f, -365.5f});
-    m_Continue->SetZIndex(5);
-    m_Continue->SetScale({3, 3});
-
-    m_Background->AddChild(m_MainMenu);
-    m_Background->AddChild(m_Continue);
-
-    m_Background->SetVisible(false);
+Background::Background(const std::string &ImagePath) {
+    SetImage(ImagePath);
 }
 
-std::shared_ptr<GameElement> Background::GetGameElement() {
-    return m_Background;
+void Background::SetImage(const std::string &ImagePath) {
+    this->m_ImagePath = ImagePath;
+    this->SetScale({3, 3});
+    this->m_Drawable = std::make_shared<Util::Image>(m_ImagePath);
 }
