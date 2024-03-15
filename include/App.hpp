@@ -33,6 +33,8 @@ private:
     std::shared_ptr<std::int16_t> m_AnimationPass =
         std::make_shared<std::int16_t>(0);
     unsigned long m_AnimationStartTime = 0;
+    glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
+    glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
 
     State m_CurrentState = State::START;
 
