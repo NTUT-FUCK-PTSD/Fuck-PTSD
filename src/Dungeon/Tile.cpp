@@ -35,11 +35,11 @@ void Tile::Update() {
 
     int8_t magicNumber = 0;
     if (m_Tile.type >= 100) {
-        magicNumber = 9;
+        magicNumber = 7;
         ImgSize.y -= 1;
 
         if (m_Tile.type >= 112 && m_Tile.type <= 117) {
-            magicNumber = 44;
+            magicNumber = 42;
         }
         else if (m_Tile.type == 103 || m_Tile.type == 106 ||
                  m_Tile.type == 111 || m_Tile.type == 118) {
@@ -48,15 +48,12 @@ void Tile::Update() {
             //     s_Tile{m_Tile.x, m_Tile.y, 0, m_Tile.zone, m_Tile.torch,
             //            m_Tile.cracked}));
             if (m_Tile.type == 111) {
-                magicNumber = -5;
+                magicNumber = -3;
             }
             else {
-                magicNumber = 8;
+                magicNumber = 7;
             }
         }
-    }
-    else if (ImgSize.y == 24) {
-        magicNumber = 2;
     }
     else if (m_Tile.type == 8) {
         ImgSize = {ImgSize.x, DUNGEON_TILE_WIDTH};
@@ -66,13 +63,27 @@ void Tile::Update() {
         (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
         -(m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE) +
             (magicNumber / 2.0 * DUNGEON_SCALE)};
-    m_SpriteSheet->SetDrawRect(
-        {static_cast<int>(ImgSize.x *
-                              (m_Index % static_cast<int>(m_TileSize.x)) +
-                          (ImgSize.x - DUNGEON_TILE_WIDTH) / 2),
-         static_cast<int>(ImgSize.y *
-                          (m_Index / static_cast<int>(m_TileSize.x))),
-         static_cast<int>(DUNGEON_TILE_WIDTH), static_cast<int>(ImgSize.y)});
+    if (ImgSize.x > DUNGEON_TILE_WIDTH) {
+        m_SpriteSheet->SetDrawRect(
+            {static_cast<int>(ImgSize.x *
+                                  (m_Index % static_cast<int>(m_TileSize.x)) +
+                              (ImgSize.x - DUNGEON_TILE_WIDTH) / 2),
+             static_cast<int>(ImgSize.y *
+                                  (m_Index / static_cast<int>(m_TileSize.x)) +
+                              (ImgSize.y - DUNGEON_TILE_WIDTH) / 2),
+             static_cast<int>(DUNGEON_TILE_WIDTH),
+             static_cast<int>(DUNGEON_TILE_WIDTH)});
+    }
+    else {
+        m_SpriteSheet->SetDrawRect(
+            {static_cast<int>(ImgSize.x *
+                                  (m_Index % static_cast<int>(m_TileSize.x)) +
+                              (ImgSize.x - DUNGEON_TILE_WIDTH) / 2),
+             static_cast<int>(ImgSize.y *
+                              (m_Index / static_cast<int>(m_TileSize.x))),
+             static_cast<int>(DUNGEON_TILE_WIDTH),
+             static_cast<int>(ImgSize.y)});
+    }
     m_Drawable = m_SpriteSheet;
 }
 
