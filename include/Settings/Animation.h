@@ -14,6 +14,8 @@ glm::vec2 moveCameraByTime(unsigned long firstTimeMs, unsigned long lastTimeMs,
 bool movePlayerByTime(unsigned long firstTimeMs, unsigned long lastTimeMs,
                       glm::vec2 destination,
                       std::shared_ptr<MainCharacter> player);
+void movePlayerAnimation(unsigned long firstTimeMs, unsigned long lastTimeMs,
+                         glm::vec2 move, std::shared_ptr<MainCharacter> player);
 } // namespace Animation
 
 #endif // FUCK_PTSD_ANIMATION_H

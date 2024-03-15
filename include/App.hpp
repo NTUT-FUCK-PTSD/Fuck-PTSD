@@ -31,6 +31,8 @@ private:
 
 private:
     unsigned long m_AnimationStartTime = 0;
+    glm::vec2 m_AniPlayerStartPosition = {0.0f, 0.0f};
+    glm::vec2 m_AniPlayerMotion = {0.0f, 0.0f};
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
     glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
 

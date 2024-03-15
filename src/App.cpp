@@ -47,66 +47,83 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
-
-    // auto isFinish =
-    //     Animation::move_player(m_AnimationPass, m_AnimationStartTime,
-    //                            m_PlayerMoveDirect, m_MainCharacter);
-
-    auto isFinish = Animation::movePlayerByTime(
-        m_AnimationStartTime, 200, m_AniPlayerDestination, m_MainCharacter);
     m_CameraPosition = Animation::moveCameraByTime(
         m_AnimationStartTime, 200, m_AniCameraDestination, m_CameraPosition);
+
+    Animation::movePlayerAnimation(m_AnimationStartTime, 200, m_AniPlayerMotion,
+                                   m_MainCharacter);
+    auto isFinish = Animation::movePlayerByTime(
+        m_AnimationStartTime, 200, m_AniPlayerDestination, m_MainCharacter);
+
     if (isFinish) {
         m_PlayerMoveDirect = MainCharacter::NONE;
     }
-    if (m_PlayerMoveDirect == MainCharacter::NONE) {
+    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
+        Util::Input::IsKeyDown(Util::Keycode::D) ||
+        Util::Input::IsKeyDown(Util::Keycode::S) ||
+        Util::Input::IsKeyDown(Util::Keycode::A)) {
+        if (m_PlayerMoveDirect != MainCharacter::NONE) {
+            m_PlayerMoveDirect = MainCharacter::NONE;
+            m_MainCharacter->SetPosition(m_AniPlayerDestination);
+            m_CameraPosition = m_AniCameraDestination;
+        }
         glm::vec2 current = {-m_CameraPosition.x, -m_CameraPosition.y};
         if (Util::Input::IsKeyDown(Util::Keycode::W)) {
             m_PlayerMoveDirect = MainCharacter::Direction::UP;
             m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
                                       m_AniPlayerDestination.y +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
+            m_AniPlayerMotion = {0, Dungeon::DUNGEON_TILE_WIDTH};
 
             m_AniCameraDestination = {m_AniCameraDestination.x,
                                       m_AniCameraDestination.y -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
         }
-        if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+        else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
             m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
             m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
             m_AniPlayerDestination = {m_AniPlayerDestination.x -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniPlayerDestination.y};
+            m_AniPlayerMotion = {Dungeon::DUNGEON_TILE_WIDTH / 2,
+                                 Dungeon::DUNGEON_TILE_WIDTH};
 
             m_AniCameraDestination = {m_AniCameraDestination.x +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniCameraDestination.y};
         }
-        if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
             m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
             m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
                                       m_AniPlayerDestination.y -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
+            m_AniPlayerMotion = {Dungeon::DUNGEON_TILE_WIDTH / 5,
+                                 Dungeon::DUNGEON_TILE_WIDTH};
 
             m_AniCameraDestination = {m_AniCameraDestination.x,
                                       m_AniCameraDestination.y +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
         }
-        if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
             m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
             m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
             m_AniPlayerDestination = {m_AniPlayerDestination.x +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniPlayerDestination.y};
+            m_AniPlayerMotion = {-Dungeon::DUNGEON_TILE_WIDTH / 2,
+                                 Dungeon::DUNGEON_TILE_WIDTH};
 
             m_AniCameraDestination = {m_AniCameraDestination.x -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniCameraDestination.y};
         }
     }
-    // LOG_INFO(m_MainCharacter->GetPosition());
 
     m_Camera.SetPosition(m_CameraPosition);
 
