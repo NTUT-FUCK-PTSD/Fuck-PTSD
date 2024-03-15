@@ -9,12 +9,13 @@
 #include "Util/Time.hpp"
 
 namespace Animation {
-glm::vec2 moveCameraByTime(unsigned long firstTimeMs, unsigned long lastTimeMs,
-                           glm::vec2 destination, glm::vec2 cameraPosition);
-bool movePlayerByTime(unsigned long firstTimeMs, unsigned long lastTimeMs,
+glm::vec2 moveCameraByTime(unsigned long firstTimeMs,
+                           unsigned long duringTimeMs, glm::vec2 destination,
+                           glm::vec2 cameraPosition);
+bool movePlayerByTime(unsigned long firstTimeMs, unsigned long duringTimeMs,
                       glm::vec2 destination,
                       std::shared_ptr<MainCharacter> player);
-void movePlayerAnimation(unsigned long firstTimeMs, unsigned long lastTimeMs,
+void movePlayerAnimation(unsigned long firstTimeMs, unsigned long duringTimeMs,
                          glm::vec2 move, std::shared_ptr<MainCharacter> player);
 } // namespace Animation
 

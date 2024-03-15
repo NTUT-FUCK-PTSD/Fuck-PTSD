@@ -6,29 +6,29 @@
 #include "Dungeon/Elements.h"
 
 glm::vec2 Animation::moveCameraByTime(unsigned long firstTimeMs,
-                                      unsigned long lastTimeMs,
+                                      unsigned long duringTimeMs,
                                       glm::vec2 destination,
                                       glm::vec2 cameraPosition) {
     unsigned long passTimeMs = Util::Time::GetElapsedTimeMs() - firstTimeMs;
-    if (passTimeMs > lastTimeMs || cameraPosition == destination) {
+    if (passTimeMs > duringTimeMs || cameraPosition == destination) {
         return destination;
     }
-    float ratio = (float)passTimeMs / lastTimeMs;
+    float ratio = (float)passTimeMs / duringTimeMs;
     glm::vec2 current = cameraPosition;
     glm::vec2 move = destination - current;
     return current + move * ratio;
 }
 
 bool Animation::movePlayerByTime(unsigned long firstTimeMs,
-                                 unsigned long lastTimeMs,
+                                 unsigned long duringTimeMs,
                                  glm::vec2 destination,
                                  std::shared_ptr<MainCharacter> player) {
     unsigned long passTimeMs = Util::Time::GetElapsedTimeMs() - firstTimeMs;
-    if (passTimeMs > lastTimeMs || player->GetPosition() == destination) {
+    if (passTimeMs > duringTimeMs || player->GetPosition() == destination) {
         player->SetPosition(destination);
         return true;
     }
-    float ratio = (float)passTimeMs / lastTimeMs;
+    float ratio = (float)passTimeMs / duringTimeMs;
     glm::vec2 current = player->GetPosition();
     glm::vec2 move = destination - current;
     player->SetPosition(current + move * ratio);
@@ -36,21 +36,21 @@ bool Animation::movePlayerByTime(unsigned long firstTimeMs,
 }
 
 void Animation::movePlayerAnimation(unsigned long firstTimeMs,
-                                    unsigned long lastTimeMs, glm::vec2 move,
+                                    unsigned long duringTimeMs, glm::vec2 move,
                                     std::shared_ptr<MainCharacter> player) {
     unsigned long passTimeMs = Util::Time::GetElapsedTimeMs() - firstTimeMs;
-    if (passTimeMs > lastTimeMs) {
+    if (passTimeMs > duringTimeMs) {
         return;
     }
     glm::vec2 current = player->GetPosition();
-    if (passTimeMs <= lastTimeMs / 2.0f) {
-        float ratio = (float)passTimeMs / (lastTimeMs / 2);
+    if (passTimeMs <= duringTimeMs / 2.0f) {
+        float ratio = (float)passTimeMs / (duringTimeMs / 2);
         player->SetPosition(current + move * ratio);
     }
     else {
         unsigned long nPassTimeMs =
-            Util::Time::GetElapsedTimeMs() - firstTimeMs + (lastTimeMs / 2);
-        float ratio = (float)nPassTimeMs / (lastTimeMs / 2);
+            Util::Time::GetElapsedTimeMs() - firstTimeMs + (duringTimeMs / 2);
+        float ratio = (float)nPassTimeMs / (duringTimeMs / 2);
         player->SetPosition(current - move * (1.0f - ratio));
     }
     return;
