@@ -48,9 +48,8 @@ void Animation::movePlayerAnimation(unsigned long firstTimeMs,
         player->SetPosition(current + move * ratio);
     }
     else {
-        unsigned long nPassTimeMs =
-            Util::Time::GetElapsedTimeMs() - firstTimeMs + (duringTimeMs / 2);
-        float ratio = (float)nPassTimeMs / (duringTimeMs / 2);
+        float ratio =
+            (float)(passTimeMs + (duringTimeMs / 2)) / (duringTimeMs / 2);
         player->SetPosition(current - move * (1.0f - ratio));
     }
     return;
