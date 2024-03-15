@@ -4,7 +4,6 @@
 
 #include "Animation.h"
 #include "Dungeon/Elements.h"
-#include "Util/Logger.hpp"
 
 glm::vec2 Animation::moveCameraByTime(unsigned long firstTimeMs,
                                       unsigned long lastTimeMs,
@@ -40,7 +39,6 @@ void Animation::movePlayerAnimation(unsigned long firstTimeMs,
                                     unsigned long lastTimeMs, glm::vec2 move,
                                     std::shared_ptr<MainCharacter> player) {
     unsigned long passTimeMs = Util::Time::GetElapsedTimeMs() - firstTimeMs;
-
     if (passTimeMs > lastTimeMs) {
         return;
     }

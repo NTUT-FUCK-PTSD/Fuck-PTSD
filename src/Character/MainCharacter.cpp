@@ -45,15 +45,3 @@ void MainCharacter::SetPosition(const glm::vec2 &position) {
     m_Body->SetPosition(position);
     m_Head->SetPosition(position);
 }
-
-void MainCharacter::move_player(const glm::vec2 distance) {
-
-    const glm::vec2 body_position = m_Body->GetPosition();
-    const glm::vec2 head_position = m_Head->GetPosition();
-
-    auto new_body_position = ToolBoxs::AddVec2(body_position, distance);
-    auto new_head_position = ToolBoxs::AddVec2(head_position, distance);
-
-    m_Body->SetPosition(new_body_position);
-    m_Head->SetPosition(new_head_position);
-}
