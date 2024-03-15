@@ -5,36 +5,18 @@
 #ifndef FUCK_PTSD_ANIMATION_H
 #define FUCK_PTSD_ANIMATION_H
 
-#include <iostream>
-#include <map>
-
 #include "MainCharacter.h"
+#include "Util/Time.hpp"
 
 namespace Animation {
-
-namespace MoveMode {
-struct triangle {
-    std::size_t totalFrames = 15;
-
-    const std::map<std::size_t, glm::vec2> DownAction = {
-        {4, {0, -4}}, {10, {0, 6}}, {14, {0, -2}}};
-    const std::map<std::size_t, glm::vec2> UpAction = {
-        {4, {0, 4}}, {10, {0, -6}}, {14, {0, 2}}};
-
-    const std::map<std::size_t, glm::vec2> LeftAction = {
-        {4, {-2, 0}}, {10, {1, 4}}, {14, {1, -6}}};
-    const std::map<std::size_t, glm::vec2> RightAction = {
-        {4, {2, 0}}, {10, {-1, 4}}, {14, {-1, -6}}};
-
-    // vector's order is important here.
-    // UP, RIGHT, DOWN, LEFT,
-    const std::vector<std::map<std::size_t, glm::vec2>> Actions = {
-        UpAction, RightAction, DownAction, LeftAction};
-};
-} // namespace MoveMode
-
-bool move_player(std::size_t current_frame, std::size_t firstFrame,
-                 MainCharacter::Direction direction,
-                 std::shared_ptr<MainCharacter> GameObject);
+glm::vec2 moveCameraByTime(unsigned long firstTimeMs,
+                           unsigned long duringTimeMs, glm::vec2 destination,
+                           glm::vec2 cameraPosition);
+bool movePlayerByTime(unsigned long firstTimeMs, unsigned long duringTimeMs,
+                      glm::vec2 destination,
+                      std::shared_ptr<MainCharacter> player);
+void movePlayerAnimation(unsigned long firstTimeMs, unsigned long duringTimeMs,
+                         glm::vec2 move, std::shared_ptr<MainCharacter> player);
 } // namespace Animation
+
 #endif // FUCK_PTSD_ANIMATION_H

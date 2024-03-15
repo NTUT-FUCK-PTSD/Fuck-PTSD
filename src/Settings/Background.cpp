@@ -11,8 +11,6 @@ Background::Background() {
     const auto MainMenuImage =
         std::make_shared<Util::Image>(m_MainMenuImagePath);
 
-    const auto test = std::make_shared<Util::Image>(ASSETS_DIR "test.png");
-
     m_MainMenu->SetDrawable(MainMenuImage);
     m_MainMenu->SetZIndex(3);
     m_MainMenu->SetScale({3, 3});

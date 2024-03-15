@@ -19,8 +19,8 @@ private:
 
     /* ----- Setter and Getter ----- */
 public:
-    void SetDisplay(const std::shared_ptr<Core::Drawable> &m_Drawable) {
-        SetDrawable(m_Drawable);
+    void SetDisplay(const std::shared_ptr<Core::Drawable> &drawable) {
+        SetDrawable(drawable);
     };
 
     void SetPosition(const glm::vec2 &Position) {

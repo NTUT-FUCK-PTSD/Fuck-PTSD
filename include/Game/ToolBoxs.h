@@ -14,8 +14,6 @@ public:
                                      uint16_t WidthNumber,
                                      uint16_t HeightNumber);
     static glm::vec2 AddVec2(const glm::vec2 &add01, const glm::vec2 &add02);
-
-    static int FrameCounter(const int current_frame);
 };
 
 #endif // FUCK_PTSD_TOOLBOXS_H

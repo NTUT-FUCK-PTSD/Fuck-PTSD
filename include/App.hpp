@@ -30,7 +30,11 @@ private:
     void ValidTask();
 
 private:
-    std::size_t animationStartFrame = 0;
+    unsigned long m_AnimationStartTime = 0;
+    glm::vec2 m_AniPlayerStartPosition = {0.0f, 0.0f};
+    glm::vec2 m_AniPlayerMotion = {0.0f, 0.0f};
+    glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
+    glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
 
     State m_CurrentState = State::START;
 
@@ -38,8 +42,6 @@ private:
         MainCharacter::Direction::NONE;
 
     std::shared_ptr<MainCharacter> m_MainCharacter;
-
-    int current_frame = 0;
 
     Camera m_Camera;
     glm::vec2 m_CameraPosition = {0, 0};

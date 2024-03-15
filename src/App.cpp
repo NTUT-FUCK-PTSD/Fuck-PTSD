@@ -1,5 +1,5 @@
-#include "App.hpp"
 #include "Animation.h"
+#include "App.hpp"
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
@@ -8,6 +8,7 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+#include "Util/Time.hpp"
 
 #include "Dungeon/Map.h"
 
@@ -46,47 +47,84 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
+    m_CameraPosition = Animation::moveCameraByTime(
+        m_AnimationStartTime, 200, m_AniCameraDestination, m_CameraPosition);
 
-    current_frame = ToolBoxs::FrameCounter(current_frame);
-
-    auto isFinish = Animation::move_player(current_frame, animationStartFrame,
-                                           m_PlayerMoveDirect, m_MainCharacter);
+    Animation::movePlayerAnimation(m_AnimationStartTime, 200, m_AniPlayerMotion,
+                                   m_MainCharacter);
+    auto isFinish = Animation::movePlayerByTime(
+        m_AnimationStartTime, 200, m_AniPlayerDestination, m_MainCharacter);
 
     if (isFinish) {
         m_PlayerMoveDirect = MainCharacter::NONE;
     }
+    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
+        Util::Input::IsKeyDown(Util::Keycode::D) ||
+        Util::Input::IsKeyDown(Util::Keycode::S) ||
+        Util::Input::IsKeyDown(Util::Keycode::A)) {
+        if (m_PlayerMoveDirect != MainCharacter::NONE) {
+            m_PlayerMoveDirect = MainCharacter::NONE;
+            m_MainCharacter->SetPosition(m_AniPlayerDestination);
+            m_CameraPosition = m_AniCameraDestination;
+        }
+        glm::vec2 current = {-m_CameraPosition.x, -m_CameraPosition.y};
+        if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::UP;
 
-    glm::vec2 currnet = {-m_CameraPosition.x, -m_CameraPosition.y};
-    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::UP;
-        animationStartFrame = current_frame + 1;
-        currnet.y -= 10;
-        m_MainCharacter->SetPosition(currnet);
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
+            m_AniPlayerDestination = {m_AniPlayerDestination.x,
+                                      m_AniPlayerDestination.y +
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
+            m_AniPlayerMotion = {0, Dungeon::DUNGEON_TILE_WIDTH};
+            m_AniCameraDestination = {m_AniCameraDestination.x,
+                                      m_AniCameraDestination.y -
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
+        }
+        else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
+            m_MainCharacter->SetFaceTo(MainCharacter::Direction::LEFT);
 
-        m_CameraPosition.y += 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
-        animationStartFrame = current_frame + 1;
-        currnet.x += 10;
-        m_MainCharacter->SetPosition(currnet);
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
+            m_AniPlayerDestination = {m_AniPlayerDestination.x -
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
+                                      m_AniPlayerDestination.y};
+            m_AniPlayerMotion = {Dungeon::DUNGEON_TILE_WIDTH / 2,
+                                 Dungeon::DUNGEON_TILE_WIDTH};
+            m_AniCameraDestination = {m_AniCameraDestination.x +
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
+                                      m_AniCameraDestination.y};
+        }
+        else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
 
-        m_CameraPosition.x -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
-        animationStartFrame = current_frame + 1;
-        currnet.y += 10;
-        m_MainCharacter->SetPosition(currnet);
-        m_CameraPosition.y -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
-        animationStartFrame = current_frame + 1;
-        currnet.x -= 10;
-        m_MainCharacter->SetPosition(currnet);
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
+            m_AniPlayerDestination = {m_AniPlayerDestination.x,
+                                      m_AniPlayerDestination.y -
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
+            m_AniPlayerMotion = {-Dungeon::DUNGEON_TILE_WIDTH / 4,
+                                 Dungeon::DUNGEON_TILE_WIDTH};
+            m_AniCameraDestination = {m_AniCameraDestination.x,
+                                      m_AniCameraDestination.y +
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
+        }
+        else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
+            m_MainCharacter->SetFaceTo(MainCharacter::Direction::RIGHT);
 
-        m_CameraPosition.x += 10;
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            m_AniPlayerStartPosition = m_MainCharacter->GetPosition();
+            m_AniPlayerDestination = {m_AniPlayerDestination.x +
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
+                                      m_AniPlayerDestination.y};
+            m_AniPlayerMotion = {-Dungeon::DUNGEON_TILE_WIDTH / 2,
+                                 Dungeon::DUNGEON_TILE_WIDTH};
+            m_AniCameraDestination = {m_AniCameraDestination.x -
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
+                                      m_AniCameraDestination.y};
+        }
     }
 
     m_Camera.SetPosition(m_CameraPosition);

@@ -44,11 +44,8 @@ void Tile::Update() {
         else if (m_Tile.type == 103 || m_Tile.type == 106 ||
                  m_Tile.type == 111 || m_Tile.type == 118) {
             SetZIndex(m_Tile.y + 1);
-            // m_Children.push_back(std::make_shared<Tile>(
-            //     s_Tile{m_Tile.x, m_Tile.y, 0, m_Tile.zone, m_Tile.torch,
-            //            m_Tile.cracked}));
             if (m_Tile.type == 111) {
-                magicNumber = -3;
+                magicNumber = 26;
             }
             else {
                 magicNumber = 7;
@@ -61,7 +58,7 @@ void Tile::Update() {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     m_Transform.translation = {
         (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
-        -(m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE) +
+        -DUNGEON_TILE_WIDTH - (m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE) +
             (magicNumber / 2.0 * DUNGEON_SCALE)};
     if (ImgSize.x > DUNGEON_TILE_WIDTH) {
         m_SpriteSheet->SetDrawRect(
