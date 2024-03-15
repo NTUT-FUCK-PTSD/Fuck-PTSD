@@ -49,7 +49,7 @@ void MainCharacter::SetPosition(const glm::vec2 &position) {
 
 void MainCharacter::SetFaceTo(Direction direction) {
     if (direction != RIGHT && direction != LEFT) {
-        LOG_ERROR("MainCharacter::SetFaceTo: Invalid direction");
+        LOG_WARN("MainCharacter::SetFaceTo: Invalid direction");
         return;
     }
     if (direction == RIGHT) {
