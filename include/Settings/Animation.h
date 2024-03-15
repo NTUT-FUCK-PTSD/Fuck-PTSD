@@ -9,9 +9,6 @@
 #include "Util/Time.hpp"
 
 namespace Animation {
-bool move_player(std::shared_ptr<std::int16_t> animationPass,
-                 unsigned long firstTime, MainCharacter::Direction direction,
-                 std::shared_ptr<MainCharacter> player);
 glm::vec2 moveCameraByTime(unsigned long firstTimeMs, unsigned long lastTimeMs,
                            glm::vec2 destination, glm::vec2 cameraPosition);
 bool movePlayerByTime(unsigned long firstTimeMs, unsigned long lastTimeMs,

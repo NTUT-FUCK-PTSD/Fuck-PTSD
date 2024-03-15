@@ -6,24 +6,6 @@
 #include "Dungeon/Elements.h"
 #include "Util/Logger.hpp"
 
-bool Animation::move_player(std::shared_ptr<std::int16_t> animationPass,
-                            unsigned long firstTime,
-                            MainCharacter::Direction direction,
-                            std::shared_ptr<MainCharacter> player) {
-
-    if (direction == MainCharacter::Direction::NONE) {
-        return true;
-    }
-
-    movePlayerByTime(
-        firstTime, 3000,
-        {player->GetPosition().x,
-         player->GetPosition().y + Dungeon::DUNGEON_TILE_WIDTH * 3},
-        player);
-    *animationPass = 0;
-    return true;
-}
-
 glm::vec2 Animation::moveCameraByTime(unsigned long firstTimeMs,
                                       unsigned long lastTimeMs,
                                       glm::vec2 destination,
