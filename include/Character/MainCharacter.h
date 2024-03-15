@@ -35,7 +35,6 @@ public:
     [[nodiscard]] const std::vector<std::shared_ptr<Util::GameObject>>
     GetGameElement() const;
 
-    void player_back(const int current_frames);
 
     /* ---- Setter and Getter ----- */
 public:
@@ -52,6 +51,8 @@ public:
     void SetBodyImagePath(const std::string &Path) { m_BodyImagePath = Path; };
 
     void SetHeadImagePath(const std::string &Path) { m_HeadImagePath = Path; }
+
+    void SetFaceTo(Direction direction);
 };
 
 #endif // FUCK_PTSD_MAINCHARACTER_H

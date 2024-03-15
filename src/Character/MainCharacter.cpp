@@ -2,6 +2,7 @@
 // Created by adven on 2024/3/4.
 //
 
+#include "Dungeon/Elements.h"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
@@ -23,12 +24,12 @@ MainCharacter::MainCharacter() {
     m_Body->SetDrawable(BodyImage);
     m_Body->SetPosition(InitPosition);
     m_Body->SetZIndex(ZIndex);
-    m_Body->SetScale({3, 3});
+    m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(InitPosition);
     m_Head->SetZIndex(ZIndex);
-    m_Head->SetScale({3, 3});
+    m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 }
 
 std::vector<std::shared_ptr<Util::GameObject>> const
@@ -44,4 +45,18 @@ MainCharacter::GetGameElement() const {
 void MainCharacter::SetPosition(const glm::vec2 &position) {
     m_Body->SetPosition(position);
     m_Head->SetPosition(position);
+}
+
+void MainCharacter::SetFaceTo(Direction direction) {
+    if (direction != RIGHT && direction != LEFT) {
+        LOG_ERROR("MainCharacter::SetFaceTo: Invalid direction");
+        return;
+    }
+    if (direction == RIGHT) {
+        m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+        m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+        return;
+    }
+    m_Body->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Head->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 }
