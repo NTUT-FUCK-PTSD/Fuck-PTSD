@@ -56,38 +56,39 @@ void App::Update() {
         m_PlayerMoveDirect = MainCharacter::NONE;
     }
 
-    glm::vec2 currnet = {-m_CameraPosition.x, -m_CameraPosition.y};
+    glm::vec2 current = {-m_CameraPosition.x, -m_CameraPosition.y};
     if (Util::Input::IsKeyDown(Util::Keycode::W)) {
         m_PlayerMoveDirect = MainCharacter::Direction::UP;
         animationStartFrame = current_frame + 1;
-        currnet.y -= 10;
-        m_MainCharacter->SetPosition(currnet);
+        current.y += Dungeon::DUNGEON_TILE_WIDTH * 3;
+        m_MainCharacter->SetPosition(current);
 
-        m_CameraPosition.y += 10;
+        m_CameraPosition.y -= Dungeon::DUNGEON_TILE_WIDTH * 3;
     }
     if (Util::Input::IsKeyDown(Util::Keycode::A)) {
         m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
         animationStartFrame = current_frame + 1;
-        currnet.x += 10;
-        m_MainCharacter->SetPosition(currnet);
+        current.x -= Dungeon::DUNGEON_TILE_WIDTH * 3;
+        m_MainCharacter->SetPosition(current);
 
-        m_CameraPosition.x -= 10;
+        m_CameraPosition.x += Dungeon::DUNGEON_TILE_WIDTH * 3;
     }
     if (Util::Input::IsKeyDown(Util::Keycode::S)) {
         m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
         animationStartFrame = current_frame + 1;
-        currnet.y += 10;
-        m_MainCharacter->SetPosition(currnet);
-        m_CameraPosition.y -= 10;
+        current.y -= Dungeon::DUNGEON_TILE_WIDTH * 3;
+        m_MainCharacter->SetPosition(current);
+        m_CameraPosition.y += Dungeon::DUNGEON_TILE_WIDTH * 3;
     }
     if (Util::Input::IsKeyDown(Util::Keycode::D)) {
         m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
         animationStartFrame = current_frame + 1;
-        currnet.x -= 10;
-        m_MainCharacter->SetPosition(currnet);
+        current.x += Dungeon::DUNGEON_TILE_WIDTH * 3;
+        m_MainCharacter->SetPosition(current);
 
-        m_CameraPosition.x += 10;
+        m_CameraPosition.x -= Dungeon::DUNGEON_TILE_WIDTH * 3;
     }
+    LOG_INFO(current);
 
     m_Camera.SetPosition(m_CameraPosition);
 

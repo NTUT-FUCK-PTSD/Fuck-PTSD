@@ -22,9 +22,9 @@ struct triangle {
         {4, {0, 4}}, {10, {0, -6}}, {14, {0, 2}}};
 
     const std::map<std::size_t, glm::vec2> LeftAction = {
-        {4, {-2, 0}}, {10, {1, 4}}, {14, {1, -6}}};
+        {4, {-2, 0}}, {10, {1, 4}}, {14, {1, -4}}};
     const std::map<std::size_t, glm::vec2> RightAction = {
-        {4, {2, 0}}, {10, {-1, 4}}, {14, {-1, -6}}};
+        {4, {2, 0}}, {10, {-1, 4}}, {14, {-1, -4}}};
 
     // vector's order is important here.
     // UP, RIGHT, DOWN, LEFT,
