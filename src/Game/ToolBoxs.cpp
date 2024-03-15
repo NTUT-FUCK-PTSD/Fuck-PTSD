@@ -33,12 +33,3 @@ glm::vec2 ToolBoxs::AddVec2(const glm::vec2 &add01, const glm::vec2 &add02) {
     glm::vec2 result = {add01[0] + add02[0], add01[1] + add02[1]};
     return result;
 }
-
-int ToolBoxs::FrameCounter(const int current_frame) {
-    if (current_frame == 60) {
-        return 1;
-    }
-    else {
-        return current_frame + 1;
-    }
-}
