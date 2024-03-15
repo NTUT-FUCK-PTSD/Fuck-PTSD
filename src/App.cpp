@@ -8,6 +8,7 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+#include "Util/Time.hpp"
 
 #include "Dungeon/Map.h"
 
@@ -47,48 +48,48 @@ void App::Start(std::shared_ptr<Core::Context>
 
 void App::Update() {
 
-    current_frame = ToolBoxs::FrameCounter(current_frame);
-
-    auto isFinish = Animation::move_player(current_frame, animationStartFrame,
-                                           m_PlayerMoveDirect, m_MainCharacter);
+    auto isFinish =
+        Animation::move_player(m_AnimationPass, m_AnimationStartTime,
+                               m_PlayerMoveDirect, m_MainCharacter);
 
     if (isFinish) {
         m_PlayerMoveDirect = MainCharacter::NONE;
     }
+    if (m_PlayerMoveDirect == MainCharacter::NONE) {
+        glm::vec2 current = {-m_CameraPosition.x, -m_CameraPosition.y};
+        if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::UP;
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            current.y += Dungeon::DUNGEON_TILE_WIDTH * 3;
+            m_MainCharacter->SetPosition(current);
 
-    glm::vec2 current = {-m_CameraPosition.x, -m_CameraPosition.y};
-    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::UP;
-        animationStartFrame = current_frame + 1;
-        current.y += Dungeon::DUNGEON_TILE_WIDTH * 3;
-        m_MainCharacter->SetPosition(current);
+            m_CameraPosition.y -= Dungeon::DUNGEON_TILE_WIDTH * 3;
+        }
+        if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            current.x -= Dungeon::DUNGEON_TILE_WIDTH * 3;
+            m_MainCharacter->SetPosition(current);
 
-        m_CameraPosition.y -= Dungeon::DUNGEON_TILE_WIDTH * 3;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
-        animationStartFrame = current_frame + 1;
-        current.x -= Dungeon::DUNGEON_TILE_WIDTH * 3;
-        m_MainCharacter->SetPosition(current);
+            m_CameraPosition.x += Dungeon::DUNGEON_TILE_WIDTH * 3;
+        }
+        if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            current.y -= Dungeon::DUNGEON_TILE_WIDTH * 3;
+            m_MainCharacter->SetPosition(current);
+            m_CameraPosition.y += Dungeon::DUNGEON_TILE_WIDTH * 3;
+        }
+        if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+            m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
+            m_AnimationStartTime = Util::Time::GetElapsedTimeMs();
+            current.x += Dungeon::DUNGEON_TILE_WIDTH * 3;
+            m_MainCharacter->SetPosition(current);
 
-        m_CameraPosition.x += Dungeon::DUNGEON_TILE_WIDTH * 3;
+            m_CameraPosition.x -= Dungeon::DUNGEON_TILE_WIDTH * 3;
+        }
     }
-    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
-        animationStartFrame = current_frame + 1;
-        current.y -= Dungeon::DUNGEON_TILE_WIDTH * 3;
-        m_MainCharacter->SetPosition(current);
-        m_CameraPosition.y += Dungeon::DUNGEON_TILE_WIDTH * 3;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
-        animationStartFrame = current_frame + 1;
-        current.x += Dungeon::DUNGEON_TILE_WIDTH * 3;
-        m_MainCharacter->SetPosition(current);
-
-        m_CameraPosition.x -= Dungeon::DUNGEON_TILE_WIDTH * 3;
-    }
-    LOG_INFO(current);
+    // LOG_INFO(m_MainCharacter->GetPosition());
 
     m_Camera.SetPosition(m_CameraPosition);
 

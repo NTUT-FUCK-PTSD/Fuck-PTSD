@@ -3,8 +3,10 @@
 //
 
 #include "Animation.h"
+#include "Util/Logger.hpp"
 
-bool Animation::move_player(std::size_t current_frame, std::size_t firstFrame,
+bool Animation::move_player(std::shared_ptr<std::int16_t> animationPass,
+                            unsigned long firstTime,
                             MainCharacter::Direction direction,
                             std::shared_ptr<MainCharacter> GameObject) {
 
@@ -18,21 +20,21 @@ bool Animation::move_player(std::size_t current_frame, std::size_t firstFrame,
     // outside
     // TODO: record firstframe
 
-    // count how many frame from start to now.
-    // the frame count the number cross 60 to 1.
-    const std::size_t count_frames = (firstFrame > 45 && current_frame < 15)
-                                         ? current_frame + (60 - firstFrame)
-                                         : current_frame - firstFrame;
-
     for (auto action : animation_mode->Actions[direction]) {
 
-        if (count_frames <= action.first) {
+        if (!(*animationPass & action.first) &&
+            (Util::Time::GetElapsedTimeMs() - firstTime) /
+                    (Util::Time::GetDeltaTime() * 1000.0f) <=
+                action.first) {
+            *animationPass |= action.first;
             GameObject->move_player(action.second);
+            LOG_CRITICAL(action.first);
             //            MoveGameObject();
 
             return false;
         }
     }
 
+    *animationPass = 0;
     return true;
 }
