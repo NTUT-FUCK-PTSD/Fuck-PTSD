@@ -1,5 +1,5 @@
-#include "App.hpp"
 #include "Animation.h"
+#include "App.hpp"
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
@@ -23,7 +23,7 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
     // Test the Dungeon::Map
-    Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 1);
+    Dungeon::Map Test(ASSETS_DIR "/dungeon/test.xml", 5);
 
     // create background
     const auto background = std::make_shared<Background>();
