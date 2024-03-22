@@ -1,9 +1,10 @@
 
 name: main
 
-on: 
-  merge_group:
-  pull_request:
+on:
+  fork:
+  # merge_group:
+  # pull_request:
 
 jobs:
 
