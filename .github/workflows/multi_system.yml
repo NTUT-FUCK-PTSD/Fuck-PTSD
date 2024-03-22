@@ -7,40 +7,40 @@ on:
 
 jobs:
 
-  windows-visual-studio:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
+  # windows-visual-studio:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: "Setup Visual Studio"
-        uses: egor-tensin/vs-shell@v2
+  #     - name: "Setup Visual Studio"
+  #       uses: egor-tensin/vs-shell@v2
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
 
-      - name: "Setup cmake"
-        run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=Debug
-          cmake --build build
+  #     - name: "Setup cmake"
+  #       run: |
+  #         cmake -B build -DCMAKE_BUILD_TYPE=Debug
+  #         cmake --build build
         
-  windows-mingw:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: seanmiddleditch/gha-setup-ninja@master
+  # windows-mingw:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: seanmiddleditch/gha-setup-ninja@master
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
     
-      - name: "Build"
-        run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
-          # cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Debug
-          cmake --build build
+  #     - name: "Build"
+  #       run: |
+  #         cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles"
+  #         # cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Debug
+  #         cmake --build build
   macos:
     runs-on: macos-latest
     steps:

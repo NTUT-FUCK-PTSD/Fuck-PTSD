@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 #add_subdirectory(${CMAKE_BINARY_DIR}/_deps/ptsd-src/)
 # add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
-add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
+add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PTSD>)
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
