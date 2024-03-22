@@ -23,7 +23,7 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
     // Test the Dungeon::Map
-    Dungeon::Map Test(ASSETS_DIR "/dungeon/test.xml", 5);
+    Dungeon::Map Test(ASSETS_DIR "/dungeon/test.xml", 1);
 
     // create background
     const auto background = std::make_shared<Background>();
