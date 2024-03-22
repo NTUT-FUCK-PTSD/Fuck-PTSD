@@ -1,5 +1,5 @@
-#include "Animation.h"
 #include "App.hpp"
+#include "Animation.h"
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
@@ -135,6 +135,7 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
+    m_MainCharacter->Update();
     m_Camera.Update();
 }
 

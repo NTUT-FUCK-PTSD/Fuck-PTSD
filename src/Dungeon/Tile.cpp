@@ -43,7 +43,7 @@ void Tile::Update() {
         }
         else if (m_Tile.type == 103 || m_Tile.type == 106 ||
                  m_Tile.type == 111 || m_Tile.type == 118) {
-            SetZIndex(m_Tile.y + 1);
+            SetZIndex(m_ZIndex + 0.25);
             if (m_Tile.type == 111) {
                 magicNumber = 26;
             }

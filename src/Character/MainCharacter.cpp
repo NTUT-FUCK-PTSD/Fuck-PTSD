@@ -2,8 +2,8 @@
 // Created by adven on 2024/3/4.
 //
 
-#include "Dungeon/Elements.h"
 #include "MainCharacter.h"
+#include "Dungeon/Elements.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 #include "Util/Image.hpp"
@@ -23,13 +23,12 @@ MainCharacter::MainCharacter() {
 
     m_Body->SetDrawable(BodyImage);
     m_Body->SetPosition(InitPosition);
-    m_Body->SetZIndex(ZIndex);
     m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(InitPosition);
-    m_Head->SetZIndex(ZIndex);
     m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    Update();
 }
 
 std::vector<std::shared_ptr<Util::GameObject>> const
@@ -59,4 +58,9 @@ void MainCharacter::SetFaceTo(Direction direction) {
     }
     m_Body->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
     m_Head->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+}
+
+glm::vec2 MainCharacter::GetGamePosition() {
+    return {-(m_Head->GetPosition().x / (Dungeon::DUNGEON_TILE_WIDTH * 3)),
+            -(m_Head->GetPosition().y / (Dungeon::DUNGEON_TILE_WIDTH * 3))};
 }
