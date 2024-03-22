@@ -6,6 +6,7 @@
 #include "Core/Context.hpp"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
+#include "music.h"
 #include "pch.hpp" // IWYU pragma: export
 
 class App {
@@ -40,6 +41,8 @@ private:
     std::shared_ptr<MainCharacter> m_MainCharacter;
 
     int current_frame = 0;
+
+    std::shared_ptr<music> m = nullptr;
 
     Camera m_Camera;
     glm::vec2 m_CameraPosition = {0, 0};

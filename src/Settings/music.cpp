@@ -12,47 +12,48 @@
 #define CHUNK_SIZE 4096
 #define EXAMPLE_DURATION 8000
 
-music::music(const std::string &path, const double speech,
-             const bool modulate) {
+void music::play() {
+    auto chunk = m_Audio.get();
 
-    // init sdl and include audio plugin
-    //    SDL_Init(SDL_INIT_AUDIO);
-    //
-    //    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_CHANNELS,
-    //                  MIX_DEFAULT_FORMAT, CHUNK_SIZE);
-    //
-    //    Mix_QuerySpec(&m_AudioFrequency, &m_AudioFormat,
-    //    &m_AudioChannelCount);
-    //
-    //    m_AudioAllocatedMixChannelsCount = Mix_AllocateChannels(MIX_CHANNELS);
-
-    Mix_Chunk *chunk = Mix_LoadWAV(
-        "/Users/chenshiang/Desktop/I-Love-PTSD/assets/music/app.wav");
-    LOG_DEBUG(SDL_GetError());
-    //    Mix_Music *music = Mix_LoadMUS(
-    //        "/Users/chenshiang/Desktop/I-Love-PTSD/assets/music/app.wav");
     const double initialSpeed = speech;
-    //    const float initialSpeed = argc > 2 ? atof(argv[2]) : 1.0;
-    //    const bool modulate = argc > 3 ? atoi(argv[3]) : false;
 
     float speed = initialSpeed;
+
     if (chunk != NULL) {
         const int channel =
             Mix_PlayChannelTimed(-1, chunk, -1, EXAMPLE_DURATION);
+        //            Mix_PlayChannel(-1, chunk, -1);
         setupPlaybackSpeedEffect(chunk, speed, channel, true);
         std::cout << "Looping for 8 seconds..." << std::endl;
 
         // while looping, change pitch dynamically
-        if (modulate)
+        if (modulate) {
             while (SDL_GetTicks() < EXAMPLE_DURATION)
                 speed = initialSpeed + 0.25 * sin(0.001 * SDL_GetTicks());
-        else
-            //            SDL_Delay(EXAMPLE_DURATION);
+        }
 
-            std::cout << "Finished." << std::endl;
+        bool running = false;
+        SDL_Event event;
+
+        SDL_Delay(1000);
+
+        std::cout << "Finished." << std::endl;
     }
     else
         std::cout << "No data." << std::endl;
+}
+
+music::music(const std::string &path, const double speech, const bool modulate)
+    : m_Audio(Mix_LoadWAV(
+                  "/Users/chenshiang/Desktop/I-Love-PTSD/assets/music/app.wav"),
+              music::MusicDeleter_Mix()),
+      path(path),
+      speech(speech),
+      modulate(modulate) {
+
+    //    Mix_Chunk *chunk =
+
+    LOG_DEBUG(SDL_GetError());
 
     //    Mix_FreeChunk(chunk);
     //    Mix_CloseAudio();
@@ -63,8 +64,8 @@ music::music(const std::string &path, const double speech,
 void music::setupPlaybackSpeedEffect(const Mix_Chunk *const chunk,
                                      const float &speed, int channel, bool loop,
                                      bool trySelfHalt) {
-    // select the register function for the current audio format and register
-    // the effect using the compatible handlers
+    // select the register function for the current audio format and
+    // register the effect using the compatible handlers
     // XXX is it correct to behave the same way to all S16 and U16 formats?
     // Should we create case statements for AUDIO_S16SYS, AUDIO_S16LSB,
     // AUDIO_S16MSB, etc, individually?

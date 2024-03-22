@@ -2,15 +2,15 @@
 #include "Animation.h"
 #include "Background.hpp"
 #include "MainCharacter.h"
+#include "SDL_mixer.h"
 #include "ToolBoxs.h"
-#include "music.h"
 #include "rusty_bridge/lib.h"
 
+#include "Dungeon/Map.h"
+#include "SDL_mixer_ext/SDL_mixer_ext.h"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
-
-#include "Dungeon/Map.h"
 
 using namespace tinyxml2;
 
@@ -29,11 +29,17 @@ void App::Start(std::shared_ptr<Core::Context>
     const auto background = std::make_shared<Background>();
     m_Camera.AddChild(background->GetGameElement());
 
+    auto m = Mix_LoadMUS(ASSETS_DIR "/music/app.wav");
+    auto m1 = Mix_LoadMUS(ASSETS_DIR "/music/");
+    Mix_SetMusicSpeed(m, 1.5);
+
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
         m_Camera.Update();
         context->Update();
     }
+    Mix_PlayMusic(m, -1);
+    Mix_SetMusicSpeed(m, 2.0);
 
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();
@@ -42,8 +48,6 @@ void App::Start(std::shared_ptr<Core::Context>
     // remove background
     m_Camera.RemoveChild(background->GetGameElement());
     m_Camera.AddChildren(Test.GetChildren());
-
-    music(ASSETS_DIR "/music/app.wav", 1.0, false);
 
     m_CurrentState = State::UPDATE;
 }
@@ -65,6 +69,8 @@ void App::Update() {
         animationStartFrame = current_frame + 1;
         currnet.y -= 10;
         m_MainCharacter->SetPosition(currnet);
+
+        m->play();
 
         m_CameraPosition.y += 10;
     }

@@ -2,9 +2,11 @@ cmake_minimum_required(VERSION 3.16)
 project(FUCK_PTSD)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
+set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_STANDARD 17)
 
 #add_subdirectory(${CMAKE_BINARY_DIR}/_deps/ptsd-src/)
+# add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
 add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
@@ -62,7 +64,7 @@ target_link_libraries(Framework
 )
 
 target_link_libraries(${PROJECT_NAME}
-        SDL2::SDL2main
+        # SDL2::SDL2main
         tinyxml2::tinyxml2
         Framework
         rusty_bridge
