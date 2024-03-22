@@ -2,9 +2,9 @@
 name: main
 
 on:
-  fork:
-  # merge_group:
-  # pull_request:
+  # fork:
+  merge_group:
+  pull_request:
 
 jobs:
 
