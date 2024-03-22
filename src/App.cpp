@@ -3,7 +3,7 @@
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
-#include "rusty_bridge/lib.h"
+// #include "Coin.h"
 
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -43,10 +43,14 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Camera.RemoveChild(background->GetGameElement());
     m_Camera.AddChildren(Test.GetChildren());
 
+    // show the coin
+    m_Window.AddChildren(m_coin->getGameObject());
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+
     m_CameraPosition = Animation::moveCameraByTime(
         m_AnimationStartTime, 200, m_AniCameraDestination, m_CameraPosition);
 
@@ -136,6 +140,7 @@ void App::Update() {
     //    LOG_INFO(rusty_extern_c_integer());
 
     m_MainCharacter->Update();
+    m_Window.Update();
     m_Camera.Update();
 }
 
