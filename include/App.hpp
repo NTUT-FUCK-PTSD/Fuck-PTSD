@@ -55,7 +55,7 @@ private:
 
     std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
     std::shared_ptr<Camera> m_Window = std::make_shared<Camera>();
-    ;
+    
     glm::vec2 m_CameraPosition = {0, 0};
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
