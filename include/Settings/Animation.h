@@ -6,6 +6,7 @@
 #define FUCK_PTSD_ANIMATION_H
 
 #include "MainCharacter.h"
+#include "Animation.h"
 #include "Util/Time.hpp"
 
 namespace Animation {

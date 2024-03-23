@@ -3,9 +3,14 @@
 #include "Background.hpp"
 #include "Camera.h"
 #include "Character/Character.hpp"
+#include "Coin.h"
 #include "Core/Context.hpp"
+#include "Core/Drawable.hpp"
+#include "Diamond.h"
+#include "Heart.h"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
+#include "Util/Text.hpp"
 #include "pch.hpp" // IWYU pragma: export
 
 class App {
@@ -30,6 +35,10 @@ private:
     void ValidTask();
 
 private:
+    //    std::shared_ptr<Heart> heart = std::make_shared<Heart>();
+    std::shared_ptr<Coin> m_Coin = std::make_shared<Coin>();
+    std::shared_ptr<Diamond> m_Diamond = std::make_shared<Diamond>();
+
     unsigned long m_AnimationStartTime = 0;
     glm::vec2 m_AniPlayerStartPosition = {0.0f, 0.0f};
     glm::vec2 m_AniPlayerMotion = {0.0f, 0.0f};
@@ -44,6 +53,7 @@ private:
     std::shared_ptr<MainCharacter> m_MainCharacter;
 
     Camera m_Camera;
+    Camera m_Window;
     glm::vec2 m_CameraPosition = {0, 0};
 };
 
