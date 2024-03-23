@@ -25,8 +25,8 @@ Map::Map(const std::string &path, const int levelNum) {
 
     std::vector<glm::ivec2> direction = {{1, 0}, {0, 1},  {-1, 0}, {0, -1},
                                          {1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
-    for (int i = 0; i < m_Size.y; i++) {
-        for (int j = 0; j < m_Size.x; j++) {
+    for (int i = 1; i < m_Size.y-1; i++) {
+        for (int j = 1; j < m_Size.x-1; j++) {
             mapIndex = j + i * m_Size.x;
             if (m_Tiles[mapIndex].empty()) {
                 continue;
