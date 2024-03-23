@@ -2,7 +2,9 @@
 
 namespace Dungeon {
 
-Map::Map(const std::string &path, const int levelNum) {
+Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
+         const int &levelNum)
+    : m_Camera(camera) {
     m_Level = std::make_unique<Level>(path, levelNum);
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
@@ -23,10 +25,10 @@ Map::Map(const std::string &path, const int levelNum) {
         m_Children.push_back(m_Tiles[mapIndex].back());
     }
 
-    std::vector<glm::ivec2> direction = {{1, 0}, {0, 1},  {-1, 0}, {0, -1},
-                                         {1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
-    for (int i = 1; i < m_Size.y-1; i++) {
-        for (int j = 1; j < m_Size.x-1; j++) {
+    std::vector<glm::ivec2> direction = {{1, 0}, {-1, 0}, {0, 1},  {0, -1},
+                                         {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+    for (int i = 1; i < m_Size.y - 1; i++) {
+        for (int j = 1; j < m_Size.x - 1; j++) {
             mapIndex = j + i * m_Size.x;
             if (m_Tiles[mapIndex].empty()) {
                 continue;
@@ -95,6 +97,24 @@ Map::Map(const std::string &path, const int levelNum) {
             }
         }
     }
+
+    // SetCloseDisplayb24
+    for (int i = 0; i < m_Size.y; i++) {
+        for (int j = 0; j < m_Size.x; j++) {
+            mapIndex = j + i * m_Size.x;
+            if (m_Tiles[mapIndex].empty()) {
+                continue;
+            }
+            if ((1 + i >= m_Size.y) ||
+                (1 + i >= 0 && m_Tiles[mapIndex + m_Size.x].empty())) {
+                m_Tiles[mapIndex].back()->SetCloseDisplayb24(true);
+            }
+        }
+    }
+
+    m_Visible = false;
+    Update();
+    m_Camera->AddChildren(m_Children);
 }
 
 void Map::AddChild(const std::shared_ptr<Util::GameObject> &child) {
@@ -113,6 +133,23 @@ void Map::RemoveChild(std::shared_ptr<Util::GameObject> child) {
 
 std::vector<std::shared_ptr<Util::GameObject>> Map::GetChildren() {
     return m_Children;
+}
+
+void Map::SetVisible(const bool &visible) {
+    m_Visible = visible;
+    Update();
+}
+
+void Map::Update() {
+    size_t mapIndex = 0;
+    for (int i = 0; i < m_Size.y; i++) {
+        for (int j = 0; j < m_Size.x; j++) {
+            mapIndex = j + i * m_Size.x;
+            for (auto &tile : m_Tiles[mapIndex]) {
+                tile->SetVisible(m_Visible);
+            }
+        }
+    }
 }
 
 } // namespace Dungeon

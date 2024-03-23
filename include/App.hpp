@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Character/Character.hpp"
 #include "Core/Context.hpp"
+#include "Dungeon/Map.h"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
 #include "pch.hpp" // IWYU pragma: export
@@ -43,8 +44,10 @@ private:
 
     std::shared_ptr<MainCharacter> m_MainCharacter;
 
-    Camera m_Camera;
+    std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
     glm::vec2 m_CameraPosition = {0, 0};
+
+    std::shared_ptr<Dungeon::Map> m_DungeonMap;
 };
 
 #endif
