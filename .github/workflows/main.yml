@@ -6,30 +6,30 @@ on:
 
 
 # linux-gcc
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Installing Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install gcc cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
+#       - name: Installing Dependencies
+#         run: |
+#           sudo apt-get update
+#           sudo apt-get -y install gcc cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+#       - name: Checkout Repository
+#         uses: actions/checkout@v3
+#         with:
+#           submodules: recursive
 
-      - name: Building Project
-        if: matrix.os == 'ubuntu-latest'
-        env:
-          CC: gcc
-          CXX: g++
-        run: |
-          cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          cmake --build build
+#       - name: Building Project
+#         if: matrix.os == 'ubuntu-latest'
+#         env:
+#           CC: gcc
+#           CXX: g++
+#         run: |
+#           cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+#           cmake --build build
  jobs:
    build:
      runs-on: ${{ matrix.os }}
