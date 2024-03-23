@@ -25,7 +25,7 @@ jobs:
         name: Installing Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -y install ${{ matrix.compiler.cc }} cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
+          sudo apt-get -y install ${{ matrix.compiler.cc }} cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev libsdl2-dev
 
       - name: Checkout Repository
         uses: actions/checkout@v3
