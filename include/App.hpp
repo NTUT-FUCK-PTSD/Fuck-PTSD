@@ -1,6 +1,10 @@
 #ifndef APP_HPP
 #define APP_HPP
 #include "Background.hpp"
+#include "Animation.h"
+#include "Background.hpp"
+#include "MainCharacter.h"
+#include "ToolBoxs.h"
 #include "Camera.h"
 #include "Character/Character.hpp"
 #include "Coin.h"
@@ -12,6 +16,8 @@
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
 #include "Util/Text.hpp"
+
+#include "pch_extreme.h"
 #include "pch.hpp" // IWYU pragma: export
 
 class App {

@@ -1,14 +1,6 @@
-#include "Animation.h"
-#include "App.hpp"
-#include "Background.hpp"
-#include "MainCharacter.h"
-#include "ToolBoxs.h"
-// #include "Coin.h"
+#include "pch_extreme.h"
 
-#include "Util/Input.hpp"
-#include "Util/Keycode.hpp"
-#include "Util/Logger.hpp"
-#include "Util/Time.hpp"
+#include "App.hpp"
 
 using namespace tinyxml2;
 
