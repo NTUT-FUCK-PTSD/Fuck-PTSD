@@ -10,6 +10,9 @@ Level::Level(const std::string path, const int levelNum) {
     m_NumLevels = m_XMLdungeon->FindAttribute("numLevels")->IntValue();
 }
 void Level::LoadLevel(const int levelNum) {
+    m_LevelIndexMin = glm::ivec2(1e9, 1e9);
+    m_LevelIndexMax = glm::ivec2(-1e9, -1e9);
+
     m_XMLdungeon = m_doc.FirstChildElement("dungeon");
     for (auto child = m_XMLdungeon->FirstChildElement("level");
          child != nullptr; child = child->NextSiblingElement("level")) {
@@ -34,6 +37,8 @@ void Level::LoadLevel(const int levelNum) {
         t.torch = child->FindAttribute("torch")->IntValue();
         t.cracked = child->FindAttribute("cracked")->IntValue();
         m_Tiles.push_back(t);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{t.x, t.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{t.x, t.y});
     }
     // load traps
     s_Trap tr;
@@ -46,6 +51,8 @@ void Level::LoadLevel(const int levelNum) {
         tr.type = child->FindAttribute("type")->IntValue();
         tr.subtype = child->FindAttribute("subtype")->IntValue();
         m_Traps.push_back(tr);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{tr.x, tr.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{tr.x, tr.y});
     }
     // load enemies
     s_Enemy e;
@@ -59,6 +66,8 @@ void Level::LoadLevel(const int levelNum) {
         e.beatDelay = child->FindAttribute("beatDelay")->IntValue();
         e.lord = child->FindAttribute("lord")->IntValue();
         m_Enemies.push_back(e);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{e.x, e.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{e.x, e.y});
     }
     // load items
     s_Item i;
@@ -73,6 +82,8 @@ void Level::LoadLevel(const int levelNum) {
         i.saleCost = child->FindAttribute("saleCost")->IntValue();
         i.singleChoice = child->FindAttribute("singleChoice")->IntValue();
         m_Items.push_back(i);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{i.x, i.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{i.x, i.y});
     }
     // load chests
     s_Chest c;
@@ -88,6 +99,8 @@ void Level::LoadLevel(const int levelNum) {
         c.hidden = child->FindAttribute("hidden")->IntValue();
         c.contents = child->FindAttribute("contents")->Value();
         m_Chests.push_back(c);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{c.x, c.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{c.x, c.y});
     }
     // load crates
     s_Crate cr;
@@ -100,6 +113,8 @@ void Level::LoadLevel(const int levelNum) {
         cr.type = child->FindAttribute("type")->IntValue();
         cr.contents = child->FindAttribute("contents")->Value();
         m_Crates.push_back(cr);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{cr.x, cr.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{cr.x, cr.y});
     }
     // load shrines
     s_Shrine s;
@@ -111,6 +126,8 @@ void Level::LoadLevel(const int levelNum) {
         s.y = child->FindAttribute("y")->IntValue();
         s.type = child->FindAttribute("type")->IntValue();
         m_Shrines.push_back(s);
+        m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{s.x, s.y});
+        m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{s.x, s.y});
     }
 }
 } // namespace Dungeon

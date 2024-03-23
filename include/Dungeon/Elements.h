@@ -2,12 +2,13 @@
 #define ELEMENTS_H
 
 #include "config.hpp"
+
 #include "glm/glm.hpp"
+
 #include <map>
 #include <string>
 
 namespace Dungeon {
-
 constexpr double DUNGEON_TILE_WIDTH = 24.0;
 constexpr double DUNGEON_COL_NUMBER = 20.0;
 constexpr double DUNGEON_ROW_NUMBER =
@@ -56,6 +57,7 @@ struct s_Shrine {
 
 const std::map<size_t, std::string> DUNGEON_TILETYPES = {
     {0, "floor_dirt1"},
+    {1, "floor_dirt2"}, // type 1 and type 0 are different png files
     {2, "stairs"},
     {3, "TEMP_shop_floor"},
     {4, "TEMP_floor_water"},
@@ -74,9 +76,19 @@ const std::map<size_t, std::string> DUNGEON_TILETYPES = {
     {16, "stairs_locked_diamond9"},
     {17, "TEMP_floor_magnetic"},
     {18, "floor_lava"},
-    {20, "wire"},
+    {20, "wire"}, // NOT IMPLEMENTED
+    {21, "floor_rising"},
+    {22, "floor_receded"},
+    {23, "wire_phase1_conductor"}, // NOT IMPLEMENTED
+    {24, "wire_phase2_conductor"}, // NOT IMPLEMENTED
+
+    {50, "door_side"},        // virtual door type
+    {51, "door_locked_side"}, // virtual door type
+    {52, "door_metal_side"},  // virtual door type
 
     {100, "wall_dirt_crypt"},
+    {101, "wall_dirt_crypt"}, // type 101 is second index of
+                              // wall_dirt_crypt(type 100)
     {102, "end_of_world"},
     {103, "door_front"},
     {104, "wall_shop_crypt"},
@@ -86,31 +98,43 @@ const std::map<size_t, std::string> DUNGEON_TILETYPES = {
 
     {108, "wall_catacomb_crypt1"},
     {109, "boss_wall"},
+    {110, "wall_shop_crypt_cracked"}, // same as wall_shop_crypt(type 104) with
+                                      // cracks
     {111, "door_metal_front"},
-    {112, "necrodancer_stage_green"},
-    {113, "necrodancer_stage_turquoise"},
-    {114, "necrodancer_stage_cyan"},
-    {115, "necrodancer_stage_speaker1"},
+    {112, "necrodancer_stage_green"},     // NOT IMPLEMENTED
+    {113, "necrodancer_stage_turquoise"}, // NOT IMPLEMENTED
+    {114, "necrodancer_stage_cyan"},      // NOT IMPLEMENTED
+    {115, "necrodancer_stage_speaker1"},  // NOT IMPLEMENTED
 
-    {116, "necrodancer_stage_spearker2"},
-    {117, "necrodancer_stage_spearker3"},
-    {118, "wire_door"}};
+    {116, "necrodancer_stage_spearker2"}, // NOT IMPLEMENTED
+    {117, "necrodancer_stage_spearker3"}, // NOT IMPLEMENTED
+    {118, "wire_door"},
+    {119, "wall_dirt_crypt"},      // same as type 101
+    {120, "conductor_wall_pipe1"}, // NOT IMPLEMENTED
+    {121, "conductor_wall_pipe2"}, // NOT IMPLEMENTED
+    {122, "conductor_wall_pipe3"}, // NOT IMPLEMENTED
+    {123, "conductor_wall_pipe4"}  // NOT IMPLEMENTED
+};
 
 const std::map<size_t, glm::ivec2> DUNGEON_TILESIZES = {
-    {0, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},   {4, {3, 1}},
-    {5, {3, 1}},    {6, {1, 1}},   {7, {3, 1}},
+    {0, {3, 2}},    {1, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},
+    {4, {3, 1}},    {5, {3, 1}},    {6, {1, 1}},   {7, {3, 1}},
 
-    {8, {3, 4}},    {9, {1, 1}},   {10, {3, 1}},  {11, {3, 1}},
-    {12, {3, 2}},   {13, {3, 1}},  {15, {1, 1}},
+    {8, {3, 4}},    {9, {1, 1}},    {10, {3, 1}},  {11, {3, 1}},
+    {12, {3, 2}},   {13, {3, 1}},   {15, {1, 1}},
 
-    {16, {1, 1}},   {17, {3, 1}},  {18, {3, 5}},  {20, {16, 8}},
+    {16, {1, 1}},   {17, {3, 1}},   {18, {3, 5}},  {20, {16, 8}},
+    {21, {3, 1}},   {22, {3, 1}},   {23, {7, 5}},  {24, {3, 5}},
 
-    {100, {16, 1}}, {102, {8, 1}}, {103, {1, 1}}, {104, {1, 1}},
-    {105, {1, 1}},  {106, {1, 1}}, {107, {1, 1}},
+    {50, {1, 1}},   {51, {1, 1}},   {52, {2, 1}},
 
-    {108, {1, 1}},  {109, {5, 1}}, {111, {2, 2}}, {112, {6, 1}},
-    {113, {6, 1}},  {114, {6, 1}}, {115, {6, 1}},
+    {100, {16, 1}}, {101, {16, 1}}, {102, {8, 1}}, {103, {1, 1}},
+    {104, {1, 1}},  {105, {1, 1}},  {106, {1, 1}}, {107, {1, 1}},
 
-    {116, {6, 1}},  {117, {6, 1}}, {118, {1, 1}}};
+    {108, {1, 1}},  {109, {5, 1}},  {110, {1, 1}}, {111, {2, 2}},
+    {112, {6, 1}},  {113, {6, 1}},  {114, {6, 1}}, {115, {6, 1}},
+
+    {116, {6, 1}},  {117, {6, 1}},  {118, {1, 1}}, {119, {16, 1}},
+    {120, {1, 1}},  {121, {1, 1}},  {122, {1, 1}}, {123, {1, 1}}};
 
 #endif // ELEMENTS_H

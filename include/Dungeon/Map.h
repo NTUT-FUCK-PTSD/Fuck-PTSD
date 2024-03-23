@@ -30,12 +30,16 @@ public:
      *
      * @param child The GameObject being removed.
      */
+
     void RemoveChild(std::shared_ptr<Util::GameObject> child);
 
     std::vector<std::shared_ptr<Util::GameObject>> GetChildren();
 
 private:
     std::unique_ptr<Level> m_Level;
+    glm::ivec2 m_Size;
+    std::vector<std::vector<std::shared_ptr<Tile>>>
+        m_Tiles; // Use map index to store tiles
     std::vector<std::shared_ptr<Util::GameObject>> m_Children;
 };
 
