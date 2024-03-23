@@ -44,7 +44,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Camera.AddChildren(Test.GetChildren());
 
     // show the coin
-    m_Window.AddChildren(m_coin->getGameObject());
+    m_Window.AddChildren(m_Coin->getGameObject());
+    m_Window.AddChildren(m_Diamond->getGameObject());
 
     m_CurrentState = State::UPDATE;
 }
@@ -59,6 +60,13 @@ void App::Update() {
     auto isFinish = Animation::movePlayerByTime(
         m_AnimationStartTime, 200, m_AniPlayerDestination, m_MainCharacter);
 
+    // add coin
+    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+        m_Coin->plusCoinNumber(10);
+        m_Diamond->plusDiamondNumber(10);
+    }
+
+    // move actions
     if (isFinish) {
         m_PlayerMoveDirect = MainCharacter::NONE;
     }
