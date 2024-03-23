@@ -1,6 +1,7 @@
 name: main-before
 
 on: 
+  push:
   merge_group:
   pull_request:
 
