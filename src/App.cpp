@@ -3,7 +3,7 @@
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
-#include "rusty_bridge/lib.h"
+// #include "Coin.h"
 
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -42,10 +42,15 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Camera->RemoveChild(background->GetGameElement());
     m_DungeonMap->SetVisible(true);
 
+    // show the coin
+    m_Window->AddChildren(m_Coin->getGameObject());
+    m_Window->AddChildren(m_Diamond->getGameObject());
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+
     m_CameraPosition = Animation::moveCameraByTime(
         m_AnimationStartTime, 200, m_AniCameraDestination, m_CameraPosition);
 
@@ -54,6 +59,13 @@ void App::Update() {
     auto isFinish = Animation::movePlayerByTime(
         m_AnimationStartTime, 200, m_AniPlayerDestination, m_MainCharacter);
 
+    // add coin
+    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+        m_Coin->plusCoinNumber(10);
+        m_Diamond->plusDiamondNumber(10);
+    }
+
+    // move actions
     if (isFinish) {
         m_PlayerMoveDirect = MainCharacter::NONE;
     }
@@ -135,6 +147,7 @@ void App::Update() {
     //    LOG_INFO(rusty_extern_c_integer());
 
     m_MainCharacter->Update();
+    m_Window->Update();
     m_Camera->Update();
 }
 
