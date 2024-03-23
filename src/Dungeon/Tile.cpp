@@ -29,7 +29,7 @@ Tile::Tile(const s_Tile &u_Tile)
         }
         else if (m_Tile.type == 103 || m_Tile.type == 106 ||
                  m_Tile.type == 111 || m_Tile.type == 118) {
-            m_ZIndex = m_ZIndex + 0.25;
+            m_ZIndex = m_ZIndex + 0.125;
             if (m_Tile.type == 111) {
                 m_MagicNumber = 26;
             }
@@ -46,6 +46,15 @@ Tile::Tile(const s_Tile &u_Tile)
     }
     else if (m_Tile.type == 8) {
         m_ImgSize = {m_ImgSize.x, DUNGEON_TILE_WIDTH};
+    }
+    else if (m_Tile.type >= 50 && m_Tile.type <= 52) {
+        m_ZIndex = m_ZIndex + 0.125;
+        if (m_Tile.type == 52) {
+            m_MagicNumber = 15;
+        }
+        else {
+            m_MagicNumber = 7;
+        }
     }
     UpdateDrawable();
 }
@@ -110,6 +119,18 @@ void Tile::UpdateDrawable() {
                               (m_ImgSize.y - DUNGEON_TILE_WIDTH) / 2),
              static_cast<int>(DUNGEON_TILE_WIDTH),
              static_cast<int>(DUNGEON_TILE_WIDTH - offSetY)});
+    }
+    else if (m_Tile.type == 52) {
+        m_Transform.translation = {m_Transform.translation.x -
+                                       DUNGEON_TILE_WIDTH,
+                                   m_Transform.translation.y};
+        m_SpriteSheet->SetDrawRect(
+            {static_cast<int>(m_ImgSize.x *
+                              (m_Index % static_cast<int>(m_TileSize.x))),
+             static_cast<int>(m_ImgSize.y *
+                              (m_Index / static_cast<int>(m_TileSize.x))),
+             static_cast<int>(m_ImgSize.x),
+             static_cast<int>(m_ImgSize.y - offSetY)});
     }
     else {
         m_SpriteSheet->SetDrawRect(

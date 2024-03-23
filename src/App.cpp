@@ -10,8 +10,6 @@
 #include "Util/Logger.hpp"
 #include "Util/Time.hpp"
 
-#include "Dungeon/Map.h"
-
 using namespace tinyxml2;
 
 extern "C" {
@@ -23,29 +21,30 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
     // Test the Dungeon::Map
-    Dungeon::Map Test(ASSETS_DIR "/dungeon/test.xml", 1);
+    m_DungeonMap = std::make_shared<Dungeon::Map>(
+        m_Camera, ASSETS_DIR "/dungeon/test.xml", 1);
 
     // create background
     const auto background = std::make_shared<Background>();
-    m_Camera.AddChild(background->GetGameElement());
+    m_Camera->AddChild(background->GetGameElement());
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
-        m_Camera.Update();
+        m_Camera->Update();
         context->Update();
     }
 
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();
-    m_Camera.AddChildren(m_MainCharacter->GetGameElement());
+    m_Camera->AddChildren(m_MainCharacter->GetGameElement());
 
     // remove background
-    m_Camera.RemoveChild(background->GetGameElement());
-    m_Camera.AddChildren(Test.GetChildren());
+    m_Camera->RemoveChild(background->GetGameElement());
+    m_DungeonMap->SetVisible(true);
 
     // show the coin
-    m_Window.AddChildren(m_Coin->getGameObject());
-    m_Window.AddChildren(m_Diamond->getGameObject());
+    m_Window->AddChildren(m_Coin->getGameObject());
+    m_Window->AddChildren(m_Diamond->getGameObject());
 
     m_CurrentState = State::UPDATE;
 }
@@ -139,7 +138,7 @@ void App::Update() {
         }
     }
 
-    m_Camera.SetPosition(m_CameraPosition);
+    m_Camera->SetPosition(m_CameraPosition);
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
@@ -148,8 +147,8 @@ void App::Update() {
     //    LOG_INFO(rusty_extern_c_integer());
 
     m_MainCharacter->Update();
-    m_Window.Update();
-    m_Camera.Update();
+    m_Window->Update();
+    m_Camera->Update();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)
