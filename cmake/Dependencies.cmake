@@ -25,6 +25,22 @@ FetchContent_MakeAvailable(PTSD)
 
 message(STATUS "PTSD: ${PTSD_SOURCE_DIR}")
 
+message(STATUS "soloud NOT FOUND, fetching from source!")
+FetchContent_Declare(
+        soloud
+        GIT_REPOSITORY https://github.com/onon1101/soloud.git
+        GIT_TAG noinst
+)
+
+FetchContent_GetProperties(soloud)
+if (NOT soloud_POPULATED)
+    FetchContent_Populate(soloud)
+    add_subdirectory(${soloud_SOURCE_DIR}/contrib)
+endif()
+
+message(STATUS "soloud: ${soloud_SOURCE_DIR}")
+
+
 #FetchContent_GetProperties(PTSD)
 #if(NOT PTSD_POPULATED)
 #    FetchContent_Populate(PTSD)
