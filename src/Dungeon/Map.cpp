@@ -3,9 +3,7 @@
 
 namespace Dungeon {
 
-Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
-         const int &levelNum)
-    : m_Camera(camera) {
+Map::Map(const std::string &path, const int &levelNum) {
     m_Level = std::make_unique<Level>(path, levelNum);
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
@@ -121,52 +119,15 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
         std::make_shared<Enemies::BlueSlime>(s_Enemy{1, 1, 0, 0, 0}));
     m_Enemies.push_back(m_MapData[1 + 1 * m_Size.x].enemies.back());
 
-    m_Visible = false;
     for (auto &tile : m_Tiles) {
-        m_Camera->AddChild(tile);
+        m_Children.push_back(tile);
     }
     for (auto &enemy : m_Enemies) {
-        m_Camera->AddChild(enemy);
-    }
-    Update();
-}
-
-void Map::SetVisible(const bool &visible) {
-    m_Visible = visible;
-    Update();
-}
-
-void Map::Update() {
-    // size_t mapIndex = 0;
-    // for (int i = 0; i < m_Size.y; i++) {
-    //     for (int j = 0; j < m_Size.x; j++) {
-    //         mapIndex = j + i * m_Size.x;
-    //         for (auto &tile : m_MapData[mapIndex].tiles) {
-    //             tile->SetVisible(m_Visible);
-    //         }
-    //         for (auto &enemy : m_MapData[mapIndex].enemies) {
-    //             enemy->SetVisible(m_Visible);
-    //         }
-    //     }
-    // }
-    for (auto &tile : m_Tiles) {
-        tile->SetVisible(m_Visible);
-    }
-    for (auto &enemy : m_Enemies) {
-        enemy->SetVisible(m_Visible);
+        m_Children.push_back(enemy);
     }
 }
 
 void Map::TempoUpdate() {
-    // size_t mapIndex = 0;
-    // for (int i = 0; i < m_Size.y; i++) {
-    //     for (int j = 0; j < m_Size.x; j++) {
-    //         mapIndex = j + i * m_Size.x;
-    //         for (auto &enemy : m_MapData[mapIndex].enemies) {
-    //             enemy->TempoMove();
-    //         }
-    //     }
-    // }
     for (auto &enemy : m_Enemies) {
         enemy->TempoMove();
     }

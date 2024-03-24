@@ -11,7 +11,7 @@ Enemy::Enemy(const s_Enemy &u_Enemy)
     SetPosition(m_Position);
 }
 
-void Enemy::SetShadow(bool shadow) {
+void Enemy::SetShadow(const bool &shadow) {
     m_Shadow = shadow;
     m_SpriteSheet->SetFrames(shadow ? m_ShadowFrames : m_NormalFrames);
 }
@@ -24,7 +24,7 @@ void Enemy::SetPosition(const glm::vec2 &position) {
     SetZIndex(m_Position.y + float(0.25));
 }
 
-void Enemy::SetLord(bool lord) {
+void Enemy::SetLord(const bool &lord) {
     m_Lord = lord;
     if (m_Lord) {
         m_Transform.scale += m_Transform.scale;

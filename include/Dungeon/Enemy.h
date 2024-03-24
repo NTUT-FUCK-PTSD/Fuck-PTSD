@@ -15,13 +15,13 @@ class Enemy : public Util::GameObject {
 public:
     Enemy(const s_Enemy &u_Enemy);
 
-    void SetShadow(bool shadow);
+    void SetShadow(const bool &shadow);
     void SetPosition(const glm::vec2 &position);
-    void SetBeatDelay(size_t beatDelay) { m_BeatDelay = beatDelay; }
-    void SetLord(bool lord);
-    void SetDamage(size_t damage) { m_Damage = damage; }
-    void SetHealth(size_t health) { m_Health = health; }
-    void SetCoin(size_t coin) { m_Coin = coin; }
+    void SetBeatDelay(const size_t &beatDelay) { m_BeatDelay = beatDelay; }
+    void SetLord(const bool &lord);
+    void SetDamage(const size_t &damage) { m_Damage = damage; }
+    void SetHealth(const size_t &health) { m_Health = health; }
+    void SetCoin(const size_t &coin) { m_Coin = coin; }
 
     [[nodiscard]] const glm::vec2 &GetPosition() const { return m_Position; }
     [[nodiscard]] size_t GetBeatDelay() const { return m_BeatDelay; }

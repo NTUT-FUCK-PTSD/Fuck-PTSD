@@ -10,6 +10,8 @@
 #include "Util/Logger.hpp"
 #include "Util/Time.hpp"
 
+#include "Dungeon/MapHandler.h"
+
 using namespace tinyxml2;
 
 extern "C" {
@@ -21,8 +23,10 @@ void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
     // Test the Dungeon::Map
-    m_DungeonMap = std::make_shared<Dungeon::Map>(
-        m_Camera, ASSETS_DIR "/dungeon/test.xml", 1);
+    m_DungeonMap =
+        std::make_shared<Dungeon::Map>(ASSETS_DIR "/dungeon/test.xml", 1);
+    m_DungeonMap->SetDrawable(
+        std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
 
     // create background
     const auto background = std::make_shared<Background>();
@@ -40,7 +44,7 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // remove background
     m_Camera->RemoveChild(background->GetGameElement());
-    m_DungeonMap->SetVisible(true);
+    m_Camera->AddChild(m_DungeonMap);
 
     // show the coin
     m_Window->AddChildren(m_Coin->getGameObject());
