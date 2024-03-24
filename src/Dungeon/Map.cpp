@@ -20,10 +20,10 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
             tile.type == 106 || tile.type == 111 || tile.type == 118) {
             m_MapData[mapIndex].tiles.push_back(std::make_shared<Tile>(s_Tile{
                 tile.x, tile.y, 0, tile.zone, tile.torch, tile.cracked}));
-            m_Children.push_back(m_MapData[mapIndex].tiles.back());
+            m_Tiles.push_back(m_MapData[mapIndex].tiles.back());
         }
         m_MapData[mapIndex].tiles.push_back(std::make_shared<Tile>(tile));
-        m_Children.push_back(m_MapData[mapIndex].tiles.back());
+        m_Tiles.push_back(m_MapData[mapIndex].tiles.back());
     }
 
     std::vector<glm::ivec2> direction = {{1, 0}, {-1, 0}, {0, 1},  {0, -1},
@@ -53,7 +53,9 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
                 }
                 if (doorCount >= 2) {
                     m_MapData[mapIndex].tiles.pop_back();
-                    RemoveChild(tmp);
+                    m_Tiles.erase(
+                        std::remove(m_Tiles.begin(), m_Tiles.end(), tmp),
+                        m_Tiles.end()); // Remove Child
                     if (tmp->GetTile().type == 111) {
                         m_MapData[mapIndex].tiles.push_back(
                             std::make_shared<Tile>(s_Tile{
@@ -78,7 +80,7 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
                                     tmp->GetTile().cracked}));
                         }
                     }
-                    m_Children.push_back(m_MapData[mapIndex].tiles.back());
+                    m_Tiles.push_back(m_MapData[mapIndex].tiles.back());
                 }
             }
             // generate border
@@ -93,8 +95,7 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
                                 j + dir.x + m_Level->GetLevelIndexMin().x - 1,
                                 i + dir.y + m_Level->GetLevelIndexMin().y - 1,
                                 102, 0, 0, 0}));
-                        m_Children.push_back(
-                            m_MapData[tmpMapIndex].tiles.back());
+                        m_Tiles.push_back(m_MapData[tmpMapIndex].tiles.back());
                     }
                 }
             }
@@ -118,29 +119,16 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
     // Add a BlueSlime for testing
     m_MapData[1 + 1 * m_Size.x].enemies.push_back(
         std::make_shared<Enemies::BlueSlime>(s_Enemy{1, 1, 0, 0, 0}));
-    m_Children.push_back(m_MapData[1 + 1 * m_Size.x].enemies.back());
+    m_Enemies.push_back(m_MapData[1 + 1 * m_Size.x].enemies.back());
 
     m_Visible = false;
+    for (auto &tile : m_Tiles) {
+        m_Camera->AddChild(tile);
+    }
+    for (auto &enemy : m_Enemies) {
+        m_Camera->AddChild(enemy);
+    }
     Update();
-    m_Camera->AddChildren(m_Children);
-}
-
-void Map::AddChild(const std::shared_ptr<Util::GameObject> &child) {
-    m_Children.push_back(child);
-}
-
-void Map::AddChildren(
-    const std::vector<std::shared_ptr<Util::GameObject>> &children) {
-    m_Children.insert(m_Children.end(), children.begin(), children.end());
-}
-
-void Map::RemoveChild(std::shared_ptr<Util::GameObject> child) {
-    m_Children.erase(std::remove(m_Children.begin(), m_Children.end(), child),
-                     m_Children.end());
-}
-
-std::vector<std::shared_ptr<Util::GameObject>> Map::GetChildren() {
-    return m_Children;
 }
 
 void Map::SetVisible(const bool &visible) {
@@ -149,29 +137,38 @@ void Map::SetVisible(const bool &visible) {
 }
 
 void Map::Update() {
-    size_t mapIndex = 0;
-    for (int i = 0; i < m_Size.y; i++) {
-        for (int j = 0; j < m_Size.x; j++) {
-            mapIndex = j + i * m_Size.x;
-            for (auto &tile : m_MapData[mapIndex].tiles) {
-                tile->SetVisible(m_Visible);
-            }
-            for (auto &enemy : m_MapData[mapIndex].enemies) {
-                enemy->SetVisible(m_Visible);
-            }
-        }
+    // size_t mapIndex = 0;
+    // for (int i = 0; i < m_Size.y; i++) {
+    //     for (int j = 0; j < m_Size.x; j++) {
+    //         mapIndex = j + i * m_Size.x;
+    //         for (auto &tile : m_MapData[mapIndex].tiles) {
+    //             tile->SetVisible(m_Visible);
+    //         }
+    //         for (auto &enemy : m_MapData[mapIndex].enemies) {
+    //             enemy->SetVisible(m_Visible);
+    //         }
+    //     }
+    // }
+    for (auto &tile : m_Tiles) {
+        tile->SetVisible(m_Visible);
+    }
+    for (auto &enemy : m_Enemies) {
+        enemy->SetVisible(m_Visible);
     }
 }
 
 void Map::TempoUpdate() {
-    size_t mapIndex = 0;
-    for (int i = 0; i < m_Size.y; i++) {
-        for (int j = 0; j < m_Size.x; j++) {
-            mapIndex = j + i * m_Size.x;
-            for (auto &enemy : m_MapData[mapIndex].enemies) {
-                enemy->TempoMove();
-            }
-        }
+    // size_t mapIndex = 0;
+    // for (int i = 0; i < m_Size.y; i++) {
+    //     for (int j = 0; j < m_Size.x; j++) {
+    //         mapIndex = j + i * m_Size.x;
+    //         for (auto &enemy : m_MapData[mapIndex].enemies) {
+    //             enemy->TempoMove();
+    //         }
+    //     }
+    // }
+    for (auto &enemy : m_Enemies) {
+        enemy->TempoMove();
     }
 }
 
