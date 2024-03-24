@@ -140,6 +140,10 @@ public:
      */
     void SetDrawRect(const SDL_Rect displayRect);
 
+    void SetFrames(const std::vector<std::size_t> &frames) {
+        m_Frames = frames;
+    }
+
 private:
     /**
      * @brief Update the animation frames.

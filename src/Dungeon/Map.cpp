@@ -1,3 +1,4 @@
+#include "Dungeon/Enemies/Green_Slime.h"
 #include "Dungeon/Map.h"
 
 namespace Dungeon {
@@ -111,6 +112,10 @@ Map::Map(const std::shared_ptr<Camera> &camera, const std::string &path,
             }
         }
     }
+
+    // Add a Green_Slime for testing
+    m_Children.push_back(
+        std::make_shared<Enemies::Green_Slime>(s_Enemy{1, 1, 0, 0, 0}));
 
     m_Visible = false;
     Update();
