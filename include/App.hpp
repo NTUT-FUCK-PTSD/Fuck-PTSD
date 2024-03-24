@@ -8,6 +8,7 @@
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
 #include "Diamond.h"
+#include "Dungeon/Map.h"
 #include "Heart.h"
 #include "MainCharacter.h"
 #include "SpriteSheet.hpp"
@@ -59,10 +60,12 @@ private:
 
     std::shared_ptr<MainCharacter> m_MainCharacter;
 
-    // windows site
-    Camera m_Camera;
-    Camera m_Window;
+    std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
+    std::shared_ptr<Camera> m_Window = std::make_shared<Camera>();
+    
     glm::vec2 m_CameraPosition = {0, 0};
+
+    std::shared_ptr<Dungeon::Map> m_DungeonMap;
 };
 
 #endif
