@@ -14,10 +14,10 @@
 #include "Util/Text.hpp"
 #include "pch.hpp" // IWYU pragma: export
 #include "music/music.h"
-#include <thread>
 #include "soloud.h"
 #include "soloud_speech.h"
 #include "soloud_thread.h"
+#include "soloud_wav.h"
 
 class App {
 public:
@@ -67,6 +67,7 @@ private:
 
     SoLoud::Soloud soloud;  // SoLoud engine core
     SoLoud::Speech speech;  // A sound source (speech, in this case)
+    SoLoud::Wav music ;
 };
 
 #endif

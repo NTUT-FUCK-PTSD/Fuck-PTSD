@@ -36,14 +36,22 @@ void App::Start(std::shared_ptr<Core::Context>
         context->Update();
     }
 
-        // Configure sound source
-        speech.setText("1 2 3   1 2 3   Hello world. Welcome to So-Loud.");
+    // music
 
-        // initialize SoLoud.
-        soloud.init();
+    // Configure sound source
+    speech.setText("1 2 3   1 2 3   Hello world. Welcome to So-Loud.");
 
-        // Play the sound source (we could do this several times if we wanted)
-        soloud.play(speech);
+    // initialize SoLoud.
+    soloud.init();
+    music.load(ASSETS_DIR"/music/add.wav");
+
+    // Play the sound source (we could do this several times if we wanted)
+    int voiceHandle = soloud.play(music);
+
+    soloud.setRelativePlaySpeed(voiceHandle, 1.5f);
+
+
+    // music finish
 
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();

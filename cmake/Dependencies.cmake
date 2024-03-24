@@ -19,7 +19,8 @@ message(STATUS "PTSD NOT FOUND, fetching from source!")
 FetchContent_Declare(
         PTSD
         GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
-        GIT_TAG submodule-ized
+#        GIT_TAG submodule-ized
+        GIT_TAG soloud
 )
 FetchContent_MakeAvailable(PTSD)
 
