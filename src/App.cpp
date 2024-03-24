@@ -3,7 +3,7 @@
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
-//#include ""
+
 
 // #include "Coin.h"
 
@@ -35,6 +35,15 @@ void App::Start(std::shared_ptr<Core::Context>
         m_Camera->Update();
         context->Update();
     }
+
+        // Configure sound source
+        speech.setText("1 2 3   1 2 3   Hello world. Welcome to So-Loud.");
+
+        // initialize SoLoud.
+        soloud.init();
+
+        // Play the sound source (we could do this several times if we wanted)
+        soloud.play(speech);
 
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();
