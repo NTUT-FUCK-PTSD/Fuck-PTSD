@@ -9,7 +9,6 @@ Enemy::Enemy(const s_Enemy &u_Enemy)
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetPosition(m_Position);
-    SetZIndex(m_Position.y + float(0.25));
 }
 
 void Enemy::SetShadow(bool shadow) {
@@ -22,6 +21,7 @@ void Enemy::SetPosition(const glm::vec2 &position) {
     m_Transform.translation = {
         -m_Position.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE,
         -m_Position.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE};
+    SetZIndex(m_Position.y + float(0.25));
 }
 
 void Enemy::SetLord(bool lord) {
@@ -39,7 +39,6 @@ void Enemy::TempoMove() {
         m_BeatDelay--;
         return;
     }
-    SetZIndex(m_Position.y + float(0.25));
     Move();
 }
 

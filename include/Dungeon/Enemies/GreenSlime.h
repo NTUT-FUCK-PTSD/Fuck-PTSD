@@ -5,9 +5,9 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Green_Slime : public Dungeon::Enemy {
+class GreenSlime : public Dungeon::Enemy {
 public:
-    Green_Slime(const s_Enemy &u_Enemy);
+    GreenSlime(const s_Enemy &u_Enemy);
 
     void Move() override;
 

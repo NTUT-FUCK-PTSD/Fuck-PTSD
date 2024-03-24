@@ -2,10 +2,15 @@
 #define MAP_H
 
 #include "Camera.h"
+#include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/Tile.h"
 
 namespace Dungeon {
+struct s_MapDate {
+    std::vector<std::shared_ptr<Tile>> tiles;
+    std::vector<std::shared_ptr<Enemy>> enemies;
+};
 
 class Map {
 public:
@@ -41,12 +46,13 @@ public:
 
     void Update();
 
+    void TempoUpdate();
+
 private:
     bool m_Visible = true;
     std::unique_ptr<Level> m_Level;
     glm::ivec2 m_Size;
-    std::vector<std::vector<std::shared_ptr<Tile>>>
-        m_Tiles; // Use map index to store tiles
+    std::vector<s_MapDate> m_MapData; // Use map index to store MapDate
     std::vector<std::shared_ptr<Util::GameObject>> m_Children;
     std::shared_ptr<Camera> m_Camera;
 };

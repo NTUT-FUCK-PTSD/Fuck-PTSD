@@ -73,6 +73,7 @@ void App::Update() {
         Util::Input::IsKeyDown(Util::Keycode::D) ||
         Util::Input::IsKeyDown(Util::Keycode::S) ||
         Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_DungeonMap->TempoUpdate();
         if (m_PlayerMoveDirect != MainCharacter::NONE) {
             m_PlayerMoveDirect = MainCharacter::NONE;
             m_MainCharacter->SetPosition(m_AniPlayerDestination);
