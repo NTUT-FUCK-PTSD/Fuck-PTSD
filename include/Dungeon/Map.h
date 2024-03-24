@@ -18,10 +18,6 @@ class Map : public Util::GameObject {
 public:
     Map(const std::string &path, const int &levelNum = 1);
 
-    std::vector<std::shared_ptr<Util::GameObject>> GetChildren();
-
-    void SetVisible(const bool &visible);
-
     void TempoUpdate();
 
 private:
