@@ -7,17 +7,33 @@
 
 #include "pch_extream.h"
 
-class Shovel final {
+#include "Equipment.h"
+#include "ToolBoxs.h"
+
+class Shovel final : public Equipment {
 public:
     explicit Shovel();
 
-    void setItem();
+    [[nodiscard]] std::shared_ptr<GameElement> getGameElement() override;
 
-    void getItem();
+    void setPosition(const glm::vec2 position) override;
+
+    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() override;
+
 
 private:
-    std::string m_imagePathWindow = "";
-    std::string m_imagePathItem = "";
+    std::size_t m_ZIndex = 50;
+    glm::vec2 m_Scale = {3,3 };
+    glm::vec2 m_Position = {0, 0};
+
+//    ASSETS_DIR "/gui/diamond.png"
+
+    std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_1.png";
+    std::string m_ImagePathItem = ASSETS_DIR "/items/shovel_basic.png";
+
+    std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_Item = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_Shovel = std::make_shared<GameElement>();
 };
 
 #endif // FUCK_PTSD_SHOVEL_H

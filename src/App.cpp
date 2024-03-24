@@ -47,6 +47,10 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Window.AddChildren(m_Coin->getGameObject());
     m_Window.AddChildren(m_Diamond->getGameObject());
 
+    // add the Tools
+//    m_Window.AddChild(m_Tools->getGameObject());
+    m_Window.AddChildren(m_Tools->getGameObjects());
+
     m_CurrentState = State::UPDATE;
 }
 
