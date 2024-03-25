@@ -6,6 +6,7 @@
 #define FUCK_PTSD_THROW_H
 
 #include "pch_extream.h"
+#include "Util/Text.hpp"
 
 #include "Equipment.h"
 #include "ToolBoxs.h"
@@ -26,6 +27,13 @@ private:
     glm::vec2 m_Scale = {3,3 };
     glm::vec2 m_Position = {0, 0};
 
+    Util::Color m_FontColor = Util::Color(255, 255, 255);
+    glm::vec2 m_FontScale = {5, 5};
+    std::size_t m_FontSize = 6;
+    std::string m_Content = "UP+";
+    std::string m_TextStylePath =
+        ASSETS_DIR "/font/necrosans-6/necrosans-6.otf";
+
     //    ASSETS_DIR "/gui/diamond.png"
 
     std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_throw.png";
@@ -33,6 +41,8 @@ private:
 
     std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Item = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_Text = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_LowerText = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Throw = std::make_shared<GameElement>();
 };
 
