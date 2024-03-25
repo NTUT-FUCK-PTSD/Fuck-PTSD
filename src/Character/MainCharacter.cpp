@@ -2,8 +2,8 @@
 // Created by adven on 2024/3/4.
 //
 
-#include "MainCharacter.h"
 #include "Dungeon/Elements.h"
+#include "MainCharacter.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 #include "Util/Image.hpp"
@@ -61,6 +61,6 @@ void MainCharacter::SetFaceTo(Direction direction) {
 }
 
 glm::vec2 MainCharacter::GetGamePosition() {
-    return {-(m_Head->GetPosition().x / (Dungeon::DUNGEON_TILE_WIDTH * 3)),
+    return {(m_Head->GetPosition().x / (Dungeon::DUNGEON_TILE_WIDTH * 3)),
             -(m_Head->GetPosition().y / (Dungeon::DUNGEON_TILE_WIDTH * 3))};
 }
