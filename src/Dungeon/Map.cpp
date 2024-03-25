@@ -3,7 +3,9 @@
 
 namespace Dungeon {
 
-Map::Map(const std::string &path, const int &levelNum) {
+Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
+         const std::string &path, const int &levelNum)
+    : m_MainCharacter(mainCharacter) {
     m_Level = std::make_unique<Level>(path, levelNum);
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
@@ -125,12 +127,47 @@ Map::Map(const std::string &path, const int &levelNum) {
     for (auto &enemy : m_Enemies) {
         m_Children.push_back(enemy);
     }
+    CameraUpdate();
+}
+
+bool Map::CheckShowPosition(const glm::vec2 &position1,
+                            const glm::vec2 &position2) {
+    return (position1.x >= position2.x - (ALLOW_EXTRA_DRAW + HalfColNumber) &&
+            position1.x <= position2.x + (ALLOW_EXTRA_DRAW + HalfColNumber) &&
+            position1.y >= position2.y - (ALLOW_EXTRA_DRAW + HalfRowNumber) &&
+            position1.y <= position2.y + (ALLOW_EXTRA_DRAW + HalfRowNumber));
+}
+
+void Map::CameraUpdate() {
+    glm::vec2 cameraPos = m_MainCharacter->GetGamePosition();
+
+    for (auto &tile : m_Tiles) {
+        if (CheckShowPosition({tile->GetTile().x, tile->GetTile().y},
+                              cameraPos)) {
+            tile->SetVisible(true);
+        }
+        else {
+            tile->SetVisible(false);
+        }
+    }
+    for (auto &enemy : m_Enemies) {
+        if (CheckShowPosition(enemy->GetPosition(), cameraPos)) {
+            enemy->SetVisible(true);
+        }
+        else {
+            enemy->SetVisible(false);
+        }
+    }
 }
 
 void Map::TempoUpdate() {
     for (auto &enemy : m_Enemies) {
         enemy->TempoMove();
     }
+}
+
+void Map::Update() {
+    CameraUpdate();
 }
 
 } // namespace Dungeon

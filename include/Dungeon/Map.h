@@ -7,6 +7,7 @@
 #include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/Tile.h"
+#include "MainCharacter.h"
 
 namespace Dungeon {
 struct s_MapDate {
@@ -16,16 +17,26 @@ struct s_MapDate {
 
 class Map : public Util::GameObject {
 public:
-    Map(const std::string &path, const int &levelNum = 1);
+    Map(const std::shared_ptr<MainCharacter> &mainCharacter,
+        const std::string &path, const int &levelNum = 1);
 
+    void CameraUpdate();
     void TempoUpdate();
 
+    void Update();
+
 private:
+    const size_t ALLOW_EXTRA_DRAW = 4;
+    bool CheckShowPosition(const glm::vec2 &position1,
+                           const glm::vec2 &position2);
+    const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
+    const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;
     glm::ivec2 m_Size;
     std::vector<s_MapDate> m_MapData; // Use map index to store MapDate
     std::vector<std::shared_ptr<Tile>> m_Tiles;
     std::vector<std::shared_ptr<Enemy>> m_Enemies;
+    std::shared_ptr<MainCharacter> m_MainCharacter;
 };
 
 } // namespace Dungeon

@@ -1,9 +1,8 @@
-#include "App.hpp"
 #include "Animation.h"
+#include "App.hpp"
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
-
 
 // #include "Coin.h"
 
@@ -24,11 +23,6 @@ int32_t rusty_extern_c_integer();
 void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
-    // Test the Dungeon::Map
-    m_DungeonMap =
-        std::make_shared<Dungeon::Map>(ASSETS_DIR "/dungeon/test.xml", 1);
-    m_DungeonMap->SetDrawable(
-        std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
 
     // create background
     const auto background = std::make_shared<Background>();
@@ -47,22 +41,27 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // initialize SoLoud.
     soloud.init();
-    music.load(ASSETS_DIR"/music/add.wav");
+    music.load(ASSETS_DIR "/music/add.wav");
 
     // Play the sound source (we could do this several times if we wanted)
     int voiceHandle = soloud.play(music);
 
     soloud.setRelativePlaySpeed(voiceHandle, 1.5f);
 
-
     // music finish
+
+    // remove background
+    m_Camera->RemoveChild(background->GetGameElement());
 
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();
     m_Camera->AddChildren(m_MainCharacter->GetGameElement());
 
-    // remove background
-    m_Camera->RemoveChild(background->GetGameElement());
+    // Test the Dungeon::Map
+    m_DungeonMap = std::make_shared<Dungeon::Map>(
+        m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
+    m_DungeonMap->SetDrawable(
+        std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);
 
     // show the coin
