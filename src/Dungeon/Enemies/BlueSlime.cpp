@@ -1,5 +1,5 @@
 #include "BlueSlime.h"
-
+#include "ToolBoxs.h"
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(const s_Enemy &u_Enemy)
     : Enemy(u_Enemy) {
@@ -13,20 +13,37 @@ Enemies::BlueSlime::BlueSlime(const s_Enemy &u_Enemy)
     SetHealth(2);
     SetDamage(50);
     SetCoin(1);
+    m_AnimationPosition = ToolBoxs::GamePostoPos(GetGamePosition());
 }
 } // namespace Dungeon
 
 namespace Dungeon::Enemies {
 void BlueSlime::Move() {
+    if (m_IsAnimating) {
+        m_AnimationPosition = m_AnimationDestination;
+        Update();
+    }
     if (m_State > 3) {
         m_State = 0;
     }
     if (m_State == 1) {
-        SetPosition(GetPosition() + glm::vec2(0, 1));
+        MoveByTime(200,
+                   ToolBoxs::GamePostoPos(GetGamePosition() + glm::vec2(0, 1)),
+                   0);
     }
     else if (m_State == 3) {
-        SetPosition(GetPosition() + glm::vec2(0, -1));
+        MoveByTime(200,
+                   ToolBoxs::GamePostoPos(GetGamePosition() + glm::vec2(0, -1)),
+                   2);
     }
     m_State++;
+}
+void BlueSlime::Update() {
+    UpdateAnimation();
+    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
+        m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationPosition);
+        m_Transform.translation = m_AnimationPosition;
+    }
+    SetZIndex(ToolBoxs::PosToGamePos(m_Transform.translation).y + float(0.25));
 }
 } // namespace Dungeon::Enemies

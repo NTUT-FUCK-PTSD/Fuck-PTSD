@@ -16,14 +16,16 @@ public:
     Enemy(const s_Enemy &u_Enemy);
 
     void SetShadow(const bool &shadow);
-    void SetPosition(const glm::vec2 &position);
+    void SetGamePosition(const glm::vec2 &gamePosition);
     void SetBeatDelay(const size_t &beatDelay) { m_BeatDelay = beatDelay; }
     void SetLord(const bool &lord);
     void SetDamage(const size_t &damage) { m_Damage = damage; }
     void SetHealth(const size_t &health) { m_Health = health; }
     void SetCoin(const size_t &coin) { m_Coin = coin; }
 
-    [[nodiscard]] const glm::vec2 &GetPosition() const { return m_Position; }
+    [[nodiscard]] const glm::vec2 &GetGamePosition() const {
+        return m_GamePosition;
+    }
     [[nodiscard]] size_t GetBeatDelay() const { return m_BeatDelay; }
     [[nodiscard]] bool GetLord() const { return m_Lord; }
     [[nodiscard]] bool GetShadow() const { return m_Shadow; }
@@ -34,13 +36,15 @@ public:
     void TempoMove();
     virtual void Move() = 0;
 
+    virtual void Update(){};
+
 protected:
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
     std::vector<std::size_t> m_NormalFrames;
     std::vector<std::size_t> m_ShadowFrames;
+    glm::vec2 m_GamePosition;
 
 private:
-    glm::vec2 m_Position;
     size_t m_BeatDelay;
     bool m_Lord;
     bool m_Shadow = false;

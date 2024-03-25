@@ -151,7 +151,7 @@ void Map::CameraUpdate() {
         }
     }
     for (auto &enemy : m_Enemies) {
-        if (CheckShowPosition(enemy->GetPosition(), cameraPos)) {
+        if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
             enemy->SetVisible(true);
         }
         else {
@@ -168,6 +168,9 @@ void Map::TempoUpdate() {
 
 void Map::Update() {
     CameraUpdate();
+    for (auto &enemy : m_Enemies) {
+        enemy->Update();
+    }
 }
 
 } // namespace Dungeon

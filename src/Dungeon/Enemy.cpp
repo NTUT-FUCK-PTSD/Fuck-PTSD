@@ -4,11 +4,11 @@
 namespace Dungeon {
 
 Enemy::Enemy(const s_Enemy &u_Enemy)
-    : m_Position({u_Enemy.x, u_Enemy.y}),
+    : m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
-    SetPosition(m_Position);
+    SetGamePosition(m_GamePosition);
 }
 
 void Enemy::SetShadow(const bool &shadow) {
@@ -16,12 +16,10 @@ void Enemy::SetShadow(const bool &shadow) {
     m_SpriteSheet->SetFrames(shadow ? m_ShadowFrames : m_NormalFrames);
 }
 
-void Enemy::SetPosition(const glm::vec2 &position) {
-    m_Position = position;
-    m_Transform.translation = {
-        -m_Position.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE,
-        -m_Position.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE};
-    SetZIndex(m_Position.y + float(0.25));
+void Enemy::SetGamePosition(const glm::vec2 &gamePosition) {
+    m_GamePosition = gamePosition;
+    m_Transform.translation = ToolBoxs::GamePostoPos(gamePosition);
+    SetZIndex(m_GamePosition.y + float(0.25));
 }
 
 void Enemy::SetLord(const bool &lord) {
