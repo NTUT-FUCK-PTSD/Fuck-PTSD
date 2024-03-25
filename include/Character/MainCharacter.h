@@ -5,13 +5,12 @@
 #ifndef FUCK_PTSD_MAINCHARACTER_H
 #define FUCK_PTSD_MAINCHARACTER_H
 
-#include "Dungeon/Elements.h"
+#include "Animation.h"
 #include "GameElement.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
-#include "Util/Time.hpp"
 
-class MainCharacter {
+class MainCharacter : public Animation {
 private:
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;
@@ -29,19 +28,6 @@ private:
     glm::vec2 m_GamePosition = {0, 0};
 
     float m_ZIndex = 0.5;
-
-    const std::vector<glm::vec2> m_MoveAnimation = {
-        {0, Dungeon::DUNGEON_TILE_WIDTH},
-        {Dungeon::DUNGEON_TILE_WIDTH / 2, Dungeon::DUNGEON_TILE_WIDTH},
-        {-Dungeon::DUNGEON_TILE_WIDTH / 4, Dungeon::DUNGEON_TILE_WIDTH},
-        {-Dungeon::DUNGEON_TILE_WIDTH / 2, Dungeon::DUNGEON_TILE_WIDTH}};
-
-    bool m_IsAnimating = false;
-    unsigned long m_AnimationStartMs;
-    unsigned long m_AnimationEndMs;
-    unsigned long m_AnimationDuringTimeMs;
-    glm::vec2 m_AnimationDestination;
-    uint16_t m_AnimationDirection;
 
     void SetPosition(const glm::vec2 &position);
 
@@ -67,9 +53,6 @@ public:
     void SetFaceTo(Direction direction);
 
     void SetZIndex(float index);
-
-    void MoveByTime(const unsigned long &duringTimeMs,
-                    const glm::vec2 &destGamePosition, Direction direction);
 
     void Update();
 };

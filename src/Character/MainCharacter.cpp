@@ -26,6 +26,8 @@ MainCharacter::MainCharacter(const std::string &headImagePath,
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(InitPosition);
     m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+
+    m_AnimationPosition = InitPosition;
     Update();
 }
 
@@ -64,46 +66,11 @@ void MainCharacter::SetFaceTo(Direction direction) {
     m_Head->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 }
 
-void MainCharacter::MoveByTime(const unsigned long &duringTimeMs,
-                               const glm::vec2 &destGamePosition,
-                               Direction direction) {
-    if (m_IsAnimating) {
-        m_Position = m_AnimationDestination;
-        Update();
-    }
-    m_AnimationStartMs = Util::Time::GetElapsedTimeMs();
-    m_AnimationDuringTimeMs = duringTimeMs;
-    m_AnimationDestination = ToolBoxs::GamePostoPos(destGamePosition);
-    m_IsAnimating = true;
-    m_AnimationDirection = direction;
-}
-
 void MainCharacter::Update() {
-    if (m_IsAnimating) {
-        unsigned long passTimeMs =
-            Util::Time::GetElapsedTimeMs() - m_AnimationStartMs;
-        if (passTimeMs > m_AnimationDuringTimeMs ||
-            m_Position == m_AnimationDestination) {
-            m_Position = m_AnimationDestination;
-            m_GamePosition = ToolBoxs::PosToGamePos(m_Position);
-            m_IsAnimating = false;
-        }
-        else {
-            if (passTimeMs <= m_AnimationDuringTimeMs / 2.0f) {
-                float ratio = (float)passTimeMs / (m_AnimationDuringTimeMs / 2);
-                m_Position += m_MoveAnimation[m_AnimationDirection] * ratio;
-            }
-            else {
-                float ratio =
-                    (float)(passTimeMs + (m_AnimationDuringTimeMs / 2)) /
-                    (m_AnimationDuringTimeMs / 2);
-                m_Position -=
-                    m_MoveAnimation[m_AnimationDirection] * (1.0f - ratio);
-            }
-            float ratio = (float)passTimeMs / m_AnimationDuringTimeMs;
-            glm::vec2 move = m_AnimationDestination - m_Position;
-            m_Position += move * ratio;
-        }
+    UpdateAnimation();
+    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
+        m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
+        m_Position = m_AnimationPosition;
     }
     SetZIndex(ToolBoxs::PosToGamePos(m_Position).y + float(0.5));
     SetPosition(m_Position);

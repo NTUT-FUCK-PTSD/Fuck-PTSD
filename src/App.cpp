@@ -97,7 +97,8 @@ void App::Update() {
             m_PlayerMoveDirect = MainCharacter::Direction::UP;
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
-                                      m_AniPlayerDestination.y - 1};
+                                      m_AniPlayerDestination.y +
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
             m_AniCameraDestination = {m_AniCameraDestination.x,
                                       m_AniCameraDestination.y -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
@@ -106,7 +107,8 @@ void App::Update() {
             m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
             m_MainCharacter->SetFaceTo(MainCharacter::Direction::LEFT);
 
-            m_AniPlayerDestination = {m_AniPlayerDestination.x - 1,
+            m_AniPlayerDestination = {m_AniPlayerDestination.x -
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniPlayerDestination.y};
             m_AniCameraDestination = {m_AniCameraDestination.x +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
@@ -116,7 +118,8 @@ void App::Update() {
             m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
-                                      m_AniPlayerDestination.y + 1};
+                                      m_AniPlayerDestination.y -
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
             m_AniCameraDestination = {m_AniCameraDestination.x,
                                       m_AniCameraDestination.y +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
@@ -125,7 +128,8 @@ void App::Update() {
             m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
             m_MainCharacter->SetFaceTo(MainCharacter::Direction::RIGHT);
 
-            m_AniPlayerDestination = {m_AniPlayerDestination.x + 1,
+            m_AniPlayerDestination = {m_AniPlayerDestination.x +
+                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniPlayerDestination.y};
             m_AniCameraDestination = {m_AniCameraDestination.x -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
