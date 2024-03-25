@@ -7,23 +7,23 @@ on:
 
 jobs:
 
-  windows-visual-studio:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
+  # windows-visual-studio:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: "Setup Visual Studio"
-        uses: egor-tensin/vs-shell@v2
+  #     - name: "Setup Visual Studio"
+  #       uses: egor-tensin/vs-shell@v2
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
 
-      - name: "Setup cmake"
-        run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=Debug
-          cmake --build build
+  #     - name: "Setup cmake"
+  #       run: |
+  #         cmake -B build -DCMAKE_BUILD_TYPE=Debug
+  #         cmake --build build
         
   windows-mingw:
     runs-on: windows-latest

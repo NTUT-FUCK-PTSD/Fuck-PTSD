@@ -1,8 +1,10 @@
-#include "Animation.h"
 #include "App.hpp"
+#include "Animation.h"
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
+
+
 // #include "Coin.h"
 
 #include "Util/Input.hpp"
@@ -38,6 +40,23 @@ void App::Start(std::shared_ptr<Core::Context>
         context->Update();
     }
 
+    // music
+
+    // Configure sound source
+    speech.setText("1 2 3   1 2 3   Hello world. Welcome to So-Loud.");
+
+    // initialize SoLoud.
+    soloud.init();
+    music.load(ASSETS_DIR"/music/add.wav");
+
+    // Play the sound source (we could do this several times if we wanted)
+    int voiceHandle = soloud.play(music);
+
+    soloud.setRelativePlaySpeed(voiceHandle, 1.5f);
+
+
+    // music finish
+
     // create MainCharacter
     m_MainCharacter = std::make_shared<MainCharacter>();
     m_Camera->AddChildren(m_MainCharacter->GetGameElement());
@@ -49,6 +68,13 @@ void App::Start(std::shared_ptr<Core::Context>
     // show the coin
     m_Window->AddChildren(m_Coin->getGameObject());
     m_Window->AddChildren(m_Diamond->getGameObject());
+
+    // add the Tools
+    //    m_Window.AddChild(m_Tools->getGameObject());
+    m_Window->AddChildren(m_Tools->getGameObjects());
+
+    // display the heart
+    m_Window->AddChildren(m_Heart->getGameObjects());
 
     m_CurrentState = State::UPDATE;
 }
