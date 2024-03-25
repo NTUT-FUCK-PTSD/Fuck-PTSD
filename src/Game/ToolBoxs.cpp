@@ -36,11 +36,12 @@ glm::vec2 ToolBoxs::AddVec2(const glm::vec2 &add01, const glm::vec2 &add02) {
 }
 
 glm::vec2 ToolBoxs::GamePostoPos(const glm::vec2 &gamePosition) {
-    return {gamePosition.x * Dungeon::DUNGEON_TILE_WIDTH * 3,
-            -gamePosition.y * Dungeon::DUNGEON_TILE_WIDTH * 3};
+    return {
+        gamePosition.x * Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE,
+        -gamePosition.y * Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE};
 }
 
 glm::vec2 ToolBoxs::PosToGamePos(const glm::vec2 &position) {
-    return {position.x / Dungeon::DUNGEON_TILE_WIDTH / 3,
-            -position.y / Dungeon::DUNGEON_TILE_WIDTH / 3};
+    return {position.x / Dungeon::DUNGEON_TILE_WIDTH / Dungeon::DUNGEON_SCALE,
+            -position.y / Dungeon::DUNGEON_TILE_WIDTH / Dungeon::DUNGEON_SCALE};
 }
