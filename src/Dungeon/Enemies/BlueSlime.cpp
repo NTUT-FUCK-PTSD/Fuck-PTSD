@@ -10,9 +10,9 @@ Enemies::BlueSlime::BlueSlime(const s_Enemy &u_Enemy)
         true, 100, true, 100);
     m_Drawable = m_SpriteSheet;
 
-    SetHealth(2);
-    SetDamage(50);
-    SetCoin(1);
+    SetHealth(4); // 2 hearts
+    SetDamage(2); // 1 heart
+    SetCoin(2);
     m_AnimationPosition = ToolBoxs::GamePostoPos(GetGamePosition());
 }
 } // namespace Dungeon
