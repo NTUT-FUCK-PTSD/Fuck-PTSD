@@ -16,6 +16,11 @@
 #include "Tools.h"
 #include "Util/Text.hpp"
 #include "pch.hpp" // IWYU pragma: export
+#include "music/music.h"
+#include "soloud.h"
+#include "soloud_speech.h"
+#include "soloud_thread.h"
+#include "soloud_wav.h"
 
 class App {
 public:
@@ -65,6 +70,10 @@ private:
     glm::vec2 m_CameraPosition = {0, 0};
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
+
+    SoLoud::Soloud soloud;  // SoLoud engine core
+    SoLoud::Speech speech;  // A sound source (speech, in this case)
+    SoLoud::Wav music ;
 };
 
 #endif
