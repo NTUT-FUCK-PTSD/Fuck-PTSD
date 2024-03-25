@@ -12,8 +12,8 @@ Tools::Tools() {
     m_Shovel = std::make_shared<Shovel>();
     m_Shovel->setPosition(m_ShovelPosition);
 
-    // create tool Attack
-    m_Attack = std::make_shared<Attack>();
+    // create tool Weapon
+    m_Attack = std::make_shared<Weapon>();
     m_Attack->setPosition(m_AttackPosition);
 
     // create tool Throw

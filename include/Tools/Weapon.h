@@ -2,17 +2,17 @@
 // Created by adven on 2024/3/24.
 //
 
-#ifndef FUCK_PTSD_ATTACK_H
-#define FUCK_PTSD_ATTACK_H
+#ifndef FUCK_PTSD_WEAPON_H
+#define FUCK_PTSD_WEAPON_H
 
 #include "pch_extream.h"
 
 #include "Equipment.h"
 #include "ToolBoxs.h"
 
-class Attack final : public Equipment {
+class Weapon final : public Equipment {
 public:
-    explicit Attack();
+    explicit Weapon();
 
     [[nodiscard]] std::shared_ptr<GameElement> getGameElement() override;
 
@@ -36,4 +36,4 @@ private:
     std::shared_ptr<GameElement> m_Attack = std::make_shared<GameElement>();
 };
 
-#endif // FUCK_PTSD_ATTACK_H
+#endif // FUCK_PTSD_WEAPON_H
