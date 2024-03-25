@@ -24,8 +24,7 @@ private:
     glm::vec2 m_FontScale = {5, 5};
     std::string m_showText = "*0";
     std::string m_imagePath = ASSETS_DIR "/gui/hud_coins.png";
-    //    std::string m_TextStylePath = ASSETS_DIR
-    //    "/font/necrosans/necrosans.ttf";
+
     std::string m_TextStylePath =
         ASSETS_DIR "/font/necrosans-6/necrosans-6.otf";
 

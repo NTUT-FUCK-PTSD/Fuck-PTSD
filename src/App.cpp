@@ -1,5 +1,5 @@
-#include "Animation.h"
 #include "App.hpp"
+#include "Animation.h"
 #include "Background.hpp"
 #include "MainCharacter.h"
 #include "ToolBoxs.h"
@@ -64,6 +64,13 @@ void App::Start(std::shared_ptr<Core::Context>
     // show the coin
     m_Window->AddChildren(m_Coin->getGameObject());
     m_Window->AddChildren(m_Diamond->getGameObject());
+
+    // add the Tools
+    //    m_Window.AddChild(m_Tools->getGameObject());
+    m_Window->AddChildren(m_Tools->getGameObjects());
+
+    // display the heart
+    m_Window->AddChildren(m_Heart->getGameObjects());
 
     m_CurrentState = State::UPDATE;
 }
