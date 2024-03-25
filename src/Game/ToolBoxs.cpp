@@ -4,6 +4,7 @@
 
 #include "ToolBoxs.h"
 
+#include "Dungeon/Elements.h"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -32,4 +33,14 @@ glm::vec2 ToolBoxs::CountImagePixel(const std::string &ImagePath,
 glm::vec2 ToolBoxs::AddVec2(const glm::vec2 &add01, const glm::vec2 &add02) {
     glm::vec2 result = {add01[0] + add02[0], add01[1] + add02[1]};
     return result;
+}
+
+glm::vec2 ToolBoxs::GamePostoPos(const glm::vec2 &gamePosition) {
+    return {gamePosition.x * Dungeon::DUNGEON_TILE_WIDTH * 3,
+            -gamePosition.y * Dungeon::DUNGEON_TILE_WIDTH * 3};
+}
+
+glm::vec2 ToolBoxs::PosToGamePos(const glm::vec2 &position) {
+    return {position.x / Dungeon::DUNGEON_TILE_WIDTH / 3,
+            -position.y / Dungeon::DUNGEON_TILE_WIDTH / 3};
 }

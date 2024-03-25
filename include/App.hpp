@@ -15,8 +15,8 @@
 #include "SpriteSheet.hpp"
 #include "Tools.h"
 #include "Util/Text.hpp"
-#include "pch.hpp" // IWYU pragma: export
 #include "music/music.h"
+#include "pch.hpp" // IWYU pragma: export
 #include "soloud.h"
 #include "soloud_speech.h"
 #include "soloud_thread.h"
@@ -51,11 +51,8 @@ private:
     std::shared_ptr<Diamond> m_Diamond = std::make_shared<Diamond>();
 
     // settings
-    unsigned long m_AnimationStartTime = 0;
-    glm::vec2 m_AniPlayerMotion = {0.0f, 0.0f};
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
     glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
-    glm::vec2 m_AniPlayerStartPosition = {0.0f, 0.0f};
 
     State m_CurrentState = State::START;
 
@@ -71,9 +68,9 @@ private:
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
 
-    SoLoud::Soloud soloud;  // SoLoud engine core
-    SoLoud::Speech speech;  // A sound source (speech, in this case)
-    SoLoud::Wav music ;
+    SoLoud::Soloud soloud; // SoLoud engine core
+    SoLoud::Speech speech; // A sound source (speech, in this case)
+    SoLoud::Wav music;
 };
 
 #endif
