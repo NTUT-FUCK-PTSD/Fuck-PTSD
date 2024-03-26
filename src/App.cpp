@@ -48,7 +48,7 @@ void App::Start(std::shared_ptr<Core::Context>
     // Play the sound source (we could do this several times if we wanted)
     int voiceHandle = soloud.play(music);
 
-    soloud.setRelativePlaySpeed(voiceHandle, 1.5f);
+    soloud.setRelativePlaySpeed(voiceHandle, 2.0f);
 
 
     // music finish

@@ -5,13 +5,11 @@
 
 #include "pch_extream.h"
 
+#include "Bomb.h"
 #include "Equipment.h"
 #include "Shovel.h"
-#include "Attack.h"
 #include "Throw.h"
-#include "Bomb.h"
-
-
+#include "Weapon.h"
 
 class Tools final{
 public:
@@ -29,7 +27,7 @@ private:
     glm::vec2 m_ShovelPosition = {-655, 350};
 
     //attack
-    std::shared_ptr<Attack> m_Attack;
+    std::shared_ptr<Weapon> m_Attack;
     glm::vec2 m_AttackPosition = {-555, 350};
 
     // throw

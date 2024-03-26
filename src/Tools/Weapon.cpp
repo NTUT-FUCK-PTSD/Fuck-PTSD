@@ -3,9 +3,9 @@
 //
 #include "pch_extream.h"
 
-#include "Attack.h"
+#include "Weapon.h"
 
-Attack::Attack() {
+Weapon::Weapon() {
     //    const auto ItemImage = std::make_shared<Util::Image>(m_ImagePathItem);
     const auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 1, 2);
 
@@ -32,14 +32,14 @@ Attack::Attack() {
     m_Attack->SetVisible(true);
 };
 
-void Attack::setPosition(const glm::vec2 position) {
+void Weapon::setPosition(const glm::vec2 position) {
     m_Window->SetPosition(position);
     m_Item->SetPosition({position.x,position.y - 5});
 }
 
-std::shared_ptr<GameElement> Attack::getGameElement() {
+std::shared_ptr<GameElement> Weapon::getGameElement() {
     return m_Attack;
 }
-std::vector<std::shared_ptr<Util::GameObject>> Attack::getGameObjects() {
+std::vector<std::shared_ptr<Util::GameObject>> Weapon::getGameObjects() {
     return {m_Window, m_Item};
 }
