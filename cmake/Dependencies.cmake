@@ -12,6 +12,8 @@ FetchContent_Declare(
         tinyxml2
         GIT_REPOSITORY https://github.com/leethomason/TinyXML2
         GIT_TAG 9.0.0
+
+        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/tinyxml2
 )
 FetchContent_MakeAvailable(tinyxml2)
 
@@ -21,6 +23,8 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
 #        GIT_TAG submodule-ized
         GIT_TAG soloud
+
+        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD
 )
 FetchContent_MakeAvailable(PTSD)
 
@@ -31,6 +35,8 @@ FetchContent_Declare(
         soloud
         GIT_REPOSITORY https://github.com/onon1101/soloud.git
         GIT_TAG noinst
+
+        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/soloud
 )
 
 FetchContent_GetProperties(soloud)
