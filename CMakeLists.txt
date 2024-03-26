@@ -31,7 +31,7 @@ add_executable(${PROJECT_NAME}
 include("${CMAKE_DIR}/Dependencies.cmake")
 
 # include rust settings
-include("${CMAKE_DIR}/Rust.cmake")
+# include("${CMAKE_DIR}/Rust.cmake")
 
 
 if(MSVC)
@@ -52,7 +52,7 @@ endif()
 
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 #target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/ptsd-src/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${PTSD_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${soloud_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -66,6 +66,6 @@ target_link_libraries(${PROJECT_NAME}
         SDL2::SDL2main
         tinyxml2::tinyxml2
         Framework
-        rusty_bridge
+        #rusty_bridge
         soloud
 )
