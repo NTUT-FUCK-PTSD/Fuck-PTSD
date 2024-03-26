@@ -3,6 +3,12 @@ project(FUCK_PTSD)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+if (WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    # see https://github.com/ntut-open-source-club/practical-tools-for-simple-design/issues/22
+    set(CMAKE_RC_FLAGS="-C 1252")
+endif()
 
 #add_subdirectory(${CMAKE_BINARY_DIR}/_deps/ptsd-src/)
 add_library(Framework ${PTSD_SRC_FILES} $<TARGET_OBJECTS:PracticalToolsForSimpleDesign>)
@@ -39,6 +45,7 @@ if(MSVC)
 else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
 endif()
+
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Resources")
