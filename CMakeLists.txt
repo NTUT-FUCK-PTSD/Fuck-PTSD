@@ -52,7 +52,7 @@ endif()
 
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 #target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/ptsd-src/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${PTSD_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${soloud_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
