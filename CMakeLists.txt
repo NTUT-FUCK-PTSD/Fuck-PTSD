@@ -31,7 +31,7 @@ add_executable(${PROJECT_NAME}
 include("${CMAKE_DIR}/Dependencies.cmake")
 
 # include rust settings
-include("${CMAKE_DIR}/Rust.cmake")
+# include("${CMAKE_DIR}/Rust.cmake")
 
 
 if(MSVC)
