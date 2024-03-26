@@ -22,8 +22,8 @@ set(PTSD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD")
 FetchContent_Declare(
         PTSD
         GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
-#        GIT_TAG submodule-ized
         GIT_TAG soloud
+
 
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD
 )
@@ -35,7 +35,8 @@ message(STATUS "soloud NOT FOUND, fetching from source!")
 FetchContent_Declare(
         soloud
         GIT_REPOSITORY https://github.com/onon1101/soloud.git
-        GIT_TAG noinst
+        # GIT_TAG noinst
+        GIT_TAG onon1101-patch-2
 
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/soloud
 )
