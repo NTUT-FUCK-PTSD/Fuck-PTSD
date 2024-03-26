@@ -66,6 +66,6 @@ target_link_libraries(${PROJECT_NAME}
         SDL2::SDL2main
         tinyxml2::tinyxml2
         Framework
-        rusty_bridge
+        #rusty_bridge
         soloud
 )
