@@ -18,6 +18,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(tinyxml2)
 
 message(STATUS "PTSD NOT FOUND, fetching from source!")
+set(PTSD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD")
 FetchContent_Declare(
         PTSD
         GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
