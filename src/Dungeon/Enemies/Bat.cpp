@@ -44,7 +44,6 @@ void Bat::Update() {
         m_NeedToMove = false;
     }
     else if (!m_CanMove && m_NeedToMove) {
-        LOG_DEBUG("Bat::Update() - m_CanMove is false");
         RandomMove();
     }
 
