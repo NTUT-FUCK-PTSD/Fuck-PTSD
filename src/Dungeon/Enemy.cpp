@@ -3,8 +3,11 @@
 
 namespace Dungeon {
 
-Enemy::Enemy(const s_Enemy &u_Enemy)
+Enemy::Enemy(const s_Enemy &u_Enemy,
+             const std::vector<std::shared_ptr<Tile>> &tiles,
+             const glm::vec2 &mapSize)
     : m_GamePosition({u_Enemy.x, u_Enemy.y}),
+      m_Tiles(tiles),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
@@ -38,6 +41,18 @@ void Enemy::TempoMove() {
         return;
     }
     Move();
+}
+
+bool Enemy::IsVaildMove(const glm::vec2 &position) {
+    if (position.x < 0 || position.y < 0 || position.x >= m_MapSize.x ||
+        position.y >= m_MapSize.y) {
+        return false;
+    }
+    if (m_Tiles[static_cast<size_t>(position.x + position.y * m_MapSize.x)]
+            ->IsWall()) {
+        return false;
+    }
+    return true;
 }
 
 } // namespace Dungeon

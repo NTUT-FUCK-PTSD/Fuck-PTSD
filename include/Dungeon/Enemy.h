@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Dungeon/Elements.h"
+#include "Dungeon/Tile.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
@@ -13,7 +13,9 @@ namespace Dungeon {
 // Abstract class
 class Enemy : public Util::GameObject {
 public:
-    Enemy(const s_Enemy &u_Enemy);
+    Enemy(const s_Enemy &u_Enemy,
+          const std::vector<std::shared_ptr<Tile>> &tiles,
+          const glm::vec2 &mapSize);
 
     void SetShadow(const bool &shadow);
     void SetGamePosition(const glm::vec2 &gamePosition);
@@ -33,6 +35,8 @@ public:
     [[nodiscard]] size_t GetHealth() const { return m_Health; }
     [[nodiscard]] size_t GetCoin() const { return m_Coin; }
 
+    bool IsVaildMove(const glm::vec2 &position);
+
     void TempoMove();
     virtual void Move() = 0;
 
@@ -43,6 +47,8 @@ protected:
     std::vector<std::size_t> m_NormalFrames;
     std::vector<std::size_t> m_ShadowFrames;
     glm::vec2 m_GamePosition;
+    std::vector<std::shared_ptr<Tile>> m_Tiles;
+    glm::vec2 m_MapSize;
 
 private:
     size_t m_BeatDelay;

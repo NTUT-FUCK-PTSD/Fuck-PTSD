@@ -14,11 +14,12 @@ struct s_MapDate {
     std::vector<std::shared_ptr<Tile>> tiles;
     std::vector<std::shared_ptr<Enemy>> enemies;
 };
-
 class Map : public Util::GameObject {
 public:
     Map(const std::shared_ptr<MainCharacter> &mainCharacter,
         const std::string &path, const int &levelNum = 1);
+
+    size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
     void CameraUpdate();
     void TempoUpdate();
