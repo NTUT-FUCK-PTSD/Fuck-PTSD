@@ -19,6 +19,7 @@ private:
 
     size_t m_State = 0;
     bool m_NeedToMove = false;
+    uint16_t m_AnimationType;
 };
 } // namespace Enemies
 } // namespace Dungeon

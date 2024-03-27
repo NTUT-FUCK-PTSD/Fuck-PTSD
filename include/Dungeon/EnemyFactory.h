@@ -4,6 +4,7 @@
 #include "Dungeon/Enemies/Bat.h"
 #include "Dungeon/Enemies/BlueSlime.h"
 #include "Dungeon/Enemies/GreenSlime.h"
+#include "Dungeon/Enemies/OrangeSlime.h"
 #include "Dungeon/Enemies/RedBat.h"
 
 namespace Dungeon {

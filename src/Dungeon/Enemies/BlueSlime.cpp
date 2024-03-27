@@ -1,5 +1,5 @@
 #include "Dungeon/Enemies/BlueSlime.h"
-#include "ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(const s_Enemy &u_Enemy)
     : Enemy(u_Enemy),
@@ -30,16 +30,19 @@ void BlueSlime::Move() {
     if (m_State == 1) {
         m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
         m_NeedToMove = true;
+        m_AnimationType = 0;
     }
     else if (m_State == 3) {
         m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
         m_NeedToMove = true;
+        m_AnimationType = 2;
     }
     m_State++;
 }
 void BlueSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 0);
+        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
+                   m_AnimationType);
         m_GamePosition = m_WillMovePosition;
         m_NeedToMove = false;
     }
@@ -47,10 +50,12 @@ void BlueSlime::Update() {
         if (m_State == 2) {
             m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
             m_State += 2;
+            m_AnimationType = 2;
         }
         else if (m_State == 4) {
             m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
             m_State = 2;
+            m_AnimationType = 0;
         }
         m_NeedToMove = false;
     }
