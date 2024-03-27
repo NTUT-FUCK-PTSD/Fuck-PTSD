@@ -27,27 +27,27 @@ void App::Start(std::shared_ptr<Core::Context>
     const auto background = std::make_shared<Background>();
     m_Camera->AddChild(background->GetGameElement());
 
+    // play main background music
+    m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
+//    m_MusicSystem->skipToTargetTime(118.2f);
+
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
+        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+            m_CurrentState = State::END;
+        }
+        m_MusicSystem->Update();
         m_Camera->Update();
         context->Update();
     }
 
-    // music
+    // play lobby music
+    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
+    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
 
-    // Configure sound source
-    speech.setText("1 2 3   1 2 3   Hello world. Welcome to So-Loud.");
-
-    // initialize SoLoud.
-    soloud.init();
-    music.load(ASSETS_DIR "/music/add.wav");
-
-    // Play the sound source (we could do this several times if we wanted)
-    int voiceHandle = soloud.play(music);
-
-    soloud.setRelativePlaySpeed(voiceHandle, 2.0f);
-
-    // music finish
+    // play zone1 leve1
+//    m_MusicSystem->playMusic(ASSETS_DIR"/music/zone1_1.ogg");
+//    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/zone1_1.txt");
 
     // remove background
     m_Camera->RemoveChild(background->GetGameElement());
@@ -80,16 +80,18 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
+
+
     // add coin
     if (Util::Input::IsKeyDown(Util::Keycode::B)) {
         m_Coin->plusCoinNumber(10);
         m_Diamond->plusDiamondNumber(10);
     }
 
-    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
+    if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
         Util::Input::IsKeyDown(Util::Keycode::D) ||
         Util::Input::IsKeyDown(Util::Keycode::S) ||
-        Util::Input::IsKeyDown(Util::Keycode::A)) {
+        Util::Input::IsKeyDown(Util::Keycode::A)) && m_MusicSystem->TempoTrigger()) {
         if (m_PlayerMoveDirect != MainCharacter::NONE) {
             m_PlayerMoveDirect = MainCharacter::NONE;
         }
@@ -147,6 +149,7 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
+    m_MusicSystem->Update();
     m_MainCharacter->Update();
     m_Window->Update();
     m_Camera->Update();
