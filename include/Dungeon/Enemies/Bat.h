@@ -15,6 +15,12 @@ public:
 
     void Update() override;
 
+protected:
+    Bat(const s_Enemy &u_Enemy, const std::string &filepath);
+
+    void MoveBat();
+    size_t m_Tick = 2;
+
 private:
     void RandomMove();
     const glm::vec2 m_FrameSize = {24, 24};

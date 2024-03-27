@@ -1,4 +1,4 @@
-#include "BlueSlime.h"
+#include "Dungeon/Enemies/BlueSlime.h"
 #include "ToolBoxs.h"
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(const s_Enemy &u_Enemy)
@@ -39,7 +39,7 @@ void BlueSlime::Move() {
 }
 void BlueSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
+        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 0);
         m_GamePosition = m_WillMovePosition;
         m_NeedToMove = false;
     }
@@ -55,7 +55,7 @@ void BlueSlime::Update() {
         m_NeedToMove = false;
     }
 
-    UpdateAnimation(false);
+    UpdateAnimation(true);
     if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
         m_Transform.translation = m_AnimationPosition;
     }

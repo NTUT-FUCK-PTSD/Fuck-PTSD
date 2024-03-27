@@ -117,7 +117,7 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
 
     // Add a Bat for testing
     m_MapData[GamePostion2MapIndex({1, 1})].enemies.push_back(
-        std::make_shared<Enemies::Bat>(s_Enemy{1, 1, 0, 0, 0}));
+        std::make_shared<Enemies::RedBat>(s_Enemy{1, 1, 0, 0, 0}));
     m_Enemies.push_back(m_MapData[GamePostion2MapIndex({1, 1})].enemies.back());
 
     for (auto &tile : m_Tiles) {

@@ -1,4 +1,4 @@
-#include "GreenSlime.h"
+#include "Dungeon/Enemies/GreenSlime.h"
 
 namespace Dungeon {
 Enemies::GreenSlime::GreenSlime(const s_Enemy &u_Enemy)

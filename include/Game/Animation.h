@@ -7,7 +7,7 @@
 
 class Animation {
 public:
-    Animation::Animation(const glm::vec2 &animationPosition);
+    Animation(const glm::vec2 &animationPosition);
     virtual void MoveByTime(const unsigned long &duringTimeMs,
                             const glm::vec2 &destination,
                             const uint16_t &direction);
