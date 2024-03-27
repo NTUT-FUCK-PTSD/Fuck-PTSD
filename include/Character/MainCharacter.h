@@ -36,6 +36,8 @@ public:
     MainCharacter(const std::string &headImagePath,
                   const std::string &bodyImagePath);
 
+    virtual ~MainCharacter() = default;
+
     [[nodiscard]] const std::vector<std::shared_ptr<Util::GameObject>>
     GetGameElement() const;
 

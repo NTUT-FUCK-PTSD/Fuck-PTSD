@@ -18,6 +18,11 @@ Enemies::OrangeSlime::OrangeSlime(const s_Enemy &u_Enemy)
     SetCoin(2);
     m_StartIdx = m_Distribution(m_RandomGenerator);
     m_State = -1; // Start from -1 to make the first move
+    m_Movement[(m_StartIdx) % 4] += GetGamePosition();
+    for (size_t i = 1; i < 4; i++) {
+        m_Movement[(m_StartIdx + i) % 4] +=
+            m_Movement[(m_StartIdx + i - 1) % 4];
+    }
 }
 } // namespace Dungeon
 
@@ -32,23 +37,19 @@ void OrangeSlime::Move() {
         m_State = 0;
     }
     if (m_State == 0) {
-        m_WillMovePosition =
-            GetGamePosition() + m_Movement[(m_StartIdx + m_State) % 4];
+        m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
     }
     else if (m_State == 1) {
-        m_WillMovePosition =
-            GetGamePosition() + m_Movement[(m_StartIdx + m_State) % 4];
+        m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
     }
     else if (m_State == 2) {
-        m_WillMovePosition =
-            GetGamePosition() + m_Movement[(m_StartIdx + m_State) % 4];
+        m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
     }
     else if (m_State == 3) {
-        m_WillMovePosition =
-            GetGamePosition() + m_Movement[(m_StartIdx + m_State) % 4];
+        m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
     }
     m_State++;

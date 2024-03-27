@@ -26,8 +26,7 @@ private:
     std::uniform_int_distribution<size_t> m_Distribution;
     size_t m_StartIdx = 0;
 
-    const std::vector<glm::vec2> m_Movement = {
-        {0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    std::vector<glm::vec2> m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 };
 } // namespace Enemies
 } // namespace Dungeon
