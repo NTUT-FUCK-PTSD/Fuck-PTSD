@@ -171,6 +171,19 @@ void Map::Update() {
         if (!(enemy->GetGamePosition() == enemy->GetWillMovePosition()) &&
             isVaildMove(enemy->GetWillMovePosition())) {
             enemy->SetCanMove(true);
+            m_MapData[GamePostion2MapIndex(enemy->GetGamePosition())]
+                .enemies.erase(
+                    std::remove(m_MapData[GamePostion2MapIndex(
+                                              enemy->GetGamePosition())]
+                                    .enemies.begin(),
+                                m_MapData[GamePostion2MapIndex(
+                                              enemy->GetGamePosition())]
+                                    .enemies.end(),
+                                enemy),
+                    m_MapData[GamePostion2MapIndex(enemy->GetGamePosition())]
+                        .enemies.end());
+            m_MapData[GamePostion2MapIndex(enemy->GetWillMovePosition())]
+                .enemies.push_back(enemy);
         }
         else {
             enemy->SetCanMove(false);
