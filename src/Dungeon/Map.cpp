@@ -166,22 +166,18 @@ void Map::TempoUpdate() {
 }
 
 void Map::Update() {
+    size_t mapIndex = 0;
     CameraUpdate();
     for (auto &enemy : m_Enemies) {
         if (!(enemy->GetGamePosition() == enemy->GetWillMovePosition()) &&
             isVaildMove(enemy->GetWillMovePosition())) {
             enemy->SetCanMove(true);
-            m_MapData[GamePostion2MapIndex(enemy->GetGamePosition())]
-                .enemies.erase(
-                    std::remove(m_MapData[GamePostion2MapIndex(
-                                              enemy->GetGamePosition())]
-                                    .enemies.begin(),
-                                m_MapData[GamePostion2MapIndex(
-                                              enemy->GetGamePosition())]
-                                    .enemies.end(),
-                                enemy),
-                    m_MapData[GamePostion2MapIndex(enemy->GetGamePosition())]
-                        .enemies.end());
+
+            mapIndex = GamePostion2MapIndex(enemy->GetGamePosition());
+            m_MapData[mapIndex].enemies.erase(
+                std::remove(m_MapData[mapIndex].enemies.begin(),
+                            m_MapData[mapIndex].enemies.end(), enemy),
+                m_MapData[mapIndex].enemies.end());
             m_MapData[GamePostion2MapIndex(enemy->GetWillMovePosition())]
                 .enemies.push_back(enemy);
         }
