@@ -13,9 +13,7 @@ namespace Dungeon {
 // Abstract class
 class Enemy : public Util::GameObject {
 public:
-    Enemy(const s_Enemy &u_Enemy,
-          const std::vector<std::shared_ptr<Tile>> &tiles,
-          const glm::vec2 &mapSize);
+    Enemy(const s_Enemy &u_Enemy);
 
     void SetShadow(const bool &shadow);
     void SetGamePosition(const glm::vec2 &gamePosition);
@@ -24,6 +22,9 @@ public:
     void SetDamage(const size_t &damage) { m_Damage = damage; }
     void SetHealth(const size_t &health) { m_Health = health; }
     void SetCoin(const size_t &coin) { m_Coin = coin; }
+    void SetCanMove(const bool &canMove) { m_CanMove = canMove; }
+
+    [[nodiscard]] bool GetCanMove() const { return m_CanMove; }
 
     [[nodiscard]] const glm::vec2 &GetGamePosition() const {
         return m_GamePosition;
@@ -34,8 +35,9 @@ public:
     [[nodiscard]] size_t GetDamage() const { return m_Damage; }
     [[nodiscard]] size_t GetHealth() const { return m_Health; }
     [[nodiscard]] size_t GetCoin() const { return m_Coin; }
-
-    bool IsVaildMove(const glm::vec2 &position);
+    [[nodiscard]] const glm::vec2 &GetWillMovePosition() const {
+        return m_WillMovePosition;
+    }
 
     void TempoMove();
     virtual void Move() = 0;
@@ -47,8 +49,8 @@ protected:
     std::vector<std::size_t> m_NormalFrames;
     std::vector<std::size_t> m_ShadowFrames;
     glm::vec2 m_GamePosition;
-    std::vector<std::shared_ptr<Tile>> m_Tiles;
-    glm::vec2 m_MapSize;
+    bool m_CanMove = false;
+    glm::vec2 m_WillMovePosition;
 
 private:
     size_t m_BeatDelay;

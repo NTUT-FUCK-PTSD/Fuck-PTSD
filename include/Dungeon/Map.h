@@ -30,6 +30,8 @@ private:
     const size_t ALLOW_EXTRA_DRAW = 4;
     bool CheckShowPosition(const glm::vec2 &position1,
                            const glm::vec2 &position2);
+    bool isVaildPosition(const glm::ivec2 &position);
+    bool isVaildMove(const glm::ivec2 &position);
     const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
     const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;

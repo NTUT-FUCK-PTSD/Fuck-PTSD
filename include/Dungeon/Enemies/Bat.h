@@ -1,5 +1,5 @@
-#ifndef BLUE_SLIME_H
-#define BLUE_SLIME_H
+#ifndef BAT_H
+#define BAT_H
 
 #include "Animation.h"
 #include "Dungeon/Enemy.h"
@@ -9,24 +9,25 @@ namespace Dungeon {
 namespace Enemies {
 class Bat : public Dungeon::Enemy, public Animation {
 public:
-    Bat(const s_Enemy &u_Enemy, const std::vector<std::shared_ptr<Tile>> &tiles,
-        const glm::vec2 &mapSize);
+    Bat(const s_Enemy &u_Enemy);
 
     void Move() override;
 
     void Update() override;
 
 private:
-    void RandomMove(const bool &direction, const bool &isFirst = false);
+    void RandomMove();
     const glm::vec2 m_FrameSize = {24, 24};
     size_t m_State = 0;
-    bool m_Direction = false;
+
+    bool m_NeedToMove = false;
+    std::vector<size_t> m_RandomPool = {0, 1, 2, 3};
 
     std::random_device m_RandomDevice;
     std::mt19937 m_RandomGenerator;
-    std::uniform_int_distribution<> m_Distribution;
+    std::uniform_int_distribution<size_t> m_Distribution;
 };
 } // namespace Enemies
 } // namespace Dungeon
 
-#endif // ENEMY_H
+#endif // BAT_H
