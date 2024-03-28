@@ -7,7 +7,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Bat : public Dungeon::Enemy, public Animation {
+class Bat : public Dungeon::Enemy, private Animation {
 public:
     Bat(const s_Enemy &u_Enemy);
 

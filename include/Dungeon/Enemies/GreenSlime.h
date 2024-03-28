@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class GreenSlime final : public Dungeon::Enemy, public Animation {
+class GreenSlime final : public Dungeon::Enemy, private Animation {
 public:
     GreenSlime(const s_Enemy &u_Enemy);
 
