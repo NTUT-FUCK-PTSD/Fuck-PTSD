@@ -35,3 +35,21 @@ void MusicSystem::playMusic(const std::string &musicPath, bool setMusicLooping) 
 void MusicSystem::skipToTargetTime(float time) {
     m_soloud.seek(m_musicHandle, time);
 }
+
+std::shared_ptr<GameElement> MusicSystem::getGameObject() {
+    m_MusicObject->AddChild(m_display.getGameElement());
+
+    m_MusicObject->SetVisible(false);
+    return m_MusicObject;
+}
+
+void MusicSystem::Update()  {
+    const std::size_t musicLength =  m_music->getLength() * 1000;
+    const std::size_t CircleTime = m_soloud.getStreamTime(m_musicHandle) * 1000;
+    const std::size_t CurrentMusicTime = CircleTime % musicLength;
+
+    m_tempo.setMusicCurrentTime(CurrentMusicTime);
+    m_tempo.Update();
+
+    m_display.Update(CurrentMusicTime, m_tempo.getTriggerTime());
+};

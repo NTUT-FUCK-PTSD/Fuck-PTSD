@@ -42,26 +42,35 @@ std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
 
 bool Tempo::canBeClick(std::size_t offset) {
 
-    if (m_duringTime >= m_tempoList[m_tempoIndex] - 500 && m_duringTime <= m_tempoList[m_tempoIndex] + 500) {
+    const auto tempoIndex = m_tempoIndex + m_punishTimes;
+
+    if (m_duringTime >= m_tempoList[tempoIndex] - 500 &&
+        m_duringTime <= m_tempoList[tempoIndex] + 500) {
         return true;
     }
     return false;
 }
 
-void Tempo::UpdateTime(float time) {
-//    listenBeat();
-    m_duringTime = time;
-
+void Tempo::UpdateTime() {
     if (m_tempoList.empty()) {
         return;
     }
 
-    if (m_duringTime >= m_tempoList[m_tempoIndex] - 500 && m_duringTime <= m_tempoList[m_tempoIndex] + 500) {
+    if (m_duringTime >= m_tempoList[m_tempoIndex] - 500 &&
+        m_duringTime <= m_tempoList[m_tempoIndex] + 500) {
         return;
-    } else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - 500 && m_duringTime <= m_tempoList[m_tempoIndex + 1] + 500) {
-        return ;
+    }
+    else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - 500 &&
+             m_duringTime <= m_tempoList[m_tempoIndex + 1] + 500) {
+        return;
     }
 
+    m_punishTimes = m_punishTimes == 0 ? m_punishTimes : m_punishTimes - 1;
     m_tempoIndex++;
 
+    LOG_DEBUG(m_punishTimes);
+}
+
+void Tempo::Update() {
+    UpdateTime();
 }

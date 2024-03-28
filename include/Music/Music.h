@@ -45,23 +45,10 @@ public:
         return m_tempo.canBeClick(100);
     }
 
-    std::shared_ptr<GameElement> getGameObject() {
-        m_MusicObject->AddChild(m_display.getGameElement());
+    std::shared_ptr<GameElement> getGameObject();
 
-        m_MusicObject->SetVisible(false);
-        return m_MusicObject;
-    }
+    void Update();
 
-    void Update() {
-        std::size_t musicLength =  m_music->getLength() * 1000;
-        std::size_t currentTime = m_soloud.getStreamTime(m_musicHandle) * 1000;
-        m_tempo.UpdateTime(currentTime % musicLength);
-        m_display.Update(currentTime % musicLength, m_tempo.getTriggerTime());
-    };
-
-    void Debug() {
-//        m_display.Update();
-    }
 
 private:
     float m_currentSpeed = 1.0f;

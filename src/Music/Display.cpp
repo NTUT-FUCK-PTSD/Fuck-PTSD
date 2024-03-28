@@ -20,7 +20,7 @@ Display::~Display() {}
 
 void Display::Update(std::size_t time, std::size_t triggerTime) {
 
-    if (time >= triggerTime - 100 && time <= triggerTime + 100) {
+    if (time - 50 >= triggerTime - 100 && time - 50 <= triggerTime + 100) {
         m_TempoHeartImage->Play();
     }
 }

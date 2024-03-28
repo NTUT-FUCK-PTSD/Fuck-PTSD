@@ -89,7 +89,14 @@ void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::B)) {
         m_Coin->plusCoinNumber(10);
         m_Diamond->plusDiamondNumber(10);
-        m_MusicSystem->Debug();
+//        m_MusicSystem->Debug();
+    }
+
+    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
+        Util::Input::IsKeyDown(Util::Keycode::D) ||
+        Util::Input::IsKeyDown(Util::Keycode::S) ||
+        Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_MusicSystem->clickEvent();
     }
 
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
@@ -97,7 +104,6 @@ void App::Update() {
         Util::Input::IsKeyDown(Util::Keycode::S) ||
         Util::Input::IsKeyDown(Util::Keycode::A)) && m_MusicSystem->TempoTrigger()) {
 
-        m_MusicSystem->clickEvent();
         if (m_PlayerMoveDirect != MainCharacter::NONE) {
             m_PlayerMoveDirect = MainCharacter::NONE;
         }
