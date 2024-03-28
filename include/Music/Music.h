@@ -56,6 +56,13 @@ private:
     Tempo m_tempo;
     Display m_display;
 
+    /* ms */
+    int16_t m_TempoOffset = 0;
+    std::size_t m_TempoRange = 500;
+    bool isShowHeartBeat = true;
+    int16_t m_DisplayOffset = -30;
+    std::size_t m_DisplayRange = 100;
+
     SoLoud::handle m_musicHandle;
 
     SoLoud::Soloud m_soloud; // SoLoud engine core

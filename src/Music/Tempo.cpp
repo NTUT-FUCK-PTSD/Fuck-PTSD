@@ -44,11 +44,23 @@ bool Tempo::canBeClick(std::size_t offset) {
 
     const auto tempoIndex = m_tempoIndex + m_punishTimes;
 
-    if (m_duringTime >= m_tempoList[tempoIndex] - 500 &&
-        m_duringTime <= m_tempoList[tempoIndex] + 500) {
+    if (m_duringTime >= m_tempoList[tempoIndex] - m_range &&
+        m_duringTime <= m_tempoList[tempoIndex] + m_range) {
         return true;
     }
     return false;
+}
+
+std::size_t Tempo::getTriggerTime() {
+    if (m_tempoList.empty()) {
+        return 0;
+    }
+    return m_tempoList[m_tempoIndex];
+};
+
+void Tempo::Update() {
+    UpdateTempoIndex();
+    UpdateTime();
 }
 
 void Tempo::UpdateTime() {
@@ -56,21 +68,31 @@ void Tempo::UpdateTime() {
         return;
     }
 
-    if (m_duringTime >= m_tempoList[m_tempoIndex] - 500 &&
-        m_duringTime <= m_tempoList[m_tempoIndex] + 500) {
+    // song of looping end time, the bug
+    if (m_tempoIndex == 0 && m_duringTime > 5000) {
         return;
     }
-    else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - 500 &&
-             m_duringTime <= m_tempoList[m_tempoIndex + 1] + 500) {
+
+    if (m_duringTime >= m_tempoList[m_tempoIndex] - m_range &&
+        m_duringTime <= m_tempoList[m_tempoIndex] + m_range) {
+        return;
+    }
+    else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - m_range &&
+             m_duringTime <= m_tempoList[m_tempoIndex + 1] + m_range) {
         return;
     }
 
     m_punishTimes = m_punishTimes == 0 ? m_punishTimes : m_punishTimes - 1;
     m_tempoIndex++;
 
-    LOG_DEBUG(m_punishTimes);
+    if (isShowHeartBeat) {
+//        LOG_DEBUG(m_punishTimes);
+        LOG_INFO(m_duringTime);
+        LOG_INFO(m_tempoList[m_tempoIndex]);
+    }
 }
 
-void Tempo::Update() {
-    UpdateTime();
+void Tempo::UpdateTempoIndex(){
+    m_tempoIndex = m_tempoIndex + 1 >= m_tempoListLength ? 0 : m_tempoIndex;
 }
+

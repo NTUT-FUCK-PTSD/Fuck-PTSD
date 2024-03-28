@@ -42,12 +42,12 @@ void App::Start(std::shared_ptr<Core::Context>
     }
 
     // play lobby music
-//    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
-//    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
+    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
+    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
 
     // play zone1 leve1
-    m_MusicSystem->playMusic(ASSETS_DIR"/music/zone1_1.ogg", true);
-    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/zone1_1.txt");
+//    m_MusicSystem->playMusic(ASSETS_DIR"/music/zone1_1.ogg", true);
+//    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/zone1_1.txt");
 
     // remove background
     m_Camera->RemoveChild(background->GetGameElement());
@@ -89,9 +89,9 @@ void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::B)) {
         m_Coin->plusCoinNumber(10);
         m_Diamond->plusDiamondNumber(10);
-//        m_MusicSystem->Debug();
     }
 
+    // detect the player
     if (Util::Input::IsKeyDown(Util::Keycode::W) ||
         Util::Input::IsKeyDown(Util::Keycode::D) ||
         Util::Input::IsKeyDown(Util::Keycode::S) ||
@@ -99,6 +99,7 @@ void App::Update() {
         m_MusicSystem->clickEvent();
     }
 
+    // player move
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
         Util::Input::IsKeyDown(Util::Keycode::D) ||
         Util::Input::IsKeyDown(Util::Keycode::S) ||

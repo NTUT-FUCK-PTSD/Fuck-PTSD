@@ -5,6 +5,13 @@
 
 MusicSystem::MusicSystem() {
     m_soloud.init();
+
+    m_display.setOffset(m_DisplayOffset);
+    m_display.setTriggerRange(m_DisplayRange);
+
+    m_tempo.setOffset(m_TempoOffset);
+    m_tempo.setRange(m_TempoRange);
+    m_tempo.setShowBeat(isShowHeartBeat);
 }
 
 MusicSystem::~MusicSystem() {
@@ -51,5 +58,7 @@ void MusicSystem::Update()  {
     m_tempo.setMusicCurrentTime(CurrentMusicTime);
     m_tempo.Update();
 
-    m_display.Update(CurrentMusicTime, m_tempo.getTriggerTime());
+    m_display.setTriggerTime(m_tempo.getTriggerTime());
+    m_display.setCurrentMusicTime(CurrentMusicTime);
+    m_display.Update();
 };

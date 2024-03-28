@@ -27,29 +27,32 @@ public:
         m_punishTimes = m_punishTimes < 2 ? m_punishTimes + 1 : m_punishTimes;
     };
 
-    std::size_t getTriggerTime() {
-        if (m_tempoList.empty()) {
-            return 0;
-        }
-        return m_tempoList[m_tempoIndex];
-    };
+    std::size_t getTriggerTime();
 
-    void setMusicCurrentTime(std::size_t time) { m_duringTime = time + m_offset; };
+    void setShowBeat(bool state) { isShowHeartBeat = state; };
+    void setRange(std::size_t range) { m_range = range; };
+    void setOffset(int16_t offset) { m_offset = offset; };
+
+    void setMusicCurrentTime(std::size_t time) {
+        m_duringTime = time + m_offset;
+    };
     void Update();
 
 protected:
     void UpdateTime();
+    void UpdateTempoIndex();
 
 private:
     std::vector<std::size_t> txtToVector(const std::string &line,
                                          const char splitChar);
 
     bool isTrigger = false;
+    bool isShowHeartBeat = false;
     std::size_t m_punishTimes = 0;
 
     std::size_t m_duringTime = 0;
     std::size_t m_range = 500;
-    uint16_t m_offset = 0; // (ms)
+    int16_t m_offset = 0; // (ms)
 
     std::size_t m_tempoIndex = 0;
     std::size_t m_tempoListLength = 0;
