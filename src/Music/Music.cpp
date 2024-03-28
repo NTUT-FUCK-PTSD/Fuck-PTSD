@@ -8,10 +8,12 @@ MusicSystem::MusicSystem() {
 
     m_display.setOffset(m_DisplayOffset);
     m_display.setTriggerRange(m_DisplayRange);
+    m_display.setMusicSpeed(m_currentSpeed);
 
     m_tempo.setOffset(m_TempoOffset);
     m_tempo.setRange(m_TempoRange);
     m_tempo.setShowBeat(isShowHeartBeat);
+    m_tempo.setMusicSpeed(m_currentSpeed);
 }
 
 MusicSystem::~MusicSystem() {
@@ -55,10 +57,10 @@ void MusicSystem::Update()  {
     const std::size_t CircleTime = m_soloud.getStreamTime(m_musicHandle) * 1000;
     const std::size_t CurrentMusicTime = CircleTime % musicLength;
 
-    m_tempo.setMusicCurrentTime(CurrentMusicTime);
+    m_tempo.setMusicCurrentTime(CurrentMusicTime * m_currentSpeed);
     m_tempo.Update();
 
     m_display.setTriggerTime(m_tempo.getTriggerTime());
-    m_display.setCurrentMusicTime(CurrentMusicTime);
+    m_display.setCurrentMusicTime(CurrentMusicTime * m_currentSpeed);
     m_display.Update();
 };

@@ -29,6 +29,7 @@ public:
 
     std::size_t getTriggerTime();
 
+    void setMusicSpeed(float speed) {m_MusicSpeed = speed; };
     void setShowBeat(bool state) { isShowHeartBeat = state; };
     void setRange(std::size_t range) { m_range = range; };
     void setOffset(int16_t offset) { m_offset = offset; };
@@ -46,6 +47,8 @@ private:
     std::vector<std::size_t> txtToVector(const std::string &line,
                                          const char splitChar);
 
+    float m_MusicSpeed = 1.0f;
+
     bool isTrigger = false;
     bool isShowHeartBeat = false;
     std::size_t m_punishTimes = 0;
@@ -54,6 +57,7 @@ private:
     std::size_t m_range = 500;
     int16_t m_offset = 0; // (ms)
 
+    std::size_t m_currentTempoTime = 0;
     std::size_t m_tempoIndex = 0;
     std::size_t m_tempoListLength = 0;
     std::vector<std::size_t> m_tempoList;

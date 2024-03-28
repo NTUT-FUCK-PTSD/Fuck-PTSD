@@ -22,6 +22,7 @@ public:
 
     std::shared_ptr<GameElement> getGameElement() const { return m_BeatHeart; };
 
+    void setMusicSpeed(float speed) {m_MusicSpeed = speed; };
     void setOffset(int16_t offset) {m_offset = offset; };
     void setTriggerTime(std::size_t time) { m_triggerTime = time; };
     void setCurrentMusicTime(std::size_t time) { m_CurrentMusicTime = time + m_offset; };
@@ -29,6 +30,8 @@ public:
 
 private:
     std::string m_HeartImagePath = ASSETS_DIR "/gui/TEMP_beat_heart.png";
+
+    float m_MusicSpeed = 1.0f;
 
     std::size_t m_triggerTime = 0;
     std::size_t m_CurrentMusicTime = 0;

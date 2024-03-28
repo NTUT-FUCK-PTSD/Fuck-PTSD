@@ -44,8 +44,8 @@ bool Tempo::canBeClick(std::size_t offset) {
 
     const auto tempoIndex = m_tempoIndex + m_punishTimes;
 
-    if (m_duringTime >= m_tempoList[tempoIndex] - m_range &&
-        m_duringTime <= m_tempoList[tempoIndex] + m_range) {
+    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed&&
+        m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
         return true;
     }
     return false;
@@ -55,10 +55,12 @@ std::size_t Tempo::getTriggerTime() {
     if (m_tempoList.empty()) {
         return 0;
     }
-    return m_tempoList[m_tempoIndex];
+    return m_currentTempoTime;
 };
 
 void Tempo::Update() {
+    m_currentTempoTime = m_tempoList.empty() ? 0 : m_tempoList[m_tempoIndex] * m_MusicSpeed;
+
     UpdateTempoIndex();
     UpdateTime();
 }
@@ -73,22 +75,22 @@ void Tempo::UpdateTime() {
         return;
     }
 
-    if (m_duringTime >= m_tempoList[m_tempoIndex] - m_range &&
-        m_duringTime <= m_tempoList[m_tempoIndex] + m_range) {
+    if (m_duringTime >= (m_tempoList[m_tempoIndex] - m_range) * m_MusicSpeed &&
+        m_duringTime <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
         return;
     }
-    else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - m_range &&
-             m_duringTime <= m_tempoList[m_tempoIndex + 1] + m_range) {
-        return;
-    }
+//    else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - m_range &&
+//             m_duringTime <= m_tempoList[m_tempoIndex + 1] + m_range) {
+//        return;
+//    }
 
     m_punishTimes = m_punishTimes == 0 ? m_punishTimes : m_punishTimes - 1;
     m_tempoIndex++;
 
     if (isShowHeartBeat) {
-//        LOG_DEBUG(m_punishTimes);
+        LOG_DEBUG(m_punishTimes);
         LOG_INFO(m_duringTime);
-        LOG_INFO(m_tempoList[m_tempoIndex]);
+        LOG_INFO(m_currentTempoTime);
     }
 }
 
