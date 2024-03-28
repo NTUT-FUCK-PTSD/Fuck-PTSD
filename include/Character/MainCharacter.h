@@ -23,7 +23,6 @@ private:
     std::shared_ptr<GameElement> m_Body = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Head = std::make_shared<GameElement>();
 
-    const glm::vec2 InitPosition = {0, 0};
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};
 
@@ -36,6 +35,8 @@ public:
 
     MainCharacter(const std::string &headImagePath,
                   const std::string &bodyImagePath);
+
+    virtual ~MainCharacter() = default;
 
     [[nodiscard]] const std::vector<std::shared_ptr<Util::GameObject>>
     GetGameElement() const;

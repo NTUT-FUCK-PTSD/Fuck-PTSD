@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class BlueSlime : public Dungeon::Enemy, public Animation {
+class BlueSlime final : public Dungeon::Enemy, private Animation {
 public:
     BlueSlime(const s_Enemy &u_Enemy);
 
@@ -16,9 +16,12 @@ public:
 
 private:
     const glm::vec2 m_FrameSize = {26, 25};
+
     size_t m_State = 0;
+    bool m_NeedToMove = false;
+    uint16_t m_AnimationType;
 };
 } // namespace Enemies
 } // namespace Dungeon
 
-#endif // ENEMY_H
+#endif // BLUE_SLIME_H

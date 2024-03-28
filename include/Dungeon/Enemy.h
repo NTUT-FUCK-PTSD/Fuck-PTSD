@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Dungeon/Elements.h"
+#include "Dungeon/Tile.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
@@ -14,6 +14,7 @@ namespace Dungeon {
 class Enemy : public Util::GameObject {
 public:
     Enemy(const s_Enemy &u_Enemy);
+    virtual ~Enemy() = default;
 
     void SetShadow(const bool &shadow);
     void SetGamePosition(const glm::vec2 &gamePosition);
@@ -22,7 +23,15 @@ public:
     void SetDamage(const size_t &damage) { m_Damage = damage; }
     void SetHealth(const size_t &health) { m_Health = health; }
     void SetCoin(const size_t &coin) { m_Coin = coin; }
+    void SetCanMove(const bool &canMove) { m_CanMove = canMove; }
+    void SetPlayerPosition(const glm::vec2 &playerPosition) {
+        m_PlayerPosition = playerPosition;
+    }
 
+    [[nodiscard]] glm::vec2 GetPlayerPosition() const {
+        return m_PlayerPosition;
+    }
+    [[nodiscard]] bool GetCanMove() const { return m_CanMove; }
     [[nodiscard]] const glm::vec2 &GetGamePosition() const {
         return m_GamePosition;
     }
@@ -32,6 +41,12 @@ public:
     [[nodiscard]] size_t GetDamage() const { return m_Damage; }
     [[nodiscard]] size_t GetHealth() const { return m_Health; }
     [[nodiscard]] size_t GetCoin() const { return m_Coin; }
+    [[nodiscard]] const glm::vec2 &GetWillMovePosition() const {
+        return m_WillMovePosition;
+    }
+
+    void MoveToPlayer(); // Set available WillMovePosition to slowly close
+                         // PlayerPosition
 
     void TempoMove();
     virtual void Move() = 0;
@@ -43,6 +58,9 @@ protected:
     std::vector<std::size_t> m_NormalFrames;
     std::vector<std::size_t> m_ShadowFrames;
     glm::vec2 m_GamePosition;
+    bool m_CanMove = false;
+    glm::vec2 m_WillMovePosition;
+    glm::vec2 m_PlayerPosition;
 
 private:
     size_t m_BeatDelay;

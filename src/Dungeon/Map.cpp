@@ -1,5 +1,5 @@
-#include "Dungeon/Enemies/BlueSlime.h"
 #include "Dungeon/Map.h"
+#include "Dungeon/EnemyFactory.h"
 
 namespace Dungeon {
 
@@ -14,8 +14,7 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
     size_t mapIndex = 0, tmpMapIndex = 0;
 
     for (auto &tile : m_Level->GetTiles()) {
-        mapIndex = (tile.x - m_Level->GetLevelIndexMin().x + 1) +
-                   (tile.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
+        mapIndex = GamePostion2MapIndex({tile.x, tile.y});
         if (tile.type == 23 || tile.type == 24 || tile.type == 103 ||
             tile.type == 106 || tile.type == 111 || tile.type == 118) {
             m_MapData[mapIndex].tiles.push_back(std::make_shared<Tile>(s_Tile{
@@ -116,10 +115,16 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
         }
     }
 
-    // Add a BlueSlime for testing
-    m_MapData[1 + 1 * m_Size.x].enemies.push_back(
-        std::make_shared<Enemies::BlueSlime>(s_Enemy{1, 1, 0, 0, 0}));
-    m_Enemies.push_back(m_MapData[1 + 1 * m_Size.x].enemies.back());
+    for (auto &enemy : m_Level->GetEnemies()) {
+        mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
+        m_MapData[mapIndex].enemies.push_back(EnemyFactory::CreateEnemy(enemy));
+        m_Enemies.push_back(m_MapData[mapIndex].enemies.back());
+    }
+
+    // Add a Bat for testing
+    m_MapData[GamePostion2MapIndex({1, 1})].enemies.push_back(
+        std::make_shared<Enemies::OrangeSlime>(s_Enemy{1, 1, 0, 0, 0}));
+    m_Enemies.push_back(m_MapData[GamePostion2MapIndex({1, 1})].enemies.back());
 
     for (auto &tile : m_Tiles) {
         m_Children.push_back(tile);
@@ -167,10 +172,52 @@ void Map::TempoUpdate() {
 }
 
 void Map::Update() {
+    size_t mapIndex = 0;
     CameraUpdate();
     for (auto &enemy : m_Enemies) {
+        if (!(enemy->GetGamePosition() == enemy->GetWillMovePosition()) &&
+            isVaildMove(enemy->GetWillMovePosition())) {
+            enemy->SetCanMove(true);
+
+            mapIndex = GamePostion2MapIndex(enemy->GetGamePosition());
+            m_MapData[mapIndex].enemies.erase(
+                std::remove(m_MapData[mapIndex].enemies.begin(),
+                            m_MapData[mapIndex].enemies.end(), enemy),
+                m_MapData[mapIndex].enemies.end());
+            m_MapData[GamePostion2MapIndex(enemy->GetWillMovePosition())]
+                .enemies.push_back(enemy);
+        }
+        else {
+            enemy->SetCanMove(false);
+        }
+        enemy->SetPlayerPosition(m_MainCharacter->GetGamePosition());
         enemy->Update();
     }
+}
+
+size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
+    return (position.x - m_Level->GetLevelIndexMin().x + 1) +
+           (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
+}
+bool Map::isVaildPosition(const glm::ivec2 &position) {
+    if (position.x < m_Level->GetLevelIndexMin().x ||
+        position.x > m_Level->GetLevelIndexMax().x ||
+        position.y < m_Level->GetLevelIndexMin().y ||
+        position.y > m_Level->GetLevelIndexMax().y) {
+        return false;
+    }
+    return true;
+}
+
+bool Map::isVaildMove(const glm::ivec2 &position) {
+    size_t mapIndex = GamePostion2MapIndex(position);
+    if (m_MapData[mapIndex].tiles.empty()) {
+        return false;
+    }
+    if (m_MapData[mapIndex].tiles.back()->IsWall()) {
+        return false;
+    }
+    return true;
 }
 
 } // namespace Dungeon

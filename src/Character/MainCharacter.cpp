@@ -6,7 +6,8 @@
 
 MainCharacter::MainCharacter(const std::string &headImagePath,
                              const std::string &bodyImagePath)
-    : m_HeadImagePath(headImagePath),
+    : Animation({0, 0}),
+      m_HeadImagePath(headImagePath),
       m_BodyImagePath(bodyImagePath) {
     HeadSize = ToolBoxs::CountImagePixel(headImagePath, 4, 2);
     BodySize = ToolBoxs::CountImagePixel(bodyImagePath, 4, 10);
@@ -20,14 +21,13 @@ MainCharacter::MainCharacter(const std::string &headImagePath,
         100, true, 100);
 
     m_Body->SetDrawable(BodyImage);
-    m_Body->SetPosition(InitPosition);
+    m_Body->SetPosition(m_Position);
     m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 
     m_Head->SetDrawable(HeadImage);
-    m_Head->SetPosition(InitPosition);
+    m_Head->SetPosition(m_Position);
     m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
 
-    m_AnimationPosition = InitPosition;
     Update();
 }
 
@@ -67,12 +67,12 @@ void MainCharacter::SetFaceTo(Direction direction) {
 }
 
 void MainCharacter::Update() {
-    UpdateAnimation();
+    UpdateAnimation(true);
     if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
         m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
         m_Position = m_AnimationPosition;
     }
-    SetZIndex(ToolBoxs::PosToGamePos(m_Position).y + float(0.5));
+    SetZIndex(m_AnimationZIndex);
     SetPosition(m_Position);
 }
 

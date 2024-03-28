@@ -18,6 +18,7 @@ void Enemy::SetShadow(const bool &shadow) {
 
 void Enemy::SetGamePosition(const glm::vec2 &gamePosition) {
     m_GamePosition = gamePosition;
+    m_WillMovePosition = gamePosition;
     m_Transform.translation = ToolBoxs::GamePostoPos(gamePosition);
     SetZIndex(m_GamePosition.y + float(0.25));
 }
