@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "Tempo.h"
+#include "Display.h"
 
 class MusicSystem final {
 public:
@@ -54,6 +55,7 @@ private:
     float m_currentSpeed = 1.0f;
 
     Tempo m_tempo;
+    Display m_display;
 
     SoLoud::handle m_musicHandle;
 

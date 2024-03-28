@@ -43,8 +43,6 @@ std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
 bool Tempo::canBeClick(std::size_t offset) {
 
     if (m_duringTime >= m_tempoList[m_tempoIndex] - 500 && m_duringTime <= m_tempoList[m_tempoIndex] + 500) {
-        LOG_INFO(m_tempoList[m_tempoIndex]);
-        LOG_INFO(m_duringTime);
         return true;
     }
     return false;
@@ -62,9 +60,6 @@ void Tempo::UpdateTime(float time) {
     } else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - 500 && m_duringTime <= m_tempoList[m_tempoIndex + 1] + 500) {
         return ;
     }
-//    LOG_INFO(m_duringTime);
-//    LOG_INFO(m_tempoList[m_tempoIndex]);
-    LOG_DEBUG(m_tempoIndex);
 
     m_tempoIndex++;
 
