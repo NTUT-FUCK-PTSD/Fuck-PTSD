@@ -5,7 +5,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class RedBat : public Bat {
+class RedBat final : public Bat {
 public:
     RedBat(const s_Enemy &u_Enemy);
 };

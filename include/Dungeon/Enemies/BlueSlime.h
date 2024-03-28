@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class BlueSlime : public Dungeon::Enemy, public Animation {
+class BlueSlime final : public Dungeon::Enemy, public Animation {
 public:
     BlueSlime(const s_Enemy &u_Enemy);
 
