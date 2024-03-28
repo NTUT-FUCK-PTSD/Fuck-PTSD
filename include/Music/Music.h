@@ -32,6 +32,10 @@ public:
 
     void skipToTargetTime(float time);
 
+    void clickEvent() {
+        m_tempo.keyBoardClick();
+    };
+
     void readTempoFile(const std::string &path) {
         m_tempo.readTempoFile(path);
     };

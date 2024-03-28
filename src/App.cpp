@@ -92,6 +92,8 @@ void App::Update() {
         Util::Input::IsKeyDown(Util::Keycode::D) ||
         Util::Input::IsKeyDown(Util::Keycode::S) ||
         Util::Input::IsKeyDown(Util::Keycode::A)) && m_MusicSystem->TempoTrigger()) {
+
+        m_MusicSystem->clickEvent();
         if (m_PlayerMoveDirect != MainCharacter::NONE) {
             m_PlayerMoveDirect = MainCharacter::NONE;
         }

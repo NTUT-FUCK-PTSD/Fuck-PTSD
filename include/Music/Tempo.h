@@ -23,6 +23,10 @@ public:
 
     bool canBeClick(std::size_t offset);
 
+    void keyBoardClick() {
+        m_tempoIndex++;
+    };
+
     void UpdateTime();
 
     void UpdateTime(float time);
@@ -30,7 +34,7 @@ private:
     std::vector<std::size_t > txtToVector(const std::string& line, const char splitChar);
 
     float m_duringTime = 0.0f;
-    std::size_t m_offset = 10;// (ms)
+    std::size_t m_offset = 1000;// (ms)
 
     std::size_t m_tempoIndex = 0;
     std::size_t m_tempoListLength = 0;
