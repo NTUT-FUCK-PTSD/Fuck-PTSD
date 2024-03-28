@@ -10,6 +10,7 @@ namespace Enemies {
 class Bat : public Dungeon::Enemy, private Animation {
 public:
     Bat(const s_Enemy &u_Enemy);
+    virtual ~Bat() = default;
 
     void Move() override;
 

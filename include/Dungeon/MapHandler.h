@@ -7,7 +7,7 @@
 
 namespace Dungeon {
 
-class MapHandler : public Core::Drawable {
+class MapHandler final : public Core::Drawable {
 public:
     MapHandler(const std::shared_ptr<Map> &map);
     void Draw(const Util::Transform &transform, const float zIndex);

@@ -14,6 +14,7 @@ namespace Dungeon {
 class Enemy : public Util::GameObject {
 public:
     Enemy(const s_Enemy &u_Enemy);
+    virtual ~Enemy() = default;
 
     void SetShadow(const bool &shadow);
     void SetGamePosition(const glm::vec2 &gamePosition);
@@ -23,9 +24,14 @@ public:
     void SetHealth(const size_t &health) { m_Health = health; }
     void SetCoin(const size_t &coin) { m_Coin = coin; }
     void SetCanMove(const bool &canMove) { m_CanMove = canMove; }
+    void SetPlayerPosition(const glm::vec2 &playerPosition) {
+        m_PlayerPosition = playerPosition;
+    }
 
+    [[nodiscard]] glm::vec2 GetPlayerPosition() const {
+        return m_PlayerPosition;
+    }
     [[nodiscard]] bool GetCanMove() const { return m_CanMove; }
-
     [[nodiscard]] const glm::vec2 &GetGamePosition() const {
         return m_GamePosition;
     }
@@ -39,6 +45,9 @@ public:
         return m_WillMovePosition;
     }
 
+    void MoveToPlayer(); // Set available WillMovePosition to slowly close
+                         // PlayerPosition
+
     void TempoMove();
     virtual void Move() = 0;
 
@@ -51,6 +60,7 @@ protected:
     glm::vec2 m_GamePosition;
     bool m_CanMove = false;
     glm::vec2 m_WillMovePosition;
+    glm::vec2 m_PlayerPosition;
 
 private:
     size_t m_BeatDelay;

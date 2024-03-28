@@ -1,5 +1,5 @@
-#include "Dungeon/EnemyFactory.h"
 #include "Dungeon/Map.h"
+#include "Dungeon/EnemyFactory.h"
 
 namespace Dungeon {
 
@@ -115,6 +115,12 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
         }
     }
 
+    for (auto &enemy : m_Level->GetEnemies()) {
+        mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
+        m_MapData[mapIndex].enemies.push_back(EnemyFactory::CreateEnemy(enemy));
+        m_Enemies.push_back(m_MapData[mapIndex].enemies.back());
+    }
+
     // Add a Bat for testing
     m_MapData[GamePostion2MapIndex({1, 1})].enemies.push_back(
         std::make_shared<Enemies::OrangeSlime>(s_Enemy{1, 1, 0, 0, 0}));
@@ -184,6 +190,7 @@ void Map::Update() {
         else {
             enemy->SetCanMove(false);
         }
+        enemy->SetPlayerPosition(m_MainCharacter->GetGamePosition());
         enemy->Update();
     }
 }
