@@ -76,6 +76,9 @@ void App::Start(std::shared_ptr<Core::Context>
     // display the heart
     m_Window->AddChildren(m_Heart->getGameObjects());
 
+    // display the tempo heart in music System
+    m_Window->AddChild(m_MusicSystem->getGameObject());
+
     m_CurrentState = State::UPDATE;
 }
 
@@ -86,6 +89,7 @@ void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::B)) {
         m_Coin->plusCoinNumber(10);
         m_Diamond->plusDiamondNumber(10);
+        m_MusicSystem->Debug();
     }
 
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||

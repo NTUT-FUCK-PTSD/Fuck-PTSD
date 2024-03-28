@@ -49,6 +49,7 @@ bool Tempo::canBeClick(std::size_t offset) {
 }
 
 void Tempo::UpdateTime(float time) {
+//    listenBeat();
     m_duringTime = time;
 
     if (m_tempoList.empty()) {

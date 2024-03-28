@@ -27,11 +27,19 @@ public:
         m_tempoIndex++;
     };
 
+    std::size_t getTriggerTime() {
+        if (m_tempoList.empty()) { return 0; }
+        return m_tempoList[m_tempoIndex];
+    };
+
     void UpdateTime();
 
     void UpdateTime(float time);
 private:
-    std::vector<std::size_t > txtToVector(const std::string& line, const char splitChar);
+//    void listenBeat();
+    std::vector<std::size_t> txtToVector(const std::string& line, const char splitChar);
+
+    bool isTrigger = false;
 
     float m_duringTime = 0.0f;
     std::size_t m_offset = 1000;// (ms)

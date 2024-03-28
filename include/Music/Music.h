@@ -45,11 +45,23 @@ public:
         return m_tempo.canBeClick(100);
     }
 
+    std::shared_ptr<GameElement> getGameObject() {
+        m_MusicObject->AddChild(m_display.getGameElement());
+
+        m_MusicObject->SetVisible(false);
+        return m_MusicObject;
+    }
+
     void Update() {
         std::size_t musicLength =  m_music->getLength() * 1000;
         std::size_t currentTime = m_soloud.getStreamTime(m_musicHandle) * 1000;
         m_tempo.UpdateTime(currentTime % musicLength);
+        m_display.Update(currentTime % musicLength, m_tempo.getTriggerTime());
     };
+
+    void Debug() {
+//        m_display.Update();
+    }
 
 private:
     float m_currentSpeed = 1.0f;
@@ -62,6 +74,8 @@ private:
     SoLoud::Soloud m_soloud; // SoLoud engine core
     SoLoud::Speech m_speech; // A sound source (speech, in this case)
     std::shared_ptr<SoLoud::Wav> m_music;
+
+    std::shared_ptr<GameElement> m_MusicObject = std::make_shared<GameElement>();
 };
 
 #endif // FUCK_PTSD_MUSIC_H

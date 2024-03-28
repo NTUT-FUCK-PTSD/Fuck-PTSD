@@ -6,11 +6,11 @@
 Display::Display() {
     const auto HeartSize = ToolBoxs::CountImagePixel(m_HeartImagePath, 2, 1);
 
-    const auto HeartImage = std::make_shared<SpriteSheet>(
-        m_HeartImagePath, HeartSize, std::vector<std::size_t>{0, 1}, false,
-        100, false, 100);
+    m_TempoHeartImage = std::make_shared<SpriteSheet>(
+        m_HeartImagePath, HeartSize, std::vector<std::size_t>{1, 0}, true, m_HeartInterval,
+        false, 0);
 
-    m_BeatHeart->SetDrawable(HeartImage);
+    m_BeatHeart->SetDrawable(m_TempoHeartImage);
     m_BeatHeart->SetPosition(m_Position);
     m_BeatHeart->SetScale(m_Scale);
     m_BeatHeart->SetZIndex(m_ZIndex);
@@ -18,4 +18,9 @@ Display::Display() {
 
 Display::~Display() {}
 
-void Display::Update() {}
+void Display::Update(std::size_t time, std::size_t triggerTime) {
+
+    if (time >= triggerTime - 100 && time <= triggerTime + 100) {
+        m_TempoHeartImage->Play();
+    }
+}
