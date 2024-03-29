@@ -4,7 +4,7 @@
 #include "Util/Renderer.hpp"
 #include "Util/Time.hpp"
 
-class Camera {
+class Camera final {
 public:
     /**
      * @brief Parameterized constructor.

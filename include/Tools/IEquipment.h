@@ -2,14 +2,14 @@
 // Created by adven on 2024/3/24.
 //
 
-#ifndef FUCK_PTSD_EQUIPMENT_H
-#define FUCK_PTSD_EQUIPMENT_H
+#ifndef FUCK_PTSD_IEquipment_H
+#define FUCK_PTSD_IEquipment_H
 
 #include "pch_extream.h"
 
 #include "GameElement.h"
 
-class Equipment {
+class IEquipment {
 public:
     virtual std::shared_ptr<GameElement> getGameElement() = 0;
 
@@ -17,10 +17,8 @@ public:
 
     virtual std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() = 0;
 
-
-//    virtual GameElement getWindowObject() = 0;
-//    virtual GameElement getItemObject() = 0;
-
+    //    virtual GameElement getWindowObject() = 0;
+    //    virtual GameElement getItemObject() = 0;
 };
 
-#endif // FUCK_PTSD_EQUIPMENT_H
+#endif // FUCK_PTSD_IEquipment_H

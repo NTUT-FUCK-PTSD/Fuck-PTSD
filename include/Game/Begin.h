@@ -10,7 +10,7 @@
 #include "Background.hpp"
 #include <memory>
 
-class Begin {
+class Begin final {
 public:
     static void CreateBackground(std::shared_ptr<Util::Renderer> m_Root,
                                  std::shared_ptr<Background> m_MainMenu,

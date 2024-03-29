@@ -7,6 +7,8 @@ class Coin {
 public:
     Coin();
 
+    virtual ~Coin() = default;
+
     void plusCoinNumber(const int number);
 
     std::size_t getCoin();

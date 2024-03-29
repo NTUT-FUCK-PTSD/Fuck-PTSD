@@ -5,14 +5,14 @@
 #ifndef FUCK_PTSD_BOMB_H
 #define FUCK_PTSD_BOMB_H
 
-#include "pch_extream.h"
 #include "Util/Color.hpp"
 #include "Util/Text.hpp"
+#include "pch_extream.h"
 
-#include "Equipment.h"
+#include "IEquipment.h"
 #include "ToolBoxs.h"
 
-class Bomb final : public Equipment {
+class Bomb final : public IEquipment {
 public:
     explicit Bomb();
 
@@ -22,10 +22,9 @@ public:
 
     std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() override;
 
-
 private:
     std::size_t m_ZIndex = 50;
-    glm::vec2 m_Scale = {3,3 };
+    glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, 0};
 
     Util::Color m_FontColor = Util::Color(255, 255, 255);

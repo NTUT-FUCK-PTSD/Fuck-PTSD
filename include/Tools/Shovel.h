@@ -7,10 +7,10 @@
 
 #include "pch_extream.h"
 
-#include "Equipment.h"
+#include "IEquipment.h"
 #include "ToolBoxs.h"
 
-class Shovel final : public Equipment {
+class Shovel final : public IEquipment {
 public:
     explicit Shovel();
 

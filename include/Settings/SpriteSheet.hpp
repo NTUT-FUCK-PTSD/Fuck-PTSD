@@ -14,7 +14,7 @@
  * @class SpriteSheet
  * @brief Class representing an SpriteSheet animation with frames.
  */
-class SpriteSheet : public Core::Drawable {
+class SpriteSheet final : public Core::Drawable {
 public:
     /**
      * @brief Enum representing the state of the animation.
