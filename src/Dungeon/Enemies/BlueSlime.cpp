@@ -1,8 +1,9 @@
 #include "Dungeon/Enemies/BlueSlime.h"
 
 namespace Dungeon {
-Enemies::BlueSlime::BlueSlime(const s_Enemy &u_Enemy)
-    : Enemy(u_Enemy),
+Enemies::BlueSlime::BlueSlime(
+    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> &simpleMapData)
+    : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
     m_NormalFrames = {4, 5, 6, 7};
     m_ShadowFrames = {12, 13, 14, 15};
@@ -37,6 +38,13 @@ void BlueSlime::Move() {
         m_NeedToMove = true;
         m_AnimationType = 2;
     }
+    if (IsVaildMove(m_WillMovePosition)) {
+        m_CanMove = true;
+    }
+    else {
+        m_CanMove = false;
+    }
+
     m_State++;
 }
 void BlueSlime::Update() {

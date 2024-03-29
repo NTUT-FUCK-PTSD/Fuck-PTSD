@@ -10,19 +10,21 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
              3; // add 3 for the border
-    m_MapData.resize(m_Size.x * m_Size.y);
+    m_MapData = std::make_shared<MapData>(m_Level->GetLevelIndexMin(),
+                                          m_Level->GetLevelIndexMax(), m_Size);
     size_t mapIndex = 0, tmpMapIndex = 0;
 
     for (auto &tile : m_Level->GetTiles()) {
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
         if (tile.type == 23 || tile.type == 24 || tile.type == 103 ||
             tile.type == 106 || tile.type == 111 || tile.type == 118) {
-            m_MapData[mapIndex].tiles.push_back(std::make_shared<Tile>(s_Tile{
-                tile.x, tile.y, 0, tile.zone, tile.torch, tile.cracked}));
-            m_Tiles.push_back(m_MapData[mapIndex].tiles.back());
+            m_MapData->AddTile(mapIndex, std::make_shared<Tile>(s_Tile{
+                                             tile.x, tile.y, 0, tile.zone,
+                                             tile.torch, tile.cracked}));
+            m_Tiles.push_back(m_MapData->GetTileBack(mapIndex));
         }
-        m_MapData[mapIndex].tiles.push_back(std::make_shared<Tile>(tile));
-        m_Tiles.push_back(m_MapData[mapIndex].tiles.back());
+        m_MapData->AddTile(mapIndex, std::make_shared<Tile>(tile));
+        m_Tiles.push_back(m_MapData->GetTileBack(mapIndex));
     }
 
     std::vector<glm::ivec2> direction = {{1, 0}, {-1, 0}, {0, 1},  {0, -1},
@@ -30,11 +32,11 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
     for (int i = 1; i < m_Size.y - 1; i++) {
         for (int j = 1; j < m_Size.x - 1; j++) {
             mapIndex = j + i * m_Size.x;
-            if (m_MapData[mapIndex].tiles.empty()) {
+            if (m_MapData->IsTilesEmpty(mapIndex)) {
                 continue;
             }
             // door direction detection
-            auto tmp = m_MapData[mapIndex].tiles.back();
+            auto tmp = m_MapData->GetTileBack(mapIndex);
             size_t doorCount = 0;
             if (tmp->GetTile().type == 103 || tmp->GetTile().type == 106 ||
                 tmp->GetTile().type == 111 || tmp->GetTile().type == 118) {
@@ -45,18 +47,19 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
                         j + direction[k].x < m_Size.x &&
                         i + direction[k].y >= 0 &&
                         i + direction[k].y < m_Size.y &&
-                        !m_MapData[tmpMapIndex].tiles.empty() &&
-                        (m_MapData[tmpMapIndex].tiles.back()->IsWall())) {
+                        !m_MapData->IsTilesEmpty(tmpMapIndex) &&
+                        (m_MapData->GetTileBack(tmpMapIndex)->IsWall())) {
                         doorCount++;
                     }
                 }
                 if (doorCount >= 2) {
-                    m_MapData[mapIndex].tiles.pop_back();
+                    m_MapData->PopbackTile(mapIndex);
                     m_Tiles.erase(
                         std::remove(m_Tiles.begin(), m_Tiles.end(), tmp),
                         m_Tiles.end()); // Remove Child
                     if (tmp->GetTile().type == 111) {
-                        m_MapData[mapIndex].tiles.push_back(
+                        m_MapData->AddTile(
+                            mapIndex,
                             std::make_shared<Tile>(s_Tile{
                                 tmp->GetTile().x, tmp->GetTile().y, 52,
                                 tmp->GetTile().zone, tmp->GetTile().torch,
@@ -65,36 +68,40 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
                     else {
                         if (tmp->GetTile().type == 103 ||
                             tmp->GetTile().type == 118) {
-                            m_MapData[mapIndex].tiles.push_back(
+                            m_MapData->AddTile(
+                                mapIndex,
                                 std::make_shared<Tile>(s_Tile{
                                     tmp->GetTile().x, tmp->GetTile().y, 50,
                                     tmp->GetTile().zone, tmp->GetTile().torch,
                                     tmp->GetTile().cracked}));
                         }
                         else {
-                            m_MapData[mapIndex].tiles.push_back(
+                            m_MapData->AddTile(
+                                mapIndex,
                                 std::make_shared<Tile>(s_Tile{
                                     tmp->GetTile().x, tmp->GetTile().y, 51,
                                     tmp->GetTile().zone, tmp->GetTile().torch,
                                     tmp->GetTile().cracked}));
                         }
                     }
-                    m_Tiles.push_back(m_MapData[mapIndex].tiles.back());
+                    m_Tiles.push_back(m_MapData->GetTileBack(mapIndex));
                 }
             }
             // generate border
-            if (m_MapData[mapIndex].tiles.back()->GetTile().type != 102) {
+            if (!m_MapData->IsTilesEmpty(mapIndex) &&
+                m_MapData->GetTileBack(mapIndex)->GetTile().type != 102) {
                 for (auto &dir : direction) {
                     tmpMapIndex = j + dir.x + (i + dir.y) * m_Size.x;
                     if (i + dir.y >= 0 && i + dir.y < m_Size.y &&
                         j + dir.x >= 0 && j + dir.x < m_Size.x &&
-                        m_MapData[tmpMapIndex].tiles.empty()) {
-                        m_MapData[tmpMapIndex].tiles.push_back(
+                        m_MapData->IsTilesEmpty(tmpMapIndex)) {
+                        m_MapData->AddTile(
+                            tmpMapIndex,
                             std::make_shared<Tile>(s_Tile{
                                 j + dir.x + m_Level->GetLevelIndexMin().x - 1,
                                 i + dir.y + m_Level->GetLevelIndexMin().y - 1,
                                 102, 0, 0, 0}));
-                        m_Tiles.push_back(m_MapData[tmpMapIndex].tiles.back());
+                        m_Tiles.push_back(m_MapData->GetTileBack(tmpMapIndex));
                     }
                 }
             }
@@ -105,26 +112,28 @@ Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
     for (int i = 0; i < m_Size.y; i++) {
         for (int j = 0; j < m_Size.x; j++) {
             mapIndex = j + i * m_Size.x;
-            if (m_MapData[mapIndex].tiles.empty()) {
+            if (m_MapData->IsTilesEmpty(mapIndex)) {
                 continue;
             }
             if ((1 + i >= m_Size.y) ||
-                (1 + i >= 0 && m_MapData[mapIndex + m_Size.x].tiles.empty())) {
-                m_MapData[mapIndex].tiles.back()->SetCloseDisplayb24(true);
+                (1 + i >= 0 && m_MapData->IsTilesEmpty(mapIndex + m_Size.x))) {
+                m_MapData->GetTileBack(mapIndex)->SetCloseDisplayb24(true);
             }
         }
     }
 
     for (auto &enemy : m_Level->GetEnemies()) {
         mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
-        m_MapData[mapIndex].enemies.push_back(EnemyFactory::CreateEnemy(enemy));
-        m_Enemies.push_back(m_MapData[mapIndex].enemies.back());
+        m_MapData->AddEnemy(mapIndex,
+                            EnemyFactory::CreateEnemy(enemy, m_MapData));
+        m_Enemies.push_back(m_MapData->GetEnemyBack(mapIndex));
     }
 
     // Add a Bat for testing
-    m_MapData[GamePostion2MapIndex({1, 1})].enemies.push_back(
-        std::make_shared<Enemies::OrangeSlime>(s_Enemy{1, 1, 0, 0, 0}));
-    m_Enemies.push_back(m_MapData[GamePostion2MapIndex({1, 1})].enemies.back());
+    m_MapData->AddEnemy(
+        GamePostion2MapIndex({1, 1}),
+        std::make_shared<Enemies::Bat>(s_Enemy{1, 1, 0, 0, 0}, m_MapData));
+    m_Enemies.push_back(m_MapData->GetEnemyBack(GamePostion2MapIndex({1, 1})));
 
     for (auto &tile : m_Tiles) {
         m_Children.push_back(tile);
@@ -175,21 +184,19 @@ void Map::Update() {
     size_t mapIndex = 0;
     CameraUpdate();
     for (auto &enemy : m_Enemies) {
-        if (!(enemy->GetGamePosition() == enemy->GetWillMovePosition()) &&
-            isVaildMove(enemy->GetWillMovePosition())) {
-            enemy->SetCanMove(true);
-
+        // if (!(enemy->GetGamePosition() == enemy->GetWillMovePosition()) &&
+        //     isVaildMove(enemy->GetWillMovePosition())) {
+        // enemy->SetCanMove(true);
+        if (enemy->GetCanMove()) {
             mapIndex = GamePostion2MapIndex(enemy->GetGamePosition());
-            m_MapData[mapIndex].enemies.erase(
-                std::remove(m_MapData[mapIndex].enemies.begin(),
-                            m_MapData[mapIndex].enemies.end(), enemy),
-                m_MapData[mapIndex].enemies.end());
-            m_MapData[GamePostion2MapIndex(enemy->GetWillMovePosition())]
-                .enemies.push_back(enemy);
+
+            m_MapData->RemoveEnemy(mapIndex, enemy);
+            m_MapData->AddEnemy(
+                GamePostion2MapIndex(enemy->GetWillMovePosition()), enemy);
         }
-        else {
-            enemy->SetCanMove(false);
-        }
+        // else {
+        //     enemy->SetCanMove(false);
+        // }
         enemy->SetPlayerPosition(m_MainCharacter->GetGamePosition());
         enemy->Update();
     }
@@ -211,10 +218,10 @@ bool Map::isVaildPosition(const glm::ivec2 &position) {
 
 bool Map::isVaildMove(const glm::ivec2 &position) {
     size_t mapIndex = GamePostion2MapIndex(position);
-    if (m_MapData[mapIndex].tiles.empty()) {
+    if (m_MapData->IsTilesEmpty(mapIndex)) {
         return false;
     }
-    if (m_MapData[mapIndex].tiles.back()->IsWall()) {
+    if (m_MapData->GetTileBack(mapIndex)->IsWall()) {
         return false;
     }
     return true;

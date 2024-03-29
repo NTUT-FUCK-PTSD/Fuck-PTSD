@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "Dungeon/SimpleMapData.h"
 #include "Dungeon/Tile.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
@@ -13,7 +14,8 @@ namespace Dungeon {
 // Abstract class
 class Enemy : public Util::GameObject {
 public:
-    Enemy(const s_Enemy &u_Enemy);
+    Enemy(const s_Enemy &u_Enemy,
+          const std::shared_ptr<SimpleMapData> &simpleMapData);
     virtual ~Enemy() = default;
 
     void SetShadow(const bool &shadow);
@@ -47,13 +49,18 @@ public:
 
     void MoveToPlayer(); // Set available WillMovePosition to slowly close
                          // PlayerPosition
-
     void TempoMove();
-    virtual void Move() = 0;
+    bool IsVaildMove(const glm::vec2 &position);
+    size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
+        return m_SimpleMapData->GamePostion2MapIndex(position);
+    }
 
+    virtual void Move() = 0;
     virtual void Update(){};
 
 protected:
+    std::shared_ptr<SimpleMapData> m_SimpleMapData;
+
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
     std::vector<std::size_t> m_NormalFrames;
     std::vector<std::size_t> m_ShadowFrames;

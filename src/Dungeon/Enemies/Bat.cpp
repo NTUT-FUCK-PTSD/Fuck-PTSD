@@ -1,8 +1,9 @@
 #include "Dungeon/Enemies/Bat.h"
 
 namespace Dungeon {
-Enemies::Bat::Bat(const s_Enemy &u_Enemy)
-    : Enemy(u_Enemy),
+Enemies::Bat::Bat(const s_Enemy &u_Enemy,
+                  const std::shared_ptr<SimpleMapData> &simpleMapData)
+    : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()) {
     m_NormalFrames = {0, 1, 2, 3};
@@ -16,8 +17,10 @@ Enemies::Bat::Bat(const s_Enemy &u_Enemy)
     SetDamage(1); // 0.5 heart
     SetCoin(2);
 }
-Enemies::Bat::Bat(const s_Enemy &u_Enemy, const std::string &filepath)
-    : Enemy(u_Enemy),
+Enemies::Bat::Bat(const s_Enemy &u_Enemy,
+                  const std::shared_ptr<SimpleMapData> &simpleMapData,
+                  const std::string &filepath)
+    : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()) {
     m_NormalFrames = {0, 1, 2, 3};
@@ -59,9 +62,9 @@ void Bat::Update() {
         m_GamePosition = m_WillMovePosition;
         m_NeedToMove = false;
     }
-    else if (!m_CanMove && m_NeedToMove) {
-        RandomMove();
-    }
+    // else if (!m_CanMove && m_NeedToMove) {
+    //     RandomMove();
+    // }
 
     // Update animation
     UpdateAnimation(false);
@@ -78,34 +81,45 @@ void Bat::RandomMove() {
         m_NeedToMove = false;
         return;
     }
-    size_t index = m_Distribution(
-        m_RandomGenerator, std::uniform_int_distribution<size_t>::param_type{
+    size_t index = 0;
+    while (!m_RandomPool.empty()) {
+        index =
+            m_Distribution(m_RandomGenerator,
+                           std::uniform_int_distribution<size_t>::param_type{
                                0, m_RandomPool.size() - 1});
-    switch (m_RandomPool[index]) {
-    case 0:
-        m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
-        m_RandomPool.erase(
-            std::remove(m_RandomPool.begin(), m_RandomPool.end(), 0),
-            m_RandomPool.end());
-        return;
-    case 1:
-        m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
-        m_RandomPool.erase(
-            std::remove(m_RandomPool.begin(), m_RandomPool.end(), 1),
-            m_RandomPool.end());
-        return;
-    case 2:
-        m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
-        m_RandomPool.erase(
-            std::remove(m_RandomPool.begin(), m_RandomPool.end(), 2),
-            m_RandomPool.end());
-        return;
-    case 3:
-        m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0);
-        m_RandomPool.erase(
-            std::remove(m_RandomPool.begin(), m_RandomPool.end(), 3),
-            m_RandomPool.end());
-        return;
+        switch (m_RandomPool[index]) {
+        case 0:
+            m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
+            m_RandomPool.erase(
+                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 0),
+                m_RandomPool.end());
+            break;
+        case 1:
+            m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
+            m_RandomPool.erase(
+                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 1),
+                m_RandomPool.end());
+            break;
+        case 2:
+            m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
+            m_RandomPool.erase(
+                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 2),
+                m_RandomPool.end());
+            break;
+        case 3:
+            m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0);
+            m_RandomPool.erase(
+                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 3),
+                m_RandomPool.end());
+            break;
+        }
+        if (IsVaildMove(m_WillMovePosition)) {
+            m_CanMove = true;
+            return;
+        }
+        else {
+            m_CanMove = false;
+        }
     }
 }
 } // namespace Dungeon::Enemies
