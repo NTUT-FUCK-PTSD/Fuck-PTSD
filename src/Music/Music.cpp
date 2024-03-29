@@ -9,6 +9,7 @@ MusicSystem::MusicSystem() {
     m_display.setOffset(m_DisplayOffset);
     m_display.setTriggerRange(m_DisplayRange);
     m_display.setMusicSpeed(m_currentSpeed);
+    m_display.setHeartBeatTime(m_DisplayHeartBeatDurationTime);
 
     m_tempo.setOffset(m_TempoOffset);
     m_tempo.setRange(m_TempoRange);

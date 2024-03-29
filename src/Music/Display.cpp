@@ -7,7 +7,7 @@ Display::Display() {
     const auto HeartSize = ToolBoxs::CountImagePixel(m_HeartImagePath, 2, 1);
 
     m_TempoHeartImage = std::make_shared<SpriteSheet>(
-        m_HeartImagePath, HeartSize, std::vector<std::size_t>{1, 0}, true,
+        m_HeartImagePath, HeartSize, std::vector<std::size_t>{0, 1}, true,
         m_HeartInterval, false, 0);
 
     m_BeatHeart->SetDrawable(m_TempoHeartImage);
@@ -20,8 +20,10 @@ Display::~Display() {}
 
 void Display::Update() {
 
-    if (m_CurrentMusicTime >= m_triggerTime - m_range &&
-        m_CurrentMusicTime <= m_triggerTime + m_range) {
-        m_TempoHeartImage->Play();
+    // update the heart beat
+    if (m_CurrentMusicTime + m_offset > m_triggerTime + m_heartBeatTime) {
+        m_TempoHeartImage->SetCurrentFrame(0);
+    } else if (m_CurrentMusicTime + m_offset > m_triggerTime) {
+        m_TempoHeartImage->SetCurrentFrame(1);
     }
 }

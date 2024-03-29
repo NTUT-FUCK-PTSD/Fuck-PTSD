@@ -62,6 +62,7 @@ private:
     bool isShowHeartBeat = true;
     int16_t m_DisplayOffset = -30;
     std::size_t m_DisplayRange = 100;
+    std::size_t m_DisplayHeartBeatDurationTime = 80;
 
     SoLoud::handle m_musicHandle;
 
