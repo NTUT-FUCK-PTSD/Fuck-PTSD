@@ -62,6 +62,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_D
 target_include_directories(${PROJECT_NAME} PRIVATE ${PTSD_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${soloud_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CUSTOMIZE_PATH})
 
@@ -69,10 +70,13 @@ target_link_libraries(Framework
         ${DEPENDENCY_LINK_LIBRARIES}
 )
 
+message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
 target_link_libraries(${PROJECT_NAME}
         SDL2::SDL2main
         tinyxml2::tinyxml2
         Framework
         #rusty_bridge
         soloud
+        Boost::filesystem
+        Boost::program_options
 )

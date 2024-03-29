@@ -49,6 +49,16 @@ endif()
 
 message(STATUS "soloud: ${soloud_SOURCE_DIR}")
 
+message(STATUS "Boost NOT FOUND, fetching from source!")
+FetchContent_Declare(
+        boost
+        GIT_REPOSITORY https://github.com/boostorg/boost.git
+        GIT_TAG master
+
+        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/boost
+)
+FetchContent_MakeAvailable(boost)
+
 
 #FetchContent_GetProperties(PTSD)
 #if(NOT PTSD_POPULATED)
