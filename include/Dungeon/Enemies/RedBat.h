@@ -7,7 +7,8 @@ namespace Dungeon {
 namespace Enemies {
 class RedBat final : public Bat {
 public:
-    RedBat(const s_Enemy &u_Enemy);
+    RedBat(const s_Enemy &u_Enemy,
+           const std::shared_ptr<SimpleMapData> &simpleMapData);
 };
 } // namespace Enemies
 } // namespace Dungeon

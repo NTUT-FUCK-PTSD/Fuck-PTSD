@@ -6,14 +6,11 @@
 #include "Camera.h"
 #include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
+#include "Dungeon/MapData.h"
 #include "Dungeon/Tile.h"
 #include "MainCharacter.h"
 
 namespace Dungeon {
-struct s_MapDate {
-    std::vector<std::shared_ptr<Tile>> tiles;
-    std::vector<std::shared_ptr<Enemy>> enemies;
-};
 class Map : public Util::GameObject {
 public:
     Map(const std::shared_ptr<MainCharacter> &mainCharacter,
@@ -36,7 +33,7 @@ private:
     const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;
     glm::ivec2 m_Size;
-    std::vector<s_MapDate> m_MapData; // Use map index to store MapDate
+    std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
     std::vector<std::shared_ptr<Tile>> m_Tiles;
     std::vector<std::shared_ptr<Enemy>> m_Enemies;
     std::shared_ptr<MainCharacter> m_MainCharacter;

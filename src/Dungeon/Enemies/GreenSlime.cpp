@@ -1,8 +1,9 @@
 #include "Dungeon/Enemies/GreenSlime.h"
 
 namespace Dungeon {
-Enemies::GreenSlime::GreenSlime(const s_Enemy &u_Enemy)
-    : Enemy(u_Enemy),
+Enemies::GreenSlime::GreenSlime(
+    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> &simpleMapData)
+    : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};

@@ -1,8 +1,9 @@
 #include "Dungeon/Enemies/OrangeSlime.h"
 
 namespace Dungeon {
-Enemies::OrangeSlime::OrangeSlime(const s_Enemy &u_Enemy)
-    : Enemy(u_Enemy),
+Enemies::OrangeSlime::OrangeSlime(
+    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> &simpleMapData)
+    : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()),
       m_Distribution(0, 3) {
@@ -52,6 +53,13 @@ void OrangeSlime::Move() {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
     }
+    if (IsVaildMove(m_WillMovePosition)) {
+        m_CanMove = true;
+    }
+    else {
+        m_CanMove = false;
+    }
+
     m_State++;
 }
 void OrangeSlime::Update() {
