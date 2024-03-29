@@ -8,7 +8,7 @@ Display::Display() {
 
     m_TempoHeartImage = std::make_shared<SpriteSheet>(
         m_HeartImagePath, HeartSize, std::vector<std::size_t>{0, 1}, true,
-        m_HeartInterval, false, 0);
+        10, false, 0);
 
     m_BeatHeart->SetDrawable(m_TempoHeartImage);
     m_BeatHeart->SetPosition(m_Position);

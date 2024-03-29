@@ -61,7 +61,7 @@ void MusicSystem::Update()  {
     m_tempo.setMusicCurrentTime(CurrentMusicTime * m_currentSpeed);
     m_tempo.Update();
 
-    m_display.setTriggerTime(m_tempo.getTriggerTime());
+    m_display.setTriggerTime(m_tempo.getTempo());
     m_display.setCurrentMusicTime(CurrentMusicTime * m_currentSpeed);
     m_display.Update();
 };

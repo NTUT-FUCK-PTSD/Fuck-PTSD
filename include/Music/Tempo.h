@@ -27,7 +27,7 @@ public:
         m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
     };
 
-    std::size_t getTriggerTime();
+    std::size_t getTempo();
 
     void setMusicSpeed(float speed) {m_MusicSpeed = speed; };
     void setShowBeat(bool state) { isShowHeartBeat = state; };

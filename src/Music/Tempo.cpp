@@ -51,7 +51,7 @@ bool Tempo::canBeClick(std::size_t offset) {
     return false;
 }
 
-std::size_t Tempo::getTriggerTime() {
+std::size_t Tempo::getTempo() {
     if (m_tempoList.empty()) {
         return 0;
     }

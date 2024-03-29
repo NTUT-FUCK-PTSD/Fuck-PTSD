@@ -16,8 +16,6 @@ public:
     explicit Display();
     ~Display();
 
-    void setBeatSpeed(std::size_t beatSpeed) { m_HeartInterval = beatSpeed; };
-
     void Update();
 
     std::shared_ptr<GameElement> getGameElement() const { return m_BeatHeart; };
@@ -45,7 +43,6 @@ private:
     glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, -300};
     std::size_t m_ZIndex = 50;
-    std::size_t m_HeartInterval = 10;
 
     std::shared_ptr<SpriteSheet> m_TempoHeartImage;
     std::shared_ptr<GameElement> m_BeatHeart = std::make_shared<GameElement>();

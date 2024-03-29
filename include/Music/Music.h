@@ -49,6 +49,11 @@ public:
 
     void Update();
 
+    void setTempoOffset(int16_t offset) { m_TempoOffset = offset; };
+    void setTempoRange(std::size_t range) {m_TempoRange = range; };
+    void setDisplayOffset(int16_t offset) {m_DisplayOffset = offset; };
+    void setDisplayHeartBeatDurationTime(std::size_t time) {m_DisplayHeartBeatDurationTime = time; };
+
 
 private:
     float m_currentSpeed = 1.0f;
