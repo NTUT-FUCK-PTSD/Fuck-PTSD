@@ -79,10 +79,10 @@ void Tempo::UpdateTime() {
         m_duringTime <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
         return;
     }
-//    else if (m_duringTime <= m_tempoList[m_tempoIndex + 1] - m_range &&
-//             m_duringTime <= m_tempoList[m_tempoIndex + 1] + m_range) {
-//        return;
-//    }
+    else if (m_duringTime <= (m_tempoList[m_tempoIndex + 1] - m_range) * m_MusicSpeed &&
+             m_duringTime <= (m_tempoList[m_tempoIndex + 1] + m_range) * m_MusicSpeed) {
+        return;
+    }
 
     m_punishTimes = m_punishTimes == 0 ? m_punishTimes : m_punishTimes - 1;
     m_tempoIndex++;

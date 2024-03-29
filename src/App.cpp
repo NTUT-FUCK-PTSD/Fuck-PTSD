@@ -44,7 +44,7 @@ void App::Start(std::shared_ptr<Core::Context>
     // play lobby music
     m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
     m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
-    m_MusicSystem->setSpeed(1.2);
+//    m_MusicSystem->setSpeed(1.2);
 
     // play zone1 leve1
 //    m_MusicSystem->playMusic(ASSETS_DIR"/music/zone1_1.ogg", true);

@@ -24,7 +24,7 @@ public:
     bool canBeClick(std::size_t offset);
 
     void keyBoardClick() {
-        m_punishTimes = m_punishTimes < 2 ? m_punishTimes + 1 : m_punishTimes;
+        m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
     };
 
     std::size_t getTriggerTime();
