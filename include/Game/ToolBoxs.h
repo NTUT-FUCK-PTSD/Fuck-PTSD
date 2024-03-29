@@ -14,6 +14,9 @@ public:
                                      uint16_t WidthNumber,
                                      uint16_t HeightNumber);
     static glm::vec2 AddVec2(const glm::vec2 &add01, const glm::vec2 &add02);
+
+    static glm::vec2 GamePostoPos(const glm::vec2 &gamePosition);
+    static glm::vec2 PosToGamePos(const glm::vec2 &position);
 };
 
 #endif // FUCK_PTSD_TOOLBOXS_H

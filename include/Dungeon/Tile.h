@@ -9,7 +9,7 @@
 
 namespace Dungeon {
 
-class Tile : public Util::GameObject {
+class Tile final : public Util::GameObject {
 public:
     Tile(const s_Tile &u_Tile);
 

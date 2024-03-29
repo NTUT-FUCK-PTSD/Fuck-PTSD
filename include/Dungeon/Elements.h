@@ -12,9 +12,9 @@ namespace Dungeon {
 constexpr double DUNGEON_TILE_WIDTH = 24.0;
 constexpr double DUNGEON_COL_NUMBER = 20.0;
 constexpr double DUNGEON_ROW_NUMBER =
-    (DUNGEON_COL_NUMBER * (WINDOW_WIDTH / WINDOW_HEIGHT));
+    (DUNGEON_COL_NUMBER * (double(WINDOW_HEIGHT) / double(WINDOW_WIDTH)));
 constexpr double DUNGEON_SCALE =
-    ((WINDOW_WIDTH / DUNGEON_COL_NUMBER) / DUNGEON_TILE_WIDTH);
+    ((double(WINDOW_WIDTH) / DUNGEON_COL_NUMBER) / DUNGEON_TILE_WIDTH);
 
 struct s_Tile {
     int x, y;

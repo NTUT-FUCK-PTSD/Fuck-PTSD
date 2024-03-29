@@ -21,8 +21,6 @@ Coin::Coin() {
     m_CoinText->SetScale(m_FontScale);
     m_CoinImage->SetScale(m_ImageScale);
 
-    //    m_CoinText->SetPosition({m_Position.x + 100, m_Position.y});
-
     m_CoinImage->SetPosition(m_Position);
 
     toLeftSideCoinText();

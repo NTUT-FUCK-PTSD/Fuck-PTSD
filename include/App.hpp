@@ -1,5 +1,6 @@
 #ifndef APP_HPP
 #define APP_HPP
+
 #include "Background.hpp"
 #include "Animation.h"
 #include "Background.hpp"
@@ -14,7 +15,10 @@
 #include "Dungeon/Map.h"
 #include "Heart.h"
 #include "MainCharacter.h"
+#include "Music/Music.h"
+#include "Shovel.h"
 #include "SpriteSheet.hpp"
+#include "Tools.h"
 #include "Util/Text.hpp"
 
 #include "pch_extreme.h"
@@ -42,13 +46,16 @@ private:
     void ValidTask();
 
 private:
-    //    std::shared_ptr<Heart> heart = std::make_shared<Heart>();
+    // music
+    std::shared_ptr<MusicSystem> m_MusicSystem = std::make_shared<MusicSystem>();
+
+    // game object
     std::shared_ptr<Coin> m_Coin = std::make_shared<Coin>();
+    std::shared_ptr<Tools> m_Tools = std::make_shared<Tools>();
+    std::shared_ptr<Heart> m_Heart = std::make_shared<Heart>();
     std::shared_ptr<Diamond> m_Diamond = std::make_shared<Diamond>();
 
-    unsigned long m_AnimationStartTime = 0;
-    glm::vec2 m_AniPlayerStartPosition = {0.0f, 0.0f};
-    glm::vec2 m_AniPlayerMotion = {0.0f, 0.0f};
+    // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
     glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
 
@@ -61,7 +68,7 @@ private:
 
     std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
     std::shared_ptr<Camera> m_Window = std::make_shared<Camera>();
-    ;
+
     glm::vec2 m_CameraPosition = {0, 0};
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;

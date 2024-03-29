@@ -1,0 +1,54 @@
+
+
+#ifndef FUCK_PCH_EXTREAM_H
+#define FUCK_PCH_EXTREAM_H
+
+#include <iostream>
+#include <map>
+#include <string>
+
+#include "pch.hpp"
+// #include "rusty_bridge/lib.h"
+
+#include "Background.hpp"
+#include "Begin.h"
+#include "Camera.h"
+#include "Dungeon/Elements.h"
+#include "Dungeon/Level.h"
+#include "Dungeon/Map.h"
+#include "Dungeon/Tile.h"
+#include "GameElement.h"
+#include "MainCharacter.h"
+#include "SpriteSheet.hpp"
+#include "ToolBoxs.h"
+
+
+#include <map>
+#include <string>
+#include <iostream>
+
+#include "pch.hpp"
+
+#include "Core/Context.hpp"
+#include "Core/Drawable.hpp"
+#include "Core/IndexBuffer.hpp"
+#include "Core/Program.hpp"
+#include "Core/Shader.hpp"
+#include "Core/Texture.hpp"
+
+#include "Util/Animation.hpp"
+#include "Util/BGM.hpp"
+#include "Util/Color.hpp"
+#include "Util/GameObject.hpp"
+#include "Util/Image.hpp"
+#include "Util/Input.hpp"
+#include "Util/Renderer.hpp"
+#include "Util/SFX.hpp"
+#include "Util/Text.hpp"
+#include "Util/Time.hpp"
+#include "Util/Transform.hpp"
+
+//#include "Util/SpriteSheet.hpp"
+#include "SpriteSheet.hpp"
+
+#endif // FUCK_PCH_EXTREM_H

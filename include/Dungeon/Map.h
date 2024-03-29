@@ -1,54 +1,45 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "Util/GameObject.hpp"
+
 #include "Camera.h"
+#include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/Tile.h"
+#include "MainCharacter.h"
 
 namespace Dungeon {
-
-class Map {
+struct s_MapDate {
+    std::vector<std::shared_ptr<Tile>> tiles;
+    std::vector<std::shared_ptr<Enemy>> enemies;
+};
+class Map : public Util::GameObject {
 public:
-    Map(const std::shared_ptr<Camera> &camera, const std::string &path,
-        const int &levelNum = 1);
+    Map(const std::shared_ptr<MainCharacter> &mainCharacter,
+        const std::string &path, const int &levelNum = 1);
 
-    /**
-     * @brief Add a child to Renderer.
-     *
-     * @param child The GameObject needing to be managed by Renderer.
-     */
-    void AddChild(const std::shared_ptr<Util::GameObject> &child);
+    size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
-    /**
-     * @brief Add children to Renderer.
-     *
-     * @param children The GameObjects needing to be managed by Renderer.
-     */
-    void
-    AddChildren(const std::vector<std::shared_ptr<Util::GameObject>> &children);
-
-    /**
-     * @brief Remove the child.
-     *
-     * @param child The GameObject being removed.
-     */
-
-    void RemoveChild(std::shared_ptr<Util::GameObject> child);
-
-    std::vector<std::shared_ptr<Util::GameObject>> GetChildren();
-
-    void SetVisible(const bool &visible);
+    void CameraUpdate();
+    void TempoUpdate();
 
     void Update();
 
 private:
-    bool m_Visible = true;
+    const size_t ALLOW_EXTRA_DRAW = 4;
+    bool CheckShowPosition(const glm::vec2 &position1,
+                           const glm::vec2 &position2);
+    bool isVaildPosition(const glm::ivec2 &position);
+    bool isVaildMove(const glm::ivec2 &position);
+    const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
+    const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;
     glm::ivec2 m_Size;
-    std::vector<std::vector<std::shared_ptr<Tile>>>
-        m_Tiles; // Use map index to store tiles
-    std::vector<std::shared_ptr<Util::GameObject>> m_Children;
-    std::shared_ptr<Camera> m_Camera;
+    std::vector<s_MapDate> m_MapData; // Use map index to store MapDate
+    std::vector<std::shared_ptr<Tile>> m_Tiles;
+    std::vector<std::shared_ptr<Enemy>> m_Enemies;
+    std::shared_ptr<MainCharacter> m_MainCharacter;
 };
 
 } // namespace Dungeon
