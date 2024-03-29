@@ -10,25 +10,7 @@
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
-class MainCharacter : public Animation {
-private:
-    std::string m_HeadImagePath;
-    std::string m_BodyImagePath;
-
-    glm::vec2 HeadSize;
-    glm::vec2 BodySize;
-    std::shared_ptr<SpriteSheet> HeadImage;
-    std::shared_ptr<SpriteSheet> BodyImage;
-
-    std::shared_ptr<GameElement> m_Body = std::make_shared<GameElement>();
-    std::shared_ptr<GameElement> m_Head = std::make_shared<GameElement>();
-
-    glm::vec2 m_Position = {0, 0};
-    glm::vec2 m_GamePosition = {0, 0};
-
-    float m_ZIndex = 0.5;
-
-    void SetPosition(const glm::vec2 &position);
+class MainCharacter final : public Animation {
 
 public:
     enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
@@ -56,6 +38,26 @@ public:
     void SetZIndex(float index);
 
     void Update();
+
+private:
+    std::string m_HeadImagePath;
+    std::string m_BodyImagePath;
+
+    glm::vec2 HeadSize;
+    glm::vec2 BodySize;
+    std::shared_ptr<SpriteSheet> HeadImage;
+    std::shared_ptr<SpriteSheet> BodyImage;
+
+    std::shared_ptr<GameElement> m_Body = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_Head = std::make_shared<GameElement>();
+
+    glm::vec2 m_Position = {0, 0};
+    glm::vec2 m_GamePosition = {0, 0};
+
+    float m_ZIndex = 0.5;
+
+    void SetPosition(const glm::vec2 &position);
+
 };
 
 #endif // FUCK_PTSD_MAINCHARACTER_H
