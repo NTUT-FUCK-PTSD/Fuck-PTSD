@@ -23,7 +23,6 @@ Tools::Tools() {
     // create tool bomb
     m_Bomb = std::make_shared<Bomb>();
     m_Bomb->setPosition(m_BombPosition);
-
 }
 
 std::shared_ptr<Util::GameObject> Tools::getGameObject() {
@@ -38,16 +37,16 @@ std::vector<std::shared_ptr<Util::GameObject>> Tools::getGameObjects() {
     auto t = m_Throw->getGameObjects();
     auto b = m_Bomb->getGameObjects();
 
-    for(int i = 0; i < s.size(); i++) {
+    for (size_t i = 0; i < s.size(); i++) {
         m_TempGameObejct.push_back(s[i]);
     }
-    for(int i = 0 ; i < a.size(); i++){
+    for (size_t i = 0; i < a.size(); i++) {
         m_TempGameObejct.push_back(a[i]);
     }
-    for(int i = 0; i <t.size();i++){
+    for (size_t i = 0; i < t.size(); i++) {
         m_TempGameObejct.push_back(t[i]);
     }
-    for(int i = 0; i <b.size();i++){
+    for (size_t i = 0; i < b.size(); i++) {
         m_TempGameObejct.push_back(b[i]);
     }
 

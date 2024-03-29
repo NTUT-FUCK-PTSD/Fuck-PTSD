@@ -67,8 +67,8 @@ private:
     std::string m_ImagePath;
     std::shared_ptr<SpriteSheet> m_Animation;
 
-    uint8_t ImageWidthNumber = 0;
-    uint8_t ImageHeightNumber = 0;
+    // uint8_t ImageWidthNumber = 0;
+    // uint8_t ImageHeightNumber = 0;
 };
 
 #endif // CHARACTER_HPP

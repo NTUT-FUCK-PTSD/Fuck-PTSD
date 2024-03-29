@@ -58,7 +58,6 @@ private:
 
     bool m_IsAnimating = false;
     unsigned long m_AnimationStartMs;
-    unsigned long m_AnimationEndMs;
     unsigned long m_AnimationDuringTimeMs;
     glm::vec2 m_AnimationDestination;
 };

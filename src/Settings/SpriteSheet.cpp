@@ -13,13 +13,13 @@ SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
                          const std::vector<std::size_t> &frames, bool play,
                          std::size_t interval, bool looping,
                          std::size_t cooldown)
-    : m_Path(filepath),
-      m_FrameSize(frameSize),
-      m_Frames(frames),
+    : m_Frames(frames),
       m_State(play ? State::PLAY : State::PAUSE),
       m_Interval(interval),
       m_Looping(looping),
-      m_Cooldown(cooldown) {
+      m_Cooldown(cooldown),
+      m_Path(filepath),
+      m_FrameSize(frameSize) {
     m_SpriteSheet = std::make_unique<Util::SpriteSheet>(filepath);
     m_Size = m_SpriteSheet->GetSize();
     m_col = static_cast<size_t>(m_Size.x / m_FrameSize.x);

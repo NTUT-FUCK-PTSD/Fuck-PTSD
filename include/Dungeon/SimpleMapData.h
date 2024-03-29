@@ -30,8 +30,8 @@ public:
     std::shared_ptr<Tile> GetTileBack(const size_t &position) const;
 
 private:
-    glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_LevelIndexMin;
+    glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_Size;
     std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
 };
