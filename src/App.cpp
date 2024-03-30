@@ -1,6 +1,6 @@
 #include "App.hpp"
 #include "Background.hpp"
-#include "MainCharacter.h"
+#include "Player.h"
 #include "ToolBoxs.h"
 
 // #include "Coin.h"
@@ -53,11 +53,11 @@ void App::Start(std::shared_ptr<Core::Context>
     // remove background
     m_Camera->RemoveChild(background->GetGameElement());
 
-    // create MainCharacter
-    m_MainCharacter = std::make_shared<MainCharacter>(
-        ASSETS_DIR "/entities/player1_heads.png",
-        ASSETS_DIR "/entities/player1_armor_body.png");
-    m_Camera->AddChildren(m_MainCharacter->GetGameElement());
+    // create Player
+    m_MainCharacter = std::make_shared<Player>();
+    m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
+    m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png");
+    m_Camera->AddChild(m_MainCharacter->GetGameElement());
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
@@ -106,11 +106,11 @@ void App::Update() {
         Util::Input::IsKeyDown(Util::Keycode::S) ||
         Util::Input::IsKeyDown(Util::Keycode::A)) && m_MusicSystem->TempoTrigger()) {
 
-        if (m_PlayerMoveDirect != MainCharacter::NONE) {
-            m_PlayerMoveDirect = MainCharacter::NONE;
+        if (m_PlayerMoveDirect != Player::NONE) {
+            m_PlayerMoveDirect = Player::NONE;
         }
         if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-            m_PlayerMoveDirect = MainCharacter::Direction::UP;
+            m_PlayerMoveDirect = Player::Direction::UP;
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
                                       m_AniPlayerDestination.y +
@@ -120,8 +120,8 @@ void App::Update() {
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
         }
         else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-            m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
-            m_MainCharacter->SetFaceTo(MainCharacter::Direction::LEFT);
+            m_PlayerMoveDirect = Player::Direction::LEFT;
+            m_MainCharacter->SetFaceTo(Player::Direction::LEFT);
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
@@ -131,7 +131,7 @@ void App::Update() {
                                       m_AniCameraDestination.y};
         }
         else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-            m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
+            m_PlayerMoveDirect = Player::Direction::DOWN;
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
                                       m_AniPlayerDestination.y -
@@ -141,8 +141,8 @@ void App::Update() {
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
         }
         else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-            m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
-            m_MainCharacter->SetFaceTo(MainCharacter::Direction::RIGHT);
+            m_PlayerMoveDirect = Player::Direction::RIGHT;
+            m_MainCharacter->SetFaceTo(Player::Direction::RIGHT);
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,

@@ -4,7 +4,7 @@
 
 #include "pch_extream.h"
 
-#include "Bomb.h"
+#include "Player/Equipment/Bomb.h"
 
 Bomb::Bomb() {
     //    const auto ItemImage = std::make_shared<Util::Image>(m_ImagePathItem);

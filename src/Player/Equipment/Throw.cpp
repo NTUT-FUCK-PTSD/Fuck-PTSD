@@ -7,7 +7,7 @@
 
 #include "pch_extream.h"
 
-#include "Throw.h"
+#include "Player/Equipment/Throw.h"
 
 Throw::Throw() {
     //    const auto ItemImage = std::make_shared<Util::Image>(m_ImagePathItem);
