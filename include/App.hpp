@@ -11,16 +11,12 @@
 #include "Dungeon/Map.h"
 #include "Heart.h"
 #include "MainCharacter.h"
+#include "Music/Music.h"
 #include "Shovel.h"
 #include "SpriteSheet.hpp"
 #include "Tools.h"
 #include "Util/Text.hpp"
-#include "music/music.h"
 #include "pch.hpp" // IWYU pragma: export
-#include "soloud.h"
-#include "soloud_speech.h"
-#include "soloud_thread.h"
-#include "soloud_wav.h"
 
 class App {
 public:
@@ -44,6 +40,9 @@ private:
     void ValidTask();
 
 private:
+    // music
+    std::shared_ptr<MusicSystem> m_MusicSystem = std::make_shared<MusicSystem>();
+
     // game object
     std::shared_ptr<Coin> m_Coin = std::make_shared<Coin>();
     std::shared_ptr<Tools> m_Tools = std::make_shared<Tools>();
@@ -67,10 +66,6 @@ private:
     glm::vec2 m_CameraPosition = {0, 0};
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
-
-    SoLoud::Soloud soloud; // SoLoud engine core
-    SoLoud::Speech speech; // A sound source (speech, in this case)
-    SoLoud::Wav music;
 };
 
 #endif
