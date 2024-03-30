@@ -5,7 +5,10 @@
 #include "Player.h"
 
 Player::Player()
-    : Animation({0, 0}) {}
+    : Animation({0, 0}) {
+
+    Update();
+}
 
 Player::Player(const std::string &headImagePath,
                const std::string &bodyImagePath)
@@ -119,4 +122,22 @@ void Player::SetZIndex(float index) {
     m_ZIndex = index;
     m_Body->SetZIndex(index);
     m_Head->SetZIndex(index + float(0.25));
+}
+
+std::unique_ptr<Coin> Player::generalCoin() {
+    return std::make_unique<Coin>();
+}
+
+void Player::UpdateCoin(const unsigned long &duringTimeMs,
+                        const glm::vec2 &destination,
+                        const uint16_t &direction) {
+    m_Coin->MoveByTime(duringTimeMs, destination, direction);
+}
+
+std::shared_ptr<GameElement> Player::GetWindowElement() {
+    m_Window->AddChild(m_Coin->GetGameObject());
+
+//    m_Window->SetVisible(false);
+//    return m_Window;
+    return m_Coin->GetGameObject();
 }

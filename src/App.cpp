@@ -58,6 +58,7 @@ void App::Start(std::shared_ptr<Core::Context>
     m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
     m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png");
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
+    m_Window->AddChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
@@ -67,15 +68,15 @@ void App::Start(std::shared_ptr<Core::Context>
     m_Camera->AddChild(m_DungeonMap);
 
     // show the coin
-    m_Window->AddChildren(m_Coin->getGameObject());
-    m_Window->AddChildren(m_Diamond->getGameObject());
-
-    // add the Tools
-    //    m_Window.AddChild(m_Tools->getGameObject());
-    m_Window->AddChildren(m_Tools->getGameObjects());
-
-    // display the heart
-    m_Window->AddChildren(m_Heart->getGameObjects());
+//    m_Window->AddChildren(m_Coin->getGameObject());
+//    m_Window->AddChildren(m_Diamond->getGameObject());
+//
+//    // add the Tools
+//    //    m_Window.AddChild(m_Tools->getGameObject());
+//    m_Window->AddChildren(m_Tools->getGameObjects());
+//
+//    // display the heart
+//    m_Window->AddChildren(m_Heart->getGameObjects());
 
     // display the tempo heart in music System
     m_Window->AddChild(m_MusicSystem->getGameObject());
@@ -87,10 +88,10 @@ void App::Update() {
 
 
     // add coin
-    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
-        m_Coin->plusCoinNumber(10);
-        m_Diamond->plusDiamondNumber(10);
-    }
+//    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+//        m_Coin->plusCoinNumber(10);
+//        m_Diamond->plusDiamondNumber(10);
+//    }
 
     // detect the player
     if (Util::Input::IsKeyDown(Util::Keycode::W) ||

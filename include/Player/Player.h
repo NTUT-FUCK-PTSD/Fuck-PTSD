@@ -7,6 +7,10 @@
 
 #include "Animation.h"
 #include "GameElement.h"
+#include "Items/Coin.h"
+#include "Items/Diamond.h"
+#include "Items/Heart.h"
+#include "Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
@@ -15,7 +19,7 @@ public:
     enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
 
     explicit Player(const std::string &headImagePath,
-           const std::string &bodyImagePath);
+                    const std::string &bodyImagePath);
 
     explicit Player();
 
@@ -40,8 +44,19 @@ public:
 
     void SetZIndex(float index);
 
+    void UpdateCoin(const unsigned long &duringTimeMs,
+                    const glm::vec2 &destination,
+                    const uint16_t &direction);
+
+    std::shared_ptr<GameElement> GetWindowElement();
+
     void Update();
+
 private:
+    std::unique_ptr<Coin> generalCoin();
+    //    std::unique_ptr<Heat> generalHeart();
+    //    void generalTools();
+    //    void generalDiamond();
 
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;
@@ -55,13 +70,15 @@ private:
     std::shared_ptr<GameElement> m_Head = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Player = std::make_shared<GameElement>();
 
+    std::unique_ptr<Coin> m_Coin = std::make_unique<Coin>();
+    std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
+
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};
 
     float m_ZIndex = 0.5;
 
     void SetPosition(const glm::vec2 &position);
-
 };
 
 #endif // FUCK_PTSD_PLAYER_H

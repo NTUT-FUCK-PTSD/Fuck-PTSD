@@ -1,3 +1,6 @@
+#ifndef FUCK_PTSD_DIAMOND_H
+#define FUCK_PTSD_DIAMOND_H
+
 #include "GameElement.h"
 #include "Util/Text.hpp"
 #include <iostream>
@@ -40,3 +43,4 @@ private:
     std::shared_ptr<GameElement> m_DiamondText =
         std::make_shared<GameElement>();
 };
+#endif
