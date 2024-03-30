@@ -56,6 +56,13 @@ size_t SimpleMapData::GamePostion2MapIndex(const glm::ivec2 &position) const {
            (position.y - GetLevelIndexMin().y + 1) * m_Size.x;
 }
 
+bool SimpleMapData::IsPositionValid(const glm::ivec2 &position) const {
+    return position.x >= GetLevelIndexMin().x &&
+           position.x <= GetLevelIndexMax().x &&
+           position.y >= GetLevelIndexMin().y &&
+           position.y <= GetLevelIndexMax().y;
+}
+
 glm::ivec2 SimpleMapData::GetSize() const {
     return m_Size;
 }

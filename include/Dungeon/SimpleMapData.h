@@ -21,6 +21,7 @@ public:
     void SetSize(const glm::ivec2 &size);
 
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
+    bool IsPositionValid(const glm::ivec2 &position) const;
 
     void AddTile(const size_t &position, const std::shared_ptr<Tile> &tile);
     void RemoveTile(const size_t &position, const std::shared_ptr<Tile> &tile);
