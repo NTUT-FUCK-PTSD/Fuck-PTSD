@@ -23,8 +23,6 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 
     std::vector<glm::ivec2> cameFrom(mapData->GetSize().x *
                                      mapData->GetSize().y);
-    LOG_INFO("{0} {1} {2}", mapData->GetSize().x, mapData->GetSize().y,
-             mapData->GetSize().x * mapData->GetSize().y);
 
     std::vector<float> costSoFar(mapData->GetSize().x * mapData->GetSize().y,
                                  std::numeric_limits<float>::max());
@@ -41,8 +39,6 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 
         for (const auto &direction : directions) {
             glm::ivec2 next = current + direction;
-            LOG_INFO("{0} {1} {2}", next.x, next.y,
-                     mapData->GamePostion2MapIndex(next));
 
             if (mapData->IsPositionValid(next) == false) {
                 continue;
@@ -54,6 +50,11 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 
             if (mapData->GetTileBack(mapData->GamePostion2MapIndex(next))
                     ->IsWall()) {
+                continue;
+            }
+
+            if (mapData->GetTileBack(mapData->GamePostion2MapIndex(next))
+                    ->IsDoor()) {
                 continue;
             }
 
