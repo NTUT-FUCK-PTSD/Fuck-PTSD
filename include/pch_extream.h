@@ -13,6 +13,6 @@
 #include "Dungeon/Map.h"
 #include "Dungeon/Tile.h"
 #include "GameElement.h"
-#include "MainCharacter.h"
+#include "Player.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"

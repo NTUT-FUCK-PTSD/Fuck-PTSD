@@ -5,10 +5,10 @@
 
 #include "pch_extream.h"
 
-#include "Bomb.h"
-#include "Shovel.h"
-#include "Throw.h"
-#include "Weapon.h"
+#include "Player/Equipment/Bomb.h"
+#include "Player/Equipment/Shovel.h"
+#include "Player/Equipment/Throw.h"
+#include "Player/Equipment/Weapon.h"
 
 class Tools final {
 public:

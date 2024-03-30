@@ -8,12 +8,12 @@
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/Tile.h"
-#include "MainCharacter.h"
+#include "Player.h"
 
 namespace Dungeon {
 class Map final : public Util::GameObject {
 public:
-    Map(const std::shared_ptr<MainCharacter> &mainCharacter,
+    Map(const std::shared_ptr<Player> &mainCharacter,
         const std::string &path, const int &levelNum = 1);
 
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
@@ -36,7 +36,7 @@ private:
     std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
     std::vector<std::shared_ptr<Tile>> m_Tiles;
     std::vector<std::shared_ptr<Enemy>> m_Enemies;
-    std::shared_ptr<MainCharacter> m_MainCharacter;
+    std::shared_ptr<Player> m_MainCharacter;
 };
 
 } // namespace Dungeon

@@ -3,7 +3,7 @@
 
 namespace Dungeon {
 
-Map::Map(const std::shared_ptr<MainCharacter> &mainCharacter,
+Map::Map(const std::shared_ptr<Player> &mainCharacter,
          const std::string &path, const int &levelNum)
     : m_MainCharacter(mainCharacter) {
     m_Level = std::make_unique<Level>(path, levelNum);
