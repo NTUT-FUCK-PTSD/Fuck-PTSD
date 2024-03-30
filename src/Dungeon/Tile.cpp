@@ -92,7 +92,8 @@ bool Tile::IsWall() {
            m_Tile.type == 104 || m_Tile.type == 105 || m_Tile.type == 107 ||
            m_Tile.type == 108 || m_Tile.type == 109 || m_Tile.type == 110 ||
            m_Tile.type == 119 || m_Tile.type == 120 || m_Tile.type == 121 ||
-           m_Tile.type == 122 || m_Tile.type == 123;
+           m_Tile.type == 122 || m_Tile.type == 123 ||
+           (m_Tile.type >= 112 && m_Tile.type <= 117);
 }
 
 void Tile::UpdateDrawable() {
