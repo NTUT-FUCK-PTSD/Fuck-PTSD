@@ -10,7 +10,7 @@
 
 namespace Dungeon {
 
-class Level {
+class Level final {
 public:
     Level(const std::string path, const int levelNum = 1);
     void LoadLevel(const int levelNum);

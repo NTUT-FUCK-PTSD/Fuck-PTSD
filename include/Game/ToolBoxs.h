@@ -7,7 +7,7 @@
 
 #include "Util/Image.hpp"
 
-class ToolBoxs {
+class ToolBoxs final {
 public:
     static bool IsAnyKeyPress();
     static glm::vec2 CountImagePixel(const std::string &ImagePath,

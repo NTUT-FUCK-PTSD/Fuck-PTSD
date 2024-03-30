@@ -8,6 +8,9 @@
 class Animation {
 public:
     Animation(const glm::vec2 &animationPosition);
+
+    virtual ~Animation() = default;
+
     virtual void MoveByTime(const unsigned long &duringTimeMs,
                             const glm::vec2 &destination,
                             const uint16_t &direction);

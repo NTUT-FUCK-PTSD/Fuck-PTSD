@@ -7,6 +7,8 @@ class Diamond {
 public:
     Diamond();
 
+    virtual ~Diamond() = default;
+
     void plusDiamondNumber(const int number);
 
     std::size_t getDiamond();

@@ -11,6 +11,7 @@
 class GameElement : public Util::GameObject {
 public:
     //   explicit Role();
+    virtual ~GameElement() = default;
 
 private:
     void ResetPosition();

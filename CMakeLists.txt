@@ -62,6 +62,7 @@ target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_D
 target_include_directories(${PROJECT_NAME} PRIVATE ${PTSD_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${soloud_SOURCE_DIR}/include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD/3rdparty/sdl2/include)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CUSTOMIZE_PATH})
 

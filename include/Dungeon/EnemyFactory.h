@@ -8,7 +8,7 @@
 #include "Dungeon/Enemies/RedBat.h"
 
 namespace Dungeon {
-class EnemyFactory {
+class EnemyFactory final {
 public:
     static std::shared_ptr<Enemy>
     CreateEnemy(const s_Enemy &u_Enemy,

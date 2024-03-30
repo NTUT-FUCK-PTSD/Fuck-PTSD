@@ -11,7 +11,7 @@
 #include "MainCharacter.h"
 
 namespace Dungeon {
-class Map : public Util::GameObject {
+class Map final : public Util::GameObject {
 public:
     Map(const std::shared_ptr<MainCharacter> &mainCharacter,
         const std::string &path, const int &levelNum = 1);
