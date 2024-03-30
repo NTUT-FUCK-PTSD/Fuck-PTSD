@@ -96,6 +96,11 @@ bool Tile::IsWall() {
            (m_Tile.type >= 112 && m_Tile.type <= 117);
 }
 
+bool Tile::IsDoor() {
+    return m_Tile.type == 103 || m_Tile.type == 106 || m_Tile.type == 111 ||
+           m_Tile.type == 118 || (m_Tile.type >= 50 && m_Tile.type <= 52);
+}
+
 void Tile::UpdateDrawable() {
     int offSetY = 0;
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
