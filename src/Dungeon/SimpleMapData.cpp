@@ -8,20 +8,25 @@ SimpleMapData::SimpleMapData(const glm::ivec2 &levelIndexMin,
       m_LevelIndexMax(levelIndexMax),
       m_Size(size) {
     m_Tiles.resize(m_Size.x * m_Size.y);
+    m_HasEntity.resize(m_Size.x * m_Size.y, false);
 }
+
 void SimpleMapData::AddTile(const size_t &position,
                             const std::shared_ptr<Tile> &tile) {
     m_Tiles.at(position).push_back(tile);
 }
+
 void SimpleMapData::RemoveTile(const size_t &position,
                                const std::shared_ptr<Tile> &tile) {
     m_Tiles.at(position).erase(std::remove(m_Tiles.at(position).begin(),
                                            m_Tiles.at(position).end(), tile),
                                m_Tiles.at(position).end());
 }
+
 void SimpleMapData::PopbackTile(const size_t &position) {
     m_Tiles.at(position).pop_back();
 }
+
 bool SimpleMapData::IsTilesEmpty(const size_t &position) const {
     return m_Tiles.at(position).empty();
 }
@@ -63,12 +68,21 @@ bool SimpleMapData::IsPositionValid(const glm::ivec2 &position) const {
            position.y <= GetLevelIndexMax().y;
 }
 
+bool SimpleMapData::IsHasEntity(const size_t &position) const {
+    return m_HasEntity.at(position);
+}
+
 glm::ivec2 SimpleMapData::GetSize() const {
     return m_Size;
 }
 
 void SimpleMapData::SetSize(const glm::ivec2 &size) {
     m_Size = size;
+}
+
+void SimpleMapData::SetHasEntity(const size_t &position,
+                                 const bool &hasEntity) {
+    m_HasEntity.at(position) = hasEntity;
 }
 
 } // namespace Dungeon

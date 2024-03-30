@@ -10,6 +10,7 @@ MapData::MapData(const glm::vec2 &levelIndexMin, const glm::vec2 &levelIndexMax,
 void MapData::AddEnemy(const size_t &position,
                        const std::shared_ptr<Enemy> &enemy) {
     m_Enemies.at(position).push_back(enemy);
+    SetHasEntity(position, true);
 }
 
 void MapData::RemoveEnemy(const size_t &position,
@@ -18,10 +19,16 @@ void MapData::RemoveEnemy(const size_t &position,
                                              m_Enemies.at(position).end(),
                                              enemy),
                                  m_Enemies.at(position).end());
+    if (m_Enemies.at(position).empty()) {
+        SetHasEntity(position, false);
+    }
 }
 
 void MapData::PopbackEnemy(const size_t &position) {
     m_Enemies.at(position).pop_back();
+    if (m_Enemies.at(position).empty()) {
+        SetHasEntity(position, false);
+    }
 }
 
 bool MapData::IsEnemiesEmpty(const size_t &position) const {
