@@ -39,26 +39,8 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 
         for (const auto &direction : directions) {
             glm::ivec2 next = current + direction;
-            // if the position is invalid
-            if (mapData->IsPositionValid(next) == false) {
-                continue;
-            }
-            // if the tile is empty
-            if (mapData->IsTilesEmpty(mapData->GamePostion2MapIndex(next))) {
-                continue;
-            }
-            // if the tile is a wall
-            if (mapData->GetTileBack(mapData->GamePostion2MapIndex(next))
-                    ->IsWall()) {
-                continue;
-            }
-            // if the tile is a door
-            if (mapData->GetTileBack(mapData->GamePostion2MapIndex(next))
-                    ->IsDoor()) {
-                continue;
-            }
-            // if the tile has entity
-            if (mapData->IsHasEntity(mapData->GamePostion2MapIndex(next))) {
+            // if the position is not walkable
+            if (mapData->IsPositionWalkable(next) == false) {
                 continue;
             }
 
