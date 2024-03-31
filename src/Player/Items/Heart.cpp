@@ -91,7 +91,7 @@ void Heart::minusHP(float number) {
     std::size_t i = 0;
     // renderer the full heart
     for (i; i < std::size_t(m_currentHP); i++) {
-        m_ElementList[4 - i]->SetDrawable(m_FullHPImage);
+        m_ElementList[i]->SetDrawable(m_FullHPImage);
     }
 
     // render the half heart
@@ -102,6 +102,6 @@ void Heart::minusHP(float number) {
     }
 
     for (i; i< m_MaxHp ; i++) {
-        m_ElementList[4 - i] ->SetDrawable(m_EmptyHPImage);
+        m_ElementList[i] ->SetDrawable(m_EmptyHPImage);
     }
 }
