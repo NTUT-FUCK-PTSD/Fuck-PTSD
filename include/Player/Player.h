@@ -25,14 +25,21 @@ public:
 
     virtual ~Player() = default;
 
+    std::shared_ptr<GameElement> GetGameElement();
+
+    [[nodiscard]] glm::vec2 GetGamePosition();
+
+    std::shared_ptr<GameElement> GetWindowElement();
+
     void SetHeadImage(const std::string &path);
     void SetHeadImage(std::shared_ptr<SpriteSheet> image);
     void SetBodyImage(const std::string &path);
     void SetBodyImage(std::shared_ptr<SpriteSheet> image);
 
-    std::shared_ptr<GameElement> GetGameElement();
-
-    [[nodiscard]] glm::vec2 GetGamePosition();
+    void gainCoin(std::size_t number);
+    void lostCoin(std::size_t number);
+    void gainDiamond(std::size_t number);
+    void lostDiamond(std::size_t number);
 
     void SetGamePosition(const glm::vec2 &position);
 
@@ -45,18 +52,13 @@ public:
     void SetZIndex(float index);
 
     void UpdateCoin(const unsigned long &duringTimeMs,
-                    const glm::vec2 &destination,
-                    const uint16_t &direction);
-
-    std::shared_ptr<GameElement> GetWindowElement();
+                    const glm::vec2 &destination, const uint16_t &direction);
 
     void Update();
 
 private:
-    std::unique_ptr<Coin> generalCoin();
-    //    std::unique_ptr<Heat> generalHeart();
-    //    void generalTools();
-    //    void generalDiamond();
+    void rendererPlayer(const std::string &headImagePath,
+                        const std::string &bodyImagePath);
 
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;

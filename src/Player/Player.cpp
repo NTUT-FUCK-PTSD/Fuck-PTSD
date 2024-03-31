@@ -15,6 +15,13 @@ Player::Player(const std::string &headImagePath,
     : Animation({0, 0}),
       m_HeadImagePath(headImagePath),
       m_BodyImagePath(bodyImagePath) {
+
+    rendererPlayer(headImagePath, bodyImagePath);
+    Update();
+}
+
+void Player::rendererPlayer(const std::string &headImagePath,
+                            const std::string &bodyImagePath) {
     HeadSize = ToolBoxs::CountImagePixel(headImagePath, 4, 2);
     BodySize = ToolBoxs::CountImagePixel(bodyImagePath, 4, 10);
 
@@ -33,8 +40,6 @@ Player::Player(const std::string &headImagePath,
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(m_Position);
     m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
-
-    Update();
 }
 
 void Player::SetBodyImage(const std::string &path) {
@@ -124,10 +129,6 @@ void Player::SetZIndex(float index) {
     m_Head->SetZIndex(index + float(0.25));
 }
 
-std::unique_ptr<Coin> Player::generalCoin() {
-    return std::make_unique<Coin>();
-}
-
 void Player::UpdateCoin(const unsigned long &duringTimeMs,
                         const glm::vec2 &destination,
                         const uint16_t &direction) {
@@ -143,4 +144,20 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
 
     m_Window->SetVisible(false);
     return m_Window;
+}
+
+void Player::gainCoin(std::size_t number) {
+    m_Coin->plusCoinNumber(number);
+}
+
+void Player::lostCoin(std::size_t number) {
+    m_Coin->plusCoinNumber(number * -1);
+}
+
+void Player::gainDiamond(std::size_t number) {
+    m_Diamond->plusDiamondNumber(number);
+}
+
+void Player::lostDiamond(std::size_t number) {
+    m_Diamond->plusDiamondNumber(number * -1);
 }

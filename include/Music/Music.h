@@ -64,7 +64,7 @@ private:
     /* ms */
     int16_t m_TempoOffset = 0;
     std::size_t m_TempoRange = 500;
-    bool isShowHeartBeat = true;
+    bool isShowHeartBeat = false;
     int16_t m_DisplayOffset = -30;
     std::size_t m_DisplayRange = 100;
     std::size_t m_DisplayHeartBeatDurationTime = 80;
