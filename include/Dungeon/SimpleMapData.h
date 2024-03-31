@@ -32,8 +32,6 @@ public:
     bool IsTilesEmpty(const size_t &position) const;
     std::vector<std::shared_ptr<Tile>> GetTiles(const size_t &position) const;
     std::shared_ptr<Tile> GetTileBack(const size_t &position) const;
-
-protected:
     void SetHasEntity(const size_t &position, const bool &hasEntity);
 
 private:

@@ -11,6 +11,7 @@ Enemies::BlueSlime::BlueSlime(
         ASSETS_DIR "/entities/slime_blue.png", m_FrameSize, m_NormalFrames,
         true, 100, true, 100);
     m_Drawable = m_SpriteSheet;
+    m_WillMovePosition = GetGamePosition();
 
     SetHealth(4); // 2 hearts
     SetDamage(2); // 1 heart
@@ -43,18 +44,6 @@ void BlueSlime::Move() {
     }
     else {
         m_CanMove = false;
-    }
-
-    m_State++;
-}
-void BlueSlime::Update() {
-    if (m_CanMove && !m_IsAnimating) {
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
-                   m_AnimationType);
-        m_GamePosition = m_WillMovePosition;
-        m_NeedToMove = false;
-    }
-    else if (!m_CanMove && m_NeedToMove) {
         if (m_State == 2) {
             m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
             m_State += 2;
@@ -66,6 +55,17 @@ void BlueSlime::Update() {
             m_AnimationType = 0;
         }
         m_NeedToMove = false;
+    }
+
+    m_State++;
+}
+void BlueSlime::Update() {
+    if (m_CanMove && !m_IsAnimating) {
+        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
+                   m_AnimationType);
+        SetGamePosition(m_WillMovePosition);
+        m_NeedToMove = false;
+        m_CanMove = false;
     }
 
     UpdateAnimation(true);

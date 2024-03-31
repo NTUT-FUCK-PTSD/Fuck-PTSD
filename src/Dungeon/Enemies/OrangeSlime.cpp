@@ -13,6 +13,7 @@ Enemies::OrangeSlime::OrangeSlime(
         ASSETS_DIR "/entities/slime_orange.png", m_FrameSize, m_NormalFrames,
         true, 100, true, 100);
     m_Drawable = m_SpriteSheet;
+    m_WillMovePosition = GetGamePosition();
 
     SetHealth(2); // 1 heart
     SetDamage(1); // 0.5 heart
@@ -66,8 +67,9 @@ void OrangeSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    (m_StartIdx + m_State - 1) % 4);
-        m_GamePosition = m_WillMovePosition;
+        SetGamePosition(m_WillMovePosition);
         m_NeedToMove = false;
+        m_CanMove = false;
     }
     else if (!m_CanMove && m_NeedToMove) {
         m_State -= 1;
