@@ -25,8 +25,6 @@ void Skeleton::Move() {
     if (m_Attack) {
         m_WillMovePosition = FindNextToPlayer();
         auto direction = m_WillMovePosition - GetGamePosition();
-        LOG_INFO("Skeleton: Move to ({0}, {1})", m_WillMovePosition.x,
-                 m_WillMovePosition.y);
 
         if (IsVaildMove(m_WillMovePosition)) {
             m_CanMove = true;

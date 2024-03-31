@@ -62,9 +62,6 @@ glm::vec2 Enemy::FindNextToPlayer() {
     }
     auto path = Dungeon::AStar::FindPath(m_GamePosition, m_PlayerPosition,
                                          m_SimpleMapData);
-    for (auto &p : path) {
-        LOG_INFO("Path: {0}, {1}", p.x, p.y);
-    }
     if (path.empty()) {
         return m_GamePosition;
     }
