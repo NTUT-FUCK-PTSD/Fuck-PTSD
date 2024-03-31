@@ -46,6 +46,7 @@ public:
     [[nodiscard]] const glm::vec2 &GetWillMovePosition() const {
         return m_WillMovePosition;
     }
+    bool GetVisible() const { return m_Visible; }
 
     void MoveToPlayer(); // Set available WillMovePosition to slowly close
                          // PlayerPosition
