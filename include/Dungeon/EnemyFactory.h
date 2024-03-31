@@ -23,6 +23,12 @@ public:
         case 2:
             return std::make_shared<Enemies::OrangeSlime>(u_Enemy,
                                                           simpleMapData);
+        case 3:
+            return std::make_shared<Enemies::Skeleton>(u_Enemy, simpleMapData);
+        case 4:
+            return std::make_shared<Enemies::Skeleton>(u_Enemy, simpleMapData);
+        case 5:
+            return std::make_shared<Enemies::Skeleton>(u_Enemy, simpleMapData);
         case 6:
             return std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
         case 7:

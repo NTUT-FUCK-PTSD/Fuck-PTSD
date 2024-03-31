@@ -17,10 +17,12 @@ public:
 
 private:
     const glm::vec2 m_FrameSize = {24, 28};
-    std::vector<std::size_t> m_AttackFrames = {4, 5, 6, 7};
-    std::vector<std::size_t> m_ShadowAttackFrames = {20, 21, 22, 23};
+    std::vector<std::size_t> m_AttackFrames;
+    std::vector<std::size_t> m_ShadowAttackFrames;
 
     bool m_Attack = false;
+    bool m_CanDropHead = false;
+    bool m_DropHead = false;
     uint16_t m_AnimationType;
 };
 } // namespace Enemies
