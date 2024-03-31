@@ -43,3 +43,7 @@ std::shared_ptr<GameElement> Shovel::getGameElement() {
 std::vector<std::shared_ptr<Util::GameObject>> Shovel::getGameObjects() {
     return {m_Window, m_Item};
 }
+
+std::shared_ptr<GameElement> Shovel::GetGameObject() const {
+    return m_Shovel;
+}

@@ -43,3 +43,7 @@ std::shared_ptr<GameElement> Weapon::getGameElement() {
 std::vector<std::shared_ptr<Util::GameObject>> Weapon::getGameObjects() {
     return {m_Window, m_Item};
 }
+
+std::shared_ptr<GameElement> Weapon::GetGameObject() const {
+    return m_Attack;
+}
