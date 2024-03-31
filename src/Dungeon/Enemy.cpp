@@ -1,4 +1,6 @@
 #include "Dungeon/Enemy.h"
+
+#include "Dungeon/AStar.h"
 #include "ToolBoxs.h"
 
 namespace Dungeon {
@@ -52,6 +54,23 @@ void Enemy::TempoMove() {
 
 bool Enemy::IsVaildMove(const glm::vec2 &position) {
     return m_SimpleMapData->IsPositionWalkable(position);
+}
+
+glm::vec2 Enemy::FindNextToPlayer() {
+    if (m_PlayerPosition == m_GamePosition) {
+        return m_GamePosition;
+    }
+    auto path = Dungeon::AStar::FindPath(m_GamePosition, m_PlayerPosition,
+                                         m_SimpleMapData);
+    for (auto &p : path) {
+        LOG_INFO("Path: {0}, {1}", p.x, p.y);
+    }
+    if (path.empty()) {
+        return m_GamePosition;
+    }
+    else {
+        return path[1];
+    }
 }
 
 } // namespace Dungeon
