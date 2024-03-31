@@ -21,6 +21,8 @@ public:
     void SetSize(const glm::ivec2 &size);
 
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
+    bool IsPositionValid(const glm::ivec2 &position) const;
+    bool IsHasEntity(const size_t &position) const;
 
     void AddTile(const size_t &position, const std::shared_ptr<Tile> &tile);
     void RemoveTile(const size_t &position, const std::shared_ptr<Tile> &tile);
@@ -29,10 +31,14 @@ public:
     std::vector<std::shared_ptr<Tile>> GetTiles(const size_t &position) const;
     std::shared_ptr<Tile> GetTileBack(const size_t &position) const;
 
+protected:
+    void SetHasEntity(const size_t &position, const bool &hasEntity);
+
 private:
     glm::ivec2 m_LevelIndexMin;
     glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_Size;
+    std::vector<bool> m_HasEntity;
     std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
 };
 } // namespace Dungeon

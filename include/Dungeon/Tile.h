@@ -19,6 +19,7 @@ public:
     std::size_t GetIndex();
     s_Tile GetTile();
     bool IsWall();
+    bool IsDoor();
 
     void UpdateDrawable();
 
