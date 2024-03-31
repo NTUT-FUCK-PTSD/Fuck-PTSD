@@ -45,6 +45,9 @@ void Enemy::SetLord(const bool &lord) {
 }
 
 void Enemy::TempoMove() {
+    if (GetVisible() == false) {
+        return;
+    }
     if (m_BeatDelay > 0) {
         m_BeatDelay--;
         return;
