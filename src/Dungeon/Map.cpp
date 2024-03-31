@@ -130,10 +130,10 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
         m_Enemies.push_back(m_MapData->GetEnemy(mapIndex));
     }
 
-    // Add a Bat for testing
+    // Add testing
     m_MapData->AddEnemy(
         GamePostion2MapIndex({1, 1}),
-        std::make_shared<Enemies::Bat>(s_Enemy{1, 1, 0, 0, 0}, m_MapData));
+        std::make_shared<Enemies::Skeleton>(s_Enemy{1, 1, 0, 0, 0}, m_MapData));
     m_Enemies.push_back(m_MapData->GetEnemy(GamePostion2MapIndex({1, 1})));
 
     for (auto &tile : m_Tiles) {

@@ -6,6 +6,7 @@
 #include "Dungeon/Enemies/GreenSlime.h"
 #include "Dungeon/Enemies/OrangeSlime.h"
 #include "Dungeon/Enemies/RedBat.h"
+#include "Dungeon/Enemies/Skeleton.h"
 
 namespace Dungeon {
 class EnemyFactory final {
