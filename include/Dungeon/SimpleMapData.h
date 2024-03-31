@@ -23,6 +23,8 @@ public:
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
     bool IsPositionValid(const glm::ivec2 &position) const;
     bool IsHasEntity(const size_t &position) const;
+    bool IsWalkable(const size_t &position) const;
+    bool IsPositionWalkable(const glm::ivec2 &position) const;
 
     void AddTile(const size_t &position, const std::shared_ptr<Tile> &tile);
     void RemoveTile(const size_t &position, const std::shared_ptr<Tile> &tile);

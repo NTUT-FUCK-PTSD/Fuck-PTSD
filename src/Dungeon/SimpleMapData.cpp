@@ -72,6 +72,16 @@ bool SimpleMapData::IsHasEntity(const size_t &position) const {
     return m_HasEntity.at(position);
 }
 
+bool SimpleMapData::IsWalkable(const size_t &position) const {
+    return !IsTilesEmpty(position) && !GetTileBack(position)->IsWall() &&
+           !GetTileBack(position)->IsDoor() && !m_HasEntity.at(position);
+}
+
+bool SimpleMapData::IsPositionWalkable(const glm::ivec2 &position) const {
+    return IsPositionValid(position) &&
+           IsWalkable(GamePostion2MapIndex(position));
+}
+
 glm::ivec2 SimpleMapData::GetSize() const {
     return m_Size;
 }
