@@ -1,10 +1,11 @@
 #include "Dungeon/Map.h"
+
 #include "Dungeon/EnemyFactory.h"
 
 namespace Dungeon {
 
-Map::Map(const std::shared_ptr<Player> &mainCharacter,
-         const std::string &path, const int &levelNum)
+Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
+         const int &levelNum)
     : m_MainCharacter(mainCharacter) {
     m_Level = std::make_unique<Level>(path, levelNum);
 
@@ -126,14 +127,14 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter,
         mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
         m_MapData->AddEnemy(mapIndex,
                             EnemyFactory::CreateEnemy(enemy, m_MapData));
-        m_Enemies.push_back(m_MapData->GetEnemyBack(mapIndex));
+        m_Enemies.push_back(m_MapData->GetEnemy(mapIndex));
     }
 
     // Add a Bat for testing
     m_MapData->AddEnemy(
         GamePostion2MapIndex({1, 1}),
         std::make_shared<Enemies::Bat>(s_Enemy{1, 1, 0, 0, 0}, m_MapData));
-    m_Enemies.push_back(m_MapData->GetEnemyBack(GamePostion2MapIndex({1, 1})));
+    m_Enemies.push_back(m_MapData->GetEnemy(GamePostion2MapIndex({1, 1})));
 
     for (auto &tile : m_Tiles) {
         m_Children.push_back(tile);
@@ -184,19 +185,16 @@ void Map::Update() {
     size_t mapIndex = 0;
     CameraUpdate();
     for (auto &enemy : m_Enemies) {
-        // if (!(enemy->GetGamePosition() == enemy->GetWillMovePosition()) &&
-        //     isVaildMove(enemy->GetWillMovePosition())) {
-        // enemy->SetCanMove(true);
+        if (!enemy->GetVisible()) {
+            continue;
+        }
         if (enemy->GetCanMove()) {
             mapIndex = GamePostion2MapIndex(enemy->GetGamePosition());
 
-            m_MapData->RemoveEnemy(mapIndex, enemy);
+            m_MapData->RemoveEnemy(mapIndex);
             m_MapData->AddEnemy(
                 GamePostion2MapIndex(enemy->GetWillMovePosition()), enemy);
         }
-        // else {
-        //     enemy->SetCanMove(false);
-        // }
         enemy->SetPlayerPosition(m_MainCharacter->GetGamePosition());
         enemy->Update();
     }
