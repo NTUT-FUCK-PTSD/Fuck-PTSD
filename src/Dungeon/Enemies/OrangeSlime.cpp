@@ -45,6 +45,7 @@ void OrangeSlime::Move() {
     else if (m_State == 1) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
+        SetFaceRight(true);
     }
     else if (m_State == 2) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
@@ -53,6 +54,7 @@ void OrangeSlime::Move() {
     else if (m_State == 3) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
+        SetFaceRight(false);
     }
     if (IsVaildMove(m_WillMovePosition)) {
         m_CanMove = true;

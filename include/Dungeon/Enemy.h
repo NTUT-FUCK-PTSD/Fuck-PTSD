@@ -29,6 +29,9 @@ public:
     void SetPlayerPosition(const glm::vec2 &playerPosition) {
         m_PlayerPosition = playerPosition;
     }
+    void SetFaceRight(bool faceToRight) {
+        m_Transform.scale.x = faceToRight ? DUNGEON_SCALE : -DUNGEON_SCALE;
+    }
 
     [[nodiscard]] glm::vec2 GetPlayerPosition() const {
         return m_PlayerPosition;

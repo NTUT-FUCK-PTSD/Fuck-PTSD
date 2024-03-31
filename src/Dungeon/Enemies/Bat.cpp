@@ -92,36 +92,31 @@ void Bat::RandomMove() {
         switch (m_RandomPool[index]) {
         case 0:
             m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
-            m_RandomPool.erase(
-                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 0),
-                m_RandomPool.end());
             break;
         case 1:
             m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
-            m_RandomPool.erase(
-                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 1),
-                m_RandomPool.end());
             break;
         case 2:
-            m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
-            m_RandomPool.erase(
-                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 2),
-                m_RandomPool.end());
+            m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0);
             break;
         case 3:
-            m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0);
-            m_RandomPool.erase(
-                std::remove(m_RandomPool.begin(), m_RandomPool.end(), 3),
-                m_RandomPool.end());
+            m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
             break;
         }
         if (IsVaildMove(m_WillMovePosition)) {
             m_CanMove = true;
+            if (m_RandomPool[index] == 2) {
+                SetFaceRight(true);
+            }
+            else if (m_RandomPool[index] == 3) {
+                SetFaceRight(false);
+            }
             return;
         }
         else {
             m_CanMove = false;
         }
+        m_RandomPool.erase(m_RandomPool.begin() + index);
     }
 }
 } // namespace Dungeon::Enemies
