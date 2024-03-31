@@ -71,6 +71,9 @@ private:
     std::shared_ptr<GameElement> m_Player = std::make_shared<GameElement>();
 
     std::unique_ptr<Coin> m_Coin = std::make_unique<Coin>();
+    std::unique_ptr<Heart> m_Heart = std::make_unique<Heart>();
+    std::unique_ptr<Tools> m_Tools = std::make_unique<Tools>();
+    std::unique_ptr<Diamond> m_Diamond = std::make_unique<Diamond>();
     std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
 
     glm::vec2 m_Position = {0, 0};

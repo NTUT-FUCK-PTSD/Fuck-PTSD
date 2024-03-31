@@ -20,7 +20,7 @@ public:
 
     std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() override;
 
-
+    std::shared_ptr<GameElement> GetGameObject() const override;
 private:
     std::size_t m_ZIndex = 50;
     glm::vec2 m_Scale = {3,3 };

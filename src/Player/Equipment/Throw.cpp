@@ -47,7 +47,7 @@ Throw::Throw() {
     m_Throw->AddChild(m_Window);
     m_Throw->AddChild(m_Item);
 
-    m_Throw->SetVisible(true);
+    m_Throw->SetVisible(false);
 };
 
 void Throw::setPosition(const glm::vec2 position) {

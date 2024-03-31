@@ -43,8 +43,10 @@ Bomb::Bomb() {
 
     m_Bomb->AddChild(m_Window);
     m_Bomb->AddChild(m_Item);
+    m_Bomb->AddChild(m_Text);
+    m_Bomb->AddChild(m_LowerText);
 
-    m_Bomb->SetVisible(true);
+    m_Bomb->SetVisible(false);
 };
 
 void Bomb::setPosition(const glm::vec2 position) {
@@ -59,4 +61,8 @@ std::shared_ptr<GameElement> Bomb::getGameElement() {
 }
 std::vector<std::shared_ptr<Util::GameObject>> Bomb::getGameObjects() {
     return {m_Window, m_Item, m_Text, m_LowerText};
+}
+
+std::shared_ptr<GameElement> Bomb::GetGameObject() const {
+    return m_Bomb;
 }

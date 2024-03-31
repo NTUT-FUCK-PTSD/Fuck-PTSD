@@ -51,3 +51,11 @@ void Diamond::plusDiamondNumber(const int number) {
 
     toLeftSideDiamondText();
 }
+
+std::shared_ptr<GameElement> Diamond::GetGameObject() {
+    m_Diamond -> AddChild(m_DiamondImage);
+    m_Diamond->AddChild(m_DiamondText);
+    m_Diamond->SetVisible(false);
+
+    return m_Diamond;
+}

@@ -29,7 +29,7 @@ Weapon::Weapon() {
     m_Attack->AddChild(m_Window);
     m_Attack->AddChild(m_Item);
 
-    m_Attack->SetVisible(true);
+    m_Attack->SetVisible(false);
 };
 
 void Weapon::setPosition(const glm::vec2 position) {

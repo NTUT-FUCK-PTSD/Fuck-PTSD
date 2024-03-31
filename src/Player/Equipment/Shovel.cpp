@@ -29,7 +29,7 @@ Shovel::Shovel() {
     m_Shovel->AddChild(m_Window);
     m_Shovel->AddChild(m_Item);
 
-    m_Shovel->SetVisible(true);
+    m_Shovel->SetVisible(false);
 };
 
 void Shovel::setPosition(const glm::vec2 position) {

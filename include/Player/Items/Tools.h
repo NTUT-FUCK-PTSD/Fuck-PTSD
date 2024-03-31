@@ -14,9 +14,9 @@ class Tools final {
 public:
     explicit Tools();
 
-    std::shared_ptr<Util::GameObject> getGameObject();
-
     std::vector<std::shared_ptr<Util::GameObject>> getGameObjects();
+
+    [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const;
 
 private:
     std::vector<std::shared_ptr<Util::GameObject>> m_TempGameObejct;
@@ -37,8 +37,8 @@ private:
     std::shared_ptr<Bomb> m_Bomb;
     glm::vec2 m_BombPosition = {-655, 70};
 
-    std::shared_ptr<Util::GameObject> m_Tools =
-        std::make_shared<Util::GameObject>();
+    std::shared_ptr<GameElement> m_Tools =
+        std::make_shared<GameElement>();
 };
 
 #endif // FUCK_PTSD_TOOLS_H

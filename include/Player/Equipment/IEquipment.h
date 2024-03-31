@@ -17,6 +17,8 @@ public:
 
     virtual std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() = 0;
 
+    virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
+
     //    virtual GameElement getWindowObject() = 0;
     //    virtual GameElement getItemObject() = 0;
 };

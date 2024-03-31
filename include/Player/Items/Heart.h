@@ -26,6 +26,8 @@ public:
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
     getGameObjects() const;
 
+    std::shared_ptr<GameElement> GetGameObject() const ;
+
 private:
     void IsDead();
 
@@ -48,6 +50,8 @@ private:
     std::shared_ptr<GameElement> m_OneHeart = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_TwoHeart = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_ThreeHeart = std::make_shared<GameElement>();
+
+    std::shared_ptr<GameElement> m_Heart = std::make_shared<GameElement>();
 };
 
 #endif // FUCK_PTSD_HEART_H

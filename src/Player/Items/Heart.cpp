@@ -20,3 +20,12 @@ Heart::Heart() {
 std::vector<std::shared_ptr<Util::GameObject>> Heart::getGameObjects() const {
     return {m_OneHeart, m_TwoHeart, m_ThreeHeart};
 }
+
+std::shared_ptr<GameElement> Heart::GetGameObject() const {
+    m_Heart->AddChild(m_OneHeart);
+    m_Heart->AddChild(m_TwoHeart);
+    m_Heart->AddChild(m_ThreeHeart);
+
+    m_Heart->SetVisible(false);
+    return m_Heart;
+}

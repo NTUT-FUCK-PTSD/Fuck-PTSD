@@ -24,13 +24,6 @@ Tools::Tools() {
     m_Bomb = std::make_shared<Bomb>();
     m_Bomb->setPosition(m_BombPosition);
 }
-
-std::shared_ptr<Util::GameObject> Tools::getGameObject() {
-    m_Tools->AddChild(m_Shovel->getGameElement());
-
-    m_Tools->SetVisible(true);
-    return m_Tools;
-}
 std::vector<std::shared_ptr<Util::GameObject>> Tools::getGameObjects() {
     auto s = m_Shovel->getGameObjects();
     auto a = m_Attack->getGameObjects();
@@ -51,4 +44,14 @@ std::vector<std::shared_ptr<Util::GameObject>> Tools::getGameObjects() {
     }
 
     return m_TempGameObejct;
+}
+
+std::shared_ptr<GameElement> Tools::GetGameObject() const {
+    m_Tools ->AddChild(m_Shovel->GetGameObject());
+    m_Tools->AddChild(m_Attack->GetGameObject());
+    m_Tools->AddChild(m_Throw->GetGameObject());
+    m_Tools->AddChild(m_Bomb->GetGameObject());
+
+    m_Tools->SetVisible(false);
+    return m_Tools;
 }
