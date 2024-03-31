@@ -29,8 +29,8 @@ public:
     void SetPlayerPosition(const glm::vec2 &playerPosition) {
         m_PlayerPosition = playerPosition;
     }
-    void SetFaceRight(bool faceToRight) {
-        m_Transform.scale.x = faceToRight ? DUNGEON_SCALE : -DUNGEON_SCALE;
+    void SetFace(bool faceTo) {
+        m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
     }
 
     [[nodiscard]] glm::vec2 GetPlayerPosition() const {
@@ -51,8 +51,8 @@ public:
     }
     bool GetVisible() const { return m_Visible; }
 
-    void MoveToPlayer(); // Set available WillMovePosition to slowly close
-                         // PlayerPosition
+    glm::vec2 FindNextToPlayer(); // Set available WillMovePosition to slowly
+                                  // close PlayerPosition
     void TempoMove();
     bool IsVaildMove(const glm::vec2 &position);
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
