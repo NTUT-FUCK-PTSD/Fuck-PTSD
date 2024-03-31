@@ -44,12 +44,7 @@ void Enemy::TempoMove() {
 }
 
 bool Enemy::IsVaildMove(const glm::vec2 &position) {
-    if (m_SimpleMapData
-            ->GetTileBack(m_SimpleMapData->GamePostion2MapIndex(position))
-            ->IsWall()) {
-        return false;
-    }
-    return true;
+    return m_SimpleMapData->IsPositionWalkable(position);
 }
 
 } // namespace Dungeon
