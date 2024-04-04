@@ -29,27 +29,37 @@ void Heart::resetHP() {
         return;
     }
 
-    auto position = m_FirstPosition;
+    if (std::size_t(m_MaxHp) > 10 ) {
+        LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 10");
+        return ;
+    }
+
+    glm::vec2 Initposition = m_FirstPosition;
+
+    float m_Times_X = (m_MaxHp - 1) / 5 == 0 ? m_MaxHp : 4;
+    Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
+
     for (int i = 0; i < std::size_t(m_MaxHp); i++) {
 
-        const auto heart = generalHeart(FULL, position);
+        LOG_INFO(Initposition);
+
+        const auto heart = generalHeart(FULL, Initposition);
         m_ElementList.push_back(heart);
 
-        // heart's y position
         if ((i + 1) % 5 == 0 && i != 0) {
-            position = {m_FirstPosition.x,
-                        m_FirstPosition.y + m_eachPositionDiff_Y.y};
+            Initposition = Initposition + m_eachPositionDiff_Y;
+
+            float m_Times_X = (i + 1) % 5 == 0 ? size_t(m_MaxHp) % 5 :(i + 1) % 5 + 1;
+            Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
         }
-        // heart's x position
-        if ((i + 1) % 5 != 0 || i == 0) {
-            position = position + m_eachPositionDiff_X;
-        }
+
+        Initposition = Initposition - m_eachPositionDiff_X;
     }
 
     m_currentHP = m_MaxHp;
     rendererHeart();
-    minusHP(2.5);
-
+    m_ElementList[5]->SetDrawable(m_HalfHPImage);
+    //        minusHP(1.0f);
 }
 
 std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
@@ -101,7 +111,7 @@ void Heart::minusHP(float number) {
         i++;
     }
 
-    for (i; i< m_MaxHp ; i++) {
-        m_ElementList[i] ->SetDrawable(m_EmptyHPImage);
+    for (i; i < m_MaxHp; i++) {
+        m_ElementList[i]->SetDrawable(m_EmptyHPImage);
     }
 }

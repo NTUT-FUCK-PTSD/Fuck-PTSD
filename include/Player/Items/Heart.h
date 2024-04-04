@@ -43,8 +43,9 @@ private:
     void rendererHeart();
 
     // HP settings
-    float m_MaxHp = 5.0f;
-    float m_currentHP = 5.0f;
+    //
+    float m_MaxHp = 6.0f;
+    float m_currentHP = 6.0f;
     const glm::vec2 m_FirstPosition = {500, 350};
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
