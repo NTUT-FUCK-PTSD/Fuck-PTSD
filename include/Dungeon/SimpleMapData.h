@@ -15,10 +15,12 @@ public:
     [[nodiscard]] glm::ivec2 GetLevelIndexMax() const;
     [[nodiscard]] glm::ivec2 GetLevelIndexMin() const;
     [[nodiscard]] glm::ivec2 GetSize() const;
+    [[nodiscard]] glm::vec2 GetPlayerPosition() const;
 
     void SetLevelIndexMax(const glm::ivec2 &levelIndexMax);
     void SetLevelIndexMin(const glm::ivec2 &levelIndexMin);
     void SetSize(const glm::ivec2 &size);
+    void SetPlayerPosition(const glm::vec2 &playerPosition);
 
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
     bool IsPositionValid(const glm::ivec2 &position) const;
@@ -40,6 +42,7 @@ private:
     glm::ivec2 m_Size;
     std::vector<bool> m_HasEntity;
     std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
+    glm::vec2 m_PlayerPosition;
 };
 } // namespace Dungeon
 

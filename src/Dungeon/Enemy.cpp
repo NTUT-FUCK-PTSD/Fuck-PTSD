@@ -60,13 +60,13 @@ bool Enemy::IsVaildMove(const glm::vec2 &position) {
 }
 
 glm::vec2 Enemy::FindNextToPlayer() {
-    if (m_PlayerPosition == m_GamePosition) {
-        return m_GamePosition;
+    if (GetPlayerPosition() == GetGamePosition()) {
+        return GetGamePosition();
     }
-    auto path = Dungeon::AStar::FindPath(m_GamePosition, m_PlayerPosition,
+    auto path = Dungeon::AStar::FindPath(GetGamePosition(), GetPlayerPosition(),
                                          m_SimpleMapData);
     if (path.empty()) {
-        return m_GamePosition;
+        return GetGamePosition();
     }
     else {
         return path[1];

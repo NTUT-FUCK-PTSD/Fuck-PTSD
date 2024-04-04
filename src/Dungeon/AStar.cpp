@@ -72,7 +72,8 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 }
 
 float AStar::Heuristic(const glm::ivec2 &start, const glm::ivec2 &end) {
-    return glm::distance(glm::vec2(start), glm::vec2(end));
+    auto difference = abs(glm::vec2(start) - glm::vec2(end));
+    return difference.x + difference.y;
 }
 
 std::vector<glm::ivec2>

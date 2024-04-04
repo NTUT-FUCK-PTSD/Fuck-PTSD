@@ -13,6 +13,7 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
              3; // add 3 for the border
     m_MapData = std::make_shared<MapData>(m_Level->GetLevelIndexMin(),
                                           m_Level->GetLevelIndexMax(), m_Size);
+    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
     size_t mapIndex = 0, tmpMapIndex = 0;
 
     for (auto &tile : m_Level->GetTiles()) {
@@ -131,10 +132,10 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
     }
 
     // Add testing
-    m_MapData->AddEnemy(
-        GamePostion2MapIndex({1, 1}),
-        std::make_shared<Enemies::Skeleton>(s_Enemy{1, 1, 3, 0, 0}, m_MapData));
-    m_Enemies.push_back(m_MapData->GetEnemy(GamePostion2MapIndex({1, 1})));
+    mapIndex = GamePostion2MapIndex({1, 1});
+    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
+    m_MapData->AddEnemy(mapIndex, enemy);
+    m_Enemies.push_back(m_MapData->GetEnemy(mapIndex));
 
     for (auto &tile : m_Tiles) {
         m_Children.push_back(tile);
@@ -176,6 +177,7 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate() {
+    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
     for (auto &enemy : m_Enemies) {
         enemy->TempoMove();
     }
@@ -195,7 +197,6 @@ void Map::Update() {
             m_MapData->AddEnemy(
                 GamePostion2MapIndex(enemy->GetWillMovePosition()), enemy);
         }
-        enemy->SetPlayerPosition(m_MainCharacter->GetGamePosition());
         enemy->Update();
     }
 }

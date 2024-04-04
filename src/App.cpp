@@ -29,11 +29,12 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // play main background music
     m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
-//    m_MusicSystem->skipToTargetTime(118.2f);
+    //    m_MusicSystem->skipToTargetTime(118.2f);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
-        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
+        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+            Util::Input::IfExit()) {
             m_CurrentState = State::END;
         }
         m_MusicSystem->Update();
@@ -42,13 +43,13 @@ void App::Start(std::shared_ptr<Core::Context>
     }
 
     // play lobby music
-//    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
-//    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
-//    m_MusicSystem->setSpeed(1.2);
+    //    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
+    //    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
+    //    m_MusicSystem->setSpeed(1.2);
 
     // play zone1 leve1
-    m_MusicSystem->playMusic(ASSETS_DIR"/music/zone1_1.ogg", true);
-    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/zone1_1.txt");
+    m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
+    m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
 
     // remove background
     m_Camera->RemoveChild(background->GetGameElement());
@@ -56,7 +57,8 @@ void App::Start(std::shared_ptr<Core::Context>
     // create Player
     m_MainCharacter = std::make_shared<Player>();
     m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
-    m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png");
+    m_MainCharacter->SetBodyImage(ASSETS_DIR
+                                  "/entities/player1_armor_body.png");
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
 
     // Test the Dungeon::Map
@@ -85,7 +87,6 @@ void App::Start(std::shared_ptr<Core::Context>
 
 void App::Update() {
 
-
     // add coin
     if (Util::Input::IsKeyDown(Util::Keycode::B)) {
         m_Coin->plusCoinNumber(10);
@@ -102,9 +103,10 @@ void App::Update() {
 
     // player move
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
-        Util::Input::IsKeyDown(Util::Keycode::D) ||
-        Util::Input::IsKeyDown(Util::Keycode::S) ||
-        Util::Input::IsKeyDown(Util::Keycode::A)) && m_MusicSystem->TempoTrigger()) {
+         Util::Input::IsKeyDown(Util::Keycode::D) ||
+         Util::Input::IsKeyDown(Util::Keycode::S) ||
+         Util::Input::IsKeyDown(Util::Keycode::A)) &&
+        m_MusicSystem->TempoTrigger()) {
 
         if (m_PlayerMoveDirect != Player::NONE) {
             m_PlayerMoveDirect = Player::NONE;
@@ -153,6 +155,7 @@ void App::Update() {
         }
         m_MainCharacter->MoveByTime(200, m_AniPlayerDestination,
                                     m_PlayerMoveDirect);
+        m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->TempoUpdate();
     }

@@ -26,15 +26,13 @@ public:
     void SetHealth(const size_t &health) { m_Health = health; }
     void SetCoin(const size_t &coin) { m_Coin = coin; }
     void SetCanMove(const bool &canMove) { m_CanMove = canMove; }
-    void SetPlayerPosition(const glm::vec2 &playerPosition) {
-        m_PlayerPosition = playerPosition;
-    }
+
     void SetFace(bool faceTo) {
         m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
     }
 
     [[nodiscard]] glm::vec2 GetPlayerPosition() const {
-        return m_PlayerPosition;
+        return m_SimpleMapData->GetPlayerPosition();
     }
     [[nodiscard]] bool GetCanMove() const { return m_CanMove; }
     [[nodiscard]] const glm::vec2 &GetGamePosition() const {
@@ -51,13 +49,19 @@ public:
     }
     bool GetVisible() const { return m_Visible; }
 
-    glm::vec2 FindNextToPlayer(); // Set available WillMovePosition to slowly
-                                  // close PlayerPosition
+    virtual glm::vec2 FindNextToPlayer(); // Set available WillMovePosition to
+                                          // slowly close PlayerPosition
     void TempoMove();
     bool IsVaildMove(const glm::vec2 &position);
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
         return m_SimpleMapData->GamePostion2MapIndex(position);
     }
+    virtual void Struck(const size_t &damage) {
+        m_Health -= damage;
+        if (m_Health <= 0) {
+            SetVisible(false);
+        }
+    };
 
     virtual void Move() = 0;
     virtual void Update(){};
@@ -71,7 +75,6 @@ protected:
     glm::vec2 m_GamePosition;
     bool m_CanMove = false;
     glm::vec2 m_WillMovePosition;
-    glm::vec2 m_PlayerPosition;
 
 private:
     size_t m_BeatDelay;

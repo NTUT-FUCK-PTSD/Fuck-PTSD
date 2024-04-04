@@ -95,4 +95,12 @@ void SimpleMapData::SetHasEntity(const size_t &position,
     m_HasEntity.at(position) = hasEntity;
 }
 
+glm::vec2 SimpleMapData::GetPlayerPosition() const {
+    return m_PlayerPosition;
+}
+
+void SimpleMapData::SetPlayerPosition(const glm::vec2 &playerPosition) {
+    m_PlayerPosition = playerPosition;
+}
+
 } // namespace Dungeon
