@@ -6,7 +6,6 @@
 #include "Dungeon/Enemies/Ghost.h"
 #include "Dungeon/Enemies/GreenSlime.h"
 #include "Dungeon/Enemies/OrangeSlime.h"
-#include "Dungeon/Enemies/RedBat.h"
 #include "Dungeon/Enemies/Skeleton.h"
 #include "Dungeon/Enemies/Zombie.h"
 
@@ -34,7 +33,9 @@ public:
         case 6:
             return std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
         case 7:
-            return std::make_shared<Enemies::RedBat>(u_Enemy, simpleMapData);
+            return std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
+        case 8:
+            return std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
         case 11:
             return std::make_shared<Enemies::Ghost>(u_Enemy, simpleMapData);
         case 12:
