@@ -17,7 +17,7 @@ public:
     void Update() override;
 
 private:
-    const glm::vec2 m_FrameSize = {24, 28};
+    const glm::vec2 m_FrameSize = {24, 25};
     std::vector<std::size_t> m_AttackFrames;
     std::vector<std::size_t> m_ShadowAttackFrames;
     std::vector<std::size_t> m_BackFrames;
