@@ -112,7 +112,7 @@ public:
      * @param transform Transformation matrix for drawing.
      * @param zIndex Z-index for drawing.
      */
-    void Draw(const Util::Transform &transform, const float zIndex) override;
+    void Draw(const Core::Matrices &data) override;
 
     /**
      * @brief Reset the animation to its initial frame.
@@ -143,6 +143,8 @@ public:
     void SetFrames(const std::vector<std::size_t> &frames) {
         m_Frames = frames;
     }
+
+    void SetAlpha(const Uint8 alpha);
 
 private:
     /**
