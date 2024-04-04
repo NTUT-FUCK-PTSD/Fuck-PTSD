@@ -82,7 +82,7 @@ void Skeleton::Move() {
         }
     }
     m_Attack = !m_Attack;
-} // Green_Slime does not move
+}
 void Skeleton::Update() {
     if (m_Attack) {
         m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowAttackFrames
