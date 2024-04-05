@@ -58,8 +58,6 @@ void Heart::resetHP() {
 
     m_currentHP = m_MaxHp;
     rendererHeart();
-    m_ElementList[5]->SetDrawable(m_HalfHPImage);
-    //        minusHP(1.0f);
 }
 
 std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
@@ -87,9 +85,6 @@ std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
     return resultObject;
 }
 
-// 2.5
-// 2
-// 0.5
 void Heart::minusHP(float number) {
     if (std::size_t(number * 2) % 1 != 0) {
         LOG_ERROR("the Heart's minusHP is not value of time of 1 or 0.5.");
