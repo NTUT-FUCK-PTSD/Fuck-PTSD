@@ -7,6 +7,7 @@
 Player::Player()
     : Animation({0, 0}) {
 
+    useDefaultSettingsTool();
     Update();
 }
 
@@ -161,3 +162,7 @@ void Player::gainDiamond(std::size_t number) {
 void Player::lostDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number * -1);
 }
+
+//void Player::useDefaultSettingsTool() {
+//    m_Tools->SetShovelType();
+//}

@@ -18,6 +18,11 @@ public:
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const;
 
+    void SetShovelType(Shovel::Type type);
+    void SetAttackType();
+    void SetThrowType();
+    void SetBombType();
+
 private:
     std::vector<std::shared_ptr<Util::GameObject>> m_TempGameObejct;
 

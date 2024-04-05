@@ -12,6 +12,10 @@
 
 class Shovel final : public IEquipment {
 public:
+    enum Type {
+        Normal,
+    };
+
     explicit Shovel();
 
     [[nodiscard]] std::shared_ptr<GameElement> getGameElement() override;

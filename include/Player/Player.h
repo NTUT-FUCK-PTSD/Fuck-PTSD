@@ -25,36 +25,44 @@ public:
 
     virtual ~Player() = default;
 
+    // some getter
     std::shared_ptr<GameElement> GetGameElement();
-
     [[nodiscard]] glm::vec2 GetGamePosition();
-
     std::shared_ptr<GameElement> GetWindowElement();
 
+    // set player's settings
+    void SetGamePosition(const glm::vec2 &position);
+    void SetBodyImagePath(const std::string &Path) { m_BodyImagePath = Path; };
+    void SetHeadImagePath(const std::string &Path) { m_HeadImagePath = Path; }
+    void SetFaceTo(Direction direction);
+    void SetZIndex(float index);
+
+    // set player outside
     void SetHeadImage(const std::string &path);
     void SetHeadImage(std::shared_ptr<SpriteSheet> image);
     void SetBodyImage(const std::string &path);
     void SetBodyImage(std::shared_ptr<SpriteSheet> image);
 
+    // set player's item
     void gainCoin(std::size_t number);
     void lostCoin(std::size_t number);
     void gainDiamond(std::size_t number);
     void lostDiamond(std::size_t number);
 
-    void SetGamePosition(const glm::vec2 &position);
+    // DOTO: set player's heart
+    void lostHP(std::size_t value);
+    void gainHP(std::size_t value);
+    void getHP(std::size_t value);
 
-    void SetBodyImagePath(const std::string &Path) { m_BodyImagePath = Path; };
+    // set player's tool
+    void useDefaultSettingsTool();
 
-    void SetHeadImagePath(const std::string &Path) { m_HeadImagePath = Path; }
+    // update
+    void Update();
 
-    void SetFaceTo(Direction direction);
-
-    void SetZIndex(float index);
-
+    // some unused functional
     void UpdateCoin(const unsigned long &duringTimeMs,
                     const glm::vec2 &destination, const uint16_t &direction);
-
-    void Update();
 
 private:
     void rendererPlayer(const std::string &headImagePath,
