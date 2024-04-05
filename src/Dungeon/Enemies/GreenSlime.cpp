@@ -11,6 +11,7 @@ Enemies::GreenSlime::GreenSlime(
         ASSETS_DIR "/entities/slime_green.png", m_FrameSize, m_NormalFrames,
         true, 100, true, 100);
     m_Drawable = m_SpriteSheet;
+    m_WillMovePosition = GetGamePosition();
 
     SetHealth(2);   // 1 heart
     SetDamage(100); // 50 hearts

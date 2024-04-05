@@ -26,59 +26,54 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 
     std::vector<float> costSoFar(mapData->GetSize().x * mapData->GetSize().y,
                                  std::numeric_limits<float>::max());
+
+    std::pair<float, glm::ivec2> lastminPath = {
+        std::numeric_limits<float>::max(), start};
     costSoFar[mapData->GamePostion2MapIndex(start)] = 0;
 
     while (!frontier.empty()) {
-        auto current = frontier.top().second;
+        std::pair<float, glm::ivec2> current = frontier.top();
         frontier.pop();
+        if (Heuristic(current.second, end) <
+            Heuristic(lastminPath.second, end)) {
+            lastminPath = current;
+        }
 
-        if (current == end) {
+        if (current.second == end) {
             path = CalculatePath(cameFrom, start, end, mapData);
             break;
         }
 
         for (const auto &direction : directions) {
-            glm::ivec2 next = current + direction;
-            // if the position is invalid
-            if (mapData->IsPositionValid(next) == false) {
-                continue;
-            }
-            // if the tile is empty
-            if (mapData->IsTilesEmpty(mapData->GamePostion2MapIndex(next))) {
-                continue;
-            }
-            // if the tile is a wall
-            if (mapData->GetTileBack(mapData->GamePostion2MapIndex(next))
-                    ->IsWall()) {
-                continue;
-            }
-            // if the tile is a door
-            if (mapData->GetTileBack(mapData->GamePostion2MapIndex(next))
-                    ->IsDoor()) {
-                continue;
-            }
-            // if the tile has entity
-            if (mapData->IsHasEntity(mapData->GamePostion2MapIndex(next))) {
+            glm::ivec2 next = current.second + direction;
+            // if the position is not walkable
+            if (mapData->IsPositionWalkable(next) == false) {
                 continue;
             }
 
-            float newCost = costSoFar[mapData->GamePostion2MapIndex(current)] +
-                            Heuristic(current, next);
-
-            if (newCost < costSoFar[mapData->GamePostion2MapIndex(next)]) {
-                costSoFar[mapData->GamePostion2MapIndex(next)] = newCost;
+            float newCost = current.first + Heuristic(current.second, next);
+            size_t mapIndex = mapData->GamePostion2MapIndex(next);
+            if (newCost < costSoFar[mapIndex]) {
+                costSoFar[mapIndex] = newCost;
                 float priority = newCost + Heuristic(next, end);
                 frontier.push({priority, next});
-                cameFrom[mapData->GamePostion2MapIndex(next)] = current;
+                cameFrom[mapIndex] = current.second;
             }
         }
     }
 
+    if (path.empty()) {
+        if (mapData->IsPositionWalkable(lastminPath.second) == false) {
+            return path;
+        }
+        path = CalculatePath(cameFrom, start, lastminPath.second, mapData);
+    }
     return path;
 }
 
 float AStar::Heuristic(const glm::ivec2 &start, const glm::ivec2 &end) {
-    return glm::distance(glm::vec2(start), glm::vec2(end));
+    auto difference = abs(glm::vec2(start) - glm::vec2(end));
+    return difference.x + difference.y;
 }
 
 std::vector<glm::ivec2>
