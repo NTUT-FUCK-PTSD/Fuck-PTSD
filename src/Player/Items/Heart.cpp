@@ -41,8 +41,6 @@ void Heart::resetHP() {
 
     for (int i = 0; i < std::size_t(m_MaxHp); i++) {
 
-        LOG_INFO(Initposition);
-
         const auto heart = generalHeart(FULL, Initposition);
         m_ElementList.push_back(heart);
 

@@ -12,6 +12,13 @@
 
 class Tools final {
 public:
+    enum Type {
+        THROW = 0,
+        BOMB,
+        WEAPON,
+        SHOVEL,
+    };
+
     explicit Tools();
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const;
@@ -19,33 +26,31 @@ public:
     // eq
     void SetThrow();
     void SetBomb();
+    void SetWeapon();
+    void SetShovel();
     void SetShovelType(Shovel::Type type);
     void SetAttackType();
     void SetThrowType();
     void SetBombType();
 
+    // remove
+    void RemoveThrow();
+    void RemoveBomb();
+    void RemoveWeapon();
+    void RemoveShovel();
+
 private:
     void rearrangeCol();
+    void rearrangeRow();
 
-    std::vector<glm::vec2> m_colPosList = {{-655, 210}, {-655, 70}};
+    std::vector<Tools::Type> m_colPosIdx;
+    std::vector<Tools::Type> m_rowPosIdx;
+    const std::vector<glm::vec2> m_colPosList = {{-655, 210}, {-655, 70}};
+    const std::vector<glm::vec2> m_rowPosList = {{-655, 350}, {-555, 350}};
 
-    // shovel
-    std::shared_ptr<Shovel> m_Shovel;
-    glm::vec2 m_ShovelPosition = {-655, 350};
 
-    // attack
-    std::shared_ptr<Weapon> m_Attack;
-    glm::vec2 m_AttackPosition = {-555, 350};
-
-    // throw
-    //    std::shared_ptr<Throw> m_Throw;
-    //    glm::vec2 m_ThrowPosition = {-655, 210};
-    //
-    //    // bomb
-    //    std::shared_ptr<Bomb> m_Bomb;
-    //    glm::vec2 m_BombPosition = {-655, 70};
-
-    std::vector<std::shared_ptr<IEquipment>> m_EquipList;
+    std::vector<std::shared_ptr<IEquipment>> m_colEquipList;
+    std::vector<std::shared_ptr<IEquipment>> m_rowEquipList;
 
     std::shared_ptr<GameElement> m_Tools = std::make_shared<GameElement>();
 };

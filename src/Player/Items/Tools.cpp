@@ -9,12 +9,10 @@
 Tools::Tools() {
 
     // create tool shovel
-    m_Shovel = std::make_shared<Shovel>();
-    m_Shovel->setPosition(m_ShovelPosition);
+    SetShovel();
 
     // create tool Weapon
-    m_Attack = std::make_shared<Weapon>();
-    m_Attack->setPosition(m_AttackPosition);
+    SetWeapon();
 
     // create tool Throw
     SetThrow();
@@ -23,34 +21,66 @@ Tools::Tools() {
     SetBomb();
 
     rearrangeCol();
+    rearrangeRow();
+}
 
-    auto e = m_EquipList.begin();
-    m_EquipList.erase(e+0);
+void Tools::SetThrow() {
+    m_colEquipList.push_back(std::make_shared<Throw>());
+    m_colPosIdx.push_back(THROW);
+}
+
+void Tools::SetBomb() {
+    m_colEquipList.push_back(std::make_shared<Bomb>());
+    m_colPosIdx.push_back(BOMB);
+}
+
+void Tools::SetShovel() {
+    m_rowEquipList.push_back(std::make_shared<Shovel>());
+}
+
+void Tools::SetWeapon() {
+    m_rowEquipList.push_back(std::make_shared<Weapon>());
+}
+
+void Tools::RemoveThrow() {
+    auto f = distance(m_colPosIdx.begin(), find(m_colPosIdx.begin(), m_colPosIdx.end(), THROW));
+    m_colPosIdx.erase(m_colPosIdx.begin() + f);
+    m_colEquipList.erase(m_colEquipList.begin() + f);
 
     rearrangeCol();
 }
 
-void Tools::SetThrow() {
-    m_EquipList.push_back(std::make_shared<Throw>());
+void Tools::RemoveBomb() {
+    auto f = distance(m_colPosIdx.begin(), find(m_colPosIdx.begin(), m_colPosIdx.end(), BOMB));
+    m_colPosIdx.erase(m_colPosIdx.begin() + f);
+    m_colEquipList.erase(m_colEquipList.begin() + f);
+
+    rearrangeCol();
 }
 
-void Tools::SetBomb() {
-    m_EquipList.push_back(std::make_shared<Bomb>());
+void Tools::RemoveShovel() {
+    auto f = distance(m_rowPosIdx.begin(), find(m_rowPosIdx.begin(), m_rowPosIdx.end(), SHOVEL));
+    m_rowPosIdx.erase(m_rowPosIdx.begin() + f);
+    m_rowEquipList.erase(m_rowEquipList.begin() + f);
+
+    rearrangeRow();
 }
 
+void Tools::RemoveWeapon() {
+    auto f = distance(m_rowPosIdx.begin(), find(m_rowPosIdx.begin(), m_rowPosIdx.end(), WEAPON));
+    m_rowPosIdx.erase(m_rowPosIdx.begin() + f);
+    m_rowEquipList.erase(m_rowEquipList.begin() + f);
+
+    rearrangeRow();
+}
 
 std::shared_ptr<GameElement> Tools::GetGameObject() const {
-    m_Tools ->AddChild(m_Shovel->GetGameObject());
-    m_Tools->AddChild(m_Attack->GetGameObject());
-//    m_Tools->AddChild(m_Throw->GetGameObject());
-//    m_Tools->AddChild(m_Bomb->GetGameObject());
 
-    if (m_EquipList.empty()) {
-        m_Tools->SetVisible(false);
-        return m_Tools;
+    for (auto elem : m_rowEquipList) {
+        m_Tools ->AddChild(elem->GetGameObject());
     }
 
-    for (auto elem: m_EquipList) {
+    for (auto elem: m_colEquipList) {
         m_Tools->AddChild(elem->GetGameObject());
     }
 
@@ -59,9 +89,18 @@ std::shared_ptr<GameElement> Tools::GetGameObject() const {
 }
 
 void Tools::rearrangeCol() {
-    for (int i = 0; i < m_EquipList.size() ;i++) {
-        auto equipList = m_EquipList[i];
+    for (int i = 0; i < m_colEquipList.size() ;i++) {
+        auto equipList = m_colEquipList[i];
         auto pos = m_colPosList[i];
+
+        equipList->setPosition(pos);
+    }
+}
+
+void Tools::rearrangeRow() {
+    for (int i = 0; i < m_rowEquipList.size() ;i++) {
+        auto equipList = m_rowEquipList[i];
+        auto pos = m_rowPosList[i];
 
         equipList->setPosition(pos);
     }

@@ -40,8 +40,6 @@ void Diamond::toLeftSideDiamondText() {
     const glm::vec2 modifyPos = {initPos.x + m_text->GetSize().x * 2.5,
                                  initPos.y};
     m_DiamondText->SetPosition(modifyPos);
-    //    LOG_DEBUG((glm::vec2){a.x + m_text->GetSize().x,
-    //    m_text->GetSize().y});
 }
 
 void Diamond::plusDiamondNumber(const int number) {
