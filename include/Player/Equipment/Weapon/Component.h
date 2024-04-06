@@ -52,4 +52,4 @@ public:
 };
 }; // namespace ToolSystem
 
-#endif // FUCK_PTSD_COMPONENT_H
+#endif // FUCK_PTSD_SCOMPONENT_H

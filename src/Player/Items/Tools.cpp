@@ -107,12 +107,12 @@ void Tools::rearrangeRow() {
     }
 }
 
-//void Tools::SetShovelType(Shovel::Type type) {
-//    auto idx = getListIdx(m_rowPosIdx, SHOVEL);
-//    auto weapon = m_rowEquipList.at(idx);
-//
-//    weapon->setShovelType(type);
-//}
+void Tools::SetShovelType(ShovelEnum::Type type) {
+    auto idx = getListIdx(m_rowPosIdx, SHOVEL);
+    auto weapon = m_rowEquipList.at(idx);
+
+    weapon->setShovelType(type);
+}
 
 void Tools::SetWeaponType(WeaponEnum::Type type) {
     auto idx = getListIdx(m_rowPosIdx, WEAPON);

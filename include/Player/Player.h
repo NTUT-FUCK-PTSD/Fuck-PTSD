@@ -61,7 +61,19 @@ public:
     void UpdateCoin(const unsigned long &duringTimeMs,
                     const glm::vec2 &destination, const uint16_t &direction);
 
+    // tool's handle
+    // about Shovel
+    bool IsShovelExist();
+    ShovelEnum::Type GetShovelType();
+
+    // about Weapon
+    bool IsWeaponExist();
+    WeaponEnum::Type GetWeaponType();
+
 private:
+    ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
+    WeaponEnum::Type m_WeaponType = WeaponEnum::Type::RAPIER;
+
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;
 

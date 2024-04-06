@@ -61,7 +61,7 @@ void Weapon::setWeaponType(WeaponEnum::Type type) {
         break;
     }
 
-    LOG_INFO(m_ItemType->imagePath);
+//    LOG_INFO(m_ItemType->imagePath);
     m_ImagePathItem = m_ItemType->imagePath;
     rendererItem();
 

@@ -46,6 +46,8 @@ private:
     template <class T>
     ptrdiff_t getListIdx(std::vector<T> list, Tools::Type type);
 
+
+
     std::vector<Tools::Type> m_colPosIdx;
     std::vector<Tools::Type> m_rowPosIdx;
     const std::vector<glm::vec2> m_colPosList = {{-655, 210}, {-655, 70}};

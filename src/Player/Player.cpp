@@ -14,8 +14,7 @@ Player::Player()
       m_Heart(std::make_unique<Heart>()),
       m_Tools(std::make_unique<Tools>()),
       m_Diamond(std::make_unique<Diamond>()),
-      m_Window(std::make_shared<GameElement>())
-{
+      m_Window(std::make_shared<GameElement>()) {
 
     // create tool Throw
     m_Tools->SetThrow();
@@ -25,11 +24,11 @@ Player::Player()
 
     // create tool shovel
     m_Tools->SetShovel();
+    m_Tools->SetShovelType(m_ShovelType);
 
     // create tool Weapon
     m_Tools->SetWeapon();
-
-    m_Tools->SetWeaponType(WeaponEnum::Type::RAPIER);
+    m_Tools->SetWeaponType(m_WeaponType);
 
     Update();
 }
@@ -156,3 +155,19 @@ void Player::lostDiamond(std::size_t number) {
 // void Player::useDefaultSettingsTool() {
 //     m_Tools->SetShovelType();
 // }
+
+bool Player::IsShovelExist() {
+    return true;
+}
+
+bool Player::IsWeaponExist() {
+    return true;
+}
+
+ShovelEnum::Type Player::GetShovelType() {
+    return m_ShovelType;
+}
+
+WeaponEnum::Type Player::GetWeaponType() {
+    return m_WeaponType;
+}
