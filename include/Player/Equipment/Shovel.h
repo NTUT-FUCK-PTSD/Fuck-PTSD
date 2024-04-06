@@ -18,11 +18,7 @@ public:
 
     explicit Shovel();
 
-    [[nodiscard]] std::shared_ptr<GameElement> getGameElement() override;
-
     void setPosition(const glm::vec2 position) override;
-
-    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() override;
 
     std::shared_ptr<GameElement> GetGameObject() const override;
 private:

@@ -29,7 +29,7 @@ public:
     void SetWeapon();
     void SetShovel();
     void SetShovelType(Shovel::Type type);
-    void SetAttackType();
+    void SetWeaponType(Weapon::Type type);
     void SetThrowType();
     void SetBombType();
 

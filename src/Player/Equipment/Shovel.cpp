@@ -36,14 +36,6 @@ void Shovel::setPosition(const glm::vec2 position) {
     m_Window->SetPosition(position);
     m_Item->SetPosition({position.x,position.y - 5});
 }
-
-std::shared_ptr<GameElement> Shovel::getGameElement() {
-    return m_Shovel;
-}
-std::vector<std::shared_ptr<Util::GameObject>> Shovel::getGameObjects() {
-    return {m_Window, m_Item};
-}
-
 std::shared_ptr<GameElement> Shovel::GetGameObject() const {
     return m_Shovel;
 }

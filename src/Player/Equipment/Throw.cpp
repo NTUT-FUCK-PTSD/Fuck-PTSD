@@ -59,13 +59,6 @@ void Throw::setPosition(const glm::vec2 position) {
     m_LowerText->SetPosition({position.x + 15, position.y - 60});
 }
 
-std::shared_ptr<GameElement> Throw::getGameElement() {
-    return m_Throw;
-}
-std::vector<std::shared_ptr<Util::GameObject>> Throw::getGameObjects() {
-    return {m_Window, m_Item, m_Text, m_LowerText};
-}
-
 std::shared_ptr<GameElement> Throw::GetGameObject() const {
     return m_Throw;
 }

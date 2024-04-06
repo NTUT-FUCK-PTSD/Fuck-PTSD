@@ -11,12 +11,7 @@
 
 class IEquipment {
 public:
-    virtual std::shared_ptr<GameElement> getGameElement() = 0;
-
     virtual void setPosition(const glm::vec2 position) = 0;
-
-    virtual std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() = 0;
-
     virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
 
     //    virtual GameElement getWindowObject() = 0;

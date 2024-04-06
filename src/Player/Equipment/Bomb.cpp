@@ -56,13 +56,6 @@ void Bomb::setPosition(const glm::vec2 position) {
     m_LowerText->SetPosition({position.x + 15, position.y - 60});
 }
 
-std::shared_ptr<GameElement> Bomb::getGameElement() {
-    return m_Bomb;
-}
-std::vector<std::shared_ptr<Util::GameObject>> Bomb::getGameObjects() {
-    return {m_Window, m_Item, m_Text, m_LowerText};
-}
-
 std::shared_ptr<GameElement> Bomb::GetGameObject() const {
     return m_Bomb;
 }
