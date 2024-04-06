@@ -7,9 +7,9 @@
 Weapon::Weapon() {
 
     rendererWindow();
-    m_ImagePathItem = ASSETS_DIR "/items/weapon_rapier.png";
-    rendererItem();
     m_Attack->SetVisible(false);
+    m_ImagePathItem = ASSETS_DIR "/items/weapon_dagger.png";
+    rendererItem();
 //    setWeaponType(WeaponEnum::Type::DAGGER);
 }
 
@@ -66,5 +66,6 @@ void Weapon::setWeaponType(WeaponEnum::Type type) {
 }
 
 bool Weapon::GetIsThrow() {
-    return m_ItemType->isThrow;
+    return false;
+//    return m_ItemType->isThrow;
 }
