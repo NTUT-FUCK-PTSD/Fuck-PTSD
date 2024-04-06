@@ -8,10 +8,8 @@ Weapon::Weapon() {
 
     rendererWindow();
 
-    setWeaponType(WeaponEnum::Type::DAGGER);
-    rendererItem();
-
     m_Attack->SetVisible(false);
+    setWeaponType(WeaponEnum::Type::DAGGER);
 }
 
 void Weapon::rendererWindow() {
@@ -64,7 +62,6 @@ void Weapon::setWeaponType(WeaponEnum::Type type) {
 //    LOG_INFO(m_ItemType->imagePath);
     m_ImagePathItem = m_ItemType->imagePath;
     rendererItem();
-
 }
 
 bool Weapon::GetIsThrow() {
