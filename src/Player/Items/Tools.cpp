@@ -90,7 +90,7 @@ std::shared_ptr<GameElement> Tools::GetGameObject() const {
 }
 
 void Tools::rearrangeCol() {
-    for (int i = 0; i < m_colEquipList.size() ;i++) {
+    for (size_t i = 0; i < m_colEquipList.size() ;i++) {
         auto equipList = m_colEquipList[i];
         auto pos = m_colPosList[i];
 
@@ -99,7 +99,7 @@ void Tools::rearrangeCol() {
 }
 
 void Tools::rearrangeRow() {
-    for (int i = 0; i < m_rowEquipList.size() ;i++) {
+    for (size_t i = 0; i < m_rowEquipList.size() ;i++) {
         auto equipList = m_rowEquipList[i];
         auto pos = m_rowPosList[i];
 
