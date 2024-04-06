@@ -19,8 +19,8 @@ public:
 
     // setter
     virtual void setPosition(const glm::vec2 position) = 0;
-    virtual void setWeaponType(WeaponEnum::Type type) { return;};
-    virtual void setShovelType(ShovelEnum::Type type) { return;};
+    virtual void setWeaponType([[maybe_unused]] WeaponEnum::Type type) { return;};
+    virtual void setShovelType([[maybe_unused]] ShovelEnum::Type type) { return;};
 
     // getter
     virtual Direction GetDirection() = 0;
