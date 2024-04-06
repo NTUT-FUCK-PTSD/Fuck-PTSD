@@ -15,15 +15,15 @@ public:
 
 private:
     // Damage
-    int16_t normal = 1;
-    int16_t blood = 1;
-    int16_t glass = 4;
-    int16_t golden = 1;
-    std::string obsidian = "1-3";
-    int16_t titanium = 2;
+    const static int16_t normal = 1;
+    const static int16_t blood = 1;
+    const static int16_t glass = 4;
+    const static int16_t golden = 1;
+    inline const static std::string obsidian = "1-3";
+    const static int16_t titanium = 2;
 
     // Settings
-    std::string a = ASSETS_DIR "/items/weapon_rapier.png";
+    inline const static std::string ImagePath = ASSETS_DIR "/items/weapon_rapier.png";
 };
 };     // namespace ToolSystem
 #endif // FUCK_PTSD_ENTITYRAPIER_H

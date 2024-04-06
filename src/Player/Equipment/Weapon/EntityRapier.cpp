@@ -3,5 +3,7 @@
 //
 
 #include "Equipment/Weapon/EntityRapier.h"
+
 ToolSystem::EntityRapier::EntityRapier()
-    : TBaseWeapon(ASSETS_DIR "/items/weapon_broadsword.png", normal, blood, glass, golden){};
+    : TBaseWeapon(normal, blood, glass, golden, obsidian, titanium,
+                  ImagePath) {};

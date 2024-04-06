@@ -9,7 +9,7 @@ Weapon::Weapon() {
     rendererWindow();
 
 
-    setType(BROADSWORD);
+    setType(DAGGER);
     rendererItem();
 
     m_Attack->SetVisible(false);
@@ -52,12 +52,13 @@ void Weapon::setType(Weapon::Type type) {
 
     switch (type) {
     case DAGGER:
-        m_ItemTypeTest = std::make_shared<ToolSystem::EntityBroadsword>();
+        m_ItemTypeTest = std::make_shared<ToolSystem::EntityDagger>();
         break;
     case BROADSWORD:
         m_ItemTypeTest = std::make_shared<ToolSystem::EntityBroadsword>();
         break;
     case RAPIER:
+        m_ItemTypeTest = std::make_shared<ToolSystem::EntityRapier>();
         break;
     }
 

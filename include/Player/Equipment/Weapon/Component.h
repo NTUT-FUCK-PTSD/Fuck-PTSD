@@ -13,49 +13,39 @@ namespace ToolSystem {
 // Damage
 struct Damage {
 
-//    explicit Damage(int16t nor, int16t blood, int16t glass, int16t golden,
-//                    const char* obsidian, int16t titan)
-//        : normal(nor),
-//          blood(blood),
-//          glass(glass),
-//          golden(golden),
-//          obsidian(obsidian),
-//          titanium(titan) {}
-explicit Damage(int16t nor, int16t blood, int16t glass, int16t golden)
-    : normal(nor),
-      blood(blood),
-      glass(glass),
-      golden(golden){};
+    explicit Damage(int16t nor, int16t blood, int16t glass, int16t golden,
+                    std::string obsidian, int16t titan)
+        : normal(nor),
+          blood(blood),
+          glass(glass),
+          golden(golden),
+          obsidian(obsidian),
+          titanium(titan) {}
 
     // Damage
     int16_t normal;
     int16_t blood;
     int16_t glass;
     int16_t golden;
-    const char* obsidian;
+    std::string obsidian;
     int16_t titanium;
 };
 
 // Settings
 struct Settings {
-    std::string imagePath;
-
-    explicit Settings(const char* path)
+    explicit Settings(std::string &path)
         : imagePath(path){};
+
+    std::string imagePath;
 };
 
 // TBaseWeapon
 struct TBaseWeapon : Damage, Settings {
 public:
-//    explicit TBaseWeapon(int16t nor, int16t blood, int16t glass, int16t golden,
-//                         const char* obsidian, int16t titan, const char* path)
-//        : Damage(nor, blood, glass, golden, obsidian, titan),
-//          Settings(path){};
-
-    explicit TBaseWeapon(const char* path, int16t nor, int16t blood,
-                         int16t glass, int16t golden)
-        : Settings(path),
-          Damage(nor, blood, glass, golden){};
+    explicit TBaseWeapon(int16t nor, int16t blood, int16t glass, int16t golden,
+                         std::string obsidian, int16t titan, std::string path)
+        : Damage(nor, blood, glass, golden, obsidian, titan),
+          Settings(path){};
 };
 }; // namespace ToolSystem
 

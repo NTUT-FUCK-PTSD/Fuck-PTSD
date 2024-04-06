@@ -9,6 +9,8 @@
 #include "ToolBoxs.h"
 #include "Weapon/Component.h"
 #include "Weapon/EntityBroadsword.h"
+#include "Weapon/EntityDagger.h"
+#include "Weapon/EntityRapier.h"
 #include "pch_extream.h"
 
 class Weapon final : public IEquipment {
