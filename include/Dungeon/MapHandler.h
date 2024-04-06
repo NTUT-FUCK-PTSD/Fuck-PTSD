@@ -10,7 +10,7 @@ namespace Dungeon {
 class MapHandler final : public Core::Drawable {
 public:
     MapHandler(const std::shared_ptr<Map> &map);
-    void Draw(const Util::Transform &transform, const float zIndex);
+    void Draw(const Core::Matrices &data);
     glm::vec2 GetSize() const { return {0, 0}; };
 
 private:

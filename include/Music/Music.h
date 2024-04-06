@@ -11,8 +11,8 @@
 #include "soloud_wav.h"
 #include <iostream>
 
-#include "Tempo.h"
 #include "Display.h"
+#include "Tempo.h"
 
 class MusicSystem final {
 public:
@@ -33,27 +33,24 @@ public:
 
     void skipToTargetTime(float time);
 
-    void clickEvent() {
-        m_tempo.keyBoardClick();
-    };
+    void clickEvent() { m_tempo.keyBoardClick(); };
 
     void readTempoFile(const std::string &path) {
         m_tempo.readTempoFile(path);
     };
 
-    bool TempoTrigger() {
-        return m_tempo.canBeClick(100);
-    }
+    bool TempoTrigger() { return m_tempo.canBeClick(100); }
 
     std::shared_ptr<GameElement> getGameObject();
 
     void Update();
 
     void setTempoOffset(int16_t offset) { m_TempoOffset = offset; };
-    void setTempoRange(std::size_t range) {m_TempoRange = range; };
-    void setDisplayOffset(int16_t offset) {m_DisplayOffset = offset; };
-    void setDisplayHeartBeatDurationTime(std::size_t time) {m_DisplayHeartBeatDurationTime = time; };
-
+    void setTempoRange(std::size_t range) { m_TempoRange = range; };
+    void setDisplayOffset(int16_t offset) { m_DisplayOffset = offset; };
+    void setDisplayHeartBeatDurationTime(std::size_t time) {
+        m_DisplayHeartBeatDurationTime = time;
+    };
 
 private:
     float m_currentSpeed = 1.0f;
@@ -64,7 +61,7 @@ private:
     /* ms */
     int16_t m_TempoOffset = 0;
     std::size_t m_TempoRange = 500;
-    bool isShowHeartBeat = true;
+    bool isShowHeartBeat = false;
     int16_t m_DisplayOffset = -30;
     std::size_t m_DisplayRange = 100;
     std::size_t m_DisplayHeartBeatDurationTime = 80;
@@ -75,7 +72,8 @@ private:
     SoLoud::Speech m_speech; // A sound source (speech, in this case)
     std::shared_ptr<SoLoud::Wav> m_music;
 
-    std::shared_ptr<GameElement> m_MusicObject = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_MusicObject =
+        std::make_shared<GameElement>();
 };
 
 #endif // FUCK_PTSD_MUSIC_H

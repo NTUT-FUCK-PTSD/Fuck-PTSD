@@ -12,16 +12,12 @@ public:
             const glm::vec2 &size);
 
     void AddEnemy(const size_t &position, const std::shared_ptr<Enemy> &enemy);
-    void RemoveEnemy(const size_t &position,
-                     const std::shared_ptr<Enemy> &enemy);
-    void PopbackEnemy(const size_t &position);
-    bool IsEnemiesEmpty(const size_t &position) const;
-    std::vector<std::shared_ptr<Enemy>>
-    GetEnemies(const size_t &position) const;
-    std::shared_ptr<Enemy> GetEnemyBack(const size_t &position) const;
+    void RemoveEnemy(const size_t &position);
+    std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
+    std::shared_ptr<Enemy> GetEnemy(const size_t &position) const;
 
 private:
-    std::vector<std::vector<std::shared_ptr<Enemy>>> m_Enemies;
+    std::vector<std::shared_ptr<Enemy>> m_Enemies;
 };
 } // namespace Dungeon
 

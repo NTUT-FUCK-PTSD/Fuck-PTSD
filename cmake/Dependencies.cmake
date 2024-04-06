@@ -1,11 +1,11 @@
 include(FetchContent)
 
-FetchContent_Declare(
-        Corrosion
-        GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
-        GIT_TAG master
-)
-FetchContent_MakeAvailable(Corrosion)
+# FetchContent_Declare(
+#         Corrosion
+#         GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
+#         GIT_TAG master
+# )
+# FetchContent_MakeAvailable(Corrosion)
 
 message(STATUS "Tinyxml2 NOT FOUND, fetching from source!")
 FetchContent_Declare(
@@ -22,8 +22,7 @@ set(PTSD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD")
 FetchContent_Declare(
         PTSD
         GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
-        GIT_TAG macos-lag-fix
-
+        GIT_TAG pivot
 
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD
 )
