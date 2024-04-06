@@ -8,4 +8,4 @@
 //                  ImagePath.c_str()) {};
 
 ToolSystem::EntityBroadsword::EntityBroadsword()
-    : TBaseWeapon(ASSETS_DIR "/items/weapon_broadsword.png", normal, blood, glass, golden){};
+    : TBaseWeapon(a.c_str(), normal, blood, glass, golden){};

@@ -12,7 +12,7 @@ class EntityBroadsword final : public TBaseWeapon  {
 public:
     explicit EntityBroadsword();
 
-//    virtual ~EntityBroadsword() = default;
+    virtual ~EntityBroadsword() = default;
 
 private:
 
