@@ -23,13 +23,13 @@ public:
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const;
 
-    // eq
+    // add equipment
     void SetThrow();
     void SetBomb();
     void SetWeapon();
     void SetShovel();
-    void SetShovelType(Shovel::Type type);
-    void SetWeaponType(Weapon::Type type);
+    void SetShovelType(ShovelEnum::Type type);
+    void SetWeaponType(WeaponEnum::Type type);
     void SetThrowType();
     void SetBombType();
 
@@ -42,6 +42,9 @@ public:
 private:
     void rearrangeCol();
     void rearrangeRow();
+
+    template <class T>
+    ptrdiff_t getListIdx(std::vector<T> list, Tools::Type type);
 
     std::vector<Tools::Type> m_colPosIdx;
     std::vector<Tools::Type> m_rowPosIdx;

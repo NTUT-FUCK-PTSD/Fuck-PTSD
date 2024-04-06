@@ -8,12 +8,24 @@
 #include "pch_extream.h"
 
 #include "GameElement.h"
+#include "TypeEquip.h"
 
 class IEquipment {
 public:
+    enum Direction {
+        ROW = 0,
+        COL,
+    };
+
+    // setter
     virtual void setPosition(const glm::vec2 position) = 0;
-    virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
+    virtual void setWeaponType(WeaponEnum::Type type) { return;};
+    virtual void setShovelType(ShovelEnum::Type type) { return;};
+
+    // getter
+    virtual Direction GetDirection() = 0;
     virtual bool GetIsThrow() { return false; };
+    virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
 
     //    virtual GameElement getWindowObject() = 0;
     //    virtual GameElement getItemObject() = 0;

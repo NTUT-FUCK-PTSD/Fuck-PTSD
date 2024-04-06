@@ -7,41 +7,31 @@
 #include "Player/Items/Tools.h"
 
 Tools::Tools() {
-    // create tool Throw
-    SetThrow();
-
-    // create tool bomb
-    SetBomb();
-
-    // create tool shovel
-    SetShovel();
-
-    // create tool Weapon
-    SetWeapon();
-
-    rearrangeCol();
-    rearrangeRow();
 }
 
 void Tools::SetThrow() {
     m_colEquipList.push_back(std::make_shared<Throw>());
     m_colPosIdx.push_back(THROW);
+    rearrangeCol();
 }
 
 void Tools::SetBomb() {
     m_colEquipList.push_back(std::make_shared<Bomb>());
     m_colPosIdx.push_back(BOMB);
+    rearrangeCol();
 }
 
 void Tools::SetShovel() {
     m_rowEquipList.push_back(std::make_shared<Shovel>());
     m_rowPosIdx.push_back(SHOVEL);
+    rearrangeRow();
 }
 
 void Tools::SetWeapon() {
     auto w = std::make_shared<Weapon>();
     m_rowEquipList.push_back(w);
     m_rowPosIdx.push_back(WEAPON);
+    rearrangeRow();
 
     if (!w->GetIsThrow()) {
         RemoveThrow();
@@ -49,7 +39,7 @@ void Tools::SetWeapon() {
 }
 
 void Tools::RemoveThrow() {
-    auto f = distance(m_colPosIdx.begin(), find(m_colPosIdx.begin(), m_colPosIdx.end(), THROW));
+    auto f = getListIdx(m_colPosIdx, THROW);
     m_colPosIdx.erase(m_colPosIdx.begin() + f);
     m_colEquipList.erase(m_colEquipList.begin() + f);
 
@@ -78,6 +68,11 @@ void Tools::RemoveWeapon() {
     m_rowEquipList.erase(m_rowEquipList.begin() + f);
 
     rearrangeRow();
+}
+
+template <class T>
+ptrdiff_t Tools::getListIdx(std::vector<T> list, Tools::Type type) {
+    return std::distance(list.begin(), find(list.begin(), list.end(), type));
 }
 
 std::shared_ptr<GameElement> Tools::GetGameObject() const {
@@ -110,4 +105,18 @@ void Tools::rearrangeRow() {
 
         equipList->setPosition(pos);
     }
+}
+
+//void Tools::SetShovelType(Shovel::Type type) {
+//    auto idx = getListIdx(m_rowPosIdx, SHOVEL);
+//    auto weapon = m_rowEquipList.at(idx);
+//
+//    weapon->setShovelType(type);
+//}
+
+void Tools::SetWeaponType(WeaponEnum::Type type) {
+    auto idx = getListIdx(m_rowPosIdx, WEAPON);
+    auto weapon = m_rowEquipList.at(idx);
+
+    weapon->setWeaponType(type);
 }

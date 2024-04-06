@@ -7,6 +7,7 @@
 
 #include "IEquipment.h"
 #include "ToolBoxs.h"
+#include "TypeEquip.h"
 #include "Weapon/Component.h"
 #include "Weapon/EntityBroadsword.h"
 #include "Weapon/EntityDagger.h"
@@ -15,18 +16,18 @@
 
 class Weapon final : public IEquipment {
 public:
-    enum Type { DAGGER = 0, BROADSWORD, RAPIER };
+
 
     explicit Weapon();
     virtual ~Weapon() = default;
 
-    [[noreturn]] void setType(Weapon::Type type);
+    [[noreturn]] void setWeaponType(WeaponEnum::Type type) override;
     [[noreturn]] void setPosition(const glm::vec2 position) override;
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
     [[nodiscard]] bool GetIsThrow() override;
 
-
+    Direction GetDirection() override { return IEquipment::Direction::ROW; };
 private:
     void rendererWindow();
     void rendererItem();

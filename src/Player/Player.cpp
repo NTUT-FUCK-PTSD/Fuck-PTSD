@@ -3,6 +3,7 @@
 //
 
 #include "Player.h"
+#include "Equipment/TypeEquip.h"
 
 Player::Player()
     : Animation({0, 0}),
@@ -15,6 +16,21 @@ Player::Player()
       m_Diamond(std::make_unique<Diamond>()),
       m_Window(std::make_shared<GameElement>())
 {
+
+    // create tool Throw
+    m_Tools->SetThrow();
+
+    // create tool bomb
+    m_Tools->SetBomb();
+
+    // create tool shovel
+    m_Tools->SetShovel();
+
+    // create tool Weapon
+    m_Tools->SetWeapon();
+
+    m_Tools->SetWeaponType(WeaponEnum::Type::RAPIER);
+
     Update();
 }
 

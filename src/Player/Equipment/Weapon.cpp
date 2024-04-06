@@ -8,12 +8,11 @@ Weapon::Weapon() {
 
     rendererWindow();
 
-
-    setType(BROADSWORD);
+    setWeaponType(WeaponEnum::Type::DAGGER);
     rendererItem();
 
     m_Attack->SetVisible(false);
-};
+}
 
 void Weapon::rendererWindow() {
     const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
@@ -34,34 +33,38 @@ void Weapon::rendererItem() {
     m_Item->SetDrawable(ItemImage);
     m_Item->SetZIndex(m_ZIndex);
     m_Item->SetScale(m_Scale);
-    m_Item->SetPosition({m_Position.x, m_Position.y - 10});
+    m_Item->SetPosition({m_Position.x, m_Position.y - 5});
     m_Attack->AddChild(m_Item);
 }
 
 void Weapon::setPosition(const glm::vec2 position) {
     m_Window->SetPosition(position);
     m_Item->SetPosition({position.x, position.y - 5});
+
+    m_Position = position;
 }
 
 std::shared_ptr<GameElement> Weapon::GetGameObject() const {
     return m_Attack;
 }
 
-void Weapon::setType(Weapon::Type type) {
+void Weapon::setWeaponType(WeaponEnum::Type type) {
     switch (type) {
-    case DAGGER:
+    case WeaponEnum::Type::DAGGER:
         m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
         break;
-    case BROADSWORD:
+    case WeaponEnum::Type::BROADSWORD:
         m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
         break;
-    case RAPIER:
+    case WeaponEnum::Type::RAPIER:
         m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
         break;
     }
 
-//    LOG_INFO(std::string(m_ItemTypeTest->imagePath));
+    LOG_INFO(m_ItemType->imagePath);
     m_ImagePathItem = m_ItemType->imagePath;
+    rendererItem();
+
 }
 
 bool Weapon::GetIsThrow() {

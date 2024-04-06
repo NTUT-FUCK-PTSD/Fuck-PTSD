@@ -12,15 +12,13 @@
 
 class Shovel final : public IEquipment {
 public:
-    enum Type {
-        Normal,
-    };
 
     explicit Shovel();
 
     void setPosition(const glm::vec2 position) override;
 
     std::shared_ptr<GameElement> GetGameObject() const override;
+    Direction GetDirection() override { return IEquipment::Direction::ROW; };
 private:
     std::size_t m_ZIndex = 50;
     glm::vec2 m_Scale = {3,3 };
