@@ -8,7 +8,8 @@
 Shovel::Shovel() {
 
     rendererWindow();
-    setShovelType(ShovelEnum::Type::Normal);
+//    setShovelType(ShovelEnum::Type::Normal);
+    m_ImagePathItem = ASSETS_DIR"/items/shovel_basic.png";
     rendererItem();
     m_Shovel->SetVisible(false);
 };

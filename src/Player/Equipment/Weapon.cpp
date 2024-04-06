@@ -7,9 +7,10 @@
 Weapon::Weapon() {
 
     rendererWindow();
-
+    m_ImagePathItem = ASSETS_DIR "/items/weapon_rapier.png";
+    rendererItem();
     m_Attack->SetVisible(false);
-    setWeaponType(WeaponEnum::Type::DAGGER);
+//    setWeaponType(WeaponEnum::Type::DAGGER);
 }
 
 void Weapon::rendererWindow() {
