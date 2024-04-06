@@ -9,6 +9,7 @@
 #include "ToolBoxs.h"
 #include "Weapon/IBaseWeapon.h"
 #include "Weapon/Dagger.hpp"
+#include "Weapon/Broadsword.h"
 #include "pch_extream.h"
 
 class Weapon final : public IEquipment {

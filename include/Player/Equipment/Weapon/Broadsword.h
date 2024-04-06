@@ -2,17 +2,17 @@
 // Created by adven on 2024/4/6.
 //
 
-#ifndef FUCK_PTSD_DAGGER_H
-#define FUCK_PTSD_DAGGER_H
+#ifndef FUCK_PTSD_BROADSWORD_H
+#define FUCK_PTSD_BROADSWORD_H
 
 #include "IBaseWeapon.h"
 
-class Dagger final : public IBaseWeapon {
+class Broadsword final : public IBaseWeapon {
 public:
-    explicit Dagger();
+    explicit Broadsword();
 
     std::string GetItemImage() override {
-        return ASSETS_DIR "/items/weapon_dagger.png";
+        return ASSETS_DIR "/items/weapon_broadsword.png";
     }
 
     Damage const GetDamage() override {
@@ -29,5 +29,4 @@ public:
     }
 };
 
-
-#endif // FUCK_PTSD_DAGGER_H
+#endif // FUCK_PTSD_BROADSWORD_H

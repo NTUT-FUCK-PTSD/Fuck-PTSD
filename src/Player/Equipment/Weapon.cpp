@@ -7,7 +7,7 @@
 Weapon::Weapon() {
 
     rendererWindow();
-    setType(DAGGER);
+    setType(BROADSWORD);
     rendererItem();
 
     m_Attack->SetVisible(false);
@@ -53,6 +53,7 @@ void Weapon::setType(Weapon::Type type) {
         m_ItemType = std::make_shared<Dagger>();
         break;
     case BROADSWORD:
+        m_ItemType = std::make_shared<Broadsword>();
         break;
     case RAPIER:
         break;
