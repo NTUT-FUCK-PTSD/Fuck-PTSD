@@ -6,8 +6,6 @@
 
 Player::Player()
     : Animation({0, 0}) {
-
-    useDefaultSettingsTool();
     Update();
 }
 

@@ -14,17 +14,20 @@ class Tools final {
 public:
     explicit Tools();
 
-    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects();
-
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const;
 
+    // eq
+    void SetThrow();
+    void SetBomb();
     void SetShovelType(Shovel::Type type);
     void SetAttackType();
     void SetThrowType();
     void SetBombType();
 
 private:
-    std::vector<std::shared_ptr<Util::GameObject>> m_TempGameObejct;
+    void rearrangeCol();
+
+    std::vector<glm::vec2> m_colPosList = {{-655, 210}, {-655, 70}};
 
     // shovel
     std::shared_ptr<Shovel> m_Shovel;
@@ -35,15 +38,16 @@ private:
     glm::vec2 m_AttackPosition = {-555, 350};
 
     // throw
-    std::shared_ptr<Throw> m_Throw;
-    glm::vec2 m_ThrowPosition = {-655, 210};
+    //    std::shared_ptr<Throw> m_Throw;
+    //    glm::vec2 m_ThrowPosition = {-655, 210};
+    //
+    //    // bomb
+    //    std::shared_ptr<Bomb> m_Bomb;
+    //    glm::vec2 m_BombPosition = {-655, 70};
 
-    // bomb
-    std::shared_ptr<Bomb> m_Bomb;
-    glm::vec2 m_BombPosition = {-655, 70};
+    std::vector<std::shared_ptr<IEquipment>> m_EquipList;
 
-    std::shared_ptr<GameElement> m_Tools =
-        std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_Tools = std::make_shared<GameElement>();
 };
 
 #endif // FUCK_PTSD_TOOLS_H

@@ -17,41 +17,52 @@ Tools::Tools() {
     m_Attack->setPosition(m_AttackPosition);
 
     // create tool Throw
-    m_Throw = std::make_shared<Throw>();
-    m_Throw->setPosition(m_ThrowPosition);
+    SetThrow();
 
     // create tool bomb
-    m_Bomb = std::make_shared<Bomb>();
-    m_Bomb->setPosition(m_BombPosition);
-}
-std::vector<std::shared_ptr<Util::GameObject>> Tools::getGameObjects() {
-    auto s = m_Shovel->getGameObjects();
-    auto a = m_Attack->getGameObjects();
-    auto t = m_Throw->getGameObjects();
-    auto b = m_Bomb->getGameObjects();
+    SetBomb();
 
-    for (size_t i = 0; i < s.size(); i++) {
-        m_TempGameObejct.push_back(s[i]);
-    }
-    for (size_t i = 0; i < a.size(); i++) {
-        m_TempGameObejct.push_back(a[i]);
-    }
-    for (size_t i = 0; i < t.size(); i++) {
-        m_TempGameObejct.push_back(t[i]);
-    }
-    for (size_t i = 0; i < b.size(); i++) {
-        m_TempGameObejct.push_back(b[i]);
-    }
+    rearrangeCol();
 
-    return m_TempGameObejct;
+    auto e = m_EquipList.begin();
+    m_EquipList.erase(e+0);
+
+    rearrangeCol();
 }
+
+void Tools::SetThrow() {
+    m_EquipList.push_back(std::make_shared<Throw>());
+}
+
+void Tools::SetBomb() {
+    m_EquipList.push_back(std::make_shared<Bomb>());
+}
+
 
 std::shared_ptr<GameElement> Tools::GetGameObject() const {
     m_Tools ->AddChild(m_Shovel->GetGameObject());
     m_Tools->AddChild(m_Attack->GetGameObject());
-    m_Tools->AddChild(m_Throw->GetGameObject());
-    m_Tools->AddChild(m_Bomb->GetGameObject());
+//    m_Tools->AddChild(m_Throw->GetGameObject());
+//    m_Tools->AddChild(m_Bomb->GetGameObject());
+
+    if (m_EquipList.empty()) {
+        m_Tools->SetVisible(false);
+        return m_Tools;
+    }
+
+    for (auto elem: m_EquipList) {
+        m_Tools->AddChild(elem->GetGameObject());
+    }
 
     m_Tools->SetVisible(false);
     return m_Tools;
+}
+
+void Tools::rearrangeCol() {
+    for (int i = 0; i < m_EquipList.size() ;i++) {
+        auto equipList = m_EquipList[i];
+        auto pos = m_colPosList[i];
+
+        equipList->setPosition(pos);
+    }
 }
