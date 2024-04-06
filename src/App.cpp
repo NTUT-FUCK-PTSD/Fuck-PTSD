@@ -67,17 +67,6 @@ void App::Start(std::shared_ptr<Core::Context>
         std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);
 
-    // show the coin
-//    m_Window->AddChildren(m_Coin->getGameObject());
-//    m_Window->AddChildren(m_Diamond->getGameObject());
-//
-//    // add the Tools
-//    //    m_Window.AddChild(m_Tools->getGameObject());
-//    m_Window->AddChildren(m_Tools->getGameObjects());
-//
-//    // display the heart
-//    m_Window->AddChildren(m_Heart->getGameObjects());
-
     // display the tempo heart in music System
     m_Window->AddChild(m_MusicSystem->getGameObject());
 

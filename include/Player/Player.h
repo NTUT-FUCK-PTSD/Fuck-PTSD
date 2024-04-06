@@ -18,9 +18,6 @@ class Player : public Animation {
 public:
     enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
 
-    explicit Player(const std::string &headImagePath,
-                    const std::string &bodyImagePath);
-
     explicit Player();
 
     virtual ~Player() = default;
@@ -65,26 +62,25 @@ public:
                     const glm::vec2 &destination, const uint16_t &direction);
 
 private:
-    void rendererPlayer(const std::string &headImagePath,
-                        const std::string &bodyImagePath);
-
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;
 
+    // character settings
     glm::vec2 HeadSize;
     glm::vec2 BodySize;
     std::shared_ptr<SpriteSheet> HeadImage;
     std::shared_ptr<SpriteSheet> BodyImage;
 
-    std::shared_ptr<GameElement> m_Body = std::make_shared<GameElement>();
-    std::shared_ptr<GameElement> m_Head = std::make_shared<GameElement>();
-    std::shared_ptr<GameElement> m_Player = std::make_shared<GameElement>();
+    // game object
+    std::shared_ptr<GameElement> m_Body;
+    std::shared_ptr<GameElement> m_Head;
+    std::shared_ptr<GameElement> m_Player;
 
-    std::unique_ptr<Coin> m_Coin = std::make_unique<Coin>();
-    std::unique_ptr<Heart> m_Heart = std::make_unique<Heart>();
-    std::unique_ptr<Tools> m_Tools = std::make_unique<Tools>();
-    std::unique_ptr<Diamond> m_Diamond = std::make_unique<Diamond>();
-    std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
+    std::unique_ptr<Coin> m_Coin;
+    std::unique_ptr<Heart> m_Heart;
+    std::unique_ptr<Tools> m_Tools;
+    std::unique_ptr<Diamond> m_Diamond;
+    std::shared_ptr<GameElement> m_Window;
 
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};
