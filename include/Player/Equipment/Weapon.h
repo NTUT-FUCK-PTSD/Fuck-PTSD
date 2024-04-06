@@ -10,6 +10,8 @@
 #include "Weapon/IBaseWeapon.h"
 #include "Weapon/Dagger.hpp"
 #include "Weapon/Broadsword.h"
+#include "Weapon/Component.h"
+#include "Weapon/EntityBroadsword.h"
 #include "pch_extream.h"
 
 class Weapon final : public IEquipment {
@@ -20,6 +22,7 @@ public:
 //    virtual ~Weapon() = 0;
 
     void setType(Weapon::Type type);
+    void test(Weapon::Type type);
     void setPosition(const glm::vec2 position) override;
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
@@ -32,11 +35,10 @@ private:
     glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, 0};
 
-    //    ASSETS_DIR "/gui/diamond.png"
-
-    std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_2.png";
     std::shared_ptr<IBaseWeapon> m_ItemType;
     //    std::string m_ImagePathItem = ASSETS_DIR "/items/weapon_dagger.png";
+
+    std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_2.png";
     std::string m_ImagePathItem;
 
     std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();

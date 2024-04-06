@@ -8,6 +8,7 @@ Weapon::Weapon() {
 
     rendererWindow();
     setType(BROADSWORD);
+    test(BROADSWORD);
     rendererItem();
 
     m_Attack->SetVisible(false);
@@ -61,4 +62,19 @@ void Weapon::setType(Weapon::Type type) {
 
     m_ImagePathItem = m_ItemType->GetItemImage();
 
+}
+
+void Weapon::test(Weapon::Type type) {
+    std::shared_ptr<ToolSystem::TBaseWeapon> m_ItemTypeTest;
+
+    switch (type) {
+    case DAGGER:
+        m_ItemTypeTest = std::make_shared<ToolSystem::EntityBroadsword>();
+        break;
+    case BROADSWORD:
+        m_ItemTypeTest = std::make_shared<ToolSystem::EntityBroadsword>();
+        break;
+    }
+
+    LOG_INFO(m_ItemTypeTest->imagePath);
 }
