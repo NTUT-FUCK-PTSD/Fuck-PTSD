@@ -3,6 +3,4 @@
 //
 #include "Equipment/Weapon/Dagger.hpp"
 
-Dagger::Damage() {
-
-}
+Dagger::Dagger() {}
