@@ -7,7 +7,7 @@
 Weapon::Weapon() {
 
     rendererWindow();
-    setType(BROADSWORD);
+    setType(DAGGER);
     test(BROADSWORD);
     rendererItem();
 
@@ -47,8 +47,6 @@ std::shared_ptr<GameElement> Weapon::GetGameObject() const {
 }
 
 void Weapon::setType(Weapon::Type type) {
-
-
     switch (type) {
     case DAGGER:
         m_ItemType = std::make_shared<Dagger>();
@@ -74,7 +72,11 @@ void Weapon::test(Weapon::Type type) {
     case BROADSWORD:
         m_ItemTypeTest = std::make_shared<ToolSystem::EntityBroadsword>();
         break;
+    case RAPIER:
+        break;
     }
 
-    LOG_INFO(m_ItemTypeTest->imagePath);
+//    m_ImagePathItem = std::string(m_ItemTypeTest->imagePath);
+    LOG_INFO(std::string(m_ItemTypeTest->imagePath));
+    m_ImagePathItem = m_ItemTypeTest->imagePath;
 }
