@@ -13,6 +13,7 @@ Enemies::OrangeSlime::OrangeSlime(
         ASSETS_DIR "/entities/slime_orange.png", m_FrameSize, m_NormalFrames,
         true, 100, true, 100);
     m_Drawable = m_SpriteSheet;
+    m_WillMovePosition = GetGamePosition();
 
     SetHealth(2); // 1 heart
     SetDamage(1); // 0.5 heart
@@ -44,6 +45,7 @@ void OrangeSlime::Move() {
     else if (m_State == 1) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
+        SetFace(true);
     }
     else if (m_State == 2) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
@@ -52,9 +54,11 @@ void OrangeSlime::Move() {
     else if (m_State == 3) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
+        SetFace(false);
     }
     if (IsVaildMove(m_WillMovePosition)) {
         m_CanMove = true;
+        SetGamePosition(m_WillMovePosition);
     }
     else {
         m_CanMove = false;
@@ -66,8 +70,8 @@ void OrangeSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    (m_StartIdx + m_State - 1) % 4);
-        m_GamePosition = m_WillMovePosition;
         m_NeedToMove = false;
+        m_CanMove = false;
     }
     else if (!m_CanMove && m_NeedToMove) {
         m_State -= 1;

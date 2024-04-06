@@ -34,13 +34,13 @@ void SpriteSheet::SetCurrentFrame(std::size_t index) {
     }
 }
 
-void SpriteSheet::Draw(const Util::Transform &transform, const float zIndex) {
+void SpriteSheet::Draw(const Core::Matrices &data) {
     SDL_Rect displayRect{
         static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
         static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
         static_cast<int>(m_FrameSize.x), static_cast<int>(m_FrameSize.y)};
     m_SpriteSheet->SetDrawRect(displayRect);
-    m_SpriteSheet->Draw(transform, zIndex);
+    m_SpriteSheet->Draw(data);
 
     Update();
 }
@@ -93,4 +93,8 @@ void SpriteSheet::Update() {
         m_State = m_Looping ? State::COOLDOWN : State::ENDED;
         m_Index = m_Frames.size() - 1;
     }
+}
+
+void SpriteSheet::SetAlpha(const Uint8 alpha) {
+    m_SpriteSheet->SetAlpha(alpha);
 }

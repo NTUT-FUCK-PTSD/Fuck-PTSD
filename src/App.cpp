@@ -29,10 +29,6 @@ void App::Start(std::shared_ptr<Core::Context>
     m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
     //    m_MusicSystem->skipToTargetTime(118.2f);
 
-    // add thread
-//    std::thread first_thread(WaitPlay, 2, m_MainCharacter);
-//    first_thread.join();
-
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
         if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
@@ -147,6 +143,7 @@ void App::Update() {
         }
         m_MainCharacter->MoveByTime(200, m_AniPlayerDestination,
                                     m_PlayerMoveDirect);
+        m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->TempoUpdate();
     }
