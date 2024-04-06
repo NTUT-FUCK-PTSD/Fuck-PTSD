@@ -37,8 +37,8 @@ struct Settings {
         : imagePath(path),
           isThrow(isThrow){};
 
-    bool isThrow;
     std::string imagePath;
+    bool isThrow;
 };
 
 // TBaseWeapon
