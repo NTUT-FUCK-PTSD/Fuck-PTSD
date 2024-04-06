@@ -5,4 +5,4 @@
 
 ToolSystem::EntityBroadsword::EntityBroadsword()
     : TBaseWeapon(normal, blood, glass, golden, obsidian, titanium,
-                  ImagePath) {};
+                  ImagePath, m_IsThrow) {};

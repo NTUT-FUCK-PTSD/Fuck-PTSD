@@ -13,6 +13,7 @@ class IEquipment {
 public:
     virtual void setPosition(const glm::vec2 position) = 0;
     virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
+    virtual bool GetIsThrow() { return false; };
 
     //    virtual GameElement getWindowObject() = 0;
     //    virtual GameElement getItemObject() = 0;

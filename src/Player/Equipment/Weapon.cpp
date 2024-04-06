@@ -9,7 +9,7 @@ Weapon::Weapon() {
     rendererWindow();
 
 
-    setType(DAGGER);
+    setType(BROADSWORD);
     rendererItem();
 
     m_Attack->SetVisible(false);
@@ -48,20 +48,22 @@ std::shared_ptr<GameElement> Weapon::GetGameObject() const {
 }
 
 void Weapon::setType(Weapon::Type type) {
-    std::shared_ptr<ToolSystem::TBaseWeapon> m_ItemTypeTest;
-
     switch (type) {
     case DAGGER:
-        m_ItemTypeTest = std::make_shared<ToolSystem::EntityDagger>();
+        m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
         break;
     case BROADSWORD:
-        m_ItemTypeTest = std::make_shared<ToolSystem::EntityBroadsword>();
+        m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
         break;
     case RAPIER:
-        m_ItemTypeTest = std::make_shared<ToolSystem::EntityRapier>();
+        m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
         break;
     }
 
 //    LOG_INFO(std::string(m_ItemTypeTest->imagePath));
-    m_ImagePathItem = m_ItemTypeTest->imagePath;
+    m_ImagePathItem = m_ItemType->imagePath;
+}
+
+bool Weapon::GetIsThrow() {
+    return m_ItemType->isThrow;
 }

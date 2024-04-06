@@ -7,18 +7,17 @@
 #include "Player/Items/Tools.h"
 
 Tools::Tools() {
+    // create tool Throw
+    SetThrow();
+
+    // create tool bomb
+    SetBomb();
 
     // create tool shovel
     SetShovel();
 
     // create tool Weapon
     SetWeapon();
-
-    // create tool Throw
-    SetThrow();
-
-    // create tool bomb
-    SetBomb();
 
     rearrangeCol();
     rearrangeRow();
@@ -36,10 +35,17 @@ void Tools::SetBomb() {
 
 void Tools::SetShovel() {
     m_rowEquipList.push_back(std::make_shared<Shovel>());
+    m_rowPosIdx.push_back(SHOVEL);
 }
 
 void Tools::SetWeapon() {
-    m_rowEquipList.push_back(std::make_shared<Weapon>());
+    auto w = std::make_shared<Weapon>();
+    m_rowEquipList.push_back(w);
+    m_rowPosIdx.push_back(WEAPON);
+
+    if (!w->GetIsThrow()) {
+        RemoveThrow();
+    }
 }
 
 void Tools::RemoveThrow() {

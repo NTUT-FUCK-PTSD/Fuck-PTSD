@@ -23,6 +23,7 @@ private:
     const static int16_t titanium = 2;
 
     // Settings
+    const static bool isThrow = false;
     inline const static std::string ImagePath = ASSETS_DIR "/items/weapon_rapier.png";
 };
 };     // namespace ToolSystem

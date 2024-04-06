@@ -33,9 +33,11 @@ struct Damage {
 
 // Settings
 struct Settings {
-    explicit Settings(std::string &path)
-        : imagePath(path){};
+    explicit Settings(std::string &path, bool isThrow)
+        : imagePath(path),
+          isThrow(isThrow){};
 
+    bool isThrow;
     std::string imagePath;
 };
 
@@ -43,9 +45,10 @@ struct Settings {
 struct TBaseWeapon : Damage, Settings {
 public:
     explicit TBaseWeapon(int16t nor, int16t blood, int16t glass, int16t golden,
-                         std::string obsidian, int16t titan, std::string path)
+                         std::string obsidian, int16t titan, std::string path,
+                         bool isThrow)
         : Damage(nor, blood, glass, golden, obsidian, titan),
-          Settings(path){};
+          Settings(path, isThrow){};
 };
 }; // namespace ToolSystem
 

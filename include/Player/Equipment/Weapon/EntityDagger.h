@@ -20,6 +20,7 @@ private:
     const static int16_t titanium = 2;
 
     // Settings
+    const static bool isThrow = true;
     inline const static std::string ImagePath = ASSETS_DIR "/items/weapon_dagger.png";
 };
 };     // namespace ToolSystem

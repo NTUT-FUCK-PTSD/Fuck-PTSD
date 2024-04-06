@@ -18,12 +18,14 @@ public:
     enum Type { DAGGER = 0, BROADSWORD, RAPIER };
 
     explicit Weapon();
-//    virtual ~Weapon() = 0;
+    virtual ~Weapon() = default;
 
-    void setType(Weapon::Type type);
-    void setPosition(const glm::vec2 position) override;
+    [[noreturn]] void setType(Weapon::Type type);
+    [[noreturn]] void setPosition(const glm::vec2 position) override;
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
+    [[nodiscard]] bool GetIsThrow() override;
+
 
 private:
     void rendererWindow();
@@ -33,10 +35,9 @@ private:
     glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, 0};
 
-//    std::shared_ptr<IBaseWeapon> m_ItemType;
-
-    std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_2.png";
     std::string m_ImagePathItem;
+    std::shared_ptr<ToolSystem::TBaseWeapon> m_ItemType;
+    std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_2.png";
 
     std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Item = std::make_shared<GameElement>();
