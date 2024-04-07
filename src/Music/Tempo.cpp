@@ -19,7 +19,7 @@ void Tempo::readTempoFile(const std::string &txtFilePath) {
     std::string line;
     std::getline(txtTempoFile, line);
 
-    m_tempoList = std::move(txtToVector(line, ','));
+    m_tempoList = txtToVector(line, ',');
 
     // 关闭文件流
     txtTempoFile.close();
@@ -40,7 +40,7 @@ std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
     return elems;
 }
 
-bool Tempo::canBeClick(std::size_t offset) {
+bool Tempo::canBeClick() {
 
     const auto tempoIndex = m_tempoIndex + m_punishTimes;
 

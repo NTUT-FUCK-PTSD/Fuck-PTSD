@@ -39,7 +39,7 @@ void Heart::resetHP() {
     float m_Times_X = (m_MaxHp - 1) / 5 == 0 ? m_MaxHp : 4;
     Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
 
-    for (int i = 0; i < std::size_t(m_MaxHp); i++) {
+    for (std::size_t i = 0; i < std::size_t(m_MaxHp); i++) {
 
         const auto heart = generalHeart(FULL, Initposition);
         m_ElementList.push_back(heart);
@@ -93,7 +93,7 @@ void Heart::minusHP(float number) {
 
     std::size_t i = 0;
     // renderer the full heart
-    for (i; i < std::size_t(m_currentHP); i++) {
+    for (; i < std::size_t(m_currentHP); i++) {
         m_ElementList[i]->SetDrawable(m_FullHPImage);
     }
 
@@ -104,7 +104,7 @@ void Heart::minusHP(float number) {
         i++;
     }
 
-    for (i; i < m_MaxHp; i++) {
+    for (; i < std::size_t(m_MaxHp); i++) {
         m_ElementList[i]->SetDrawable(m_EmptyHPImage);
     }
 }

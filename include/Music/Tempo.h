@@ -21,7 +21,7 @@ public:
     // must read one line in file, it not be '\n'
     void readTempoFile(const std::string &txtFilePath);
 
-    bool canBeClick(std::size_t offset);
+    bool canBeClick();
 
     void keyBoardClick() {
         m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
@@ -49,7 +49,6 @@ private:
 
     float m_MusicSpeed = 1.0f;
 
-    bool isTrigger = false;
     bool isShowHeartBeat = false;
     std::size_t m_punishTimes = 0;
 
