@@ -37,7 +37,7 @@ void Shovel::rendererItem() {
 }
 
 void Shovel::setPosition(const glm::vec2 position) {
-    m_Window->SetPosition(position);
+    m_Window->SetPosition({position.x, position.y + 0.4});
     m_Item->SetPosition({position.x, position.y - 5});
 
     m_Position = position;

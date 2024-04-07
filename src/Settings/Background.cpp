@@ -16,7 +16,7 @@ Background::Background() {
     m_MainMenu->SetScale({3, 3});
 
     m_Continue->SetDrawable(ContinueImage);
-    m_Continue->SetPosition({-0.5f, -365.5f});
+    m_Continue->SetPosition({-0.5f, -365.4f});
     m_Continue->SetZIndex(5);
     m_Continue->SetScale({3, 3});
 

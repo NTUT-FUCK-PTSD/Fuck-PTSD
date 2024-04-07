@@ -55,7 +55,7 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
                     }
                 }
                 if (doorCount >= 2) {
-                    m_MapData->PopbackTile(mapIndex);
+                    m_MapData->PopBackTile(mapIndex);
                     m_Tiles.erase(
                         std::remove(m_Tiles.begin(), m_Tiles.end(), tmp),
                         m_Tiles.end()); // Remove Child
@@ -110,7 +110,7 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
         }
     }
 
-    // SetCloseDisplayb24
+    // SetCloseDisplayB24
     for (int i = 0; i < m_Size.y; i++) {
         for (int j = 0; j < m_Size.x; j++) {
             mapIndex = j + i * m_Size.x;
@@ -119,7 +119,7 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
             }
             if ((1 + i >= m_Size.y) ||
                 (1 + i >= 0 && m_MapData->IsTilesEmpty(mapIndex + m_Size.x))) {
-                m_MapData->GetTileBack(mapIndex)->SetCloseDisplayb24(true);
+                m_MapData->GetTileBack(mapIndex)->SetCloseDisplayB24(true);
             }
         }
     }

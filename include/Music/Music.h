@@ -39,7 +39,7 @@ public:
         m_tempo.readTempoFile(path);
     };
 
-    bool TempoTrigger() { return m_tempo.canBeClick(100); }
+    bool TempoTrigger() { return m_tempo.canBeClick(); }
 
     std::shared_ptr<GameElement> getGameObject();
 
