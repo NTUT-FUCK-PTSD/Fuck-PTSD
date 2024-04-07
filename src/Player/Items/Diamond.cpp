@@ -40,8 +40,6 @@ void Diamond::toLeftSideDiamondText() {
     const glm::vec2 modifyPos = {initPos.x + m_text->GetSize().x * 2.5,
                                  initPos.y};
     m_DiamondText->SetPosition(modifyPos);
-    //    LOG_DEBUG((glm::vec2){a.x + m_text->GetSize().x,
-    //    m_text->GetSize().y});
 }
 
 void Diamond::plusDiamondNumber(const int number) {
@@ -50,4 +48,12 @@ void Diamond::plusDiamondNumber(const int number) {
     m_text->SetText(str);
 
     toLeftSideDiamondText();
+}
+
+std::shared_ptr<GameElement> Diamond::GetGameObject() {
+    m_Diamond -> AddChild(m_DiamondImage);
+    m_Diamond->AddChild(m_DiamondText);
+    m_Diamond->SetVisible(false);
+
+    return m_Diamond;
 }

@@ -1,22 +1,20 @@
 #include "App.hpp"
 #include "Background.hpp"
+#include "Dungeon/MapHandler.h"
 #include "Player.h"
 #include "ToolBoxs.h"
-
-// #include "Coin.h"
-
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Time.hpp"
-
-#include "Dungeon/MapHandler.h"
+#include <thread>
 
 using namespace tinyxml2;
 
 extern "C" {
 int32_t rusty_extern_c_integer();
 }
+
 
 // show the start background and listen the keypress
 void App::Start(std::shared_ptr<Core::Context>
@@ -60,6 +58,7 @@ void App::Start(std::shared_ptr<Core::Context>
     m_MainCharacter->SetBodyImage(ASSETS_DIR
                                   "/entities/player1_armor_body.png");
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
+    m_Window->AddChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
@@ -67,17 +66,6 @@ void App::Start(std::shared_ptr<Core::Context>
     m_DungeonMap->SetDrawable(
         std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);
-
-    // show the coin
-    m_Window->AddChildren(m_Coin->getGameObject());
-    m_Window->AddChildren(m_Diamond->getGameObject());
-
-    // add the Tools
-    //    m_Window.AddChild(m_Tools->getGameObject());
-    m_Window->AddChildren(m_Tools->getGameObjects());
-
-    // display the heart
-    m_Window->AddChildren(m_Heart->getGameObjects());
 
     // display the tempo heart in music System
     m_Window->AddChild(m_MusicSystem->getGameObject());
@@ -88,10 +76,10 @@ void App::Start(std::shared_ptr<Core::Context>
 void App::Update() {
 
     // add coin
-    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
-        m_Coin->plusCoinNumber(10);
-        m_Diamond->plusDiamondNumber(10);
-    }
+    //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+    //        m_Coin->plusCoinNumber(10);
+    //        m_Diamond->plusDiamondNumber(10);
+    //    }
 
     // detect the player
     if (Util::Input::IsKeyDown(Util::Keycode::W) ||

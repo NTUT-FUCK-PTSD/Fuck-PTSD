@@ -5,30 +5,40 @@
 #ifndef FUCK_PTSD_WEAPON_H
 #define FUCK_PTSD_WEAPON_H
 
-#include "pch_extream.h"
-
 #include "IEquipment.h"
 #include "ToolBoxs.h"
+#include "TypeEquip.h"
+#include "Weapon/Component.h"
+#include "Weapon/EntityBroadsword.h"
+#include "Weapon/EntityDagger.h"
+#include "Weapon/EntityRapier.h"
+#include "pch_extream.h"
 
 class Weapon final : public IEquipment {
 public:
+
+
     explicit Weapon();
+    virtual ~Weapon() = default;
 
-    [[nodiscard]] std::shared_ptr<GameElement> getGameElement() override;
+    [[noreturn]] void setWeaponType(WeaponEnum::Type type) override;
+    [[noreturn]] void setPosition(const glm::vec2 position) override;
 
-    void setPosition(const glm::vec2 position) override;
+    [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
+    [[nodiscard]] bool GetIsThrow() override;
 
-    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() override;
-
+    Direction GetDirection() override { return IEquipment::Direction::ROW; };
 private:
+    void rendererWindow();
+    void rendererItem();
+
     std::size_t m_ZIndex = 50;
     glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, 0};
 
-    //    ASSETS_DIR "/gui/diamond.png"
-
+    std::string m_ImagePathItem;
+    std::shared_ptr<ToolSystem::TBaseWeapon> m_ItemType;
     std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_2.png";
-    std::string m_ImagePathItem = ASSETS_DIR "/items/weapon_dagger.png";
 
     std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Item = std::make_shared<GameElement>();

@@ -3,33 +3,32 @@
 //
 
 #include "Player.h"
+#include "Equipment/TypeEquip.h"
 
 Player::Player()
-    : Animation({0, 0}) {}
-
-Player::Player(const std::string &headImagePath,
-               const std::string &bodyImagePath)
     : Animation({0, 0}),
-      m_HeadImagePath(headImagePath),
-      m_BodyImagePath(bodyImagePath) {
-    HeadSize = ToolBoxs::CountImagePixel(headImagePath, 4, 2);
-    BodySize = ToolBoxs::CountImagePixel(bodyImagePath, 4, 10);
+      m_Body(std::make_shared<GameElement>()),
+      m_Head(std::make_shared<GameElement>()),
+      m_Player(std::make_shared<GameElement>()),
+      m_Coin(std::make_unique<Coin>()),
+      m_Heart(std::make_unique<Heart>()),
+      m_Tools(std::make_unique<Tools>()),
+      m_Diamond(std::make_unique<Diamond>()),
+      m_Window(std::make_shared<GameElement>()) {
 
-    HeadImage = std::make_shared<SpriteSheet>(
-        headImagePath, HeadSize, std::vector<std::size_t>{0, 1, 2, 3}, true,
-        100, true, 100);
+    // create tool Throw
+    m_Tools->SetThrow();
 
-    BodyImage = std::make_shared<SpriteSheet>(
-        bodyImagePath, BodySize, std::vector<std::size_t>{0, 1, 2, 3}, true,
-        100, true, 100);
+    // create tool bomb
+    m_Tools->SetBomb();
 
-    m_Body->SetDrawable(BodyImage);
-    m_Body->SetPosition(m_Position);
-    m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    // create tool shovel
+    m_Tools->SetShovel();
+    m_Tools->SetShovelType(m_ShovelType);
 
-    m_Head->SetDrawable(HeadImage);
-    m_Head->SetPosition(m_Position);
-    m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    // create tool Weapon
+    m_Tools->SetWeapon();
+    m_Tools->SetWeaponType(m_WeaponType);
 
     Update();
 }
@@ -119,4 +118,56 @@ void Player::SetZIndex(float index) {
     m_ZIndex = index;
     m_Body->SetZIndex(index);
     m_Head->SetZIndex(index + float(0.25));
+}
+
+void Player::UpdateCoin(const unsigned long &duringTimeMs,
+                        const glm::vec2 &destination,
+                        const uint16_t &direction) {
+    m_Coin->MoveByTime(duringTimeMs, destination, direction);
+}
+
+std::shared_ptr<GameElement> Player::GetWindowElement() {
+    m_Window->AddChild(m_Coin->GetGameObject());
+    m_Window->AddChild(m_Heart->GetGameObject());
+    m_Window->AddChild(m_Diamond->GetGameObject());
+    m_Window->AddChild(m_Tools->GetGameObject());
+
+    m_Window->SetVisible(false);
+    return m_Window;
+}
+
+void Player::gainCoin(std::size_t number) {
+    m_Coin->plusCoinNumber(number);
+}
+
+void Player::lostCoin(std::size_t number) {
+    m_Coin->plusCoinNumber(number * -1);
+}
+
+void Player::gainDiamond(std::size_t number) {
+    m_Diamond->plusDiamondNumber(number);
+}
+
+void Player::lostDiamond(std::size_t number) {
+    m_Diamond->plusDiamondNumber(number * -1);
+}
+
+// void Player::useDefaultSettingsTool() {
+//     m_Tools->SetShovelType();
+// }
+
+bool Player::IsShovelExist() {
+    return true;
+}
+
+bool Player::IsWeaponExist() {
+    return true;
+}
+
+ShovelEnum::Type Player::GetShovelType() {
+    return m_ShovelType;
+}
+
+WeaponEnum::Type Player::GetWeaponType() {
+    return m_WeaponType;
 }

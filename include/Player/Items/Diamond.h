@@ -1,3 +1,6 @@
+#ifndef FUCK_PTSD_DIAMOND_H
+#define FUCK_PTSD_DIAMOND_H
+
 #include "GameElement.h"
 #include "Util/Text.hpp"
 #include <iostream>
@@ -15,6 +18,7 @@ public:
 
     // return GameObject
     std::vector<std::shared_ptr<Util::GameObject>> getGameObject();
+    std::shared_ptr<GameElement> GetGameObject();
 
 private:
     void toLeftSideDiamondText();
@@ -39,4 +43,6 @@ private:
         std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_DiamondText =
         std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_Diamond = std::make_shared<GameElement>();
 };
+#endif
