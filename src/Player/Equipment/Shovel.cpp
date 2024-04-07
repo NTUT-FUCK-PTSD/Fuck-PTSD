@@ -5,14 +5,25 @@
 
 #include "Player/Equipment/Shovel.h"
 
-Shovel::Shovel() {
+Shovel::Shovel(ShovelEnum::Type type) {
 
     rendererWindow();
-//    setShovelType(ShovelEnum::Type::Normal);
-    m_ImagePathItem = ASSETS_DIR"/items/shovel_basic.png";
+
+    selectWeaponType(type);
     rendererItem();
+
     m_Shovel->SetVisible(false);
 };
+
+void Shovel::selectWeaponType(ShovelEnum::Type type) {
+    switch (type) {
+    case ShovelEnum::Normal:
+        m_ItemType = std::make_shared<ToolSystem::EntityShovel>();
+        break;
+    }
+
+    m_ImagePathItem = m_ItemType->imagePath;
+}
 
 void Shovel::rendererWindow() {
     const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
@@ -48,12 +59,7 @@ std::shared_ptr<GameElement> Shovel::GetGameObject() const {
 }
 
 void Shovel::setShovelType(ShovelEnum::Type type) {
-    switch (type) {
-    case ShovelEnum::Normal:
-        m_ItemType = std::make_shared<ToolSystem::EntityShovel>();
-        break;
-    }
 
-    m_ImagePathItem = m_ItemType->imagePath;
+    selectWeaponType(type);
     rendererItem();
 }

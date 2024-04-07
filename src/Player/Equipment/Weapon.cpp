@@ -4,13 +4,32 @@
 #include "pch_extream.h"
 #include "Player/Equipment/Weapon.h"
 
-Weapon::Weapon() {
+Weapon::Weapon(WeaponEnum::Type type) {
 
+    // renderer the window
     rendererWindow();
-    m_Attack->SetVisible(false);
-    m_ImagePathItem = ASSETS_DIR "/items/weapon_dagger.png";
+
+    // renderer the item
+    selectWeaponType(type);
     rendererItem();
-//    setWeaponType(WeaponEnum::Type::DAGGER);
+
+    m_Attack->SetVisible(false);
+}
+
+void Weapon::selectWeaponType(WeaponEnum::Type type) {
+    switch (type) {
+    case WeaponEnum::Type::DAGGER:
+        m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
+        break;
+    case WeaponEnum::Type::BROADSWORD:
+        m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
+        break;
+    case WeaponEnum::Type::RAPIER:
+        m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
+        break;
+    }
+
+    m_ImagePathItem = m_ItemType->imagePath;
 }
 
 void Weapon::rendererWindow() {
@@ -48,20 +67,7 @@ std::shared_ptr<GameElement> Weapon::GetGameObject() const {
 }
 
 void Weapon::setWeaponType(WeaponEnum::Type type) {
-    switch (type) {
-    case WeaponEnum::Type::DAGGER:
-        m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
-        break;
-    case WeaponEnum::Type::BROADSWORD:
-        m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
-        break;
-    case WeaponEnum::Type::RAPIER:
-        m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
-        break;
-    }
-
-//    LOG_INFO(m_ItemType->imagePath);
-    m_ImagePathItem = m_ItemType->imagePath;
+    selectWeaponType(type);
     rendererItem();
 }
 

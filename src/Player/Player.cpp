@@ -23,12 +23,10 @@ Player::Player()
     m_Tools->SetBomb();
 
     // create tool shovel
-    m_Tools->SetShovel();
-    m_Tools->SetShovelType(m_ShovelType);
+    m_Tools->SetShovel(m_ShovelType);
 
     // create tool Weapon
-    m_Tools->SetWeapon();
-    m_Tools->SetWeaponType(m_WeaponType);
+    m_Tools->SetWeapon(m_WeaponType);
 
     Update();
 }
