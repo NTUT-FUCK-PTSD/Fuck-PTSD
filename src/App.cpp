@@ -83,10 +83,11 @@ void App::Update() {
 //    m_DebugSystem->HP();
 
     // add coin
-    //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
-    //        m_Coin->plusCoinNumber(10);
-    //        m_Diamond->plusDiamondNumber(10);
-    //    }
+        if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+            m_MainCharacter->gainCoin(10);
+            m_MainCharacter->gainDiamond(10);
+            m_MainCharacter->lostHP(0.5);
+        }
 
     // detect the player
     if (Util::Input::IsKeyDown(Util::Keycode::W) ||

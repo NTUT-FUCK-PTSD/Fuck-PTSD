@@ -172,3 +172,11 @@ ShovelEnum::Type Player::GetShovelType() {
 WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
 }
+
+//void Player::gainHP(std::size_t value) {
+//    m_Heart->plusHP(value);
+//}
+
+void Player::lostHP(float value) {
+    m_Heart->minusHP(value);
+}
