@@ -17,7 +17,7 @@ public:
 
     void SetPosition(const glm::vec2 &position);
 
-    std::size_t getCoin();
+    std::size_t GetCoin();
 
     // return GameObject
     std::vector<std::shared_ptr<Util::GameObject>> getGameObject();

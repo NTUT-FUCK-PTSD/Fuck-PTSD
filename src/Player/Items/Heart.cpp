@@ -6,9 +6,6 @@
 Heart::Heart() {
 
     resetHP();
-
-    minusHP(10.0f);
-    plusHP(5.5f);
 }
 
 std::vector<std::shared_ptr<Util::GameObject>> Heart::getGameObjects() const {

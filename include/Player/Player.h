@@ -48,11 +48,9 @@ public:
 
     // DOTO: set player's heart
     void lostHP(float value);
-    void gainHP(std::size_t value);
-    void getHP(std::size_t value);
-
-    // set player's tool
-    void useDefaultSettingsTool();
+    void gainHP(float value);
+    bool IsPlayerDead();
+//    void getHP(std::size_t value);
 
     // update
     void Update();
