@@ -79,8 +79,8 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
-    m_DebugSystem->ShowHelloWorld();
-    m_DebugSystem->HP();
+//    m_DebugSystem->ShowHelloWorld();
+//    m_DebugSystem->HP();
 
     // add coin
     //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
@@ -161,6 +161,7 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
+    m_DebugSystem->Update();
     m_MusicSystem->Update();
     m_MainCharacter->Update();
     m_Window->Update();
