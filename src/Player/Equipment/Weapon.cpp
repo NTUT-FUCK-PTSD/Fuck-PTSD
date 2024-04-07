@@ -14,8 +14,15 @@ Weapon::Weapon() {
 }
 
 void Weapon::rendererWindow() {
-    const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
-    m_Window->SetDrawable(WindowImage);
+    const auto WindowSpriteSheet = std::make_shared<Util::SpriteSheet>(m_ImagePathWindow);
+
+    WindowSpriteSheet->SetDrawRect(
+SDL_Rect {0, 0, 30, 33}
+        );
+//    const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
+
+//    m_Window->SetDrawable(WindowImage);
+    m_Window->SetDrawable(WindowSpriteSheet);
     m_Window->SetZIndex(m_ZIndex + 1);
     m_Window->SetScale(m_Scale);
     m_Window->SetPosition(m_Position);
@@ -23,7 +30,7 @@ void Weapon::rendererWindow() {
 }
 
 void Weapon::rendererItem() {
-    const auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 1, 2);
+    auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 1, 2);
 
     const auto ItemImage = std::make_shared<SpriteSheet>(
         m_ImagePathItem, ItemSize, std::vector<std::size_t>{0}, false, 100,
@@ -37,7 +44,7 @@ void Weapon::rendererItem() {
 }
 
 void Weapon::setPosition(const glm::vec2 position) {
-    m_Window->SetPosition(position);
+    m_Window->SetPosition({position.x, position.y + 0.4});
     m_Item->SetPosition({position.x, position.y - 5});
 
     m_Position = position;

@@ -52,8 +52,8 @@ Bomb::Bomb() {
 void Bomb::setPosition(const glm::vec2 position) {
     m_Window->SetPosition(position);
     m_Item->SetPosition({position.x,position.y + 10});
-    m_Text->SetPosition({position.x + 15, position.y - 40});
-    m_LowerText->SetPosition({position.x + 15, position.y - 60});
+    m_Text->SetPosition({position.x + 25, position.y - 40});
+    m_LowerText->SetPosition({position.x + 25, position.y - 60});
 }
 
 std::shared_ptr<GameElement> Bomb::GetGameObject() const {
