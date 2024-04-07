@@ -5,14 +5,15 @@
 #include "Camera.h"
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
+#include "Debug/DebugSystem.h"
 #include "Dungeon/Map.h"
+#include "Items/Tools.h"
 #include "Music/Music.h"
 #include "Player.h"
 #include "Player/Equipment/Shovel.h"
 #include "Player/Items/Coin.h"
 #include "Player/Items/Diamond.h"
 #include "Player/Items/Heart.h"
-#include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "Util/Text.hpp"
 #include "pch.hpp" // IWYU pragma: export
@@ -39,8 +40,11 @@ private:
     void ValidTask();
 
 private:
-    // music
-    std::shared_ptr<MusicSystem> m_MusicSystem = std::make_shared<MusicSystem>();
+    // debug window
+    std::shared_ptr<DebugSystem> m_DebugSystem;
+        // music
+        std::shared_ptr<MusicSystem> m_MusicSystem =
+            std::make_shared<MusicSystem>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};

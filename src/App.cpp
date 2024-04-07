@@ -31,10 +31,12 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
+
         if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
             Util::Input::IfExit()) {
             m_CurrentState = State::END;
         }
+
         m_MusicSystem->Update();
         m_Camera->Update();
         context->Update();
@@ -70,10 +72,15 @@ void App::Start(std::shared_ptr<Core::Context>
     // display the tempo heart in music System
     m_Window->AddChild(m_MusicSystem->getGameObject());
 
+    // create Debug window
+    m_DebugSystem = std::make_shared<DebugSystem>();
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+    m_DebugSystem->ShowHelloWorld();
+    m_DebugSystem->HP();
 
     // add coin
     //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
@@ -158,6 +165,8 @@ void App::Update() {
     m_MainCharacter->Update();
     m_Window->Update();
     m_Camera->Update();
+
+//    ImGui::ShowDemoWindow();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)
