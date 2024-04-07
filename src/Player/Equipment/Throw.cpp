@@ -46,8 +46,10 @@ Throw::Throw() {
 
     m_Throw->AddChild(m_Window);
     m_Throw->AddChild(m_Item);
+    m_Throw->AddChild(m_Text);
+    m_Throw->AddChild(m_LowerText);
 
-    m_Throw->SetVisible(true);
+    m_Throw->SetVisible(false);
 };
 
 void Throw::setPosition(const glm::vec2 position) {
@@ -57,9 +59,6 @@ void Throw::setPosition(const glm::vec2 position) {
     m_LowerText->SetPosition({position.x + 15, position.y - 60});
 }
 
-std::shared_ptr<GameElement> Throw::getGameElement() {
+std::shared_ptr<GameElement> Throw::GetGameObject() const {
     return m_Throw;
-}
-std::vector<std::shared_ptr<Util::GameObject>> Throw::getGameObjects() {
-    return {m_Window, m_Item, m_Text, m_LowerText};
 }

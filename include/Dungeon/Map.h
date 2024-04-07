@@ -9,6 +9,7 @@
 #include "Dungeon/MapData.h"
 #include "Dungeon/Tile.h"
 #include "Player.h"
+#include "Player/Player.h"
 
 namespace Dungeon {
 class Map final : public Util::GameObject {

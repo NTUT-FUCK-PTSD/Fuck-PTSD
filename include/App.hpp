@@ -42,12 +42,6 @@ private:
     // music
     std::shared_ptr<MusicSystem> m_MusicSystem = std::make_shared<MusicSystem>();
 
-    // game object
-    std::shared_ptr<Coin> m_Coin = std::make_shared<Coin>();
-    std::shared_ptr<Tools> m_Tools = std::make_shared<Tools>();
-    std::shared_ptr<Heart> m_Heart = std::make_shared<Heart>();
-    std::shared_ptr<Diamond> m_Diamond = std::make_shared<Diamond>();
-
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
     glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
