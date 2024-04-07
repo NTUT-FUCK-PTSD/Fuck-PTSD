@@ -72,6 +72,5 @@ void Weapon::setWeaponType(WeaponEnum::Type type) {
 }
 
 bool Weapon::GetIsThrow() {
-    return false;
-//    return m_ItemType->isThrow;
+    return m_ItemType->isThrow;
 }
