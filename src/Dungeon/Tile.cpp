@@ -64,7 +64,7 @@ void Tile::SetIndex(std::size_t index) {
     UpdateDrawable();
 }
 
-void Tile::SetCloseDisplayb24(bool closeDisplayb24) {
+void Tile::SetCloseDisplayB24(bool closeDisplayb24) {
     if (IsWall()) {
         m_CloseDisplayb24 = closeDisplayb24;
     }

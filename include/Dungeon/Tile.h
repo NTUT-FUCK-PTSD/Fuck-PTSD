@@ -11,10 +11,10 @@ namespace Dungeon {
 
 class Tile final : public Util::GameObject {
 public:
-    Tile(const s_Tile &u_Tile);
+    explicit Tile(const s_Tile &u_Tile);
 
     void SetIndex(std::size_t index);
-    void SetCloseDisplayb24(bool closeDisplayb24);
+    void SetCloseDisplayB24(bool closeDisplayb24);
     void SetRotation(float rotation);
     std::size_t GetIndex();
     s_Tile GetTile();
