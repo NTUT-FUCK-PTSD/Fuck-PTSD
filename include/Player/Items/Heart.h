@@ -26,6 +26,8 @@ public:
 
     void SetHeartMaxHp(float value);
 
+    bool IsDead();
+
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
     getGameObjects() const;
 
@@ -38,13 +40,12 @@ public:
     };
 
 private:
-    void IsDead();
     std::shared_ptr<GameElement> generalHeart(STATE state, const glm::vec2 &position);
     void AddToList();
     void RendererHeart(std::size_t number);
 
     // HP settings
-    //
+    bool m_Dead = false;
     float m_MaxHp = 15.0f;
     float m_currentHP = 6.0f;
     const glm::vec2 m_FirstPosition = {500, 350};
