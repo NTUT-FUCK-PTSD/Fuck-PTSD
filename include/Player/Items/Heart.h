@@ -16,7 +16,7 @@ class Heart final {
 public:
     explicit Heart();
 
-    void plusHP(std::size_t number);
+    void plusHP(float number);
 
     void minusHP(float number);
 
@@ -40,11 +40,12 @@ public:
 private:
     void IsDead();
     std::shared_ptr<GameElement> generalHeart(STATE state, const glm::vec2 &position);
-    void rendererHeart();
+    void AddToList();
+    void RendererHeart(std::size_t number);
 
     // HP settings
     //
-    float m_MaxHp = 6.0f;
+    float m_MaxHp = 15.0f;
     float m_currentHP = 6.0f;
     const glm::vec2 m_FirstPosition = {500, 350};
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};

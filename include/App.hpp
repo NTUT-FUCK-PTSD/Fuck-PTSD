@@ -5,7 +5,6 @@
 #include "Camera.h"
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
-#include "Debug/DebugSystem.h"
 #include "Dungeon/Map.h"
 #include "Items/Tools.h"
 #include "Music/Music.h"
@@ -15,6 +14,7 @@
 #include "Player/Items/Diamond.h"
 #include "Player/Items/Heart.h"
 #include "SpriteSheet.hpp"
+#include "SubWindow/DebugSystem.h"
 #include "Util/Text.hpp"
 #include "pch.hpp" // IWYU pragma: export
 

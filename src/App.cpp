@@ -79,8 +79,6 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
-//    m_DebugSystem->ShowHelloWorld();
-//    m_DebugSystem->HP();
 
     // add coin
         if (Util::Input::IsKeyDown(Util::Keycode::B)) {

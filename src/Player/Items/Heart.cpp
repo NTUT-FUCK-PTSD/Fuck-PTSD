@@ -17,7 +17,7 @@ std::shared_ptr<GameElement> Heart::GetGameObject() const {
     return m_Heart;
 }
 
-void Heart::rendererHeart() {
+void Heart::AddToList() {
     for (auto element : m_ElementList) {
         m_Heart->AddChild(element);
     }
@@ -29,33 +29,40 @@ void Heart::resetHP() {
         return;
     }
 
-    if (std::size_t(m_MaxHp) > 10 ) {
-        LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 10");
-        return ;
-    }
+    //    if (std::size_t(m_MaxHp) > 10) {
+    //        LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 10");
+    //        return;
+    //    }
 
-    glm::vec2 Initposition = m_FirstPosition;
+    uint16_t m_Times_x =
+        size_t(m_MaxHp / 5) > 0 ? 4 : std::size_t(m_MaxHp) % 5 - 1;
 
-    float m_Times_X = (m_MaxHp - 1) / 5 == 0 ? m_MaxHp : 4;
-    Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
+    glm::vec2 InitPosition = m_FirstPosition;
+    InitPosition += m_eachPositionDiff_X * float(m_Times_x);
 
-    for (int i = 0; i < std::size_t(m_MaxHp); i++) {
-
-        const auto heart = generalHeart(FULL, Initposition);
+    for (std::size_t i = 1; i <= std::size_t(m_MaxHp); i++) {
+        const auto heart = generalHeart(FULL, InitPosition);
         m_ElementList.push_back(heart);
 
-        if ((i + 1) % 5 == 0 && i != 0) {
-            Initposition = Initposition + m_eachPositionDiff_Y;
+        if (i % 5 == 0 && i != 0) {
+            // i = 5
 
-            float m_Times_X = (i + 1) % 5 == 0 ? size_t(m_MaxHp) % 5 :(i + 1) % 5 + 1;
-            Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
+            // y offset
+            InitPosition += m_eachPositionDiff_Y;
+
+            // x offset
+            m_Times_x = (size_t(m_MaxHp) - i) / 5 > 0
+                            ? 5
+                            : (size_t(m_MaxHp) - i) % 5;
+            InitPosition += m_eachPositionDiff_X * float(m_Times_x);
         }
 
-        Initposition = Initposition - m_eachPositionDiff_X;
+        InitPosition -= m_eachPositionDiff_X;
     }
 
+//    m_ElementList[7]->SetDrawable(m_EmptyHPImage);
     m_currentHP = m_MaxHp;
-    rendererHeart();
+    AddToList();
 }
 
 std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
@@ -83,14 +90,7 @@ std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
     return resultObject;
 }
 
-void Heart::minusHP(float number) {
-    if (std::size_t(number * 2) % 1 != 0) {
-        LOG_ERROR("the Heart's minusHP is not value of time of 1 or 0.5.");
-        return;
-    }
-
-    m_currentHP -= number;
-
+void Heart::RendererHeart(std::size_t number) {
     std::size_t i = 0;
     // renderer the full heart
     for (i; i < std::size_t(m_currentHP); i++) {
@@ -107,4 +107,29 @@ void Heart::minusHP(float number) {
     for (i; i < m_MaxHp; i++) {
         m_ElementList[i]->SetDrawable(m_EmptyHPImage);
     }
+};
+
+void Heart::plusHP(float number) {
+    if (std::size_t(number * 2) % 1 != 0) {
+        LOG_ERROR("the Heart's minusHP is not value of time of 1 or 0.5.");
+        return;
+    }
+
+    if (m_currentHP + number > m_MaxHp) {
+        LOG_ERROR("The HP is out of limit when you plus");
+        return;
+    }
+
+    m_currentHP += number;
+    RendererHeart((size_t)m_currentHP);
+}
+
+void Heart::minusHP(float number) {
+    if (std::size_t(number * 2) % 1 != 0) {
+        LOG_ERROR("the Heart's minusHP is not value of time of 1 or 0.5.");
+        return;
+    }
+
+    m_currentHP -= number;
+    RendererHeart((size_t)m_currentHP);
 }
