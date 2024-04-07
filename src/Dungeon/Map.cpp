@@ -55,7 +55,7 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
                     }
                 }
                 if (doorCount >= 2) {
-                    m_MapData->PopbackTile(mapIndex);
+                    m_MapData->PopBackTile(mapIndex);
                     m_Tiles.erase(
                         std::remove(m_Tiles.begin(), m_Tiles.end(), tmp),
                         m_Tiles.end()); // Remove Child
