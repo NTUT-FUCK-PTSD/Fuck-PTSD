@@ -106,6 +106,7 @@ void Player::Update() {
     }
     SetZIndex(m_AnimationZIndex);
     SetPosition(m_Position);
+
 }
 
 void Player::SetPosition(const glm::vec2 &position) {
