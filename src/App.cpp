@@ -9,12 +9,13 @@
 #include "Util/Time.hpp"
 #include <thread>
 
+#define CMAKE_DEBUG_OPTION true
+
 using namespace tinyxml2;
 
 extern "C" {
 int32_t rusty_extern_c_integer();
 }
-
 
 // show the start background and listen the keypress
 void App::Start(std::shared_ptr<Core::Context>
@@ -81,11 +82,25 @@ void App::Start(std::shared_ptr<Core::Context>
 void App::Update() {
 
     // add coin
-        if (Util::Input::IsKeyDown(Util::Keycode::B)) {
-            m_MainCharacter->gainCoin(10);
-            m_MainCharacter->gainDiamond(10);
-            m_MainCharacter->lostHP(0.5);
-        }
+    //        if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+    //            m_MainCharacter->gainCoin(10);
+    //            m_MainCharacter->gainDiamond(10);
+    //            m_MainCharacter->lostHP(0.5);
+    //        }
+
+#if (CMAKE_DEBUG_OPTION == true)
+    // Get Value from Debug Panel
+    auto resource = m_DebugSystem->ReturnResource();
+    if (resource.isReady) {
+        m_MainCharacter->gainHP(resource.gainHP);
+        m_MainCharacter->gainCoin(resource.gainCoin);
+        m_MainCharacter->gainDiamond(resource.gainDiamond);
+
+        m_MainCharacter->lostHP(resource.lostHP);
+        m_MainCharacter->lostCoin(resource.lostCoin);
+        m_MainCharacter->lostDiamond(resource.lostDiamond);
+    };
+#endif
 
     // detect the player
     if (Util::Input::IsKeyDown(Util::Keycode::W) ||
@@ -158,15 +173,14 @@ void App::Update() {
         m_CurrentState = State::END;
     }
 
-    //    LOG_INFO(rusty_extern_c_integer());
-
     m_DebugSystem->Update();
     m_MusicSystem->Update();
     m_MainCharacter->Update();
     m_Window->Update();
     m_Camera->Update();
 
-//    ImGui::ShowDemoWindow();
+    //    ImGui::ShowDemoWindow();
+    //    LOG_INFO(rusty_extern_c_integer());
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)

@@ -50,7 +50,6 @@ public:
     void lostHP(float value);
     void gainHP(float value);
     bool IsPlayerDead();
-//    void getHP(std::size_t value);
 
     // update
     void Update();
