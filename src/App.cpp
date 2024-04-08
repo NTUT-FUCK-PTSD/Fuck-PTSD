@@ -15,7 +15,6 @@ extern "C" {
 int32_t rusty_extern_c_integer();
 }
 
-
 // show the start background and listen the keypress
 void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
@@ -99,7 +98,9 @@ void App::Update() {
         if (m_PlayerMoveDirect != Player::NONE) {
             m_PlayerMoveDirect = Player::NONE;
         }
-        if (Util::Input::IsKeyDown(Util::Keycode::W)) {
+        if (Util::Input::IsKeyDown(Util::Keycode::W) &&
+            m_DungeonMap->GetMapData()->IsPositionWalkable(
+                m_MainCharacter->GetGamePosition() + glm::vec2(0, -1))) {
             m_PlayerMoveDirect = Player::Direction::UP;
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
@@ -109,7 +110,9 @@ void App::Update() {
                                       m_AniCameraDestination.y -
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
         }
-        else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
+        else if (Util::Input::IsKeyDown(Util::Keycode::A) &&
+                 m_DungeonMap->GetMapData()->IsPositionWalkable(
+                     m_MainCharacter->GetGamePosition() + glm::vec2(-1, 0))) {
             m_PlayerMoveDirect = Player::Direction::LEFT;
             m_MainCharacter->SetFaceTo(Player::Direction::LEFT);
 
@@ -120,7 +123,9 @@ void App::Update() {
                                           Dungeon::DUNGEON_TILE_WIDTH * 3,
                                       m_AniCameraDestination.y};
         }
-        else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
+        else if (Util::Input::IsKeyDown(Util::Keycode::S) &&
+                 m_DungeonMap->GetMapData()->IsPositionWalkable(
+                     m_MainCharacter->GetGamePosition() + glm::vec2(0, 1))) {
             m_PlayerMoveDirect = Player::Direction::DOWN;
 
             m_AniPlayerDestination = {m_AniPlayerDestination.x,
@@ -130,7 +135,9 @@ void App::Update() {
                                       m_AniCameraDestination.y +
                                           Dungeon::DUNGEON_TILE_WIDTH * 3};
         }
-        else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
+        else if (Util::Input::IsKeyDown(Util::Keycode::D) &&
+                 m_DungeonMap->GetMapData()->IsPositionWalkable(
+                     m_MainCharacter->GetGamePosition() + glm::vec2(1, 0))) {
             m_PlayerMoveDirect = Player::Direction::RIGHT;
             m_MainCharacter->SetFaceTo(Player::Direction::RIGHT);
 

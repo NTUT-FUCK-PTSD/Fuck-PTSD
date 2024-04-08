@@ -60,6 +60,14 @@ void Skeleton::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_CanMove = false;
+                m_WillMovePosition = GetGamePosition();
+                m_AnimationType = 0;
+                m_AttackPlayer = true;
+                m_Attack = !m_Attack;
+                return;
+            }
             m_CanMove = true;
             SetGamePosition(m_WillMovePosition);
             if (direction.x > 0) {

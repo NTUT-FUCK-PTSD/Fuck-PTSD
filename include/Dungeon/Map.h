@@ -14,10 +14,12 @@
 namespace Dungeon {
 class Map final : public Util::GameObject {
 public:
-    Map(const std::shared_ptr<Player> &mainCharacter,
-        const std::string &path, const int &levelNum = 1);
+    Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
+        const int &levelNum = 1);
 
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
+
+    std::shared_ptr<MapData> GetMapData() const { return m_MapData; }
 
     void CameraUpdate();
     void TempoUpdate();

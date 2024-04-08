@@ -70,6 +70,12 @@ void Ghost::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_CanMove = false;
+                m_WillMovePosition = GetGamePosition();
+                m_AttackPlayer = true;
+                return;
+            }
             m_CanMove = true;
             SetGamePosition(m_WillMovePosition);
             if (direction.x > 0) {

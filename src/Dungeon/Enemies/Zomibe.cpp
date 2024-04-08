@@ -54,6 +54,12 @@ void Zombie::Move() {
         }
         m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
         if (IsVaildMove(m_WillMovePosition) && m_Attack) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_CanMove = false;
+                m_WillMovePosition = GetGamePosition();
+                m_Attack = !m_Attack;
+                return;
+            }
             m_CanMove = true;
             SetGamePosition(m_WillMovePosition);
         }

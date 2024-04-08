@@ -125,6 +125,11 @@ void Bat::RandomMove() {
             break;
         }
         if (IsVaildMove(m_WillMovePosition)) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_NeedToMove = false;
+                m_AttackPlayer = true;
+                return;
+            }
             m_CanMove = true;
             SetGamePosition(m_WillMovePosition);
             if (m_RandomPool[index] == 2) {

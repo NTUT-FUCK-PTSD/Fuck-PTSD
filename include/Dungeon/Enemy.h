@@ -76,6 +76,8 @@ protected:
     bool m_CanMove = false;
     glm::vec2 m_WillMovePosition;
 
+    bool m_AttackPlayer = false;
+
 private:
     size_t m_BeatDelay;
     bool m_Lord;

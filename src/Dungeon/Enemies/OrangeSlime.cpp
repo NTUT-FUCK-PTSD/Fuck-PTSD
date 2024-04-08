@@ -57,6 +57,14 @@ void OrangeSlime::Move() {
         SetFace(false);
     }
     if (IsVaildMove(m_WillMovePosition)) {
+        if (m_WillMovePosition == GetPlayerPosition()) {
+            m_CanMove = false;
+            m_NeedToMove = false;
+            m_WillMovePosition = GetGamePosition();
+            m_AttackPlayer = true;
+            m_State++;
+            return;
+        }
         m_CanMove = true;
         SetGamePosition(m_WillMovePosition);
     }
