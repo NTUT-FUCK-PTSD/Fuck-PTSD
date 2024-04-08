@@ -61,7 +61,10 @@ void Ghost::Move() {
         SetTransparent(true);
     }
     else {
-        SetTransparent(false);
+        if (m_Transparent) {
+            SetTransparent(false);
+            return;
+        }
     }
     m_LastDistance = tmp;
 
