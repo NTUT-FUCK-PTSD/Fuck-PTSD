@@ -99,7 +99,8 @@ void Heart::RendererHeart(std::size_t number) {
         i++;
     }
 
-    for (; i < m_MaxHp; i++) {
+
+    for (; i < std::size_t(m_MaxHp); i++) {
         m_ElementList[i]->SetDrawable(m_EmptyHPImage);
     }
 };

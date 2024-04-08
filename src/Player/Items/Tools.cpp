@@ -21,14 +21,14 @@ void Tools::SetBomb() {
     rearrangeCol();
 }
 
-void Tools::SetShovel() {
-    m_rowEquipList.push_back(std::make_shared<Shovel>());
+void Tools::SetShovel(ShovelEnum::Type type) {
+    m_rowEquipList.push_back(std::make_shared<Shovel>(type));
     m_rowPosIdx.push_back(SHOVEL);
     rearrangeRow();
 }
 
-void Tools::SetWeapon() {
-    auto w = std::make_shared<Weapon>();
+void Tools::SetWeapon(WeaponEnum::Type type) {
+    auto w = std::make_shared<Weapon>(type);
     m_rowEquipList.push_back(w);
     m_rowPosIdx.push_back(WEAPON);
     rearrangeRow();

@@ -23,7 +23,7 @@ void SimpleMapData::RemoveTile(const size_t &position,
                                m_Tiles.at(position).end());
 }
 
-void SimpleMapData::PopbackTile(const size_t &position) {
+void SimpleMapData::PopBackTile(const size_t &position) {
     m_Tiles.at(position).pop_back();
 }
 
@@ -56,7 +56,7 @@ void SimpleMapData::SetLevelIndexMin(const glm::ivec2 &levelIndexMin) {
     m_LevelIndexMin = levelIndexMin;
 }
 
-size_t SimpleMapData::GamePostion2MapIndex(const glm::ivec2 &position) const {
+size_t SimpleMapData::gamePosition2MapIndex(const glm::ivec2 &position) const {
     return (position.x - GetLevelIndexMin().x + 1) +
            (position.y - GetLevelIndexMin().y + 1) * m_Size.x;
 }
@@ -79,7 +79,7 @@ bool SimpleMapData::IsWalkable(const size_t &position) const {
 
 bool SimpleMapData::IsPositionWalkable(const glm::ivec2 &position) const {
     return IsPositionValid(position) &&
-           IsWalkable(GamePostion2MapIndex(position));
+           IsWalkable(gamePosition2MapIndex(position));
 }
 
 glm::ivec2 SimpleMapData::GetSize() const {

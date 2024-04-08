@@ -50,10 +50,22 @@ Bomb::Bomb() {
 };
 
 void Bomb::setPosition(const glm::vec2 position) {
+#ifdef _WIN32
     m_Window->SetPosition(position);
     m_Item->SetPosition({position.x,position.y + 10});
     m_Text->SetPosition({position.x + 25, position.y - 40});
     m_LowerText->SetPosition({position.x + 25, position.y - 60});
+#elif __APPLE__
+    m_Window->SetPosition(position);
+    m_Item->SetPosition({position.x,position.y + 10});
+    m_Text->SetPosition({position.x + 15, position.y - 40});
+    m_LowerText->SetPosition({position.x + 15, position.y - 60});
+#else
+    m_Window->SetPosition(position);
+    m_Item->SetPosition({position.x,position.y + 10});
+    m_Text->SetPosition({position.x + 25, position.y - 40});
+    m_LowerText->SetPosition({position.x + 25, position.y - 60});
+#endif
 }
 
 std::shared_ptr<GameElement> Bomb::GetGameObject() const {

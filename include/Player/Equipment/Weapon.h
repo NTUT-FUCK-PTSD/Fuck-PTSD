@@ -18,7 +18,7 @@ class Weapon final : public IEquipment {
 public:
 
 
-    explicit Weapon();
+    explicit Weapon(WeaponEnum::Type type);
     virtual ~Weapon() = default;
 
     [[noreturn]] void setWeaponType(WeaponEnum::Type type) override;
@@ -29,6 +29,7 @@ public:
 
     Direction GetDirection() override { return IEquipment::Direction::ROW; };
 private:
+    void selectWeaponType(WeaponEnum::Type type);
     void rendererWindow();
     void rendererItem();
 

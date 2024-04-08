@@ -26,8 +26,8 @@ public:
     // add equipment
     void SetThrow();
     void SetBomb();
-    void SetWeapon();
-    void SetShovel();
+    void SetWeapon(WeaponEnum::Type type);
+    void SetShovel(ShovelEnum::Type type);
     void SetShovelType(ShovelEnum::Type type);
     void SetWeaponType(WeaponEnum::Type type);
     void SetThrowType();
