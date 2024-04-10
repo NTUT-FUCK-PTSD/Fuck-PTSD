@@ -21,6 +21,10 @@ public:
 
     std::shared_ptr<MapData> GetMapData() const { return m_MapData; }
 
+    void RemoveEnemy(const size_t &position);
+    void RemoveWall(const size_t &position);
+    void OpenDoor(const size_t &position);
+
     void CameraUpdate();
     void TempoUpdate();
 
@@ -37,8 +41,6 @@ private:
     std::unique_ptr<Level> m_Level;
     glm::ivec2 m_Size;
     std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
-    std::vector<std::shared_ptr<Tile>> m_Tiles;
-    std::vector<std::shared_ptr<Enemy>> m_Enemies;
     std::shared_ptr<Player> m_MainCharacter;
 };
 

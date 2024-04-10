@@ -13,7 +13,8 @@ SimpleMapData::SimpleMapData(const glm::ivec2 &levelIndexMin,
 
 void SimpleMapData::AddTile(const size_t &position,
                             const std::shared_ptr<Tile> &tile) {
-    m_Tiles.at(position).push_back(tile);
+    m_Tiles.at(position).emplace_back(tile);
+    m_TilesQueue.emplace_back(tile);
 }
 
 void SimpleMapData::RemoveTile(const size_t &position,
@@ -21,9 +22,15 @@ void SimpleMapData::RemoveTile(const size_t &position,
     m_Tiles.at(position).erase(std::remove(m_Tiles.at(position).begin(),
                                            m_Tiles.at(position).end(), tile),
                                m_Tiles.at(position).end());
+    m_TilesQueue.erase(
+        std::remove(m_TilesQueue.begin(), m_TilesQueue.end(), tile),
+        m_TilesQueue.end());
 }
 
 void SimpleMapData::PopBackTile(const size_t &position) {
+    m_TilesQueue.erase(std::remove(m_TilesQueue.begin(), m_TilesQueue.end(),
+                                   m_Tiles.at(position).back()),
+                       m_TilesQueue.end());
     m_Tiles.at(position).pop_back();
 }
 
@@ -56,7 +63,7 @@ void SimpleMapData::SetLevelIndexMin(const glm::ivec2 &levelIndexMin) {
     m_LevelIndexMin = levelIndexMin;
 }
 
-size_t SimpleMapData::gamePosition2MapIndex(const glm::ivec2 &position) const {
+size_t SimpleMapData::GamePosition2MapIndex(const glm::ivec2 &position) const {
     return (position.x - GetLevelIndexMin().x + 1) +
            (position.y - GetLevelIndexMin().y + 1) * m_Size.x;
 }
@@ -79,7 +86,58 @@ bool SimpleMapData::IsWalkable(const size_t &position) const {
 
 bool SimpleMapData::IsPositionWalkable(const glm::ivec2 &position) const {
     return IsPositionValid(position) &&
-           IsWalkable(gamePosition2MapIndex(position));
+           IsWalkable(GamePosition2MapIndex(position));
+}
+
+bool SimpleMapData::IsPositionDoor(const glm::ivec2 &position) const {
+    return IsPositionValid(position) &&
+           !IsTilesEmpty(GamePosition2MapIndex(position)) &&
+           GetTileBack(GamePosition2MapIndex(position))->IsDoor();
+}
+
+bool SimpleMapData::IsPositionWall(const glm::ivec2 &position) const {
+    return IsPositionValid(position) &&
+           !IsTilesEmpty(GamePosition2MapIndex(position)) &&
+           GetTileBack(GamePosition2MapIndex(position))->IsWall();
+}
+
+bool SimpleMapData::IsPositionCoin(
+    [[maybe_unused]] const glm::ivec2 &position) const {
+    return false;
+}
+
+bool SimpleMapData::IsPositionDiamond(
+    [[maybe_unused]] const glm::ivec2 &position) const {
+    return false;
+}
+
+bool SimpleMapData::IsPositionHeart(
+    [[maybe_unused]] const glm::ivec2 &position) const {
+    return false;
+}
+
+bool SimpleMapData::IsPositionTool(
+    [[maybe_unused]] const glm::ivec2 &position) const {
+    return false;
+}
+
+bool SimpleMapData::IsPositionPlayer(const glm::vec2 &position) const {
+    return position == m_PlayerPosition;
+}
+
+bool SimpleMapData::IsPositionInteractive(const glm::ivec2 &position) const {
+    return IsPositionValid(position) &&
+           !IsTilesEmpty(GamePosition2MapIndex(position)) &&
+           (IsPositionDoor(position) || IsPositionWall(position) ||
+            IsHasEntity(GamePosition2MapIndex(position)) ||
+            IsPositionPlayer(position) || IsPositionCoin(position) ||
+            IsPositionDiamond(position) || IsPositionHeart(position) ||
+            IsPositionTool(position));
+}
+
+bool SimpleMapData::IsPositionPlayerAct(const glm::vec2 &position) const {
+    return IsWalkable(GamePosition2MapIndex(position)) ||
+           IsPositionInteractive(position);
 }
 
 glm::ivec2 SimpleMapData::GetSize() const {
@@ -101,6 +159,10 @@ glm::vec2 SimpleMapData::GetPlayerPosition() const {
 
 void SimpleMapData::SetPlayerPosition(const glm::vec2 &playerPosition) {
     m_PlayerPosition = playerPosition;
+}
+
+std::deque<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
+    return m_TilesQueue;
 }
 
 } // namespace Dungeon
