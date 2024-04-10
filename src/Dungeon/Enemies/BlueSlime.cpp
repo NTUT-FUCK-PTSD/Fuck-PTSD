@@ -50,7 +50,6 @@ void BlueSlime::Move() {
             return;
         }
         m_CanMove = true;
-        SetGamePosition(m_WillMovePosition);
     }
     else {
         m_CanMove = false;
@@ -71,6 +70,7 @@ void BlueSlime::Move() {
 }
 void BlueSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    m_AnimationType);
         m_NeedToMove = false;

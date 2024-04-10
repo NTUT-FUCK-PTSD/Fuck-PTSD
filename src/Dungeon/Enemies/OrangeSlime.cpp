@@ -66,7 +66,6 @@ void OrangeSlime::Move() {
             return;
         }
         m_CanMove = true;
-        SetGamePosition(m_WillMovePosition);
     }
     else {
         m_CanMove = false;
@@ -76,6 +75,7 @@ void OrangeSlime::Move() {
 }
 void OrangeSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    (m_StartIdx + m_State - 1) % 4);
         m_NeedToMove = false;

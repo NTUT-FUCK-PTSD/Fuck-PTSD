@@ -81,6 +81,7 @@ void Bat::MoveBat() {
 void Bat::Update() {
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
         m_NeedToMove = false;
         m_CanMove = false;
@@ -131,7 +132,6 @@ void Bat::RandomMove() {
                 return;
             }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
             if (m_RandomPool[index] == 2) {
                 SetFace(true);
             }

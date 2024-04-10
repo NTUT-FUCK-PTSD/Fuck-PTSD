@@ -80,7 +80,6 @@ void Ghost::Move() {
                 return;
             }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
             if (direction.x > 0) {
                 SetFace(false);
             }
@@ -96,6 +95,7 @@ void Ghost::Move() {
 void Ghost::Update() {
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
         m_CanMove = false;
     }

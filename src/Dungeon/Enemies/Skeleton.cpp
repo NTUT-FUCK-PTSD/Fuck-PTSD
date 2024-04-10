@@ -69,7 +69,6 @@ void Skeleton::Move() {
                 return;
             }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
             if (direction.x > 0) {
                 SetFace(false);
                 m_AnimationType = 1;
@@ -102,6 +101,7 @@ void Skeleton::Update() {
 
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    m_AnimationType);
         m_CanMove = false;

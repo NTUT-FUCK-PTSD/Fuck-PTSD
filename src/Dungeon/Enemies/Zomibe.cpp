@@ -34,7 +34,6 @@ void Zombie::Move() {
     if (IsVaildMove(m_WillMovePosition)) {
         if (m_Attack) {
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
         }
     }
     else {
@@ -61,7 +60,6 @@ void Zombie::Move() {
                 return;
             }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
         }
         else {
             m_CanMove = false;
@@ -88,6 +86,7 @@ void Zombie::Update() {
 
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         if (m_Direction == 1) {
             SetFace(false);
         }
