@@ -131,6 +131,10 @@ void Bat::RandomMove() {
                 m_AttackPlayer = true;
                 return;
             }
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()), false);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition), true);
             m_CanMove = true;
             if (m_RandomPool[index] == 2) {
                 SetFace(true);

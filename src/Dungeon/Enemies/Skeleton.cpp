@@ -69,6 +69,10 @@ void Skeleton::Move() {
                 return;
             }
             m_CanMove = true;
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()), false);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition), true);
             if (direction.x > 0) {
                 SetFace(false);
                 m_AnimationType = 1;

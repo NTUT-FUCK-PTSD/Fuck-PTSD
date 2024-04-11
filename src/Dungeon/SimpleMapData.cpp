@@ -153,7 +153,7 @@ void SimpleMapData::SetHasEntity(const size_t &position,
     m_HasEntity.at(position) = hasEntity;
 }
 
-glm::vec2 SimpleMapData::GetPlayerPosition() const {
+glm::vec2 SimpleMapData::GetPlayerPosition() {
     return m_PlayerPosition;
 }
 
@@ -161,8 +161,13 @@ void SimpleMapData::SetPlayerPosition(const glm::vec2 &playerPosition) {
     m_PlayerPosition = playerPosition;
 }
 
-std::deque<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
+std::vector<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
     return m_TilesQueue;
 }
 
+float SimpleMapData::Heuristic(const glm::vec2 &start, const glm::vec2 &end) {
+    return glm::distance(start, end);
+}
 } // namespace Dungeon
+
+glm::vec2 Dungeon::SimpleMapData::m_PlayerPosition = {0, 0};

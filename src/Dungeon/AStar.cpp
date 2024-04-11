@@ -34,8 +34,8 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
     while (!frontier.empty()) {
         std::pair<float, glm::ivec2> current = frontier.top();
         frontier.pop();
-        if (Heuristic(current.second, end) <
-            Heuristic(lastminPath.second, end)) {
+        if (mapData->Heuristic(current.second, end) <
+            mapData->Heuristic(lastminPath.second, end)) {
             lastminPath = current;
         }
 
@@ -51,11 +51,12 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
                 continue;
             }
 
-            float newCost = current.first + Heuristic(current.second, next);
+            float newCost =
+                current.first + mapData->Heuristic(current.second, next);
             size_t mapIndex = mapData->GamePosition2MapIndex(next);
             if (newCost < costSoFar[mapIndex]) {
                 costSoFar[mapIndex] = newCost;
-                float priority = newCost + Heuristic(next, end);
+                float priority = newCost + mapData->Heuristic(next, end);
                 frontier.push({priority, next});
                 cameFrom[mapIndex] = current.second;
             }
@@ -69,11 +70,6 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
         path = CalculatePath(cameFrom, start, lastminPath.second, mapData);
     }
     return path;
-}
-
-float AStar::Heuristic(const glm::ivec2 &start, const glm::ivec2 &end) {
-    auto difference = abs(glm::vec2(start) - glm::vec2(end));
-    return difference.x + difference.y;
 }
 
 std::vector<glm::ivec2>

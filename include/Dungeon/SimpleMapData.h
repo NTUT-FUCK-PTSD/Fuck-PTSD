@@ -2,7 +2,7 @@
 #define SIMPLE_MAP_DATA_H
 
 #include "Dungeon/Tile.h"
-#include <deque>
+
 #include <vector>
 
 namespace Dungeon {
@@ -16,12 +16,12 @@ public:
     [[nodiscard]] glm::ivec2 GetLevelIndexMax() const;
     [[nodiscard]] glm::ivec2 GetLevelIndexMin() const;
     [[nodiscard]] glm::ivec2 GetSize() const;
-    [[nodiscard]] glm::vec2 GetPlayerPosition() const;
+    [[nodiscard]] static glm::vec2 GetPlayerPosition();
 
     void SetLevelIndexMax(const glm::ivec2 &levelIndexMax);
     void SetLevelIndexMin(const glm::ivec2 &levelIndexMin);
     void SetSize(const glm::ivec2 &size);
-    void SetPlayerPosition(const glm::vec2 &playerPosition);
+    static void SetPlayerPosition(const glm::vec2 &playerPosition);
 
     [[nodiscard]] std::size_t
     GamePosition2MapIndex(const glm::ivec2 &position) const;
@@ -49,7 +49,9 @@ public:
     GetTileBack(const size_t &position) const;
     void SetHasEntity(const size_t &position, const bool &hasEntity);
 
-    std::deque<std::shared_ptr<Tile>> GetTilesQueue() const;
+    std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
+
+    static float Heuristic(const glm::vec2 &start, const glm::vec2 &end);
 
 private:
     glm::ivec2 m_LevelIndexMin;
@@ -57,9 +59,8 @@ private:
     glm::ivec2 m_Size;
     std::vector<bool> m_HasEntity;
     std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
-    std::deque<std::shared_ptr<Tile>> m_TilesQueue;
-
-    glm::vec2 m_PlayerPosition;
+    std::vector<std::shared_ptr<Tile>> m_TilesQueue;
+    static glm::vec2 m_PlayerPosition;
 };
 } // namespace Dungeon
 

@@ -56,7 +56,7 @@ void Ghost::Struck(const size_t &damage) {
 }
 void Ghost::Move() {
     auto tmp =
-        Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
+        m_SimpleMapData->Heuristic(GetGamePosition(), GetPlayerPosition());
     if (m_LastDistance > tmp || (m_Transparent && m_LastDistance == tmp)) {
         SetTransparent(true);
     }
@@ -80,6 +80,10 @@ void Ghost::Move() {
                 return;
             }
             m_CanMove = true;
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()), false);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition), true);
             if (direction.x > 0) {
                 SetFace(false);
             }

@@ -66,6 +66,10 @@ void OrangeSlime::Move() {
             return;
         }
         m_CanMove = true;
+        m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(GetGamePosition()),
+                                      false);
+        m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(m_WillMovePosition),
+                                      true);
     }
     else {
         m_CanMove = false;

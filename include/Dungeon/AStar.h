@@ -9,7 +9,6 @@ public:
     static std::vector<glm::ivec2>
     FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
              const std::shared_ptr<SimpleMapData> &mapData);
-    static float Heuristic(const glm::ivec2 &start, const glm::ivec2 &end);
 
 private:
     struct NodeCompare {

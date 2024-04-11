@@ -19,7 +19,7 @@ public:
 
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
-    std::shared_ptr<MapData> GetMapData() const { return m_MapData; }
+    std::shared_ptr<MapData> GetMapData() const;
 
     void RemoveEnemy(const size_t &position);
     void RemoveWall(const size_t &position);

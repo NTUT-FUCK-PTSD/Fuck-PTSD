@@ -131,7 +131,7 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
     for (auto &tile : m_MapData->GetTilesQueue()) {
         m_Children.push_back(tile);
     }
-    for (auto &enemy : m_MapData->GetEnemiesQueue()) {
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
         m_Children.push_back(enemy);
     }
     CameraUpdate();
@@ -157,7 +157,7 @@ void Map::CameraUpdate() {
             tile->SetVisible(false);
         }
     }
-    for (auto &enemy : m_MapData->GetEnemiesQueue()) {
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
             enemy->SetVisible(true);
         }
@@ -169,7 +169,7 @@ void Map::CameraUpdate() {
 
 void Map::TempoUpdate() {
     m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    for (auto &enemy : m_MapData->GetEnemiesQueue()) {
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
         enemy->TempoMove();
     }
 }
@@ -177,7 +177,7 @@ void Map::TempoUpdate() {
 void Map::Update() {
     size_t mapIndex = 0;
     CameraUpdate();
-    std::deque<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemiesQueue());
+    std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto &enemy : EnemyQueue) {
         if (!enemy->GetVisible()) {
             continue;
@@ -197,6 +197,11 @@ size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
     return (position.x - m_Level->GetLevelIndexMin().x + 1) +
            (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
 }
+
+std::shared_ptr<MapData> Map::GetMapData() const {
+    return m_MapData;
+}
+
 bool Map::isVaildPosition(const glm::ivec2 &position) {
     if (position.x < m_Level->GetLevelIndexMin().x ||
         position.x > m_Level->GetLevelIndexMax().x ||

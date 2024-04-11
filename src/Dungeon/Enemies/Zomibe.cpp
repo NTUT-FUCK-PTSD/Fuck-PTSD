@@ -68,6 +68,12 @@ void Zombie::Move() {
     if (!m_Attack) {
         m_WillMovePosition = m_GamePosition;
     }
+    if (m_CanMove) {
+        m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(GetGamePosition()),
+                                      false);
+        m_SimpleMapData->SetHasEntity(
+            m_SimpleMapData->GamePosition2MapIndex(m_WillMovePosition), true);
+    }
     m_Attack = !m_Attack;
 }
 void Zombie::Update() {

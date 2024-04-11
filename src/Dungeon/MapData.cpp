@@ -11,7 +11,7 @@ void MapData::AddEnemy(const size_t &position,
                        const std::shared_ptr<Enemy> &enemy) {
     m_Enemies.at(position) = enemy;
     SetHasEntity(position, true);
-    m_EnemiesQueue.push_back(enemy);
+    m_EnemyQueue.push_back(enemy);
 }
 
 void MapData::RemoveEnemy(const size_t &position) {
@@ -19,10 +19,9 @@ void MapData::RemoveEnemy(const size_t &position) {
         return;
     }
     // m_Enemies.at(position)->SetVisible(false);
-    m_EnemiesQueue.erase(std::remove(m_EnemiesQueue.begin(),
-                                     m_EnemiesQueue.end(),
-                                     m_Enemies.at(position)),
-                         m_EnemiesQueue.end());
+    m_EnemyQueue.erase(std::remove(m_EnemyQueue.begin(), m_EnemyQueue.end(),
+                                   m_Enemies.at(position)),
+                       m_EnemyQueue.end());
     m_Enemies.at(position) = nullptr;
     SetHasEntity(position, false);
 }
@@ -35,8 +34,15 @@ std::shared_ptr<Enemy> MapData::GetEnemy(const size_t &position) const {
     return m_Enemies.at(position);
 }
 
-std::deque<std::shared_ptr<Enemy>> MapData::GetEnemiesQueue() const {
-    return m_EnemiesQueue;
+std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
+    auto v(m_EnemyQueue);
+    sort(v.begin(), v.end(), EnemyCompare);
+    return v;
 }
 
+bool MapData::EnemyCompare(std::shared_ptr<Enemy> &lhs,
+                           std::shared_ptr<Enemy> &rhs) {
+    return Heuristic(GetPlayerPosition(), lhs->GetGamePosition()) <
+           Heuristic(GetPlayerPosition(), rhs->GetGamePosition());
+}
 } // namespace Dungeon
