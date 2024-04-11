@@ -1,3 +1,5 @@
+#include "Dungeon/AStar.h"
+
 #include "Dungeon/SimpleMapData.h"
 
 namespace Dungeon {
@@ -166,7 +168,7 @@ std::vector<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
 }
 
 float SimpleMapData::Heuristic(const glm::vec2 &start, const glm::vec2 &end) {
-    return glm::distance(start, end);
+    return AStar::Heuristic(start, end);
 }
 } // namespace Dungeon
 
