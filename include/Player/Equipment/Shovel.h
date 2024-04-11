@@ -13,7 +13,7 @@
 
 class Shovel final : public IEquipment {
 public:
-    explicit Shovel();
+    explicit Shovel(ShovelEnum::Type type);
 
     void setPosition(const glm::vec2 position) override;
     void setShovelType(ShovelEnum::Type type) override;
@@ -21,6 +21,7 @@ public:
     std::shared_ptr<GameElement> GetGameObject() const override;
     Direction GetDirection() override { return IEquipment::Direction::ROW; };
 private:
+    void selectWeaponType(ShovelEnum::Type type);
     void rendererWindow();
     void rendererItem();
 

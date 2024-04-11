@@ -2,6 +2,7 @@
 // Created by adven on 2024/3/27.
 //
 #include "Music/Tempo.h"
+#include "Util/Logger.hpp"
 
 Tempo::Tempo() {}
 
@@ -19,7 +20,7 @@ void Tempo::readTempoFile(const std::string &txtFilePath) {
     std::string line;
     std::getline(txtTempoFile, line);
 
-    m_tempoList = std::move(txtToVector(line, ','));
+    m_tempoList = txtToVector(line, ',');
 
     // 关闭文件流
     txtTempoFile.close();
@@ -40,11 +41,11 @@ std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
     return elems;
 }
 
-bool Tempo::canBeClick(std::size_t offset) {
+bool Tempo::canBeClick() {
 
     const auto tempoIndex = m_tempoIndex + m_punishTimes;
 
-    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed&&
+    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed &&
         m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
         return true;
     }
@@ -59,8 +60,11 @@ std::size_t Tempo::getTempo() {
 };
 
 void Tempo::Update() {
-    m_currentTempoTime = m_tempoList.empty() ? 0 : m_tempoList[m_tempoIndex] * m_MusicSpeed;
+    m_currentTempoTime = m_tempoList.empty()
+                             ? 0
+                             : m_tempoList[m_currentTempoIndex] * m_MusicSpeed;
 
+    LOG_INFO(m_currentTempoIndex);
     UpdateTempoIndex();
     UpdateTime();
 }
@@ -75,26 +79,35 @@ void Tempo::UpdateTime() {
         return;
     }
 
+    if (m_duringTime >=
+            (m_tempoList[m_currentTempoIndex] - m_range) * m_MusicSpeed &&
+        m_duringTime <=
+            (m_tempoList[m_currentTempoIndex] + m_range) * m_MusicSpeed) {
+        return;
+    }
+
+    m_currentTempoIndex++;
     if (m_duringTime >= (m_tempoList[m_tempoIndex] - m_range) * m_MusicSpeed &&
         m_duringTime <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
         return;
     }
-    else if (m_duringTime <= (m_tempoList[m_tempoIndex + 1] - m_range) * m_MusicSpeed &&
-             m_duringTime <= (m_tempoList[m_tempoIndex + 1] + m_range) * m_MusicSpeed) {
+    else if (m_duringTime <=
+                 (m_tempoList[m_tempoIndex + 1] - m_range) * m_MusicSpeed &&
+             m_duringTime <=
+                 (m_tempoList[m_tempoIndex + 1] + m_range) * m_MusicSpeed) {
         return;
     }
 
     m_punishTimes = m_punishTimes == 0 ? m_punishTimes : m_punishTimes - 1;
     m_tempoIndex++;
 
-    if (isShowHeartBeat) {
-        LOG_DEBUG(m_punishTimes);
-        LOG_INFO(m_duringTime);
-        LOG_INFO(m_currentTempoTime);
-    }
+    //    if (isShowHeartBeat) {
+    //        LOG_DEBUG(m_punishTimes);
+    //        LOG_INFO(m_duringTime);
+    //        LOG_INFO(m_currentTempoTime);
+    //    }
 }
 
-void Tempo::UpdateTempoIndex(){
+void Tempo::UpdateTempoIndex() {
     m_tempoIndex = m_tempoIndex + 1 >= m_tempoListLength ? 0 : m_tempoIndex;
 }
-

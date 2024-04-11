@@ -15,7 +15,6 @@ extern "C" {
 int32_t rusty_extern_c_integer();
 }
 
-
 // show the start background and listen the keypress
 void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
@@ -82,14 +81,6 @@ void App::Update() {
     //        m_Diamond->plusDiamondNumber(10);
     //    }
 
-    // detect the player
-    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
-        Util::Input::IsKeyDown(Util::Keycode::D) ||
-        Util::Input::IsKeyDown(Util::Keycode::S) ||
-        Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_MusicSystem->clickEvent();
-    }
-
     // player move
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
          Util::Input::IsKeyDown(Util::Keycode::D) ||
@@ -147,6 +138,14 @@ void App::Update() {
         m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->TempoUpdate();
+    }
+
+    // detect the player
+    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
+        Util::Input::IsKeyDown(Util::Keycode::D) ||
+        Util::Input::IsKeyDown(Util::Keycode::S) ||
+        Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_MusicSystem->clickEvent();
     }
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {

@@ -39,7 +39,7 @@ public:
         m_tempo.readTempoFile(path);
     };
 
-    bool TempoTrigger() { return m_tempo.canBeClick(100); }
+    bool TempoTrigger() { return m_tempo.canBeClick(); }
 
     std::shared_ptr<GameElement> getGameObject();
 
@@ -61,7 +61,8 @@ private:
     /* ms */
     int16_t m_TempoOffset = 0;
     std::size_t m_TempoRange = 500;
-    bool isShowHeartBeat = false;
+    /* bool isShowHeartBeat = false; */
+    bool isShowHeartBeat = true;
     int16_t m_DisplayOffset = -30;
     std::size_t m_DisplayRange = 100;
     std::size_t m_DisplayHeartBeatDurationTime = 80;

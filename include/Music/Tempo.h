@@ -21,15 +21,16 @@ public:
     // must read one line in file, it not be '\n'
     void readTempoFile(const std::string &txtFilePath);
 
-    bool canBeClick(std::size_t offset);
+    bool canBeClick();
 
     void keyBoardClick() {
         m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
+        m_tempoIndex++;
     };
 
     std::size_t getTempo();
 
-    void setMusicSpeed(float speed) {m_MusicSpeed = speed; };
+    void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
     void setShowBeat(bool state) { isShowHeartBeat = state; };
     void setRange(std::size_t range) { m_range = range; };
     void setOffset(int16_t offset) { m_offset = offset; };
@@ -49,7 +50,6 @@ private:
 
     float m_MusicSpeed = 1.0f;
 
-    bool isTrigger = false;
     bool isShowHeartBeat = false;
     std::size_t m_punishTimes = 0;
 
@@ -59,6 +59,7 @@ private:
 
     std::size_t m_currentTempoTime = 0;
     std::size_t m_tempoIndex = 0;
+    std::size_t m_currentTempoIndex = 0;
     std::size_t m_tempoListLength = 0;
     std::vector<std::size_t> m_tempoList;
 };

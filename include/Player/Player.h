@@ -72,7 +72,7 @@ public:
 
 private:
     ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
-    WeaponEnum::Type m_WeaponType = WeaponEnum::Type::RAPIER;
+    WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;
 
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;
