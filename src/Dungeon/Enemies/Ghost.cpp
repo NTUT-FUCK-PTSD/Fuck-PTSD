@@ -56,7 +56,7 @@ void Ghost::Struck(const size_t &damage) {
 }
 void Ghost::Move() {
     auto tmp =
-        m_SimpleMapData->Heuristic(GetGamePosition(), GetPlayerPosition());
+        Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
     if (m_LastDistance > tmp || (m_Transparent && m_LastDistance == tmp)) {
         SetTransparent(true);
     }
