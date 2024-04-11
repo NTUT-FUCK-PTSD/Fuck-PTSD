@@ -26,6 +26,9 @@ file(GLOB_RECURSE HEADER_FILES include/*)
 # import folder customize path
 include("${CMAKE_SOURCE_DIR}/files.cmake")
 
+# set program name
+set (${PROGRAM_NAME} "Crypt of the NecroDancer")
+
 add_executable(${PROJECT_NAME}
         ${SRC_DIR}/main.cpp
         ${SRC_FILES}
