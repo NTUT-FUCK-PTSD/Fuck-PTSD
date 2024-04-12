@@ -52,7 +52,12 @@ public:
     void MoveByTime(const unsigned long &duringTimeMs,
                     const glm::vec2 &destination);
 
+    void Shake(const unsigned long &duringTimeMs, const float &strength);
+
 private:
+    void ShakeUpdate();
+    void MoveByTimeInternal(const unsigned long &duringTimeMs,
+                            const glm::vec2 &destination);
     std::shared_ptr<Util::Renderer> m_Renderer;
     glm::vec2 m_Position = {0, 0};
 
@@ -60,6 +65,12 @@ private:
     unsigned long m_AnimationStartMs;
     unsigned long m_AnimationDuringTimeMs;
     glm::vec2 m_AnimationDestination;
+
+    glm::vec2 m_OrginalPosition = {0, 0};
+    bool m_IsShaking = false;
+    unsigned long m_ShakeStartMs;
+    unsigned long m_ShakeDuringTimeMs = 0;
+    float m_ShakeStrength = 0;
 };
 
 #endif // CAMERA_H

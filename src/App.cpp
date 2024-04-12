@@ -79,6 +79,9 @@ void App::Update() {
     //        m_Coin->plusCoinNumber(10);
     //        m_Diamond->plusDiamondNumber(10);
     //    }
+    if (Util::Input::IsKeyDown(Util::Keycode::P)) {
+        m_Camera->Shake(1000, 10);
+    }
 
     // player move
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
