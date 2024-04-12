@@ -23,10 +23,7 @@ public:
 
     bool canBeClick();
 
-    void keyBoardClick() {
-        m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
-        m_tempoIndex++;
-    };
+    void keyBoardClick();
 
     std::size_t getTempo();
 
@@ -51,6 +48,7 @@ private:
     float m_MusicSpeed = 1.0f;
 
     bool isShowHeartBeat = false;
+    bool m_isWrongTimeClick = false;
     std::size_t m_punishTimes = 0;
 
     std::size_t m_duringTime = 0;

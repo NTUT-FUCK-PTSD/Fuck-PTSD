@@ -43,7 +43,14 @@ std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
 
 bool Tempo::canBeClick() {
 
-    const auto tempoIndex = m_tempoIndex + m_punishTimes;
+    auto tempoIndex = m_tempoIndex + m_punishTimes;
+
+    //    if (m_isWrongTimeClick == true) {
+    //        tempoIndex -= 1;
+    //    }
+
+    //    LOG_INFO(m_tempoList[tempoIndex]);
+    //    LOG_DEBUG(m_duringTime);
 
     if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed &&
         m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
@@ -64,10 +71,22 @@ void Tempo::Update() {
                              ? 0
                              : m_tempoList[m_currentTempoIndex] * m_MusicSpeed;
 
-    LOG_INFO(m_currentTempoIndex);
+    //    LOG_INFO(m_currentTempoIndex);
     UpdateTempoIndex();
     UpdateTime();
 }
+
+void Tempo::keyBoardClick() {
+    m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
+
+    LOG_INFO(m_tempoIndex);
+
+    if (m_isWrongTimeClick == false) {
+        m_tempoIndex++;
+    }
+
+    m_isWrongTimeClick = true;
+};
 
 void Tempo::UpdateTime() {
     if (m_tempoList.empty()) {
@@ -79,6 +98,9 @@ void Tempo::UpdateTime() {
         return;
     }
 
+    //    LOG_INFO(m_isWrongTimeClick);
+
+    // getTempo return value
     if (m_duringTime >=
             (m_tempoList[m_currentTempoIndex] - m_range) * m_MusicSpeed &&
         m_duringTime <=
@@ -87,6 +109,8 @@ void Tempo::UpdateTime() {
     }
 
     m_currentTempoIndex++;
+    m_isWrongTimeClick = false;
+
     if (m_duringTime >= (m_tempoList[m_tempoIndex] - m_range) * m_MusicSpeed &&
         m_duringTime <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
         return;
@@ -110,4 +134,6 @@ void Tempo::UpdateTime() {
 
 void Tempo::UpdateTempoIndex() {
     m_tempoIndex = m_tempoIndex + 1 >= m_tempoListLength ? 0 : m_tempoIndex;
+    m_currentTempoIndex =
+        m_currentTempoIndex + 1 >= m_tempoListLength ? 0 : m_currentTempoIndex;
 }
