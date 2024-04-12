@@ -96,7 +96,6 @@ void Player::SetFaceTo(Direction direction) {
 void Player::Update() {
     UpdateAnimation(true);
     if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
         m_Position = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
@@ -179,6 +178,6 @@ void Player::MoveByTime(const unsigned long duringTimeMs,
                         const glm::vec2 &destination,
                         const uint16_t direction) {
     // Update GamePosition but not draw
-    m_GamePosition = destination;
+    m_GamePosition = ToolBoxs::PosToGamePos(destination);
     Animation::MoveByTime(duringTimeMs, destination, direction);
 }
