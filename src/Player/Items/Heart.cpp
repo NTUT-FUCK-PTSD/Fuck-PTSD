@@ -76,6 +76,7 @@ std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
 
     resultObject->SetScale(m_Scale);
     resultObject->SetPosition(position);
+    resultObject->SetZIndex((float)m_ZIndex);
 
     return resultObject;
 }
