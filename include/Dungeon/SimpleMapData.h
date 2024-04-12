@@ -26,8 +26,8 @@ public:
     [[nodiscard]] std::size_t
     GamePosition2MapIndex(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionValid(const glm::ivec2 &position) const;
-    [[nodiscard]] bool IsHasEntity(const size_t &position) const;
-    [[nodiscard]] bool IsWalkable(const size_t &position) const;
+    [[nodiscard]] bool IsHasEntity(const size_t position) const;
+    [[nodiscard]] bool IsWalkable(const size_t position) const;
     [[nodiscard]] bool IsPositionWalkable(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionDoor(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionWall(const glm::ivec2 &position) const;
@@ -39,15 +39,15 @@ public:
     [[nodiscard]] bool IsPositionInteractive(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionPlayerAct(const glm::vec2 &position) const;
 
-    void AddTile(const size_t &position, const std::shared_ptr<Tile> &tile);
-    void RemoveTile(const size_t &position, const std::shared_ptr<Tile> &tile);
-    void PopBackTile(const size_t &position);
-    [[nodiscard]] bool IsTilesEmpty(const size_t &position) const;
+    void AddTile(const size_t position, const std::shared_ptr<Tile> tile);
+    void RemoveTile(const size_t position, const std::shared_ptr<Tile> tile);
+    void PopBackTile(const size_t position);
+    [[nodiscard]] bool IsTilesEmpty(const size_t position) const;
     [[nodiscard]] std::vector<std::shared_ptr<Tile>>
-    GetTiles(const size_t &position) const;
+    GetTiles(const size_t position) const;
     [[nodiscard]] std::shared_ptr<Tile>
-    GetTileBack(const size_t &position) const;
-    void SetHasEntity(const size_t &position, const bool &hasEntity);
+    GetTileBack(const size_t position) const;
+    void SetHasEntity(const size_t position, const bool &hasEntity);
 
     std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
 

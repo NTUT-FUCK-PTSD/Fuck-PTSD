@@ -4,7 +4,7 @@
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(const s_Enemy &u_Enemy,
-                      const std::shared_ptr<SimpleMapData> &simpleMapData)
+                      const std::shared_ptr<SimpleMapData> simpleMapData)
     : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
     m_NormalFrames = {0, 1};
@@ -48,7 +48,7 @@ glm::vec2 Ghost::FindNextToPlayer() {
         return path[1];
     }
 }
-void Ghost::Struck(const size_t &damage) {
+void Ghost::Struck(const size_t damage) {
     if (m_Transparent) {
         return;
     }

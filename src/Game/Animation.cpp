@@ -9,7 +9,7 @@ Animation::Animation(const glm::vec2 &animationPosition)
             .y;
 }
 
-void Animation::MoveByTime(const unsigned long &duringTimeMs,
+void Animation::MoveByTime(const unsigned long duringTimeMs,
                            const glm::vec2 &destination,
                            const uint16_t &direction) {
     if (m_IsAnimating) {
@@ -23,7 +23,7 @@ void Animation::MoveByTime(const unsigned long &duringTimeMs,
     m_AnimationDirection = direction;
 }
 
-void Animation::MoveByTime(const unsigned long &duringTimeMs,
+void Animation::MoveByTime(const unsigned long duringTimeMs,
                            const glm::vec2 &destination) {
     if (m_IsAnimating) {
         m_AnimationPosition = m_AnimationDestination;

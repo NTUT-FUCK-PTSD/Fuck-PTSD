@@ -115,7 +115,7 @@ void Player::SetZIndex(float index) {
     m_Head->SetZIndex(index + float(0.25));
 }
 
-void Player::UpdateCoin(const unsigned long &duringTimeMs,
+void Player::UpdateCoin(const unsigned long duringTimeMs,
                         const glm::vec2 &destination,
                         const uint16_t &direction) {
     m_Coin->MoveByTime(duringTimeMs, destination, direction);

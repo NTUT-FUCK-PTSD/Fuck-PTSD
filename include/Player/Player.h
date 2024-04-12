@@ -58,7 +58,7 @@ public:
     void Update();
 
     // some unused functional
-    void UpdateCoin(const unsigned long &duringTimeMs,
+    void UpdateCoin(const unsigned long duringTimeMs,
                     const glm::vec2 &destination, const uint16_t &direction);
 
     // tool's handle

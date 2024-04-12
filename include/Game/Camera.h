@@ -19,7 +19,7 @@ public:
      *
      * @param child The GameObject needing to be managed by Renderer.
      */
-    void AddChild(const std::shared_ptr<Util::GameObject> &child);
+    void AddChild(const std::shared_ptr<Util::GameObject> child);
 
     /**
      * @brief Add children to Renderer.
@@ -43,20 +43,20 @@ public:
      */
     void Update();
 
-    void SetPosition(const glm::vec2 &position) { m_Position = position; }
+    void SetPosition(const glm::vec2 position) { m_Position = position; }
 
     glm::vec2 GetPosition() { return m_Position; }
 
     std::shared_ptr<Util::Renderer> GetRenderer() { return m_Renderer; }
 
-    void MoveByTime(const unsigned long &duringTimeMs,
+    void MoveByTime(const unsigned long duringTimeMs,
                     const glm::vec2 &destination);
 
-    void Shake(const unsigned long &duringTimeMs, const float &strength);
+    void Shake(const unsigned long duringTimeMs, const float strength);
 
 private:
     void ShakeUpdate();
-    void MoveByTimeInternal(const unsigned long &duringTimeMs,
+    void MoveByTimeInternal(const unsigned long duringTimeMs,
                             const glm::vec2 &destination);
     std::shared_ptr<Util::Renderer> m_Renderer;
     glm::vec2 m_Position = {0, 0};

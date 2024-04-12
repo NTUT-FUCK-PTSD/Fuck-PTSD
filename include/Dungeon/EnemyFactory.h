@@ -14,7 +14,7 @@ class EnemyFactory final {
 public:
     static std::shared_ptr<Enemy>
     CreateEnemy(const s_Enemy &u_Enemy,
-                const std::shared_ptr<SimpleMapData> &simpleMapData) {
+                const std::shared_ptr<SimpleMapData> simpleMapData) {
         switch (u_Enemy.type) {
         case 0:
             return std::make_shared<Enemies::GreenSlime>(u_Enemy,

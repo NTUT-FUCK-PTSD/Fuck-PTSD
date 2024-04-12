@@ -9,7 +9,7 @@ namespace Enemies {
 class Skeleton final : public Dungeon::Enemy, private Animation {
 public:
     Skeleton(const s_Enemy &u_Enemy,
-             const std::shared_ptr<SimpleMapData> &simpleMapData);
+             const std::shared_ptr<SimpleMapData> simpleMapData);
 
     void Move() override;
 

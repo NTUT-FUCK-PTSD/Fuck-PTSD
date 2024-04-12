@@ -5,8 +5,8 @@
 
 namespace Dungeon {
 
-Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
-         const int &levelNum)
+Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
+         const size_t levelNum)
     : m_MainCharacter(mainCharacter) {
     m_Level = std::make_unique<Level>(path, levelNum);
 
@@ -224,14 +224,14 @@ bool Map::isVaildMove(const glm::ivec2 &position) {
     return true;
 }
 
-void Map::RemoveEnemy(const size_t &position) {
+void Map::RemoveEnemy(const size_t position) {
     m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
                                  m_MapData->GetEnemy(position)),
                      m_Children.end());
     m_MapData->RemoveEnemy(position);
 }
 
-void Map::RemoveWall(const size_t &position) {
+void Map::RemoveWall(const size_t position) {
     auto tile = m_MapData->GetTileBack(position)->GetTile();
 
     if (tile.type == 102) {
@@ -247,7 +247,7 @@ void Map::RemoveWall(const size_t &position) {
     m_Children.push_back(m_MapData->GetTileBack(position));
 }
 
-void Map::OpenDoor(const size_t &position) {
+void Map::OpenDoor(const size_t position) {
     auto doorType = m_MapData->GetTileBack(position)->GetTile().type;
     if (doorType == 50 || doorType == 103 || doorType == 118) {
         m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),

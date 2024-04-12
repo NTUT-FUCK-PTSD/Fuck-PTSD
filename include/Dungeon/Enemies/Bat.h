@@ -10,7 +10,7 @@ namespace Enemies {
 class Bat : public Dungeon::Enemy, private Animation {
 public:
     Bat(const s_Enemy &u_Enemy,
-        const std::shared_ptr<SimpleMapData> &simpleMapData);
+        const std::shared_ptr<SimpleMapData> simpleMapData);
     virtual ~Bat() = default;
 
     void Move() override;
@@ -19,7 +19,7 @@ public:
 
 protected:
     Bat(const s_Enemy &u_Enemy,
-        const std::shared_ptr<SimpleMapData> &simpleMapData,
+        const std::shared_ptr<SimpleMapData> simpleMapData,
         const std::string &filepath);
 
     void MoveBat();

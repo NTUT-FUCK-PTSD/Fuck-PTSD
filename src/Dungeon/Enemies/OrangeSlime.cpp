@@ -2,7 +2,7 @@
 
 namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(
-    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> &simpleMapData)
+    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> simpleMapData)
     : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()),

@@ -2,7 +2,7 @@
 
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(const s_Enemy &u_Enemy,
-                            const std::shared_ptr<SimpleMapData> &simpleMapData)
+                            const std::shared_ptr<SimpleMapData> simpleMapData)
     : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
     if (u_Enemy.type == 3) {

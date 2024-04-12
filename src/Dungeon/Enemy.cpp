@@ -6,7 +6,7 @@
 namespace Dungeon {
 
 Enemy::Enemy(const s_Enemy &u_Enemy,
-             const std::shared_ptr<SimpleMapData> &simpleMapData)
+             const std::shared_ptr<SimpleMapData> simpleMapData)
     : m_SimpleMapData(simpleMapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_BeatDelay(u_Enemy.beatDelay),
