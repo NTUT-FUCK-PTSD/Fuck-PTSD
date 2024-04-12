@@ -39,9 +39,11 @@ void Animation::UpdateAnimation(const bool &isDirection) {
     if (m_IsAnimating) {
         unsigned long passTimeMs =
             Util::Time::GetElapsedTimeMs() - m_AnimationStartMs;
+
         if (passTimeMs > m_AnimationDuringTimeMs ||
             ((m_AnimationPosition == m_AnimationDestination) && !isDirection)) {
             m_AnimationPosition = m_AnimationDestination;
+            m_AnimationDestination = {0, 0};
             m_IsAnimating = false;
         }
         else {
