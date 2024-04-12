@@ -14,7 +14,7 @@
  * @class SpriteSheet
  * @brief Class representing an SpriteSheet animation with frames.
  */
-class SpriteSheet : public Core::Drawable {
+class SpriteSheet final : public Core::Drawable {
 public:
     /**
      * @brief Enum representing the state of the animation.
@@ -112,7 +112,7 @@ public:
      * @param transform Transformation matrix for drawing.
      * @param zIndex Z-index for drawing.
      */
-    void Draw(const Util::Transform &transform, const float zIndex) override;
+    void Draw(const Core::Matrices &data) override;
 
     /**
      * @brief Reset the animation to its initial frame.
@@ -139,6 +139,12 @@ public:
      * @param displayRect The Rect of draw range
      */
     void SetDrawRect(const SDL_Rect displayRect);
+
+    void SetFrames(const std::vector<std::size_t> &frames) {
+        m_Frames = frames;
+    }
+
+    void SetAlpha(const Uint8 alpha);
 
 private:
     /**

@@ -1,0 +1,22 @@
+#ifndef MAP_HANDLER_H
+#define MAP_HANDLER_H
+
+#include "Core/Drawable.hpp"
+
+#include "Dungeon/Map.h"
+
+namespace Dungeon {
+
+class MapHandler final : public Core::Drawable {
+public:
+    MapHandler(const std::shared_ptr<Map> &map);
+    void Draw(const Core::Matrices &data);
+    glm::vec2 GetSize() const { return {0, 0}; };
+
+private:
+    const std::shared_ptr<Map> m_Map;
+};
+
+} // namespace Dungeon
+
+#endif // MAP_HANDLER_H

@@ -1,42 +1,47 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "Util/GameObject.hpp"
+
+#include "Camera.h"
+#include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
+#include "Dungeon/MapData.h"
 #include "Dungeon/Tile.h"
+#include "Player.h"
+#include "Player/Player.h"
 
 namespace Dungeon {
-
-class Map {
+class Map final : public Util::GameObject {
 public:
-    Map(const std::string &path, const int levelNum = 1);
+    Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
+        const int &levelNum = 1);
 
-    /**
-     * @brief Add a child to Renderer.
-     *
-     * @param child The GameObject needing to be managed by Renderer.
-     */
-    void AddChild(const std::shared_ptr<Util::GameObject> &child);
+    size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
-    /**
-     * @brief Add children to Renderer.
-     *
-     * @param children The GameObjects needing to be managed by Renderer.
-     */
-    void
-    AddChildren(const std::vector<std::shared_ptr<Util::GameObject>> &children);
+    std::shared_ptr<MapData> GetMapData() const;
 
-    /**
-     * @brief Remove the child.
-     *
-     * @param child The GameObject being removed.
-     */
-    void RemoveChild(std::shared_ptr<Util::GameObject> child);
+    void RemoveEnemy(const size_t &position);
+    void RemoveWall(const size_t &position);
+    void OpenDoor(const size_t &position);
 
-    std::vector<std::shared_ptr<Util::GameObject>> GetChildren();
+    void CameraUpdate();
+    void TempoUpdate();
+
+    void Update();
 
 private:
+    const size_t ALLOW_EXTRA_DRAW = 4;
+    bool CheckShowPosition(const glm::vec2 &position1,
+                           const glm::vec2 &position2);
+    bool isVaildPosition(const glm::ivec2 &position);
+    bool isVaildMove(const glm::ivec2 &position);
+    const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
+    const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;
-    std::vector<std::shared_ptr<Util::GameObject>> m_Children;
+    glm::ivec2 m_Size;
+    std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
+    std::shared_ptr<Player> m_MainCharacter;
 };
 
 } // namespace Dungeon

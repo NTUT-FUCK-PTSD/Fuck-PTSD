@@ -2,8 +2,9 @@
 #define CAMERA_H
 
 #include "Util/Renderer.hpp"
+#include "Util/Time.hpp"
 
-class Camera {
+class Camera final {
 public:
     /**
      * @brief Parameterized constructor.
@@ -48,9 +49,17 @@ public:
 
     std::shared_ptr<Util::Renderer> GetRenderer() { return m_Renderer; }
 
+    void MoveByTime(const unsigned long &duringTimeMs,
+                    const glm::vec2 &destination);
+
 private:
     std::shared_ptr<Util::Renderer> m_Renderer;
     glm::vec2 m_Position = {0, 0};
+
+    bool m_IsAnimating = false;
+    unsigned long m_AnimationStartMs;
+    unsigned long m_AnimationDuringTimeMs;
+    glm::vec2 m_AnimationDestination;
 };
 
 #endif // CAMERA_H

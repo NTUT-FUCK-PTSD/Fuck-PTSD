@@ -1,15 +1,13 @@
 #include "App.hpp"
-#include "Animation.h"
 #include "Background.hpp"
-#include "MainCharacter.h"
+#include "Dungeon/MapHandler.h"
+#include "Player.h"
 #include "ToolBoxs.h"
-#include "rusty_bridge/lib.h"
-
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
-
-#include "Dungeon/Map.h"
+#include "Util/Time.hpp"
+#include <thread>
 
 using namespace tinyxml2;
 
@@ -21,75 +19,154 @@ int32_t rusty_extern_c_integer();
 void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
-    // Test the Dungeon::Map
-    Dungeon::Map Test(ASSETS_DIR "/level/test.xml", 1);
 
     // create background
     const auto background = std::make_shared<Background>();
-    m_Camera.AddChild(background->GetGameElement());
+    m_Camera->AddChild(background->GetGameElement());
+
+    // play main background music
+    m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
+    //    m_MusicSystem->skipToTargetTime(118.2f);
 
     // Wait any key click
     while (!ToolBoxs::IsAnyKeyPress()) {
-        m_Camera.Update();
+        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+            Util::Input::IfExit()) {
+            m_CurrentState = State::END;
+        }
+        m_MusicSystem->Update();
+        m_Camera->Update();
         context->Update();
     }
 
-    // create MainCharacter
-    m_MainCharacter = std::make_shared<MainCharacter>();
-    m_Camera.AddChildren(m_MainCharacter->GetGameElement());
+    // play lobby music
+    //    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
+    //    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
+    //    m_MusicSystem->setSpeed(1.2);
+
+    // play zone1 leve1
+    m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
+    m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
 
     // remove background
-    m_Camera.RemoveChild(background->GetGameElement());
-    m_Camera.AddChildren(Test.GetChildren());
+    m_Camera->RemoveChild(background->GetGameElement());
+
+    // create Player
+    m_MainCharacter = std::make_shared<Player>();
+    m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
+    m_MainCharacter->SetBodyImage(ASSETS_DIR
+                                  "/entities/player1_armor_body.png");
+    m_Camera->AddChild(m_MainCharacter->GetGameElement());
+    m_Window->AddChild(m_MainCharacter->GetWindowElement());
+
+    // Test the Dungeon::Map
+    m_DungeonMap = std::make_shared<Dungeon::Map>(
+        m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
+    m_DungeonMap->SetDrawable(
+        std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
+    m_Camera->AddChild(m_DungeonMap);
+
+    // display the tempo heart in music System
+    m_Window->AddChild(m_MusicSystem->getGameObject());
 
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+//    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
-    current_frame = ToolBoxs::FrameCounter(current_frame);
+    // add coin
+    //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
+    //        m_Coin->plusCoinNumber(10);
+    //        m_Diamond->plusDiamondNumber(10);
+    //    }
 
-    auto isFinish = Animation::move_player(current_frame, animationStartFrame,
-                                           m_PlayerMoveDirect, m_MainCharacter);
+    // player move
+    if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
+         Util::Input::IsKeyDown(Util::Keycode::D) ||
+         Util::Input::IsKeyDown(Util::Keycode::S) ||
+         Util::Input::IsKeyDown(Util::Keycode::A)) &&
+        m_MusicSystem->TempoTrigger()) {
 
-    if (isFinish) {
-        m_PlayerMoveDirect = MainCharacter::NONE;
+        glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
+
+        if (m_PlayerMoveDirect != Player::NONE) {
+            m_PlayerMoveDirect = Player::NONE;
+        }
+        const std::vector<Util::Keycode> key = {
+            Util::Keycode::W, Util::Keycode::A, Util::Keycode::S,
+            Util::Keycode::D};
+        const std::vector<glm::vec2> direction = {
+            {0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+        const std::vector<Player::Direction> playerDirection = {
+            Player::Direction::UP, Player::Direction::LEFT,
+            Player::Direction::DOWN, Player::Direction::RIGHT};
+        const std::vector<glm::vec2> aniPlayerDirection = {
+            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
+            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+        const std::vector<glm::vec2> aniCameraDirection = {
+            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
+            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+
+        for (size_t i = 0; i < 4; i++) {
+            if (Util::Input::IsKeyDown(key[i]) &&
+                m_DungeonMap->GetMapData()->IsPositionPlayerAct(
+                    m_MainCharacter->GetGamePosition() + direction[i])) {
+                playerDestination =
+                    m_MainCharacter->GetGamePosition() + direction[i];
+                m_MainCharacter->SetFaceTo(playerDirection[i]);
+                auto mapIndex =
+                    m_DungeonMap->GamePostion2MapIndex(playerDestination);
+                if (m_DungeonMap->GetMapData()->IsPositionInteractive(
+                        playerDestination)) {
+                    if (m_DungeonMap->GetMapData()->IsHasEntity(mapIndex)) {
+                        m_DungeonMap->RemoveEnemy(
+                            m_DungeonMap->GamePostion2MapIndex(
+                                playerDestination));
+                    }
+                    else if (m_DungeonMap->GetMapData()->IsPositionWall(
+                                 playerDestination)) {
+                        m_DungeonMap->RemoveWall(
+                            m_DungeonMap->GamePostion2MapIndex(
+                                playerDestination));
+                    }
+                    else if (m_DungeonMap->GetMapData()->IsPositionDoor(
+                                 playerDestination)) {
+                        m_DungeonMap->OpenDoor(
+                            m_DungeonMap->GamePostion2MapIndex(
+                                playerDestination));
+                    }
+                }
+                else {
+                    m_PlayerMoveDirect = playerDirection[i];
+
+                    m_AniPlayerDestination = {
+                        m_AniPlayerDestination.x + aniPlayerDirection[i].x,
+                        m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                    m_AniCameraDestination = {
+                        m_AniCameraDestination.x + aniCameraDirection[i].x,
+                        m_AniCameraDestination.y + aniCameraDirection[i].y};
+                }
+            }
+        }
+        m_MainCharacter->MoveByTime(200, m_AniPlayerDestination,
+                                    m_PlayerMoveDirect);
+        m_MainCharacter->Update();
+        m_Camera->MoveByTime(200, m_AniCameraDestination);
+        m_DungeonMap->TempoUpdate();
     }
 
-    glm::vec2 currnet = {-m_CameraPosition.x, -m_CameraPosition.y};
-    if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::UP;
-        animationStartFrame = current_frame + 1;
-        currnet.y -= 10;
-        m_MainCharacter->SetPosition(currnet);
-
-        m_CameraPosition.y += 10;
+    // detect the player
+    if (Util::Input::IsKeyDown(Util::Keycode::W) ||
+        Util::Input::IsKeyDown(Util::Keycode::D) ||
+        Util::Input::IsKeyDown(Util::Keycode::S) ||
+        Util::Input::IsKeyDown(Util::Keycode::A)) {
+        m_MusicSystem->clickEvent();
     }
-    if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::LEFT;
-        animationStartFrame = current_frame + 1;
-        currnet.x += 10;
-        m_MainCharacter->SetPosition(currnet);
-
-        m_CameraPosition.x -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::DOWN;
-        animationStartFrame = current_frame + 1;
-        currnet.y += 10;
-        m_MainCharacter->SetPosition(currnet);
-        m_CameraPosition.y -= 10;
-    }
-    if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-        m_PlayerMoveDirect = MainCharacter::Direction::RIGHT;
-        animationStartFrame = current_frame + 1;
-        currnet.x -= 10;
-        m_MainCharacter->SetPosition(currnet);
-
-        m_CameraPosition.x += 10;
-    }
-
-    m_Camera.SetPosition(m_CameraPosition);
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
@@ -97,7 +174,10 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
-    m_Camera.Update();
+    m_MusicSystem->Update();
+    m_MainCharacter->Update();
+    m_Window->Update();
+    m_Camera->Update();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)

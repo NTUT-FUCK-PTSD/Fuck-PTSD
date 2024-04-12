@@ -4,6 +4,7 @@
 
 #include "ToolBoxs.h"
 
+#include "Dungeon/Elements.h"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -34,11 +35,13 @@ glm::vec2 ToolBoxs::AddVec2(const glm::vec2 &add01, const glm::vec2 &add02) {
     return result;
 }
 
-int ToolBoxs::FrameCounter(const int current_frame) {
-    if (current_frame == 60) {
-        return 1;
-    }
-    else {
-        return current_frame + 1;
-    }
+glm::vec2 ToolBoxs::GamePostoPos(const glm::vec2 &gamePosition) {
+    return {
+        gamePosition.x * Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE,
+        -gamePosition.y * Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE};
+}
+
+glm::vec2 ToolBoxs::PosToGamePos(const glm::vec2 &position) {
+    return {position.x / Dungeon::DUNGEON_TILE_WIDTH / Dungeon::DUNGEON_SCALE,
+            -position.y / Dungeon::DUNGEON_TILE_WIDTH / Dungeon::DUNGEON_SCALE};
 }

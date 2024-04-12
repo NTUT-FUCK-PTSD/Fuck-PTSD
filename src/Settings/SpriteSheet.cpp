@@ -13,13 +13,13 @@ SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
                          const std::vector<std::size_t> &frames, bool play,
                          std::size_t interval, bool looping,
                          std::size_t cooldown)
-    : m_Path(filepath),
-      m_FrameSize(frameSize),
-      m_Frames(frames),
+    : m_Frames(frames),
       m_State(play ? State::PLAY : State::PAUSE),
       m_Interval(interval),
       m_Looping(looping),
-      m_Cooldown(cooldown) {
+      m_Cooldown(cooldown),
+      m_Path(filepath),
+      m_FrameSize(frameSize) {
     m_SpriteSheet = std::make_unique<Util::SpriteSheet>(filepath);
     m_Size = m_SpriteSheet->GetSize();
     m_col = static_cast<size_t>(m_Size.x / m_FrameSize.x);
@@ -34,13 +34,13 @@ void SpriteSheet::SetCurrentFrame(std::size_t index) {
     }
 }
 
-void SpriteSheet::Draw(const Util::Transform &transform, const float zIndex) {
+void SpriteSheet::Draw(const Core::Matrices &data) {
     SDL_Rect displayRect{
         static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
         static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
         static_cast<int>(m_FrameSize.x), static_cast<int>(m_FrameSize.y)};
     m_SpriteSheet->SetDrawRect(displayRect);
-    m_SpriteSheet->Draw(transform, zIndex);
+    m_SpriteSheet->Draw(data);
 
     Update();
 }
@@ -93,4 +93,8 @@ void SpriteSheet::Update() {
         m_State = m_Looping ? State::COOLDOWN : State::ENDED;
         m_Index = m_Frames.size() - 1;
     }
+}
+
+void SpriteSheet::SetAlpha(const Uint8 alpha) {
+    m_SpriteSheet->SetAlpha(alpha);
 }
