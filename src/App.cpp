@@ -19,26 +19,31 @@ int32_t rusty_extern_c_integer();
 void App::Start(std::shared_ptr<Core::Context>
                     context) { // the value context is come from main.cpp
     LOG_TRACE("Start");
+    if (m_FirstTime) {
+        m_FirstTime = false;
+        // create background
+        m_Background = std::make_shared<Background>();
+        m_Camera->AddChild(m_Background->GetGameElement());
 
-    // create background
-    const auto background = std::make_shared<Background>();
-    m_Camera->AddChild(background->GetGameElement());
-
-    // play main background music
-    m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
-    //    m_MusicSystem->skipToTargetTime(118.2f);
-
-    // Wait any key click
-    while (!ToolBoxs::IsAnyKeyPress()) {
-        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-            Util::Input::IfExit()) {
-            m_CurrentState = State::END;
-        }
-        m_MusicSystem->Update();
-        m_Camera->Update();
-        context->Update();
+        // play main background music
+        m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
+        //    m_MusicSystem->skipToTargetTime(118.2f);
     }
 
+    // Wait any key click
+    if (ToolBoxs::IsAnyKeyPress()) {
+        m_IsMainMenu = false;
+    }
+
+    m_MusicSystem->Update();
+    m_Camera->Update();
+
+    if (Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
+    if (m_IsMainMenu) {
+        return;
+    }
     // play lobby music
     //    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
     //    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
@@ -49,7 +54,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
 
     // remove background
-    m_Camera->RemoveChild(background->GetGameElement());
+    m_Camera->RemoveChild(m_Background->GetGameElement());
+    m_Background.reset();
 
     // create Player
     m_MainCharacter = std::make_shared<Player>();
