@@ -43,6 +43,9 @@ void Camera::Update() {
 
 void Camera::MoveByTime(const unsigned long &duringTimeMs,
                         const glm::vec2 &destination) {
+    if (destination == m_Position) {
+        return;
+    }
     if (m_IsShaking) {
         m_Position = m_OrginalPosition;
         m_ShakeDuringTimeMs = 0;
@@ -83,7 +86,7 @@ void Camera::ShakeUpdate() {
     }
     else {
         MoveByTimeInternal(
-            100,
+            50,
             glm::linearRand(m_OrginalPosition +
                                 glm::vec2(-m_ShakeStrength, -m_ShakeStrength),
                             m_OrginalPosition +
