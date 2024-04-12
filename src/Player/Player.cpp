@@ -79,7 +79,7 @@ void Player::SetGamePosition(const glm::vec2 &gamePosition) {
     m_Head->SetPosition(m_Position);
 }
 
-void Player::SetFaceTo(const Direction &direction) {
+void Player::SetFaceTo(Direction direction) {
     if (direction != RIGHT && direction != LEFT) {
         // LOG_WARN("Player::SetFaceTo: Invalid direction");
         return;
@@ -109,7 +109,7 @@ void Player::SetPosition(const glm::vec2 &position) {
     m_Head->SetPosition(m_Position);
 }
 
-void Player::SetZIndex(const float &index) {
+void Player::SetZIndex(float index) {
     m_ZIndex = index;
     m_Body->SetZIndex(index);
     m_Head->SetZIndex(index + float(0.25));
@@ -131,24 +131,20 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
     return m_Window;
 }
 
-void Player::gainCoin(const std::size_t &number) {
+void Player::gainCoin(std::size_t number) {
     m_Coin->plusCoinNumber(number);
 }
 
-void Player::lostCoin(const std::size_t &number) {
+void Player::lostCoin(std::size_t number) {
     m_Coin->plusCoinNumber(number * -1);
 }
 
-void Player::gainDiamond(const std::size_t &number) {
+void Player::gainDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number);
 }
 
-void Player::lostDiamond(const std::size_t &number) {
+void Player::lostDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number * -1);
-}
-
-void Player::lostHP(const std::size_t &value) {
-    m_Heart->minusHP(value);
 }
 
 // void Player::useDefaultSettingsTool() {

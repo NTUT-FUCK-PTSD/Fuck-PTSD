@@ -31,8 +31,8 @@ public:
     void SetGamePosition(const glm::vec2 &position);
     void SetBodyImagePath(const std::string &Path) { m_BodyImagePath = Path; };
     void SetHeadImagePath(const std::string &Path) { m_HeadImagePath = Path; }
-    void SetFaceTo(const Direction &direction);
-    void SetZIndex(const float &index);
+    void SetFaceTo(Direction direction);
+    void SetZIndex(float index);
 
     // set player outside
     void SetHeadImage(const std::string &path);
@@ -41,16 +41,15 @@ public:
     void SetBodyImage(std::shared_ptr<SpriteSheet> image);
 
     // set player's item
-    void gainCoin(const std::size_t &number);
-    void lostCoin(const std::size_t &number);
-    void gainDiamond(const std::size_t &number);
-    void lostDiamond(const std::size_t &number);
+    void gainCoin(std::size_t number);
+    void lostCoin(std::size_t number);
+    void gainDiamond(std::size_t number);
+    void lostDiamond(std::size_t number);
 
-    // set player's heart
-    void lostHP(const std::size_t &value);
-    // TODO
-    void gainHP(const std::size_t &value);
-    void getHP(const std::size_t &value);
+    // DOTO: set player's heart
+    void lostHP(std::size_t value);
+    void gainHP(std::size_t value);
+    void getHP(std::size_t value);
 
     // set player's tool
     void useDefaultSettingsTool();
