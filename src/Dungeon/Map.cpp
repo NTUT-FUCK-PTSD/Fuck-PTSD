@@ -1,6 +1,7 @@
 #include "Dungeon/Map.h"
 
 #include "Dungeon/EnemyFactory.h"
+#include "Dungeon/TileFactory.h"
 
 namespace Dungeon {
 
@@ -20,11 +21,11 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
         if (tile.type == 23 || tile.type == 24 || tile.type == 103 ||
             tile.type == 106 || tile.type == 111 || tile.type == 118) {
-            m_MapData->AddTile(mapIndex, std::make_shared<Tile>(s_Tile{
+            m_MapData->AddTile(mapIndex, TileFactory::CreateTile(s_Tile{
                                              tile.x, tile.y, 0, tile.zone,
                                              tile.torch, tile.cracked}));
         }
-        m_MapData->AddTile(mapIndex, std::make_shared<Tile>(tile));
+        m_MapData->AddTile(mapIndex, TileFactory::CreateTile(tile));
     }
 
     std::vector<glm::ivec2> direction = {{1, 0}, {-1, 0}, {0, 1},  {0, -1},
@@ -57,7 +58,7 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
                     if (tmp->GetTile().type == 111) {
                         m_MapData->AddTile(
                             mapIndex,
-                            std::make_shared<Tile>(s_Tile{
+                            TileFactory::CreateTile(s_Tile{
                                 tmp->GetTile().x, tmp->GetTile().y, 52,
                                 tmp->GetTile().zone, tmp->GetTile().torch,
                                 tmp->GetTile().cracked}));
@@ -67,7 +68,7 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
                             tmp->GetTile().type == 118) {
                             m_MapData->AddTile(
                                 mapIndex,
-                                std::make_shared<Tile>(s_Tile{
+                                TileFactory::CreateTile(s_Tile{
                                     tmp->GetTile().x, tmp->GetTile().y, 50,
                                     tmp->GetTile().zone, tmp->GetTile().torch,
                                     tmp->GetTile().cracked}));
@@ -75,7 +76,7 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
                         else {
                             m_MapData->AddTile(
                                 mapIndex,
-                                std::make_shared<Tile>(s_Tile{
+                                TileFactory::CreateTile(s_Tile{
                                     tmp->GetTile().x, tmp->GetTile().y, 51,
                                     tmp->GetTile().zone, tmp->GetTile().torch,
                                     tmp->GetTile().cracked}));
@@ -93,7 +94,7 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
                         m_MapData->IsTilesEmpty(tmpMapIndex)) {
                         m_MapData->AddTile(
                             tmpMapIndex,
-                            std::make_shared<Tile>(s_Tile{
+                            TileFactory::CreateTile(s_Tile{
                                 j + dir.x + m_Level->GetLevelIndexMin().x - 1,
                                 i + dir.y + m_Level->GetLevelIndexMin().y - 1,
                                 102, 0, 0, 0}));
@@ -241,8 +242,8 @@ void Map::RemoveWall(const size_t position) {
                      m_Children.end());
     m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
     m_MapData->AddTile(
-        position, std::make_shared<Tile>(s_Tile{tile.x, tile.y, 0, tile.zone,
-                                                tile.torch, tile.cracked}));
+        position, TileFactory::CreateTile(s_Tile{tile.x, tile.y, 0, tile.zone,
+                                                 tile.torch, tile.cracked}));
     m_Children.push_back(m_MapData->GetTileBack(position));
 }
 
