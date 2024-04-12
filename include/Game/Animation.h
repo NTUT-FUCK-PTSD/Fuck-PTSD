@@ -11,10 +11,10 @@ public:
 
     virtual ~Animation() = default;
 
-    virtual void MoveByTime(const unsigned long &duringTimeMs,
+    virtual void MoveByTime(const unsigned long duringTimeMs,
                             const glm::vec2 &destination,
                             const uint16_t &direction);
-    virtual void MoveByTime(const unsigned long &duringTimeMs,
+    virtual void MoveByTime(const unsigned long duringTimeMs,
                             const glm::vec2 &destination);
 
 protected:

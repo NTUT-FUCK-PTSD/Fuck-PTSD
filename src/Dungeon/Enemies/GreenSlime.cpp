@@ -2,7 +2,7 @@
 
 namespace Dungeon {
 Enemies::GreenSlime::GreenSlime(
-    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> &simpleMapData)
+    const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> simpleMapData)
     : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
     m_NormalFrames = {0, 1, 2, 3};

@@ -20,8 +20,8 @@ bool ToolBoxs::IsAnyKeyPress() {
 }
 
 glm::vec2 ToolBoxs::CountImagePixel(const std::string &ImagePath,
-                                    uint16_t WidthNumber,
-                                    uint16_t HeightNumber) {
+                                    const uint16_t WidthNumber,
+                                    const uint16_t HeightNumber) {
     const auto ImageSize = Util::Image(ImagePath).GetSize();
 
     const auto result = glm::vec2(ImageSize[0] / (double)WidthNumber,

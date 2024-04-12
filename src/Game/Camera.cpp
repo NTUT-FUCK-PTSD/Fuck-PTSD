@@ -6,7 +6,7 @@
 Camera::Camera(const std::vector<std::shared_ptr<Util::GameObject>> &children)
     : m_Renderer(std::make_shared<Util::Renderer>(children)) {}
 
-void Camera::AddChild(const std::shared_ptr<Util::GameObject> &child) {
+void Camera::AddChild(const std::shared_ptr<Util::GameObject> child) {
     m_Renderer->AddChild(child);
 }
 
@@ -41,7 +41,7 @@ void Camera::Update() {
     m_Renderer->Update(m_Position);
 }
 
-void Camera::MoveByTime(const unsigned long &duringTimeMs,
+void Camera::MoveByTime(const unsigned long duringTimeMs,
                         const glm::vec2 &destination) {
     if (destination == m_Position) {
         return;
@@ -55,7 +55,7 @@ void Camera::MoveByTime(const unsigned long &duringTimeMs,
     MoveByTimeInternal(duringTimeMs, destination);
 }
 
-void Camera::Shake(const unsigned long &duringTimeMs, const float &strength) {
+void Camera::Shake(const unsigned long duringTimeMs, const float strength) {
     if (m_IsAnimating) {
         m_Position = m_AnimationDestination;
         m_IsAnimating = false;
@@ -94,7 +94,7 @@ void Camera::ShakeUpdate() {
     }
 }
 
-void Camera::MoveByTimeInternal(const unsigned long &duringTimeMs,
+void Camera::MoveByTimeInternal(const unsigned long duringTimeMs,
                                 const glm::vec2 &destination) {
     if (m_IsAnimating) {
         m_Position = m_AnimationDestination;

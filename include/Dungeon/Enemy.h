@@ -15,16 +15,16 @@ namespace Dungeon {
 class Enemy : public Util::GameObject {
 public:
     Enemy(const s_Enemy &u_Enemy,
-          const std::shared_ptr<SimpleMapData> &simpleMapData);
+          const std::shared_ptr<SimpleMapData> simpleMapData);
     virtual ~Enemy() = default;
 
     void SetShadow(const bool &shadow);
     void SetGamePosition(const glm::vec2 &gamePosition);
-    void SetBeatDelay(const size_t &beatDelay) { m_BeatDelay = beatDelay; }
+    void SetBeatDelay(const size_t beatDelay) { m_BeatDelay = beatDelay; }
     void SetLord(const bool &lord);
-    void SetDamage(const size_t &damage) { m_Damage = damage; }
-    void SetHealth(const size_t &health) { m_Health = health; }
-    void SetCoin(const size_t &coin) { m_Coin = coin; }
+    void SetDamage(const size_t damage) { m_Damage = damage; }
+    void SetHealth(const size_t health) { m_Health = health; }
+    void SetCoin(const size_t coin) { m_Coin = coin; }
     void SetCanMove(const bool &canMove) { m_CanMove = canMove; }
 
     void SetFace(bool faceTo) {
@@ -56,7 +56,7 @@ public:
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
         return m_SimpleMapData->GamePosition2MapIndex(position);
     }
-    virtual void Struck(const size_t &damage) {
+    virtual void Struck(const size_t damage) {
         m_Health -= damage;
         if (m_Health <= 0) {
             SetVisible(false);

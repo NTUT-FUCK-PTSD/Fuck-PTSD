@@ -9,7 +9,7 @@ namespace Enemies {
 class GreenSlime final : public Dungeon::Enemy, private Animation {
 public:
     GreenSlime(const s_Enemy &u_Enemy,
-               const std::shared_ptr<SimpleMapData> &simpleMapData);
+               const std::shared_ptr<SimpleMapData> simpleMapData);
 
     void Move() override;
 
