@@ -4,11 +4,12 @@
 
 #include "ToolBoxs.h"
 
-#include "Dungeon/Elements.h"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+
+#include "Settings/Window.hpp"
 
 bool ToolBoxs::IsAnyKeyPress() {
     for (int i = 0; i < 512; i++) {
@@ -36,12 +37,11 @@ glm::vec2 ToolBoxs::AddVec2(const glm::vec2 &add01, const glm::vec2 &add02) {
 }
 
 glm::vec2 ToolBoxs::GamePostoPos(const glm::vec2 &gamePosition) {
-    return {
-        gamePosition.x * Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE,
-        -gamePosition.y * Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE};
+    return {gamePosition.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE,
+            -gamePosition.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE};
 }
 
 glm::vec2 ToolBoxs::PosToGamePos(const glm::vec2 &position) {
-    return {position.x / Dungeon::DUNGEON_TILE_WIDTH / Dungeon::DUNGEON_SCALE,
-            -position.y / Dungeon::DUNGEON_TILE_WIDTH / Dungeon::DUNGEON_SCALE};
+    return {position.x / DUNGEON_TILE_WIDTH / DUNGEON_SCALE,
+            -position.y / DUNGEON_TILE_WIDTH / DUNGEON_SCALE};
 }

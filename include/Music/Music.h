@@ -9,7 +9,6 @@
 #include "soloud_speech.h"
 #include "soloud_thread.h"
 #include "soloud_wav.h"
-#include <iostream>
 
 #include "Display.h"
 #include "Tempo.h"

@@ -1,9 +1,10 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
+#include <random>
+
 #include "Animation.h"
 #include "Dungeon/Enemy.h"
-#include <random>
 
 namespace Dungeon {
 namespace Enemies {

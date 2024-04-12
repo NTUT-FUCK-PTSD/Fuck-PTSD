@@ -1,5 +1,7 @@
 #include "Dungeon/Tiles/DoorMetalSide.h"
 
+#include "Settings/Window.hpp"
+
 namespace Dungeon {
 namespace Tiles {
 DoorMetalSide::DoorMetalSide(const s_Tile &u_Tile)

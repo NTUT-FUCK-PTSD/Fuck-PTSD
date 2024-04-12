@@ -1,9 +1,9 @@
 #ifndef SIMPLE_MAP_DATA_H
 #define SIMPLE_MAP_DATA_H
 
-#include "Dungeon/Tile.h"
-
 #include <deque>
+
+#include "Dungeon/Tile.h"
 
 namespace Dungeon {
 class SimpleMapData {

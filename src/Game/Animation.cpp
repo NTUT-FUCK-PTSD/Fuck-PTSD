@@ -3,9 +3,8 @@
 Animation::Animation(const glm::vec2 &animationPosition)
     : m_AnimationPosition(animationPosition) {
     m_AnimationZIndex =
-        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y -
-                                       Dungeon::DUNGEON_TILE_WIDTH -
-                                       Dungeon::DUNGEON_TILE_WIDTH})
+        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
+                                       DUNGEON_TILE_WIDTH})
             .y;
 }
 
@@ -67,10 +66,9 @@ void Animation::UpdateAnimation(const bool &isDirection) {
             m_AnimationPosition += move * ratio;
         }
 
-        m_AnimationZIndex =
-            ToolBoxs::PosToGamePos({0, m_AnimationPosition.y -
-                                           Dungeon::DUNGEON_TILE_WIDTH -
-                                           Dungeon::DUNGEON_TILE_WIDTH})
-                .y;
+        m_AnimationZIndex = ToolBoxs::PosToGamePos({0, m_AnimationPosition.y -
+                                                           DUNGEON_TILE_WIDTH -
+                                                           DUNGEON_TILE_WIDTH})
+                                .y;
     }
 }

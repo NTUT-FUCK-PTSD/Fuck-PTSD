@@ -5,6 +5,8 @@
 #ifndef FUCK_PTSD_HEART_H
 #define FUCK_PTSD_HEART_H
 
+#include "config.hpp"
+
 #include "GameElement.h"
 #include <queue>
 
@@ -49,7 +51,8 @@ private:
     //
     std::size_t m_MaxHp = 12;
     std::size_t m_currentHP;
-    const glm::vec2 m_FirstPosition = {500, 350};
+    const glm::vec2 m_FirstPosition = {WINDOW_WIDTH / 2 - 220,
+                                       WINDOW_HEIGHT / 2 - 55};
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 

@@ -5,6 +5,7 @@
 
 #include "Dungeon/SimpleMapData.h"
 #include "Dungeon/Tile.h"
+#include "Settings/Window.hpp"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 

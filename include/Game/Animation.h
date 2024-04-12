@@ -1,8 +1,9 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "Dungeon/Elements.h"
+#include "Settings/Window.hpp"
 #include "ToolBoxs.h"
+
 #include "Util/Time.hpp"
 
 class Animation {
@@ -21,10 +22,10 @@ protected:
     void UpdateAnimation(const bool &isDirection = false);
 
     const std::vector<glm::vec2> m_MoveAnimation = {
-        {0, Dungeon::DUNGEON_TILE_WIDTH},
-        {Dungeon::DUNGEON_TILE_WIDTH * 2 / 5, Dungeon::DUNGEON_TILE_WIDTH},
-        {-Dungeon::DUNGEON_TILE_WIDTH / 4, Dungeon::DUNGEON_TILE_WIDTH},
-        {-Dungeon::DUNGEON_TILE_WIDTH * 2 / 5, Dungeon::DUNGEON_TILE_WIDTH},
+        {0, DUNGEON_TILE_WIDTH},
+        {DUNGEON_TILE_WIDTH * 2 / 5, DUNGEON_TILE_WIDTH},
+        {-DUNGEON_TILE_WIDTH / 4, DUNGEON_TILE_WIDTH},
+        {-DUNGEON_TILE_WIDTH * 2 / 5, DUNGEON_TILE_WIDTH},
         {0, 0}};
 
     bool m_IsAnimating = false;

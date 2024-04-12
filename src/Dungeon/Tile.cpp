@@ -1,4 +1,6 @@
 #include "Dungeon/Tile.h"
+
+#include "Settings/Window.hpp"
 #include "ToolBoxs.h"
 
 namespace Dungeon {

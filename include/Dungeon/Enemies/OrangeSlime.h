@@ -1,9 +1,10 @@
 #ifndef ORANGE_SLIME_H
 #define ORANGE_SLIME_H
 
+#include <random>
+
 #include "Animation.h"
 #include "Dungeon/Enemy.h"
-#include <random>
 
 namespace Dungeon {
 namespace Enemies {

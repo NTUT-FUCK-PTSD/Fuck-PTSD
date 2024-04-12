@@ -3,6 +3,8 @@
 #ifndef FUCK_PTSD_TOOLS_H
 #define FUCK_PTSD_TOOLS_H
 
+#include "config.hpp"
+
 #include "pch_extream.h"
 
 #include "Player/Equipment/Bomb.h"
@@ -46,13 +48,14 @@ private:
     template <class T>
     ptrdiff_t getListIdx(std::vector<T> list, Tools::Type type);
 
-
-
     std::vector<Tools::Type> m_colPosIdx;
     std::vector<Tools::Type> m_rowPosIdx;
-    const std::vector<glm::vec2> m_colPosList = {{-655, 210}, {-655, 70}};
-    const std::vector<glm::vec2> m_rowPosList = {{-655, 350}, {-555, 350}};
-
+    const std::vector<glm::vec2> m_colPosList = {
+        {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 195},
+        {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 335}};
+    const std::vector<glm::vec2> m_rowPosList = {
+        {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 55},
+        {-int(WINDOW_WIDTH) / 2 + 165, WINDOW_HEIGHT / 2 - 55}};
 
     std::vector<std::shared_ptr<IEquipment>> m_colEquipList;
     std::vector<std::shared_ptr<IEquipment>> m_rowEquipList;
