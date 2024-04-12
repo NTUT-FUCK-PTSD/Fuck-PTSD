@@ -117,7 +117,7 @@ void Player::SetZIndex(float index) {
 
 void Player::UpdateCoin(const unsigned long duringTimeMs,
                         const glm::vec2 &destination,
-                        const uint16_t &direction) {
+                        const uint16_t direction) {
     m_Coin->MoveByTime(duringTimeMs, destination, direction);
 }
 
@@ -175,9 +175,9 @@ WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
 }
 
-void Player::MoveByTime(const unsigned long &duringTimeMs,
+void Player::MoveByTime(const unsigned long duringTimeMs,
                         const glm::vec2 &destination,
-                        const uint16_t &direction) {
+                        const uint16_t direction) {
     // Update GamePosition but not draw
     m_GamePosition = destination;
     Animation::MoveByTime(duringTimeMs, destination, direction);

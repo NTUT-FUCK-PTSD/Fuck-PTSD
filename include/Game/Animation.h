@@ -13,7 +13,7 @@ public:
 
     virtual void MoveByTime(const unsigned long duringTimeMs,
                             const glm::vec2 &destination,
-                            const uint16_t &direction);
+                            const uint16_t direction);
     virtual void MoveByTime(const unsigned long duringTimeMs,
                             const glm::vec2 &destination);
 

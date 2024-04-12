@@ -11,7 +11,7 @@ Animation::Animation(const glm::vec2 &animationPosition)
 
 void Animation::MoveByTime(const unsigned long duringTimeMs,
                            const glm::vec2 &destination,
-                           const uint16_t &direction) {
+                           const uint16_t direction) {
     if (m_IsAnimating) {
         m_AnimationPosition = m_AnimationDestination;
         UpdateAnimation(true);

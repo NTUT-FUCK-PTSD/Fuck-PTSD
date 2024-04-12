@@ -16,18 +16,18 @@ class Heart final {
 public:
     explicit Heart();
 
-    void plusHP(const size_t &number);
+    void plusHP(const size_t number);
 
-    void minusHP(const size_t &number);
-    void minusHeart(const float &number);
+    void minusHP(const size_t number);
+    void minusHeart(const float number);
 
-    void hitHeart(const size_t &index);
+    void hitHeart(const size_t index);
 
-    void gainHeart(const size_t &number = 2);
+    void gainHeart(const size_t number = 2);
     void UpdateHP();
     void resetHP();
 
-    void SetHeartMaxHp(const size_t &value);
+    void SetHeartMaxHp(const size_t value);
 
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
     getGameObjects() const;

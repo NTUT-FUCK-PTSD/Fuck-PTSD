@@ -18,7 +18,7 @@ std::shared_ptr<GameElement> Heart::GetGameObject() const {
     return m_Heart;
 }
 
-void Heart::gainHeart(const size_t &number) {
+void Heart::gainHeart(const size_t number) {
     size_t HP = m_MaxHp + 2 * number;
     if (HP > 20) {
         LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 20");
@@ -94,7 +94,7 @@ void Heart::UpdateHP() {
     }
 }
 
-void Heart::minusHP(const size_t &number) {
+void Heart::minusHP(const size_t number) {
     if (number > m_currentHP) {
         LOG_ERROR("the value of number is not available");
         return;
@@ -103,7 +103,7 @@ void Heart::minusHP(const size_t &number) {
     UpdateHP();
 }
 
-void Heart::minusHeart(const float &number) {
+void Heart::minusHeart(const float number) {
     if (number < 0) {
         LOG_ERROR("the value of number is not available");
         return;

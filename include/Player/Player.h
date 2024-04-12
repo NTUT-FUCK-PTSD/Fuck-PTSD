@@ -59,7 +59,7 @@ public:
 
     // some unused functional
     void UpdateCoin(const unsigned long duringTimeMs,
-                    const glm::vec2 &destination, const uint16_t &direction);
+                    const glm::vec2 &destination, const uint16_t direction);
 
     // tool's handle
     // about Shovel
@@ -70,9 +70,9 @@ public:
     bool IsWeaponExist();
     WeaponEnum::Type GetWeaponType();
 
-    virtual void MoveByTime(const unsigned long &duringTimeMs,
+    virtual void MoveByTime(const unsigned long duringTimeMs,
                             const glm::vec2 &destination,
-                            const uint16_t &direction) override;
+                            const uint16_t direction) override;
 
 private:
     ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
