@@ -73,6 +73,7 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
+//    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
     // add coin
     //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
