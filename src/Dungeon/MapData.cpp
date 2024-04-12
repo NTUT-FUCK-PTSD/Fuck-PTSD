@@ -26,15 +26,11 @@ void MapData::RemoveEnemy(const std::size_t position) {
     SetHasEntity(position, false);
 }
 
-std::vector<std::shared_ptr<Enemy>> MapData::GetEnemies() const {
-    return m_Enemies;
-}
-
 std::shared_ptr<Enemy> MapData::GetEnemy(const std::size_t position) const {
     return m_Enemies.at(position);
 }
 
-std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
+std::deque<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
     auto v(m_EnemyQueue);
     sort(v.begin(), v.end(), EnemyCompare);
     return v;

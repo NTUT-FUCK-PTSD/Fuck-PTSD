@@ -3,7 +3,7 @@
 
 #include "Dungeon/Tile.h"
 
-#include <vector>
+#include <deque>
 
 namespace Dungeon {
 class SimpleMapData {
@@ -40,16 +40,17 @@ public:
     [[nodiscard]] bool IsPositionPlayerAct(const glm::vec2 &position) const;
 
     void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
-    void RemoveTile(const std::size_t position, const std::shared_ptr<Tile> tile);
+    void RemoveTile(const std::size_t position,
+                    const std::shared_ptr<Tile> tile);
     void PopBackTile(const std::size_t position);
     [[nodiscard]] bool IsTilesEmpty(const std::size_t position) const;
-    [[nodiscard]] std::vector<std::shared_ptr<Tile>>
+    [[nodiscard]] std::deque<std::shared_ptr<Tile>>
     GetTiles(const std::size_t position) const;
     [[nodiscard]] std::shared_ptr<Tile>
     GetTileBack(const std::size_t position) const;
     void SetHasEntity(const std::size_t position, const bool &hasEntity);
 
-    std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
+    std::deque<std::shared_ptr<Tile>> GetTilesQueue() const;
 
     static float Heuristic(const glm::vec2 &start, const glm::vec2 &end);
 
@@ -58,8 +59,8 @@ private:
     glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_Size;
     std::vector<bool> m_HasEntity;
-    std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
-    std::vector<std::shared_ptr<Tile>> m_TilesQueue;
+    std::vector<std::deque<std::shared_ptr<Tile>>> m_Tiles;
+    std::deque<std::shared_ptr<Tile>> m_TilesQueue;
     static glm::vec2 m_PlayerPosition;
 };
 } // namespace Dungeon

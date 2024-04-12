@@ -40,7 +40,7 @@ bool SimpleMapData::IsTilesEmpty(const std::size_t position) const {
     return m_Tiles.at(position).empty();
 }
 
-std::vector<std::shared_ptr<Tile>>
+std::deque<std::shared_ptr<Tile>>
 SimpleMapData::GetTiles(const std::size_t position) const {
     return m_Tiles.at(position);
 }
@@ -165,7 +165,7 @@ void SimpleMapData::SetPlayerPosition(const glm::vec2 &playerPosition) {
     m_PlayerPosition = playerPosition;
 }
 
-std::vector<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
+std::deque<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
     return m_TilesQueue;
 }
 
