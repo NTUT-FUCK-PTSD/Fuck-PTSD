@@ -23,36 +23,36 @@ void Heart::rendererHeart() {
     }
 }
 
-void Heart::resetHP() {
-    if (std::size_t(m_MaxHp * 10) % 10 != 0) {
-        LOG_ERROR("the Heart of init value was not a integer");
+void Heart::gainHeart(const size_t &number) {
+    auto HP = m_MaxHp + 2 * number;
+    if (HP > 20) {
+        LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 20");
         return;
     }
 
-    if (std::size_t(m_MaxHp) > 10 ) {
-        LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 10");
-        return ;
-    }
-
-    glm::vec2 Initposition = m_FirstPosition;
-
-    float m_Times_X = (m_MaxHp - 1) / 5 == 0 ? m_MaxHp : 4;
-    Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
-
-    for (std::size_t i = 0; i < std::size_t(m_MaxHp); i++) {
+    float times_X = m_MaxHp > 10 ? (m_MaxHp - 10) / 2 : m_MaxHp / 2;
+    float times_Y = m_MaxHp > 10 ? 1 : 0;
+    glm::vec2 Initposition = m_FirstPosition + m_eachPositionDiff_Y * times_Y +
+                             m_eachPositionDiff_X * times_X;
+    LOG_INFO(Initposition);
+    for (std::size_t i = m_MaxHp / 2; i < std::size_t(HP / 2); i++) {
 
         const auto heart = generalHeart(FULL, Initposition);
         m_ElementList.push_back(heart);
 
-        if ((i + 1) % 5 == 0 && i != 0) {
-            Initposition = Initposition + m_eachPositionDiff_Y;
-
-            float m_Times_X = (i + 1) % 5 == 0 ? size_t(m_MaxHp) % 5 :(i + 1) % 5 + 1;
-            Initposition = Initposition + m_eachPositionDiff_X * m_Times_X;
+        Initposition += m_eachPositionDiff_X;
+        if (i == 4) {
+            Initposition = m_FirstPosition + m_eachPositionDiff_Y;
         }
-
-        Initposition = Initposition - m_eachPositionDiff_X;
     }
+    m_MaxHp = HP;
+}
+
+void Heart::resetHP() {
+    auto HP = m_MaxHp / 2;
+    m_MaxHp = 0;
+
+    gainHeart(HP);
 
     m_currentHP = m_MaxHp;
     rendererHeart();
@@ -83,23 +83,22 @@ std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
     return resultObject;
 }
 
-void Heart::minusHP(float number) {
-    if (std::size_t(number * 2) % 1 != 0) {
-        LOG_ERROR("the Heart's minusHP is not value of time of 1 or 0.5.");
+void Heart::minusHP(const size_t &number) {
+    if (number > m_currentHP) {
+        LOG_ERROR("the value of number is not available");
         return;
     }
-
     m_currentHP -= number;
 
     std::size_t i = 0;
     // renderer the full heart
-    for (; i < std::size_t(m_currentHP); i++) {
+
+    for (; i < std::size_t(m_currentHP / 2); i++) {
         m_ElementList[i]->SetDrawable(m_FullHPImage);
     }
 
     // render the half heart
-    if (std::size_t(m_currentHP * 2) % 2 != 0) {
-        LOG_INFO(std::size_t(m_currentHP * 2) % 2);
+    if (m_currentHP % 2 != 0) {
         m_ElementList[i]->SetDrawable(m_HalfHPImage);
         i++;
     }
@@ -107,4 +106,13 @@ void Heart::minusHP(float number) {
     for (; i < std::size_t(m_MaxHp); i++) {
         m_ElementList[i]->SetDrawable(m_EmptyHPImage);
     }
+}
+
+void Heart::minusHeart(const float &number) {
+    if (number < 0) {
+        LOG_ERROR("the value of number is not available");
+        return;
+    }
+
+    minusHP(number * 2);
 }
