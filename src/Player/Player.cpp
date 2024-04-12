@@ -147,6 +147,14 @@ void Player::lostDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number * -1);
 }
 
+void Player::lostHP(std::size_t value) {
+    m_Heart->minusHP(value);
+}
+
+void Player::gainHeart(std::size_t value) {
+    m_Heart->gainHeart(value);
+}
+
 // void Player::useDefaultSettingsTool() {
 //     m_Tools->SetShovelType();
 // }

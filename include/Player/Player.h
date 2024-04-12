@@ -48,7 +48,7 @@ public:
 
     // DOTO: set player's heart
     void lostHP(std::size_t value);
-    void gainHP(std::size_t value);
+    void gainHeart(std::size_t value);
     void getHP(std::size_t value);
 
     // set player's tool
