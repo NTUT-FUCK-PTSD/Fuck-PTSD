@@ -60,8 +60,19 @@ void Skeleton::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_CanMove = false;
+                m_WillMovePosition = GetGamePosition();
+                m_AnimationType = 0;
+                m_AttackPlayer = true;
+                m_Attack = !m_Attack;
+                return;
+            }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()), false);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition), true);
             if (direction.x > 0) {
                 SetFace(false);
                 m_AnimationType = 1;
@@ -94,6 +105,7 @@ void Skeleton::Update() {
 
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    m_AnimationType);
         m_CanMove = false;

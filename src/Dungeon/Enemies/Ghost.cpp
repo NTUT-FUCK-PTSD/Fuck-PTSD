@@ -57,11 +57,14 @@ void Ghost::Struck(const size_t &damage) {
 void Ghost::Move() {
     auto tmp =
         Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
-    if (m_LastDistance > tmp) {
+    if (m_LastDistance > tmp || (m_Transparent && m_LastDistance == tmp)) {
         SetTransparent(true);
     }
     else {
-        SetTransparent(false);
+        if (m_Transparent) {
+            SetTransparent(false);
+            return;
+        }
     }
     m_LastDistance = tmp;
 
@@ -70,8 +73,17 @@ void Ghost::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_CanMove = false;
+                m_WillMovePosition = GetGamePosition();
+                m_AttackPlayer = true;
+                return;
+            }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()), false);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition), true);
             if (direction.x > 0) {
                 SetFace(false);
             }
@@ -87,6 +99,7 @@ void Ghost::Move() {
 void Ghost::Update() {
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
         m_CanMove = false;
     }

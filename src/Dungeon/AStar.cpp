@@ -29,7 +29,7 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
 
     std::pair<float, glm::ivec2> lastminPath = {
         std::numeric_limits<float>::max(), start};
-    costSoFar[mapData->gamePosition2MapIndex(start)] = 0;
+    costSoFar[mapData->GamePosition2MapIndex(start)] = 0;
 
     while (!frontier.empty()) {
         std::pair<float, glm::ivec2> current = frontier.top();
@@ -52,7 +52,7 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
             }
 
             float newCost = current.first + Heuristic(current.second, next);
-            size_t mapIndex = mapData->gamePosition2MapIndex(next);
+            size_t mapIndex = mapData->GamePosition2MapIndex(next);
             if (newCost < costSoFar[mapIndex]) {
                 costSoFar[mapIndex] = newCost;
                 float priority = newCost + Heuristic(next, end);
@@ -71,9 +71,8 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
     return path;
 }
 
-float AStar::Heuristic(const glm::ivec2 &start, const glm::ivec2 &end) {
-    auto difference = abs(glm::vec2(start) - glm::vec2(end));
-    return difference.x + difference.y;
+float AStar::Heuristic(const glm::vec2 &start, const glm::vec2 &end) {
+    return glm::distance(start, end);
 }
 
 std::vector<glm::ivec2>
@@ -84,7 +83,7 @@ AStar::CalculatePath(const std::vector<glm::ivec2> &cameFrom,
     glm::ivec2 current = end;
     while (current != start) {
         path.push_back(current);
-        current = cameFrom[mapData->gamePosition2MapIndex(current)];
+        current = cameFrom[mapData->GamePosition2MapIndex(current)];
     }
     path.push_back(start);
     std::reverse(path.begin(), path.end());

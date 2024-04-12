@@ -2,8 +2,8 @@
 // Created by adven on 2024/3/4.
 //
 
-#include "Player.h"
 #include "Equipment/TypeEquip.h"
+#include "Player.h"
 
 Player::Player()
     : Animation({0, 0}),
@@ -84,7 +84,7 @@ void Player::SetGamePosition(const glm::vec2 &gamePosition) {
 
 void Player::SetFaceTo(Direction direction) {
     if (direction != RIGHT && direction != LEFT) {
-        LOG_WARN("Player::SetFaceTo: Invalid direction");
+        // LOG_WARN("Player::SetFaceTo: Invalid direction");
         return;
     }
     if (direction == RIGHT) {

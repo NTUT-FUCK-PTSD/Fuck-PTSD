@@ -40,8 +40,20 @@ void BlueSlime::Move() {
         m_AnimationType = 2;
     }
     if (IsVaildMove(m_WillMovePosition)) {
+        if (m_WillMovePosition == GetPlayerPosition()) {
+            m_CanMove = false;
+            m_NeedToMove = false;
+            m_WillMovePosition = GetGamePosition();
+            m_AnimationType = 0;
+            m_AttackPlayer = true;
+            m_State++;
+            return;
+        }
         m_CanMove = true;
-        SetGamePosition(m_WillMovePosition);
+        m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(GetGamePosition()),
+                                      false);
+        m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(m_WillMovePosition),
+                                      true);
     }
     else {
         m_CanMove = false;
@@ -62,6 +74,7 @@ void BlueSlime::Move() {
 }
 void BlueSlime::Update() {
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    m_AnimationType);
         m_NeedToMove = false;

@@ -23,10 +23,8 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
             m_MapData->AddTile(mapIndex, std::make_shared<Tile>(s_Tile{
                                              tile.x, tile.y, 0, tile.zone,
                                              tile.torch, tile.cracked}));
-            m_Tiles.push_back(m_MapData->GetTileBack(mapIndex));
         }
         m_MapData->AddTile(mapIndex, std::make_shared<Tile>(tile));
-        m_Tiles.push_back(m_MapData->GetTileBack(mapIndex));
     }
 
     std::vector<glm::ivec2> direction = {{1, 0}, {-1, 0}, {0, 1},  {0, -1},
@@ -56,9 +54,6 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
                 }
                 if (doorCount >= 2) {
                     m_MapData->PopBackTile(mapIndex);
-                    m_Tiles.erase(
-                        std::remove(m_Tiles.begin(), m_Tiles.end(), tmp),
-                        m_Tiles.end()); // Remove Child
                     if (tmp->GetTile().type == 111) {
                         m_MapData->AddTile(
                             mapIndex,
@@ -86,7 +81,6 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
                                     tmp->GetTile().cracked}));
                         }
                     }
-                    m_Tiles.push_back(m_MapData->GetTileBack(mapIndex));
                 }
             }
             // generate border
@@ -103,7 +97,6 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
                                 j + dir.x + m_Level->GetLevelIndexMin().x - 1,
                                 i + dir.y + m_Level->GetLevelIndexMin().y - 1,
                                 102, 0, 0, 0}));
-                        m_Tiles.push_back(m_MapData->GetTileBack(tmpMapIndex));
                     }
                 }
             }
@@ -128,19 +121,17 @@ Map::Map(const std::shared_ptr<Player> &mainCharacter, const std::string &path,
         mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
         m_MapData->AddEnemy(mapIndex,
                             EnemyFactory::CreateEnemy(enemy, m_MapData));
-        m_Enemies.push_back(m_MapData->GetEnemy(mapIndex));
     }
 
     // Add testing
     mapIndex = GamePostion2MapIndex({1, 1});
     auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
     m_MapData->AddEnemy(mapIndex, enemy);
-    m_Enemies.push_back(m_MapData->GetEnemy(mapIndex));
 
-    for (auto &tile : m_Tiles) {
+    for (auto &tile : m_MapData->GetTilesQueue()) {
         m_Children.push_back(tile);
     }
-    for (auto &enemy : m_Enemies) {
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
         m_Children.push_back(enemy);
     }
     CameraUpdate();
@@ -157,7 +148,7 @@ bool Map::CheckShowPosition(const glm::vec2 &position1,
 void Map::CameraUpdate() {
     glm::vec2 cameraPos = m_MainCharacter->GetGamePosition();
 
-    for (auto &tile : m_Tiles) {
+    for (auto &tile : m_MapData->GetTilesQueue()) {
         if (CheckShowPosition({tile->GetTile().x, tile->GetTile().y},
                               cameraPos)) {
             tile->SetVisible(true);
@@ -166,7 +157,7 @@ void Map::CameraUpdate() {
             tile->SetVisible(false);
         }
     }
-    for (auto &enemy : m_Enemies) {
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
             enemy->SetVisible(true);
         }
@@ -178,7 +169,7 @@ void Map::CameraUpdate() {
 
 void Map::TempoUpdate() {
     m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    for (auto &enemy : m_Enemies) {
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
         enemy->TempoMove();
     }
 }
@@ -186,7 +177,8 @@ void Map::TempoUpdate() {
 void Map::Update() {
     size_t mapIndex = 0;
     CameraUpdate();
-    for (auto &enemy : m_Enemies) {
+    std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
+    for (auto &enemy : EnemyQueue) {
         if (!enemy->GetVisible()) {
             continue;
         }
@@ -205,6 +197,11 @@ size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
     return (position.x - m_Level->GetLevelIndexMin().x + 1) +
            (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
 }
+
+std::shared_ptr<MapData> Map::GetMapData() const {
+    return m_MapData;
+}
+
 bool Map::isVaildPosition(const glm::ivec2 &position) {
     if (position.x < m_Level->GetLevelIndexMin().x ||
         position.x > m_Level->GetLevelIndexMax().x ||
@@ -224,6 +221,39 @@ bool Map::isVaildMove(const glm::ivec2 &position) {
         return false;
     }
     return true;
+}
+
+void Map::RemoveEnemy(const size_t &position) {
+    m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
+                                 m_MapData->GetEnemy(position)),
+                     m_Children.end());
+    m_MapData->RemoveEnemy(position);
+}
+
+void Map::RemoveWall(const size_t &position) {
+    auto tile = m_MapData->GetTileBack(position)->GetTile();
+
+    if (tile.type == 102) {
+        return;
+    }
+    m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
+                                 m_MapData->GetTileBack(position)),
+                     m_Children.end());
+    m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
+    m_MapData->AddTile(
+        position, std::make_shared<Tile>(s_Tile{tile.x, tile.y, 0, tile.zone,
+                                                tile.torch, tile.cracked}));
+    m_Children.push_back(m_MapData->GetTileBack(position));
+}
+
+void Map::OpenDoor(const size_t &position) {
+    auto doorType = m_MapData->GetTileBack(position)->GetTile().type;
+    if (doorType == 50 || doorType == 103 || doorType == 118) {
+        m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
+                                     m_MapData->GetTileBack(position)),
+                         m_Children.end());
+        m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
+    }
 }
 
 } // namespace Dungeon

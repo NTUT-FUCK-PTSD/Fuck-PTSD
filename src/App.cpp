@@ -88,50 +88,70 @@ void App::Update() {
          Util::Input::IsKeyDown(Util::Keycode::A)) &&
         m_MusicSystem->TempoTrigger()) {
 
+        glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
+
         if (m_PlayerMoveDirect != Player::NONE) {
             m_PlayerMoveDirect = Player::NONE;
         }
-        if (Util::Input::IsKeyDown(Util::Keycode::W)) {
-            m_PlayerMoveDirect = Player::Direction::UP;
+        const std::vector<Util::Keycode> key = {
+            Util::Keycode::W, Util::Keycode::A, Util::Keycode::S,
+            Util::Keycode::D};
+        const std::vector<glm::vec2> direction = {
+            {0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+        const std::vector<Player::Direction> playerDirection = {
+            Player::Direction::UP, Player::Direction::LEFT,
+            Player::Direction::DOWN, Player::Direction::RIGHT};
+        const std::vector<glm::vec2> aniPlayerDirection = {
+            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
+            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+        const std::vector<glm::vec2> aniCameraDirection = {
+            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
+            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
+            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
 
-            m_AniPlayerDestination = {m_AniPlayerDestination.x,
-                                      m_AniPlayerDestination.y +
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
-            m_AniCameraDestination = {m_AniCameraDestination.x,
-                                      m_AniCameraDestination.y -
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
-        }
-        else if (Util::Input::IsKeyDown(Util::Keycode::A)) {
-            m_PlayerMoveDirect = Player::Direction::LEFT;
-            m_MainCharacter->SetFaceTo(Player::Direction::LEFT);
+        for (size_t i = 0; i < 4; i++) {
+            if (Util::Input::IsKeyDown(key[i]) &&
+                m_DungeonMap->GetMapData()->IsPositionPlayerAct(
+                    m_MainCharacter->GetGamePosition() + direction[i])) {
+                playerDestination =
+                    m_MainCharacter->GetGamePosition() + direction[i];
+                m_MainCharacter->SetFaceTo(playerDirection[i]);
+                auto mapIndex =
+                    m_DungeonMap->GamePostion2MapIndex(playerDestination);
+                if (m_DungeonMap->GetMapData()->IsPositionInteractive(
+                        playerDestination)) {
+                    if (m_DungeonMap->GetMapData()->IsHasEntity(mapIndex)) {
+                        m_DungeonMap->RemoveEnemy(
+                            m_DungeonMap->GamePostion2MapIndex(
+                                playerDestination));
+                    }
+                    else if (m_DungeonMap->GetMapData()->IsPositionWall(
+                                 playerDestination)) {
+                        m_DungeonMap->RemoveWall(
+                            m_DungeonMap->GamePostion2MapIndex(
+                                playerDestination));
+                    }
+                    else if (m_DungeonMap->GetMapData()->IsPositionDoor(
+                                 playerDestination)) {
+                        m_DungeonMap->OpenDoor(
+                            m_DungeonMap->GamePostion2MapIndex(
+                                playerDestination));
+                    }
+                }
+                else {
+                    m_PlayerMoveDirect = playerDirection[i];
 
-            m_AniPlayerDestination = {m_AniPlayerDestination.x -
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
-                                      m_AniPlayerDestination.y};
-            m_AniCameraDestination = {m_AniCameraDestination.x +
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
-                                      m_AniCameraDestination.y};
-        }
-        else if (Util::Input::IsKeyDown(Util::Keycode::S)) {
-            m_PlayerMoveDirect = Player::Direction::DOWN;
-
-            m_AniPlayerDestination = {m_AniPlayerDestination.x,
-                                      m_AniPlayerDestination.y -
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
-            m_AniCameraDestination = {m_AniCameraDestination.x,
-                                      m_AniCameraDestination.y +
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3};
-        }
-        else if (Util::Input::IsKeyDown(Util::Keycode::D)) {
-            m_PlayerMoveDirect = Player::Direction::RIGHT;
-            m_MainCharacter->SetFaceTo(Player::Direction::RIGHT);
-
-            m_AniPlayerDestination = {m_AniPlayerDestination.x +
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
-                                      m_AniPlayerDestination.y};
-            m_AniCameraDestination = {m_AniCameraDestination.x -
-                                          Dungeon::DUNGEON_TILE_WIDTH * 3,
-                                      m_AniCameraDestination.y};
+                    m_AniPlayerDestination = {
+                        m_AniPlayerDestination.x + aniPlayerDirection[i].x,
+                        m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                    m_AniCameraDestination = {
+                        m_AniCameraDestination.x + aniCameraDirection[i].x,
+                        m_AniCameraDestination.y + aniCameraDirection[i].y};
+                }
+            }
         }
         m_MainCharacter->MoveByTime(200, m_AniPlayerDestination,
                                     m_PlayerMoveDirect);

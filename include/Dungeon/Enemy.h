@@ -54,7 +54,7 @@ public:
     void TempoMove();
     bool IsVaildMove(const glm::vec2 &position);
     size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
-        return m_SimpleMapData->gamePosition2MapIndex(position);
+        return m_SimpleMapData->GamePosition2MapIndex(position);
     }
     virtual void Struck(const size_t &damage) {
         m_Health -= damage;
@@ -75,6 +75,8 @@ protected:
     glm::vec2 m_GamePosition;
     bool m_CanMove = false;
     glm::vec2 m_WillMovePosition;
+
+    bool m_AttackPlayer = false;
 
 private:
     size_t m_BeatDelay;

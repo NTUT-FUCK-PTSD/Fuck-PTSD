@@ -3,7 +3,6 @@
 
 #include "Dungeon/Enemy.h"
 #include "Dungeon/SimpleMapData.h"
-#include <vector>
 
 namespace Dungeon {
 class MapData final : public SimpleMapData {
@@ -15,9 +14,15 @@ public:
     void RemoveEnemy(const size_t &position);
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const size_t &position) const;
+    std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
+
+protected:
+    static bool EnemyCompare(std::shared_ptr<Enemy> &lhs,
+                             std::shared_ptr<Enemy> &rhs);
 
 private:
     std::vector<std::shared_ptr<Enemy>> m_Enemies;
+    std::vector<std::shared_ptr<Enemy>> m_EnemyQueue;
 };
 } // namespace Dungeon
 

@@ -81,6 +81,7 @@ void Bat::MoveBat() {
 void Bat::Update() {
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
         m_NeedToMove = false;
         m_CanMove = false;
@@ -125,8 +126,16 @@ void Bat::RandomMove() {
             break;
         }
         if (IsVaildMove(m_WillMovePosition)) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_NeedToMove = false;
+                m_AttackPlayer = true;
+                return;
+            }
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()), false);
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition), true);
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
             if (m_RandomPool[index] == 2) {
                 SetFace(true);
             }

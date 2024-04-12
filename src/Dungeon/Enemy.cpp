@@ -24,9 +24,9 @@ void Enemy::SetShadow(const bool &shadow) {
 
 void Enemy::SetGamePosition(const glm::vec2 &gamePosition) {
     m_SimpleMapData->SetHasEntity(
-        m_SimpleMapData->gamePosition2MapIndex(m_GamePosition), false);
+        m_SimpleMapData->GamePosition2MapIndex(m_GamePosition), false);
     m_SimpleMapData->SetHasEntity(
-        m_SimpleMapData->gamePosition2MapIndex(gamePosition), true);
+        m_SimpleMapData->GamePosition2MapIndex(gamePosition), true);
     m_GamePosition = gamePosition;
     m_WillMovePosition = gamePosition;
     // drawable would be updated depending on the enemy derived class

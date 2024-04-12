@@ -34,7 +34,6 @@ void Zombie::Move() {
     if (IsVaildMove(m_WillMovePosition)) {
         if (m_Attack) {
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
         }
     }
     else {
@@ -54,8 +53,13 @@ void Zombie::Move() {
         }
         m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
         if (IsVaildMove(m_WillMovePosition) && m_Attack) {
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                m_CanMove = false;
+                m_WillMovePosition = GetGamePosition();
+                m_Attack = !m_Attack;
+                return;
+            }
             m_CanMove = true;
-            SetGamePosition(m_WillMovePosition);
         }
         else {
             m_CanMove = false;
@@ -63,6 +67,12 @@ void Zombie::Move() {
     }
     if (!m_Attack) {
         m_WillMovePosition = m_GamePosition;
+    }
+    if (m_CanMove) {
+        m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(GetGamePosition()),
+                                      false);
+        m_SimpleMapData->SetHasEntity(
+            m_SimpleMapData->GamePosition2MapIndex(m_WillMovePosition), true);
     }
     m_Attack = !m_Attack;
 }
@@ -82,6 +92,7 @@ void Zombie::Update() {
 
     // Collision
     if (m_CanMove && !m_IsAnimating) {
+        SetGamePosition(m_WillMovePosition);
         if (m_Direction == 1) {
             SetFace(false);
         }
