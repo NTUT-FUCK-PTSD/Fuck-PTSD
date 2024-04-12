@@ -63,6 +63,8 @@ public:
         }
     };
 
+    virtual void AttackPlayer();
+
     virtual void Move() = 0;
     virtual void Update(){};
 

@@ -61,10 +61,7 @@ void Skeleton::Move() {
 
         if (IsVaildMove(m_WillMovePosition)) {
             if (m_WillMovePosition == GetPlayerPosition()) {
-                m_CanMove = false;
-                m_WillMovePosition = GetGamePosition();
-                m_AnimationType = 0;
-                m_AttackPlayer = true;
+                AttackPlayer();
                 m_Attack = !m_Attack;
                 return;
             }
@@ -116,4 +113,12 @@ void Skeleton::Update() {
     }
     SetZIndex(m_AnimationZIndex);
 }
+
+void Skeleton::AttackPlayer() {
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        m_AnimationType = 0;
+        Enemy::AttackPlayer();
+    }
+}
+
 } // namespace Dungeon::Enemies

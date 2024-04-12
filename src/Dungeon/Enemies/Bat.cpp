@@ -127,8 +127,7 @@ void Bat::RandomMove() {
         }
         if (IsVaildMove(m_WillMovePosition)) {
             if (m_WillMovePosition == GetPlayerPosition()) {
-                m_NeedToMove = false;
-                m_AttackPlayer = true;
+                AttackPlayer();
                 return;
             }
             m_SimpleMapData->SetHasEntity(

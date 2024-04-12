@@ -73,4 +73,12 @@ glm::vec2 Enemy::FindNextToPlayer() {
     }
 }
 
+void Enemy::AttackPlayer() {
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        m_CanMove = false;
+        m_WillMovePosition = GetGamePosition();
+        m_AttackPlayer = true;
+    }
+}
+
 } // namespace Dungeon

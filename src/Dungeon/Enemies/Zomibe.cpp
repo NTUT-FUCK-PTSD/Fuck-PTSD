@@ -32,9 +32,12 @@ void Zombie::Move() {
     m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
 
     if (IsVaildMove(m_WillMovePosition)) {
-        if (m_Attack) {
-            m_CanMove = true;
+        if (m_WillMovePosition == GetPlayerPosition()) {
+            AttackPlayer();
+            m_Attack = !m_Attack;
+            return;
         }
+        m_CanMove = true;
     }
     else {
         switch (m_Direction) {
@@ -52,10 +55,10 @@ void Zombie::Move() {
             break;
         }
         m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
+
         if (IsVaildMove(m_WillMovePosition) && m_Attack) {
             if (m_WillMovePosition == GetPlayerPosition()) {
-                m_CanMove = false;
-                m_WillMovePosition = GetGamePosition();
+                AttackPlayer();
                 m_Attack = !m_Attack;
                 return;
             }
@@ -68,6 +71,7 @@ void Zombie::Move() {
     if (!m_Attack) {
         m_WillMovePosition = m_GamePosition;
     }
+
     if (m_CanMove) {
         m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(GetGamePosition()),
                                       false);
@@ -77,8 +81,8 @@ void Zombie::Move() {
     m_Attack = !m_Attack;
 }
 void Zombie::Update() {
+    UpdateFace();
     if (m_Direction == 0) {
-        SetFace(true);
         m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowBackFrames
                                              : m_BackFrames);
     }
@@ -93,12 +97,6 @@ void Zombie::Update() {
     // Collision
     if (m_CanMove && !m_IsAnimating) {
         SetGamePosition(m_WillMovePosition);
-        if (m_Direction == 1) {
-            SetFace(false);
-        }
-        else if (m_Direction == 3) {
-            SetFace(true);
-        }
         MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
                    m_Direction);
         m_CanMove = false;
@@ -108,5 +106,13 @@ void Zombie::Update() {
         m_Transform.translation = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
+}
+
+void Zombie::UpdateFace() {
+    if (m_Direction == 0 || m_Direction == 3) {
+        SetFace(true);
+        return;
+    }
+    SetFace(false);
 }
 } // namespace Dungeon::Enemies

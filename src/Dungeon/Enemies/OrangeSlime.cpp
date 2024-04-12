@@ -58,10 +58,7 @@ void OrangeSlime::Move() {
     }
     if (IsVaildMove(m_WillMovePosition)) {
         if (m_WillMovePosition == GetPlayerPosition()) {
-            m_CanMove = false;
-            m_NeedToMove = false;
-            m_WillMovePosition = GetGamePosition();
-            m_AttackPlayer = true;
+            AttackPlayer();
             m_State++;
             return;
         }
@@ -94,5 +91,12 @@ void OrangeSlime::Update() {
         m_Transform.translation = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
+}
+
+void OrangeSlime::AttackPlayer() {
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        m_NeedToMove = false;
+        Enemy::AttackPlayer();
+    }
 }
 } // namespace Dungeon::Enemies
