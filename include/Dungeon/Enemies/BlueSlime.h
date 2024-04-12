@@ -20,7 +20,7 @@ public:
 private:
     const glm::vec2 m_FrameSize = {26, 25};
 
-    size_t m_State = 0;
+    std::size_t m_State = 0;
     bool m_NeedToMove = false;
     uint16_t m_AnimationType;
 };

@@ -112,7 +112,7 @@ void App::Update() {
             {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
             {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
 
-        for (size_t i = 0; i < 4; i++) {
+        for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i]) &&
                 m_DungeonMap->GetMapData()->IsPositionPlayerAct(
                     m_MainCharacter->GetGamePosition() + direction[i])) {

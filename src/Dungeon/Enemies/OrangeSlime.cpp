@@ -21,7 +21,7 @@ Enemies::OrangeSlime::OrangeSlime(
     m_StartIdx = m_Distribution(m_RandomGenerator);
     m_State = -1; // Start from -1 to make the first move
     m_Movement[(m_StartIdx) % 4] += GetGamePosition();
-    for (size_t i = 1; i < 4; i++) {
+    for (std::size_t i = 1; i < 4; i++) {
         m_Movement[(m_StartIdx + i) % 4] +=
             m_Movement[(m_StartIdx + i - 1) % 4];
     }

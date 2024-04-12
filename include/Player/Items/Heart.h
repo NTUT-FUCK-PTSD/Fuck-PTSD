@@ -16,18 +16,18 @@ class Heart final {
 public:
     explicit Heart();
 
-    void plusHP(const size_t number);
+    void plusHP(const std::size_t number);
 
-    void minusHP(const size_t number);
+    void minusHP(const std::size_t number);
     void minusHeart(const float number);
 
-    void hitHeart(const size_t index);
+    void hitHeart(const std::size_t index);
 
-    void gainHeart(const size_t number = 2);
+    void gainHeart(const std::size_t number = 2);
     void UpdateHP();
     void resetHP();
 
-    void SetHeartMaxHp(const size_t value);
+    void SetHeartMaxHp(const std::size_t value);
 
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
     getGameObjects() const;
@@ -46,8 +46,8 @@ private:
                                               const glm::vec2 &position);
     // HP settings
     //
-    size_t m_MaxHp = 12;
-    size_t m_currentHP;
+    std::size_t m_MaxHp = 12;
+    std::size_t m_currentHP;
     const glm::vec2 m_FirstPosition = {500, 350};
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};

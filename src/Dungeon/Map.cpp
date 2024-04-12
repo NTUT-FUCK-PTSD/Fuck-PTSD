@@ -6,7 +6,7 @@
 namespace Dungeon {
 
 Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
-         const size_t levelNum)
+         const std::size_t levelNum)
     : m_MainCharacter(mainCharacter) {
     m_Level = std::make_unique<Level>(path, levelNum);
 
@@ -15,7 +15,7 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
     m_MapData = std::make_shared<MapData>(m_Level->GetLevelIndexMin(),
                                           m_Level->GetLevelIndexMax(), m_Size);
     m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    size_t mapIndex = 0, tmpMapIndex = 0;
+    std::size_t mapIndex = 0, tmpMapIndex = 0;
 
     for (auto &tile : m_Level->GetTiles()) {
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
@@ -38,10 +38,10 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
             }
             // door direction detection
             auto tmp = m_MapData->GetTileBack(mapIndex);
-            size_t doorCount = 0;
+            std::size_t doorCount = 0;
             if (tmp->GetTile().type == 103 || tmp->GetTile().type == 106 ||
                 tmp->GetTile().type == 111 || tmp->GetTile().type == 118) {
-                for (size_t k = 2; k < 4; k++) {
+                for (std::size_t k = 2; k < 4; k++) {
                     tmpMapIndex =
                         j + direction[k].x + (i + direction[k].y) * m_Size.x;
                     if (j + direction[k].x >= 0 &&
@@ -176,7 +176,7 @@ void Map::TempoUpdate() {
 }
 
 void Map::Update() {
-    size_t mapIndex = 0;
+    std::size_t mapIndex = 0;
     CameraUpdate();
     std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto &enemy : EnemyQueue) {
@@ -194,7 +194,7 @@ void Map::Update() {
     }
 }
 
-size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
+std::size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
     return (position.x - m_Level->GetLevelIndexMin().x + 1) +
            (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
 }
@@ -214,7 +214,7 @@ bool Map::isVaildPosition(const glm::ivec2 &position) {
 }
 
 bool Map::isVaildMove(const glm::ivec2 &position) {
-    size_t mapIndex = GamePostion2MapIndex(position);
+    std::size_t mapIndex = GamePostion2MapIndex(position);
     if (m_MapData->IsTilesEmpty(mapIndex)) {
         return false;
     }
@@ -224,14 +224,14 @@ bool Map::isVaildMove(const glm::ivec2 &position) {
     return true;
 }
 
-void Map::RemoveEnemy(const size_t position) {
+void Map::RemoveEnemy(const std::size_t position) {
     m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
                                  m_MapData->GetEnemy(position)),
                      m_Children.end());
     m_MapData->RemoveEnemy(position);
 }
 
-void Map::RemoveWall(const size_t position) {
+void Map::RemoveWall(const std::size_t position) {
     auto tile = m_MapData->GetTileBack(position)->GetTile();
 
     if (tile.type == 102) {
@@ -247,7 +247,7 @@ void Map::RemoveWall(const size_t position) {
     m_Children.push_back(m_MapData->GetTileBack(position));
 }
 
-void Map::OpenDoor(const size_t position) {
+void Map::OpenDoor(const std::size_t position) {
     auto doorType = m_MapData->GetTileBack(position)->GetTile().type;
     if (doorType == 50 || doorType == 103 || doorType == 118) {
         m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),

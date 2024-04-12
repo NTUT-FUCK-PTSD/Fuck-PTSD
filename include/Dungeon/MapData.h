@@ -10,10 +10,10 @@ public:
     MapData(const glm::vec2 &levelIndexMin, const glm::vec2 &levelIndexMax,
             const glm::vec2 &size);
 
-    void AddEnemy(const size_t position, const std::shared_ptr<Enemy> enemy);
-    void RemoveEnemy(const size_t position);
+    void AddEnemy(const std::size_t position, const std::shared_ptr<Enemy> enemy);
+    void RemoveEnemy(const std::size_t position);
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
-    std::shared_ptr<Enemy> GetEnemy(const size_t position) const;
+    std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
 
 protected:

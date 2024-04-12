@@ -37,7 +37,7 @@ protected:
     int8_t m_MagicNumber = 0;
     std::size_t m_Index = 0;
     bool m_CloseDisplayb24 = false;
-    size_t m_OffSetY = 0;
+    std::size_t m_OffSetY = 0;
     std::shared_ptr<Util::SpriteSheet> m_SpriteSheet;
 };
 } // namespace Dungeon

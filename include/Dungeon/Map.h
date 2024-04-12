@@ -15,15 +15,15 @@ namespace Dungeon {
 class Map final : public Util::GameObject {
 public:
     Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
-        const size_t levelNum = 1);
+        const std::size_t levelNum = 1);
 
-    size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
+    std::size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
     std::shared_ptr<MapData> GetMapData() const;
 
-    void RemoveEnemy(const size_t position);
-    void RemoveWall(const size_t position);
-    void OpenDoor(const size_t position);
+    void RemoveEnemy(const std::size_t position);
+    void RemoveWall(const std::size_t position);
+    void OpenDoor(const std::size_t position);
 
     void CameraUpdate();
     void TempoUpdate();
@@ -31,7 +31,7 @@ public:
     void Update();
 
 private:
-    const size_t ALLOW_EXTRA_DRAW = 4;
+    const std::size_t ALLOW_EXTRA_DRAW = 4;
     bool CheckShowPosition(const glm::vec2 &position1,
                            const glm::vec2 &position2);
     bool isVaildPosition(const glm::ivec2 &position);

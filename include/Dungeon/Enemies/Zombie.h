@@ -26,12 +26,12 @@ private:
     std::vector<std::size_t> m_ShadowBackFrames;
 
     bool m_Attack = false;
-    size_t m_Direction = 0;
+    std::size_t m_Direction = 0;
     std::vector<glm::vec2> m_Movement = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
     std::random_device m_RandomDevice;
     std::mt19937 m_RandomGenerator;
-    std::uniform_int_distribution<size_t> m_Distribution;
+    std::uniform_int_distribution<std::size_t> m_Distribution;
 };
 
 } // namespace Enemies

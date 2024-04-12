@@ -48,7 +48,7 @@ glm::vec2 Ghost::FindNextToPlayer() {
         return path[1];
     }
 }
-void Ghost::Struck(const size_t damage) {
+void Ghost::Struck(const std::size_t damage) {
     if (m_Transparent) {
         return;
     }

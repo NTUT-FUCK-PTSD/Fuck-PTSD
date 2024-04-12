@@ -19,7 +19,7 @@ Enemies::Zombie::Zombie(const s_Enemy &u_Enemy,
     m_WillMovePosition = GetGamePosition();
     m_Direction =
         m_Distribution(m_RandomGenerator,
-                       std::uniform_int_distribution<size_t>::param_type{0, 3});
+                       std::uniform_int_distribution<std::size_t>::param_type{0, 3});
 
     SetHealth(2); // 1 heart
     SetDamage(2); // 1 heart

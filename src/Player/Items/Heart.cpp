@@ -18,20 +18,20 @@ std::shared_ptr<GameElement> Heart::GetGameObject() const {
     return m_Heart;
 }
 
-void Heart::gainHeart(const size_t number) {
-    size_t HP = m_MaxHp + 2 * number;
+void Heart::gainHeart(const std::size_t number) {
+    std::size_t HP = m_MaxHp + 2 * number;
     if (HP > 20) {
         LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 20");
         return;
     }
 
-    for (size_t i = m_MaxHp / 2; i < HP / 2; i++) {
+    for (std::size_t i = m_MaxHp / 2; i < HP / 2; i++) {
         m_ElementList.push_front(generalHeart(
             STATE::EMPTY, m_FirstPosition + m_eachPositionDiff_X * float(i)));
         m_Heart->AddChild(m_ElementList.front());
 
         if (m_ElementList.size() > 5) {
-            for (size_t j = 0; j < 5; j++) {
+            for (std::size_t j = 0; j < 5; j++) {
                 m_ElementList[j]->SetPivot(glm::vec2(-(26 + 2.0f / 3.0f), 0) *
                                            float(m_ElementList.size() - 5));
             }
@@ -94,7 +94,7 @@ void Heart::UpdateHP() {
     }
 }
 
-void Heart::minusHP(const size_t number) {
+void Heart::minusHP(const std::size_t number) {
     if (number > m_currentHP) {
         LOG_ERROR("the value of number is not available");
         return;
