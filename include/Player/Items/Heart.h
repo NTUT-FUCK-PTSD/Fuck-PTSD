@@ -6,7 +6,7 @@
 #define FUCK_PTSD_HEART_H
 
 #include "GameElement.h"
-#include <iostream>
+#include <queue>
 
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
@@ -24,6 +24,7 @@ public:
     void hitHeart(const size_t &index);
 
     void gainHeart(const size_t &number = 2);
+    void UpdateHP();
     void resetHP();
 
     void SetHeartMaxHp(const size_t &value);
@@ -43,8 +44,6 @@ private:
     void IsDead();
     std::shared_ptr<GameElement> generalHeart(STATE state,
                                               const glm::vec2 &position);
-    void rendererHeart();
-
     // HP settings
     //
     size_t m_MaxHp = 12;
@@ -65,7 +64,7 @@ private:
         std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart_empty.png");
 
     // game object
-    std::vector<std::shared_ptr<GameElement>> m_ElementList;
+    std::deque<std::shared_ptr<GameElement>> m_ElementList;
 
     std::shared_ptr<GameElement> m_OneHeart = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_TwoHeart = std::make_shared<GameElement>();

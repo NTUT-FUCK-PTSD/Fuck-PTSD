@@ -3,6 +3,7 @@
 //
 
 #include "Player/Items/Heart.h"
+
 Heart::Heart() {
 
     resetHP();
@@ -17,35 +18,31 @@ std::shared_ptr<GameElement> Heart::GetGameObject() const {
     return m_Heart;
 }
 
-void Heart::rendererHeart() {
-    for (auto element : m_ElementList) {
-        m_Heart->AddChild(element);
-    }
-}
-
 void Heart::gainHeart(const size_t &number) {
-    auto HP = m_MaxHp + 2 * number;
+    size_t HP = m_MaxHp + 2 * number;
     if (HP > 20) {
         LOG_ERROR("the value `m_MaxHP` only in range 1 ~ 20");
         return;
     }
 
-    float times_X = m_MaxHp > 10 ? (m_MaxHp - 10) / 2 : m_MaxHp / 2;
-    float times_Y = m_MaxHp > 10 ? 1 : 0;
-    glm::vec2 Initposition = m_FirstPosition + m_eachPositionDiff_Y * times_Y +
-                             m_eachPositionDiff_X * times_X;
-    LOG_INFO(Initposition);
-    for (std::size_t i = m_MaxHp / 2; i < std::size_t(HP / 2); i++) {
+    for (size_t i = m_MaxHp / 2; i < HP / 2; i++) {
+        m_ElementList.push_front(generalHeart(
+            STATE::EMPTY, m_FirstPosition + m_eachPositionDiff_X * float(i)));
+        m_Heart->AddChild(m_ElementList.front());
 
-        const auto heart = generalHeart(FULL, Initposition);
-        m_ElementList.push_back(heart);
-
-        Initposition += m_eachPositionDiff_X;
-        if (i == 4) {
-            Initposition = m_FirstPosition + m_eachPositionDiff_Y;
+        if (m_ElementList.size() > 5) {
+            for (size_t j = 0; j < 5; j++) {
+                m_ElementList[j]->SetPivot(glm::vec2(-(26 + 2.0f / 3.0f), 0) *
+                                           float(m_ElementList.size() - 5));
+            }
+            m_ElementList[5]->SetPosition(m_ElementList[5]->GetPosition() +
+                                          m_eachPositionDiff_Y);
+            m_ElementList[5]->SetPivot({0, 0});
         }
     }
+
     m_MaxHp = HP;
+    UpdateHP();
 }
 
 void Heart::resetHP() {
@@ -55,7 +52,7 @@ void Heart::resetHP() {
     gainHeart(HP);
 
     m_currentHP = m_MaxHp;
-    rendererHeart();
+    UpdateHP();
 }
 
 std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
@@ -83,29 +80,27 @@ std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
     return resultObject;
 }
 
+void Heart::UpdateHP() {
+    for (int i = m_ElementList.size() - 1; i >= 0; i--) {
+        if (int(m_currentHP) - int(i << 1) <= 0) {
+            m_ElementList[i]->SetDrawable(m_EmptyHPImage);
+        }
+        else if (m_currentHP - (i << 1) == 1) {
+            m_ElementList[i]->SetDrawable(m_HalfHPImage);
+        }
+        else {
+            m_ElementList[i]->SetDrawable(m_FullHPImage);
+        }
+    }
+}
+
 void Heart::minusHP(const size_t &number) {
     if (number > m_currentHP) {
         LOG_ERROR("the value of number is not available");
         return;
     }
     m_currentHP -= number;
-
-    std::size_t i = 0;
-    // renderer the full heart
-
-    for (; i < std::size_t(m_currentHP / 2); i++) {
-        m_ElementList[i]->SetDrawable(m_FullHPImage);
-    }
-
-    // render the half heart
-    if (m_currentHP % 2 != 0) {
-        m_ElementList[i]->SetDrawable(m_HalfHPImage);
-        i++;
-    }
-
-    for (; i < std::size_t(m_MaxHp); i++) {
-        m_ElementList[i]->SetDrawable(m_EmptyHPImage);
-    }
+    UpdateHP();
 }
 
 void Heart::minusHeart(const float &number) {
