@@ -108,15 +108,15 @@ void App::Update() {
             Player::Direction::UP, Player::Direction::LEFT,
             Player::Direction::DOWN, Player::Direction::RIGHT};
         const std::vector<glm::vec2> aniPlayerDirection = {
-            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
-            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+            {0, Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE},
+            {-Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE, 0},
+            {0, -Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE},
+            {Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE, 0}};
         const std::vector<glm::vec2> aniCameraDirection = {
-            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
-            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+            {0, -Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE},
+            {Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE, 0},
+            {0, Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE},
+            {-Dungeon::DUNGEON_TILE_WIDTH * Dungeon::DUNGEON_SCALE, 0}};
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i]) &&
