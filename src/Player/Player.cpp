@@ -1,9 +1,6 @@
-//
-// Created by adven on 2024/3/4.
-//
+#include "Player.h"
 
 #include "Equipment/TypeEquip.h"
-#include "Player.h"
 
 Player::Player()
     : Animation({0, 0}),
@@ -168,4 +165,12 @@ ShovelEnum::Type Player::GetShovelType() {
 
 WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
+}
+
+void Player::MoveByTime(const unsigned long &duringTimeMs,
+                        const glm::vec2 &destination,
+                        const uint16_t &direction) {
+    // Update GamePosition but not draw
+    m_GamePosition = destination;
+    Animation::MoveByTime(duringTimeMs, destination, direction);
 }

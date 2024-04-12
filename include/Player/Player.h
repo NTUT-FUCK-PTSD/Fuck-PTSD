@@ -70,6 +70,10 @@ public:
     bool IsWeaponExist();
     WeaponEnum::Type GetWeaponType();
 
+    virtual void MoveByTime(const unsigned long &duringTimeMs,
+                            const glm::vec2 &destination,
+                            const uint16_t &direction) override;
+
 private:
     ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
     WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;
