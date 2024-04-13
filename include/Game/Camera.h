@@ -71,6 +71,10 @@ private:
     unsigned long m_ShakeStartMs;
     unsigned long m_ShakeDuringTimeMs = 0;
     float m_ShakeStrength = 0;
+    bool m_ShakeHold = false;
+    glm::vec2 m_ShakeHoldDestination = {
+        0, 0}; // The destination of the camera when shaking
+    unsigned long m_ShakeHoldDuringTimeMs = 0;
 };
 
 #endif // CAMERA_H

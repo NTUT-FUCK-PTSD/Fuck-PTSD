@@ -57,7 +57,11 @@ void Camera::MoveByTime(const unsigned long duringTimeMs,
 
 void Camera::Shake(const unsigned long duringTimeMs, const float strength) {
     if (m_IsAnimating) {
-        m_Position = m_AnimationDestination;
+        m_ShakeHoldDuringTimeMs =
+            m_AnimationDuringTimeMs -
+            (Util::Time::GetElapsedTimeMs() - m_AnimationStartMs);
+        m_ShakeHoldDestination = m_AnimationDestination;
+        m_ShakeHold = true;
         m_IsAnimating = false;
     }
     if (m_IsShaking) {
@@ -83,6 +87,10 @@ void Camera::ShakeUpdate() {
         m_Position = m_OrginalPosition;
         m_ShakeDuringTimeMs = 0;
         m_IsShaking = false;
+        if (m_ShakeHold) {
+            MoveByTimeInternal(m_ShakeHoldDuringTimeMs, m_ShakeHoldDestination);
+            m_ShakeHold = false;
+        }
     }
     else {
         MoveByTimeInternal(
