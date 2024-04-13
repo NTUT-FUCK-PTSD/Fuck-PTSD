@@ -86,6 +86,12 @@ void App::Update() {
     //        m_Diamond->plusDiamondNumber(10);
     //    }
 
+    if (Util::Input::IsKeyDown(Util::Keycode::N)) {
+        m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        m_AniCameraDestination = {0, 0};
+        m_AniPlayerDestination = {0, 0};
+    }
+
     // player move
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
          Util::Input::IsKeyDown(Util::Keycode::D) ||
