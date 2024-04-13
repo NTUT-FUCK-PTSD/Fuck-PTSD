@@ -154,6 +154,7 @@ bool Map::CheckShowPosition(const glm::vec2 &position1,
 
 void Map::CameraUpdate() {
     glm::vec2 cameraPos = m_MainCharacter->GetGamePosition();
+    m_Transform.translation = {0, 0};
 
     for (auto &tile : m_MapData->GetTilesQueue()) {
         if (CheckShowPosition({tile->GetTile().x, tile->GetTile().y},
