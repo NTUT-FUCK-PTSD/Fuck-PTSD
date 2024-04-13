@@ -85,10 +85,12 @@ void Player::SetFaceTo(Direction direction) {
         return;
     }
     if (direction == RIGHT) {
+        m_FaceTo = RIGHT;
         m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
         m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
         return;
     }
+    m_FaceTo = LEFT;
     m_Body->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
     m_Head->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
 }
@@ -128,6 +130,10 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
 
     m_Window->SetVisible(false);
     return m_Window;
+}
+
+Player::Direction Player::GetFaceTo() {
+    return m_FaceTo;
 }
 
 void Player::gainCoin(std::size_t number) {

@@ -26,6 +26,7 @@ public:
     std::shared_ptr<GameElement> GetGameElement();
     [[nodiscard]] glm::vec2 GetGamePosition();
     std::shared_ptr<GameElement> GetWindowElement();
+    Direction GetFaceTo();
 
     // set player's settings
     void SetGamePosition(const glm::vec2 &position);
@@ -86,6 +87,7 @@ private:
     glm::vec2 BodySize;
     std::shared_ptr<SpriteSheet> HeadImage;
     std::shared_ptr<SpriteSheet> BodyImage;
+    Direction m_FaceTo = Direction::RIGHT;
 
     // game object
     std::shared_ptr<GameElement> m_Body;
