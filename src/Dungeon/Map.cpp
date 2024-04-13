@@ -12,7 +12,7 @@ Map::Map(const std::shared_ptr<Camera> camera,
       m_MainCharacter(mainCharacter) {
     // ZIndex 100 is top
     m_ZIndex = 100;
-    m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path, levelNum);
 
