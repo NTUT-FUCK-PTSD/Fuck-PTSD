@@ -100,7 +100,6 @@ void Player::Update() {
         m_Position = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
-    LOG_INFO(m_AnimationZIndex);
     SetPosition(m_Position);
 }
 
