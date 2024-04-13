@@ -67,7 +67,7 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
-        m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
+        m_Camera, m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
     m_DungeonMap->SetDrawable(
         std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);
@@ -165,7 +165,7 @@ void App::Update() {
                                     m_PlayerMoveDirect);
         m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
-        m_DungeonMap->TempoUpdate();
+        m_DungeonMap->PlayerTrigger();
     }
 
     // detect the player
