@@ -6,9 +6,10 @@
 #define FUCK_PTSD_SCOMPONENT_H
 
 #define int16t int16_t
-#include <iostream>
 #include <vector>
+
 #include "../Weapon/Component.h"
+
 namespace ToolSystem {
 
 // Dig Level
@@ -20,7 +21,7 @@ struct DigLevel {
 };
 
 // Settings
-//struct Settings {
+// struct Settings {
 //    explicit Settings(std::string &path, bool isThrow)
 //        : imagePath(path),
 //          isThrow(isThrow){};

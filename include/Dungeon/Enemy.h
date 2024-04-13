@@ -5,6 +5,7 @@
 
 #include "Dungeon/SimpleMapData.h"
 #include "Dungeon/Tile.h"
+#include "Settings/Window.hpp"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
@@ -20,11 +21,11 @@ public:
 
     void SetShadow(const bool &shadow);
     void SetGamePosition(const glm::vec2 &gamePosition);
-    void SetBeatDelay(const size_t beatDelay) { m_BeatDelay = beatDelay; }
+    void SetBeatDelay(const std::size_t beatDelay) { m_BeatDelay = beatDelay; }
     void SetLord(const bool &lord);
-    void SetDamage(const size_t damage) { m_Damage = damage; }
-    void SetHealth(const size_t health) { m_Health = health; }
-    void SetCoin(const size_t coin) { m_Coin = coin; }
+    void SetDamage(const std::size_t damage) { m_Damage = damage; }
+    void SetHealth(const std::size_t health) { m_Health = health; }
+    void SetCoin(const std::size_t coin) { m_Coin = coin; }
     void SetCanMove(const bool &canMove) { m_CanMove = canMove; }
 
     void SetFace(bool faceTo) {
@@ -38,35 +39,41 @@ public:
     [[nodiscard]] const glm::vec2 &GetGamePosition() const {
         return m_GamePosition;
     }
-    [[nodiscard]] size_t GetBeatDelay() const { return m_BeatDelay; }
+    [[nodiscard]] std::size_t GetBeatDelay() const { return m_BeatDelay; }
     [[nodiscard]] bool GetLord() const { return m_Lord; }
     [[nodiscard]] bool GetShadow() const { return m_Shadow; }
-    [[nodiscard]] size_t GetDamage() const { return m_Damage; }
-    [[nodiscard]] size_t GetHealth() const { return m_Health; }
-    [[nodiscard]] size_t GetCoin() const { return m_Coin; }
+    [[nodiscard]] std::size_t GetDamage() const { return m_Damage; }
+    [[nodiscard]] std::size_t GetHealth() const { return m_Health; }
+    [[nodiscard]] std::size_t GetCoin() const { return m_Coin; }
     [[nodiscard]] const glm::vec2 &GetWillMovePosition() const {
         return m_WillMovePosition;
     }
-    bool GetVisible() const { return m_Visible; }
+    // DidAttack() is used to check if the enemy has attacked the player
+    // it only returns true once after the enemy has attacked the player
+    [[nodiscard]] bool DidAttack();
+    [[nodiscard]] bool GetVisible() const { return m_Visible; }
 
     virtual glm::vec2 FindNextToPlayer(); // Set available WillMovePosition to
                                           // slowly close PlayerPosition
     void TempoMove();
     bool IsVaildMove(const glm::vec2 &position);
-    size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
+    std::size_t GamePostion2MapIndex(const glm::ivec2 &position) const {
         return m_SimpleMapData->GamePosition2MapIndex(position);
     }
-    virtual void Struck(const size_t damage) {
+    virtual void Struck(const std::size_t damage) {
         m_Health -= damage;
         if (m_Health <= 0) {
             SetVisible(false);
         }
     };
 
-    virtual void Move() = 0;
     virtual void Update(){};
 
 protected:
+    virtual void Move() = 0;
+
+    virtual void AttackPlayer();
+
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
@@ -79,12 +86,12 @@ protected:
     bool m_AttackPlayer = false;
 
 private:
-    size_t m_BeatDelay;
+    std::size_t m_BeatDelay;
     bool m_Lord;
     bool m_Shadow = false;
-    size_t m_Damage = 0;
-    size_t m_Health = 0; // Notice: 1 heart = 2 health(same as damage)
-    size_t m_Coin = 0;
+    std::size_t m_Damage = 0;
+    std::size_t m_Health = 0; // Notice: 1 heart = 2 health(same as damage)
+    std::size_t m_Coin = 0;
 };
 } // namespace Dungeon
 

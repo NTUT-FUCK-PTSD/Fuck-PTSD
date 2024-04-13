@@ -15,10 +15,14 @@ public:
 
     void Update() override;
 
+    void AttackPlayer() override;
+
 private:
     const glm::vec2 m_FrameSize = {26, 25};
+    glm::vec2 m_InitPosition;
+    glm::vec2 m_Move = glm::vec2(0, 1);
 
-    size_t m_State = 0;
+    std::size_t m_State = 0;
     bool m_NeedToMove = false;
     uint16_t m_AnimationType;
 };

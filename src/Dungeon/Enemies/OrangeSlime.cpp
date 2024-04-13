@@ -21,7 +21,7 @@ Enemies::OrangeSlime::OrangeSlime(
     m_StartIdx = m_Distribution(m_RandomGenerator);
     m_State = -1; // Start from -1 to make the first move
     m_Movement[(m_StartIdx) % 4] += GetGamePosition();
-    for (size_t i = 1; i < 4; i++) {
+    for (std::size_t i = 1; i < 4; i++) {
         m_Movement[(m_StartIdx + i) % 4] +=
             m_Movement[(m_StartIdx + i - 1) % 4];
     }
@@ -58,10 +58,7 @@ void OrangeSlime::Move() {
     }
     if (IsVaildMove(m_WillMovePosition)) {
         if (m_WillMovePosition == GetPlayerPosition()) {
-            m_CanMove = false;
-            m_NeedToMove = false;
-            m_WillMovePosition = GetGamePosition();
-            m_AttackPlayer = true;
+            AttackPlayer();
             m_State++;
             return;
         }
@@ -94,5 +91,12 @@ void OrangeSlime::Update() {
         m_Transform.translation = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
+}
+
+void OrangeSlime::AttackPlayer() {
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        m_NeedToMove = false;
+        Enemy::AttackPlayer();
+    }
 }
 } // namespace Dungeon::Enemies

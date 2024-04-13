@@ -5,6 +5,8 @@
 
 #include "Util/Image.hpp"
 
+#include "Settings/Window.hpp"
+
 Background::Background() {
     const auto ContinueImage =
         std::make_shared<Util::Image>(m_ContinueImagePath);
@@ -13,12 +15,12 @@ Background::Background() {
 
     m_MainMenu->SetDrawable(MainMenuImage);
     m_MainMenu->SetZIndex(3);
-    m_MainMenu->SetScale({3, 3});
+    m_MainMenu->SetScale(glm::vec2(DUNGEON_SCALE, DUNGEON_SCALE));
 
     m_Continue->SetDrawable(ContinueImage);
     m_Continue->SetPosition({-0.5f, -365.4f});
     m_Continue->SetZIndex(5);
-    m_Continue->SetScale({3, 3});
+    m_Continue->SetScale(glm::vec2(DUNGEON_SCALE, DUNGEON_SCALE));
 
     m_Background->AddChild(m_MainMenu);
     m_Background->AddChild(m_Continue);

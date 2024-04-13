@@ -9,17 +9,17 @@ SimpleMapData::SimpleMapData(const glm::ivec2 &levelIndexMin,
     : m_LevelIndexMin(levelIndexMin),
       m_LevelIndexMax(levelIndexMax),
       m_Size(size) {
-    m_Tiles.resize(m_Size.x * m_Size.y);
-    m_HasEntity.resize(m_Size.x * m_Size.y, false);
+    m_Tiles.resize(GetSize().x * GetSize().y);
+    m_HasEntity.resize(GetSize().x * GetSize().y, false);
 }
 
-void SimpleMapData::AddTile(const size_t position,
+void SimpleMapData::AddTile(const std::size_t position,
                             const std::shared_ptr<Tile> tile) {
     m_Tiles.at(position).emplace_back(tile);
     m_TilesQueue.emplace_back(tile);
 }
 
-void SimpleMapData::RemoveTile(const size_t position,
+void SimpleMapData::RemoveTile(const std::size_t position,
                                const std::shared_ptr<Tile> tile) {
     m_Tiles.at(position).erase(std::remove(m_Tiles.at(position).begin(),
                                            m_Tiles.at(position).end(), tile),
@@ -29,23 +29,30 @@ void SimpleMapData::RemoveTile(const size_t position,
         m_TilesQueue.end());
 }
 
-void SimpleMapData::PopBackTile(const size_t position) {
+void SimpleMapData::ClearTiles() {
+    m_Tiles.clear();
+    m_Tiles.resize(GetSize().x * GetSize().y);
+    m_TilesQueue.clear();
+}
+
+void SimpleMapData::PopBackTile(const std::size_t position) {
     m_TilesQueue.erase(std::remove(m_TilesQueue.begin(), m_TilesQueue.end(),
                                    m_Tiles.at(position).back()),
                        m_TilesQueue.end());
     m_Tiles.at(position).pop_back();
 }
 
-bool SimpleMapData::IsTilesEmpty(const size_t position) const {
+bool SimpleMapData::IsTilesEmpty(const std::size_t position) const {
     return m_Tiles.at(position).empty();
 }
 
 std::vector<std::shared_ptr<Tile>>
-SimpleMapData::GetTiles(const size_t position) const {
+SimpleMapData::GetTiles(const std::size_t position) const {
     return m_Tiles.at(position);
 }
 
-std::shared_ptr<Tile> SimpleMapData::GetTileBack(const size_t position) const {
+std::shared_ptr<Tile>
+SimpleMapData::GetTileBack(const std::size_t position) const {
     return m_Tiles.at(position).back();
 }
 
@@ -65,7 +72,8 @@ void SimpleMapData::SetLevelIndexMin(const glm::ivec2 &levelIndexMin) {
     m_LevelIndexMin = levelIndexMin;
 }
 
-size_t SimpleMapData::GamePosition2MapIndex(const glm::ivec2 &position) const {
+std::size_t
+SimpleMapData::GamePosition2MapIndex(const glm::ivec2 &position) const {
     return (position.x - GetLevelIndexMin().x + 1) +
            (position.y - GetLevelIndexMin().y + 1) * m_Size.x;
 }
@@ -77,11 +85,11 @@ bool SimpleMapData::IsPositionValid(const glm::ivec2 &position) const {
            position.y <= GetLevelIndexMax().y;
 }
 
-bool SimpleMapData::IsHasEntity(const size_t position) const {
+bool SimpleMapData::IsHasEntity(const std::size_t position) const {
     return m_HasEntity.at(position);
 }
 
-bool SimpleMapData::IsWalkable(const size_t position) const {
+bool SimpleMapData::IsWalkable(const std::size_t position) const {
     return !IsTilesEmpty(position) && !GetTileBack(position)->IsWall() &&
            !GetTileBack(position)->IsDoor() && !m_HasEntity.at(position);
 }
@@ -150,7 +158,8 @@ void SimpleMapData::SetSize(const glm::ivec2 &size) {
     m_Size = size;
 }
 
-void SimpleMapData::SetHasEntity(const size_t position, const bool &hasEntity) {
+void SimpleMapData::SetHasEntity(const std::size_t position,
+                                 const bool &hasEntity) {
     m_HasEntity.at(position) = hasEntity;
 }
 

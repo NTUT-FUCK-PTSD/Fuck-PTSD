@@ -1,6 +1,8 @@
 #ifndef FUCK_PTSD_DIAMOND_H
 #define FUCK_PTSD_DIAMOND_H
 
+#include "config.hpp"
+
 #include "GameElement.h"
 #include "Util/Text.hpp"
 #include <iostream>
@@ -35,7 +37,7 @@ private:
     std::string m_TextStylePath =
         ASSETS_DIR "/font/necrosans-6/necrosans-6.otf";
 
-    glm::vec2 m_Position = {585, 275};
+    glm::vec2 m_Position = {WINDOW_WIDTH / 2 - 135, WINDOW_HEIGHT / 2 - 130};
 
     std::shared_ptr<Util::Text> m_text;
 

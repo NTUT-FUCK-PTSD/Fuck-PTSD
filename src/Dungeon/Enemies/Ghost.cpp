@@ -48,7 +48,7 @@ glm::vec2 Ghost::FindNextToPlayer() {
         return path[1];
     }
 }
-void Ghost::Struck(const size_t damage) {
+void Ghost::Struck(const std::size_t damage) {
     if (m_Transparent) {
         return;
     }
@@ -74,9 +74,7 @@ void Ghost::Move() {
 
         if (IsVaildMove(m_WillMovePosition)) {
             if (m_WillMovePosition == GetPlayerPosition()) {
-                m_CanMove = false;
-                m_WillMovePosition = GetGamePosition();
-                m_AttackPlayer = true;
+                AttackPlayer();
                 return;
             }
             m_CanMove = true;
@@ -108,5 +106,15 @@ void Ghost::Update() {
         m_Transform.translation = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
+}
+
+void Ghost::AttackPlayer() {
+    if (m_Transparent) {
+        return;
+    }
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        Enemy::AttackPlayer();
+        m_WillMovePosition = GetGamePosition();
+    }
 }
 } // namespace Dungeon::Enemies

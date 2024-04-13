@@ -27,7 +27,7 @@ public:
 
     State GetCurrentState() const { return m_CurrentState; }
 
-    void Start(std::shared_ptr<Core::Context> context);
+    void Start();
 
     void Update();
 
@@ -39,8 +39,14 @@ private:
     void ValidTask();
 
 private:
+    // mainmenu
+    std::shared_ptr<Background> m_Background;
+    bool m_FirstTime = true;
+    bool m_IsMainMenu = true;
+
     // music
-    std::shared_ptr<MusicSystem> m_MusicSystem = std::make_shared<MusicSystem>();
+    std::shared_ptr<MusicSystem> m_MusicSystem =
+        std::make_shared<MusicSystem>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};

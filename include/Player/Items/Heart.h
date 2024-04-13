@@ -5,8 +5,10 @@
 #ifndef FUCK_PTSD_HEART_H
 #define FUCK_PTSD_HEART_H
 
+#include "config.hpp"
+
 #include "GameElement.h"
-#include <iostream>
+#include <queue>
 
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
@@ -16,20 +18,23 @@ class Heart final {
 public:
     explicit Heart();
 
-    void plusHP(std::size_t number);
+    void plusHP(const std::size_t number);
 
-    void minusHP(float number);
+    void minusHP(const std::size_t number);
+    void minusHeart(const float number);
 
-    void hitHeart(std::size_t index);
+    void hitHeart(const std::size_t index);
 
+    void gainHeart(const std::size_t number = 2);
+    void UpdateHP();
     void resetHP();
 
-    void SetHeartMaxHp(float value);
+    void SetHeartMaxHp(const std::size_t value);
 
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
     getGameObjects() const;
 
-    std::shared_ptr<GameElement> GetGameObject() const ;
+    std::shared_ptr<GameElement> GetGameObject() const;
 
     enum STATE {
         FULL = 0,
@@ -39,14 +44,15 @@ public:
 
 private:
     void IsDead();
-    std::shared_ptr<GameElement> generalHeart(STATE state, const glm::vec2 &position);
-    void rendererHeart();
-
+    std::shared_ptr<GameElement> generalHeart(STATE state,
+                                              const glm::vec2 &position);
+    std::size_t m_ZIndex = 50;
     // HP settings
     //
-    float m_MaxHp = 6.0f;
-    float m_currentHP = 6.0f;
-    const glm::vec2 m_FirstPosition = {500, 350};
+    std::size_t m_MaxHp = 12;
+    std::size_t m_currentHP;
+    const glm::vec2 m_FirstPosition = {WINDOW_WIDTH / 2 - 220,
+                                       WINDOW_HEIGHT / 2 - 55};
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 
@@ -62,7 +68,7 @@ private:
         std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart_empty.png");
 
     // game object
-    std::vector<std::shared_ptr<GameElement>> m_ElementList;
+    std::deque<std::shared_ptr<GameElement>> m_ElementList;
 
     std::shared_ptr<GameElement> m_OneHeart = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_TwoHeart = std::make_shared<GameElement>();

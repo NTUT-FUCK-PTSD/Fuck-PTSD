@@ -1,9 +1,9 @@
 #ifndef SIMPLE_MAP_DATA_H
 #define SIMPLE_MAP_DATA_H
 
-#include "Dungeon/Tile.h"
-
 #include <vector>
+
+#include "Dungeon/Tile.h"
 
 namespace Dungeon {
 class SimpleMapData {
@@ -26,8 +26,8 @@ public:
     [[nodiscard]] std::size_t
     GamePosition2MapIndex(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionValid(const glm::ivec2 &position) const;
-    [[nodiscard]] bool IsHasEntity(const size_t position) const;
-    [[nodiscard]] bool IsWalkable(const size_t position) const;
+    [[nodiscard]] bool IsHasEntity(const std::size_t position) const;
+    [[nodiscard]] bool IsWalkable(const std::size_t position) const;
     [[nodiscard]] bool IsPositionWalkable(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionDoor(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionWall(const glm::ivec2 &position) const;
@@ -39,25 +39,29 @@ public:
     [[nodiscard]] bool IsPositionInteractive(const glm::ivec2 &position) const;
     [[nodiscard]] bool IsPositionPlayerAct(const glm::vec2 &position) const;
 
-    void AddTile(const size_t position, const std::shared_ptr<Tile> tile);
-    void RemoveTile(const size_t position, const std::shared_ptr<Tile> tile);
-    void PopBackTile(const size_t position);
-    [[nodiscard]] bool IsTilesEmpty(const size_t position) const;
+    void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
+    void RemoveTile(const std::size_t position,
+                    const std::shared_ptr<Tile> tile);
+    void ClearTiles();
+    void PopBackTile(const std::size_t position);
+    [[nodiscard]] bool IsTilesEmpty(const std::size_t position) const;
     [[nodiscard]] std::vector<std::shared_ptr<Tile>>
-    GetTiles(const size_t position) const;
+    GetTiles(const std::size_t position) const;
     [[nodiscard]] std::shared_ptr<Tile>
-    GetTileBack(const size_t position) const;
-    void SetHasEntity(const size_t position, const bool &hasEntity);
+    GetTileBack(const std::size_t position) const;
+    void SetHasEntity(const std::size_t position, const bool &hasEntity);
 
     std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
 
     static float Heuristic(const glm::vec2 &start, const glm::vec2 &end);
 
+protected:
+    std::vector<bool> m_HasEntity;
+
 private:
     glm::ivec2 m_LevelIndexMin;
     glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_Size;
-    std::vector<bool> m_HasEntity;
     std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
     std::vector<std::shared_ptr<Tile>> m_TilesQueue;
     static glm::vec2 m_PlayerPosition;

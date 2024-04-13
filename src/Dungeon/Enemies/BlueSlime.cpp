@@ -12,10 +12,15 @@ Enemies::BlueSlime::BlueSlime(
         true, 100, true, 100);
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
+    m_InitPosition = GetGamePosition();
 
     SetHealth(4); // 2 hearts
     SetDamage(2); // 1 heart
     SetCoin(2);
+
+    if (!IsVaildMove(m_InitPosition + m_Move)) {
+        m_Move = -m_Move;
+    }
 }
 } // namespace Dungeon
 
@@ -30,22 +35,28 @@ void BlueSlime::Move() {
         m_State = 0;
     }
     if (m_State == 1) {
-        m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
+        if (GetGamePosition() == m_InitPosition) {
+            m_WillMovePosition = m_InitPosition + m_Move;
+        }
+        else {
+            m_WillMovePosition = m_InitPosition;
+        }
         m_NeedToMove = true;
         m_AnimationType = 0;
     }
     else if (m_State == 3) {
-        m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
+        if (GetGamePosition() == m_InitPosition) {
+            m_WillMovePosition = m_InitPosition + m_Move;
+        }
+        else {
+            m_WillMovePosition = m_InitPosition;
+        }
         m_NeedToMove = true;
         m_AnimationType = 2;
     }
     if (IsVaildMove(m_WillMovePosition)) {
         if (m_WillMovePosition == GetPlayerPosition()) {
-            m_CanMove = false;
-            m_NeedToMove = false;
-            m_WillMovePosition = GetGamePosition();
-            m_AnimationType = 0;
-            m_AttackPlayer = true;
+            AttackPlayer();
             m_State++;
             return;
         }
@@ -55,21 +66,6 @@ void BlueSlime::Move() {
         m_SimpleMapData->SetHasEntity(GamePostion2MapIndex(m_WillMovePosition),
                                       true);
     }
-    else {
-        m_CanMove = false;
-        if (m_State == 2) {
-            m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
-            m_State += 2;
-            m_AnimationType = 2;
-        }
-        else if (m_State == 4) {
-            m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
-            m_State = 2;
-            m_AnimationType = 0;
-        }
-        m_NeedToMove = false;
-    }
-
     m_State++;
 }
 void BlueSlime::Update() {
@@ -86,5 +82,13 @@ void BlueSlime::Update() {
         m_Transform.translation = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
+}
+
+void BlueSlime::AttackPlayer() {
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        m_NeedToMove = false;
+        m_AnimationType = 0;
+        Enemy::AttackPlayer();
+    }
 }
 } // namespace Dungeon::Enemies

@@ -105,11 +105,11 @@ void Bat::RandomMove() {
         m_NeedToMove = false;
         return;
     }
-    size_t index = 0;
+    std::size_t index = 0;
     while (!m_RandomPool.empty()) {
         index =
             m_Distribution(m_RandomGenerator,
-                           std::uniform_int_distribution<size_t>::param_type{
+                           std::uniform_int_distribution<std::size_t>::param_type{
                                0, m_RandomPool.size() - 1});
         switch (m_RandomPool[index]) {
         case 0:
@@ -127,8 +127,7 @@ void Bat::RandomMove() {
         }
         if (IsVaildMove(m_WillMovePosition)) {
             if (m_WillMovePosition == GetPlayerPosition()) {
-                m_NeedToMove = false;
-                m_AttackPlayer = true;
+                AttackPlayer();
                 return;
             }
             m_SimpleMapData->SetHasEntity(

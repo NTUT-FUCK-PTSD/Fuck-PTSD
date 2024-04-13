@@ -16,29 +16,33 @@ int32_t rusty_extern_c_integer();
 }
 
 // show the start background and listen the keypress
-void App::Start(std::shared_ptr<Core::Context>
-                    context) { // the value context is come from main.cpp
+void App::Start() {
     LOG_TRACE("Start");
+    if (m_FirstTime) {
+        m_FirstTime = false;
+        // create background
+        m_Background = std::make_shared<Background>();
+        m_Camera->AddChild(m_Background->GetGameElement());
 
-    // create background
-    const auto background = std::make_shared<Background>();
-    m_Camera->AddChild(background->GetGameElement());
-
-    // play main background music
-    m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
-    //    m_MusicSystem->skipToTargetTime(118.2f);
-
-    // Wait any key click
-    while (!ToolBoxs::IsAnyKeyPress()) {
-        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-            Util::Input::IfExit()) {
-            m_CurrentState = State::END;
-        }
-        m_MusicSystem->Update();
-        m_Camera->Update();
-        context->Update();
+        // play main background music
+        m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
+        //    m_MusicSystem->skipToTargetTime(118.2f);
     }
 
+    // Wait any key click
+    if (ToolBoxs::IsAnyKeyPress()) {
+        m_IsMainMenu = false;
+    }
+
+    m_MusicSystem->Update();
+    m_Camera->Update();
+
+    if (Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
+    if (m_IsMainMenu) {
+        return;
+    }
     // play lobby music
     //    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
     //    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
@@ -49,7 +53,8 @@ void App::Start(std::shared_ptr<Core::Context>
     m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
 
     // remove background
-    m_Camera->RemoveChild(background->GetGameElement());
+    m_Camera->RemoveChild(m_Background->GetGameElement());
+    m_Background.reset();
 
     // create Player
     m_MainCharacter = std::make_shared<Player>();
@@ -61,7 +66,7 @@ void App::Start(std::shared_ptr<Core::Context>
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
-        m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
+        m_Camera, m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
     m_DungeonMap->SetDrawable(
         std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);
@@ -80,6 +85,12 @@ void App::Update() {
     //        m_Coin->plusCoinNumber(10);
     //        m_Diamond->plusDiamondNumber(10);
     //    }
+
+    if (Util::Input::IsKeyDown(Util::Keycode::N)) {
+        m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        m_AniCameraDestination = {0, 0};
+        m_AniPlayerDestination = {0, 0};
+    }
 
     // player move
     if ((Util::Input::IsKeyDown(Util::Keycode::W) ||
@@ -102,17 +113,17 @@ void App::Update() {
             Player::Direction::UP, Player::Direction::LEFT,
             Player::Direction::DOWN, Player::Direction::RIGHT};
         const std::vector<glm::vec2> aniPlayerDirection = {
-            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
-            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+            {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
+            {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
+            {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
+            {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
         const std::vector<glm::vec2> aniCameraDirection = {
-            {0, -Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {Dungeon::DUNGEON_TILE_WIDTH * 3, 0},
-            {0, Dungeon::DUNGEON_TILE_WIDTH * 3},
-            {-Dungeon::DUNGEON_TILE_WIDTH * 3, 0}};
+            {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
+            {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
+            {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
+            {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
 
-        for (size_t i = 0; i < 4; i++) {
+        for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i]) &&
                 m_DungeonMap->GetMapData()->IsPositionPlayerAct(
                     m_MainCharacter->GetGamePosition() + direction[i])) {
@@ -159,7 +170,7 @@ void App::Update() {
                                     m_PlayerMoveDirect);
         m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
-        m_DungeonMap->TempoUpdate();
+        m_DungeonMap->PlayerTrigger();
     }
 
     // detect the player

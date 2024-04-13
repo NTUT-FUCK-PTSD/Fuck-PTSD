@@ -1,61 +1,55 @@
 #ifndef ELEMENTS_H
 #define ELEMENTS_H
 
+#include <map>
+#include <string>
+
 #include "config.hpp"
 
 #include "glm/glm.hpp"
 
-#include <map>
-#include <string>
-
 namespace Dungeon {
-constexpr double DUNGEON_TILE_WIDTH = 24.0;
-constexpr double DUNGEON_COL_NUMBER = 20.0;
-constexpr double DUNGEON_ROW_NUMBER =
-    (DUNGEON_COL_NUMBER * (double(WINDOW_HEIGHT) / double(WINDOW_WIDTH)));
-constexpr double DUNGEON_SCALE =
-    ((double(WINDOW_WIDTH) / DUNGEON_COL_NUMBER) / DUNGEON_TILE_WIDTH);
 
 struct s_Tile {
     int x, y;
-    size_t type, zone, torch, cracked;
+    std::size_t type, zone, torch, cracked;
 };
 
 struct s_Trap {
     int x, y;
-    size_t type, subtype;
+    std::size_t type, subtype;
 };
 
 struct s_Enemy {
     int x, y;
-    size_t type, beatDelay, lord;
+    std::size_t type, beatDelay, lord;
 };
 
 struct s_Item {
     int x, y;
     std::string type;
-    size_t bloodCost, saleCost, singleChoice;
+    std::size_t bloodCost, saleCost, singleChoice;
 };
 
 struct s_Chest {
     int x, y;
-    size_t saleCost, singleChoice, color, hidden;
+    std::size_t saleCost, singleChoice, color, hidden;
     std::string contents;
 };
 
 struct s_Crate {
     int x, y;
-    size_t type;
+    std::size_t type;
     std::string contents;
 };
 
 struct s_Shrine {
     int x, y;
-    size_t type;
+    std::size_t type;
 };
 } // namespace Dungeon
 
-const std::map<size_t, std::string> DUNGEON_TILETYPES = {
+const std::map<std::size_t, std::string> DUNGEON_TILETYPES = {
     {0, "floor_dirt1"},
     {1, "floor_dirt2"}, // type 1 and type 0 are different png files
     {2, "stairs"},
@@ -116,7 +110,7 @@ const std::map<size_t, std::string> DUNGEON_TILETYPES = {
     {123, "conductor_wall_pipe4"}  // NOT IMPLEMENTED
 };
 
-const std::map<size_t, glm::ivec2> DUNGEON_TILESIZES = {
+const std::map<std::size_t, glm::ivec2> DUNGEON_TILESIZES = {
     {0, {3, 2}},    {1, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},
     {4, {3, 1}},    {5, {3, 1}},    {6, {1, 1}},   {7, {3, 1}},
 

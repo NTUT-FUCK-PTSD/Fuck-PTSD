@@ -3,15 +3,14 @@
 Animation::Animation(const glm::vec2 &animationPosition)
     : m_AnimationPosition(animationPosition) {
     m_AnimationZIndex =
-        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y -
-                                       Dungeon::DUNGEON_TILE_WIDTH -
-                                       Dungeon::DUNGEON_TILE_WIDTH})
+        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
+                                       DUNGEON_TILE_WIDTH})
             .y;
 }
 
 void Animation::MoveByTime(const unsigned long duringTimeMs,
                            const glm::vec2 &destination,
-                           const uint16_t &direction) {
+                           const uint16_t direction) {
     if (m_IsAnimating) {
         m_AnimationPosition = m_AnimationDestination;
         UpdateAnimation(true);
@@ -39,9 +38,11 @@ void Animation::UpdateAnimation(const bool &isDirection) {
     if (m_IsAnimating) {
         unsigned long passTimeMs =
             Util::Time::GetElapsedTimeMs() - m_AnimationStartMs;
+
         if (passTimeMs > m_AnimationDuringTimeMs ||
             ((m_AnimationPosition == m_AnimationDestination) && !isDirection)) {
             m_AnimationPosition = m_AnimationDestination;
+            m_AnimationDestination = {0, 0};
             m_IsAnimating = false;
         }
         else {
@@ -64,11 +65,9 @@ void Animation::UpdateAnimation(const bool &isDirection) {
             glm::vec2 move = m_AnimationDestination - m_AnimationPosition;
             m_AnimationPosition += move * ratio;
         }
-
-        m_AnimationZIndex =
-            ToolBoxs::PosToGamePos({0, m_AnimationPosition.y -
-                                           Dungeon::DUNGEON_TILE_WIDTH -
-                                           Dungeon::DUNGEON_TILE_WIDTH})
-                .y;
     }
+    m_AnimationZIndex =
+        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
+                                       DUNGEON_TILE_WIDTH})
+            .y;
 }

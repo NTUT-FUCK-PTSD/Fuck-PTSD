@@ -5,18 +5,52 @@
 
 namespace Dungeon {
 
-Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
-         const size_t levelNum)
-    : m_MainCharacter(mainCharacter) {
-    m_Level = std::make_unique<Level>(path, levelNum);
+Map::Map(const std::shared_ptr<Camera> camera,
+         const std::shared_ptr<Player> mainCharacter, const std::string &path,
+         const std::size_t levelNum)
+    : m_Camera(camera),
+      m_MainCharacter(mainCharacter) {
+    // ZIndex 100 is top
+    m_ZIndex = 100;
+    m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
+    m_Transform.translation = {0, 0};
+    m_Level = std::make_unique<Level>(path);
+    m_Available = LoadLevel(levelNum);
+
+    // Add testing
+    auto mapIndex = GamePostion2MapIndex({1, 1});
+    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
+    m_MapData->AddEnemy(mapIndex, enemy);
+    m_Children.push_back(enemy);
+}
+
+bool Map::LoadLevel(const std::size_t levelNum) {
+    m_Children.clear();
+    if (!m_Level->LoadLevel(levelNum)) {
+        m_Available = false;
+        return false;
+    }
+    m_LevelNum = levelNum;
+    m_Camera->SetPosition({0, 0});
+    m_MainCharacter->SetGamePosition({0, 0});
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
              3; // add 3 for the border
     m_MapData = std::make_shared<MapData>(m_Level->GetLevelIndexMin(),
                                           m_Level->GetLevelIndexMax(), m_Size);
     m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    size_t mapIndex = 0, tmpMapIndex = 0;
 
+    LoadTile();
+    LoadEnemy();
+
+    CameraUpdate();
+    return true;
+}
+
+void Map::LoadTile() {
+    m_MapData->ClearTiles();
+
+    std::size_t mapIndex = 0, tmpMapIndex = 0;
     for (auto &tile : m_Level->GetTiles()) {
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
         if (tile.type == 23 || tile.type == 24 || tile.type == 103 ||
@@ -38,10 +72,10 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
             }
             // door direction detection
             auto tmp = m_MapData->GetTileBack(mapIndex);
-            size_t doorCount = 0;
+            std::size_t doorCount = 0;
             if (tmp->GetTile().type == 103 || tmp->GetTile().type == 106 ||
                 tmp->GetTile().type == 111 || tmp->GetTile().type == 118) {
-                for (size_t k = 2; k < 4; k++) {
+                for (std::size_t k = 2; k < 4; k++) {
                     tmpMapIndex =
                         j + direction[k].x + (i + direction[k].y) * m_Size.x;
                     if (j + direction[k].x >= 0 &&
@@ -49,7 +83,8 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
                         i + direction[k].y >= 0 &&
                         i + direction[k].y < m_Size.y &&
                         !m_MapData->IsTilesEmpty(tmpMapIndex) &&
-                        (m_MapData->GetTileBack(tmpMapIndex)->IsWall())) {
+                        (m_MapData->GetTileBack(tmpMapIndex)->IsWall() ||
+                         m_MapData->GetTileBack(tmpMapIndex)->IsDoor())) {
                         doorCount++;
                     }
                 }
@@ -118,24 +153,28 @@ Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
         }
     }
 
+    for (auto &tile : m_MapData->GetTilesQueue()) {
+        m_Children.push_back(tile);
+    }
+}
+
+void Map::LoadEnemy() {
+    m_MapData->ClearEnemies();
+
+    std::size_t mapIndex = 0;
     for (auto &enemy : m_Level->GetEnemies()) {
         mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
         m_MapData->AddEnemy(mapIndex,
                             EnemyFactory::CreateEnemy(enemy, m_MapData));
     }
 
-    // Add testing
-    mapIndex = GamePostion2MapIndex({1, 1});
-    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
-    m_MapData->AddEnemy(mapIndex, enemy);
-
-    for (auto &tile : m_MapData->GetTilesQueue()) {
-        m_Children.push_back(tile);
-    }
     for (auto &enemy : m_MapData->GetEnemyQueue()) {
         m_Children.push_back(enemy);
     }
-    CameraUpdate();
+}
+
+std::size_t Map::GetLevelNum() const {
+    return m_LevelNum;
 }
 
 bool Map::CheckShowPosition(const glm::vec2 &position1,
@@ -148,6 +187,7 @@ bool Map::CheckShowPosition(const glm::vec2 &position1,
 
 void Map::CameraUpdate() {
     glm::vec2 cameraPos = m_MainCharacter->GetGamePosition();
+    m_Transform.translation = {0, 0};
 
     for (auto &tile : m_MapData->GetTilesQueue()) {
         if (CheckShowPosition({tile->GetTile().x, tile->GetTile().y},
@@ -169,14 +209,28 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate() {
-    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    for (auto &enemy : m_MapData->GetEnemyQueue()) {
-        enemy->TempoMove();
+    if (!m_PlayerTrigger) {
+        m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
+        m_TempoAttack = false;
+        for (auto &enemy : m_MapData->GetEnemyQueue()) {
+            enemy->TempoMove();
+        }
     }
+    m_PlayerTrigger = false;
+}
+
+void Map::PlayerTrigger() {
+    m_PlayerTrigger = false;
+    TempoUpdate();
+    m_PlayerTrigger = true;
+}
+
+void Map::TempoTrigger() {
+    TempoUpdate();
 }
 
 void Map::Update() {
-    size_t mapIndex = 0;
+    std::size_t mapIndex = 0;
     CameraUpdate();
     std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto &enemy : EnemyQueue) {
@@ -191,10 +245,12 @@ void Map::Update() {
                 GamePostion2MapIndex(enemy->GetWillMovePosition()), enemy);
         }
         enemy->Update();
+
+        EnemyAttackHandle(enemy);
     }
 }
 
-size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
+std::size_t Map::GamePostion2MapIndex(const glm::ivec2 &position) const {
     return (position.x - m_Level->GetLevelIndexMin().x + 1) +
            (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
 }
@@ -214,7 +270,7 @@ bool Map::isVaildPosition(const glm::ivec2 &position) {
 }
 
 bool Map::isVaildMove(const glm::ivec2 &position) {
-    size_t mapIndex = GamePostion2MapIndex(position);
+    std::size_t mapIndex = GamePostion2MapIndex(position);
     if (m_MapData->IsTilesEmpty(mapIndex)) {
         return false;
     }
@@ -224,14 +280,14 @@ bool Map::isVaildMove(const glm::ivec2 &position) {
     return true;
 }
 
-void Map::RemoveEnemy(const size_t position) {
+void Map::RemoveEnemy(const std::size_t position) {
     m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
                                  m_MapData->GetEnemy(position)),
                      m_Children.end());
     m_MapData->RemoveEnemy(position);
 }
 
-void Map::RemoveWall(const size_t position) {
+void Map::RemoveWall(const std::size_t position) {
     auto tile = m_MapData->GetTileBack(position)->GetTile();
 
     if (tile.type == 102) {
@@ -247,13 +303,44 @@ void Map::RemoveWall(const size_t position) {
     m_Children.push_back(m_MapData->GetTileBack(position));
 }
 
-void Map::OpenDoor(const size_t position) {
-    auto doorType = m_MapData->GetTileBack(position)->GetTile().type;
+void Map::OpenDoor(const std::size_t position) {
+    auto tile = m_MapData->GetTileBack(position)->GetTile();
+    auto doorType = tile.type;
+    auto gamePosition = glm::vec2(tile.x, tile.y);
+
     if (doorType == 50 || doorType == 103 || doorType == 118) {
+        for (size_t i = 0; i < 4; i++) {
+            auto tmpPosition = gamePosition + m_EnemyMove[i];
+            auto tmpMapIndex = GamePostion2MapIndex(tmpPosition);
+            if (m_MapData->IsPositionDoor(tmpPosition) &&
+                doorType ==
+                    m_MapData->GetTileBack(tmpMapIndex)->GetTile().type) {
+                m_Children.erase(
+                    std::remove(m_Children.begin(), m_Children.end(),
+                                m_MapData->GetTileBack(tmpMapIndex)),
+                    m_Children.end());
+                m_MapData->RemoveTile(tmpMapIndex,
+                                      m_MapData->GetTileBack(tmpMapIndex));
+            }
+        }
         m_Children.erase(std::remove(m_Children.begin(), m_Children.end(),
                                      m_MapData->GetTileBack(position)),
                          m_Children.end());
         m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
+    }
+}
+
+void Map::EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy) {
+    if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
+        m_OverlayRed = false;
+    }
+    if (enemy->DidAttack() && !m_TempoAttack) {
+        m_TempoAttack = true;
+        m_OverlayRed = true;
+
+        m_MainCharacter->lostHP(enemy->GetDamage());
+        m_Camera->Shake(100, 10);
+        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
     }
 }
 

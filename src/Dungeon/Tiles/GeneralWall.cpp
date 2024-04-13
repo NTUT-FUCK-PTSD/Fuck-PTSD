@@ -1,5 +1,7 @@
 #include "Dungeon/Tiles/GeneralWall.h"
 
+#include "Settings/Window.hpp"
+
 namespace Dungeon {
 namespace Tiles {
 GeneralWall::GeneralWall(const s_Tile &u_Tile, const bool generalWall)

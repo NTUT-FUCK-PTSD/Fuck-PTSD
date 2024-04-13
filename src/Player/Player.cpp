@@ -1,9 +1,6 @@
-//
-// Created by adven on 2024/3/4.
-//
+#include "Player.h"
 
 #include "Equipment/TypeEquip.h"
-#include "Player.h"
 
 Player::Player()
     : Animation({0, 0}),
@@ -38,7 +35,7 @@ void Player::SetBodyImage(const std::string &path) {
         100);
     m_Body->SetDrawable(BodyImage);
     m_Body->SetPosition(m_Position);
-    m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::SetHeadImage(const std::string &path) {
@@ -48,19 +45,19 @@ void Player::SetHeadImage(const std::string &path) {
         100);
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(m_Position);
-    m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::SetHeadImage(std::shared_ptr<SpriteSheet> image) {
     m_Head->SetDrawable(image);
     m_Head->SetPosition(m_Position);
-    m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::SetBodyImage(std::shared_ptr<SpriteSheet> image) {
     m_Body->SetDrawable(image);
     m_Body->SetPosition(m_Position);
-    m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 std::shared_ptr<GameElement> Player::GetGameElement() {
@@ -77,9 +74,8 @@ glm::vec2 Player::GetGamePosition() {
 
 void Player::SetGamePosition(const glm::vec2 &gamePosition) {
     m_GamePosition = gamePosition;
-    m_Position = ToolBoxs::GamePostoPos(gamePosition);
-    m_Body->SetPosition(m_Position);
-    m_Head->SetPosition(m_Position);
+    m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
+    SetPosition(ToolBoxs::GamePostoPos(gamePosition));
 }
 
 void Player::SetFaceTo(Direction direction) {
@@ -88,18 +84,19 @@ void Player::SetFaceTo(Direction direction) {
         return;
     }
     if (direction == RIGHT) {
-        m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
-        m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+        m_FaceTo = RIGHT;
+        m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+        m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
         return;
     }
-    m_Body->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
-    m_Head->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_FaceTo = LEFT;
+    m_Body->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Head->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::Update() {
     UpdateAnimation(true);
     if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
         m_Position = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
@@ -120,7 +117,7 @@ void Player::SetZIndex(float index) {
 
 void Player::UpdateCoin(const unsigned long duringTimeMs,
                         const glm::vec2 &destination,
-                        const uint16_t &direction) {
+                        const uint16_t direction) {
     m_Coin->MoveByTime(duringTimeMs, destination, direction);
 }
 
@@ -132,6 +129,10 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
 
     m_Window->SetVisible(false);
     return m_Window;
+}
+
+Player::Direction Player::GetFaceTo() {
+    return m_FaceTo;
 }
 
 void Player::gainCoin(std::size_t number) {
@@ -148,6 +149,14 @@ void Player::gainDiamond(std::size_t number) {
 
 void Player::lostDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number * -1);
+}
+
+void Player::lostHP(std::size_t value) {
+    m_Heart->minusHP(value);
+}
+
+void Player::gainHeart(std::size_t value) {
+    m_Heart->gainHeart(value);
 }
 
 // void Player::useDefaultSettingsTool() {
@@ -168,4 +177,12 @@ ShovelEnum::Type Player::GetShovelType() {
 
 WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
+}
+
+void Player::MoveByTime(const unsigned long duringTimeMs,
+                        const glm::vec2 &destination,
+                        const uint16_t direction) {
+    // Update GamePosition but not draw
+    m_GamePosition = ToolBoxs::PosToGamePos(destination);
+    Animation::MoveByTime(duringTimeMs, destination, direction);
 }

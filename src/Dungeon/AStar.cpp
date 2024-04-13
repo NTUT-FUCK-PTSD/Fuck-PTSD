@@ -52,7 +52,7 @@ AStar::FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
             }
 
             float newCost = current.first + Heuristic(current.second, next);
-            size_t mapIndex = mapData->GamePosition2MapIndex(next);
+            std::size_t mapIndex = mapData->GamePosition2MapIndex(next);
             if (newCost < costSoFar[mapIndex]) {
                 costSoFar[mapIndex] = newCost;
                 float priority = newCost + Heuristic(next, end);

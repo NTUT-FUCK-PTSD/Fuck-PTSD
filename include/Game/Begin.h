@@ -5,10 +5,11 @@
 #ifndef FUCK_PTSD_BEGIN_H
 #define FUCK_PTSD_BEGIN_H
 
+#include <memory>
+
 #include "Util/Renderer.hpp"
 
 #include "Background.hpp"
-#include <memory>
 
 class Begin final {
 public:

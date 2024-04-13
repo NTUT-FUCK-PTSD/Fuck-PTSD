@@ -16,18 +16,17 @@
 
 class Weapon final : public IEquipment {
 public:
-
-
     explicit Weapon(WeaponEnum::Type type);
     virtual ~Weapon() = default;
 
-    [[noreturn]] void setWeaponType(WeaponEnum::Type type) override;
-    [[noreturn]] void setPosition(const glm::vec2 position) override;
+    void setWeaponType(WeaponEnum::Type type) override;
+    void setPosition(const glm::vec2 position) override;
 
     [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
     [[nodiscard]] bool GetIsThrow() override;
 
     Direction GetDirection() override { return IEquipment::Direction::ROW; };
+
 private:
     void selectWeaponType(WeaponEnum::Type type);
     void rendererWindow();

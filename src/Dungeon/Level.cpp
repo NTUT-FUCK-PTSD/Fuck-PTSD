@@ -1,19 +1,40 @@
 #include "Dungeon/Level.h"
 namespace Dungeon {
 
-Level::Level(const std::string path, const int levelNum) {
+Level::Level(const std::string &path, const int levelNum) {
+    if (LoadFile(path)) {
+        m_Available = LoadLevel(levelNum);
+    }
+}
+
+Level::Level(const std::string &path) {
+    if (LoadFile(path)) {
+        m_Available = false;
+    }
+}
+
+bool Level::LoadFile(const std::string &path) {
     if (m_doc.LoadFile(path.c_str()) != tinyxml2::XML_SUCCESS) {
         LOG_ERROR("Failed to load level file: " + path);
-        throw std::runtime_error("Failed to load level file: " + path);
+        // throw std::runtime_error("Failed to load level file: " + path);
+        return false;
     }
-    LoadLevel(levelNum);
+    m_XMLdungeon = m_doc.FirstChildElement("dungeon");
     m_NumLevels = m_XMLdungeon->FindAttribute("numLevels")->IntValue();
+    return true;
 }
-void Level::LoadLevel(const int levelNum) {
+
+bool Level::LoadLevel(const int levelNum) {
+    if (levelNum > m_NumLevels) {
+        LOG_ERROR("Level number out of range: " + std::to_string(levelNum));
+        // throw std::runtime_error("Level number out of range: " +
+        //                          std::to_string(levelNum));
+        return false;
+    }
+
     m_LevelIndexMin = glm::ivec2(1e9, 1e9);
     m_LevelIndexMax = glm::ivec2(-1e9, -1e9);
 
-    m_XMLdungeon = m_doc.FirstChildElement("dungeon");
     for (auto child = m_XMLdungeon->FirstChildElement("level");
          child != nullptr; child = child->NextSiblingElement("level")) {
         if (child->FindAttribute("num")->IntValue() == levelNum) {
@@ -129,5 +150,7 @@ void Level::LoadLevel(const int levelNum) {
         m_LevelIndexMin = glm::min(m_LevelIndexMin, glm::ivec2{s.x, s.y});
         m_LevelIndexMax = glm::max(m_LevelIndexMax, glm::ivec2{s.x, s.y});
     }
+
+    return true;
 }
 } // namespace Dungeon

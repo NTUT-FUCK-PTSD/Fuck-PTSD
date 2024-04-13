@@ -1,9 +1,10 @@
 #ifndef ORANGE_SLIME_H
 #define ORANGE_SLIME_H
 
+#include <random>
+
 #include "Animation.h"
 #include "Dungeon/Enemy.h"
-#include <random>
 
 namespace Dungeon {
 namespace Enemies {
@@ -16,16 +17,18 @@ public:
 
     void Update() override;
 
+    void AttackPlayer() override;
+
 private:
     const glm::vec2 m_FrameSize = {26, 26};
 
-    size_t m_State = 0;
+    std::size_t m_State = 0;
     bool m_NeedToMove = false;
 
     std::random_device m_RandomDevice;
     std::mt19937 m_RandomGenerator;
-    std::uniform_int_distribution<size_t> m_Distribution;
-    size_t m_StartIdx = 0;
+    std::uniform_int_distribution<std::size_t> m_Distribution;
+    std::size_t m_StartIdx = 0;
 
     std::vector<glm::vec2> m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 };

@@ -1,6 +1,8 @@
 #ifndef FUCK_PTSD_COIN_H
 #define FUCK_PTSD_COIN_H
 
+#include "config.hpp"
+
 #include "Animation.h"
 #include "GameElement.h"
 #include "Util/Text.hpp"
@@ -40,7 +42,7 @@ private:
     std::string m_TextStylePath =
         ASSETS_DIR "/font/necrosans-6/necrosans-6.otf";
 
-    glm::vec2 m_Position = {585, 350};
+    glm::vec2 m_Position = {WINDOW_WIDTH / 2 - 135, WINDOW_HEIGHT / 2 - 55};
     glm::vec2 m_GamePosition = {0, 0};
 
     std::shared_ptr<Util::Text> m_text;

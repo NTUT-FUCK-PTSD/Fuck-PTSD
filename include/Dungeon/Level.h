@@ -12,9 +12,12 @@ namespace Dungeon {
 
 class Level final {
 public:
-    Level(const std::string path, const int levelNum = 1);
-    void LoadLevel(const int levelNum);
+    Level(const std::string &path, const int levelNum);
+    Level(const std::string &path);
+    [[nodiscard]] bool LoadFile(const std::string &path);
+    [[nodiscard]] bool LoadLevel(const int levelNum);
 
+    bool IsAvailable() { return m_Available; }
     int GetNumLevels() { return m_NumLevels; }
     int GetBossNum() { return m_BossNum; }
     int GetMusic() { return m_Music; }
@@ -37,6 +40,8 @@ public:
     void AddShrine(const s_Shrine &shrines) { m_Shrines.push_back(shrines); }
 
 private:
+    bool m_Available;
+
     int m_NumLevels;
     int m_BossNum;
     int m_Music;

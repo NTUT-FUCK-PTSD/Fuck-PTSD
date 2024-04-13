@@ -15,6 +15,8 @@ public:
 
     void Update() override;
 
+    void AttackPlayer() override;
+
 private:
     const glm::vec2 m_FrameSize = {24, 28};
     std::vector<std::size_t> m_AttackFrames;
