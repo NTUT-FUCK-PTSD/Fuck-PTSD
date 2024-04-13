@@ -27,6 +27,7 @@ Map::Map(const std::shared_ptr<Camera> camera,
 bool Map::LoadLevel(const std::size_t levelNum) {
     m_Children.clear();
     if (!m_Level->LoadLevel(levelNum)) {
+        m_Available = false;
         return false;
     }
     m_LevelNum = levelNum;

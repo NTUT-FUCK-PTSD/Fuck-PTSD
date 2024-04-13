@@ -35,7 +35,7 @@ public:
 
     void Update();
 
-    bool GetOverlayRed() const { return m_OverlayRed; }
+    bool IsOverlayRed() const { return m_OverlayRed; }
 
 private:
     bool m_Available;
