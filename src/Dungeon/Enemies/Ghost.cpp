@@ -113,8 +113,8 @@ void Ghost::AttackPlayer() {
         return;
     }
     if (GetPlayerPosition() == m_WillMovePosition) {
-        m_WillMovePosition = GetGamePosition();
         Enemy::AttackPlayer();
+        m_WillMovePosition = GetGamePosition();
     }
 }
 } // namespace Dungeon::Enemies

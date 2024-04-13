@@ -48,7 +48,10 @@ public:
     [[nodiscard]] const glm::vec2 &GetWillMovePosition() const {
         return m_WillMovePosition;
     }
-    bool GetVisible() const { return m_Visible; }
+    // DidAttack() is used to check if the enemy has attacked the player
+    // it only returns true once after the enemy has attacked the player
+    [[nodiscard]] bool DidAttack();
+    [[nodiscard]] bool GetVisible() const { return m_Visible; }
 
     virtual glm::vec2 FindNextToPlayer(); // Set available WillMovePosition to
                                           // slowly close PlayerPosition
@@ -64,12 +67,13 @@ public:
         }
     };
 
-    virtual void AttackPlayer();
-
-    virtual void Move() = 0;
     virtual void Update(){};
 
 protected:
+    virtual void Move() = 0;
+
+    virtual void AttackPlayer();
+
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;

@@ -5,9 +5,15 @@
 
 namespace Dungeon {
 
-Map::Map(const std::shared_ptr<Player> mainCharacter, const std::string &path,
+Map::Map(const std::shared_ptr<Camera> camera,
+         const std::shared_ptr<Player> mainCharacter, const std::string &path,
          const std::size_t levelNum)
-    : m_MainCharacter(mainCharacter) {
+    : m_Camera(camera),
+      m_MainCharacter(mainCharacter) {
+    // ZIndex 100 is top
+    m_ZIndex = 100;
+    m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path, levelNum);
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
@@ -169,10 +175,24 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate() {
-    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    for (auto &enemy : m_MapData->GetEnemyQueue()) {
-        enemy->TempoMove();
+    if (!m_PlayerTrigger) {
+        m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
+        m_TempoAttack = false;
+        for (auto &enemy : m_MapData->GetEnemyQueue()) {
+            enemy->TempoMove();
+        }
     }
+    m_PlayerTrigger = false;
+}
+
+void Map::PlayerTrigger() {
+    m_PlayerTrigger = false;
+    TempoUpdate();
+    m_PlayerTrigger = true;
+}
+
+void Map::TempoTrigger() {
+    TempoUpdate();
 }
 
 void Map::Update() {
@@ -191,6 +211,8 @@ void Map::Update() {
                 GamePostion2MapIndex(enemy->GetWillMovePosition()), enemy);
         }
         enemy->Update();
+
+        EnemyAttackHandle(enemy);
     }
 }
 
@@ -254,6 +276,20 @@ void Map::OpenDoor(const std::size_t position) {
                                      m_MapData->GetTileBack(position)),
                          m_Children.end());
         m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
+    }
+}
+
+void Map::EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy) {
+    if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
+        m_OverlayRed = false;
+    }
+    if (enemy->DidAttack() && !m_TempoAttack) {
+        m_TempoAttack = true;
+        m_OverlayRed = true;
+
+        m_MainCharacter->lostHP(enemy->GetDamage());
+        m_Camera->Shake(100, 10);
+        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
     }
 }
 

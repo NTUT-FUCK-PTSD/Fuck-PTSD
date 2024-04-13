@@ -59,6 +59,14 @@ bool Enemy::IsVaildMove(const glm::vec2 &position) {
     return m_SimpleMapData->IsPositionWalkable(position);
 }
 
+bool Enemy::DidAttack() {
+    if (m_AttackPlayer) {
+        m_AttackPlayer = false;
+        return true;
+    }
+    return false;
+}
+
 glm::vec2 Enemy::FindNextToPlayer() {
     if (GetPlayerPosition() == GetGamePosition()) {
         return GetGamePosition();
@@ -78,6 +86,7 @@ void Enemy::AttackPlayer() {
         m_CanMove = false;
         m_WillMovePosition = GetGamePosition();
         m_AttackPlayer = true;
+        LOG_INFO(m_AttackPlayer);
     }
 }
 
