@@ -73,7 +73,7 @@ void App::Start(std::shared_ptr<Core::Context>
 }
 
 void App::Update() {
-//    LOG_INFO(1 / Util::Time::GetDeltaTime());
+    //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
     // add coin
     //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
@@ -127,6 +127,7 @@ void App::Update() {
                         m_DungeonMap->RemoveEnemy(
                             m_DungeonMap->GamePostion2MapIndex(
                                 playerDestination));
+                        m_Camera->Shake(150, 10);
                     }
                     else if (m_DungeonMap->GetMapData()->IsPositionWall(
                                  playerDestination)) {
@@ -139,6 +140,7 @@ void App::Update() {
                         m_DungeonMap->OpenDoor(
                             m_DungeonMap->GamePostion2MapIndex(
                                 playerDestination));
+                        m_Camera->Shake(100, 10);
                     }
                 }
                 else {

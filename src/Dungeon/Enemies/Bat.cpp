@@ -2,7 +2,7 @@
 
 namespace Dungeon {
 Enemies::Bat::Bat(const s_Enemy &u_Enemy,
-                  const std::shared_ptr<SimpleMapData> &simpleMapData)
+                  const std::shared_ptr<SimpleMapData> simpleMapData)
     : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()) {
@@ -41,7 +41,7 @@ Enemies::Bat::Bat(const s_Enemy &u_Enemy,
     m_WillMovePosition = GetGamePosition();
 }
 Enemies::Bat::Bat(const s_Enemy &u_Enemy,
-                  const std::shared_ptr<SimpleMapData> &simpleMapData,
+                  const std::shared_ptr<SimpleMapData> simpleMapData,
                   const std::string &filepath)
     : Enemy(u_Enemy, simpleMapData),
       Animation(ToolBoxs::GamePostoPos(GetGamePosition())),

@@ -1,7 +1,7 @@
 #include "Dungeon/MapHandler.h"
 
 namespace Dungeon {
-MapHandler::MapHandler(const std::shared_ptr<Map> &map)
+MapHandler::MapHandler(const std::shared_ptr<Map> map)
     : m_Map(map) {}
 
 void MapHandler::Draw(const Core::Matrices &data) {

@@ -20,7 +20,7 @@ private:
 
     /* ----- Setter and Getter ----- */
 public:
-    void SetDisplay(const std::shared_ptr<Core::Drawable> &drawable) {
+    void SetDisplay(const std::shared_ptr<Core::Drawable> drawable) {
         SetDrawable(drawable);
     };
 

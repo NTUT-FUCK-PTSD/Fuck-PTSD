@@ -8,7 +8,7 @@ class AStar final {
 public:
     static std::vector<glm::ivec2>
     FindPath(const glm::ivec2 &start, const glm::ivec2 &end,
-             const std::shared_ptr<SimpleMapData> &mapData);
+             const std::shared_ptr<SimpleMapData> mapData);
     static float Heuristic(const glm::vec2 &start, const glm::vec2 &end);
 
 private:
@@ -21,7 +21,7 @@ private:
     static std::vector<glm::ivec2>
     CalculatePath(const std::vector<glm::ivec2> &cameFrom,
                   const glm::ivec2 &start, const glm::ivec2 &end,
-                  const std::shared_ptr<SimpleMapData> &mapData);
+                  const std::shared_ptr<SimpleMapData> mapData);
 };
 } // namespace Dungeon
 
