@@ -86,7 +86,6 @@ void Enemy::AttackPlayer() {
         m_CanMove = false;
         m_WillMovePosition = GetGamePosition();
         m_AttackPlayer = true;
-        LOG_INFO(m_AttackPlayer);
     }
 }
 

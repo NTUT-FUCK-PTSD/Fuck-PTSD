@@ -17,6 +17,8 @@ public:
         const std::shared_ptr<Player> mainCharacter, const std::string &path,
         const std::size_t levelNum = 1);
 
+    void LoadLevel(const std::size_t levelNum);
+
     std::size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
     std::shared_ptr<MapData> GetMapData() const;
@@ -34,6 +36,9 @@ public:
     bool GetOverlayRed() const { return m_OverlayRed; }
 
 private:
+    void LoadTile();
+    void LoadEnemy();
+
     void TempoUpdate();
 
     const std::size_t ALLOW_EXTRA_DRAW = 4;

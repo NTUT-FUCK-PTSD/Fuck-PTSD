@@ -42,6 +42,7 @@ public:
     void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
     void RemoveTile(const std::size_t position,
                     const std::shared_ptr<Tile> tile);
+    void ClearTiles();
     void PopBackTile(const std::size_t position);
     [[nodiscard]] bool IsTilesEmpty(const std::size_t position) const;
     [[nodiscard]] std::vector<std::shared_ptr<Tile>>
@@ -54,11 +55,13 @@ public:
 
     static float Heuristic(const glm::vec2 &start, const glm::vec2 &end);
 
+protected:
+    std::vector<bool> m_HasEntity;
+
 private:
     glm::ivec2 m_LevelIndexMin;
     glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_Size;
-    std::vector<bool> m_HasEntity;
     std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
     std::vector<std::shared_ptr<Tile>> m_TilesQueue;
     static glm::vec2 m_PlayerPosition;

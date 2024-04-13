@@ -12,6 +12,7 @@ public:
 
     void AddEnemy(const std::size_t position, const std::shared_ptr<Enemy> enemy);
     void RemoveEnemy(const std::size_t position);
+    void ClearEnemies();
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;

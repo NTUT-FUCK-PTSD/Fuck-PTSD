@@ -10,7 +10,7 @@ Tempo::~Tempo() {}
 
 void Tempo::readTempoFile(const std::string &txtFilePath) {
     std::ifstream txtTempoFile(txtFilePath);
-    LOG_INFO("hello");
+    // LOG_INFO("hello");
 
     if (!txtTempoFile.is_open()) {
         LOG_ERROR("fuck it can not open this file");

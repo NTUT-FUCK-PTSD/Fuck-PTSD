@@ -9,8 +9,8 @@ SimpleMapData::SimpleMapData(const glm::ivec2 &levelIndexMin,
     : m_LevelIndexMin(levelIndexMin),
       m_LevelIndexMax(levelIndexMax),
       m_Size(size) {
-    m_Tiles.resize(m_Size.x * m_Size.y);
-    m_HasEntity.resize(m_Size.x * m_Size.y, false);
+    m_Tiles.resize(GetSize().x * GetSize().y);
+    m_HasEntity.resize(GetSize().x * GetSize().y, false);
 }
 
 void SimpleMapData::AddTile(const std::size_t position,
@@ -27,6 +27,12 @@ void SimpleMapData::RemoveTile(const std::size_t position,
     m_TilesQueue.erase(
         std::remove(m_TilesQueue.begin(), m_TilesQueue.end(), tile),
         m_TilesQueue.end());
+}
+
+void SimpleMapData::ClearTiles() {
+    m_Tiles.clear();
+    m_Tiles.resize(GetSize().x * GetSize().y);
+    m_TilesQueue.clear();
 }
 
 void SimpleMapData::PopBackTile(const std::size_t position) {

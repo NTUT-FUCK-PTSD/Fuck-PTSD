@@ -26,6 +26,14 @@ void MapData::RemoveEnemy(const std::size_t position) {
     SetHasEntity(position, false);
 }
 
+void MapData::ClearEnemies() {
+    m_Enemies.clear();
+    m_Enemies.resize(GetSize().x * GetSize().y);
+    m_HasEntity.clear();
+    m_HasEntity.resize(GetSize().x * GetSize().y, false);
+    m_EnemyQueue.clear();
+}
+
 std::vector<std::shared_ptr<Enemy>> MapData::GetEnemies() const {
     return m_Enemies;
 }

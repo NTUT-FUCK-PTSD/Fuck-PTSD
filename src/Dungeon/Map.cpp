@@ -14,15 +14,36 @@ Map::Map(const std::shared_ptr<Camera> camera,
     m_ZIndex = 100;
     m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
     m_Transform.translation = {0, 0};
-    m_Level = std::make_unique<Level>(path, levelNum);
+    m_Level = std::make_unique<Level>(path);
+    LoadLevel(levelNum);
+
+    // Add testing
+    auto mapIndex = GamePostion2MapIndex({1, 1});
+    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
+    m_MapData->AddEnemy(mapIndex, enemy);
+    m_Children.push_back(enemy);
+}
+
+void Map::LoadLevel(const std::size_t levelNum) {
+    m_Children.clear();
+    m_Level->LoadLevel(levelNum);
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin() +
              3; // add 3 for the border
     m_MapData = std::make_shared<MapData>(m_Level->GetLevelIndexMin(),
                                           m_Level->GetLevelIndexMax(), m_Size);
     m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-    std::size_t mapIndex = 0, tmpMapIndex = 0;
 
+    LoadTile();
+    LoadEnemy();
+
+    CameraUpdate();
+}
+
+void Map::LoadTile() {
+    m_MapData->ClearTiles();
+
+    std::size_t mapIndex = 0, tmpMapIndex = 0;
     for (auto &tile : m_Level->GetTiles()) {
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
         if (tile.type == 23 || tile.type == 24 || tile.type == 103 ||
@@ -124,24 +145,24 @@ Map::Map(const std::shared_ptr<Camera> camera,
         }
     }
 
+    for (auto &tile : m_MapData->GetTilesQueue()) {
+        m_Children.push_back(tile);
+    }
+}
+
+void Map::LoadEnemy() {
+    m_MapData->ClearEnemies();
+
+    std::size_t mapIndex = 0;
     for (auto &enemy : m_Level->GetEnemies()) {
         mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
         m_MapData->AddEnemy(mapIndex,
                             EnemyFactory::CreateEnemy(enemy, m_MapData));
     }
 
-    // Add testing
-    mapIndex = GamePostion2MapIndex({1, 1});
-    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
-    m_MapData->AddEnemy(mapIndex, enemy);
-
-    for (auto &tile : m_MapData->GetTilesQueue()) {
-        m_Children.push_back(tile);
-    }
     for (auto &enemy : m_MapData->GetEnemyQueue()) {
         m_Children.push_back(enemy);
     }
-    CameraUpdate();
 }
 
 bool Map::CheckShowPosition(const glm::vec2 &position1,
