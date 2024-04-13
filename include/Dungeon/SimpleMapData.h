@@ -1,7 +1,7 @@
 #ifndef SIMPLE_MAP_DATA_H
 #define SIMPLE_MAP_DATA_H
 
-#include <deque>
+#include <vector>
 
 #include "Dungeon/Tile.h"
 
@@ -44,13 +44,13 @@ public:
                     const std::shared_ptr<Tile> tile);
     void PopBackTile(const std::size_t position);
     [[nodiscard]] bool IsTilesEmpty(const std::size_t position) const;
-    [[nodiscard]] std::deque<std::shared_ptr<Tile>>
+    [[nodiscard]] std::vector<std::shared_ptr<Tile>>
     GetTiles(const std::size_t position) const;
     [[nodiscard]] std::shared_ptr<Tile>
     GetTileBack(const std::size_t position) const;
     void SetHasEntity(const std::size_t position, const bool &hasEntity);
 
-    std::deque<std::shared_ptr<Tile>> GetTilesQueue() const;
+    std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
 
     static float Heuristic(const glm::vec2 &start, const glm::vec2 &end);
 
@@ -59,8 +59,8 @@ private:
     glm::ivec2 m_LevelIndexMax;
     glm::ivec2 m_Size;
     std::vector<bool> m_HasEntity;
-    std::vector<std::deque<std::shared_ptr<Tile>>> m_Tiles;
-    std::deque<std::shared_ptr<Tile>> m_TilesQueue;
+    std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
+    std::vector<std::shared_ptr<Tile>> m_TilesQueue;
     static glm::vec2 m_PlayerPosition;
 };
 } // namespace Dungeon

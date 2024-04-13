@@ -178,7 +178,7 @@ void Map::TempoUpdate() {
 void Map::Update() {
     std::size_t mapIndex = 0;
     CameraUpdate();
-    std::deque<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
+    std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto &enemy : EnemyQueue) {
         if (!enemy->GetVisible()) {
             continue;
