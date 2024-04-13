@@ -65,10 +65,9 @@ void Animation::UpdateAnimation(const bool &isDirection) {
             glm::vec2 move = m_AnimationDestination - m_AnimationPosition;
             m_AnimationPosition += move * ratio;
         }
-
-        m_AnimationZIndex = ToolBoxs::PosToGamePos({0, m_AnimationPosition.y -
-                                                           DUNGEON_TILE_WIDTH -
-                                                           DUNGEON_TILE_WIDTH})
-                                .y;
     }
+    m_AnimationZIndex =
+        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
+                                       DUNGEON_TILE_WIDTH})
+            .y;
 }

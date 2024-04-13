@@ -17,7 +17,9 @@ public:
         const std::shared_ptr<Player> mainCharacter, const std::string &path,
         const std::size_t levelNum = 1);
 
-    void LoadLevel(const std::size_t levelNum);
+    bool IsAvailable() { return m_Available; }
+    bool LoadLevel(const std::size_t levelNum);
+    std::size_t GetLevelNum() const;
 
     std::size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
 
@@ -36,10 +38,13 @@ public:
     bool GetOverlayRed() const { return m_OverlayRed; }
 
 private:
+    bool m_Available;
     void LoadTile();
     void LoadEnemy();
 
     void TempoUpdate();
+
+    std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
     const std::size_t ALLOW_EXTRA_DRAW = 4;
     bool CheckShowPosition(const glm::vec2 &position1,
@@ -51,6 +56,7 @@ private:
     const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
     const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;
+    std::size_t m_LevelNum;
     glm::ivec2 m_Size;
     std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
     std::shared_ptr<Camera> m_Camera;

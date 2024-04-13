@@ -74,9 +74,8 @@ glm::vec2 Player::GetGamePosition() {
 
 void Player::SetGamePosition(const glm::vec2 &gamePosition) {
     m_GamePosition = gamePosition;
-    m_Position = ToolBoxs::GamePostoPos(gamePosition);
-    m_Body->SetPosition(m_Position);
-    m_Head->SetPosition(m_Position);
+    m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
+    SetPosition(ToolBoxs::GamePostoPos(gamePosition));
 }
 
 void Player::SetFaceTo(Direction direction) {
@@ -101,6 +100,7 @@ void Player::Update() {
         m_Position = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
+    LOG_INFO(m_AnimationZIndex);
     SetPosition(m_Position);
 }
 
