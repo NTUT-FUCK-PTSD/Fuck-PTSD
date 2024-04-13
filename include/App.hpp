@@ -27,7 +27,7 @@ public:
 
     State GetCurrentState() const { return m_CurrentState; }
 
-    void Start(std::shared_ptr<Core::Context> context);
+    void Start();
 
     void Update();
 

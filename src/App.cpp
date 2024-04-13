@@ -16,8 +16,7 @@ int32_t rusty_extern_c_integer();
 }
 
 // show the start background and listen the keypress
-void App::Start(std::shared_ptr<Core::Context>
-                    context) { // the value context is come from main.cpp
+void App::Start() {
     LOG_TRACE("Start");
     if (m_FirstTime) {
         m_FirstTime = false;
