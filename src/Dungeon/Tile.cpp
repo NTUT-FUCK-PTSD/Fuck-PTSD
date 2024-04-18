@@ -7,20 +7,18 @@ namespace Dungeon {
 
 Tile::Tile(const s_Tile &u_Tile)
     : m_Tile(u_Tile) {
-    m_ZIndex = m_Tile.y;
     m_Filepath =
         (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(m_Tile.type) + ".png";
-    m_SpriteSheet = std::make_shared<Util::SpriteSheet>(m_Filepath);
-
-    m_TileSize = DUNGEON_TILESIZES.at(m_Tile.type);
-    m_ImgSize =
-        ToolBoxs::CountImagePixel(m_Filepath, m_TileSize.x, m_TileSize.y);
-    m_Drawable = m_SpriteSheet;
+    Initialize();
 }
 
 Tile::Tile(const s_Tile &u_Tile, const std::string &filepath)
     : m_Tile(u_Tile),
       m_Filepath(filepath) {
+    Initialize();
+}
+
+void Tile::Initialize() {
     m_ZIndex = m_Tile.y;
     m_SpriteSheet = std::make_shared<Util::SpriteSheet>(m_Filepath);
 
@@ -28,6 +26,7 @@ Tile::Tile(const s_Tile &u_Tile, const std::string &filepath)
     m_ImgSize =
         ToolBoxs::CountImagePixel(m_Filepath, m_TileSize.x, m_TileSize.y);
     m_Drawable = m_SpriteSheet;
+    m_SpriteSheet->SetColorMod({0, 0, 0, 255});
 }
 
 void Tile::SetIndex(std::size_t index) {
@@ -50,6 +49,23 @@ void Tile::SetRotation(float rotation) {
     m_Transform.rotation = rotation;
 }
 
+void Tile::SetOverlay(bool visible) {
+    if (!m_Seen) {
+        if (!visible) {
+            m_Seen = !visible;
+        }
+        else {
+            return;
+        }
+    }
+    m_IsOverlay = visible;
+    if (visible) {
+        m_SpriteSheet->SetColorMod({100, 100, 100, 255});
+    }
+    else {
+        m_SpriteSheet->SetColorMod({255, 255, 255, 255});
+    }
+}
 std::size_t Tile::GetIndex() {
     return m_Index;
 }

@@ -190,9 +190,18 @@ void Map::CameraUpdate() {
     m_Transform.translation = {0, 0};
 
     for (auto &tile : m_MapData->GetTilesQueue()) {
+        if (tile->GetTile().x == 0 && tile->GetTile().y == 0) {
+            tile->SetOverlay(true);
+        }
         if (CheckShowPosition({tile->GetTile().x, tile->GetTile().y},
                               cameraPos)) {
             tile->SetVisible(true);
+            if (CanPlayerSeePosition({tile->GetTile().x, tile->GetTile().y})) {
+                tile->SetOverlay(false);
+            }
+            else {
+                tile->SetOverlay(true);
+            }
         }
         else {
             tile->SetVisible(false);
@@ -201,6 +210,12 @@ void Map::CameraUpdate() {
     for (auto &enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
             enemy->SetVisible(true);
+            if (CanPlayerSeePosition(enemy->GetGamePosition())) {
+                enemy->SetShadow(false);
+            }
+            else {
+                enemy->SetShadow(true);
+            }
         }
         else {
             enemy->SetVisible(false);
@@ -342,6 +357,26 @@ void Map::EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy) {
         m_Camera->Shake(100, 10);
         m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
     }
+}
+
+bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
+    // Linear Interpolation
+    glm::vec2 playerPosition = m_MainCharacter->GetGamePosition();
+    glm::vec2 direction = position - playerPosition;
+    float distance = glm::length(direction);
+    for (float i = 0; i <= 1.0; i += 1.0 / distance) {
+        glm::vec2 checkPosition = playerPosition + direction * i;
+        checkPosition = {std::round(checkPosition.x),
+                         std::round(checkPosition.y)};
+        if (position == checkPosition) {
+            return true;
+        }
+        if (m_MapData->IsPositionWall(checkPosition) ||
+            m_MapData->IsPositionDoor(checkPosition)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 } // namespace Dungeon

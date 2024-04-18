@@ -92,6 +92,8 @@ private:
     std::size_t m_Damage = 0;
     std::size_t m_Health = 0; // Notice: 1 heart = 2 health(same as damage)
     std::size_t m_Coin = 0;
+
+    bool m_Seen = false;
 };
 } // namespace Dungeon
 

@@ -6,8 +6,7 @@ namespace Dungeon {
 namespace Tiles {
 GeneralWall::GeneralWall(const s_Tile &u_Tile, const bool generalWall)
     : Tile(u_Tile) {
-    m_MagicNumber = 7;
-    m_ImgSize.y -= 1;
+    m_MagicNumber = 6;
     if (generalWall) {
         UpdateDrawable();
     }
@@ -16,8 +15,7 @@ GeneralWall::GeneralWall(const s_Tile &u_Tile, const bool generalWall)
 GeneralWall::GeneralWall(const s_Tile &u_Tile, const std::string &filePath,
                          const bool generalWall)
     : Tile(u_Tile, filePath) {
-    m_MagicNumber = 7;
-    m_ImgSize.y -= 1;
+    m_MagicNumber = 6;
     if (generalWall) {
         UpdateDrawable();
     }

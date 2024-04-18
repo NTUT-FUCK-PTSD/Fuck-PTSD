@@ -53,6 +53,8 @@ private:
     bool isVaildMove(const glm::ivec2 &position);
     // use reference to avoid copy
     void EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy);
+    bool CanPlayerSeePosition(const glm::vec2 &position);
+
     const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
     const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     std::unique_ptr<Level> m_Level;
