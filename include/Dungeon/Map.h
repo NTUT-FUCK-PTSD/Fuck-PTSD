@@ -69,6 +69,7 @@ private:
     unsigned long m_OverlayRedTime = 0;
 
     bool m_PlayerTrigger = false;
+    std::vector<int> m_ShadowRenderDP;
 };
 
 } // namespace Dungeon

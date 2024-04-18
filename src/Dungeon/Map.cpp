@@ -43,6 +43,8 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     LoadTile();
     LoadEnemy();
 
+    m_ShadowRenderDP.clear();
+    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, 0);
     CameraUpdate();
     return true;
 }
@@ -230,6 +232,8 @@ void Map::TempoUpdate() {
         for (auto &enemy : m_MapData->GetEnemyQueue()) {
             enemy->TempoMove();
         }
+        m_ShadowRenderDP.clear();
+        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, 0);
     }
     m_PlayerTrigger = false;
 }
@@ -360,6 +364,11 @@ void Map::EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy) {
 }
 
 bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
+    std::size_t mapIndex = m_MapData->GamePosition2MapIndex(position);
+    if (m_ShadowRenderDP[mapIndex] == 1) {
+        return true;
+    }
+
     // Linear Interpolation
     glm::vec2 playerPosition = m_MainCharacter->GetGamePosition();
     glm::vec2 direction = position - playerPosition;
@@ -368,11 +377,15 @@ bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
         glm::vec2 checkPosition = playerPosition + direction * i;
         checkPosition = {std::round(checkPosition.x),
                          std::round(checkPosition.y)};
+        mapIndex = m_MapData->GamePosition2MapIndex(checkPosition);
+
         if (position == checkPosition) {
+            m_ShadowRenderDP[mapIndex] = 1;
             return true;
         }
         if (m_MapData->IsPositionWall(checkPosition) ||
             m_MapData->IsPositionDoor(checkPosition)) {
+            m_ShadowRenderDP[mapIndex] = -1;
             return false;
         }
     }
