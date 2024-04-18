@@ -51,6 +51,9 @@ public:
         m_DisplayHeartBeatDurationTime = time;
     };
 
+    std::size_t getTempoIndex();
+    std::size_t getTempoTime();
+
 private:
     float m_currentSpeed = 1.0f;
 

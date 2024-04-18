@@ -30,6 +30,14 @@ void MusicSystem::speedUp(float musicSpeed) {
     m_currentSpeed = m_currentSpeed + musicSpeed;
 }
 
+std::size_t MusicSystem::getTempoIndex() {
+    return m_tempo.getTempoIndex();
+}
+
+std::size_t MusicSystem::getTempoTime() {
+    return m_tempo.getTempo();
+}
+
 void MusicSystem::playMusic(const std::string &musicPath) {
     m_music = std::make_shared<SoLoud::Wav>();
     m_music->load(musicPath.c_str());

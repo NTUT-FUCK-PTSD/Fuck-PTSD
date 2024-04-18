@@ -137,3 +137,7 @@ void Tempo::UpdateTempoIndex() {
     m_currentTempoIndex =
         m_currentTempoIndex + 1 >= m_tempoListLength ? 0 : m_currentTempoIndex;
 }
+
+std::size_t Tempo::getTempoIndex(){
+    return m_currentTempoIndex;
+}
