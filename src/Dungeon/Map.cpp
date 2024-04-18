@@ -44,7 +44,7 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     LoadEnemy();
 
     m_ShadowRenderDP.clear();
-    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, 0);
+    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     CameraUpdate();
     return true;
 }
@@ -233,7 +233,7 @@ void Map::TempoUpdate() {
             enemy->TempoMove();
         }
         m_ShadowRenderDP.clear();
-        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, 0);
+        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     }
     m_PlayerTrigger = false;
 }
@@ -365,7 +365,7 @@ void Map::EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy) {
 
 bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
     std::size_t mapIndex = m_MapData->GamePosition2MapIndex(position);
-    if (m_ShadowRenderDP[mapIndex] == 1) {
+    if (m_ShadowRenderDP[mapIndex]) {
         return true;
     }
 
@@ -380,12 +380,12 @@ bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
         mapIndex = m_MapData->GamePosition2MapIndex(checkPosition);
 
         if (position == checkPosition) {
-            m_ShadowRenderDP[mapIndex] = 1;
+            m_ShadowRenderDP[mapIndex] = true;
             return true;
         }
         if (m_MapData->IsPositionWall(checkPosition) ||
             m_MapData->IsPositionDoor(checkPosition)) {
-            m_ShadowRenderDP[mapIndex] = -1;
+            m_ShadowRenderDP[mapIndex] = false;
             return false;
         }
     }
