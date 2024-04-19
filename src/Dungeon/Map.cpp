@@ -3,8 +3,6 @@
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
 
-#include "Dungeon/MiniMap.h"
-
 namespace Dungeon {
 
 Map::Map(const std::shared_ptr<Camera> camera,
@@ -28,7 +26,6 @@ Map::Map(const std::shared_ptr<Camera> camera,
 
 bool Map::LoadLevel(const std::size_t levelNum) {
     m_Children.clear();
-
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
         return false;
@@ -45,8 +42,6 @@ bool Map::LoadLevel(const std::size_t levelNum) {
 
     LoadTile();
     LoadEnemy();
-
-    m_Children.push_back(std::make_shared<Dungeon::MiniMap>(m_MapData));
 
     m_ShadowRenderDP.clear();
     m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
