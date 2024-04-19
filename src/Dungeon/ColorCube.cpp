@@ -17,6 +17,10 @@ glm::vec2 ColorCube::GetSize() const {
     return (m_Available == true) ? m_Image->GetSize() : glm::vec2(0.0f);
 }
 
+bool ColorCube::GetAvailable() const {
+    return m_Available;
+}
+
 void ColorCube::SetColor(CubeColor color) {
     m_Image.reset();
     m_Color = color;
@@ -80,6 +84,14 @@ void ColorCube::SetColor(CubeColor color) {
     case CubeColor::spore:
         m_Image = std::make_shared<Util::Image>(
             ASSETS_DIR "/particles/TEMP_particle_spore.png");
+        break;
+    case CubeColor::stone:
+        m_Image = std::make_shared<Util::Image>(
+            ASSETS_DIR "/particles/TEMP_particle_stone.png");
+        break;
+    case CubeColor::wall:
+        m_Image = std::make_shared<Util::Image>(
+            ASSETS_DIR "/particles/TEMP_particle_wall.png");
         break;
     case CubeColor::water:
         m_Image = std::make_shared<Util::Image>(

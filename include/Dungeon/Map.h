@@ -7,6 +7,7 @@
 #include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
+#include "Dungeon/MiniMap.h"
 #include "Dungeon/Tile.h"
 #include "Player/Player.h"
 
@@ -14,8 +15,10 @@ namespace Dungeon {
 class Map final : public Util::GameObject {
 public:
     Map(const std::shared_ptr<Camera> camera,
+        const std::shared_ptr<Camera> UIcamera,
         const std::shared_ptr<Player> mainCharacter, const std::string &path,
         const std::size_t levelNum = 1);
+    ~Map();
 
     bool IsAvailable() { return m_Available; }
     bool LoadLevel(const std::size_t levelNum);
@@ -62,6 +65,7 @@ private:
     glm::ivec2 m_Size;
     std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
     std::shared_ptr<Camera> m_Camera;
+    std::shared_ptr<Camera> m_UIcamera;
     std::shared_ptr<Player> m_MainCharacter;
 
     bool m_TempoAttack = false;
@@ -70,6 +74,8 @@ private:
 
     bool m_PlayerTrigger = false;
     std::vector<bool> m_ShadowRenderDP;
+
+    std::shared_ptr<MiniMap> m_MiniMap;
 };
 
 } // namespace Dungeon

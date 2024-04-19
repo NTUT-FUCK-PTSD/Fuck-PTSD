@@ -110,4 +110,8 @@ void Tile::UpdateDrawable() {
     m_Drawable = m_SpriteSheet;
 }
 
+bool Tile::GetSeen() const {
+    return m_Seen;
+}
+
 } // namespace Dungeon

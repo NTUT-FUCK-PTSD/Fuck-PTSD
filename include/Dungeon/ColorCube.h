@@ -20,6 +20,8 @@ enum class CubeColor {
     purple,
     red,
     spore,
+    stone,
+    wall,
     water,
     white,
     yellow,
@@ -34,6 +36,7 @@ public:
     ~ColorCube() = default;
     void Draw(const Core::Matrices &data) override;
     glm::vec2 GetSize() const override;
+    bool GetAvailable() const;
     void SetColor(Dungeon::CubeColor color);
 
 private:

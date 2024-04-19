@@ -3,14 +3,14 @@
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
 
-#include "Dungeon/MiniMap.h"
-
 namespace Dungeon {
 
 Map::Map(const std::shared_ptr<Camera> camera,
+         const std::shared_ptr<Camera> UIcamera,
          const std::shared_ptr<Player> mainCharacter, const std::string &path,
          const std::size_t levelNum)
     : m_Camera(camera),
+      m_UIcamera(UIcamera),
       m_MainCharacter(mainCharacter) {
     // ZIndex 100 is top
     m_ZIndex = 100;
@@ -24,6 +24,13 @@ Map::Map(const std::shared_ptr<Camera> camera,
     auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
     m_MapData->AddEnemy(mapIndex, enemy);
     m_Children.push_back(enemy);
+}
+
+Map::~Map() {
+    m_Children.clear();
+    m_MapData->ClearTiles();
+    m_MapData->ClearEnemies();
+    m_UIcamera->RemoveChild(m_MiniMap);
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
@@ -46,7 +53,9 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     LoadTile();
     LoadEnemy();
 
-    m_Children.push_back(std::make_shared<Dungeon::MiniMap>(m_MapData));
+    m_UIcamera->RemoveChild(m_MiniMap);
+    m_MiniMap = std::make_shared<MiniMap>(m_MapData);
+    m_UIcamera->AddChild(m_MiniMap);
 
     m_ShadowRenderDP.clear();
     m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
@@ -256,9 +265,10 @@ void Map::TempoTrigger() {
 void Map::Update() {
     std::size_t mapIndex = 0;
     CameraUpdate();
+    m_MiniMap->Update();
     std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto &enemy : EnemyQueue) {
-        if (!enemy->GetVisible()) {
+        if (!enemy->GetSeen()) {
             continue;
         }
         if (enemy->GetCanMove()) {
