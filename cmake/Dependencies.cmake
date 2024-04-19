@@ -21,11 +21,8 @@ message(STATUS "PTSD NOT FOUND, fetching from source!")
 set(PTSD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD")
 FetchContent_Declare(
         PTSD
-        URL https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design/archive/refs/tags/v1.2.4.zip
-
-        # GIT_REPOSITORY https://github.com/HeavenManySugar/PTSD
-        # GIT_TAG Example
-
+        GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design.git
+        GIT_TAG v1.2.5
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD
 )
 FetchContent_MakeAvailable(PTSD)
