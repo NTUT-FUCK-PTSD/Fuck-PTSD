@@ -4,5 +4,5 @@
 #include "Equipment/Weapon/EntityBroadsword.h"
 
 ToolSystem::EntityBroadsword::EntityBroadsword()
-    : TBaseWeapon(normal, blood, glass, golden, obsidian, titanium,
-                  ImagePath, m_IsThrow) {};
+    : TBaseWeapon(normal, blood, glass, golden, obsidian, titanium, ImagePath,
+                  m_IsThrow){};

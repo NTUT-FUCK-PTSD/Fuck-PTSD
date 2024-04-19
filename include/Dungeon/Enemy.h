@@ -67,7 +67,7 @@ public:
         }
     };
 
-    virtual void Update(){};
+    virtual void Update() {};
 
     bool GetSeen() const { return m_Seen; }
 

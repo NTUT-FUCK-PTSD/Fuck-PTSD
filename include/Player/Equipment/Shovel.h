@@ -5,11 +5,13 @@
 #ifndef FUCK_PTSD_SHOVEL_H
 #define FUCK_PTSD_SHOVEL_H
 
-#include "IEquipment.h"
-#include "Shovel/SComponent.h"
-#include "Shovel/EntityShovel.h"
-#include "ToolBoxs.h"
 #include "pch_extream.h"
+
+#include "IEquipment.h"
+#include "ToolBoxs.h"
+
+#include "Shovel/EntityShovel.h"
+#include "Shovel/SComponent.h"
 
 class Shovel final : public IEquipment {
 public:
@@ -20,13 +22,14 @@ public:
 
     std::shared_ptr<GameElement> GetGameObject() const override;
     Direction GetDirection() override { return IEquipment::Direction::ROW; };
+
 private:
     void selectWeaponType(ShovelEnum::Type type);
     void rendererWindow();
     void rendererItem();
 
     std::size_t m_ZIndex = 50;
-    glm::vec2 m_Scale = {3,3 };
+    glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, 0};
 
     std::shared_ptr<ToolSystem::TBaseShovel> m_ItemType;

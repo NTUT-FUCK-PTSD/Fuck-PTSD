@@ -24,7 +24,7 @@ private:
 
     bool m_Attack = false;
     bool m_CanDropHead = false;
-    bool m_DropHead = false;
+    // bool m_DropHead = false;
     uint16_t m_AnimationType;
 };
 } // namespace Enemies
