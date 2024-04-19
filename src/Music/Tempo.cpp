@@ -4,11 +4,11 @@
 #include "Music/Tempo.h"
 #include "Util/Logger.hpp"
 
-Tempo::Tempo() {}
+Music::Tempo::Tempo() {}
 
-Tempo::~Tempo() {}
+Music::Tempo::~Tempo() {}
 
-void Tempo::readTempoFile(const std::string &txtFilePath) {
+void Music::Tempo::readTempoFile(const std::string &txtFilePath) {
     std::ifstream txtTempoFile(txtFilePath);
     // LOG_INFO("hello");
 
@@ -26,7 +26,7 @@ void Tempo::readTempoFile(const std::string &txtFilePath) {
     txtTempoFile.close();
 }
 
-std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
+std::vector<std::size_t> Music::Tempo::txtToVector(const std::string &line,
                                             const char splitChar) {
     std::stringstream ss(line);
     std::string item;
@@ -41,7 +41,7 @@ std::vector<std::size_t> Tempo::txtToVector(const std::string &line,
     return elems;
 }
 
-bool Tempo::canBeClick() {
+bool Music::Tempo::canBeClick() {
 
     auto tempoIndex = m_tempoIndex + m_punishTimes;
 
@@ -59,14 +59,14 @@ bool Tempo::canBeClick() {
     return false;
 }
 
-std::size_t Tempo::getTempo() {
+std::size_t Music::Tempo::getTempo() {
     if (m_tempoList.empty()) {
         return 0;
     }
     return m_currentTempoTime;
 };
 
-void Tempo::Update() {
+void Music::Tempo::Update() {
     m_currentTempoTime = m_tempoList.empty()
                              ? 0
                              : m_tempoList[m_currentTempoIndex] * m_MusicSpeed;
@@ -76,7 +76,7 @@ void Tempo::Update() {
     UpdateTime();
 }
 
-void Tempo::keyBoardClick() {
+void Music::Tempo::keyBoardClick() {
     m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
 
     LOG_INFO(m_tempoIndex);
@@ -88,7 +88,7 @@ void Tempo::keyBoardClick() {
     m_isWrongTimeClick = true;
 };
 
-void Tempo::UpdateTime() {
+void Music::Tempo::UpdateTime() {
     if (m_tempoList.empty()) {
         return;
     }
@@ -132,12 +132,12 @@ void Tempo::UpdateTime() {
     //    }
 }
 
-void Tempo::UpdateTempoIndex() {
+void Music::Tempo::UpdateTempoIndex() {
     m_tempoIndex = m_tempoIndex + 1 >= m_tempoListLength ? 0 : m_tempoIndex;
     m_currentTempoIndex =
         m_currentTempoIndex + 1 >= m_tempoListLength ? 0 : m_currentTempoIndex;
 }
 
-std::size_t Tempo::getTempoIndex(){
+std::size_t Music::Tempo::getTempoIndex() const{
     return m_currentTempoIndex;
 }

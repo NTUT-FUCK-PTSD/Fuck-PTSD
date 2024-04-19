@@ -10,13 +10,15 @@
 #include "soloud_thread.h"
 #include "soloud_wav.h"
 
-#include "Display.h"
+#include "BeatHeart.h"
 #include "Tempo.h"
 
-class MusicSystem final {
+
+namespace Music {
+class Player final {
 public:
-    explicit MusicSystem();
-    ~MusicSystem();
+    explicit Player();
+    ~Player();
 
     void setEnable();
 
@@ -58,7 +60,7 @@ private:
     float m_currentSpeed = 1.0f;
 
     Tempo m_tempo;
-    Display m_display;
+    BeatHeart m_display;
 
     /* ms */
     int16_t m_TempoOffset = 0;
@@ -78,5 +80,6 @@ private:
     std::shared_ptr<GameElement> m_MusicObject =
         std::make_shared<GameElement>();
 };
+}
 
 #endif // FUCK_PTSD_MUSIC_H
