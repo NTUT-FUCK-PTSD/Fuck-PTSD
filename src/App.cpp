@@ -187,6 +187,9 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
+    LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
+    LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
+
     m_MusicSystem->Update();
     m_MainCharacter->Update();
     m_Window->Update();

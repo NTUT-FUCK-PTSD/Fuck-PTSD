@@ -26,6 +26,7 @@ public:
     void keyBoardClick();
 
     std::size_t getTempo();
+    std::size_t getTempoIndex();
 
     void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
     void setShowBeat(bool state) { isShowHeartBeat = state; };
