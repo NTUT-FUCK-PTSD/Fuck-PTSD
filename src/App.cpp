@@ -86,6 +86,11 @@ void App::Update() {
     //        m_Diamond->plusDiamondNumber(10);
     //    }
 
+    if (m_BeforeTempoIndex != m_MusicSystem->getTempoIndex()) {
+        m_BeforeTempoIndex = m_MusicSystem->getTempoIndex();
+        m_DungeonMap->TempoTrigger();
+    }
+
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
         m_AniCameraDestination = {0, 0};
@@ -187,8 +192,8 @@ void App::Update() {
 
     //    LOG_INFO(rusty_extern_c_integer());
 
-    LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
-    LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
+    // LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
+    // LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
 
     m_MusicSystem->Update();
     m_MainCharacter->Update();
