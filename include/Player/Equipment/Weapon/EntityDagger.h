@@ -24,5 +24,5 @@ private:
     inline const static std::string ImagePath =
         ASSETS_DIR "/items/weapon_dagger.png";
 };
-};     // namespace ToolSystem
+}; // namespace ToolSystem
 #endif // FUCK_PTSD_ENTITYDAGGER_H

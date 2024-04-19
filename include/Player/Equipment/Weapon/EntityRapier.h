@@ -28,5 +28,5 @@ private:
     inline const static std::string ImagePath =
         ASSETS_DIR "/items/weapon_rapier.png";
 };
-};     // namespace ToolSystem
+}; // namespace ToolSystem
 #endif // FUCK_PTSD_ENTITYRAPIER_H
