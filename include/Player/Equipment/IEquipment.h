@@ -18,7 +18,8 @@ public:
     };
 
     // setter
-    [[noreturn]] virtual void setPosition(const glm::vec2 position) = 0;
+    [[noreturn]]
+    virtual void setPosition(const glm::vec2 position) = 0;
     virtual void setWeaponType([[maybe_unused]] WeaponEnum::Type type) {
         return;
     };

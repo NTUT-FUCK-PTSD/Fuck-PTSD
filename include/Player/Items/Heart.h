@@ -31,8 +31,8 @@ public:
 
     void SetHeartMaxHp(const std::size_t value);
 
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
-    getGameObjects() const;
+    [[nodiscard]]
+    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() const;
 
     std::shared_ptr<GameElement> GetGameObject() const;
 

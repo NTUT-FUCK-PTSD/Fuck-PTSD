@@ -14,7 +14,8 @@ class Background final {
 public:
     Background();
 
-    [[nodiscard]] std::shared_ptr<GameElement> GetGameElement();
+    [[nodiscard]]
+    std::shared_ptr<GameElement> GetGameElement();
 
 private:
     std::string m_ContinueImagePath = ASSETS_DIR "/mainmenu/continue.png";
