@@ -59,12 +59,9 @@ void Tile::SetOverlay(bool visible) {
         }
     }
     m_IsOverlay = visible;
-    if (visible) {
-        m_SpriteSheet->SetColorMod({100, 100, 100, 255});
-    }
-    else {
-        m_SpriteSheet->SetColorMod({255, 255, 255, 255});
-    }
+    SDL_Color color = (visible == true ? SDL_Color({100, 100, 100, 255})
+                                       : SDL_Color({255, 255, 255, 255}));
+    m_SpriteSheet->SetColorMod(color);
 }
 std::size_t Tile::GetIndex() {
     return m_Index;
