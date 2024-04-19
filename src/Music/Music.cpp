@@ -56,6 +56,7 @@ void Music::Player::skipToTargetTime(float time) {
 
 std::shared_ptr<GameElement> Music::Player::getGameObject() {
     m_MusicObject->AddChild(m_display.getGameElement());
+//    m_MusicObject->AddChild(m_rhythmIndicator.GetGameElement());
 
     m_MusicObject->SetVisible(false);
     return m_MusicObject;
@@ -72,4 +73,6 @@ void Music::Player::Update()  {
     m_display.setTriggerTime(m_tempo.getTempo());
     m_display.setCurrentMusicTime(CurrentMusicTime * m_currentSpeed);
     m_display.Update();
+
+//    m_rhythmIndicator.Update();
 };

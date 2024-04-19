@@ -12,6 +12,7 @@
 
 #include "BeatHeart.h"
 #include "Tempo.h"
+#include "RhythmIndicator.h"
 
 
 namespace Music {
@@ -59,8 +60,11 @@ public:
 private:
     float m_currentSpeed = 1.0f;
 
+
     Tempo m_tempo;
     BeatHeart m_display;
+    RhythmIndicator m_rhythmIndicator;
+
 
     /* ms */
     int16_t m_TempoOffset = 0;
