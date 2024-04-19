@@ -387,6 +387,18 @@ bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
     // Linear Interpolation
     glm::vec2 playerPosition = m_MainCharacter->GetGamePosition();
     glm::vec2 direction = position - playerPosition;
+    if (direction.x > 0) {
+        direction.x -= 0.5;
+    }
+    else if (direction.x < 0) {
+        direction.x += 0.5;
+    }
+    if (direction.y > 0) {
+        direction.y -= 0.5;
+    }
+    else if (direction.y < 0) {
+        direction.y += 0.5;
+    }
     float distance = glm::length(direction);
     for (float i = 0; i <= 1.0; i += 1.0 / distance) {
         glm::vec2 checkPosition = playerPosition + direction * i;
