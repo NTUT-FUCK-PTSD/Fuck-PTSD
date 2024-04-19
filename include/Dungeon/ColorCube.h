@@ -26,17 +26,20 @@ enum class CubeColor {
     yellowgreen
 };
 
-class ColorCube : public Core::Drawable {
+class ColorCube final : public Core::Drawable {
 public:
     ColorCube(Dungeon::CubeColor color);
+    ColorCube(const ColorCube &other) = default;
+    ColorCube() = default;
     ~ColorCube() = default;
     void Draw(const Core::Matrices &data) override;
     glm::vec2 GetSize() const override;
+    void SetColor(Dungeon::CubeColor color);
 
 private:
-    void SetColor(Dungeon::CubeColor color);
     Dungeon::CubeColor m_Color;
     std::shared_ptr<Util::Image> m_Image;
+    bool m_Available = false;
 };
 } // namespace Dungeon
 

@@ -4,14 +4,17 @@ namespace Dungeon {
 ColorCube::ColorCube(CubeColor color)
     : m_Color(color) {
     SetColor(color);
+    m_Available = true;
 }
 
 void ColorCube::Draw(const Core::Matrices &data) {
-    m_Image->Draw(data);
+    if (m_Available == true) {
+        m_Image->Draw(data);
+    }
 }
 
 glm::vec2 ColorCube::GetSize() const {
-    return m_Image->GetSize();
+    return (m_Available == true) ? m_Image->GetSize() : glm::vec2(0.0f);
 }
 
 void ColorCube::SetColor(CubeColor color) {
@@ -95,5 +98,6 @@ void ColorCube::SetColor(CubeColor color) {
             ASSETS_DIR "/particles/TEMP_particle_yellow.png");
         break;
     }
+    m_Available = true;
 }
 } // namespace Dungeon
