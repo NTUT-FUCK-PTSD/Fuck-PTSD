@@ -40,22 +40,11 @@ std::vector<std::size_t> Music::Tempo::txtToVector(const std::string &line,
     return elems;
 }
 
-//bool Music::Tempo::canBeClick() {
-//
-//    auto tempoIndex = m_tempoIndex + m_punishTimes;
-//
-//    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed &&
-//        m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
-//        return true;
-//    }
-//    return false;
-//}
-
 bool Music::Tempo::canBeClick() {
     const std::size_t tempoIndex = m_tempoIndex;
 
     const std::size_t triggerLower = m_tempoList[tempoIndex] - m_range;
-    const std::size_t triggerUpper = m_tempoList[tempoIndex] - m_range;
+    const std::size_t triggerUpper = m_tempoList[tempoIndex] + m_range;
 
     // if yes = true, no = false;
     return m_duringTime >= triggerLower && m_duringTime <= triggerUpper;
