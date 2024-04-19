@@ -51,10 +51,7 @@ bool Music::Tempo::canBeClick() {
 }
 
 std::size_t Music::Tempo::getTempo() {
-    if (m_tempoList.empty()) {
-        return 0;
-    }
-    return m_currentTempoTime;
+    return m_tempoList.empty() ? 0 : m_currentTempoTime;
 };
 
 void Music::Tempo::Update() {
