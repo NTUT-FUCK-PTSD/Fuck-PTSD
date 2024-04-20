@@ -79,19 +79,6 @@ void MiniMap::SetVisible(const std::size_t position, bool visible) {
     m_Children[position]->SetVisible(visible);
 }
 
-void MiniMap::AddChildren(
-    const std::vector<std::shared_ptr<GameObject>> &children) {
-    m_Children.reserve(m_Children.size() + children.size());
-    m_Children.insert(m_Children.end(), children.begin(), children.end());
-}
-
-void MiniMap::RemoveChildren(
-    const std::vector<std::shared_ptr<GameObject>> &children) {
-    for (auto &child : children) {
-        RemoveChild(child);
-    }
-}
-
 void MiniMap::Update() {
     // Update Tiles
     for (int i = 0; i < m_MapData->GetSize().y; i++) {
