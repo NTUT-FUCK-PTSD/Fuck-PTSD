@@ -37,9 +37,7 @@ public:
 
     void clickEvent() { m_tempo.keyBoardClick(); };
 
-    void readTempoFile(const std::string &path) {
-        m_tempo.readTempoFile(path);
-    };
+    void readTempoFile(const std::string &path);
 
     bool TempoTrigger() { return m_tempo.canBeClick(); }
 

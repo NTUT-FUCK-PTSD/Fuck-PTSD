@@ -147,3 +147,7 @@ void Music::Tempo::UpdateTempoIndex() {
 std::size_t Music::Tempo::getTempoIndex() const{
     return m_currentTempoIndex;
 }
+
+std::vector<std::size_t> Music::Tempo::GetTempoTriggerList() {
+    return m_tempoList;
+}

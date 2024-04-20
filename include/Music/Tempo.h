@@ -39,6 +39,8 @@ public:
     };
     void Update();
 
+    std::vector<std::size_t> GetTempoTriggerList();
+
 protected:
     void UpdateTime();
     void UpdateTempoIndex();
