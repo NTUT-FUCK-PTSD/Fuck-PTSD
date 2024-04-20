@@ -262,8 +262,7 @@ void Map::TempoUpdate(bool isPlayer) {
     m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
 }
 
-void Map::PlayerTrigger(const std::size_t index) {
-    m_TempoIndex = index;
+void Map::PlayerTrigger() {
     TempoUpdate(true);
 }
 

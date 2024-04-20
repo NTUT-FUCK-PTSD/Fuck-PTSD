@@ -174,7 +174,7 @@ void App::Update() {
                                     m_PlayerMoveDirect);
         m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
-        m_DungeonMap->PlayerTrigger(m_MusicSystem->getTempoIndex2());
+        m_DungeonMap->PlayerTrigger();
     }
 
     // detect the player
