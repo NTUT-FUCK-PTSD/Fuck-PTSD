@@ -65,8 +65,9 @@ void App::Start() {
     m_Window->AddChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
-    m_DungeonMap = std::make_shared<Dungeon::Map>(
-        m_Camera, m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
+    m_DungeonMap =
+        std::make_shared<Dungeon::Map>(m_Camera, m_Window, m_MainCharacter,
+                                       ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
     m_DungeonMap->SetDrawable(
         std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);

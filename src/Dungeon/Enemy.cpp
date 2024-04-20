@@ -18,6 +18,15 @@ Enemy::Enemy(const s_Enemy &u_Enemy,
 }
 
 void Enemy::SetShadow(const bool &shadow) {
+    if (!m_Seen) {
+        if (!shadow) {
+            m_Seen = !shadow;
+        }
+        else {
+            m_Visible = false;
+            return;
+        }
+    }
     m_Shadow = shadow;
     m_SpriteSheet->SetFrames(shadow ? m_ShadowFrames : m_NormalFrames);
 }

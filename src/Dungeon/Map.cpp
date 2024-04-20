@@ -6,9 +6,11 @@
 namespace Dungeon {
 
 Map::Map(const std::shared_ptr<Camera> camera,
+         const std::shared_ptr<Camera> UIcamera,
          const std::shared_ptr<Player> mainCharacter, const std::string &path,
          const std::size_t levelNum)
     : m_Camera(camera),
+      m_UIcamera(UIcamera),
       m_MainCharacter(mainCharacter) {
     // ZIndex 100 is top
     m_ZIndex = 100;
@@ -24,8 +26,16 @@ Map::Map(const std::shared_ptr<Camera> camera,
     m_Children.push_back(enemy);
 }
 
+Map::~Map() {
+    m_Children.clear();
+    m_MapData->ClearTiles();
+    m_MapData->ClearEnemies();
+    m_UIcamera->RemoveChild(m_MiniMap);
+}
+
 bool Map::LoadLevel(const std::size_t levelNum) {
     m_Children.clear();
+
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
         return false;
@@ -43,6 +53,12 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     LoadTile();
     LoadEnemy();
 
+    m_UIcamera->RemoveChild(m_MiniMap);
+    m_MiniMap = std::make_shared<MiniMap>(m_MapData);
+    m_UIcamera->AddChild(m_MiniMap);
+
+    m_ShadowRenderDP.clear();
+    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     CameraUpdate();
     return true;
 }
@@ -190,9 +206,18 @@ void Map::CameraUpdate() {
     m_Transform.translation = {0, 0};
 
     for (auto &tile : m_MapData->GetTilesQueue()) {
+        if (tile->GetTile().x == 0 && tile->GetTile().y == 0) {
+            tile->SetOverlay(true);
+        }
         if (CheckShowPosition({tile->GetTile().x, tile->GetTile().y},
                               cameraPos)) {
             tile->SetVisible(true);
+            if (CanPlayerSeePosition({tile->GetTile().x, tile->GetTile().y})) {
+                tile->SetOverlay(false);
+            }
+            else {
+                tile->SetOverlay(true);
+            }
         }
         else {
             tile->SetVisible(false);
@@ -201,6 +226,12 @@ void Map::CameraUpdate() {
     for (auto &enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
             enemy->SetVisible(true);
+            if (CanPlayerSeePosition(enemy->GetGamePosition())) {
+                enemy->SetShadow(false);
+            }
+            else {
+                enemy->SetShadow(true);
+            }
         }
         else {
             enemy->SetVisible(false);
@@ -215,6 +246,8 @@ void Map::TempoUpdate() {
         for (auto &enemy : m_MapData->GetEnemyQueue()) {
             enemy->TempoMove();
         }
+        m_ShadowRenderDP.clear();
+        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     }
     m_PlayerTrigger = false;
 }
@@ -232,9 +265,10 @@ void Map::TempoTrigger() {
 void Map::Update() {
     std::size_t mapIndex = 0;
     CameraUpdate();
+    m_MiniMap->Update();
     std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto &enemy : EnemyQueue) {
-        if (!enemy->GetVisible()) {
+        if (!enemy->GetSeen()) {
             continue;
         }
         if (enemy->GetCanMove()) {
@@ -342,6 +376,47 @@ void Map::EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy) {
         m_Camera->Shake(100, 10);
         m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
     }
+}
+
+bool Map::CanPlayerSeePosition(const glm::vec2 &position) {
+    std::size_t mapIndex = m_MapData->GamePosition2MapIndex(position);
+    if (m_ShadowRenderDP[mapIndex]) {
+        return true;
+    }
+
+    // Linear Interpolation
+    glm::vec2 playerPosition = m_MainCharacter->GetGamePosition();
+    glm::vec2 direction = position - playerPosition;
+    if (direction.x > 0) {
+        direction.x -= 0.5;
+    }
+    else if (direction.x < 0) {
+        direction.x += 0.5;
+    }
+    if (direction.y > 0) {
+        direction.y -= 0.5;
+    }
+    else if (direction.y < 0) {
+        direction.y += 0.5;
+    }
+    float distance = glm::length(direction);
+    for (float i = 0; i <= 1.0; i += 1.0 / distance) {
+        glm::vec2 checkPosition = playerPosition + direction * i;
+        checkPosition = {std::round(checkPosition.x),
+                         std::round(checkPosition.y)};
+        mapIndex = m_MapData->GamePosition2MapIndex(checkPosition);
+
+        if (position == checkPosition) {
+            m_ShadowRenderDP[mapIndex] = true;
+            return true;
+        }
+        if (m_MapData->IsPositionWall(checkPosition) ||
+            m_MapData->IsPositionDoor(checkPosition)) {
+            m_ShadowRenderDP[mapIndex] = false;
+            return false;
+        }
+    }
+    return true;
 }
 
 } // namespace Dungeon
