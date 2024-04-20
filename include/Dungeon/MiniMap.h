@@ -23,9 +23,6 @@ public:
 private:
     void BuildMiniMap();
     void UpdateTileColor(const std::size_t mapIndex);
-    void AddChildren(const std::vector<std::shared_ptr<GameObject>> &children);
-    void
-    RemoveChildren(const std::vector<std::shared_ptr<GameObject>> &children);
 
     std::shared_ptr<MapData> m_MapData;
     std::vector<std::shared_ptr<ColorCube>> m_ColorCubes;
