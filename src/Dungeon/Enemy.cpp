@@ -14,7 +14,7 @@ Enemy::Enemy(const s_Enemy &u_Enemy,
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
     m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
-    SetZIndex(m_GamePosition.y / 2e3 + 2e-5);
+    SetZIndex(m_GamePosition.y / 1e3 + 1e-5);
 }
 
 void Enemy::SetShadow(const bool &shadow) {
