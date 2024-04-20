@@ -16,7 +16,7 @@ Music::BeatHeart::BeatHeart() {
     m_BeatHeart->SetZIndex(m_ZIndex);
 }
 
-//Music::BeatHeart::~BeatHeart() {}
+// Music::BeatHeart::~BeatHeart() {}
 
 void Music::BeatHeart::Update() {
 

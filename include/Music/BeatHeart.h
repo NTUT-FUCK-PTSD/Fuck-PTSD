@@ -13,7 +13,7 @@
 #include "Settings/Window.hpp"
 
 namespace Music {
-//class Display final {
+// class Display final {
 class BeatHeart final {
 public:
     explicit BeatHeart();
@@ -21,7 +21,10 @@ public:
 
     void Update();
 
-    [[nodiscard]] std::shared_ptr<GameElement> getGameElement() const { return m_BeatHeart; };
+    [[nodiscard]]
+    std::shared_ptr<GameElement> getGameElement() const {
+        return m_BeatHeart;
+    };
 
     void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
     void setOffset(int16_t offset) { m_offset = offset; };
@@ -52,6 +55,6 @@ private:
     std::shared_ptr<SpriteSheet> m_TempoHeartImage;
     std::shared_ptr<GameElement> m_BeatHeart = std::make_shared<GameElement>();
 };
-}
+} // namespace Music
 
 #endif // FUCK_PTSD_BEATHEART_H

@@ -11,9 +11,8 @@
 #include "soloud_wav.h"
 
 #include "BeatHeart.h"
-#include "Tempo.h"
 #include "RhythmIndicator.h"
-
+#include "Tempo.h"
 
 namespace Music {
 class Player final {
@@ -58,11 +57,9 @@ public:
 private:
     float m_currentSpeed = 1.0f;
 
-
     Tempo m_tempo;
     BeatHeart m_display;
     RhythmIndicator m_rhythmIndicator;
-
 
     /* ms */
     int16_t m_TempoOffset = 0;
@@ -82,6 +79,6 @@ private:
     std::shared_ptr<GameElement> m_MusicObject =
         std::make_shared<GameElement>();
 };
-}
+} // namespace Music
 
 #endif // FUCK_PTSD_MUSIC_H
