@@ -24,7 +24,8 @@ public:
 
     // some getter
     std::shared_ptr<GameElement> GetGameElement();
-    [[nodiscard]] glm::vec2 GetGamePosition();
+    [[nodiscard]]
+    glm::vec2 GetGamePosition();
     std::shared_ptr<GameElement> GetWindowElement();
     Direction GetFaceTo();
 

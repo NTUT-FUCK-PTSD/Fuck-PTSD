@@ -21,8 +21,8 @@ public:
     Direction GetDirection() override { return IEquipment::Direction::COL; };
 
 private:
-    std::size_t m_ZIndex = 50;
-    glm::vec2 m_Scale = {3, 3};
+    std::size_t m_ZIndex = 99;
+    glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     glm::vec2 m_Position = {0, 0};
 
     Util::Color m_FontColor = Util::Color(255, 255, 255);

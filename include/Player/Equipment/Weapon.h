@@ -22,8 +22,10 @@ public:
     void setWeaponType(WeaponEnum::Type type) override;
     void setPosition(const glm::vec2 position) override;
 
-    [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
-    [[nodiscard]] bool GetIsThrow() override;
+    [[nodiscard]]
+    std::shared_ptr<GameElement> GetGameObject() const override;
+    [[nodiscard]]
+    bool GetIsThrow() override;
 
     Direction GetDirection() override { return IEquipment::Direction::ROW; };
 
@@ -32,8 +34,8 @@ private:
     void rendererWindow();
     void rendererItem();
 
-    std::size_t m_ZIndex = 50;
-    glm::vec2 m_Scale = {3, 3};
+    std::size_t m_ZIndex = 99;
+    glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     glm::vec2 m_Position = {0, 0};
 
     std::string m_ImagePathItem;

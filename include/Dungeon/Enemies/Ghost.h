@@ -13,8 +13,6 @@ public:
 
     void SetTransparent(bool transparent);
 
-    glm::vec2 FindNextToPlayer() override;
-
     void Struck(const std::size_t damage) override;
 
     void Move() override;
@@ -27,7 +25,6 @@ private:
     const glm::vec2 m_FrameSize = {24, 24};
 
     std::size_t m_LastDistance = 0;
-    std::size_t m_Distance = 0;
 
     bool m_Transparent = false;
 };

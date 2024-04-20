@@ -7,16 +7,20 @@ Camera::Camera(const std::vector<std::shared_ptr<Util::GameObject>> &children)
     : m_Renderer(std::make_shared<Util::Renderer>(children)) {}
 
 void Camera::AddChild(const std::shared_ptr<Util::GameObject> child) {
-    m_Renderer->AddChild(child);
+    m_GameChildren.push_back(child);
 }
 
 void Camera::AddChildren(
     const std::vector<std::shared_ptr<Util::GameObject>> &children) {
-    m_Renderer->AddChildren(children);
+    m_GameChildren.reserve(m_GameChildren.size() + children.size());
+    m_GameChildren.insert(m_GameChildren.end(), children.begin(),
+                          children.end());
 }
 
 void Camera::RemoveChild(std::shared_ptr<Util::GameObject> child) {
-    m_Renderer->RemoveChild(child);
+    m_GameChildren.erase(
+        std::remove(m_GameChildren.begin(), m_GameChildren.end(), child),
+        m_GameChildren.end());
 }
 
 void Camera::Update() {
@@ -38,7 +42,16 @@ void Camera::Update() {
     if (m_IsShaking) {
         ShakeUpdate();
     }
+    m_Renderer->AddChildren(m_GameChildren);
     m_Renderer->Update(m_Position);
+    for (auto &child : m_GameChildren) {
+        m_Renderer->RemoveChild(child);
+    }
+    m_Renderer->AddChildren(m_UIChildren);
+    m_Renderer->Update({0, 0});
+    for (auto &child : m_UIChildren) {
+        m_Renderer->RemoveChild(child);
+    }
 }
 
 void Camera::MoveByTime(const unsigned long duringTimeMs,
@@ -112,4 +125,20 @@ void Camera::MoveByTimeInternal(const unsigned long duringTimeMs,
     m_AnimationDuringTimeMs = duringTimeMs;
     m_AnimationDestination = destination;
     m_IsAnimating = true;
+}
+
+void Camera::AddUIChild(const std::shared_ptr<Util::GameObject> child) {
+    m_UIChildren.push_back(child);
+}
+
+void Camera::AddUIChildren(
+    const std::vector<std::shared_ptr<Util::GameObject>> &children) {
+    m_UIChildren.reserve(m_UIChildren.size() + children.size());
+    m_UIChildren.insert(m_UIChildren.end(), children.begin(), children.end());
+}
+
+void Camera::RemoveUIChild(std::shared_ptr<Util::GameObject> child) {
+    m_UIChildren.erase(
+        std::remove(m_UIChildren.begin(), m_UIChildren.end(), child),
+        m_UIChildren.end());
 }

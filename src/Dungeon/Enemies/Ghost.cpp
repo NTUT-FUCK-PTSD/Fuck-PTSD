@@ -18,9 +18,6 @@ Enemies::Ghost::Ghost(const s_Enemy &u_Enemy,
     SetHealth(2); // 1 heart
     SetDamage(1); // 0.5 heart
     SetCoin(2);
-    m_Distance = Dungeon::AStar::FindPath(m_GamePosition, GetPlayerPosition(),
-                                          m_SimpleMapData)
-                     .size();
 }
 } // namespace Dungeon
 
@@ -32,20 +29,6 @@ void Ghost::SetTransparent(bool transparent) {
     }
     else {
         m_SpriteSheet->SetAlpha(255);
-    }
-}
-glm::vec2 Ghost::FindNextToPlayer() {
-    if (GetPlayerPosition() == GetGamePosition()) {
-        return GetGamePosition();
-    }
-    auto path = Dungeon::AStar::FindPath(GetGamePosition(), GetPlayerPosition(),
-                                         m_SimpleMapData);
-    m_Distance = path.size();
-    if (path.empty()) {
-        return GetGamePosition();
-    }
-    else {
-        return path[1];
     }
 }
 void Ghost::Struck(const std::size_t damage) {

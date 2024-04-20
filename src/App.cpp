@@ -62,7 +62,7 @@ void App::Start() {
     m_MainCharacter->SetBodyImage(ASSETS_DIR
                                   "/entities/player1_armor_body.png");
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
-    m_Window->AddChild(m_MainCharacter->GetWindowElement());
+    m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
@@ -77,7 +77,7 @@ void App::Start() {
     m_Camera->AddChild(m_DungeonMap);
 
     // display the tempo heart in music System
-    m_Window->AddChild(m_MusicSystem->getGameObject());
+    m_Camera->AddUIChild(m_MusicSystem->getGameObject());
 
     m_CurrentState = State::UPDATE;
 }
@@ -90,10 +90,10 @@ void App::Update() {
     //        m_Coin->plusCoinNumber(10);
     //        m_Diamond->plusDiamondNumber(10);
     //    }
-
-    if (m_BeforeTempoIndex != m_MusicSystem->getTempoIndex()) {
-        m_BeforeTempoIndex = m_MusicSystem->getTempoIndex();
-        m_DungeonMap->TempoTrigger();
+    auto tempoIndex = m_MusicSystem->getTempoIndex();
+    if (m_BeforeTempoIndex != tempoIndex) {
+        m_BeforeTempoIndex = tempoIndex;
+        m_DungeonMap->TempoTrigger(tempoIndex);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -108,7 +108,6 @@ void App::Update() {
          Util::Input::IsKeyDown(Util::Keycode::S) ||
          Util::Input::IsKeyDown(Util::Keycode::A)) &&
         m_MusicSystem->TempoTrigger()) {
-
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -202,7 +201,6 @@ void App::Update() {
 
     m_MusicSystem->Update();
     m_MainCharacter->Update();
-    m_Window->Update();
     m_Camera->Update();
 }
 

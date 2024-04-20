@@ -45,8 +45,8 @@ private:
     bool m_IsMainMenu = true;
 
     // music
-    std::shared_ptr<MusicSystem> m_MusicSystem =
-        std::make_shared<MusicSystem>();
+    std::shared_ptr<Music::Player> m_MusicSystem =
+        std::make_shared<Music::Player>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
@@ -59,12 +59,12 @@ private:
     std::shared_ptr<Player> m_MainCharacter;
 
     std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
-    std::shared_ptr<Camera> m_Window = std::make_shared<Camera>();
 
     glm::vec2 m_CameraPosition = {0, 0};
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
     std::size_t m_BeforeTempoIndex = 0;
+    std::size_t m_TempoIndex = 0;
 };
 
 #endif

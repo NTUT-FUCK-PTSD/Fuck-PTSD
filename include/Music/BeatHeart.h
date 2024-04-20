@@ -2,8 +2,8 @@
 // Created by adven on 2024/3/27.
 //
 
-#ifndef FUCK_PTSD_DISPLAY_H
-#define FUCK_PTSD_DISPLAY_H
+#ifndef FUCK_PTSD_BEATHEART_H
+#define FUCK_PTSD_BEATHEART_H
 
 #include <iostream>
 
@@ -12,14 +12,19 @@
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
 
-class Display final {
+namespace Music {
+// class Display final {
+class BeatHeart final {
 public:
-    explicit Display();
-    ~Display();
+    explicit BeatHeart();
+    virtual ~BeatHeart() = default;
 
     void Update();
 
-    std::shared_ptr<GameElement> getGameElement() const { return m_BeatHeart; };
+    [[nodiscard]]
+    std::shared_ptr<GameElement> getGameElement() const {
+        return m_BeatHeart;
+    };
 
     void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
     void setOffset(int16_t offset) { m_offset = offset; };
@@ -45,10 +50,11 @@ private:
     glm::vec2 m_Position = {0, -(static_cast<int>(WINDOW_HEIGHT) / 2) +
                                    (52 * DUNGEON_SCALE) / 2 +
                                    DUNGEON_TILE_WIDTH};
-    std::size_t m_ZIndex = 50;
+    std::size_t m_ZIndex = 100;
 
     std::shared_ptr<SpriteSheet> m_TempoHeartImage;
     std::shared_ptr<GameElement> m_BeatHeart = std::make_shared<GameElement>();
 };
+} // namespace Music
 
-#endif // FUCK_PTSD_DISPLAY_H
+#endif // FUCK_PTSD_BEATHEART_H

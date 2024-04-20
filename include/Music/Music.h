@@ -10,13 +10,15 @@
 #include "soloud_thread.h"
 #include "soloud_wav.h"
 
-#include "Display.h"
+#include "BeatHeart.h"
+#include "RhythmIndicator.h"
 #include "Tempo.h"
 
-class MusicSystem final {
+namespace Music {
+class Player final {
 public:
-    explicit MusicSystem();
-    ~MusicSystem();
+    explicit Player();
+    ~Player();
 
     void setEnable();
 
@@ -34,9 +36,7 @@ public:
 
     void clickEvent() { m_tempo.keyBoardClick(); };
 
-    void readTempoFile(const std::string &path) {
-        m_tempo.readTempoFile(path);
-    };
+    void readTempoFile(const std::string &path);
 
     bool TempoTrigger() { return m_tempo.canBeClick(); }
 
@@ -58,7 +58,8 @@ private:
     float m_currentSpeed = 1.0f;
 
     Tempo m_tempo;
-    Display m_display;
+    BeatHeart m_display;
+    RhythmIndicator m_rhythmIndicator;
 
     /* ms */
     int16_t m_TempoOffset = 0;
@@ -78,5 +79,6 @@ private:
     std::shared_ptr<GameElement> m_MusicObject =
         std::make_shared<GameElement>();
 };
+} // namespace Music
 
 #endif // FUCK_PTSD_MUSIC_H

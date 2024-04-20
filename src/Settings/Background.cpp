@@ -14,12 +14,12 @@ Background::Background() {
         std::make_shared<Util::Image>(m_MainMenuImagePath);
 
     m_MainMenu->SetDrawable(MainMenuImage);
-    m_MainMenu->SetZIndex(3);
+    m_MainMenu->SetZIndex(99);
     m_MainMenu->SetScale(glm::vec2(DUNGEON_SCALE, DUNGEON_SCALE));
 
     m_Continue->SetDrawable(ContinueImage);
     m_Continue->SetPosition({-0.5f, -365.4f});
-    m_Continue->SetZIndex(5);
+    m_Continue->SetZIndex(100);
     m_Continue->SetScale(glm::vec2(DUNGEON_SCALE, DUNGEON_SCALE));
 
     m_Background->AddChild(m_MainMenu);

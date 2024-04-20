@@ -1,7 +1,9 @@
 //
 // Created by adven on 2024/3/24.
 //
+
 #include "pch_extream.h"
+
 #include "Player/Equipment/Weapon.h"
 
 Weapon::Weapon(WeaponEnum::Type type) {
@@ -33,14 +35,14 @@ void Weapon::selectWeaponType(WeaponEnum::Type type) {
 }
 
 void Weapon::rendererWindow() {
-    const auto WindowSpriteSheet = std::make_shared<Util::SpriteSheet>(m_ImagePathWindow);
+    const auto WindowSpriteSheet =
+        std::make_shared<Util::SpriteSheet>(m_ImagePathWindow);
 
-    WindowSpriteSheet->SetDrawRect(
-SDL_Rect {0, 0, 30, 33}
-        );
-//    const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
+    WindowSpriteSheet->SetDrawRect(SDL_Rect{0, 0, 30, 33});
+    //    const auto WindowImage =
+    //    std::make_shared<Util::Image>(m_ImagePathWindow);
 
-//    m_Window->SetDrawable(WindowImage);
+    //    m_Window->SetDrawable(WindowImage);
     m_Window->SetDrawable(WindowSpriteSheet);
     m_Window->SetZIndex(m_ZIndex + 1);
     m_Window->SetScale(m_Scale);

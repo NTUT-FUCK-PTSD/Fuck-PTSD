@@ -107,10 +107,10 @@ void Bat::RandomMove() {
     }
     std::size_t index = 0;
     while (!m_RandomPool.empty()) {
-        index =
-            m_Distribution(m_RandomGenerator,
-                           std::uniform_int_distribution<std::size_t>::param_type{
-                               0, m_RandomPool.size() - 1});
+        index = m_Distribution(
+            m_RandomGenerator,
+            std::uniform_int_distribution<std::size_t>::param_type{
+                0, m_RandomPool.size() - 1});
         switch (m_RandomPool[index]) {
         case 0:
             m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
