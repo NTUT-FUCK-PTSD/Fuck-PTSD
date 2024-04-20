@@ -65,7 +65,6 @@ private:
     glm::ivec2 m_Size;
     std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
     std::shared_ptr<Camera> m_Camera;
-    std::shared_ptr<Camera> m_UIcamera;
     std::shared_ptr<Player> m_MainCharacter;
 
     bool m_TempoAttack = false;
