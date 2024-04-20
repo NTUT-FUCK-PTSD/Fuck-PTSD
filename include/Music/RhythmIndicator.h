@@ -6,10 +6,11 @@
 #define FUCK_PTSD_RHYTHMINDICATOR_H
 
 #include <iostream>
-#include "Util/Time.hpp"
+
+#include "GameElement.h"
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
-#include "GameElement.h"
+#include "Util/Time.hpp"
 
 namespace Music {
 
@@ -24,12 +25,10 @@ public:
     void Update();
 
 private:
-
     // functions
     void CreateGameElement(std::size_t number);
     void InitIndicationPosition();
     std::size_t CountTempoNumber(std::size_t second);
-
 
     // settings
     const std::size_t m_tempoRange = 2000; // 2 sec
@@ -49,8 +48,7 @@ private:
     std::shared_ptr<Util::Image> m_redIndicator;
     std::shared_ptr<Util::Image> m_blueIndicator;
     std::shared_ptr<Util::Image> m_greenIndicator;
-
 };
-}
+} // namespace Music
 
 #endif // FUCK_PTSD_RHYTHMINDICATOR_H

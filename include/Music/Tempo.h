@@ -65,6 +65,6 @@ private:
     std::size_t m_tempoListLength = 0;
     std::vector<std::size_t> m_tempoList;
 };
-}
+} // namespace Music
 
 #endif // FUCK_PTSD_TEMPO_H

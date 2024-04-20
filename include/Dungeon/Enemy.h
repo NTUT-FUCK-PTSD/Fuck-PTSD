@@ -32,26 +32,54 @@ public:
         m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
     }
 
-    [[nodiscard]] glm::vec2 GetPlayerPosition() const {
+    [[nodiscard]]
+    glm::vec2 GetPlayerPosition() const {
         return m_SimpleMapData->GetPlayerPosition();
     }
-    [[nodiscard]] bool GetCanMove() const { return m_CanMove; }
-    [[nodiscard]] const glm::vec2 &GetGamePosition() const {
+    [[nodiscard]]
+    bool GetCanMove() const {
+        return m_CanMove;
+    }
+    [[nodiscard]]
+    const glm::vec2 &GetGamePosition() const {
         return m_GamePosition;
     }
-    [[nodiscard]] std::size_t GetBeatDelay() const { return m_BeatDelay; }
-    [[nodiscard]] bool GetLord() const { return m_Lord; }
-    [[nodiscard]] bool GetShadow() const { return m_Shadow; }
-    [[nodiscard]] std::size_t GetDamage() const { return m_Damage; }
-    [[nodiscard]] std::size_t GetHealth() const { return m_Health; }
-    [[nodiscard]] std::size_t GetCoin() const { return m_Coin; }
-    [[nodiscard]] const glm::vec2 &GetWillMovePosition() const {
+    [[nodiscard]]
+    std::size_t GetBeatDelay() const {
+        return m_BeatDelay;
+    }
+    [[nodiscard]]
+    bool GetLord() const {
+        return m_Lord;
+    }
+    [[nodiscard]]
+    bool GetShadow() const {
+        return m_Shadow;
+    }
+    [[nodiscard]]
+    std::size_t GetDamage() const {
+        return m_Damage;
+    }
+    [[nodiscard]]
+    std::size_t GetHealth() const {
+        return m_Health;
+    }
+    [[nodiscard]]
+    std::size_t GetCoin() const {
+        return m_Coin;
+    }
+    [[nodiscard]]
+    const glm::vec2 &GetWillMovePosition() const {
         return m_WillMovePosition;
     }
     // DidAttack() is used to check if the enemy has attacked the player
     // it only returns true once after the enemy has attacked the player
-    [[nodiscard]] bool DidAttack();
-    [[nodiscard]] bool GetVisible() const { return m_Visible; }
+    [[nodiscard]]
+    bool DidAttack();
+    [[nodiscard]]
+    bool GetVisible() const {
+        return m_Visible;
+    }
 
     virtual glm::vec2 FindNextToPlayer(); // Set available WillMovePosition to
                                           // slowly close PlayerPosition
@@ -67,7 +95,7 @@ public:
         }
     };
 
-    virtual void Update(){};
+    virtual void Update() {};
 
     bool GetSeen() const { return m_Seen; }
 

@@ -22,8 +22,10 @@ public:
     void setWeaponType(WeaponEnum::Type type) override;
     void setPosition(const glm::vec2 position) override;
 
-    [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const override;
-    [[nodiscard]] bool GetIsThrow() override;
+    [[nodiscard]]
+    std::shared_ptr<GameElement> GetGameObject() const override;
+    [[nodiscard]]
+    bool GetIsThrow() override;
 
     Direction GetDirection() override { return IEquipment::Direction::ROW; };
 

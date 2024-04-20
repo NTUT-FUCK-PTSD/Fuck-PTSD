@@ -26,7 +26,7 @@ void Music::Tempo::readTempoFile(const std::string &txtFilePath) {
 }
 
 std::vector<std::size_t> Music::Tempo::txtToVector(const std::string &line,
-                                            const char splitChar) {
+                                                   const char splitChar) {
     std::stringstream ss(line);
     std::string item;
     std::size_t transform = 0;
@@ -40,15 +40,15 @@ std::vector<std::size_t> Music::Tempo::txtToVector(const std::string &line,
     return elems;
 }
 
-//bool Music::Tempo::canBeClick() {
-//    const std::size_t tempoIndex = m_tempoIndex;
+// bool Music::Tempo::canBeClick() {
+//     const std::size_t tempoIndex = m_tempoIndex;
 //
-//    const std::size_t triggerLower = m_tempoList[tempoIndex] - m_range;
-//    const std::size_t triggerUpper = m_tempoList[tempoIndex] + m_range;
+//     const std::size_t triggerLower = m_tempoList[tempoIndex] - m_range;
+//     const std::size_t triggerUpper = m_tempoList[tempoIndex] + m_range;
 //
-//    // if yes = true, no = false;
-//    return m_duringTime >= triggerLower && m_duringTime <= triggerUpper;
-//}
+//     // if yes = true, no = false;
+//     return m_duringTime >= triggerLower && m_duringTime <= triggerUpper;
+// }
 
 bool Music::Tempo::canBeClick() {
 
@@ -144,7 +144,7 @@ void Music::Tempo::UpdateTempoIndex() {
         m_currentTempoIndex + 1 >= m_tempoListLength ? 0 : m_currentTempoIndex;
 }
 
-std::size_t Music::Tempo::getTempoIndex() const{
+std::size_t Music::Tempo::getTempoIndex() const {
     return m_currentTempoIndex;
 }
 

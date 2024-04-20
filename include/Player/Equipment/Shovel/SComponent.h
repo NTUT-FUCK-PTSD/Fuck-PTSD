@@ -15,7 +15,7 @@ namespace ToolSystem {
 // Dig Level
 struct DigLevel {
     explicit DigLevel(std::vector<std::size_t> _level)
-        : level(_level){};
+        : level(_level) {};
 
     std::vector<std::size_t> level;
 };

@@ -3,7 +3,7 @@
 //
 #include "Music/Music.h"
 
-Music::Player::Player(){
+Music::Player::Player() {
     m_soloud.init();
 
     m_display.setOffset(m_DisplayOffset);
@@ -43,7 +43,8 @@ void Music::Player::playMusic(const std::string &musicPath) {
     m_music->load(musicPath.c_str());
     m_musicHandle = m_soloud.play(*m_music);
 }
-void Music::Player::playMusic(const std::string &musicPath, bool setMusicLooping) {
+void Music::Player::playMusic(const std::string &musicPath,
+                              bool setMusicLooping) {
     m_music = std::make_shared<SoLoud::Wav>();
     m_music->load(musicPath.c_str());
     m_music->setLooping(setMusicLooping);
@@ -62,8 +63,8 @@ std::shared_ptr<GameElement> Music::Player::getGameObject() {
     return m_MusicObject;
 }
 
-void Music::Player::Update()  {
-    const std::size_t musicLength =  m_music->getLength() * 1000;
+void Music::Player::Update() {
+    const std::size_t musicLength = m_music->getLength() * 1000;
     const std::size_t CircleTime = m_soloud.getStreamTime(m_musicHandle) * 1000;
     const std::size_t CurrentMusicTime = CircleTime % musicLength;
 
