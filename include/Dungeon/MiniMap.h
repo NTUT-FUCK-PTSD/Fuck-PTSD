@@ -12,7 +12,6 @@ class MiniMap : public Util::GameObject {
 public:
     MiniMap(std::shared_ptr<MapData> mapData);
     ~MiniMap() = default;
-    glm::vec2 GetSize() const;
     void SetColor(const glm::vec2 &position, CubeColor color);
     void SetColor(const std::size_t position, CubeColor color);
     void SetVisible(const glm::vec2 &position, bool visible);
