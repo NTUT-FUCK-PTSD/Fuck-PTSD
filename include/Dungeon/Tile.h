@@ -23,10 +23,13 @@ public:
     void SetOverlay(bool visible);
     std::size_t GetIndex();
     s_Tile GetTile();
+    bool GetVisible();
     virtual bool IsWall() = 0;
     virtual bool IsDoor() = 0;
 
     virtual void UpdateDrawable();
+
+    bool GetSeen() const;
 
 protected:
     void UpdateScale();

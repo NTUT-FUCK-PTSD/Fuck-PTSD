@@ -7,9 +7,10 @@
 
 #include <iostream>
 
-#include "GameElement.h"
-#include "SpriteSheet.hpp"
-#include "ToolBoxs.h"
+#include "Game/ToolBoxs.h"
+#include "Settings/GameElement.h"
+#include "Settings/SpriteSheet.hpp"
+#include "Settings/Window.hpp"
 
 class Display final {
 public:
@@ -40,8 +41,10 @@ private:
     std::size_t m_heartBeatTime = 0;
     std::size_t m_range = 100;
 
-    glm::vec2 m_Scale = {3, 3};
-    glm::vec2 m_Position = {0, -300};
+    glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    glm::vec2 m_Position = {0, -(static_cast<int>(WINDOW_HEIGHT) / 2) +
+                                   (52 * DUNGEON_SCALE) / 2 +
+                                   DUNGEON_TILE_WIDTH};
     std::size_t m_ZIndex = 50;
 
     std::shared_ptr<SpriteSheet> m_TempoHeartImage;

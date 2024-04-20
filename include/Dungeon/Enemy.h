@@ -69,6 +69,8 @@ public:
 
     virtual void Update(){};
 
+    bool GetSeen() const { return m_Seen; }
+
 protected:
     virtual void Move() = 0;
 

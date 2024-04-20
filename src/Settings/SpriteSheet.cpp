@@ -75,9 +75,9 @@ void SpriteSheet::Update() {
         return;
     }
 
-    m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTime();
+    m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTimeMs();
     std::size_t updateFrameCount =
-        static_cast<std::size_t>(m_TimeBetweenFrameUpdate / (m_Interval / 1000.0));
+        static_cast<std::size_t>(m_TimeBetweenFrameUpdate / m_Interval);
 
     if (updateFrameCount <= 0)
         return;
