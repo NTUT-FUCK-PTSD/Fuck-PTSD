@@ -249,31 +249,30 @@ void Map::CameraUpdate() {
     }
 }
 
-void Map::TempoUpdate() {
-    LOG_INFO("TempoUpdate {}", m_TempoIndex);
+void Map::TempoUpdate(bool isPlayer) {
     m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
     m_TempoAttack = false;
-    for (auto &enemy : m_MapData->GetEnemyQueue()) {
-        enemy->TempoMove();
+    if (!isPlayer) {
+        for (auto &enemy : m_MapData->GetEnemyQueue()) {
+            enemy->TempoMove();
+        }
+        return;
     }
     m_ShadowRenderDP.clear();
     m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
 }
 
 void Map::PlayerTrigger(const std::size_t index) {
-    if (m_TempoIndex == index) {
-        return;
-    }
-    TempoUpdate();
     m_TempoIndex = index;
+    TempoUpdate(true);
 }
 
 void Map::TempoTrigger(const std::size_t index) {
     if (m_TempoIndex == index) {
         return;
     }
-    TempoUpdate();
     m_TempoIndex = index;
+    TempoUpdate(false);
 }
 
 void Map::Update() {
