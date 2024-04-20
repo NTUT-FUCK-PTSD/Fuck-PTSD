@@ -28,6 +28,7 @@ public:
 
     std::size_t getTempo();
     std::size_t getTempoIndex() const;
+    std::size_t getTempoIndex2() const;
 
     void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
     void setShowBeat(bool state) { isShowHeartBeat = state; };

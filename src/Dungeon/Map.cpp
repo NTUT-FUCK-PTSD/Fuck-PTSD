@@ -250,26 +250,30 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate() {
-    if (!m_PlayerTrigger) {
-        m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-        m_TempoAttack = false;
-        for (auto &enemy : m_MapData->GetEnemyQueue()) {
-            enemy->TempoMove();
-        }
-        m_ShadowRenderDP.clear();
-        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
+    LOG_INFO("TempoUpdate {}", m_TempoIndex);
+    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
+    m_TempoAttack = false;
+    for (auto &enemy : m_MapData->GetEnemyQueue()) {
+        enemy->TempoMove();
     }
-    m_PlayerTrigger = false;
+    m_ShadowRenderDP.clear();
+    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
 }
 
-void Map::PlayerTrigger() {
-    m_PlayerTrigger = false;
+void Map::PlayerTrigger(const std::size_t index) {
+    if (m_TempoIndex == index) {
+        return;
+    }
     TempoUpdate();
-    m_PlayerTrigger = true;
+    m_TempoIndex = index;
 }
 
-void Map::TempoTrigger() {
+void Map::TempoTrigger(const std::size_t index) {
+    if (m_TempoIndex == index) {
+        return;
+    }
     TempoUpdate();
+    m_TempoIndex = index;
 }
 
 void Map::Update() {

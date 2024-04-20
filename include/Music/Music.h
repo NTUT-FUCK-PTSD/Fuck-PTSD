@@ -52,6 +52,7 @@ public:
     };
 
     std::size_t getTempoIndex();
+    std::size_t getTempoIndex2() { return m_tempo.getTempoIndex2(); };
     std::size_t getTempoTime();
 
 private:

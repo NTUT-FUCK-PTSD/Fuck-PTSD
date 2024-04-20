@@ -148,6 +148,10 @@ std::size_t Music::Tempo::getTempoIndex() const {
     return m_currentTempoIndex;
 }
 
+std::size_t Music::Tempo::getTempoIndex2() const {
+    return m_tempoIndex;
+}
+
 std::vector<std::size_t> Music::Tempo::GetTempoTriggerList() {
     return m_tempoList;
 }
