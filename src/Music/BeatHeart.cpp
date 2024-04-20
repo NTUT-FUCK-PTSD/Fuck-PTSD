@@ -1,9 +1,9 @@
 //
 // Created by adven on 2024/3/28.
 //
-#include "Music/Display.h"
+#include "Music/BeatHeart.h"
 
-Display::Display() {
+Music::BeatHeart::BeatHeart() {
     const auto HeartSize = ToolBoxs::CountImagePixel(m_HeartImagePath, 2, 1);
 
     m_TempoHeartImage = std::make_shared<SpriteSheet>(
@@ -16,9 +16,9 @@ Display::Display() {
     m_BeatHeart->SetZIndex(m_ZIndex);
 }
 
-Display::~Display() {}
+//Music::BeatHeart::~BeatHeart() {}
 
-void Display::Update() {
+void Music::BeatHeart::Update() {
 
     // update the heart beat
     if (m_CurrentMusicTime + m_offset > m_triggerTime + m_heartBeatTime) {
