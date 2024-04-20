@@ -5,11 +5,12 @@
 #ifndef FUCK_PTSD_RHYTHMINDICATOR_H
 #define FUCK_PTSD_RHYTHMINDICATOR_H
 
+#include <iostream>
+
 #include "GameElement.h"
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
 #include "Util/Time.hpp"
-#include <iostream>
 
 namespace Music {
 
