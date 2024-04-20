@@ -45,7 +45,7 @@ private:
     void LoadTile();
     void LoadEnemy();
 
-    void TempoUpdate();
+    void TempoUpdate(bool isPlayer);
 
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
