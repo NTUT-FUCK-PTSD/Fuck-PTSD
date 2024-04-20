@@ -14,6 +14,7 @@ public:
     ~MiniMap() = default;
     glm::vec2 GetSize() const;
     void SetColor(const glm::vec2 &position, CubeColor color);
+    void SetColor(const std::size_t position, CubeColor color);
     void SetVisible(const glm::vec2 &position, bool visible);
     void SetVisible(const std::size_t position, bool visible);
     void SetScale(double scale);
