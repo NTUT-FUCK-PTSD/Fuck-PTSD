@@ -109,52 +109,25 @@ void MiniMap::Update() {
     }
 
     // Update Enemies
-    RemoveChildren(m_EnemiesCubeObjects);
-    m_EnemiesCubeObjects.clear();
     for (auto &enemy : m_MapData->GetEnemyQueue()) {
         if (!enemy->GetSeen()) {
             continue;
         }
-        auto position = enemy->GetGamePosition();
-        auto i = position.x - m_MapData->GetLevelIndexMin().x + 1;
-        auto j = position.y - m_MapData->GetLevelIndexMin().y + 1;
-        auto enemyCube = std::make_shared<ColorCube>();
-        m_EnemiesCubeObjects.push_back(
-            std::make_shared<Util::GameObject>(enemyCube, 100 - (1e-2)));
-        m_EnemiesCubeObjects.back()->SetVisible(true);
-        m_EnemiesCubeObjects.back()->m_Transform.scale = {m_Scale, m_Scale};
-        m_EnemiesCubeObjects.back()->m_Transform.translation = {
-            static_cast<int>(WINDOW_WIDTH) / 2 - DUNGEON_TILE_WIDTH -
-                (2 * (m_MapData->GetSize().x - (i + 1))) * m_Scale,
-            -(static_cast<int>(WINDOW_HEIGHT) / 2) +
-                (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH) +
-                (2 * (m_MapData->GetSize().y - (j + 1))) * m_Scale};
-        enemyCube->SetColor(CubeColor::red);
+        auto mapIndex = enemy->GamePostion2MapIndex(enemy->GetGamePosition());
+        m_ColorCubes[mapIndex]->SetColor(CubeColor::red);
     }
-    AddChildren(m_EnemiesCubeObjects);
 
     // Update Player
-    RemoveChild(m_PlayerCubeObject);
-    auto position = m_MapData->GetPlayerPosition();
-    auto i = position.x - m_MapData->GetLevelIndexMin().x + 1;
-    auto j = position.y - m_MapData->GetLevelIndexMin().y + 1;
-    auto playerCube = std::make_shared<ColorCube>();
-    m_PlayerCubeObject = std::make_shared<Util::GameObject>(playerCube, 100);
-    m_PlayerCubeObject->SetVisible(m_PlayerStatus);
-    m_PlayerCubeObject->m_Transform.scale = {m_Scale, m_Scale};
-    m_PlayerCubeObject->m_Transform.translation = {
-        static_cast<int>(WINDOW_WIDTH) / 2 - DUNGEON_TILE_WIDTH -
-            (2 * (m_MapData->GetSize().x - (i + 1))) * m_Scale,
-        -(static_cast<int>(WINDOW_HEIGHT) / 2) +
-            (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH) +
-            (2 * (m_MapData->GetSize().y - (j + 1))) * m_Scale};
-    playerCube->SetColor(CubeColor::blue);
-
-    if (Util::Time::GetElapsedTimeMs() - m_LastPlayerChanged > 250) {
+    auto dTime = Util::Time::GetElapsedTimeMs() - m_LastPlayerChanged;
+    if (dTime < 250) {
+        auto mapIndex =
+            m_MapData->GamePosition2MapIndex(m_MapData->GetPlayerPosition());
+        m_ColorCubes[mapIndex]->SetColor(CubeColor::blue);
+    }
+    else if (dTime > 500) {
         m_PlayerStatus = !m_PlayerStatus;
         m_LastPlayerChanged = Util::Time::GetElapsedTimeMs();
     }
-    AddChild(m_PlayerCubeObject);
 }
 
 void MiniMap::SetScale(double scale) {
