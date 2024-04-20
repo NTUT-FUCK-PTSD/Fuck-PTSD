@@ -80,13 +80,23 @@ void MiniMap::SetVisible(const std::size_t position, bool visible) {
 }
 
 void MiniMap::Update() {
-    // Update Tiles
     for (int i = 0; i < m_MapData->GetSize().y; i++) {
         for (int j = 0; j < m_MapData->GetSize().x; j++) {
             auto mapIndex = j + i * m_MapData->GetSize().x;
             if (!m_ColorCubes[mapIndex]->GetAvailable()) {
                 continue;
             }
+            // Update Enemy
+            auto enemy = m_MapData->GetEnemy(mapIndex);
+            if (enemy) {
+                if (!enemy->GetSeen()) {
+                    continue;
+                }
+                SetColor(mapIndex, CubeColor::red);
+                SetVisible(mapIndex, true);
+                continue;
+            }
+            // Update Tiles
             if (!m_MapData->IsTilesEmpty(mapIndex)) {
                 if (!m_MapData->GetTileBack(mapIndex)->GetSeen()) {
                     continue;
@@ -99,15 +109,6 @@ void MiniMap::Update() {
             UpdateTileColor(mapIndex);
             SetVisible(mapIndex, true);
         }
-    }
-
-    // Update Enemies
-    for (auto &enemy : m_MapData->GetEnemyQueue()) {
-        if (!enemy->GetSeen()) {
-            continue;
-        }
-        auto mapIndex = enemy->GamePostion2MapIndex(enemy->GetGamePosition());
-        SetColor(mapIndex, CubeColor::red);
     }
 
     // Update Player
