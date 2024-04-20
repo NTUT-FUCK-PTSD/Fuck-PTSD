@@ -38,7 +38,6 @@ public:
     void Update();
 
     bool IsOverlayRed() const { return m_OverlayRed; }
-    void UpdateTempoIndex(const std::size_t index);
 
 private:
     bool m_Available;
