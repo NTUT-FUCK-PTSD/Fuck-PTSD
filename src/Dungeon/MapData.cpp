@@ -53,8 +53,8 @@ std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
 bool MapData::EnemyCompare(std::shared_ptr<Enemy> &lhs,
                            std::shared_ptr<Enemy> &rhs) {
     std::string lhsPriority, rhsPriority;
-    lhsPriority += lhs->GetLord() ? "2" : "1";
-    rhsPriority += rhs->GetLord() ? "2" : "1";
+    lhsPriority = lhs->GetLord() ? "2" : "1";
+    rhsPriority = rhs->GetLord() ? "2" : "1";
     lhsPriority += fmt::format("{:0>2}", lhs->GetDamage());
     rhsPriority += fmt::format("{:0>2}", rhs->GetDamage());
     lhsPriority += fmt::format("{:0>2}", lhs->GetHealth());
