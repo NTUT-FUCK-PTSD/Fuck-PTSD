@@ -1,5 +1,7 @@
 #include "Dungeon/MapData.h"
 
+#include <fmt/core.h>
+
 namespace Dungeon {
 MapData::MapData(const glm::vec2 &levelIndexMin, const glm::vec2 &levelIndexMax,
                  const glm::vec2 &size)
@@ -50,6 +52,22 @@ std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
 
 bool MapData::EnemyCompare(std::shared_ptr<Enemy> &lhs,
                            std::shared_ptr<Enemy> &rhs) {
+    std::string lhsPriority, rhsPriority;
+    lhsPriority += lhs->GetLord() ? "2" : "1";
+    rhsPriority += rhs->GetLord() ? "2" : "1";
+    lhsPriority += fmt::format("{:0>2}", lhs->GetDamage());
+    rhsPriority += fmt::format("{:0>2}", rhs->GetDamage());
+    lhsPriority += fmt::format("{:0>2}", lhs->GetHealth());
+    rhsPriority += fmt::format("{:0>2}", rhs->GetHealth());
+    lhsPriority += fmt::format("{:0>2}", lhs->GetCoin());
+    rhsPriority += fmt::format("{:0>2}", rhs->GetCoin());
+    if (lhsPriority < rhsPriority) {
+        return true;
+    }
+    else if (lhsPriority > rhsPriority) {
+        return false;
+    }
+
     return Heuristic(GetPlayerPosition(), lhs->GetGamePosition()) <
            Heuristic(GetPlayerPosition(), rhs->GetGamePosition());
 }
