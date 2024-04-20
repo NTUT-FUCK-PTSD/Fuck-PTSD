@@ -34,7 +34,7 @@ void Music::RhythmIndicator::Update() {
     const auto intervalTime = currentTime - m_lastTime;
     m_lastTime = currentTime;
 
-    LOG_INFO(intervalTime);
+    // LOG_INFO(intervalTime);
     if (intervalTime >= 100) {
         return;
     }

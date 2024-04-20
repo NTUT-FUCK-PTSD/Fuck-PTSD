@@ -6,7 +6,7 @@ namespace Dungeon {
 namespace Tiles {
 DoorMetalSide::DoorMetalSide(const s_Tile &u_Tile)
     : GeneralDoorSide(u_Tile, false) {
-    m_ZIndex = m_ZIndex + 1e-6;
+    m_ZIndex = m_ZIndex + 1e-4;
     m_MagicNumber = 15;
     UpdateDoorMetalSideDrawable();
 }
