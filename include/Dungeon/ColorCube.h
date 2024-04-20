@@ -44,8 +44,9 @@ public:
 
 private:
     Dungeon::CubeColor m_Color;
+    std::shared_ptr<Util::Image> m_Image;
 
-    static std::map<Dungeon::CubeColor, std::unique_ptr<Util::Image>>
+    static std::map<Dungeon::CubeColor, std::shared_ptr<Util::Image>>
         m_ColorMap;
     static bool m_ColorMapInitialized;
 
