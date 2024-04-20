@@ -7,9 +7,10 @@
 
 #include "config.hpp"
 
-#include "GameElement.h"
 #include <queue>
 
+#include "Settings/GameElement.h"
+#include "Settings/Window.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
@@ -46,7 +47,7 @@ private:
     void IsDead();
     std::shared_ptr<GameElement> generalHeart(STATE state,
                                               const glm::vec2 &position);
-    std::size_t m_ZIndex = 50;
+    std::size_t m_ZIndex = 100;
     // HP settings
     //
     std::size_t m_MaxHp = 12;
@@ -57,7 +58,7 @@ private:
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 
     // Image Settings
-    const glm::vec2 m_Scale = {3, 3};
+    const glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     std::shared_ptr<Util::Image> m_FullHPImage =
         std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart.png");
 

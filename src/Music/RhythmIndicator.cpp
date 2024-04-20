@@ -99,7 +99,7 @@ void Music::RhythmIndicator::CreateGameElement(std::size_t number) {
     for (std::size_t i = 0; i < number; i++) {
         auto object = std::make_shared<GameElement>();
         object->SetDrawable(m_blueIndicator);
-        object->SetZIndex(40);
+        object->SetZIndex(99);
         object->SetScale({3.0, 2.5});
         object->SetPosition(m_centerPosition);
         m_IndicatorList.push_back(object);
@@ -110,7 +110,7 @@ void Music::RhythmIndicator::CreateGameElement(std::size_t number) {
     for (std::size_t i = 0; i < number; i++) {
         auto object = std::make_shared<GameElement>();
         object->SetDrawable(m_blueIndicator);
-        object->SetZIndex(40);
+        object->SetZIndex(99);
         object->SetScale({3.0, 2.5});
         object->SetPosition(m_centerPosition);
         m_IndicatorListLeft.push_back(object);

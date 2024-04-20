@@ -54,6 +54,11 @@ public:
 
     void Shake(const unsigned long duringTimeMs, const float strength);
 
+    void AddUIChild(const std::shared_ptr<Util::GameObject> child);
+    void AddUIChildren(
+        const std::vector<std::shared_ptr<Util::GameObject>> &children);
+    void RemoveUIChild(std::shared_ptr<Util::GameObject> child);
+
 private:
     void ShakeUpdate();
     void MoveByTimeInternal(const unsigned long duringTimeMs,
@@ -75,6 +80,8 @@ private:
     glm::vec2 m_ShakeHoldDestination = {
         0, 0}; // The destination of the camera when shaking
     unsigned long m_ShakeHoldDuringTimeMs = 0;
+    std::vector<std::shared_ptr<Util::GameObject>> m_GameChildren;
+    std::vector<std::shared_ptr<Util::GameObject>> m_UIChildren;
 };
 
 #endif // CAMERA_H

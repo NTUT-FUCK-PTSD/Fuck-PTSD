@@ -5,7 +5,8 @@ Animation::Animation(const glm::vec2 &animationPosition)
     m_AnimationZIndex =
         ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
                                        DUNGEON_TILE_WIDTH})
-            .y;
+            .y /
+        1e3;
 }
 
 void Animation::MoveByTime(const unsigned long duringTimeMs,
@@ -69,5 +70,6 @@ void Animation::UpdateAnimation(const bool &isDirection) {
     m_AnimationZIndex =
         ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
                                        DUNGEON_TILE_WIDTH})
-            .y;
+            .y /
+        1e3;
 }
