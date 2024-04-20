@@ -1,11 +1,18 @@
-BasedOnStyle: LLVM
+BasedOnStyle: Chromium
 IndentWidth: 4
 AccessModifierOffset: -4
+#PenaltyBreakBeforeFirstCallParameter: 100
+AlignAfterOpenBracket: BlockIndent
+AllowAllArgumentsOnNextLine: false
 AllowShortFunctionsOnASingleLine: Inline
 AlwaysBreakTemplateDeclarations: Yes
+AlignConsecutiveDeclarations: true
+BinPackParameters: false
+BinPackArguments: false
 PackConstructorInitializers: Never
 InsertNewlineAtEOF: true
 BreakAfterAttributes: Always
 BreakBeforeBraces: Custom
 BraceWrapping:
-  BeforeElse: true
+  BeforeElse: false
+  AfterFunction: false
