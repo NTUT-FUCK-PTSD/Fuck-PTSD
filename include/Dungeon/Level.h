@@ -14,8 +14,10 @@ class Level final {
 public:
     Level(const std::string &path, const int levelNum);
     Level(const std::string &path);
-    [[nodiscard]] bool LoadFile(const std::string &path);
-    [[nodiscard]] bool LoadLevel(const int levelNum);
+    [[nodiscard]]
+    bool LoadFile(const std::string &path);
+    [[nodiscard]]
+    bool LoadLevel(const int levelNum);
 
     bool IsAvailable() { return m_Available; }
     int GetNumLevels() { return m_NumLevels; }

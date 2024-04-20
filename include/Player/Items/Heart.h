@@ -7,9 +7,10 @@
 
 #include "config.hpp"
 
-#include "GameElement.h"
 #include <queue>
 
+#include "Settings/GameElement.h"
+#include "Settings/Window.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
@@ -31,8 +32,8 @@ public:
 
     void SetHeartMaxHp(const std::size_t value);
 
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
-    getGameObjects() const;
+    [[nodiscard]]
+    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() const;
 
     std::shared_ptr<GameElement> GetGameObject() const;
 
@@ -57,7 +58,7 @@ private:
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 
     // Image Settings
-    const glm::vec2 m_Scale = {3, 3};
+    const glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     std::shared_ptr<Util::Image> m_FullHPImage =
         std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart.png");
 

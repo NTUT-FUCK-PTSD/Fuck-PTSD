@@ -7,7 +7,8 @@
 #include "Util/Logger.hpp"
 
 //
-Coin::Coin(): Animation({0, 0}) {
+Coin::Coin()
+    : Animation({0, 0}) {
     m_text = std::make_shared<Util::Text>(
         m_TextStylePath, m_fontSize, m_showText, Util::Color(255, 255, 255));
     const auto CoinImage = std::make_shared<Util::Image>(m_imagePath);
@@ -68,6 +69,6 @@ void Coin::Update() {
         m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
         m_Position = m_AnimationPosition;
     }
-//    SetZIndex(m_AnimationZIndex);
-    SetPosition({m_Position.x + 585 ,m_Position.y + 350});
+    //    SetZIndex(m_AnimationZIndex);
+    SetPosition({m_Position.x + 585, m_Position.y + 350});
 }

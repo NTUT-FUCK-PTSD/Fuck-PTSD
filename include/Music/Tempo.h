@@ -13,6 +13,7 @@
 
 #include "Util/Logger.hpp"
 
+namespace Music {
 class Tempo final {
 public:
     explicit Tempo();
@@ -26,7 +27,7 @@ public:
     void keyBoardClick();
 
     std::size_t getTempo();
-    std::size_t getTempoIndex();
+    std::size_t getTempoIndex() const;
 
     void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
     void setShowBeat(bool state) { isShowHeartBeat = state; };
@@ -37,6 +38,8 @@ public:
         m_duringTime = time + m_offset;
     };
     void Update();
+
+    std::vector<std::size_t> GetTempoTriggerList();
 
 protected:
     void UpdateTime();
@@ -62,5 +65,6 @@ private:
     std::size_t m_tempoListLength = 0;
     std::vector<std::size_t> m_tempoList;
 };
+} // namespace Music
 
 #endif // FUCK_PTSD_TEMPO_H

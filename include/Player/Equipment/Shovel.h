@@ -5,11 +5,13 @@
 #ifndef FUCK_PTSD_SHOVEL_H
 #define FUCK_PTSD_SHOVEL_H
 
+#include "pch_extream.h"
+
 #include "IEquipment.h"
+#include "ToolBoxs.h"
+
 #include "Shovel/EntityShovel.h"
 #include "Shovel/SComponent.h"
-#include "ToolBoxs.h"
-#include "pch_extream.h"
 
 class Shovel final : public IEquipment {
 public:
@@ -27,7 +29,7 @@ private:
     void rendererItem();
 
     std::size_t m_ZIndex = 99;
-    glm::vec2 m_Scale = {3, 3};
+    glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     glm::vec2 m_Position = {0, 0};
 
     std::shared_ptr<ToolSystem::TBaseShovel> m_ItemType;

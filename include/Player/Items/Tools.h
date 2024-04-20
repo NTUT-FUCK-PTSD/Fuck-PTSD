@@ -23,7 +23,8 @@ public:
 
     explicit Tools();
 
-    [[nodiscard]] std::shared_ptr<GameElement> GetGameObject() const;
+    [[nodiscard]]
+    std::shared_ptr<GameElement> GetGameObject() const;
 
     // add equipment
     void SetThrow();

@@ -33,6 +33,13 @@ Map::~Map() {
 
 bool Map::LoadLevel(const std::size_t levelNum) {
     m_Children.clear();
+    if (m_MapData) {
+        m_MapData->ClearTiles();
+        m_MapData->ClearEnemies();
+    }
+    if (m_MiniMap) {
+        m_UIcamera->RemoveChild(m_MiniMap);
+    }
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
@@ -50,8 +57,9 @@ bool Map::LoadLevel(const std::size_t levelNum) {
 
     LoadTile();
     LoadEnemy();
-
-    m_Camera->RemoveUIChild(m_MiniMap);
+    if (m_MiniMap) {
+        m_UIcamera->RemoveChild(m_MiniMap);
+    }
     m_MiniMap = std::make_shared<MiniMap>(m_MapData);
     m_Camera->AddUIChild(m_MiniMap);
 

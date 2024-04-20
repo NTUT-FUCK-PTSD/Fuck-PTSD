@@ -51,6 +51,10 @@ void MapHandler::ChangeEasterEggColor() {
             SDL_FreeSurface,
         };
     int isCopyWork = SDL_BlitSurface(&surface, NULL, targetSurface.get(), NULL);
+    if (isCopyWork != 0) {
+        LOG_ERROR("SDL_BlitSurface failed: {}", SDL_GetError());
+        return;
+    }
 
     SDL_SetSurfaceColorMod(&surface, 255, 255, 255);
     SDL_SetSurfaceBlendMode(&surface, OriginalBlendMode);
@@ -75,8 +79,8 @@ void MapHandler::EasterEgg() {
         dir.x *= -1;
     }
 
-    auto delta = static_cast<float>(Util::Time::GetDeltaTime());
-    pos += dir * delta * 500.0F;
+    auto delta = static_cast<float>(Util::Time::GetDeltaTimeMs());
+    pos += dir * delta * 0.5F;
 
     auto data = Util::ConvertToUniformBufferData(m_Transform,
                                                  m_EasterEgg->GetSize(), 100);

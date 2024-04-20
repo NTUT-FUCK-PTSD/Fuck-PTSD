@@ -31,17 +31,22 @@ public:
     void SetScale(const glm::vec2 &Ratio) { m_Transform.scale = Ratio; }
 
     // return Image Path
-    [[nodiscard]] const std::string &GetImagePath() const {
+    [[nodiscard]]
+    const std::string &GetImagePath() const {
         return m_ImagePath;
     }
 
     // return Image's Position
-    [[nodiscard]] const glm::vec2 &GetPosition() const {
+    [[nodiscard]]
+    const glm::vec2 &GetPosition() const {
         return m_Transform.translation;
     }
 
     // Is visible
-    [[nodiscard]] bool GetVisibility() const { return m_Visible; }
+    [[nodiscard]]
+    bool GetVisibility() const {
+        return m_Visible;
+    }
 };
 
 #endif // I_LOVE_PTSD_ROLE_H
