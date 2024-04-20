@@ -32,7 +32,7 @@ public:
     void OpenDoor(const std::size_t position);
 
     void CameraUpdate();
-    void PlayerTrigger(const std::size_t index);
+    void PlayerTrigger();
     void TempoTrigger(const std::size_t index);
 
     void Update();
