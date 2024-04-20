@@ -30,9 +30,6 @@ private:
     std::shared_ptr<MapData> m_MapData;
     std::vector<std::shared_ptr<ColorCube>> m_ColorCubes;
 
-    std::vector<std::shared_ptr<GameObject>> m_EnemiesCubeObjects;
-    std::shared_ptr<GameObject> m_PlayerCubeObject;
-
     Util::ms_t m_LastPlayerChanged = 0;
     bool m_PlayerStatus = false;
     double m_Scale = DUNGEON_SCALE + 1;
