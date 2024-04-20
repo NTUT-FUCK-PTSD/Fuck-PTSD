@@ -50,13 +50,13 @@
             <tile cracked="0" torch="0" type="0" x="-3" y="-4" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="-3" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="-2" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="-3" y="-1" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="-3" y="-1" zone="0" name="DAILY CHALLENGE"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="0" zone="0"></tile>
             <tile cracked="0" torch="1" type="104" x="-3" y="1" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="2" zone="0"></tile>
             <tile cracked="0" torch="1" type="104" x="-3" y="3" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="4" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="-3" y="5" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="-3" y="5" zone="0" name="ALL ZONES MODE"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="6" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-3" y="7" zone="0"></tile>
             <tile cracked="0" torch="0" type="104" x="-3" y="8" zone="0"></tile>
@@ -79,13 +79,13 @@
             <tile cracked="0" torch="0" type="0" x="-1" y="-4" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="-3" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="-2" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="-1" y="-1" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="-1" y="-1" zone="0" name="ALL ZONES MODE"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="0" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="-1" y="1" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="-1" y="1" zone="0" name="CHARACTER SELECT"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="2" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="-1" y="3" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="-1" y="3" zone="0" name="TUTORIAL"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="4" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="-1" y="5" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="-1" y="5" zone="0" name="DANEE PAD MODE EASIER"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="6" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="-1" y="7" zone="0"></tile>
             <tile cracked="0" torch="0" type="104" x="-1" y="8" zone="0"></tile>
@@ -109,13 +109,13 @@
             <tile cracked="0" torch="0" type="0" x="1" y="-4" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="-3" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="-2" zone="0"></tile>
-            <tile cracked="0" torch="0" type="2" x="1" y="-1" zone="0"></tile>
+            <tile cracked="0" torch="0" type="2" x="1" y="-1" zone="0" name="ZONE1"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="0" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="1" y="1" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="1" y="1" zone="0" name="ZONE2"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="2" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="1" y="3" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="1" y="3" zone="0" name="ZONE3"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="4" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="1" y="5" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="1" y="5" zone="0" name="ZONE4"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="6" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="1" y="7" zone="0"></tile>
             <tile cracked="0" torch="0" type="104" x="1" y="8" zone="0"></tile>
@@ -139,13 +139,13 @@
             <tile cracked="0" torch="0" type="0" x="3" y="-4" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="-3" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="-2" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="3" y="-1" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="3" y="-1" zone="0" name="LOCAL CO-OP"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="0" zone="0"></tile>
             <tile cracked="0" torch="1" type="104" x="3" y="1" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="2" zone="0"></tile>
             <tile cracked="0" torch="1" type="104" x="3" y="3" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="4" zone="0"></tile>
-            <tile cracked="0" torch="0" type="6" x="3" y="5" zone="0"></tile>
+            <tile cracked="0" torch="0" type="6" x="3" y="5" zone="0" name="LEVEL EDITOR"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="6" zone="0"></tile>
             <tile cracked="0" torch="0" type="0" x="3" y="7" zone="0"></tile>
             <tile cracked="0" torch="0" type="104" x="3" y="8" zone="0"></tile>
