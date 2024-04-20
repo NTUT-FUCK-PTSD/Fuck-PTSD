@@ -85,10 +85,10 @@ void App::Update() {
     //        m_Coin->plusCoinNumber(10);
     //        m_Diamond->plusDiamondNumber(10);
     //    }
-
-    if (m_BeforeTempoIndex != m_MusicSystem->getTempoIndex()) {
-        m_BeforeTempoIndex = m_MusicSystem->getTempoIndex();
-        m_DungeonMap->TempoTrigger();
+    auto tempoIndex = m_MusicSystem->getTempoIndex();
+    if (m_BeforeTempoIndex != tempoIndex) {
+        m_BeforeTempoIndex = tempoIndex;
+        m_DungeonMap->TempoTrigger(tempoIndex);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -103,7 +103,6 @@ void App::Update() {
          Util::Input::IsKeyDown(Util::Keycode::S) ||
          Util::Input::IsKeyDown(Util::Keycode::A)) &&
         m_MusicSystem->TempoTrigger()) {
-
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -175,7 +174,7 @@ void App::Update() {
                                     m_PlayerMoveDirect);
         m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
-        m_DungeonMap->PlayerTrigger();
+        m_DungeonMap->PlayerTrigger(m_MusicSystem->getTempoIndex2());
     }
 
     // detect the player

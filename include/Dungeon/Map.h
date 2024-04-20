@@ -32,12 +32,13 @@ public:
     void OpenDoor(const std::size_t position);
 
     void CameraUpdate();
-    void PlayerTrigger();
-    void TempoTrigger();
+    void PlayerTrigger(const std::size_t index);
+    void TempoTrigger(const std::size_t index);
 
     void Update();
 
     bool IsOverlayRed() const { return m_OverlayRed; }
+    void UpdateTempoIndex(const std::size_t index);
 
 private:
     bool m_Available;
@@ -71,10 +72,11 @@ private:
     bool m_OverlayRed = false;
     unsigned long m_OverlayRedTime = 0;
 
-    bool m_PlayerTrigger = false;
     std::vector<bool> m_ShadowRenderDP;
 
     std::shared_ptr<MiniMap> m_MiniMap;
+
+    std::size_t m_TempoIndex = 0;
 };
 
 } // namespace Dungeon
