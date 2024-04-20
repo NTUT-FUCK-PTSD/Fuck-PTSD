@@ -7,16 +7,11 @@
 
 #include "pch_extream.h"
 
-#include "pch_extream.h"
-
 #include "IEquipment.h"
-#include "ToolBoxs.h"
-
 #include "ToolBoxs.h"
 
 #include "Shovel/EntityShovel.h"
 #include "Shovel/SComponent.h"
-
 
 class Shovel final : public IEquipment {
 public:
