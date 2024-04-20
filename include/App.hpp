@@ -45,8 +45,8 @@ private:
     bool m_IsMainMenu = true;
 
     // music
-    std::shared_ptr<MusicSystem> m_MusicSystem =
-        std::make_shared<MusicSystem>();
+    std::shared_ptr<Music::Player> m_MusicSystem =
+        std::make_shared<Music::Player>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
