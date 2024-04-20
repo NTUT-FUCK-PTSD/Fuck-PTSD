@@ -62,18 +62,17 @@ void App::Start() {
     m_MainCharacter->SetBodyImage(ASSETS_DIR
                                   "/entities/player1_armor_body.png");
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
-    m_Window->AddChild(m_MainCharacter->GetWindowElement());
+    m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
-    m_DungeonMap =
-        std::make_shared<Dungeon::Map>(m_Camera, m_Window, m_MainCharacter,
-                                       ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
+    m_DungeonMap = std::make_shared<Dungeon::Map>(
+        m_Camera, m_MainCharacter, ASSETS_DIR "/dungeon/MY DUNGEON.xml", 1);
     m_DungeonMap->SetDrawable(
         std::make_shared<Dungeon::MapHandler>(m_DungeonMap));
     m_Camera->AddChild(m_DungeonMap);
 
     // display the tempo heart in music System
-    m_Window->AddChild(m_MusicSystem->getGameObject());
+    m_Camera->AddUIChild(m_MusicSystem->getGameObject());
 
     m_CurrentState = State::UPDATE;
 }
@@ -198,7 +197,6 @@ void App::Update() {
 
     m_MusicSystem->Update();
     m_MainCharacter->Update();
-    m_Window->Update();
     m_Camera->Update();
 }
 

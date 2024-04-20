@@ -26,7 +26,7 @@ private:
     void toLeftSideDiamondText();
 
     std::size_t m_Number = 0;
-    std::size_t m_ZIndex = 50;
+    std::size_t m_ZIndex = 100;
     std::size_t m_fontSize = 6;
     glm::vec2 m_ImageScale = {3, 3};
     glm::vec2 m_FontScale = {5, 5};

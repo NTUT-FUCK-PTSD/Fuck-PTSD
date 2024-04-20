@@ -59,7 +59,6 @@ private:
     std::shared_ptr<Player> m_MainCharacter;
 
     std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
-    std::shared_ptr<Camera> m_Window = std::make_shared<Camera>();
 
     glm::vec2 m_CameraPosition = {0, 0};
 

@@ -126,7 +126,6 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
     m_Window->AddChild(m_Heart->GetGameObject());
     m_Window->AddChild(m_Diamond->GetGameObject());
     m_Window->AddChild(m_Tools->GetGameObject());
-
     m_Window->SetVisible(false);
     return m_Window;
 }

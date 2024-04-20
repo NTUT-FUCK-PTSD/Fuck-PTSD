@@ -45,7 +45,7 @@ private:
     glm::vec2 m_Position = {0, -(static_cast<int>(WINDOW_HEIGHT) / 2) +
                                    (52 * DUNGEON_SCALE) / 2 +
                                    DUNGEON_TILE_WIDTH};
-    std::size_t m_ZIndex = 50;
+    std::size_t m_ZIndex = 100;
 
     std::shared_ptr<SpriteSheet> m_TempoHeartImage;
     std::shared_ptr<GameElement> m_BeatHeart = std::make_shared<GameElement>();

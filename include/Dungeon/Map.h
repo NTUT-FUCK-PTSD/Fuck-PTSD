@@ -15,7 +15,6 @@ namespace Dungeon {
 class Map final : public Util::GameObject {
 public:
     Map(const std::shared_ptr<Camera> camera,
-        const std::shared_ptr<Camera> UIcamera,
         const std::shared_ptr<Player> mainCharacter, const std::string &path,
         const std::size_t levelNum = 1);
     ~Map();

@@ -32,7 +32,7 @@ private:
     void rendererWindow();
     void rendererItem();
 
-    std::size_t m_ZIndex = 50;
+    std::size_t m_ZIndex = 99;
     glm::vec2 m_Scale = {3, 3};
     glm::vec2 m_Position = {0, 0};
 
