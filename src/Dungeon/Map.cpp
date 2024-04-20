@@ -38,7 +38,7 @@ bool Map::LoadLevel(const std::size_t levelNum) {
         m_MapData->ClearEnemies();
     }
     if (m_MiniMap) {
-        m_UIcamera->RemoveChild(m_MiniMap);
+        m_Camera->RemoveUIChild(m_MiniMap);
     }
 
     if (!m_Level->LoadLevel(levelNum)) {
@@ -58,7 +58,7 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     LoadTile();
     LoadEnemy();
     if (m_MiniMap) {
-        m_UIcamera->RemoveChild(m_MiniMap);
+        m_Camera->RemoveUIChild(m_MiniMap);
     }
     m_MiniMap = std::make_shared<MiniMap>(m_MapData);
     m_Camera->AddUIChild(m_MiniMap);
@@ -249,27 +249,29 @@ void Map::CameraUpdate() {
     }
 }
 
-void Map::TempoUpdate() {
-    if (!m_PlayerTrigger) {
-        m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
-        m_TempoAttack = false;
+void Map::TempoUpdate(bool isPlayer) {
+    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
+    m_TempoAttack = false;
+    if (!isPlayer) {
         for (auto &enemy : m_MapData->GetEnemyQueue()) {
             enemy->TempoMove();
         }
-        m_ShadowRenderDP.clear();
-        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
+        return;
     }
-    m_PlayerTrigger = false;
+    m_ShadowRenderDP.clear();
+    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
 }
 
 void Map::PlayerTrigger() {
-    m_PlayerTrigger = false;
-    TempoUpdate();
-    m_PlayerTrigger = true;
+    TempoUpdate(true);
 }
 
-void Map::TempoTrigger() {
-    TempoUpdate();
+void Map::TempoTrigger(const std::size_t index) {
+    if (m_TempoIndex == index) {
+        return;
+    }
+    m_TempoIndex = index;
+    TempoUpdate(false);
 }
 
 void Map::Update() {

@@ -64,6 +64,7 @@ private:
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
     std::size_t m_BeforeTempoIndex = 0;
+    std::size_t m_TempoIndex = 0;
 };
 
 #endif
