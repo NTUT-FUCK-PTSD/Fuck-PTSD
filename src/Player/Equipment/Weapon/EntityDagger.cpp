@@ -6,4 +6,4 @@
 
 ToolSystem::EntityDagger::EntityDagger()
     : TBaseWeapon(normal, blood, glass, golden, obsidian, titanium, ImagePath,
-                  isThrow) {};
+                  isThrow){};
