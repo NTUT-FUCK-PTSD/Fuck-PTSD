@@ -1,86 +1,70 @@
+name: Compile
 
-name: main-before
-
-on: 
+on:
   merge_group:
   pull_request:
 
-# linux-gcc
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - os: ubuntu-latest
+            compiler: gcc
+            generator: Ninja
+            deps_cmdline: sudo apt-get update && sudo apt-get -y install gcc cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
+          - os: ubuntu-latest
+            compiler: clang
+            generator: Ninja
+            deps_cmdline: sudo apt-get update && sudo apt-get -y install clang cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
+          - os: windows-latest
+            compiler: msvc
+            generator: Visual Studio 17 2022
+          - os: windows-latest
+            compiler: mingw
+            generator: MinGW Makefiles
+          - os: macos-latest
+            compiler: clang
+            generator: Ninja
+            deps_cmdline: brew install cmake ninja mesa-glu mesa xorg-server
+
     steps:
-      - uses: actions/checkout@v4
+      - if: matrix.config.os == 'windows-latest' && matrix.config.compiler == 'mingw'
+        name: "Set Windows-MinGW-Compiler"
+        uses: seanmiddleditch/gha-setup-ninja@master
 
-      - name: Installing Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install gcc cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
-
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Building Project
-        if: matrix.os == 'ubuntu-latest'
-        env:
-          CC: gcc
-          CXX: g++
+      - name: Install Dependencies
+        shell: bash
         run: |
-          cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          if [[ ! -z "${{ matrix.config.deps_cmdline }}" ]]; then
+            eval ${{ matrix.config.deps_cmdline }}
+          fi
+
+      - name: "Setup cmake"
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Debug -G "${{ matrix.config.generator }}"
           cmake --build build
-        
-# jobs:
-#   build:
-#     runs-on: ${{ matrix.os }}
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         os: [ubuntu-latest]
-#         compiler: [{ cc: gcc, cxx: g++ }, { cc: clang, cxx: clang++ }]
-#         build_type: [Debug]
-#         binary: [linux-binary]
-#         include:
-#           - os: windows-latest
-#             build_type: Debug
-#             binary: windows-binary
 
-#     steps:
-#       - if: matrix.os == 'ubuntu-latest'
-#         name: Installing Dependencies
-#         run: |
-#           sudo apt-get update
-#           sudo apt-get -y install ${{ matrix.compiler.cc }} cmake ninja-build libglu1-mesa-dev mesa-common-dev xorg-dev
-
-#       - name: Checkout Repository
-#         uses: actions/checkout@v3
-#         with:
-#           submodules: recursive
-
-#       - name: Check Format
-#         if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'clang'
-#         run: |
-#           find src/ include/ test/ assets/shaders/ -name "*.*" -print0 | \
-#             xargs -0 clang-format --dry-run --Werror --ferror-limit=15
-
-#       - name: Building Project
-#         if: matrix.os == 'ubuntu-latest'
-#         env:
-#           CC: ${{ matrix.compiler.cc }}
-#           CXX: ${{ matrix.compiler.cxx }}
-#         run: |
-#           cmake -B build -G "Ninja" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-#           cmake --build build
-
-#       - name: Run Linter
-#         if: matrix.os == 'ubuntu-latest' && matrix.compiler == 'clang'
-#         run: |
-#           find src/ include/ test/ -name "*.*" -print0 | \
-#             xargs -0 run-clang-tidy true -p build
-
-#       - name: Building Project
-#         if: matrix.os == 'windows-latest'
-#         run: |
-#           cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-#           cmake --build build --config ${{ matrix.build_type }}
+  formatting-check:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path:
+          - "src"
+          - "include"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run clang-format style check for C/C++/Protobuf programs.
+        uses: jidicula/clang-format-action@v4.11.0
+        with:
+          clang-format-version: "18"
+          check-path: ${{ matrix.path }}
+          fallback-style: "Mozilla" # optional
