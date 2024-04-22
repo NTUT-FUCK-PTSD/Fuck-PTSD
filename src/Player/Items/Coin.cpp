@@ -7,8 +7,7 @@
 #include "Util/Logger.hpp"
 
 //
-Coin::Coin()
-    : Animation({0, 0}) {
+Coin::Coin() {
     m_text = std::make_shared<Util::Text>(
         m_TextStylePath, m_fontSize, m_showText, Util::Color(255, 255, 255));
     const auto CoinImage = std::make_shared<Util::Image>(m_imagePath);
@@ -64,11 +63,17 @@ std::shared_ptr<GameElement> Coin::GetGameObject() {
 }
 
 void Coin::Update() {
-    UpdateAnimation(true);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
-        m_Position = m_AnimationPosition;
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_GamePosition =
+            ToolBoxs::PosToGamePos(m_Animation->GetAnimationPosition());
+        m_Position = m_Animation->GetAnimationPosition();
     }
     //    SetZIndex(m_AnimationZIndex);
     SetPosition({m_Position.x + 585, m_Position.y + 350});
+}
+
+void Coin::MoveByTime(const unsigned long duringTimeMs,
+                      const glm::vec2 &destination, const uint16_t direction) {
+    m_Animation->MoveByTime(duringTimeMs, destination, direction);
 }

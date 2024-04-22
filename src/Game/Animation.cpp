@@ -12,31 +12,33 @@ Animation::Animation(const glm::vec2 &animationPosition)
 void Animation::MoveByTime(const unsigned long duringTimeMs,
                            const glm::vec2 &destination,
                            const uint16_t direction) {
-    if (m_IsAnimating) {
+    if (m_IsAnimatingInternal) {
         m_AnimationPosition = m_AnimationDestination;
         UpdateAnimation(true);
     }
     m_AnimationStartMs = Util::Time::GetElapsedTimeMs();
     m_AnimationDuringTimeMs = duringTimeMs;
     m_AnimationDestination = destination;
+    m_IsAnimatingInternal = true;
     m_IsAnimating = true;
     m_AnimationDirection = direction;
 }
 
 void Animation::MoveByTime(const unsigned long duringTimeMs,
                            const glm::vec2 &destination) {
-    if (m_IsAnimating) {
+    if (m_IsAnimatingInternal) {
         m_AnimationPosition = m_AnimationDestination;
         UpdateAnimation(false);
     }
     m_AnimationStartMs = Util::Time::GetElapsedTimeMs();
     m_AnimationDuringTimeMs = duringTimeMs;
     m_AnimationDestination = destination;
+    m_IsAnimatingInternal = true;
     m_IsAnimating = true;
 }
 
 void Animation::UpdateAnimation(const bool &isDirection) {
-    if (m_IsAnimating) {
+    if (m_IsAnimatingInternal) {
         unsigned long passTimeMs =
             Util::Time::GetElapsedTimeMs() - m_AnimationStartMs;
 
@@ -44,7 +46,7 @@ void Animation::UpdateAnimation(const bool &isDirection) {
             ((m_AnimationPosition == m_AnimationDestination) && !isDirection)) {
             m_AnimationPosition = m_AnimationDestination;
             m_AnimationDestination = {0, 0};
-            m_IsAnimating = false;
+            m_IsAnimatingInternal = false;
         }
         else {
             if (isDirection) {
@@ -72,4 +74,12 @@ void Animation::UpdateAnimation(const bool &isDirection) {
                                        DUNGEON_TILE_WIDTH})
             .y /
         1e2;
+}
+
+bool Animation::IsAnimating() {
+    if (!m_IsAnimatingInternal && m_IsAnimating) {
+        m_IsAnimating = false;
+        return true;
+    }
+    return m_IsAnimating;
 }

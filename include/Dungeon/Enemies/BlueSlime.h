@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class BlueSlime final : public Dungeon::Enemy, private Animation {
+class BlueSlime final : public Dungeon::Enemy {
 public:
     BlueSlime(const s_Enemy &u_Enemy,
               const std::shared_ptr<SimpleMapData> simpleMapData);
@@ -24,6 +24,7 @@ private:
 
     std::size_t m_State = 0;
     bool m_NeedToMove = false;
+    std::unique_ptr<Animation> m_Animation;
     uint16_t m_AnimationType;
 };
 } // namespace Enemies

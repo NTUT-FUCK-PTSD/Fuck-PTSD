@@ -8,7 +8,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class OrangeSlime final : public Dungeon::Enemy, private Animation {
+class OrangeSlime final : public Dungeon::Enemy {
 public:
     OrangeSlime(const s_Enemy &u_Enemy,
                 const std::shared_ptr<SimpleMapData> simpleMapData);
@@ -31,6 +31,8 @@ private:
     std::size_t m_StartIdx = 0;
 
     std::vector<glm::vec2> m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    std::unique_ptr<Animation> m_Animation;
 };
 } // namespace Enemies
 } // namespace Dungeon

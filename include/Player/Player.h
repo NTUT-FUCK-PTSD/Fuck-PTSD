@@ -14,7 +14,7 @@
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
-class Player : public Animation {
+class Player {
 public:
     enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
 
@@ -72,9 +72,8 @@ public:
     bool IsWeaponExist();
     WeaponEnum::Type GetWeaponType();
 
-    virtual void MoveByTime(const unsigned long duringTimeMs,
-                            const glm::vec2 &destination,
-                            const uint16_t direction) override;
+    void MoveByTime(const unsigned long duringTimeMs,
+                    const glm::vec2 &destination, const uint16_t direction);
 
 private:
     ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
@@ -107,6 +106,8 @@ private:
     float m_ZIndex = 0.5;
 
     void SetPosition(const glm::vec2 &position);
+
+    std::unique_ptr<Animation> m_Animation;
 };
 
 #endif // FUCK_PTSD_PLAYER_H

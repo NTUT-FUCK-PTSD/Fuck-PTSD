@@ -8,7 +8,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Bat : public Dungeon::Enemy, private Animation {
+class Bat : public Dungeon::Enemy {
 public:
     Bat(const s_Enemy &u_Enemy,
         const std::shared_ptr<SimpleMapData> simpleMapData);
@@ -18,16 +18,11 @@ public:
 
     void Update() override;
 
-protected:
-    Bat(const s_Enemy &u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData,
-        const std::string &filepath);
-
+private:
+    void RandomMove();
     void MoveBat();
     std::size_t m_Tick = 2;
 
-private:
-    void RandomMove();
     const glm::vec2 m_FrameSize = {24, 24};
     std::size_t m_State = 0;
 
@@ -37,6 +32,8 @@ private:
     std::random_device m_RandomDevice;
     std::mt19937 m_RandomGenerator;
     std::uniform_int_distribution<std::size_t> m_Distribution;
+
+    std::unique_ptr<Animation> m_Animation;
 };
 } // namespace Enemies
 } // namespace Dungeon

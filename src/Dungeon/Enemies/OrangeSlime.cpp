@@ -4,9 +4,10 @@ namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(
     const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> simpleMapData)
     : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()),
       m_Distribution(0, 3) {
+    m_Animation =
+        std::make_unique<Animation>(ToolBoxs::GamePostoPos(GetGamePosition()));
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -30,10 +31,6 @@ Enemies::OrangeSlime::OrangeSlime(
 
 namespace Dungeon::Enemies {
 void OrangeSlime::Move() {
-    if (m_IsAnimating) {
-        m_AnimationPosition = m_AnimationDestination;
-        Update();
-    }
     m_NeedToMove = false;
     if (m_State > 3) {
         m_State = 0;
@@ -75,10 +72,10 @@ void OrangeSlime::Move() {
     m_State++;
 }
 void OrangeSlime::Update() {
-    if (m_CanMove && !m_IsAnimating) {
+    if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
-                   (m_StartIdx + m_State - 1) % 4);
+        m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
+                                (m_StartIdx + m_State - 1) % 4);
         m_NeedToMove = false;
         m_CanMove = false;
     }
@@ -86,11 +83,11 @@ void OrangeSlime::Update() {
         m_State -= 1;
     }
 
-    UpdateAnimation(true);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Transform.translation = m_AnimationPosition;
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
     }
-    SetZIndex(m_AnimationZIndex);
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void OrangeSlime::AttackPlayer() {

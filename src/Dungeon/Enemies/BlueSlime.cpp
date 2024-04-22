@@ -3,8 +3,9 @@
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(
     const s_Enemy &u_Enemy, const std::shared_ptr<SimpleMapData> simpleMapData)
-    : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
+    : Enemy(u_Enemy, simpleMapData) {
+    m_Animation =
+        std::make_unique<Animation>(ToolBoxs::GamePostoPos(GetGamePosition()));
     m_NormalFrames = {4, 5, 6, 7};
     m_ShadowFrames = {12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -26,10 +27,6 @@ Enemies::BlueSlime::BlueSlime(
 
 namespace Dungeon::Enemies {
 void BlueSlime::Move() {
-    if (m_IsAnimating) {
-        m_AnimationPosition = m_AnimationDestination;
-        Update();
-    }
     m_NeedToMove = false;
     if (m_State > 3) {
         m_State = 0;
@@ -69,19 +66,19 @@ void BlueSlime::Move() {
     m_State++;
 }
 void BlueSlime::Update() {
-    if (m_CanMove && !m_IsAnimating) {
+    if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
-                   m_AnimationType);
+        m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition),
+                                m_AnimationType);
         m_NeedToMove = false;
         m_CanMove = false;
     }
 
-    UpdateAnimation(true);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Transform.translation = m_AnimationPosition;
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
     }
-    SetZIndex(m_AnimationZIndex);
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void BlueSlime::AttackPlayer() {

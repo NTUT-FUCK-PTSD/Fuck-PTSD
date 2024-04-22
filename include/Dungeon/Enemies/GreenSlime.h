@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class GreenSlime final : public Dungeon::Enemy, private Animation {
+class GreenSlime final : public Dungeon::Enemy {
 public:
     GreenSlime(const s_Enemy &u_Enemy,
                const std::shared_ptr<SimpleMapData> simpleMapData);
@@ -17,6 +17,7 @@ public:
 
 private:
     const glm::vec2 m_FrameSize = {26, 26};
+    std::unique_ptr<Animation> m_Animation;
 };
 } // namespace Enemies
 } // namespace Dungeon

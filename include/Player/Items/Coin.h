@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 
-class Coin final : public Animation {
+class Coin final {
 public:
     Coin();
 
@@ -27,6 +27,9 @@ public:
     std::shared_ptr<GameElement> GetGameObject();
 
     void Update();
+
+    void MoveByTime(const unsigned long duringTimeMs,
+                    const glm::vec2 &destination, const uint16_t direction);
 
 private:
     void toLeftSideCoinText();
@@ -50,6 +53,8 @@ private:
     std::shared_ptr<GameElement> m_Coin = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_CoinText = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_CoinImage = std::make_shared<GameElement>();
+
+    std::unique_ptr<Animation> m_Animation;
 };
 
 #endif
