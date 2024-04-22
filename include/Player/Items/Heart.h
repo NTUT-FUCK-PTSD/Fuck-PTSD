@@ -44,9 +44,11 @@ public:
     };
 
 private:
-    void IsDead();
-    std::shared_ptr<GameElement>
-                generalHeart(STATE state, const glm::vec2& position);
+    void                         IsDead();
+    std::shared_ptr<GameElement> generalHeart(
+        STATE            state,
+        const glm::vec2& position
+    );
     std::size_t m_ZIndex = 100;
     // HP settings
     //

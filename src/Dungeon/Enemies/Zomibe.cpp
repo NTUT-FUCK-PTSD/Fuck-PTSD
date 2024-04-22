@@ -51,18 +51,10 @@ void Zombie::Move() {
         m_CanMove = true;
     } else {
         switch (m_Direction) {
-            case 0:
-                m_Direction = 2;
-                break;
-            case 1:
-                m_Direction = 3;
-                break;
-            case 2:
-                m_Direction = 0;
-                break;
-            case 3:
-                m_Direction = 1;
-                break;
+        case 0: m_Direction = 2; break;
+        case 1: m_Direction = 3; break;
+        case 2: m_Direction = 0; break;
+        case 3: m_Direction = 1; break;
         }
         m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
 

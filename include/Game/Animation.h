@@ -12,8 +12,10 @@ public:
         const glm::vec2&    destination,
         const uint16_t      direction
     );
-    void
-    MoveByTime(const unsigned long duringTimeMs, const glm::vec2& destination);
+    void MoveByTime(
+        const unsigned long duringTimeMs,
+        const glm::vec2&    destination
+    );
     void      UpdateAnimation(const bool isDirection = false);
     bool      IsAnimating();
     glm::vec2 GetAnimationPosition();

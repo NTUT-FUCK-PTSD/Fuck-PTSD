@@ -50,8 +50,10 @@ public:
 
     std::shared_ptr<Util::Renderer> GetRenderer() { return m_Renderer; }
 
-    void
-    MoveByTime(const unsigned long duringTimeMs, const glm::vec2& destination);
+    void MoveByTime(
+        const unsigned long duringTimeMs,
+        const glm::vec2&    destination
+    );
 
     void Shake(const unsigned long duringTimeMs, const float strength);
 

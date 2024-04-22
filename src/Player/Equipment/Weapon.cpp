@@ -19,15 +19,15 @@ Weapon::Weapon(WeaponEnum::Type type) {
 
 void Weapon::selectWeaponType(WeaponEnum::Type type) {
     switch (type) {
-        case WeaponEnum::Type::DAGGER:
-            m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
-            break;
-        case WeaponEnum::Type::BROADSWORD:
-            m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
-            break;
-        case WeaponEnum::Type::RAPIER:
-            m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
-            break;
+    case WeaponEnum::Type::DAGGER:
+        m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
+        break;
+    case WeaponEnum::Type::BROADSWORD:
+        m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
+        break;
+    case WeaponEnum::Type::RAPIER:
+        m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
+        break;
     }
 
     m_ImagePathItem = m_ItemType->imagePath;

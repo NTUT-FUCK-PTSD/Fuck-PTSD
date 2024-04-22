@@ -50,8 +50,10 @@ private:
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
     const std::size_t ALLOW_EXTRA_DRAW = 4;
-    bool
-    CheckShowPosition(const glm::vec2& position1, const glm::vec2& position2);
+    bool              CheckShowPosition(
+                     const glm::vec2& position1,
+                     const glm::vec2& position2
+                 );
     bool isVaildPosition(const glm::ivec2& position);
     bool isVaildMove(const glm::ivec2& position);
     // use reference to avoid copy

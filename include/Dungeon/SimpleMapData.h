@@ -60,8 +60,10 @@ public:
     bool IsPositionPlayerAct(const glm::vec2& position) const;
 
     void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
-    void
-    RemoveTile(const std::size_t position, const std::shared_ptr<Tile> tile);
+    void RemoveTile(
+        const std::size_t           position,
+        const std::shared_ptr<Tile> tile
+    );
     void ClearTiles();
     void PopBackTile(const std::size_t position);
     [[nodiscard]]
