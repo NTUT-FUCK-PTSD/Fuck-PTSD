@@ -3,6 +3,8 @@
 
 #include "Util/Image.hpp"
 
+#include <map>
+
 namespace Dungeon {
 enum class CubeColor {
     black,
@@ -31,17 +33,23 @@ enum class CubeColor {
 class ColorCube final : public Core::Drawable {
 public:
     ColorCube(Dungeon::CubeColor color);
-    ColorCube(const ColorCube &other) = default;
-    ColorCube() = default;
+    ColorCube();
     ~ColorCube() = default;
     void Draw(const Core::Matrices &data) override;
     glm::vec2 GetSize() const override;
     bool GetAvailable() const;
     void SetColor(Dungeon::CubeColor color);
+    Dungeon::CubeColor GetColor() const;
+    static void InitColorMap();
 
 private:
     Dungeon::CubeColor m_Color;
     std::shared_ptr<Util::Image> m_Image;
+
+    static std::map<Dungeon::CubeColor, std::shared_ptr<Util::Image>>
+        m_ColorMap;
+    static bool m_ColorMapInitialized;
+
     bool m_Available = false;
 };
 } // namespace Dungeon

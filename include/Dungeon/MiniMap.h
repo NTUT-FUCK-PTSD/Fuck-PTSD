@@ -12,8 +12,8 @@ class MiniMap : public Util::GameObject {
 public:
     MiniMap(std::shared_ptr<MapData> mapData);
     ~MiniMap() = default;
-    glm::vec2 GetSize() const;
     void SetColor(const glm::vec2 &position, CubeColor color);
+    void SetColor(const std::size_t position, CubeColor color);
     void SetVisible(const glm::vec2 &position, bool visible);
     void SetVisible(const std::size_t position, bool visible);
     void SetScale(double scale);
@@ -23,15 +23,9 @@ public:
 private:
     void BuildMiniMap();
     void UpdateTileColor(const std::size_t mapIndex);
-    void AddChildren(const std::vector<std::shared_ptr<GameObject>> &children);
-    void
-    RemoveChildren(const std::vector<std::shared_ptr<GameObject>> &children);
 
     std::shared_ptr<MapData> m_MapData;
     std::vector<std::shared_ptr<ColorCube>> m_ColorCubes;
-
-    std::vector<std::shared_ptr<GameObject>> m_EnemiesCubeObjects;
-    std::shared_ptr<GameObject> m_PlayerCubeObject;
 
     Util::ms_t m_LastPlayerChanged = 0;
     bool m_PlayerStatus = false;
