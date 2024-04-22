@@ -28,8 +28,11 @@ public:
 
     void Update();
 
-    void MoveByTime(const unsigned long duringTimeMs,
-                    const glm::vec2 &destination, const uint16_t direction);
+    void MoveByTime(
+        const unsigned long duringTimeMs,
+        const glm::vec2&    destination,
+        const uint16_t      direction
+    );
 
 private:
     void toLeftSideCoinText();

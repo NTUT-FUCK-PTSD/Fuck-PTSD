@@ -70,15 +70,19 @@ std::shared_ptr<GameElement> Coin::GetGameObject() {
 void Coin::Update() {
     m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
-        m_GamePosition =
-            ToolBoxs::PosToGamePos(m_Animation->GetAnimationPosition());
+        m_GamePosition = ToolBoxs::PosToGamePos(
+            m_Animation->GetAnimationPosition()
+        );
         m_Position = m_Animation->GetAnimationPosition();
     }
     //    SetZIndex(m_AnimationZIndex);
     SetPosition({m_Position.x + 585, m_Position.y + 350});
 }
 
-void Coin::MoveByTime(const unsigned long duringTimeMs,
-                      const glm::vec2 &destination, const uint16_t direction) {
+void Coin::MoveByTime(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination,
+    const uint16_t      direction
+) {
     m_Animation->MoveByTime(duringTimeMs, destination, direction);
 }

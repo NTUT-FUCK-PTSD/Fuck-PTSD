@@ -28,7 +28,7 @@ private:
     bool m_CanDropHead = false;
     // bool m_DropHead = false;
     std::unique_ptr<Animation> m_Animation;
-    uint16_t m_AnimationType;
+    uint16_t                   m_AnimationType;
 };
 }  // namespace Enemies
 }  // namespace Dungeon
