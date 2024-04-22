@@ -16,15 +16,18 @@ void MiniMap::BuildMiniMap() {
             mapIndex = j + i * m_MapData->GetSize().x;
             m_ColorCubes.push_back(std::make_shared<ColorCube>());
             m_Children.push_back(std::make_shared<Util::GameObject>(
-                m_ColorCubes.back(), 100 - (1e-1)));
+                m_ColorCubes.back(),
+                100 - (1e-1)
+            ));
             SetVisible(mapIndex, true);
             m_Children[mapIndex]->m_Transform.scale = {m_Scale, m_Scale};
             m_Children[mapIndex]->m_Transform.translation = {
-                static_cast<int>(WINDOW_WIDTH) / 2 - DUNGEON_TILE_WIDTH -
-                    (2 * (m_MapData->GetSize().x - (j + 1))) * m_Scale,
-                -(static_cast<int>(WINDOW_HEIGHT) / 2) +
-                    (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH) +
-                    (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale};
+              static_cast<int>(WINDOW_WIDTH) / 2 - DUNGEON_TILE_WIDTH
+                  - (2 * (m_MapData->GetSize().x - (j + 1))) * m_Scale,
+              -(static_cast<int>(WINDOW_HEIGHT) / 2)
+                  + (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH)
+                  + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale
+            };
             UpdateTileColor(mapIndex);
             SetVisible(mapIndex, false);
         }
@@ -36,29 +39,27 @@ void MiniMap::UpdateTileColor(const std::size_t mapIndex) {
         if (m_MapData->GetTileBack(mapIndex)->IsWall()) {
             if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 102) {
                 SetColor(mapIndex, CubeColor::gray);
-            }
-            else if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 107) {
+            } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type
+                       == 107) {
                 SetColor(mapIndex, CubeColor::stone);
-            }
-            else if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 104 ||
-                     m_MapData->GetTileBack(mapIndex)->GetTile().type == 105 ||
-                     m_MapData->GetTileBack(mapIndex)->GetTile().type == 110) {
+            } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 104
+                       || m_MapData->GetTileBack(mapIndex)->GetTile().type
+                              == 105
+                       || m_MapData->GetTileBack(mapIndex)->GetTile().type
+                              == 110) {
                 SetColor(mapIndex, CubeColor::metrognome);
-            }
-            else {
+            } else {
                 SetColor(mapIndex, CubeColor::wall);
             }
-        }
-        else if (m_MapData->GetTileBack(mapIndex)->IsDoor()) {
+        } else if (m_MapData->GetTileBack(mapIndex)->IsDoor()) {
             SetColor(mapIndex, CubeColor::green);
-        }
-        else {
+        } else {
             SetColor(mapIndex, CubeColor::white);
         }
     }
 }
 
-void MiniMap::SetColor(const glm::vec2 &position, CubeColor color) {
+void MiniMap::SetColor(const glm::vec2& position, CubeColor color) {
     auto mapIndex = m_MapData->GamePosition2MapIndex(position);
     SetColor(mapIndex, color);
 }
@@ -70,7 +71,7 @@ void MiniMap::SetColor(const std::size_t position, CubeColor color) {
     m_ColorCubes[position]->SetColor(color);
 }
 
-void MiniMap::SetVisible(const glm::vec2 &position, bool visible) {
+void MiniMap::SetVisible(const glm::vec2& position, bool visible) {
     auto mapIndex = m_MapData->GamePosition2MapIndex(position);
     SetVisible(mapIndex, visible);
 }
@@ -101,8 +102,7 @@ void MiniMap::Update() {
                 if (!m_MapData->GetTileBack(mapIndex)->GetSeen()) {
                     continue;
                 }
-            }
-            else {
+            } else {
                 SetVisible(mapIndex, false);
                 continue;
             }
@@ -114,11 +114,11 @@ void MiniMap::Update() {
     // Update Player
     auto dTime = Util::Time::GetElapsedTimeMs() - m_LastPlayerChanged;
     if (dTime < 250) {
-        auto mapIndex =
-            m_MapData->GamePosition2MapIndex(m_MapData->GetPlayerPosition());
+        auto mapIndex = m_MapData->GamePosition2MapIndex(
+            m_MapData->GetPlayerPosition()
+        );
         SetColor(mapIndex, CubeColor::blue);
-    }
-    else if (dTime > 500) {
+    } else if (dTime > 500) {
         m_PlayerStatus = !m_PlayerStatus;
         m_LastPlayerChanged = Util::Time::GetElapsedTimeMs();
     }
@@ -129,4 +129,4 @@ void MiniMap::SetScale(double scale) {
     BuildMiniMap();
     Update();
 }
-} // namespace Dungeon
+}  // namespace Dungeon

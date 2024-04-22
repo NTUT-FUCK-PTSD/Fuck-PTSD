@@ -12,9 +12,9 @@ class MiniMap : public Util::GameObject {
 public:
     MiniMap(std::shared_ptr<MapData> mapData);
     ~MiniMap() = default;
-    void SetColor(const glm::vec2 &position, CubeColor color);
+    void SetColor(const glm::vec2& position, CubeColor color);
     void SetColor(const std::size_t position, CubeColor color);
-    void SetVisible(const glm::vec2 &position, bool visible);
+    void SetVisible(const glm::vec2& position, bool visible);
     void SetVisible(const std::size_t position, bool visible);
     void SetScale(double scale);
 
@@ -24,13 +24,13 @@ private:
     void BuildMiniMap();
     void UpdateTileColor(const std::size_t mapIndex);
 
-    std::shared_ptr<MapData> m_MapData;
+    std::shared_ptr<MapData>                m_MapData;
     std::vector<std::shared_ptr<ColorCube>> m_ColorCubes;
 
     Util::ms_t m_LastPlayerChanged = 0;
-    bool m_PlayerStatus = false;
-    double m_Scale = DUNGEON_SCALE + 1;
+    bool       m_PlayerStatus = false;
+    double     m_Scale = DUNGEON_SCALE + 1;
 };
-} // namespace Dungeon
+}  // namespace Dungeon
 
-#endif // MINIMAP_H
+#endif  // MINIMAP_H

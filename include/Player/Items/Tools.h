@@ -49,14 +49,16 @@ private:
     template <class T>
     ptrdiff_t getListIdx(std::vector<T> list, Tools::Type type);
 
-    std::vector<Tools::Type> m_colPosIdx;
-    std::vector<Tools::Type> m_rowPosIdx;
+    std::vector<Tools::Type>     m_colPosIdx;
+    std::vector<Tools::Type>     m_rowPosIdx;
     const std::vector<glm::vec2> m_colPosList = {
-        {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 195},
-        {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 335}};
+      {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 195},
+      {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 335}
+    };
     const std::vector<glm::vec2> m_rowPosList = {
-        {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 55},
-        {-int(WINDOW_WIDTH) / 2 + 165, WINDOW_HEIGHT / 2 - 55}};
+      {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 55},
+      {-int(WINDOW_WIDTH) / 2 + 165, WINDOW_HEIGHT / 2 - 55}
+    };
 
     std::vector<std::shared_ptr<IEquipment>> m_colEquipList;
     std::vector<std::shared_ptr<IEquipment>> m_rowEquipList;
@@ -64,4 +66,4 @@ private:
     std::shared_ptr<GameElement> m_Tools = std::make_shared<GameElement>();
 };
 
-#endif // FUCK_PTSD_TOOLS_H
+#endif  // FUCK_PTSD_TOOLS_H

@@ -8,8 +8,10 @@ namespace Dungeon {
 namespace Enemies {
 class BlueSlime final : public Dungeon::Enemy {
 public:
-    BlueSlime(const s_Enemy &u_Enemy,
-              const std::shared_ptr<SimpleMapData> simpleMapData);
+    BlueSlime(
+        const s_Enemy&                       u_Enemy,
+        const std::shared_ptr<SimpleMapData> simpleMapData
+    );
 
     void Move() override;
 
@@ -19,15 +21,15 @@ public:
 
 private:
     const glm::vec2 m_FrameSize = {26, 25};
-    glm::vec2 m_InitPosition;
-    glm::vec2 m_Move = glm::vec2(0, 1);
+    glm::vec2       m_InitPosition;
+    glm::vec2       m_Move = glm::vec2(0, 1);
 
-    std::size_t m_State = 0;
-    bool m_NeedToMove = false;
+    std::size_t                m_State = 0;
+    bool                       m_NeedToMove = false;
     std::unique_ptr<Animation> m_Animation;
-    uint16_t m_AnimationType;
+    uint16_t                   m_AnimationType;
 };
-} // namespace Enemies
-} // namespace Dungeon
+}  // namespace Enemies
+}  // namespace Dungeon
 
-#endif // BLUE_SLIME_H
+#endif  // BLUE_SLIME_H

@@ -7,10 +7,10 @@ namespace Dungeon {
 namespace Tiles {
 class WirePhaseConductor final : public GeneralFloor {
 public:
-    explicit WirePhaseConductor(const s_Tile &u_Tile);
+    explicit WirePhaseConductor(const s_Tile& u_Tile);
     virtual ~WirePhaseConductor() override = default;
 };
-} // namespace Tiles
-} // namespace Dungeon
+}  // namespace Tiles
+}  // namespace Dungeon
 
-#endif // WIREPHASECONDUCTOR_H
+#endif  // WIREPHASECONDUCTOR_H

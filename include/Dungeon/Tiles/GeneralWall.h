@@ -7,9 +7,12 @@ namespace Dungeon {
 namespace Tiles {
 class GeneralWall : public Tile {
 public:
-    GeneralWall(const s_Tile &u_Tile, const bool generalWall = true);
-    GeneralWall(const s_Tile &u_Tile, const std::string &filePath,
-                const bool generalWall = true);
+    GeneralWall(const s_Tile& u_Tile, const bool generalWall = true);
+    GeneralWall(
+        const s_Tile&      u_Tile,
+        const std::string& filePath,
+        const bool         generalWall = true
+    );
     virtual ~GeneralWall() override = default;
 
     bool IsWall() override { return true; };
@@ -18,7 +21,7 @@ public:
 protected:
     void UpdateTranslation() override;
 };
-} // namespace Tiles
-} // namespace Dungeon
+}  // namespace Tiles
+}  // namespace Dungeon
 
-#endif // GENERALWALL_H
+#endif  // GENERALWALL_H

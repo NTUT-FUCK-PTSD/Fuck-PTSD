@@ -7,11 +7,14 @@
 Music::RhythmIndicator::RhythmIndicator()
     : m_rhythmIndicator(std::make_shared<GameElement>()),
       m_redIndicator(std::make_shared<Util::Image>(
-          ASSETS_DIR "/gui/TEMP_beat_marker_red.png")),
-      m_blueIndicator(std::make_shared<Util::Image>(
-          ASSETS_DIR "/gui/TEMP_beat_marker.png")),
+          ASSETS_DIR "/gui/TEMP_beat_marker_red.png"
+      )),
+      m_blueIndicator(
+          std::make_shared<Util::Image>(ASSETS_DIR "/gui/TEMP_beat_marker.png")
+      ),
       m_greenIndicator(std::make_shared<Util::Image>(
-          ASSETS_DIR "/gui/TEMP_beat_marker_green.png")) {
+          ASSETS_DIR "/gui/TEMP_beat_marker_green.png"
+      )) {
     //    m_rhythmIndicator->SetVisible(false);
 }
 
@@ -20,7 +23,8 @@ std::shared_ptr<GameElement> Music::RhythmIndicator::GetGameElement() {
 }
 
 void Music::RhythmIndicator::SetTempoTriggerList(
-    std::vector<std::size_t> tempoTriggerList) {
+    std::vector<std::size_t> tempoTriggerList
+) {
     m_tempoTriggerList = std::move(tempoTriggerList);
     m_tempoNumber = CountTempoNumber(m_tempoRange);
 
@@ -42,16 +46,16 @@ void Music::RhythmIndicator::Update() {
     const auto intervalPixel = 720.0f / static_cast<float>(m_tempoNumber);
 
     std::size_t index = m_startBeatIndex;
-    for (const auto &elem : m_IndicatorList) {
-        const std::size_t tempoIntervalTime =
-            m_tempoTriggerList[index + 1] - m_tempoTriggerList[index];
-        const float moveSpeed =
-            (intervalPixel / static_cast<float>(tempoIntervalTime)) *
-            static_cast<float>(intervalTime);
+    for (const auto& elem : m_IndicatorList) {
+        const std::size_t tempoIntervalTime = m_tempoTriggerList[index + 1]
+                                              - m_tempoTriggerList[index];
+        const float moveSpeed = (intervalPixel
+                                 / static_cast<float>(tempoIntervalTime))
+                                * static_cast<float>(intervalTime);
 
         const auto position = elem->GetPosition();
-        const auto movePosition =
-            glm::vec2({position.x + moveSpeed, position.y});
+        const auto movePosition = glm::vec2({position.x + moveSpeed, position.y}
+        );
 
         index += 1;
         if (movePosition.x >= 0) {
@@ -63,16 +67,16 @@ void Music::RhythmIndicator::Update() {
     }
 
     index = m_startBeatIndex;
-    for (const auto &elem : m_IndicatorListLeft) {
-        const std::size_t tempoIntervalTime =
-            m_tempoTriggerList[index + 1] - m_tempoTriggerList[index];
-        const float moveSpeed =
-            (intervalPixel / static_cast<float>(tempoIntervalTime)) *
-            static_cast<float>(intervalTime);
+    for (const auto& elem : m_IndicatorListLeft) {
+        const std::size_t tempoIntervalTime = m_tempoTriggerList[index + 1]
+                                              - m_tempoTriggerList[index];
+        const float moveSpeed = (intervalPixel
+                                 / static_cast<float>(tempoIntervalTime))
+                                * static_cast<float>(intervalTime);
 
         const auto position = elem->GetPosition();
-        const auto movePosition =
-            glm::vec2({position.x - moveSpeed, position.y});
+        const auto movePosition = glm::vec2({position.x - moveSpeed, position.y}
+        );
 
         index += 1;
         if (movePosition.x <= 0) {
@@ -123,14 +127,14 @@ void Music::RhythmIndicator::InitIndicationPosition() {
     auto intervalSpace = 720.0f / static_cast<float>(m_tempoNumber);
 
     auto position = m_centerPosition;
-    for (const auto &elem : m_IndicatorList) {
+    for (const auto& elem : m_IndicatorList) {
         elem->SetPosition(position);
 
         position.x -= intervalSpace;
     }
 
     position = m_centerPosition;
-    for (const auto &elem : m_IndicatorListLeft) {
+    for (const auto& elem : m_IndicatorListLeft) {
         elem->SetPosition(position);
 
         position.x += intervalSpace;

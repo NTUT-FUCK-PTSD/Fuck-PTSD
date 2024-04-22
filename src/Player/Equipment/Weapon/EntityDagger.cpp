@@ -5,5 +5,13 @@
 #include "Equipment/Weapon/EntityDagger.h"
 
 ToolSystem::EntityDagger::EntityDagger()
-    : TBaseWeapon(normal, blood, glass, golden, obsidian, titanium, ImagePath,
-                  isThrow) {};
+    : TBaseWeapon(
+          normal,
+          blood,
+          glass,
+          golden,
+          obsidian,
+          titanium,
+          ImagePath,
+          isThrow
+      ) {};

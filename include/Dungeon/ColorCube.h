@@ -35,23 +35,23 @@ public:
     ColorCube(Dungeon::CubeColor color);
     ColorCube();
     ~ColorCube() = default;
-    void Draw(const Core::Matrices &data) override;
-    glm::vec2 GetSize() const override;
-    bool GetAvailable() const;
-    void SetColor(Dungeon::CubeColor color);
+    void               Draw(const Core::Matrices& data) override;
+    glm::vec2          GetSize() const override;
+    bool               GetAvailable() const;
+    void               SetColor(Dungeon::CubeColor color);
     Dungeon::CubeColor GetColor() const;
-    static void InitColorMap();
+    static void        InitColorMap();
 
 private:
-    Dungeon::CubeColor m_Color;
+    Dungeon::CubeColor           m_Color;
     std::shared_ptr<Util::Image> m_Image;
 
     static std::map<Dungeon::CubeColor, std::shared_ptr<Util::Image>>
-        m_ColorMap;
+                m_ColorMap;
     static bool m_ColorMapInitialized;
 
     bool m_Available = false;
 };
-} // namespace Dungeon
+}  // namespace Dungeon
 
-#endif // COLORCUBE_H
+#endif  // COLORCUBE_H

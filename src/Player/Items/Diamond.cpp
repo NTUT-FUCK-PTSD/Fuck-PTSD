@@ -10,7 +10,11 @@
 //
 Diamond::Diamond() {
     m_text = std::make_shared<Util::Text>(
-        m_TextStylePath, m_fontSize, m_showText, Util::Color(255, 255, 255));
+        m_TextStylePath,
+        m_fontSize,
+        m_showText,
+        Util::Color(255, 255, 255)
+    );
     const auto CoinImage = std::make_shared<Util::Image>(m_imagePath);
 
     m_DiamondText->SetDrawable(m_text);
@@ -34,11 +38,12 @@ std::vector<std::shared_ptr<Util::GameObject>> Diamond::getGameObject() {
 }
 
 void Diamond::toLeftSideDiamondText() {
-
     // left point
-    glm::vec2 initPos = {m_Position.x + 50, m_Position.y};
-    const glm::vec2 modifyPos = {initPos.x + m_text->GetSize().x * 2.5,
-                                 initPos.y};
+    glm::vec2       initPos = {m_Position.x + 50, m_Position.y};
+    const glm::vec2 modifyPos = {
+      initPos.x + m_text->GetSize().x * 2.5,
+      initPos.y
+    };
     m_DiamondText->SetPosition(modifyPos);
 }
 

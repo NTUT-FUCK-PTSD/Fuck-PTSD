@@ -1,17 +1,20 @@
 #include "Animation.h"
 
-Animation::Animation(const glm::vec2 &animationPosition)
+Animation::Animation(const glm::vec2& animationPosition)
     : m_AnimationPosition(animationPosition) {
-    m_AnimationZIndex =
-        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
-                                       DUNGEON_TILE_WIDTH})
-            .y /
-        1e2;
+    m_AnimationZIndex = ToolBoxs::PosToGamePos({0,
+                                                m_AnimationPosition.y
+                                                    - DUNGEON_TILE_WIDTH
+                                                    - DUNGEON_TILE_WIDTH})
+                            .y
+                        / 1e2;
 }
 
-void Animation::MoveByTime(const unsigned long duringTimeMs,
-                           const glm::vec2 &destination,
-                           const uint16_t direction) {
+void Animation::MoveByTime(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination,
+    const uint16_t      direction
+) {
     if (m_IsAnimatingInternal) {
         m_AnimationPosition = m_AnimationDestination;
         UpdateAnimation(true);
@@ -24,8 +27,10 @@ void Animation::MoveByTime(const unsigned long duringTimeMs,
     m_AnimationDirection = direction;
 }
 
-void Animation::MoveByTime(const unsigned long duringTimeMs,
-                           const glm::vec2 &destination) {
+void Animation::MoveByTime(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination
+) {
     if (m_IsAnimatingInternal) {
         m_AnimationPosition = m_AnimationDestination;
         UpdateAnimation(false);
@@ -37,43 +42,43 @@ void Animation::MoveByTime(const unsigned long duringTimeMs,
     m_IsAnimating = true;
 }
 
-void Animation::UpdateAnimation(const bool &isDirection) {
+void Animation::UpdateAnimation(const bool& isDirection) {
     if (m_IsAnimatingInternal) {
-        unsigned long passTimeMs =
-            Util::Time::GetElapsedTimeMs() - m_AnimationStartMs;
+        unsigned long passTimeMs = Util::Time::GetElapsedTimeMs()
+                                   - m_AnimationStartMs;
 
-        if (passTimeMs > m_AnimationDuringTimeMs ||
-            ((m_AnimationPosition == m_AnimationDestination) && !isDirection)) {
+        if (passTimeMs > m_AnimationDuringTimeMs
+            || ((m_AnimationPosition == m_AnimationDestination) && !isDirection
+            )) {
             m_AnimationPosition = m_AnimationDestination;
             m_AnimationDestination = {0, 0};
             m_IsAnimatingInternal = false;
-        }
-        else {
+        } else {
             if (isDirection) {
                 if (passTimeMs <= m_AnimationDuringTimeMs / 2.0f) {
-                    float ratio =
-                        (float)passTimeMs / (m_AnimationDuringTimeMs / 2);
-                    m_AnimationPosition +=
-                        m_MoveAnimation[m_AnimationDirection] * ratio;
-                }
-                else {
-                    float ratio =
-                        (float)(passTimeMs + (m_AnimationDuringTimeMs / 2)) /
-                        (m_AnimationDuringTimeMs / 2);
-                    m_AnimationPosition -=
-                        m_MoveAnimation[m_AnimationDirection] * (1.0f - ratio);
+                    float ratio = (float)passTimeMs
+                                  / (m_AnimationDuringTimeMs / 2);
+                    m_AnimationPosition += m_MoveAnimation[m_AnimationDirection]
+                                           * ratio;
+                } else {
+                    float ratio = (float)(passTimeMs
+                                          + (m_AnimationDuringTimeMs / 2))
+                                  / (m_AnimationDuringTimeMs / 2);
+                    m_AnimationPosition -= m_MoveAnimation[m_AnimationDirection]
+                                           * (1.0f - ratio);
                 }
             }
-            float ratio = (float)passTimeMs / m_AnimationDuringTimeMs;
+            float     ratio = (float)passTimeMs / m_AnimationDuringTimeMs;
             glm::vec2 move = m_AnimationDestination - m_AnimationPosition;
             m_AnimationPosition += move * ratio;
         }
     }
-    m_AnimationZIndex =
-        ToolBoxs::PosToGamePos({0, m_AnimationPosition.y - DUNGEON_TILE_WIDTH -
-                                       DUNGEON_TILE_WIDTH})
-            .y /
-        1e2;
+    m_AnimationZIndex = ToolBoxs::PosToGamePos({0,
+                                                m_AnimationPosition.y
+                                                    - DUNGEON_TILE_WIDTH
+                                                    - DUNGEON_TILE_WIDTH})
+                            .y
+                        / 1e2;
 }
 
 bool Animation::IsAnimating() {

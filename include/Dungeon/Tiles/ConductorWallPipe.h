@@ -7,10 +7,10 @@ namespace Dungeon {
 namespace Tiles {
 class ConductorWallPipe final : public GeneralWall {
 public:
-    explicit ConductorWallPipe(const s_Tile &u_Tile);
+    explicit ConductorWallPipe(const s_Tile& u_Tile);
     virtual ~ConductorWallPipe() override = default;
 };
-} // namespace Tiles
-} // namespace Dungeon
+}  // namespace Tiles
+}  // namespace Dungeon
 
-#endif // CONDUCTORWALLPIPE_H
+#endif  // CONDUCTORWALLPIPE_H

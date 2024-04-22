@@ -15,15 +15,16 @@ namespace Dungeon {
 class Map final : public Util::GameObject {
 public:
     Map(const std::shared_ptr<Camera> camera,
-        const std::shared_ptr<Player> mainCharacter, const std::string &path,
-        const std::size_t levelNum = 1);
+        const std::shared_ptr<Player> mainCharacter,
+        const std::string&            path,
+        const std::size_t             levelNum = 1);
     ~Map();
 
-    bool IsAvailable() { return m_Available; }
-    bool LoadLevel(const std::size_t levelNum);
+    bool        IsAvailable() { return m_Available; }
+    bool        LoadLevel(const std::size_t levelNum);
     std::size_t GetLevelNum() const;
 
-    std::size_t GamePostion2MapIndex(const glm::ivec2 &position) const;
+    std::size_t GamePostion2MapIndex(const glm::ivec2& position) const;
 
     std::shared_ptr<MapData> GetMapData() const;
 
@@ -49,25 +50,25 @@ private:
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
     const std::size_t ALLOW_EXTRA_DRAW = 4;
-    bool CheckShowPosition(const glm::vec2 &position1,
-                           const glm::vec2 &position2);
-    bool isVaildPosition(const glm::ivec2 &position);
-    bool isVaildMove(const glm::ivec2 &position);
+    bool
+    CheckShowPosition(const glm::vec2& position1, const glm::vec2& position2);
+    bool isVaildPosition(const glm::ivec2& position);
+    bool isVaildMove(const glm::ivec2& position);
     // use reference to avoid copy
-    void EnemyAttackHandle(const std::shared_ptr<Enemy> &enemy);
-    bool CanPlayerSeePosition(const glm::vec2 &position);
+    void EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy);
+    bool CanPlayerSeePosition(const glm::vec2& position);
 
-    const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
-    const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
-    std::unique_ptr<Level> m_Level;
-    std::size_t m_LevelNum;
-    glm::ivec2 m_Size;
-    std::shared_ptr<MapData> m_MapData; // Use map index to store MapDate
-    std::shared_ptr<Camera> m_Camera;
-    std::shared_ptr<Player> m_MainCharacter;
+    const std::size_t        HalfColNumber = DUNGEON_COL_NUMBER / 2;
+    const std::size_t        HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
+    std::unique_ptr<Level>   m_Level;
+    std::size_t              m_LevelNum;
+    glm::ivec2               m_Size;
+    std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
+    std::shared_ptr<Camera>  m_Camera;
+    std::shared_ptr<Player>  m_MainCharacter;
 
-    bool m_TempoAttack = false;
-    bool m_OverlayRed = false;
+    bool          m_TempoAttack = false;
+    bool          m_OverlayRed = false;
     unsigned long m_OverlayRedTime = 0;
 
     std::vector<bool> m_ShadowRenderDP;
@@ -77,5 +78,5 @@ private:
     std::size_t m_TempoIndex = 0;
 };
 
-} // namespace Dungeon
-#endif // MAP_H
+}  // namespace Dungeon
+#endif  // MAP_H

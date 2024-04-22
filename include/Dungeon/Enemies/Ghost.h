@@ -8,8 +8,10 @@ namespace Dungeon {
 namespace Enemies {
 class Ghost final : public Dungeon::Enemy {
 public:
-    Ghost(const s_Enemy &u_Enemy,
-          const std::shared_ptr<SimpleMapData> simpleMapData);
+    Ghost(
+        const s_Enemy&                       u_Enemy,
+        const std::shared_ptr<SimpleMapData> simpleMapData
+    );
 
     void SetTransparent(bool transparent);
 
@@ -30,7 +32,7 @@ private:
 
     std::unique_ptr<Animation> m_Animation;
 };
-} // namespace Enemies
-} // namespace Dungeon
+}  // namespace Enemies
+}  // namespace Dungeon
 
-#endif // GHOST_H
+#endif  // GHOST_H

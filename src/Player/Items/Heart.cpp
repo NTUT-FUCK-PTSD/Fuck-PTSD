@@ -5,7 +5,6 @@
 #include "Player/Items/Heart.h"
 
 Heart::Heart() {
-
     resetHP();
 }
 
@@ -27,16 +26,21 @@ void Heart::gainHeart(const std::size_t number) {
 
     for (std::size_t i = m_MaxHp / 2; i < HP / 2; i++) {
         m_ElementList.push_front(generalHeart(
-            STATE::EMPTY, m_FirstPosition + m_eachPositionDiff_X * float(i)));
+            STATE::EMPTY,
+            m_FirstPosition + m_eachPositionDiff_X * float(i)
+        ));
         m_Heart->AddChild(m_ElementList.front());
 
         if (m_ElementList.size() > 5) {
             for (std::size_t j = 0; j < 5; j++) {
-                m_ElementList[j]->SetPivot(glm::vec2(-(26 + 2.0f / 3.0f), 0) *
-                                           float(m_ElementList.size() - 5));
+                m_ElementList[j]->SetPivot(
+                    glm::vec2(-(26 + 2.0f / 3.0f), 0)
+                    * float(m_ElementList.size() - 5)
+                );
             }
-            m_ElementList[5]->SetPosition(m_ElementList[5]->GetPosition() +
-                                          m_eachPositionDiff_Y);
+            m_ElementList[5]->SetPosition(
+                m_ElementList[5]->GetPosition() + m_eachPositionDiff_Y
+            );
             m_ElementList[5]->SetPivot({0, 0});
         }
     }
@@ -55,21 +59,17 @@ void Heart::resetHP() {
     UpdateHP();
 }
 
-std::shared_ptr<GameElement> Heart::generalHeart(Heart::STATE state,
-                                                 const glm::vec2 &position) {
-
+std::shared_ptr<GameElement>
+Heart::generalHeart(Heart::STATE state, const glm::vec2& position) {
     const auto resultObject = std::make_shared<GameElement>();
 
     if (state == Heart::STATE::FULL) {
         resultObject->SetDrawable(m_FullHPImage);
-    }
-    else if (state == Heart::STATE::HALF) {
+    } else if (state == Heart::STATE::HALF) {
         resultObject->SetDrawable(m_HalfHPImage);
-    }
-    else if (state == Heart::STATE::EMPTY) {
+    } else if (state == Heart::STATE::EMPTY) {
         resultObject->SetDrawable(m_EmptyHPImage);
-    }
-    else {
+    } else {
         LOG_ERROR("the state that params is not available");
         return nullptr;
     }
@@ -85,11 +85,9 @@ void Heart::UpdateHP() {
     for (int i = m_ElementList.size() - 1; i >= 0; i--) {
         if (int(m_currentHP) - int(i << 1) <= 0) {
             m_ElementList[i]->SetDrawable(m_EmptyHPImage);
-        }
-        else if (m_currentHP - (i << 1) == 1) {
+        } else if (m_currentHP - (i << 1) == 1) {
             m_ElementList[i]->SetDrawable(m_HalfHPImage);
-        }
-        else {
+        } else {
             m_ElementList[i]->SetDrawable(m_FullHPImage);
         }
     }

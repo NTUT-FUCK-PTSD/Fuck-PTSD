@@ -5,10 +5,10 @@
 #ifndef FUCK_PTSD_BACKGROUND_HPP
 #define FUCK_PTSD_BACKGROUND_HPP
 
+#include <string>
 #include "GameElement.h"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-#include <string>
 
 class Background final {
 public:
@@ -29,4 +29,4 @@ private:
     std::string m_ImagePath;
 };
 
-#endif // FUCK_PTSD_BACKGROUND_HPP
+#endif  // FUCK_PTSD_BACKGROUND_HPP

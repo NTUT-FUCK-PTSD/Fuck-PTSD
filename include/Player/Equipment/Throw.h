@@ -22,15 +22,15 @@ public:
 
 private:
     std::size_t m_ZIndex = 99;
-    glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
-    glm::vec2 m_Position = {0, 0};
+    glm::vec2   m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    glm::vec2   m_Position = {0, 0};
 
     Util::Color m_FontColor = Util::Color(255, 255, 255);
-    glm::vec2 m_FontScale = {5, 5};
+    glm::vec2   m_FontScale = {5, 5};
     std::size_t m_FontSize = 6;
     std::string m_Content = "UP+";
-    std::string m_TextStylePath =
-        ASSETS_DIR "/font/necrosans-6/necrosans-6.otf";
+    std::string m_TextStylePath = ASSETS_DIR
+        "/font/necrosans-6/necrosans-6.otf";
 
     //    ASSETS_DIR "/gui/diamond.png"
 
@@ -44,4 +44,4 @@ private:
     std::shared_ptr<GameElement> m_Throw = std::make_shared<GameElement>();
 };
 
-#endif // FUCK_PTSD_THROW_H
+#endif  // FUCK_PTSD_THROW_H

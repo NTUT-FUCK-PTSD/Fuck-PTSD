@@ -7,10 +7,10 @@ namespace Dungeon {
 namespace Tiles {
 class FloorTar final : public GeneralFloor {
 public:
-    explicit FloorTar(const s_Tile &u_Tile);
+    explicit FloorTar(const s_Tile& u_Tile);
     virtual ~FloorTar() override = default;
 };
-} // namespace Tiles
-} // namespace Dungeon
+}  // namespace Tiles
+}  // namespace Dungeon
 
-#endif // FLOORTAR_H
+#endif  // FLOORTAR_H

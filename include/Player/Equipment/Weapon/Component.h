@@ -12,9 +12,14 @@ namespace ToolSystem {
 
 // Damage
 struct Damage {
-
-    explicit Damage(int16t nor, int16t blood, int16t glass, int16t golden,
-                    std::string obsidian, int16t titan)
+    explicit Damage(
+        int16t      nor,
+        int16t      blood,
+        int16t      glass,
+        int16t      golden,
+        std::string obsidian,
+        int16t      titan
+    )
         : normal(nor),
           blood(blood),
           glass(glass),
@@ -23,33 +28,40 @@ struct Damage {
           titanium(titan) {}
 
     // Damage
-    int16_t normal;
-    int16_t blood;
-    int16_t glass;
-    int16_t golden;
+    int16_t     normal;
+    int16_t     blood;
+    int16_t     glass;
+    int16_t     golden;
     std::string obsidian;
-    int16_t titanium;
+    int16_t     titanium;
 };
 
 // Settings
 struct Settings {
-    explicit Settings(std::string &path, bool isThrow)
+    explicit Settings(std::string& path, bool isThrow)
         : imagePath(path),
           isThrow(isThrow) {};
 
     std::string imagePath;
-    bool isThrow;
+    bool        isThrow;
 };
 
 // TBaseWeapon
 struct TBaseWeapon : Damage, Settings {
 public:
-    explicit TBaseWeapon(int16t nor, int16t blood, int16t glass, int16t golden,
-                         std::string obsidian, int16t titan, std::string path,
-                         bool isThrow)
+    explicit TBaseWeapon(
+        int16t      nor,
+        int16t      blood,
+        int16t      glass,
+        int16t      golden,
+        std::string obsidian,
+        int16t      titan,
+        std::string path,
+        bool        isThrow
+    )
         : Damage(nor, blood, glass, golden, obsidian, titan),
           Settings(path, isThrow) {};
 };
-}; // namespace ToolSystem
+};  // namespace ToolSystem
 
-#endif // FUCK_PTSD_SCOMPONENT_H
+#endif  // FUCK_PTSD_SCOMPONENT_H
