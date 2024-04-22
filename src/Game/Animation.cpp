@@ -104,3 +104,20 @@ float Animation::GetAnimationZIndex() {
 void Animation::UpdateGamePosition(const glm::vec2& gamePosition) {
     m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
 }
+
+unsigned long Animation::GetAnimationStartMs() {
+    return m_AnimationStartMs;
+}
+
+unsigned long Animation::GetAnimationDuringTimeMs() {
+    return m_AnimationDuringTimeMs;
+}
+
+glm::vec2 Animation::GetAnimationDestination() {
+    return m_AnimationDestination;
+}
+
+void Animation::SetAnimationStop() {
+    m_IsAnimating = false;
+    m_IsAnimatingInternal = false;
+}

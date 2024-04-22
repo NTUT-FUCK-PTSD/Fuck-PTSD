@@ -1,6 +1,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include <glm/fwd.hpp>
 #include "Settings/Window.hpp"
 
 class Animation final {
@@ -21,6 +22,11 @@ public:
     glm::vec2 GetAnimationPosition();
     float     GetAnimationZIndex();
     void      UpdateGamePosition(const glm::vec2& gamePosition);
+
+    glm::vec2     GetAnimationDestination();
+    unsigned long GetAnimationStartMs();
+    unsigned long GetAnimationDuringTimeMs();
+    void          SetAnimationStop();
 
 private:
     const std::vector<glm::vec2> m_MoveAnimation = {
