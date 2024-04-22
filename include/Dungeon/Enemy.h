@@ -21,14 +21,14 @@ public:
     );
     virtual ~Enemy() = default;
 
-    void SetShadow(const bool& shadow);
+    void SetShadow(const bool shadow);
     void SetGamePosition(const glm::vec2& gamePosition);
     void SetBeatDelay(const std::size_t beatDelay) { m_BeatDelay = beatDelay; }
-    void SetLord(const bool& lord);
+    void SetLord(const bool lord);
     void SetDamage(const std::size_t damage) { m_Damage = damage; }
     void SetHealth(const std::size_t health) { m_Health = health; }
     void SetCoin(const std::size_t coin) { m_Coin = coin; }
-    void SetCanMove(const bool& canMove) { m_CanMove = canMove; }
+    void SetCanMove(const bool canMove) { m_CanMove = canMove; }
 
     void SetFace(bool faceTo) {
         m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;

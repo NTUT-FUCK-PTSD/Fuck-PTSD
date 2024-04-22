@@ -14,7 +14,7 @@ public:
     );
     void
     MoveByTime(const unsigned long duringTimeMs, const glm::vec2& destination);
-    void      UpdateAnimation(const bool& isDirection = false);
+    void      UpdateAnimation(const bool isDirection = false);
     bool      IsAnimating();
     glm::vec2 GetAnimationPosition();
     float     GetAnimationZIndex();

@@ -71,7 +71,7 @@ public:
     ) const;
     [[nodiscard]]
     std::shared_ptr<Tile> GetTileBack(const std::size_t position) const;
-    void SetHasEntity(const std::size_t position, const bool& hasEntity);
+    void SetHasEntity(const std::size_t position, const bool hasEntity);
 
     std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
 

@@ -46,7 +46,7 @@ void Animation::MoveByTime(
     m_IsAnimating = true;
 }
 
-void Animation::UpdateAnimation(const bool& isDirection) {
+void Animation::UpdateAnimation(const bool isDirection) {
     if (m_IsAnimatingInternal) {
         unsigned long passTimeMs = Util::Time::GetElapsedTimeMs()
                                    - m_AnimationStartMs;
