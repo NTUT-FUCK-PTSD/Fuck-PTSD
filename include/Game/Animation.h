@@ -2,9 +2,6 @@
 #define ANIMATION_H
 
 #include "Settings/Window.hpp"
-#include "ToolBoxs.h"
-
-#include "Util/Time.hpp"
 
 class Animation final {
 public:
@@ -19,11 +16,9 @@ public:
     MoveByTime(const unsigned long duringTimeMs, const glm::vec2& destination);
     void      UpdateAnimation(const bool& isDirection = false);
     bool      IsAnimating();
-    glm::vec2 GetAnimationPosition() { return m_AnimationPosition; }
-    float     GetAnimationZIndex() { return m_AnimationZIndex; }
-    void      UpdateGamePosition(const glm::vec2& gamePosition) {
-        m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
-    }
+    glm::vec2 GetAnimationPosition();
+    float     GetAnimationZIndex();
+    void      UpdateGamePosition(const glm::vec2& gamePosition);
 
 private:
     const std::vector<glm::vec2> m_MoveAnimation = {

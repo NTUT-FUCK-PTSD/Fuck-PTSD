@@ -1,13 +1,17 @@
-#include "Animation.h"
+#include "Game/Animation.h"
+
+#include "Util/Time.hpp"
+
+#include "Game/ToolBoxs.h"
 
 Animation::Animation(const glm::vec2& animationPosition)
     : m_AnimationPosition(animationPosition) {
-    m_AnimationZIndex = ToolBoxs::PosToGamePos({0,
-                                                m_AnimationPosition.y
-                                                    - DUNGEON_TILE_WIDTH
-                                                    - DUNGEON_TILE_WIDTH})
-                            .y
-                        / 1e2;
+    float positionY = ToolBoxs::PosToGamePos({0,
+                                              m_AnimationPosition.y
+                                                  - DUNGEON_TILE_WIDTH
+                                                  - DUNGEON_TILE_WIDTH})
+                          .y;
+    m_AnimationZIndex = static_cast<float>(positionY / 1e2);
 }
 
 void Animation::MoveByTime(
@@ -57,13 +61,13 @@ void Animation::UpdateAnimation(const bool& isDirection) {
             if (isDirection) {
                 if (passTimeMs <= m_AnimationDuringTimeMs / 2.0f) {
                     float ratio = (float)passTimeMs
-                                  / (m_AnimationDuringTimeMs / 2);
+                                  / (m_AnimationDuringTimeMs / 2.0f);
                     m_AnimationPosition += m_MoveAnimation[m_AnimationDirection]
                                            * ratio;
                 } else {
                     float ratio = (float)(passTimeMs
-                                          + (m_AnimationDuringTimeMs / 2))
-                                  / (m_AnimationDuringTimeMs / 2);
+                                          + (m_AnimationDuringTimeMs / 2.0f))
+                                  / (m_AnimationDuringTimeMs / 2.0f);
                     m_AnimationPosition -= m_MoveAnimation[m_AnimationDirection]
                                            * (1.0f - ratio);
                 }
@@ -73,12 +77,12 @@ void Animation::UpdateAnimation(const bool& isDirection) {
             m_AnimationPosition += move * ratio;
         }
     }
-    m_AnimationZIndex = ToolBoxs::PosToGamePos({0,
-                                                m_AnimationPosition.y
-                                                    - DUNGEON_TILE_WIDTH
-                                                    - DUNGEON_TILE_WIDTH})
-                            .y
-                        / 1e2;
+    float positionY = ToolBoxs::PosToGamePos({0,
+                                              m_AnimationPosition.y
+                                                  - DUNGEON_TILE_WIDTH
+                                                  - DUNGEON_TILE_WIDTH})
+                          .y;
+    m_AnimationZIndex = static_cast<float>(positionY / 1e2);
 }
 
 bool Animation::IsAnimating() {
@@ -87,4 +91,16 @@ bool Animation::IsAnimating() {
         return true;
     }
     return m_IsAnimating;
+}
+
+glm::vec2 Animation::GetAnimationPosition() {
+    return m_AnimationPosition;
+}
+
+float Animation::GetAnimationZIndex() {
+    return m_AnimationZIndex;
+}
+
+void Animation::UpdateGamePosition(const glm::vec2& gamePosition) {
+    m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
 }
