@@ -67,3 +67,5 @@ jobs:
         with:
           clang-format-version: "18"
           check-path: ${{ matrix.path }}
+          fallback-style: "file"
+
