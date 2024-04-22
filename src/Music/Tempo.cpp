@@ -8,7 +8,7 @@ Music::Tempo::Tempo() {}
 
 Music::Tempo::~Tempo() {}
 
-void Music::Tempo::readTempoFile(const std::string &txtFilePath) {
+void Music::Tempo::readTempoFile(const std::string& txtFilePath) {
     std::ifstream txtTempoFile(txtFilePath);
 
     if (!txtTempoFile.is_open()) {
@@ -25,11 +25,11 @@ void Music::Tempo::readTempoFile(const std::string &txtFilePath) {
     txtTempoFile.close();
 }
 
-std::vector<std::size_t> Music::Tempo::txtToVector(const std::string &line,
-                                                   const char splitChar) {
-    std::stringstream ss(line);
-    std::string item;
-    std::size_t transform = 0;
+std::vector<std::size_t>
+Music::Tempo::txtToVector(const std::string& line, const char splitChar) {
+    std::stringstream        ss(line);
+    std::string              item;
+    std::size_t              transform = 0;
     std::vector<std::size_t> elems;
     while (std::getline(ss, item, splitChar)) {
         transform = std::stoi(item);
@@ -51,7 +51,6 @@ std::vector<std::size_t> Music::Tempo::txtToVector(const std::string &line,
 // }
 
 bool Music::Tempo::canBeClick() {
-
     auto tempoIndex = m_tempoIndex + m_punishTimes;
 
     //    if (m_isWrongTimeClick == true) {
@@ -61,8 +60,8 @@ bool Music::Tempo::canBeClick() {
     //    LOG_INFO(m_tempoList[tempoIndex]);
     //    LOG_DEBUG(m_duringTime);
 
-    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed &&
-        m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
+    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed
+        && m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
         return true;
     }
     return false;
@@ -107,24 +106,24 @@ void Music::Tempo::UpdateTime() {
     //    LOG_INFO(m_isWrongTimeClick);
 
     // getTempo return value
-    if (m_duringTime >=
-            (m_tempoList[m_currentTempoIndex] - m_range) * m_MusicSpeed &&
-        m_duringTime <=
-            (m_tempoList[m_currentTempoIndex] + m_range) * m_MusicSpeed) {
+    if (m_duringTime
+            >= (m_tempoList[m_currentTempoIndex] - m_range) * m_MusicSpeed
+        && m_duringTime
+               <= (m_tempoList[m_currentTempoIndex] + m_range) * m_MusicSpeed) {
         return;
     }
 
     m_currentTempoIndex++;
     m_isWrongTimeClick = false;
 
-    if (m_duringTime >= (m_tempoList[m_tempoIndex] - m_range) * m_MusicSpeed &&
-        m_duringTime <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
+    if (m_duringTime >= (m_tempoList[m_tempoIndex] - m_range) * m_MusicSpeed
+        && m_duringTime
+               <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
         return;
-    }
-    else if (m_duringTime <=
-                 (m_tempoList[m_tempoIndex + 1] - m_range) * m_MusicSpeed &&
-             m_duringTime <=
-                 (m_tempoList[m_tempoIndex + 1] + m_range) * m_MusicSpeed) {
+    } else if (m_duringTime
+                   <= (m_tempoList[m_tempoIndex + 1] - m_range) * m_MusicSpeed
+               && m_duringTime <= (m_tempoList[m_tempoIndex + 1] + m_range)
+                                      * m_MusicSpeed) {
         return;
     }
 
@@ -140,8 +139,9 @@ void Music::Tempo::UpdateTime() {
 
 void Music::Tempo::UpdateTempoIndex() {
     m_tempoIndex = m_tempoIndex + 1 >= m_tempoListLength ? 0 : m_tempoIndex;
-    m_currentTempoIndex =
-        m_currentTempoIndex + 1 >= m_tempoListLength ? 0 : m_currentTempoIndex;
+    m_currentTempoIndex = m_currentTempoIndex + 1 >= m_tempoListLength
+                              ? 0
+                              : m_currentTempoIndex;
 }
 
 std::size_t Music::Tempo::getTempoIndex() const {

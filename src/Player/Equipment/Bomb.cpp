@@ -11,13 +11,27 @@ Bomb::Bomb() {
     const auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 5, 2);
 
     const auto ItemImage = std::make_shared<SpriteSheet>(
-        m_ImagePathItem, ItemSize, std::vector<std::size_t>{0, 1, 2, 3, 4},
-        false, 100, true, 100);
+        m_ImagePathItem,
+        ItemSize,
+        std::vector<std::size_t>{0, 1, 2, 3, 4},
+        false,
+        100,
+        true,
+        100
+    );
     const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
     const auto UpperTextObject = std::make_shared<Util::Text>(
-        m_TextStylePath, m_FontSize, m_Content, m_FontColor);
+        m_TextStylePath,
+        m_FontSize,
+        m_Content,
+        m_FontColor
+    );
     const auto LowerTextObject = std::make_shared<Util::Text>(
-        m_TextStylePath, m_FontSize, "LEFT", m_FontColor);
+        m_TextStylePath,
+        m_FontSize,
+        "LEFT",
+        m_FontColor
+    );
 
     m_Window->SetDrawable(WindowImage);
     m_Item->SetDrawable(ItemImage);

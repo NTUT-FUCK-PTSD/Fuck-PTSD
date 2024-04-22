@@ -22,9 +22,9 @@ public:
 
     void setEnable();
 
-    void playMusic(const std::string &musicPath);
+    void playMusic(const std::string& musicPath);
 
-    void playMusic(const std::string &musicPath, bool setMusicLooping);
+    void playMusic(const std::string& musicPath, bool setMusicLooping);
 
     // let music to this speed
     void setSpeed(float musicSpeed);
@@ -36,7 +36,7 @@ public:
 
     void clickEvent() { m_tempo.keyBoardClick(); };
 
-    void readTempoFile(const std::string &path);
+    void readTempoFile(const std::string& path);
 
     bool TempoTrigger() { return m_tempo.canBeClick(); }
 
@@ -57,28 +57,28 @@ public:
 private:
     float m_currentSpeed = 1.0f;
 
-    Tempo m_tempo;
-    BeatHeart m_display;
+    Tempo           m_tempo;
+    BeatHeart       m_display;
     RhythmIndicator m_rhythmIndicator;
 
     /* ms */
-    int16_t m_TempoOffset = 0;
+    int16_t     m_TempoOffset = 0;
     std::size_t m_TempoRange = 500;
     /* bool isShowHeartBeat = false; */
-    bool isShowHeartBeat = true;
-    int16_t m_DisplayOffset = -30;
+    bool        isShowHeartBeat = true;
+    int16_t     m_DisplayOffset = -30;
     std::size_t m_DisplayRange = 100;
     std::size_t m_DisplayHeartBeatDurationTime = 80;
 
     SoLoud::handle m_musicHandle;
 
-    SoLoud::Soloud m_soloud; // SoLoud engine core
-    SoLoud::Speech m_speech; // A sound source (speech, in this case)
+    SoLoud::Soloud m_soloud;  // SoLoud engine core
+    SoLoud::Speech m_speech;  // A sound source (speech, in this case)
     std::shared_ptr<SoLoud::Wav> m_music;
 
-    std::shared_ptr<GameElement> m_MusicObject =
-        std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_MusicObject = std::make_shared<GameElement>(
+    );
 };
-} // namespace Music
+}  // namespace Music
 
-#endif // FUCK_PTSD_MUSIC_H
+#endif  // FUCK_PTSD_MUSIC_H

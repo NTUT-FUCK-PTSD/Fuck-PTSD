@@ -6,7 +6,6 @@
 #include "Player/Equipment/Shovel.h"
 
 Shovel::Shovel(ShovelEnum::Type type) {
-
     rendererWindow();
 
     selectWeaponType(type);
@@ -17,9 +16,9 @@ Shovel::Shovel(ShovelEnum::Type type) {
 
 void Shovel::selectWeaponType(ShovelEnum::Type type) {
     switch (type) {
-    case ShovelEnum::Normal:
-        m_ItemType = std::make_shared<ToolSystem::EntityShovel>();
-        break;
+        case ShovelEnum::Normal:
+            m_ItemType = std::make_shared<ToolSystem::EntityShovel>();
+            break;
     }
 
     m_ImagePathItem = m_ItemType->imagePath;
@@ -37,8 +36,14 @@ void Shovel::rendererWindow() {
 void Shovel::rendererItem() {
     const auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 1, 2);
     const auto ItemImage = std::make_shared<SpriteSheet>(
-        m_ImagePathItem, ItemSize, std::vector<std::size_t>{0}, false, 100,
-        true, 100);
+        m_ImagePathItem,
+        ItemSize,
+        std::vector<std::size_t>{0},
+        false,
+        100,
+        true,
+        100
+    );
 
     m_Item->SetDrawable(ItemImage);
     m_Item->SetZIndex(m_ZIndex);
@@ -59,7 +64,6 @@ std::shared_ptr<GameElement> Shovel::GetGameObject() const {
 }
 
 void Shovel::setShovelType(ShovelEnum::Type type) {
-
     selectWeaponType(type);
     rendererItem();
 }

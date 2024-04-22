@@ -7,13 +7,13 @@ namespace Dungeon {
 namespace Tiles {
 class GeneralFloor : public Tile {
 public:
-    explicit GeneralFloor(const s_Tile &u_Tile, const bool generalFloor = true);
+    explicit GeneralFloor(const s_Tile& u_Tile, const bool generalFloor = true);
     virtual ~GeneralFloor() override = default;
 
     bool IsWall() override { return false; };
     bool IsDoor() override { return false; };
 };
-} // namespace Tiles
-} // namespace Dungeon
+}  // namespace Tiles
+}  // namespace Dungeon
 
-#endif // GENERALFLOOR_H
+#endif  // GENERALFLOOR_H

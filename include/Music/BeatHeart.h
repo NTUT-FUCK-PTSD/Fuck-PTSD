@@ -42,19 +42,21 @@ private:
 
     std::size_t m_triggerTime = 0;
     std::size_t m_CurrentMusicTime = 0;
-    int16_t m_offset = 0;
+    int16_t     m_offset = 0;
     std::size_t m_heartBeatTime = 0;
     std::size_t m_range = 100;
 
     glm::vec2 m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
-    glm::vec2 m_Position = {0, -(static_cast<int>(WINDOW_HEIGHT) / 2) +
-                                   (52 * DUNGEON_SCALE) / 2 +
-                                   DUNGEON_TILE_WIDTH};
+    glm::vec2 m_Position = {
+      0,
+      -(static_cast<int>(WINDOW_HEIGHT) / 2) + (52 * DUNGEON_SCALE) / 2
+          + DUNGEON_TILE_WIDTH
+    };
     std::size_t m_ZIndex = 100;
 
     std::shared_ptr<SpriteSheet> m_TempoHeartImage;
     std::shared_ptr<GameElement> m_BeatHeart = std::make_shared<GameElement>();
 };
-} // namespace Music
+}  // namespace Music
 
-#endif // FUCK_PTSD_BEATHEART_H
+#endif  // FUCK_PTSD_BEATHEART_H

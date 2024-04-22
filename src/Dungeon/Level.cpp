@@ -1,19 +1,19 @@
 #include "Dungeon/Level.h"
 namespace Dungeon {
 
-Level::Level(const std::string &path, const int levelNum) {
+Level::Level(const std::string& path, const int levelNum) {
     if (LoadFile(path)) {
         m_Available = LoadLevel(levelNum);
     }
 }
 
-Level::Level(const std::string &path) {
+Level::Level(const std::string& path) {
     if (LoadFile(path)) {
         m_Available = false;
     }
 }
 
-bool Level::LoadFile(const std::string &path) {
+bool Level::LoadFile(const std::string& path) {
     if (m_doc.LoadFile(path.c_str()) != tinyxml2::XML_SUCCESS) {
         LOG_ERROR("Failed to load level file: " + path);
         // throw std::runtime_error("Failed to load level file: " + path);
@@ -36,7 +36,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_LevelIndexMax = glm::ivec2(-1e9, -1e9);
 
     for (auto child = m_XMLdungeon->FirstChildElement("level");
-         child != nullptr; child = child->NextSiblingElement("level")) {
+         child != nullptr;
+         child = child->NextSiblingElement("level")) {
         if (child->FindAttribute("num")->IntValue() == levelNum) {
             m_BossNum = child->FindAttribute("bossNum")->IntValue();
             m_Music = child->FindAttribute("music")->IntValue();
@@ -50,7 +51,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Tiles.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("tiles")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         t.x = child->FindAttribute("x")->IntValue();
         t.y = child->FindAttribute("y")->IntValue();
         t.type = child->FindAttribute("type")->IntValue();
@@ -66,7 +68,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Traps.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("traps")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         tr.x = child->FindAttribute("x")->IntValue();
         tr.y = child->FindAttribute("y")->IntValue();
         tr.type = child->FindAttribute("type")->IntValue();
@@ -80,7 +83,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Enemies.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("enemies")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         e.x = child->FindAttribute("x")->IntValue();
         e.y = child->FindAttribute("y")->IntValue();
         e.type = child->FindAttribute("type")->IntValue();
@@ -95,7 +99,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Items.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("items")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         i.x = child->FindAttribute("x")->IntValue();
         i.y = child->FindAttribute("y")->IntValue();
         i.type = child->FindAttribute("type")->Value();
@@ -111,7 +116,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Chests.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("chests")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         c.x = child->FindAttribute("x")->IntValue();
         c.y = child->FindAttribute("y")->IntValue();
         c.saleCost = child->FindAttribute("saleCost")->IntValue();
@@ -128,7 +134,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Crates.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("crates")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         cr.x = child->FindAttribute("x")->IntValue();
         cr.y = child->FindAttribute("y")->IntValue();
         cr.type = child->FindAttribute("type")->IntValue();
@@ -142,7 +149,8 @@ bool Level::LoadLevel(const int levelNum) {
     m_Shrines.clear();
     for (auto child =
              m_XMLlevel->FirstChildElement("shrines")->FirstChildElement();
-         child != nullptr; child = child->NextSiblingElement()) {
+         child != nullptr;
+         child = child->NextSiblingElement()) {
         s.x = child->FindAttribute("x")->IntValue();
         s.y = child->FindAttribute("y")->IntValue();
         s.type = child->FindAttribute("type")->IntValue();
@@ -153,4 +161,4 @@ bool Level::LoadLevel(const int levelNum) {
 
     return true;
 }
-} // namespace Dungeon
+}  // namespace Dungeon

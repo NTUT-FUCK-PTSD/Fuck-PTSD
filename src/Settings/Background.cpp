@@ -8,10 +8,10 @@
 #include "Settings/Window.hpp"
 
 Background::Background() {
-    const auto ContinueImage =
-        std::make_shared<Util::Image>(m_ContinueImagePath);
-    const auto MainMenuImage =
-        std::make_shared<Util::Image>(m_MainMenuImagePath);
+    const auto ContinueImage = std::make_shared<Util::Image>(m_ContinueImagePath
+    );
+    const auto MainMenuImage = std::make_shared<Util::Image>(m_MainMenuImagePath
+    );
 
     m_MainMenu->SetDrawable(MainMenuImage);
     m_MainMenu->SetZIndex(99);
