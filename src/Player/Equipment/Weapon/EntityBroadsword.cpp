@@ -13,6 +13,4 @@ ToolSystem::EntityBroadsword::EntityBroadsword()
           titanium,
           ImagePath,
           m_IsThrow
-      ) {
-
-      };
+      ) {};

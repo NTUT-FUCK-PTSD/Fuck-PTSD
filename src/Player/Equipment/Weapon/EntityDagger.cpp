@@ -14,6 +14,4 @@ ToolSystem::EntityDagger::EntityDagger()
           titanium,
           ImagePath,
           isThrow
-      ) {
-
-      };
+      ) {};

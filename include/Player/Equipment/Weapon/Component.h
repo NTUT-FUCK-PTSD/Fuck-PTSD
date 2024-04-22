@@ -40,9 +40,7 @@ struct Damage {
 struct Settings {
     explicit Settings(std::string& path, bool isThrow)
         : imagePath(path),
-          isThrow(isThrow) {
-
-          };
+          isThrow(isThrow) {};
 
     std::string imagePath;
     bool        isThrow;
@@ -62,9 +60,7 @@ public:
         bool        isThrow
     )
         : Damage(nor, blood, glass, golden, obsidian, titan),
-          Settings(path, isThrow) {
-
-          };
+          Settings(path, isThrow) {};
 };
 };  // namespace ToolSystem
 
