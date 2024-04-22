@@ -38,13 +38,15 @@ std::size_t Music::Player::getTempoTime() {
     return m_tempo.getTempo();
 }
 
-void Music::Player::playMusic(const std::string &musicPath) {
+void Music::Player::playMusic(const std::string& musicPath) {
     m_music = std::make_shared<SoLoud::Wav>();
     m_music->load(musicPath.c_str());
     m_musicHandle = m_soloud.play(*m_music);
 }
-void Music::Player::playMusic(const std::string &musicPath,
-                              bool setMusicLooping) {
+void Music::Player::playMusic(
+    const std::string& musicPath,
+    bool               setMusicLooping
+) {
     m_music = std::make_shared<SoLoud::Wav>();
     m_music->load(musicPath.c_str());
     m_music->setLooping(setMusicLooping);
@@ -78,7 +80,7 @@ void Music::Player::Update() {
     m_rhythmIndicator.Update();
 };
 
-void Music::Player::readTempoFile(const std::string &path) {
+void Music::Player::readTempoFile(const std::string& path) {
     m_tempo.readTempoFile(path);
 
     const std::vector<std::size_t> tempoList = m_tempo.GetTempoTriggerList();

@@ -28,12 +28,12 @@ public:
     };
 
     // getter
-    virtual Direction GetDirection() = 0;
-    virtual bool GetIsThrow() { return false; };
+    virtual Direction                    GetDirection() = 0;
+    virtual bool                         GetIsThrow() { return false; };
     virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
 
     //    virtual GameElement getWindowObject() = 0;
     //    virtual GameElement getItemObject() = 0;
 };
 
-#endif // FUCK_PTSD_IEquipment_H
+#endif  // FUCK_PTSD_IEquipment_H

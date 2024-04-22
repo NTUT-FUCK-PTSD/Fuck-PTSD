@@ -8,8 +8,10 @@ namespace Dungeon {
 namespace Enemies {
 class GreenSlime final : public Dungeon::Enemy, private Animation {
 public:
-    GreenSlime(const s_Enemy &u_Enemy,
-               const std::shared_ptr<SimpleMapData> simpleMapData);
+    GreenSlime(
+        const s_Enemy&                       u_Enemy,
+        const std::shared_ptr<SimpleMapData> simpleMapData
+    );
 
     void Move() override;
 
@@ -18,7 +20,7 @@ public:
 private:
     const glm::vec2 m_FrameSize = {26, 26};
 };
-} // namespace Enemies
-} // namespace Dungeon
+}  // namespace Enemies
+}  // namespace Dungeon
 
-#endif // GREEN_SLIME_H
+#endif  // GREEN_SLIME_H

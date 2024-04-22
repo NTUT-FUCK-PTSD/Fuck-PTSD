@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 :: Initialize an empty string for the file list
 set FILE_LIST=
 
-for /f "delims=" %%i in ('dir /s /b *.cpp *.h ^| findstr /v "\\3rdparty\\ \\build\\"') do (
+for /f "delims=" %%i in ('dir /s /b *.cpp *.h *.hpp ^| findstr /v "\\3rdparty\\ \\build\\"') do (
   :: Get the relative directory and file name
   set REL_DIR=%%~dpi
   set FILE_NAME=%%~nxi

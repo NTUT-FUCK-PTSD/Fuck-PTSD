@@ -7,7 +7,6 @@
 #include "Player/Equipment/Weapon.h"
 
 Weapon::Weapon(WeaponEnum::Type type) {
-
     // renderer the window
     rendererWindow();
 
@@ -20,23 +19,24 @@ Weapon::Weapon(WeaponEnum::Type type) {
 
 void Weapon::selectWeaponType(WeaponEnum::Type type) {
     switch (type) {
-    case WeaponEnum::Type::DAGGER:
-        m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
-        break;
-    case WeaponEnum::Type::BROADSWORD:
-        m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
-        break;
-    case WeaponEnum::Type::RAPIER:
-        m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
-        break;
+        case WeaponEnum::Type::DAGGER:
+            m_ItemType = std::make_shared<ToolSystem::EntityDagger>();
+            break;
+        case WeaponEnum::Type::BROADSWORD:
+            m_ItemType = std::make_shared<ToolSystem::EntityBroadsword>();
+            break;
+        case WeaponEnum::Type::RAPIER:
+            m_ItemType = std::make_shared<ToolSystem::EntityRapier>();
+            break;
     }
 
     m_ImagePathItem = m_ItemType->imagePath;
 }
 
 void Weapon::rendererWindow() {
-    const auto WindowSpriteSheet =
-        std::make_shared<Util::SpriteSheet>(m_ImagePathWindow);
+    const auto WindowSpriteSheet = std::make_shared<Util::SpriteSheet>(
+        m_ImagePathWindow
+    );
 
     WindowSpriteSheet->SetDrawRect(SDL_Rect{0, 0, 30, 33});
     //    const auto WindowImage =
@@ -54,8 +54,14 @@ void Weapon::rendererItem() {
     auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 1, 2);
 
     const auto ItemImage = std::make_shared<SpriteSheet>(
-        m_ImagePathItem, ItemSize, std::vector<std::size_t>{0}, false, 100,
-        true, 100);
+        m_ImagePathItem,
+        ItemSize,
+        std::vector<std::size_t>{0},
+        false,
+        100,
+        true,
+        100
+    );
 
     m_Item->SetDrawable(ItemImage);
     m_Item->SetZIndex(m_ZIndex);

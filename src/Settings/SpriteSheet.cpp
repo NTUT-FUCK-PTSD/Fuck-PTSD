@@ -9,10 +9,15 @@
 
 #include "config.hpp"
 
-SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
-                         const std::vector<std::size_t> &frames, bool play,
-                         std::size_t interval, bool looping,
-                         std::size_t cooldown)
+SpriteSheet::SpriteSheet(
+    const std::string               filepath,
+    glm::vec2                       frameSize,
+    const std::vector<std::size_t>& frames,
+    bool                            play,
+    std::size_t                     interval,
+    bool                            looping,
+    std::size_t                     cooldown
+)
     : m_Frames(frames),
       m_State(play ? State::PLAY : State::PAUSE),
       m_Interval(interval),
@@ -34,11 +39,13 @@ void SpriteSheet::SetCurrentFrame(std::size_t index) {
     }
 }
 
-void SpriteSheet::Draw(const Core::Matrices &data) {
+void SpriteSheet::Draw(const Core::Matrices& data) {
     SDL_Rect displayRect{
-        static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
-        static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
-        static_cast<int>(m_FrameSize.x), static_cast<int>(m_FrameSize.y)};
+      static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
+      static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
+      static_cast<int>(m_FrameSize.x),
+      static_cast<int>(m_FrameSize.y)
+    };
     m_SpriteSheet->SetDrawRect(displayRect);
     m_SpriteSheet->Draw(data);
 
@@ -76,8 +83,9 @@ void SpriteSheet::Update() {
     }
 
     m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTimeMs();
-    std::size_t updateFrameCount =
-        static_cast<std::size_t>(m_TimeBetweenFrameUpdate / m_Interval);
+    std::size_t updateFrameCount = static_cast<std::size_t>(
+        m_TimeBetweenFrameUpdate / m_Interval
+    );
 
     if (updateFrameCount <= 0)
         return;

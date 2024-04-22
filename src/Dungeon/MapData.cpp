@@ -3,14 +3,19 @@
 #include <fmt/core.h>
 
 namespace Dungeon {
-MapData::MapData(const glm::vec2 &levelIndexMin, const glm::vec2 &levelIndexMax,
-                 const glm::vec2 &size)
+MapData::MapData(
+    const glm::vec2& levelIndexMin,
+    const glm::vec2& levelIndexMax,
+    const glm::vec2& size
+)
     : SimpleMapData(levelIndexMin, levelIndexMax, size) {
     m_Enemies.resize(GetSize().x * GetSize().y);
 }
 
-void MapData::AddEnemy(const std::size_t position,
-                       const std::shared_ptr<Enemy> enemy) {
+void MapData::AddEnemy(
+    const std::size_t            position,
+    const std::shared_ptr<Enemy> enemy
+) {
     m_Enemies.at(position) = enemy;
     SetHasEntity(position, true);
     m_EnemyQueue.push_back(enemy);
@@ -21,9 +26,14 @@ void MapData::RemoveEnemy(const std::size_t position) {
         return;
     }
     // m_Enemies.at(position)->SetVisible(false);
-    m_EnemyQueue.erase(std::remove(m_EnemyQueue.begin(), m_EnemyQueue.end(),
-                                   m_Enemies.at(position)),
-                       m_EnemyQueue.end());
+    m_EnemyQueue.erase(
+        std::remove(
+            m_EnemyQueue.begin(),
+            m_EnemyQueue.end(),
+            m_Enemies.at(position)
+        ),
+        m_EnemyQueue.end()
+    );
     m_Enemies.at(position) = nullptr;
     SetHasEntity(position, false);
 }
@@ -50,8 +60,10 @@ std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
     return v;
 }
 
-bool MapData::EnemyCompare(std::shared_ptr<Enemy> &lhs,
-                           std::shared_ptr<Enemy> &rhs) {
+bool MapData::EnemyCompare(
+    std::shared_ptr<Enemy>& lhs,
+    std::shared_ptr<Enemy>& rhs
+) {
     std::string lhsPriority, rhsPriority;
     lhsPriority = lhs->GetLord() ? "2" : "1";
     rhsPriority = rhs->GetLord() ? "2" : "1";
@@ -63,12 +75,11 @@ bool MapData::EnemyCompare(std::shared_ptr<Enemy> &lhs,
     rhsPriority += fmt::format("{:0>2}", rhs->GetCoin());
     if (lhsPriority < rhsPriority) {
         return true;
-    }
-    else if (lhsPriority > rhsPriority) {
+    } else if (lhsPriority > rhsPriority) {
         return false;
     }
 
-    return Heuristic(GetPlayerPosition(), lhs->GetGamePosition()) <
-           Heuristic(GetPlayerPosition(), rhs->GetGamePosition());
+    return Heuristic(GetPlayerPosition(), lhs->GetGamePosition())
+           < Heuristic(GetPlayerPosition(), rhs->GetGamePosition());
 }
-} // namespace Dungeon
+}  // namespace Dungeon

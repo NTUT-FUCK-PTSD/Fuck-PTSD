@@ -12,7 +12,6 @@ Player::Player()
       m_Tools(std::make_unique<Tools>()),
       m_Diamond(std::make_unique<Diamond>()),
       m_Window(std::make_shared<GameElement>()) {
-
     // create tool Throw
     m_Tools->SetThrow();
 
@@ -28,21 +27,33 @@ Player::Player()
     Update();
 }
 
-void Player::SetBodyImage(const std::string &path) {
+void Player::SetBodyImage(const std::string& path) {
     BodySize = ToolBoxs::CountImagePixel(path, 4, 10);
     BodyImage = std::make_shared<SpriteSheet>(
-        path, BodySize, std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true,
-        100);
+        path,
+        BodySize,
+        std::vector<std::size_t>{0, 1, 2, 3},
+        true,
+        100,
+        true,
+        100
+    );
     m_Body->SetDrawable(BodyImage);
     m_Body->SetPosition(m_Position);
     m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
-void Player::SetHeadImage(const std::string &path) {
+void Player::SetHeadImage(const std::string& path) {
     HeadSize = ToolBoxs::CountImagePixel(path, 4, 2);
     HeadImage = std::make_shared<SpriteSheet>(
-        path, HeadSize, std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true,
-        100);
+        path,
+        HeadSize,
+        std::vector<std::size_t>{0, 1, 2, 3},
+        true,
+        100,
+        true,
+        100
+    );
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(m_Position);
     m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
@@ -72,7 +83,7 @@ glm::vec2 Player::GetGamePosition() {
     return m_GamePosition;
 }
 
-void Player::SetGamePosition(const glm::vec2 &gamePosition) {
+void Player::SetGamePosition(const glm::vec2& gamePosition) {
     m_GamePosition = gamePosition;
     m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
     SetPosition(ToolBoxs::GamePostoPos(gamePosition));
@@ -103,7 +114,7 @@ void Player::Update() {
     SetPosition(m_Position);
 }
 
-void Player::SetPosition(const glm::vec2 &position) {
+void Player::SetPosition(const glm::vec2& position) {
     m_Position = position;
     m_Body->SetPosition(m_Position);
     m_Head->SetPosition(m_Position);
@@ -115,9 +126,11 @@ void Player::SetZIndex(float index) {
     m_Head->SetZIndex(index + float(0.25));
 }
 
-void Player::UpdateCoin(const unsigned long duringTimeMs,
-                        const glm::vec2 &destination,
-                        const uint16_t direction) {
+void Player::UpdateCoin(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination,
+    const uint16_t      direction
+) {
     m_Coin->MoveByTime(duringTimeMs, destination, direction);
 }
 
@@ -178,9 +191,11 @@ WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
 }
 
-void Player::MoveByTime(const unsigned long duringTimeMs,
-                        const glm::vec2 &destination,
-                        const uint16_t direction) {
+void Player::MoveByTime(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination,
+    const uint16_t      direction
+) {
     // Update GamePosition but not draw
     m_GamePosition = ToolBoxs::PosToGamePos(destination);
     Animation::MoveByTime(duringTimeMs, destination, direction);

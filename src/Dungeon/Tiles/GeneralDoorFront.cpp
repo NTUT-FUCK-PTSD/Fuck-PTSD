@@ -2,8 +2,10 @@
 
 namespace Dungeon {
 namespace Tiles {
-GeneralDoorFront::GeneralDoorFront(const s_Tile &u_Tile,
-                                   const bool generalDoorFront)
+GeneralDoorFront::GeneralDoorFront(
+    const s_Tile& u_Tile,
+    const bool    generalDoorFront
+)
     : Tile(u_Tile) {
     m_ZIndex = m_ZIndex + 1e-4;
     m_MagicNumber = 7;
@@ -12,9 +14,11 @@ GeneralDoorFront::GeneralDoorFront(const s_Tile &u_Tile,
     }
 }
 
-GeneralDoorFront::GeneralDoorFront(const s_Tile &u_Tile,
-                                   const std::string &filePath,
-                                   const bool generalDoorFront)
+GeneralDoorFront::GeneralDoorFront(
+    const s_Tile&      u_Tile,
+    const std::string& filePath,
+    const bool         generalDoorFront
+)
     : Tile(u_Tile, filePath) {
     m_ZIndex = m_ZIndex + 1e-4;
     m_MagicNumber = 7;
@@ -22,5 +26,5 @@ GeneralDoorFront::GeneralDoorFront(const s_Tile &u_Tile,
         UpdateDrawable();
     }
 }
-} // namespace Tiles
-} // namespace Dungeon
+}  // namespace Tiles
+}  // namespace Dungeon

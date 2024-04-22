@@ -20,7 +20,7 @@ public:
     ~Tempo();
 
     // must read one line in file, it not be '\n'
-    void readTempoFile(const std::string &txtFilePath);
+    void readTempoFile(const std::string& txtFilePath);
 
     bool canBeClick();
 
@@ -46,25 +46,25 @@ protected:
     void UpdateTempoIndex();
 
 private:
-    std::vector<std::size_t> txtToVector(const std::string &line,
-                                         const char splitChar);
+    std::vector<std::size_t>
+    txtToVector(const std::string& line, const char splitChar);
 
     float m_MusicSpeed = 1.0f;
 
-    bool isShowHeartBeat = false;
-    bool m_isWrongTimeClick = false;
+    bool        isShowHeartBeat = false;
+    bool        m_isWrongTimeClick = false;
     std::size_t m_punishTimes = 0;
 
     std::size_t m_duringTime = 0;
     std::size_t m_range = 500;
-    int16_t m_offset = 0; // (ms)
+    int16_t     m_offset = 0;  // (ms)
 
-    std::size_t m_currentTempoTime = 0;
-    std::size_t m_tempoIndex = 0;
-    std::size_t m_currentTempoIndex = 0;
-    std::size_t m_tempoListLength = 0;
+    std::size_t              m_currentTempoTime = 0;
+    std::size_t              m_tempoIndex = 0;
+    std::size_t              m_currentTempoIndex = 0;
+    std::size_t              m_tempoListLength = 0;
     std::vector<std::size_t> m_tempoList;
 };
-} // namespace Music
+}  // namespace Music
 
-#endif // FUCK_PTSD_TEMPO_H
+#endif  // FUCK_PTSD_TEMPO_H

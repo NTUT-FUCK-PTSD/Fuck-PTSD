@@ -24,21 +24,21 @@ public:
         SetDrawable(drawable);
     };
 
-    void SetPosition(const glm::vec2 &Position) {
+    void SetPosition(const glm::vec2& Position) {
         m_Transform.translation = Position;
     }
 
-    void SetScale(const glm::vec2 &Ratio) { m_Transform.scale = Ratio; }
+    void SetScale(const glm::vec2& Ratio) { m_Transform.scale = Ratio; }
 
     // return Image Path
     [[nodiscard]]
-    const std::string &GetImagePath() const {
+    const std::string& GetImagePath() const {
         return m_ImagePath;
     }
 
     // return Image's Position
     [[nodiscard]]
-    const glm::vec2 &GetPosition() const {
+    const glm::vec2& GetPosition() const {
         return m_Transform.translation;
     }
 
@@ -49,4 +49,4 @@ public:
     }
 };
 
-#endif // I_LOVE_PTSD_ROLE_H
+#endif  // I_LOVE_PTSD_ROLE_H
