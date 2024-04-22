@@ -14,4 +14,6 @@ ToolSystem::EntityRapier::EntityRapier()
           titanium,
           ImagePath,
           isThrow
-      ) {};
+      ) {
+
+      };

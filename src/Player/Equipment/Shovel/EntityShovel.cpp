@@ -4,4 +4,6 @@
 #include "Equipment/Shovel/EntityShovel.h"
 
 ToolSystem::EntityShovel::EntityShovel()
-    : TBaseShovel(level, ImagePath, m_IsThrow) {};
+    : TBaseShovel(level, ImagePath, m_IsThrow) {
+
+      };
