@@ -15,7 +15,7 @@ jobs:
 
       - uses: mattnotmitt/doxygen-action@v1.9.5
         with:
-          doxyfile-path: docs/Doxyfile
+          doxyfile-path: ./Doxyfile
 
       - uses: peaceiris/actions-gh-pages@v3.9.3
         with:
