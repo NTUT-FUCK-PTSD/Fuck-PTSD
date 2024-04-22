@@ -44,14 +44,10 @@ void Camera::Update() {
     }
     m_Renderer->AddChildren(m_GameChildren);
     m_Renderer->Update(m_Position);
-    for (auto &child : m_GameChildren) {
-        m_Renderer->RemoveChild(child);
-    }
+    m_Renderer->ClearChildren();
     m_Renderer->AddChildren(m_UIChildren);
     m_Renderer->Update({0, 0});
-    for (auto &child : m_UIChildren) {
-        m_Renderer->RemoveChild(child);
-    }
+    m_Renderer->ClearChildren();
 }
 
 void Camera::MoveByTime(const unsigned long duringTimeMs,
