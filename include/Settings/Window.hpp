@@ -10,4 +10,4 @@ constexpr double DUNGEON_ROW_NUMBER =
 constexpr double DUNGEON_SCALE =
     ((double(WINDOW_WIDTH) / DUNGEON_COL_NUMBER) / DUNGEON_TILE_WIDTH);
 
-#endif // FUCK_PTSD_WINDOW_HPP
+#endif  // FUCK_PTSD_WINDOW_HPP

@@ -15,7 +15,7 @@
 #include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "Util/Text.hpp"
-#include "pch.hpp" // IWYU pragma: export
+#include "pch.hpp"  // IWYU pragma: export
 
 class App {
 public:
@@ -31,7 +31,7 @@ public:
 
     void Update();
 
-    void End(); // NOLINT(readability-convert-member-functions-to-static)
+    void End();  // NOLINT(readability-convert-member-functions-to-static)
 
     std::string Print(std::string s) { return s; }
 
@@ -41,8 +41,8 @@ private:
 private:
     // mainmenu
     std::shared_ptr<Background> m_Background;
-    bool m_FirstTime = true;
-    bool m_IsMainMenu = true;
+    bool                        m_FirstTime = true;
+    bool                        m_IsMainMenu = true;
 
     // music
     std::shared_ptr<Music::Player> m_MusicSystem =
@@ -63,8 +63,8 @@ private:
     glm::vec2 m_CameraPosition = {0, 0};
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
-    std::size_t m_BeforeTempoIndex = 0;
-    std::size_t m_TempoIndex = 0;
+    std::size_t                   m_BeforeTempoIndex = 0;
+    std::size_t                   m_TempoIndex = 0;
 };
 
 #endif
