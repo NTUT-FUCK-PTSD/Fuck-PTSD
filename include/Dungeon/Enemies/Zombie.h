@@ -8,7 +8,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Zombie final : public Dungeon::Enemy, private Animation {
+class Zombie final : public Dungeon::Enemy {
 public:
     Zombie(
         const s_Enemy&                       u_Enemy,
@@ -35,6 +35,7 @@ private:
     std::random_device                         m_RandomDevice;
     std::mt19937                               m_RandomGenerator;
     std::uniform_int_distribution<std::size_t> m_Distribution;
+    std::unique_ptr<Animation>                 m_Animation;
 };
 
 }  // namespace Enemies

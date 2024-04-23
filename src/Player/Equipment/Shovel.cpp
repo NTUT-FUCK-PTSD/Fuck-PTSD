@@ -16,9 +16,9 @@ Shovel::Shovel(ShovelEnum::Type type) {
 
 void Shovel::selectWeaponType(ShovelEnum::Type type) {
     switch (type) {
-        case ShovelEnum::Normal:
-            m_ItemType = std::make_shared<ToolSystem::EntityShovel>();
-            break;
+    case ShovelEnum::Normal:
+        m_ItemType = std::make_shared<ToolSystem::EntityShovel>();
+        break;
     }
 
     m_ImagePathItem = m_ItemType->imagePath;

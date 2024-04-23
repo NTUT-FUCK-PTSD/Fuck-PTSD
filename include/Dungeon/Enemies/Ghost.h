@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Ghost final : public Dungeon::Enemy, private Animation {
+class Ghost final : public Dungeon::Enemy {
 public:
     Ghost(
         const s_Enemy&                       u_Enemy,
@@ -29,6 +29,8 @@ private:
     std::size_t m_LastDistance = 0;
 
     bool m_Transparent = false;
+
+    std::unique_ptr<Animation> m_Animation;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

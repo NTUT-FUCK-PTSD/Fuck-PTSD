@@ -46,8 +46,10 @@ protected:
     void UpdateTempoIndex();
 
 private:
-    std::vector<std::size_t>
-    txtToVector(const std::string& line, const char splitChar);
+    std::vector<std::size_t> txtToVector(
+        const std::string& line,
+        const char         splitChar
+    );
 
     float m_MusicSpeed = 1.0f;
 

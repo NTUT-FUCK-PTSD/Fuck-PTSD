@@ -6,8 +6,10 @@ Enemies::Zombie::Zombie(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()) {
+    m_Animation = std::make_unique<Animation>(
+        ToolBoxs::GamePostoPos(GetGamePosition())
+    );
     m_BackFrames = {0, 1, 2, 3, 4, 5, 6, 7};
     m_NormalFrames = {8, 9, 10, 11, 12, 13, 14, 15};
     m_AttackFrames = {16, 17, 18, 19, 20, 21, 22, 23};
@@ -49,18 +51,10 @@ void Zombie::Move() {
         m_CanMove = true;
     } else {
         switch (m_Direction) {
-            case 0:
-                m_Direction = 2;
-                break;
-            case 1:
-                m_Direction = 3;
-                break;
-            case 2:
-                m_Direction = 0;
-                break;
-            case 3:
-                m_Direction = 1;
-                break;
+        case 0: m_Direction = 2; break;
+        case 1: m_Direction = 3; break;
+        case 2: m_Direction = 0; break;
+        case 3: m_Direction = 1; break;
         }
         m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
 
@@ -106,20 +100,20 @@ void Zombie::Update() {
     }
 
     // Collision
-    if (m_CanMove && !m_IsAnimating) {
+    if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        MoveByTime(
+        m_Animation->MoveByTime(
             200,
             ToolBoxs::GamePostoPos(m_WillMovePosition),
             m_Direction
         );
         m_CanMove = false;
     }
-    UpdateAnimation(true);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Transform.translation = m_AnimationPosition;
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
     }
-    SetZIndex(m_AnimationZIndex);
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Zombie::UpdateFace() {

@@ -2,7 +2,8 @@
 #define CAMERA_H
 
 #include "Util/Renderer.hpp"
-#include "Util/Time.hpp"
+
+#include "Game/Animation.h"
 
 class Camera final {
 public:
@@ -48,10 +49,10 @@ public:
 
     glm::vec2 GetPosition() { return m_Position; }
 
-    std::shared_ptr<Util::Renderer> GetRenderer() { return m_Renderer; }
-
-    void
-    MoveByTime(const unsigned long duringTimeMs, const glm::vec2& destination);
+    void MoveByTime(
+        const unsigned long duringTimeMs,
+        const glm::vec2&    destination
+    );
 
     void Shake(const unsigned long duringTimeMs, const float strength);
 
@@ -62,18 +63,11 @@ public:
     void RemoveUIChild(std::shared_ptr<Util::GameObject> child);
 
 private:
-    void ShakeUpdate();
-    void MoveByTimeInternal(
-        const unsigned long duringTimeMs,
-        const glm::vec2&    destination
-    );
-    std::shared_ptr<Util::Renderer> m_Renderer;
+    void                            ShakeUpdate();
+    std::unique_ptr<Util::Renderer> m_Renderer;
     glm::vec2                       m_Position = {0, 0};
 
-    bool          m_IsAnimating = false;
-    unsigned long m_AnimationStartMs;
-    unsigned long m_AnimationDuringTimeMs;
-    glm::vec2     m_AnimationDestination;
+    std::unique_ptr<Animation> m_Animation;
 
     glm::vec2     m_OrginalPosition = {0, 0};
     bool          m_IsShaking = false;

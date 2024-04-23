@@ -3,8 +3,7 @@
 #include "Equipment/TypeEquip.h"
 
 Player::Player()
-    : Animation({0, 0}),
-      m_Body(std::make_shared<GameElement>()),
+    : m_Body(std::make_shared<GameElement>()),
       m_Head(std::make_shared<GameElement>()),
       m_Player(std::make_shared<GameElement>()),
       m_Coin(std::make_unique<Coin>()),
@@ -23,6 +22,9 @@ Player::Player()
 
     // create tool Weapon
     m_Tools->SetWeapon(m_WeaponType);
+
+    // init Animation
+    m_Animation = std::make_unique<Animation>(m_Position);
 
     Update();
 }
@@ -85,7 +87,7 @@ glm::vec2 Player::GetGamePosition() {
 
 void Player::SetGamePosition(const glm::vec2& gamePosition) {
     m_GamePosition = gamePosition;
-    m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
+    m_Animation->UpdateGamePosition(gamePosition);
     SetPosition(ToolBoxs::GamePostoPos(gamePosition));
 }
 
@@ -106,11 +108,11 @@ void Player::SetFaceTo(Direction direction) {
 }
 
 void Player::Update() {
-    UpdateAnimation(true);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Position = m_AnimationPosition;
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_Position = m_Animation->GetAnimationPosition();
     }
-    SetZIndex(m_AnimationZIndex);
+    SetZIndex(m_Animation->GetAnimationZIndex());
     SetPosition(m_Position);
 }
 
@@ -198,5 +200,5 @@ void Player::MoveByTime(
 ) {
     // Update GamePosition but not draw
     m_GamePosition = ToolBoxs::PosToGamePos(destination);
-    Animation::MoveByTime(duringTimeMs, destination, direction);
+    m_Animation->MoveByTime(duringTimeMs, destination, direction);
 }

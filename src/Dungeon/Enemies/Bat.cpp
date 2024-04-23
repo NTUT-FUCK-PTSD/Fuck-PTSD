@@ -6,84 +6,61 @@ Enemies::Bat::Bat(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
       m_RandomGenerator(m_RandomDevice()) {
+    m_Animation = std::make_unique<Animation>(
+        ToolBoxs::GamePostoPos(GetGamePosition())
+    );
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
 
     switch (u_Enemy.type) {
-        case 6:
-            m_SpriteSheet = std::make_shared<SpriteSheet>(
-                ASSETS_DIR "/entities/bat.png",
-                m_FrameSize,
-                m_NormalFrames,
-                true,
-                100,
-                true,
-                100
-            );
-            SetHealth(2);  // 1 heart
-            SetDamage(1);  // 0.5 heart
-            SetCoin(2);
-            break;
-        case 7:
-            m_SpriteSheet = std::make_shared<SpriteSheet>(
-                ASSETS_DIR "/entities/bat_red.png",
-                m_FrameSize,
-                m_NormalFrames,
-                true,
-                100,
-                true,
-                100
-            );
-            SetHealth(2);  // 1 heart
-            SetDamage(2);  // 1 heart
-            SetCoin(3);
-            m_Tick = 1;
-            break;
-        case 8:
-            m_SpriteSheet = std::make_shared<SpriteSheet>(
-                ASSETS_DIR "/entities/bat_green.png",
-                m_FrameSize,
-                m_NormalFrames,
-                true,
-                100,
-                true,
-                100
-            );
-            SetHealth(2);  // 1 heart
-            SetDamage(3);  // 1.5 heart
-            SetCoin(20);
-            m_Tick = 1;
-            break;
+    case 6:
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        SetHealth(2);  // 1 heart
+        SetDamage(1);  // 0.5 heart
+        SetCoin(2);
+        break;
+    case 7:
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat_red.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        SetHealth(2);  // 1 heart
+        SetDamage(2);  // 1 heart
+        SetCoin(3);
+        m_Tick = 1;
+        break;
+    case 8:
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat_green.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        SetHealth(2);  // 1 heart
+        SetDamage(3);  // 1.5 heart
+        SetCoin(20);
+        m_Tick = 1;
+        break;
     }
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
-}
-Enemies::Bat::Bat(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData,
-    const std::string&                   filepath
-)
-    : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())),
-      m_RandomGenerator(m_RandomDevice()) {
-    m_NormalFrames = {0, 1, 2, 3};
-    m_ShadowFrames = {4, 5, 6, 7};
-    m_SpriteSheet = std::make_shared<SpriteSheet>(
-        filepath,
-        m_FrameSize,
-        m_NormalFrames,
-        true,
-        100,
-        true,
-        100
-    );
-    m_Drawable = m_SpriteSheet;
-
-    SetHealth(2);  // 1 heart
-    SetDamage(1);  // 0.5 heart
-    SetCoin(2);
 }
 }  // namespace Dungeon
 
@@ -92,10 +69,6 @@ void Bat::Move() {
     MoveBat();
 }
 void Bat::MoveBat() {
-    if (m_IsAnimating) {
-        m_AnimationPosition = m_AnimationDestination;
-        Update();
-    }
     m_NeedToMove = false;
     if (m_State > m_Tick - 1) {
         m_State = 0;
@@ -109,9 +82,12 @@ void Bat::MoveBat() {
 }
 void Bat::Update() {
     // Collision
-    if (m_CanMove && !m_IsAnimating) {
+    if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
+        m_Animation->MoveByTime(
+            200,
+            ToolBoxs::GamePostoPos(m_WillMovePosition)
+        );
         m_NeedToMove = false;
         m_CanMove = false;
     }
@@ -120,13 +96,13 @@ void Bat::Update() {
     // }
 
     // Update animation
-    UpdateAnimation(false);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Transform.translation = m_AnimationPosition;
+    m_Animation->UpdateAnimation(false);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
     }
 
     // Update z index
-    SetZIndex(m_AnimationZIndex);
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Bat::RandomMove() {
@@ -144,18 +120,14 @@ void Bat::RandomMove() {
             }
         );
         switch (m_RandomPool[index]) {
-            case 0:
-                m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
-                break;
-            case 1:
-                m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
-                break;
-            case 2:
-                m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0);
-                break;
-            case 3:
-                m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
-                break;
+        case 0: m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1); break;
+        case 1:
+            m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
+            break;
+        case 2: m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0); break;
+        case 3:
+            m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
+            break;
         }
         if (IsVaildMove(m_WillMovePosition)) {
             if (m_WillMovePosition == GetPlayerPosition()) {

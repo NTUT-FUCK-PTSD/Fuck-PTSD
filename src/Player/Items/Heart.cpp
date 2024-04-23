@@ -59,8 +59,10 @@ void Heart::resetHP() {
     UpdateHP();
 }
 
-std::shared_ptr<GameElement>
-Heart::generalHeart(Heart::STATE state, const glm::vec2& position) {
+std::shared_ptr<GameElement> Heart::generalHeart(
+    Heart::STATE     state,
+    const glm::vec2& position
+) {
     const auto resultObject = std::make_shared<GameElement>();
 
     if (state == Heart::STATE::FULL) {

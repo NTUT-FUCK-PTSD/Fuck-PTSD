@@ -13,8 +13,10 @@ public:
         const glm::vec2& size
     );
 
-    void
-    AddEnemy(const std::size_t position, const std::shared_ptr<Enemy> enemy);
+    void AddEnemy(
+        const std::size_t            position,
+        const std::shared_ptr<Enemy> enemy
+    );
     void                                RemoveEnemy(const std::size_t position);
     void                                ClearEnemies();
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
@@ -22,8 +24,10 @@ public:
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
 
 protected:
-    static bool
-    EnemyCompare(std::shared_ptr<Enemy>& lhs, std::shared_ptr<Enemy>& rhs);
+    static bool EnemyCompare(
+        std::shared_ptr<Enemy>& lhs,
+        std::shared_ptr<Enemy>& rhs
+    );
 
 private:
     std::vector<std::shared_ptr<Enemy>> m_Enemies;

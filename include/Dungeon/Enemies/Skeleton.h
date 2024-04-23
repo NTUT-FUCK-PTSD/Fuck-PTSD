@@ -6,7 +6,7 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Skeleton final : public Dungeon::Enemy, private Animation {
+class Skeleton final : public Dungeon::Enemy {
 public:
     Skeleton(
         const s_Enemy&                       u_Enemy,
@@ -27,7 +27,8 @@ private:
     bool m_Attack = false;
     bool m_CanDropHead = false;
     // bool m_DropHead = false;
-    uint16_t m_AnimationType;
+    std::unique_ptr<Animation> m_Animation;
+    uint16_t                   m_AnimationType;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

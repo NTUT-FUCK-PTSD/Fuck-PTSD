@@ -25,8 +25,10 @@ void Music::Tempo::readTempoFile(const std::string& txtFilePath) {
     txtTempoFile.close();
 }
 
-std::vector<std::size_t>
-Music::Tempo::txtToVector(const std::string& line, const char splitChar) {
+std::vector<std::size_t> Music::Tempo::txtToVector(
+    const std::string& line,
+    const char         splitChar
+) {
     std::stringstream        ss(line);
     std::string              item;
     std::size_t              transform = 0;

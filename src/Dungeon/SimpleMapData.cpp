@@ -179,7 +179,7 @@ void SimpleMapData::SetSize(const glm::ivec2& size) {
 
 void SimpleMapData::SetHasEntity(
     const std::size_t position,
-    const bool&       hasEntity
+    const bool        hasEntity
 ) {
     m_HasEntity.at(position) = hasEntity;
 }

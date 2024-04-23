@@ -5,8 +5,10 @@ Enemies::GreenSlime::GreenSlime(
     const s_Enemy&                       u_Enemy,
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
-    : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
+    : Enemy(u_Enemy, simpleMapData) {
+    m_Animation = std::make_unique<Animation>(
+        ToolBoxs::GamePostoPos(GetGamePosition())
+    );
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -26,16 +28,13 @@ Enemies::GreenSlime::GreenSlime(
     SetCoin(1);
 }
 }  // namespace Dungeon
-
 namespace Dungeon::Enemies {
 void GreenSlime::Move() {
-    MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 0);
+    m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 0);
 }  // Green_Slime does not move
 void GreenSlime::Update() {
-    UpdateAnimation(true);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Transform.translation = m_AnimationPosition;
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
     }
-    SetZIndex(m_AnimationZIndex);
 }
 }  // namespace Dungeon::Enemies

@@ -7,8 +7,10 @@ Enemies::Ghost::Ghost(
     const s_Enemy&                       u_Enemy,
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
-    : Enemy(u_Enemy, simpleMapData),
-      Animation(ToolBoxs::GamePostoPos(GetGamePosition())) {
+    : Enemy(u_Enemy, simpleMapData) {
+    m_Animation = std::make_unique<Animation>(
+        ToolBoxs::GamePostoPos(GetGamePosition())
+    );
     m_NormalFrames = {0, 1};
     m_ShadowFrames = {2, 3};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -87,16 +89,19 @@ void Ghost::Move() {
 }
 void Ghost::Update() {
     // Collision
-    if (m_CanMove && !m_IsAnimating) {
+    if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition));
+        m_Animation->MoveByTime(
+            200,
+            ToolBoxs::GamePostoPos(m_WillMovePosition)
+        );
         m_CanMove = false;
     }
-    UpdateAnimation(false);
-    if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_Transform.translation = m_AnimationPosition;
+    m_Animation->UpdateAnimation(false);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
     }
-    SetZIndex(m_AnimationZIndex);
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Ghost::AttackPlayer() {
