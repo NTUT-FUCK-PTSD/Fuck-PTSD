@@ -5,14 +5,14 @@
 #ifndef FUCK_PTSD_HEART_H
 #define FUCK_PTSD_HEART_H
 
-#include "config.hpp"
+#include <deque>
 
-#include <queue>
+#include "Util/GameObject.hpp"
+#include "Util/Image.hpp"
+#include "config.hpp"
 
 #include "Settings/GameElement.h"
 #include "Settings/Window.hpp"
-#include "Util/GameObject.hpp"
-#include "Util/Image.hpp"
 
 class Heart final {
 public:
