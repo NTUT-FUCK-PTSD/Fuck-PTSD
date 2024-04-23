@@ -12,22 +12,23 @@ public:
      *
      * @param children The GameObject needing to be managed by Renderer.
      */
-    Camera(const std::vector<std::shared_ptr<Util::GameObject>> &children = {});
+    Camera(const std::vector<std::shared_ptr<Util::GameObject>>& children = {});
 
     /**
      * @brief Add a child to Renderer.
      *
      * @param child The GameObject needing to be managed by Renderer.
      */
-    void AddChild(const std::shared_ptr<Util::GameObject> &child);
+    void AddChild(const std::shared_ptr<Util::GameObject> child);
 
     /**
      * @brief Add children to Renderer.
      *
      * @param children The GameObjects needing to be managed by Renderer.
      */
-    void
-    AddChildren(const std::vector<std::shared_ptr<Util::GameObject>> &children);
+    void AddChildren(
+        const std::vector<std::shared_ptr<Util::GameObject>>& children
+    );
 
     /**
      * @brief Remove the child.
@@ -43,23 +44,50 @@ public:
      */
     void Update();
 
-    void SetPosition(const glm::vec2 &position) { m_Position = position; }
+    void SetPosition(const glm::vec2 position) { m_Position = position; }
 
     glm::vec2 GetPosition() { return m_Position; }
 
     std::shared_ptr<Util::Renderer> GetRenderer() { return m_Renderer; }
 
-    void MoveByTime(const unsigned long &duringTimeMs,
-                    const glm::vec2 &destination);
+    void
+    MoveByTime(const unsigned long duringTimeMs, const glm::vec2& destination);
+
+    void Shake(const unsigned long duringTimeMs, const float strength);
+
+    void AddUIChild(const std::shared_ptr<Util::GameObject> child);
+    void AddUIChildren(
+        const std::vector<std::shared_ptr<Util::GameObject>>& children
+    );
+    void RemoveUIChild(std::shared_ptr<Util::GameObject> child);
 
 private:
+    void ShakeUpdate();
+    void MoveByTimeInternal(
+        const unsigned long duringTimeMs,
+        const glm::vec2&    destination
+    );
     std::shared_ptr<Util::Renderer> m_Renderer;
-    glm::vec2 m_Position = {0, 0};
+    glm::vec2                       m_Position = {0, 0};
 
-    bool m_IsAnimating = false;
+    bool          m_IsAnimating = false;
     unsigned long m_AnimationStartMs;
     unsigned long m_AnimationDuringTimeMs;
-    glm::vec2 m_AnimationDestination;
+    glm::vec2     m_AnimationDestination;
+
+    glm::vec2     m_OrginalPosition = {0, 0};
+    bool          m_IsShaking = false;
+    unsigned long m_ShakeStartMs;
+    unsigned long m_ShakeDuringTimeMs = 0;
+    float         m_ShakeStrength = 0;
+    bool          m_ShakeHold = false;
+    glm::vec2     m_ShakeHoldDestination = {
+      0,
+      0
+    };  // The destination of the camera when shaking
+    unsigned long                                  m_ShakeHoldDuringTimeMs = 0;
+    std::vector<std::shared_ptr<Util::GameObject>> m_GameChildren;
+    std::vector<std::shared_ptr<Util::GameObject>> m_UIChildren;
 };
 
-#endif // CAMERA_H
+#endif  // CAMERA_H

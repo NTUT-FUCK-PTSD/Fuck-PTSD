@@ -18,17 +18,22 @@ public:
     };
 
     // setter
-    [[noreturn]] virtual void setPosition(const glm::vec2 position) = 0;
-    [[noreturn]] virtual void setWeaponType([[maybe_unused]] WeaponEnum::Type type) { return;};
-    [[noreturn]] virtual void setShovelType([[maybe_unused]] ShovelEnum::Type type) { return;};
+    [[noreturn]]
+    virtual void setPosition(const glm::vec2 position) = 0;
+    virtual void setWeaponType([[maybe_unused]] WeaponEnum::Type type) {
+        return;
+    };
+    virtual void setShovelType([[maybe_unused]] ShovelEnum::Type type) {
+        return;
+    };
 
     // getter
-    virtual Direction GetDirection() = 0;
-    virtual bool GetIsThrow() { return false; };
+    virtual Direction                    GetDirection() = 0;
+    virtual bool                         GetIsThrow() { return false; };
     virtual std::shared_ptr<GameElement> GetGameObject() const = 0;
 
     //    virtual GameElement getWindowObject() = 0;
     //    virtual GameElement getItemObject() = 0;
 };
 
-#endif // FUCK_PTSD_IEquipment_H
+#endif  // FUCK_PTSD_IEquipment_H

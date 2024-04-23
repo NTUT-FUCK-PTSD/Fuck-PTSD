@@ -15,4 +15,4 @@ enum Type {
 };
 }
 
-#endif // FUCK_PTSD_TYPEEQUIP_H
+#endif  // FUCK_PTSD_TYPEEQUIP_H

@@ -37,9 +37,15 @@ public:
      * @param cooldown Cooldown time in milliseconds before the animation can
      * restart.
      */
-    SpriteSheet(const std::string filepath, glm::vec2 size,
-                const std::vector<std::size_t> &frames, bool play,
-                std::size_t interval, bool looping, std::size_t cooldown);
+    SpriteSheet(
+        const std::string               filepath,
+        glm::vec2                       size,
+        const std::vector<std::size_t>& frames,
+        bool                            play,
+        std::size_t                     interval,
+        bool                            looping,
+        std::size_t                     cooldown
+    );
 
     /**
      * @brief Get the interval between frames.
@@ -112,7 +118,7 @@ public:
      * @param transform Transformation matrix for drawing.
      * @param zIndex Z-index for drawing.
      */
-    void Draw(const Core::Matrices &data) override;
+    void Draw(const Core::Matrices& data) override;
 
     /**
      * @brief Reset the animation to its initial frame.
@@ -140,7 +146,7 @@ public:
      */
     void SetDrawRect(const SDL_Rect displayRect);
 
-    void SetFrames(const std::vector<std::size_t> &frames) {
+    void SetFrames(const std::vector<std::size_t>& frames) {
         m_Frames = frames;
     }
 
@@ -155,23 +161,23 @@ private:
 private:
     /* Animation Part*/
     std::vector<std::size_t> m_Frames;
-    State m_State;
-    std::size_t m_Interval;
-    bool m_Looping;
-    std::size_t m_Cooldown;
-    bool m_IsChangeFrame = false;
+    State                    m_State;
+    std::size_t              m_Interval;
+    bool                     m_Looping;
+    std::size_t              m_Cooldown;
+    bool                     m_IsChangeFrame = false;
 
     unsigned long m_CooldownEndTime = 0;
-    double m_TimeBetweenFrameUpdate = 0;
+    double        m_TimeBetweenFrameUpdate = 0;
 
     std::size_t m_Index = 0;
 
     /* SpriteSheet Part*/
     std::unique_ptr<Util::SpriteSheet> m_SpriteSheet;
-    std::string m_Path;
-    glm::vec2 m_Size;
-    std::size_t m_col;
-    glm::vec2 m_FrameSize;
+    std::string                        m_Path;
+    glm::vec2                          m_Size;
+    std::size_t                        m_col;
+    glm::vec2                          m_FrameSize;
 };
 
-#endif // SPRITESHEET_HPP
+#endif  // SPRITESHEET_HPP

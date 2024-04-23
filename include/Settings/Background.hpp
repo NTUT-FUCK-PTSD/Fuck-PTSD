@@ -5,16 +5,17 @@
 #ifndef FUCK_PTSD_BACKGROUND_HPP
 #define FUCK_PTSD_BACKGROUND_HPP
 
+#include <string>
 #include "GameElement.h"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-#include <string>
 
 class Background final {
 public:
     Background();
 
-    [[nodiscard]] std::shared_ptr<GameElement> GetGameElement();
+    [[nodiscard]]
+    std::shared_ptr<GameElement> GetGameElement();
 
 private:
     std::string m_ContinueImagePath = ASSETS_DIR "/mainmenu/continue.png";
@@ -28,4 +29,4 @@ private:
     std::string m_ImagePath;
 };
 
-#endif // FUCK_PTSD_BACKGROUND_HPP
+#endif  // FUCK_PTSD_BACKGROUND_HPP

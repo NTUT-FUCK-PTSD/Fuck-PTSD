@@ -11,14 +11,26 @@ Bomb::Bomb() {
     const auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 5, 2);
 
     const auto ItemImage = std::make_shared<SpriteSheet>(
-        m_ImagePathItem, ItemSize, std::vector<std::size_t>{0,1,2,3,4}, false, 100, true, 100
+        m_ImagePathItem,
+        ItemSize,
+        std::vector<std::size_t>{0, 1, 2, 3, 4},
+        false,
+        100,
+        true,
+        100
     );
     const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
     const auto UpperTextObject = std::make_shared<Util::Text>(
-        m_TextStylePath, m_FontSize, m_Content, m_FontColor
+        m_TextStylePath,
+        m_FontSize,
+        m_Content,
+        m_FontColor
     );
     const auto LowerTextObject = std::make_shared<Util::Text>(
-        m_TextStylePath, m_FontSize, "LEFT", m_FontColor
+        m_TextStylePath,
+        m_FontSize,
+        "LEFT",
+        m_FontColor
     );
 
     m_Window->SetDrawable(WindowImage);
@@ -37,7 +49,7 @@ Bomb::Bomb() {
     m_LowerText->SetScale(m_Scale);
 
     m_Window->SetPosition(m_Position);
-    m_Item->SetPosition({m_Position.x,m_Position.y + 5});
+    m_Item->SetPosition({m_Position.x, m_Position.y + 5});
     m_Text->SetPosition(m_Position);
     m_LowerText->SetPosition(m_Position);
 
@@ -52,17 +64,17 @@ Bomb::Bomb() {
 void Bomb::setPosition(const glm::vec2 position) {
 #ifdef _WIN32
     m_Window->SetPosition(position);
-    m_Item->SetPosition({position.x,position.y + 10});
+    m_Item->SetPosition({position.x, position.y + 10});
     m_Text->SetPosition({position.x + 25, position.y - 40});
     m_LowerText->SetPosition({position.x + 25, position.y - 60});
 #elif __APPLE__
     m_Window->SetPosition(position);
-    m_Item->SetPosition({position.x,position.y + 10});
+    m_Item->SetPosition({position.x, position.y + 10});
     m_Text->SetPosition({position.x + 15, position.y - 40});
     m_LowerText->SetPosition({position.x + 15, position.y - 60});
 #else
     m_Window->SetPosition(position);
-    m_Item->SetPosition({position.x,position.y + 10});
+    m_Item->SetPosition({position.x, position.y + 10});
     m_Text->SetPosition({position.x + 25, position.y - 40});
     m_LowerText->SetPosition({position.x + 25, position.y - 60});
 #endif

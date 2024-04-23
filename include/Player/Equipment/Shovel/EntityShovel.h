@@ -13,15 +13,16 @@ public:
     explicit EntityShovel();
 
     virtual ~EntityShovel() = default;
-private:
 
+private:
     // Dig Level
     inline const static std::vector<std::size_t> level = {1};
 
     // Settings
-    const static bool m_IsThrow = false;
-    inline const static std::string ImagePath = ASSETS_DIR"/items/shovel_basic.png";
+    const static bool               m_IsThrow = false;
+    inline const static std::string ImagePath = ASSETS_DIR
+        "/items/shovel_basic.png";
 };
-} // namespace ToolSystem
+}  // namespace ToolSystem
 
-#endif // FUCK_PTSD_ENTITYSHOVEL_H
+#endif  // FUCK_PTSD_ENTITYSHOVEL_H

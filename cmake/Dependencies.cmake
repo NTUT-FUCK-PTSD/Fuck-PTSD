@@ -20,13 +20,20 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tinyxml2)
 
+FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+        GIT_TAG 10.2.1
+        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fmt
+)
+FetchContent_MakeAvailable(fmt)
+
 message(STATUS "PTSD NOT FOUND, fetching from source!")
 set(PTSD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD")
 FetchContent_Declare(
         PTSD
-        GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design
-        GIT_TAG pivot
-
+        GIT_REPOSITORY https://github.com/NTUT-FUCK-PTSD/practical-tools-for-simple-design.git
+        GIT_TAG v1.2.6
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD
 )
 FetchContent_MakeAvailable(PTSD)

@@ -12,16 +12,17 @@ public:
 
 private:
     // Damage
-    const static int16_t normal = 1;
-    const static int16_t blood = 1;
-    const static int16_t glass = 4;
-    const static int16_t golden = 1;
+    const static int16_t            normal = 1;
+    const static int16_t            blood = 1;
+    const static int16_t            glass = 4;
+    const static int16_t            golden = 1;
     inline const static std::string obsidian = "1-3";
-    const static int16_t titanium = 2;
+    const static int16_t            titanium = 2;
 
     // Settings
-    const static bool isThrow = true;
-    inline const static std::string ImagePath = ASSETS_DIR "/items/weapon_dagger.png";
+    const static bool               isThrow = true;
+    inline const static std::string ImagePath = ASSETS_DIR
+        "/items/weapon_dagger.png";
 };
-};     // namespace ToolSystem
-#endif // FUCK_PTSD_ENTITYDAGGER_H
+};  // namespace ToolSystem
+#endif  // FUCK_PTSD_ENTITYDAGGER_H

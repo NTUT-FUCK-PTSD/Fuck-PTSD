@@ -21,16 +21,16 @@ public:
     Direction GetDirection() override { return IEquipment::Direction::COL; };
 
 private:
-    std::size_t m_ZIndex = 50;
-    glm::vec2 m_Scale = {3, 3};
-    glm::vec2 m_Position = {0, 0};
+    std::size_t m_ZIndex = 99;
+    glm::vec2   m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    glm::vec2   m_Position = {0, 0};
 
     Util::Color m_FontColor = Util::Color(255, 255, 255);
-    glm::vec2 m_FontScale = {5, 5};
+    glm::vec2   m_FontScale = {5, 5};
     std::size_t m_FontSize = 6;
     std::string m_Content = "DOWN";
-    std::string m_TextStylePath =
-        ASSETS_DIR "/font/necrosans-6/necrosans-6.otf";
+    std::string m_TextStylePath = ASSETS_DIR
+        "/font/necrosans-6/necrosans-6.otf";
 
     std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_bomb.png";
     std::string m_ImagePathItem = ASSETS_DIR "/items/bomb.png";
@@ -42,4 +42,4 @@ private:
     std::shared_ptr<GameElement> m_Bomb = std::make_shared<GameElement>();
 };
 
-#endif // FUCK_PTSD_BOMB_H
+#endif  // FUCK_PTSD_BOMB_H

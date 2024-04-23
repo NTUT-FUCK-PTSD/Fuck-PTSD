@@ -1,8 +1,5 @@
-//
-// Created by adven on 2024/3/4.
-//
-
 #include "Player.h"
+
 #include "Equipment/TypeEquip.h"
 
 Player::Player()
@@ -15,7 +12,6 @@ Player::Player()
       m_Tools(std::make_unique<Tools>()),
       m_Diamond(std::make_unique<Diamond>()),
       m_Window(std::make_shared<GameElement>()) {
-
     // create tool Throw
     m_Tools->SetThrow();
 
@@ -31,36 +27,48 @@ Player::Player()
     Update();
 }
 
-void Player::SetBodyImage(const std::string &path) {
+void Player::SetBodyImage(const std::string& path) {
     BodySize = ToolBoxs::CountImagePixel(path, 4, 10);
     BodyImage = std::make_shared<SpriteSheet>(
-        path, BodySize, std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true,
-        100);
+        path,
+        BodySize,
+        std::vector<std::size_t>{0, 1, 2, 3},
+        true,
+        100,
+        true,
+        100
+    );
     m_Body->SetDrawable(BodyImage);
     m_Body->SetPosition(m_Position);
-    m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
-void Player::SetHeadImage(const std::string &path) {
+void Player::SetHeadImage(const std::string& path) {
     HeadSize = ToolBoxs::CountImagePixel(path, 4, 2);
     HeadImage = std::make_shared<SpriteSheet>(
-        path, HeadSize, std::vector<std::size_t>{0, 1, 2, 3}, true, 100, true,
-        100);
+        path,
+        HeadSize,
+        std::vector<std::size_t>{0, 1, 2, 3},
+        true,
+        100,
+        true,
+        100
+    );
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(m_Position);
-    m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::SetHeadImage(std::shared_ptr<SpriteSheet> image) {
     m_Head->SetDrawable(image);
     m_Head->SetPosition(m_Position);
-    m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::SetBodyImage(std::shared_ptr<SpriteSheet> image) {
     m_Body->SetDrawable(image);
     m_Body->SetPosition(m_Position);
-    m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 std::shared_ptr<GameElement> Player::GetGameElement() {
@@ -75,31 +83,31 @@ glm::vec2 Player::GetGamePosition() {
     return m_GamePosition;
 }
 
-void Player::SetGamePosition(const glm::vec2 &gamePosition) {
+void Player::SetGamePosition(const glm::vec2& gamePosition) {
     m_GamePosition = gamePosition;
-    m_Position = ToolBoxs::GamePostoPos(gamePosition);
-    m_Body->SetPosition(m_Position);
-    m_Head->SetPosition(m_Position);
+    m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
+    SetPosition(ToolBoxs::GamePostoPos(gamePosition));
 }
 
 void Player::SetFaceTo(Direction direction) {
     if (direction != RIGHT && direction != LEFT) {
-        LOG_WARN("Player::SetFaceTo: Invalid direction");
+        // LOG_WARN("Player::SetFaceTo: Invalid direction");
         return;
     }
     if (direction == RIGHT) {
-        m_Body->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
-        m_Head->SetScale({Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+        m_FaceTo = RIGHT;
+        m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+        m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
         return;
     }
-    m_Body->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
-    m_Head->SetScale({-Dungeon::DUNGEON_SCALE, Dungeon::DUNGEON_SCALE});
+    m_FaceTo = LEFT;
+    m_Body->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Head->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
 }
 
 void Player::Update() {
     UpdateAnimation(true);
     if (m_IsAnimating || m_AnimationPosition == m_AnimationDestination) {
-        m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
         m_Position = m_AnimationPosition;
     }
     SetZIndex(m_AnimationZIndex);
@@ -107,7 +115,7 @@ void Player::Update() {
 
 }
 
-void Player::SetPosition(const glm::vec2 &position) {
+void Player::SetPosition(const glm::vec2& position) {
     m_Position = position;
     m_Body->SetPosition(m_Position);
     m_Head->SetPosition(m_Position);
@@ -119,9 +127,11 @@ void Player::SetZIndex(float index) {
     m_Head->SetZIndex(index + float(0.25));
 }
 
-void Player::UpdateCoin(const unsigned long &duringTimeMs,
-                        const glm::vec2 &destination,
-                        const uint16_t &direction) {
+void Player::UpdateCoin(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination,
+    const uint16_t      direction
+) {
     m_Coin->MoveByTime(duringTimeMs, destination, direction);
 }
 
@@ -130,9 +140,12 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
     m_Window->AddChild(m_Heart->GetGameObject());
     m_Window->AddChild(m_Diamond->GetGameObject());
     m_Window->AddChild(m_Tools->GetGameObject());
-
     m_Window->SetVisible(false);
     return m_Window;
+}
+
+Player::Direction Player::GetFaceTo() {
+    return m_FaceTo;
 }
 
 void Player::gainCoin(std::size_t number) {
@@ -149,6 +162,14 @@ void Player::gainDiamond(std::size_t number) {
 
 void Player::lostDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number * -1);
+}
+
+void Player::lostHP(std::size_t value) {
+    m_Heart->minusHP(value);
+}
+
+void Player::gainHeart(std::size_t value) {
+    m_Heart->gainHeart(value);
 }
 
 // void Player::useDefaultSettingsTool() {
@@ -171,14 +192,12 @@ WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
 }
 
-void Player::gainHP(float value) {
-    m_Heart->plusHP(value);
-}
-
-void Player::lostHP(float value) {
-    m_Heart->minusHP(value);
-}
-
-bool Player::IsPlayerDead() {
-    return m_Heart->IsDead();
+void Player::MoveByTime(
+    const unsigned long duringTimeMs,
+    const glm::vec2&    destination,
+    const uint16_t      direction
+) {
+    // Update GamePosition but not draw
+    m_GamePosition = ToolBoxs::PosToGamePos(destination);
+    Animation::MoveByTime(duringTimeMs, destination, direction);
 }

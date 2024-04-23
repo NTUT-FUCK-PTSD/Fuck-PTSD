@@ -5,9 +5,12 @@
 #ifndef FUCK_PTSD_HEART_H
 #define FUCK_PTSD_HEART_H
 
-#include "GameElement.h"
-#include <iostream>
+#include "config.hpp"
 
+#include <queue>
+
+#include "Settings/GameElement.h"
+#include "Settings/Window.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
@@ -16,22 +19,23 @@ class Heart final {
 public:
     explicit Heart();
 
-    void plusHP(float number);
+    void plusHP(const std::size_t number);
 
-    void minusHP(float number);
+    void minusHP(const std::size_t number);
+    void minusHeart(const float number);
 
-    void hitHeart(std::size_t index);
+    void hitHeart(const std::size_t index);
 
+    void gainHeart(const std::size_t number = 2);
+    void UpdateHP();
     void resetHP();
 
-    void SetHeartMaxHp(float value);
+    void SetHeartMaxHp(const std::size_t value);
 
-    bool IsDead();
+    [[nodiscard]]
+    std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() const;
 
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>>
-    getGameObjects() const;
-
-    std::shared_ptr<GameElement> GetGameObject() const ;
+    std::shared_ptr<GameElement> GetGameObject() const;
 
     enum STATE {
         FULL = 0,
@@ -40,31 +44,37 @@ public:
     };
 
 private:
-    std::shared_ptr<GameElement> generalHeart(STATE state, const glm::vec2 &position);
-    void AddToList();
-    void RendererHeart(std::size_t number);
-
+    void IsDead();
+    std::shared_ptr<GameElement>
+                generalHeart(STATE state, const glm::vec2& position);
+    std::size_t m_ZIndex = 100;
     // HP settings
-    bool m_Dead = false;
-    float m_MaxHp = 15.0f;
-    float m_currentHP = 6.0f;
-    const glm::vec2 m_FirstPosition = {500, 350};
+    //
+    std::size_t     m_MaxHp = 12;
+    std::size_t     m_currentHP;
+    const glm::vec2 m_FirstPosition = {
+      WINDOW_WIDTH / 2 - 220,
+      WINDOW_HEIGHT / 2 - 55
+    };
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 
     // Image Settings
-    const glm::vec2 m_Scale = {3, 3};
-    std::shared_ptr<Util::Image> m_FullHPImage =
-        std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart.png");
+    const glm::vec2              m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    std::shared_ptr<Util::Image> m_FullHPImage = std::make_shared<Util::Image>(
+        ASSETS_DIR "/gui/heart.png"
+    );
 
-    std::shared_ptr<Util::Image> m_HalfHPImage =
-        std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart_half.png");
+    std::shared_ptr<Util::Image> m_HalfHPImage = std::make_shared<Util::Image>(
+        ASSETS_DIR "/gui/heart_half.png"
+    );
 
-    std::shared_ptr<Util::Image> m_EmptyHPImage =
-        std::make_shared<Util::Image>(ASSETS_DIR "/gui/heart_empty.png");
+    std::shared_ptr<Util::Image> m_EmptyHPImage = std::make_shared<Util::Image>(
+        ASSETS_DIR "/gui/heart_empty.png"
+    );
 
     // game object
-    std::vector<std::shared_ptr<GameElement>> m_ElementList;
+    std::deque<std::shared_ptr<GameElement>> m_ElementList;
 
     std::shared_ptr<GameElement> m_OneHeart = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_TwoHeart = std::make_shared<GameElement>();
@@ -73,4 +83,4 @@ private:
     std::shared_ptr<GameElement> m_Heart = std::make_shared<GameElement>();
 };
 
-#endif // FUCK_PTSD_HEART_H
+#endif  // FUCK_PTSD_HEART_H

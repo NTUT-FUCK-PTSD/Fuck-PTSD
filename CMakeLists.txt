@@ -5,6 +5,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/build)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/build)
+endif()
+
 if (WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     # see https://github.com/ntut-open-source-club/practical-tools-for-simple-design/issues/22
     set(CMAKE_RC_FLAGS="-C 1252")
@@ -47,16 +54,18 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
 endif()
 
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/Resources")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE PTSD_DIR="${CMAKE_CURRENT_SOURCE_DIR}/PTSD")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE ASSETS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets")
-else()
-    message(FATAL_ERROR "relative RESOURCE_DIR is WIP, Please use `-DCMAKE_BUILD_TYPE=Debug` build for now.")
-    # target_compile_definitions(${PROJECT_NAME} PRIVATE RESOURCE_DIR="${CMAKE_INSTALL_PREFIX}/Resources")
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+    ASSETS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/assets"
+    )
+elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+    ASSETS_DIR="./assets"
+    )
+else ()
+    message(FATAL_ERROR "Unknown build type: ${CMAKE_BUILD_TYPE}")
 endif()
-
 
 target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${DEPENDENCY_INCLUDE_DIRS})
 #target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PTSD/include)
@@ -72,6 +81,7 @@ target_link_libraries(Framework
 
 target_link_libraries(${PROJECT_NAME}
         SDL2::SDL2main
+        fmt
         tinyxml2::tinyxml2
         Framework
         #rusty_bridge

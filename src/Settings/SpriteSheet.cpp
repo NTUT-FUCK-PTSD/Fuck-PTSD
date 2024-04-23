@@ -9,10 +9,15 @@
 
 #include "config.hpp"
 
-SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
-                         const std::vector<std::size_t> &frames, bool play,
-                         std::size_t interval, bool looping,
-                         std::size_t cooldown)
+SpriteSheet::SpriteSheet(
+    const std::string               filepath,
+    glm::vec2                       frameSize,
+    const std::vector<std::size_t>& frames,
+    bool                            play,
+    std::size_t                     interval,
+    bool                            looping,
+    std::size_t                     cooldown
+)
     : m_Frames(frames),
       m_State(play ? State::PLAY : State::PAUSE),
       m_Interval(interval),
@@ -22,7 +27,7 @@ SpriteSheet::SpriteSheet(const std::string filepath, glm::vec2 frameSize,
       m_FrameSize(frameSize) {
     m_SpriteSheet = std::make_unique<Util::SpriteSheet>(filepath);
     m_Size = m_SpriteSheet->GetSize();
-    m_col = static_cast<size_t>(m_Size.x / m_FrameSize.x);
+    m_col = static_cast<std::size_t>(m_Size.x / m_FrameSize.x);
 }
 
 void SpriteSheet::SetCurrentFrame(std::size_t index) {
@@ -34,11 +39,13 @@ void SpriteSheet::SetCurrentFrame(std::size_t index) {
     }
 }
 
-void SpriteSheet::Draw(const Core::Matrices &data) {
+void SpriteSheet::Draw(const Core::Matrices& data) {
     SDL_Rect displayRect{
-        static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
-        static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
-        static_cast<int>(m_FrameSize.x), static_cast<int>(m_FrameSize.y)};
+      static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
+      static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
+      static_cast<int>(m_FrameSize.x),
+      static_cast<int>(m_FrameSize.y)
+    };
     m_SpriteSheet->SetDrawRect(displayRect);
     m_SpriteSheet->Draw(data);
 
@@ -75,9 +82,10 @@ void SpriteSheet::Update() {
         return;
     }
 
-    m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTime();
-    size_t updateFrameCount =
-        static_cast<size_t>(m_TimeBetweenFrameUpdate / (m_Interval / 1000.0));
+    m_TimeBetweenFrameUpdate += Util::Time::GetDeltaTimeMs();
+    std::size_t updateFrameCount = static_cast<std::size_t>(
+        m_TimeBetweenFrameUpdate / m_Interval
+    );
 
     if (updateFrameCount <= 0)
         return;
@@ -85,7 +93,7 @@ void SpriteSheet::Update() {
     m_Index += updateFrameCount;
     m_TimeBetweenFrameUpdate = 0;
 
-    size_t const totalFramesCount = m_Frames.size();
+    std::size_t const totalFramesCount = m_Frames.size();
     if (m_Index >= totalFramesCount) {
         if (m_Looping) {
             m_CooldownEndTime = nowTime + m_Cooldown;

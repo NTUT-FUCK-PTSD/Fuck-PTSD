@@ -7,9 +7,14 @@
 #include "Util/Logger.hpp"
 
 //
-Coin::Coin(): Animation({0, 0}) {
+Coin::Coin()
+    : Animation({0, 0}) {
     m_text = std::make_shared<Util::Text>(
-        m_TextStylePath, m_fontSize, m_showText, Util::Color(255, 255, 255));
+        m_TextStylePath,
+        m_fontSize,
+        m_showText,
+        Util::Color(255, 255, 255)
+    );
     const auto CoinImage = std::make_shared<Util::Image>(m_imagePath);
 
     m_CoinText->SetDrawable(m_text);
@@ -31,11 +36,12 @@ std::vector<std::shared_ptr<Util::GameObject>> Coin::getGameObject() {
 }
 
 void Coin::toLeftSideCoinText() {
-
     // left point
-    glm::vec2 initPos = {m_Position.x + 50, m_Position.y};
-    const glm::vec2 modifyPos = {initPos.x + m_text->GetSize().x * 2.5,
-                                 initPos.y};
+    glm::vec2       initPos = {m_Position.x + 50, m_Position.y};
+    const glm::vec2 modifyPos = {
+      initPos.x + m_text->GetSize().x * 2.5,
+      initPos.y
+    };
     m_CoinText->SetPosition(modifyPos);
     //    LOG_DEBUG((glm::vec2){a.x + m_text->GetSize().x,
     //    m_text->GetSize().y});
@@ -49,7 +55,7 @@ void Coin::plusCoinNumber(const int number) {
     toLeftSideCoinText();
 }
 
-void Coin::SetPosition(const glm::vec2 &position) {
+void Coin::SetPosition(const glm::vec2& position) {
     m_CoinText->SetPosition(position);
     m_CoinImage->SetPosition(position);
 }
@@ -68,6 +74,6 @@ void Coin::Update() {
         m_GamePosition = ToolBoxs::PosToGamePos(m_AnimationDestination);
         m_Position = m_AnimationPosition;
     }
-//    SetZIndex(m_AnimationZIndex);
-    SetPosition({m_Position.x + 585 ,m_Position.y + 350});
+    //    SetZIndex(m_AnimationZIndex);
+    SetPosition({m_Position.x + 585, m_Position.y + 350});
 }
