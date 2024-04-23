@@ -46,6 +46,12 @@ void Music::RhythmIndicator::Update() {
     const auto intervalPixel = 720.0f / static_cast<float>(m_tempoNumber);
 
     std::size_t index = m_startBeatIndex;
+
+    if (index + m_tempoNumber == m_tempoTriggerList.size()) {
+        m_startBeatIndex = 0;
+        return;
+    }
+
     for (const auto& elem : m_IndicatorList) {
         const std::size_t tempoIntervalTime = m_tempoTriggerList[index + 1]
                                               - m_tempoTriggerList[index];
