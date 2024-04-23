@@ -74,6 +74,10 @@ void Music::RhythmIndicator::Update() {
 
     index = m_startBeatIndex;
     for (const auto& elem : m_IndicatorListLeft) {
+        if (index + 1 == m_tempoTriggerList.size()) {
+            m_startBeatIndex = 0;
+            return;
+        }
         const std::size_t tempoIntervalTime = m_tempoTriggerList[index + 1]
                                               - m_tempoTriggerList[index];
         const float moveSpeed = (intervalPixel
