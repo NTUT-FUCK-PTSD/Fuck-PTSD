@@ -33,6 +33,9 @@ Enemies::Ghost::Ghost(
 
 namespace Dungeon::Enemies {
 void Ghost::SetTransparent(bool transparent) {
+    if (m_Transparent == transparent) {
+        return;
+    }
     m_Transparent = transparent;
     if (m_Transparent) {
         m_SpriteSheet->SetAlpha(128);
