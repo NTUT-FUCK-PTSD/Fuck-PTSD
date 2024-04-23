@@ -13,7 +13,6 @@
 #include "Settings/Window.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-#include "Util/Logger.hpp"
 
 class Heart final {
 public:
@@ -53,7 +52,7 @@ private:
     // HP settings
     //
     std::size_t     m_MaxHp = 12;
-    std::size_t     m_currentHP;
+    std::size_t     m_currentHP = 0;
     const glm::vec2 m_FirstPosition = {
       WINDOW_WIDTH / 2 - 220,
       WINDOW_HEIGHT / 2 - 55
