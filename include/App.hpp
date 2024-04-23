@@ -1,21 +1,13 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "Background.hpp"
-#include "Camera.h"
-#include "Core/Context.hpp"
-#include "Core/Drawable.hpp"
-#include "Dungeon/Map.h"
-#include "Music/Music.h"
-#include "Player.h"
-#include "Player/Equipment/Shovel.h"
-#include "Player/Items/Coin.h"
-#include "Player/Items/Diamond.h"
-#include "Player/Items/Heart.h"
-#include "Player/Items/Tools.h"
-#include "SpriteSheet.hpp"
-#include "Util/Text.hpp"
 #include "pch.hpp"  // IWYU pragma: export
+
+#include "Dungeon/Map.h"
+#include "Game/Camera.h"
+#include "Music/Music.h"
+#include "Player/Player.h"
+#include "Settings/Background.hpp"
 
 class App {
 public:
