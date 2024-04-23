@@ -28,6 +28,9 @@ void Enemy::SetShadow(const bool shadow) {
             return;
         }
     }
+    if (m_Shadow == shadow) {
+        return;
+    }
     m_Shadow = shadow;
     m_SpriteSheet->SetFrames(shadow ? m_ShadowFrames : m_NormalFrames);
 }
@@ -59,7 +62,7 @@ void Enemy::SetLord(const bool lord) {
 }
 
 void Enemy::TempoMove() {
-    if (GetVisible() == false) {
+    if (GetVisible() == false || m_Seen == false) {
         return;
     }
     if (m_BeatDelay > 0) {
