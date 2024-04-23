@@ -106,11 +106,9 @@ void Ghost::Update() {
 
 void Ghost::AttackPlayer() {
     if (m_Transparent) {
+        m_WillMovePosition = GetGamePosition();
         return;
     }
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        Enemy::AttackPlayer();
-        m_WillMovePosition = GetGamePosition();
-    }
+    Enemy::AttackPlayer();
 }
 }  // namespace Dungeon::Enemies
