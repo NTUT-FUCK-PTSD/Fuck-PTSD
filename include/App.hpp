@@ -6,14 +6,15 @@
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
 #include "Dungeon/Map.h"
+#include "Items/Tools.h"
 #include "Music/Music.h"
 #include "Player.h"
 #include "Player/Equipment/Shovel.h"
 #include "Player/Items/Coin.h"
 #include "Player/Items/Diamond.h"
 #include "Player/Items/Heart.h"
-#include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
+#include "SubWindow/DebugSystem.h"
 #include "Util/Text.hpp"
 #include "pch.hpp"  // IWYU pragma: export
 

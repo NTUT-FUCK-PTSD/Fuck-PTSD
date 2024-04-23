@@ -9,6 +9,8 @@
 #include "Util/Logger.hpp"
 #include "Util/Time.hpp"
 
+#define CMAKE_DEBUG_OPTION true
+
 using namespace tinyxml2;
 
 extern "C" {
@@ -30,6 +32,7 @@ void App::Start() {
     }
 
     // Wait any key click
+
     if (ToolBoxs::IsAnyKeyPress()) {
         m_IsMainMenu = false;
     }
@@ -77,6 +80,9 @@ void App::Start() {
 
     // display the tempo heart in music System
     m_Camera->AddUIChild(m_MusicSystem->getGameObject());
+
+    // create Debug window
+    m_DebugSystem = std::make_shared<DebugSystem>();
 
     m_CurrentState = State::UPDATE;
 }
@@ -207,7 +213,6 @@ void App::Update() {
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-
     //    LOG_INFO(rusty_extern_c_integer());
 
     // LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
@@ -216,6 +221,9 @@ void App::Update() {
     m_MusicSystem->Update();
     m_MainCharacter->Update();
     m_Camera->Update();
+
+    //    ImGui::ShowDemoWindow();
+    //    LOG_INFO(rusty_extern_c_integer());
 }
 
 void App::End() {  // NOLINT(this method will mutate members in the future)

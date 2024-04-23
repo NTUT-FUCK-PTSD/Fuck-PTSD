@@ -1,5 +1,8 @@
 include(FetchContent)
 
+cmake_policy(SET CMP0135 NEW)
+
+
 # FetchContent_Declare(
 #         Corrosion
 #         GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
@@ -55,16 +58,4 @@ endif()
 
 message(STATUS "soloud: ${soloud_SOURCE_DIR}")
 
-
-#FetchContent_GetProperties(PTSD)
-#if(NOT PTSD_POPULATED)
-#    FetchContent_Populate(PTSD)
-#    add_subdirectory(${PTSD_SOURCE_DIR} ${PTSD_BINARY_DIR})
-#endif()
-
-#include_directories(${PTSD_SOURCE_DIR}/include)
-
-#add_library(PTSD INTERFACE)
-
-#target_include_directories(PTSD INTERFACE ${asio_SOURCE_DIR}/PTSD/include)
 

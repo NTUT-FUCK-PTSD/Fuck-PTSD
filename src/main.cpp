@@ -19,6 +19,9 @@ int main(int, char**) {
             context->SetExit(true);
             break;
         }
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         context->Update();
     }
     return 0;

@@ -11,4 +11,7 @@ list(APPEND CUSTOMIZE_PATH
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Tools
     ${CMAKE_CURRENT_BINARY_DIR}/include/Music
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Dungeon/Enemies
+    ${CMAKE_CURRENT_BINARY_DIR}/include/SubWindow
+    ${CMAKE_CURRENT_BINARY_DIR}/include/SubWindow/Component
+    ${CMAKE_CURRENT_BINARY_DIR}/include/SubWindow/Entity
 )

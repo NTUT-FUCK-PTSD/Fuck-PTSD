@@ -16,7 +16,7 @@ public:
 
     void plusDiamondNumber(const int number);
 
-    std::size_t getDiamond();
+    std::size_t GetDiamond();
 
     // return GameObject
     std::vector<std::shared_ptr<Util::GameObject>> getGameObject();
