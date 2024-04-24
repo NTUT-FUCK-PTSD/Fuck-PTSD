@@ -6,7 +6,7 @@
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
 #include "Dungeon/Map.h"
-#include "Music/Music.h"
+#include "Music/Player.h"
 #include "Player.h"
 #include "Player/Equipment/Shovel.h"
 #include "Player/Items/Coin.h"
@@ -45,8 +45,8 @@ private:
     bool                        m_IsMainMenu = true;
 
     // music
-    std::shared_ptr<Music::Player> m_MusicSystem =
-        std::make_shared<Music::Player>();
+    // std::shared_ptr<Music::Player> m_MusicSystem =
+    //     std::make_shared<Music::Player>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
