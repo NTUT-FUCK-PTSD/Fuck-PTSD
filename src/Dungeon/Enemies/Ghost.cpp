@@ -33,6 +33,9 @@ Enemies::Ghost::Ghost(
 
 namespace Dungeon::Enemies {
 void Ghost::SetTransparent(bool transparent) {
+    if (m_Transparent == transparent) {
+        return;
+    }
     m_Transparent = transparent;
     if (m_Transparent) {
         m_SpriteSheet->SetAlpha(128);
@@ -106,11 +109,9 @@ void Ghost::Update() {
 
 void Ghost::AttackPlayer() {
     if (m_Transparent) {
+        m_WillMovePosition = GetGamePosition();
         return;
     }
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        Enemy::AttackPlayer();
-        m_WillMovePosition = GetGamePosition();
-    }
+    Enemy::AttackPlayer();
 }
 }  // namespace Dungeon::Enemies

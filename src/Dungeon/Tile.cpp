@@ -56,6 +56,9 @@ void Tile::SetOverlay(bool visible) {
             return;
         }
     }
+    if (m_IsOverlay == visible) {
+        return;
+    }
     m_IsOverlay = visible;
     SDL_Color color =
         (visible == true ? SDL_Color({100, 100, 100, 255})
@@ -93,7 +96,7 @@ void Tile::UpdateDrawable() {
                  + (m_ImgSize.x - DUNGEON_TILE_WIDTH) / 2
              ),
              static_cast<int>(
-                 m_ImgSize.y * (m_Index / static_cast<int>(m_TileSize.x))
+                 m_ImgSize.y * static_cast<int>(m_Index / m_TileSize.x)
                  + (m_ImgSize.y - DUNGEON_TILE_WIDTH) / 2
              ),
              static_cast<int>(DUNGEON_TILE_WIDTH),
@@ -106,7 +109,7 @@ void Tile::UpdateDrawable() {
                  + (m_ImgSize.x - DUNGEON_TILE_WIDTH) / 2
              ),
              static_cast<int>(
-                 m_ImgSize.y * (m_Index / static_cast<int>(m_TileSize.x))
+                 m_ImgSize.y * static_cast<int>(m_Index / m_TileSize.x)
              ),
              static_cast<int>(DUNGEON_TILE_WIDTH),
              static_cast<int>(m_ImgSize.y - m_OffSetY)}
