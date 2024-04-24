@@ -7,6 +7,7 @@
 #include "Core/Drawable.hpp"
 #include "Dungeon/Map.h"
 #include "Music/Player.h"
+#include "Music/Tempo.h"
 #include "Player.h"
 #include "Player/Equipment/Shovel.h"
 #include "Player/Items/Coin.h"

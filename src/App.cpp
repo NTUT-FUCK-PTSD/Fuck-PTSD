@@ -57,6 +57,8 @@ void App::Start() {
     Music::Player::PlayMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
     Music::Player::SetVolume(0.1f);
 
+    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/zone1_1.txt");
+
     // play zone1 leve1
     // m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
     // m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
@@ -91,6 +93,8 @@ void App::Start() {
 }
 
 void App::Update() {
+    // LOG_INFO(Util::Time::GetElapsedTimeMs());
+    ;
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
     // add coin
@@ -98,11 +102,12 @@ void App::Update() {
     //        m_Coin->plusCoinNumber(10);
     //        m_Diamond->plusDiamondNumber(10);
     //    }
-    // auto tempoIndex = m_MusicSystem->getTempoIndex();
-    // if (m_BeforeTempoIndex != tempoIndex) {
-    //     m_BeforeTempoIndex = tempoIndex;
-    //     m_DungeonMap->TempoTrigger(tempoIndex);
-    // }
+    auto tempoIndex =
+        Music::Tempo::GetCurrentBeatIdx(Util::Time::GetElapsedTimeMs(), 0);
+    if (m_BeforeTempoIndex != tempoIndex) {
+        m_BeforeTempoIndex = tempoIndex;
+        m_DungeonMap->TempoTrigger(tempoIndex);
+    }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
@@ -114,7 +119,13 @@ void App::Update() {
     if ((Util::Input::IsKeyDown(Util::Keycode::W)
          || Util::Input::IsKeyDown(Util::Keycode::D)
          || Util::Input::IsKeyDown(Util::Keycode::S)
-         || Util::Input::IsKeyDown(Util::Keycode::A))) {
+         || Util::Input::IsKeyDown(Util::Keycode::A))
+        && Music::Tempo::IsTempoInRange(500, Util::Time::GetElapsedTimeMs())) {
+        // LOG_INFO(
+        //     "Music Test: {}",
+        //     Music::Tempo::IsTempoInRange(500, Util::Time::GetElapsedTimeMs())
+        // );
+
         // && m_MusicSystem->TempoTrigger()) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 

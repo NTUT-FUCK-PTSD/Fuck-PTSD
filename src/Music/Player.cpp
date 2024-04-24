@@ -41,6 +41,10 @@ void Music::Player::SetSpeed(float speed) {
     m_MusicSystem.setRelativePlaySpeed(m_MusicHandle, speed);
 }
 
+std::size_t Music::Player::LoopCounter() {
+    return m_MusicSystem.getLoopCount(m_MusicHandle);
+}
+
 std::shared_ptr<SoLoud::Wav> Music::Player::m_Wav =
     std::make_shared<SoLoud::Wav>();
 

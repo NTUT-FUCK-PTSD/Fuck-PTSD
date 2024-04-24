@@ -29,6 +29,8 @@ public:
 
     static void SetSpeed(float speed);
 
+    static std::size_t LoopCounter();
+
 private:
     static SoLoud::Soloud               m_MusicSystem;
     static std::shared_ptr<SoLoud::Wav> m_Wav;
