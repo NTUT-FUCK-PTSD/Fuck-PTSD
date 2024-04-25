@@ -29,6 +29,9 @@ Enemies::Ghost::Ghost(
     SetHealth(2);  // 1 heart
     SetDamage(1);  // 0.5 heart
     SetCoin(2);
+
+    m_LastDistance =
+        Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
 }
 }  // namespace Dungeon
 
@@ -68,6 +71,18 @@ void Ghost::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
+            if (direction.x > 0) {
+                SetFace(false);
+                m_AnimationType = 1;
+            } else if (direction.x < 0) {
+                SetFace(true);
+                m_AnimationType = 3;
+            } else if (direction.y > 0) {
+                m_AnimationType = 0;
+            } else if (direction.y < 0) {
+                m_AnimationType = 2;
+            }
+
             if (m_WillMovePosition == GetPlayerPosition()) {
                 AttackPlayer();
                 return;
@@ -81,11 +96,7 @@ void Ghost::Move() {
                 GamePostion2MapIndex(m_WillMovePosition),
                 true
             );
-            if (direction.x > 0) {
-                SetFace(false);
-            } else if (direction.x < 0) {
-                SetFace(true);
-            }
+            tmp -= 1;
         } else {
             m_CanMove = false;
         }
