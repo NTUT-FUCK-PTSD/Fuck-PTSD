@@ -42,28 +42,22 @@ Enemies::OrangeSlime::OrangeSlime(
 
 namespace Dungeon::Enemies {
 void OrangeSlime::Move() {
-    m_NeedToMove = false;
     if (m_State > 3) {
         m_State = 0;
     }
     if (m_State == 0) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
-        m_NeedToMove = true;
     } else if (m_State == 1) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
-        m_NeedToMove = true;
     } else if (m_State == 2) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
-        m_NeedToMove = true;
     } else if (m_State == 3) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
-        m_NeedToMove = true;
     }
     if (IsVaildMove(m_WillMovePosition)) {
         UpdateState();
         if (m_WillMovePosition == GetPlayerPosition()) {
             AttackPlayer();
-            m_State++;
             return;
         }
         m_CanMove = true;
@@ -90,10 +84,7 @@ void OrangeSlime::Update() {
             ToolBoxs::GamePostoPos(m_WillMovePosition),
             (m_StartIdx + m_State - 1) % 4
         );
-        m_NeedToMove = false;
         m_CanMove = false;
-    } else if (!m_CanMove && m_NeedToMove) {
-        m_State -= 1;
     }
 
     m_Animation->UpdateAnimation(true);
@@ -101,13 +92,6 @@ void OrangeSlime::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
-}
-
-void OrangeSlime::AttackPlayer() {
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        m_NeedToMove = false;
-        Enemy::AttackPlayer();
-    }
 }
 
 void OrangeSlime::UpdateFace(const glm::vec2& direction) {

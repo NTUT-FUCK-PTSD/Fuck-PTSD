@@ -18,8 +18,6 @@ public:
 
     void Update() override;
 
-    void AttackPlayer() override;
-
     void UpdateState();
 
 private:
@@ -28,7 +26,6 @@ private:
     const glm::vec2 m_FrameSize = {26, 26};
 
     std::size_t m_State = 0;
-    bool        m_NeedToMove = false;
 
     std::random_device                         m_RandomDevice;
     std::mt19937                               m_RandomGenerator;
