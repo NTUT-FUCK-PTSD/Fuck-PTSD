@@ -11,6 +11,7 @@ Enemy::Enemy(
 )
     : m_SimpleMapData(simpleMapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
+      m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
@@ -91,7 +92,8 @@ glm::vec2 Enemy::FindNextToPlayer() {
     auto path = Dungeon::AStar::FindPath(
         GetGamePosition(),
         GetPlayerPosition(),
-        m_SimpleMapData
+        m_SimpleMapData,
+        10
     );
     if (path.empty()) {
         return GetGamePosition();
