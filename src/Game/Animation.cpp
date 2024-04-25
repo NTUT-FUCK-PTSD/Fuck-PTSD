@@ -11,7 +11,7 @@ Animation::Animation(const glm::vec2& animationPosition)
                                                   - DUNGEON_TILE_WIDTH
                                                   - DUNGEON_TILE_WIDTH})
                           .y;
-    m_AnimationZIndex = static_cast<float>(positionY / 1e2);
+    m_AnimationZIndex = positionY;
 }
 
 void Animation::MoveByTime(
@@ -81,7 +81,7 @@ void Animation::UpdateAnimation(const bool isDirection) {
                                                   - DUNGEON_TILE_WIDTH
                                                   - DUNGEON_TILE_WIDTH})
                           .y;
-    m_AnimationZIndex = static_cast<float>(positionY / 1e2);
+    m_AnimationZIndex = positionY;
 }
 
 bool Animation::IsAnimating() {

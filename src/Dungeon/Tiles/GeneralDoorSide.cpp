@@ -7,7 +7,7 @@ GeneralDoorSide::GeneralDoorSide(
     const bool    generalDoorSide
 )
     : Tile(u_Tile) {
-    m_ZIndex = m_ZIndex + 1e-4;
+    m_ZIndex = m_ZIndex + 0.125f;
     m_MagicNumber = 7;
     if (generalDoorSide) {
         UpdateDrawable();
