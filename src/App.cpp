@@ -94,16 +94,9 @@ void App::Start() {
 
 void App::Update() {
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
-    ;
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
-    // add coin
-    //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
-    //        m_Coin->plusCoinNumber(10);
-    //        m_Diamond->plusDiamondNumber(10);
-    //    }
-    auto tempoIndex =
-        Music::Tempo::GetCurrentBeatIdx(Util::Time::GetElapsedTimeMs(), 0);
+    auto tempoIndex = Music::Tempo::GetCurrentBeatIdx();
     if (m_BeforeTempoIndex != tempoIndex) {
         m_BeforeTempoIndex = tempoIndex;
         m_DungeonMap->TempoTrigger(tempoIndex);
@@ -121,12 +114,6 @@ void App::Update() {
          || Util::Input::IsKeyDown(Util::Keycode::S)
          || Util::Input::IsKeyDown(Util::Keycode::A))
         && Music::Tempo::IsTempoInRange(500, Util::Time::GetElapsedTimeMs())) {
-        // LOG_INFO(
-        //     "Music Test: {}",
-        //     Music::Tempo::IsTempoInRange(500, Util::Time::GetElapsedTimeMs())
-        // );
-
-        // && m_MusicSystem->TempoTrigger()) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -234,6 +221,8 @@ void App::Update() {
     // LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
 
     // m_MusicSystem->Update();
+
+    Music::Tempo::Update(Util::Time::GetElapsedTimeMs(), 0.0f);
     m_MainCharacter->Update();
     m_Camera->Update();
 }

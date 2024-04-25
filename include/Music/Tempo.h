@@ -14,6 +14,12 @@
 namespace Music {
 class Tempo {
 public:
+    // constructor
+    explicit Tempo();
+
+    // destructor
+    virtual ~Tempo() = default;
+
     static void ReadTempoFile(const std::string& path);
 
     [[nodiscard]]
@@ -31,6 +37,12 @@ public:
     // value
     static std::size_t m_BeatListLen;
     // static std::size_t m_CurrentBeatIdx;
+
+    static void Update(
+        const float       musicPlaytTime,
+        const std::size_t triggerOffset
+    );
+    // void Update(const float time);
 
 private:
     static void LopReset();

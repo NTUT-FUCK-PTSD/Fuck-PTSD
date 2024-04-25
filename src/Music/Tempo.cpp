@@ -101,21 +101,31 @@ std::size_t Music::Tempo::GetCurrentBeatIdx(
     const float       time,
     const std::size_t offset
 ) {
-    if (m_CurrentBeatLopTimes != Music::Player::LoopCounter()) {
-        m_CurrentBeatLopTimes = Music::Player::LoopCounter();
-        LopReset();
-    }
-
-    if (m_BeatList[m_CurrentBeatIdx] + offset
-        < static_cast<std::size_t>(time)) {
-        m_CurrentBeatIdx++;
-    }
     return m_CurrentBeatIdx;
 }
 
 void Music::Tempo::LopReset() {
     m_CurrentBeatIdx = 0;
     m_IsBeatClick = std::vector<bool>(m_BeatListLen, false);
+}
+
+void Music::Tempo::Update(
+    const float       musicPlaytTime,
+    const std::size_t triggerOffset
+) {
+    if (m_CurrentBeatLopTimes != Music::Player::LoopCounter()) {
+        m_CurrentBeatLopTimes = Music::Player::LoopCounter();
+        LopReset();
+    }
+
+    if (m_BeatList.back() < static_cast<std::size_t>(musicPlaytTime)) {
+        throw std::runtime_error("out of range");
+    }
+
+    if (m_BeatList[m_CurrentBeatIdx] + triggerOffset
+        < static_cast<std::size_t>(musicPlaytTime)) {
+        m_CurrentBeatIdx++;
+    }
 }
 
 std::vector<std::size_t> Music::Tempo::m_BeatList;
