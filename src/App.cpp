@@ -86,6 +86,9 @@ void App::Start() {
     ));
     m_Camera->AddChild(m_DungeonMap);
 
+    Display::BeatHeart::Init();
+    m_Camera->AddUIChild(Display::BeatHeart::GetGameElement());
+
     // display the tempo heart in music System
     // m_Camera->AddUIChild(m_MusicSystem->getGameObject());
 
@@ -96,10 +99,11 @@ void App::Update() {
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
-    auto tempoIndex = Music::Tempo::GetCurrentBeatIdx();
+    auto tempoIndex = Music::Tempo::m_CurrentBeatIdx;
     if (m_BeforeTempoIndex != tempoIndex) {
         m_BeforeTempoIndex = tempoIndex;
         m_DungeonMap->TempoTrigger(tempoIndex);
+        Display::BeatHeart::SwitchHeart(100);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -222,7 +226,10 @@ void App::Update() {
 
     // m_MusicSystem->Update();
 
-    Music::Tempo::Update(Util::Time::GetElapsedTimeMs(), 0.0f);
+    auto musicTime = Music::Player::GetMusicTime() * 1000;
+
+    Music::Tempo::Update(musicTime, 0u);
+    Display::BeatHeart::Update();
     m_MainCharacter->Update();
     m_Camera->Update();
 }

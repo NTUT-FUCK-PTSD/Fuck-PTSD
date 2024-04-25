@@ -97,11 +97,8 @@ bool Music::Tempo::IsTempoInRange(
     }
 }
 
-std::size_t Music::Tempo::GetCurrentBeatIdx(
-    const float       time,
-    const std::size_t offset
-) {
-    return m_CurrentBeatIdx;
+std::size_t Music::Tempo::GetBeatTime() {
+    return m_BeatList.at(m_CurrentBeatIdx);
 }
 
 void Music::Tempo::LopReset() {

@@ -2,30 +2,41 @@
 #define BEATHEART_H
 
 #include <memory>
+#include <string>
 
 #include "Util/GameObject.hpp"
 
 #include "GameElement.h"
+#include "Settings/GameElement.h"
+#include "Settings/SpriteSheet.hpp"
+#include "Settings/Window.hpp"
 #include "SpriteSheet.hpp"
 
 namespace Display {
-class BeatHeart : public GameElement {
+class BeatHeart final {
 public:
-    explicit BeatHeart();
-    virtual ~BeatHeart() = default;
+    static void Init();
 
-    void Update();
+    static void SwitchHeart(const std::size_t duringTime);
+
+    static std::shared_ptr<GameElement> GetGameElement();
+
+    static void Update();
 
 private:
     static std::string m_HeartImagePath;
 
+    static glm::vec2 m_Position;
+
+    static glm::vec2 m_Scale;
+
+    static float m_ZIndex;
+
+    static std::size_t m_AfterSwitchTime;
+
     static std::shared_ptr<SpriteSheet> m_HeartImage;
 
-    static const glm::vec2 m_Position;
-
-    static const glm::vec2 m_Scale;
-
-    static const float m_ZIndexBeatHeart;
+    static std::shared_ptr<GameElement> m_GameElement;
 };
 }  // namespace Display
 

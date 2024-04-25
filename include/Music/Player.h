@@ -1,6 +1,7 @@
 #ifndef MUSIC_PLAYER_H
 #define MUSIC_PLAYER_H
 
+#include <memory>
 #include <string>
 
 #include "soloud.h"
@@ -30,6 +31,8 @@ public:
     static void SetSpeed(float speed);
 
     static std::size_t LoopCounter();
+
+    static float GetMusicTime();
 
 private:
     static SoLoud::Soloud               m_MusicSystem;

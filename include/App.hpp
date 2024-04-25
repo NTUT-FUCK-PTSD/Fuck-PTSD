@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
+#include "Display/BeatHeart.h"
 #include "Dungeon/Map.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"

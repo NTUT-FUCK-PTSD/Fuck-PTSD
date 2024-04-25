@@ -45,6 +45,10 @@ std::size_t Music::Player::LoopCounter() {
     return m_MusicSystem.getLoopCount(m_MusicHandle);
 }
 
+float Music::Player::GetMusicTime() {
+    return m_MusicSystem.getStreamTime(m_MusicHandle);
+}
+
 std::shared_ptr<SoLoud::Wav> Music::Player::m_Wav =
     std::make_shared<SoLoud::Wav>();
 

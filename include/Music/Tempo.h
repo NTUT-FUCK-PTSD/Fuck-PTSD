@@ -29,20 +29,15 @@ public:
     );
 
     [[nodiscard]]
-    static std::size_t GetCurrentBeatIdx(
-        const float       time,
-        const std::size_t offset
-    );
-
-    // value
-    static std::size_t m_BeatListLen;
-    // static std::size_t m_CurrentBeatIdx;
+    static std::size_t GetBeatTime();
 
     static void Update(
         const float       musicPlaytTime,
         const std::size_t triggerOffset
     );
-    // void Update(const float time);
+
+    static std::size_t m_BeatListLen;
+    static std::size_t m_CurrentBeatIdx;
 
 private:
     static void LopReset();
@@ -50,7 +45,6 @@ private:
     static std::vector<std::size_t> m_BeatList;
     static std::vector<bool>        m_IsBeatClick;
     static std::size_t              m_CurrentBeatLopTimes;
-    static std::size_t              m_CurrentBeatIdx;
 };
 }  // namespace Music
 
