@@ -51,10 +51,12 @@ void Music::Tempo::ReadTempoFile(const std::string& path) {
 
 bool Music::Tempo::IsTempoInRange(
     const std::size_t triggerRange,
-    const float       time
+    const float       time,
+    const std::size_t MusicLoopCounter
 ) {
-    if (m_CurrentBeatLopTimes != Music::Player::LoopCounter()) {
-        m_CurrentBeatLopTimes = Music::Player::LoopCounter();
+    // TODO: //
+    if (m_CurrentBeatLopTimes != MusicLoopCounter) {
+        m_CurrentBeatLopTimes = MusicLoopCounter;
         LopReset();
     }
 
@@ -121,10 +123,11 @@ void Music::Tempo::LopReset() {
 
 void Music::Tempo::Update(
     const float       musicPlaytTime,
-    const std::size_t triggerOffset
+    const std::size_t triggerOffset,
+    const std::size_t MusicLoopCounter
 ) {
-    if (m_CurrentBeatLopTimes != Music::Player::LoopCounter()) {
-        m_CurrentBeatLopTimes = Music::Player::LoopCounter();
+    if (m_CurrentBeatLopTimes != MusicLoopCounter) {
+        m_CurrentBeatLopTimes = MusicLoopCounter;
         LopReset();
     }
 

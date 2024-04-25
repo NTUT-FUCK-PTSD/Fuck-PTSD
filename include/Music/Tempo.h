@@ -28,7 +28,8 @@ public:
     [[nodiscard]]
     static bool IsTempoInRange(
         const std::size_t triggerRange,
-        const float       time
+        const float       time,
+        const std::size_t MusicLoopCounter
     );
 
     [[nodiscard]]
@@ -39,7 +40,8 @@ public:
 
     static void Update(
         const float       musicPlaytTime,
-        const std::size_t triggerOffset
+        const std::size_t triggerOffset,
+        const std::size_t MusicLoopCounter
     );
 
     static std::size_t m_BeatListLen;

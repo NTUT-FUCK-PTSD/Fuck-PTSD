@@ -122,7 +122,11 @@ void App::Update() {
          || Util::Input::IsKeyDown(Util::Keycode::D)
          || Util::Input::IsKeyDown(Util::Keycode::S)
          || Util::Input::IsKeyDown(Util::Keycode::A))
-        && Music::Tempo::IsTempoInRange(500, Util::Time::GetElapsedTimeMs())) {
+        && Music::Tempo::IsTempoInRange(
+            500,
+            Util::Time::GetElapsedTimeMs(),
+            Music::Player::LoopCounter()
+        )) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -235,7 +239,7 @@ void App::Update() {
     auto musicTime = Music::Player::GetMusicTime() * 1000;
 
     Display::BeatHeart::Update();
-    Music::Tempo::Update(musicTime, 0u);
+    Music::Tempo::Update(musicTime, 0u, Music::Player::LoopCounter());
 
     m_MainCharacter->Update();
     m_Camera->Update();
