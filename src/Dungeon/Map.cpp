@@ -449,43 +449,61 @@ void Map::EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy) {
 }
 
 bool Map::CanPlayerSeePosition(const glm::vec2& position) {
-    std::size_t mapIndex = m_MapData->GamePosition2MapIndex(position);
-    if (m_ShadowRenderDP[mapIndex]) {
-        return true;
+    // BresenhamLine Algorithm
+    // glm::vec2 targetPosition = position;
+    // glm::vec2 sourcePosition = m_MainCharacter->GetGamePosition();
+
+    // I don't know why but the target and source position are reversed
+    // so I have to reverse them
+    glm::vec2 targetPosition = m_MainCharacter->GetGamePosition();
+    glm::vec2 sourcePosition = position;
+
+    std::vector<glm::vec2> integerCoordinates;
+
+    glm::vec2 delta = targetPosition - sourcePosition;
+    glm::vec2 sign = glm::sign(delta);
+    delta = glm::abs(delta);
+    int       error = 0;
+    glm::vec2 current = sourcePosition;
+
+    if (delta.x > delta.y) {
+        for (int i = 0; i <= delta.x; ++i) {
+            integerCoordinates.push_back(current);
+            error -= delta.y;
+            if (error < 0) {
+                current.y += sign.y;
+                error += delta.x;
+            }
+            current.x += sign.x;
+        }
+    } else {
+        for (int i = 0; i <= delta.y; ++i) {
+            integerCoordinates.push_back(current);
+            error -= delta.x;
+            if (error < 0) {
+                current.x += sign.x;
+                error += delta.y;
+            }
+            current.y += sign.y;
+        }
     }
 
-    // Linear Interpolation
-    glm::vec2 playerPosition = m_MainCharacter->GetGamePosition();
-    glm::vec2 direction = position - playerPosition;
-    if (direction.x > 0) {
-        direction.x -= 0.5;
-    } else if (direction.x < 0) {
-        direction.x += 0.5;
-    }
-    if (direction.y > 0) {
-        direction.y -= 0.5;
-    } else if (direction.y < 0) {
-        direction.y += 0.5;
-    }
-    float distance = glm::length(direction);
-    for (float i = 0; i <= 1.0; i += 1.0 / distance) {
-        glm::vec2 checkPosition = playerPosition + direction * i;
-        checkPosition = {
-          std::round(checkPosition.x),
-          std::round(checkPosition.y)
-        };
-        mapIndex = m_MapData->GamePosition2MapIndex(checkPosition);
-
-        if (position == checkPosition) {
+    std::size_t mapIndex;
+    // because the integerCoordinates is from target to source
+    // so we have to reverse it
+    for (int i = integerCoordinates.size() - 1; i >= 0; --i) {
+        mapIndex = m_MapData->GamePosition2MapIndex(integerCoordinates[i]);
+        if (position == integerCoordinates[i]) {
             m_ShadowRenderDP[mapIndex] = true;
             return true;
         }
-        if (m_MapData->IsPositionWall(checkPosition)
-            || m_MapData->IsPositionDoor(checkPosition)) {
+        if (m_MapData->IsPositionWall(integerCoordinates[i])
+            || m_MapData->IsPositionDoor(integerCoordinates[i])) {
             m_ShadowRenderDP[mapIndex] = false;
             return false;
         }
     }
+    m_ShadowRenderDP[m_MapData->GamePosition2MapIndex(position)] = true;
     return true;
 }
 
