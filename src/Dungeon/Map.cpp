@@ -288,7 +288,9 @@ void Map::TempoUpdate(bool isPlayer) {
         m_ShadowRenderDP.clear();
         m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     }
+    Update();
     CameraUpdate();
+    m_MiniMap->Update();
 }
 
 void Map::PlayerTrigger() {
@@ -311,7 +313,6 @@ void Map::Update() {
         m_OverlayRed = false;
     }
 
-    m_MiniMap->Update();
     std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto& enemy : EnemyQueue) {
         if (!enemy->GetSeen()) {
