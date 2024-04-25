@@ -87,6 +87,15 @@ void MiniMap::Update() {
             if (!m_ColorCubes[mapIndex]->GetAvailable()) {
                 continue;
             }
+            // Update Tiles
+            if (!m_MapData->IsTilesEmpty(mapIndex)) {
+                if (!m_MapData->GetTileBack(mapIndex)->GetSeen()) {
+                    continue;
+                }
+            } else {
+                SetVisible(mapIndex, false);
+                continue;
+            }
             // Update Enemy
             auto enemy = m_MapData->GetEnemy(mapIndex);
             if (enemy) {
@@ -95,15 +104,6 @@ void MiniMap::Update() {
                 }
                 SetColor(mapIndex, CubeColor::red);
                 SetVisible(mapIndex, true);
-                continue;
-            }
-            // Update Tiles
-            if (!m_MapData->IsTilesEmpty(mapIndex)) {
-                if (!m_MapData->GetTileBack(mapIndex)->GetSeen()) {
-                    continue;
-                }
-            } else {
-                SetVisible(mapIndex, false);
                 continue;
             }
             UpdateTileColor(mapIndex);
