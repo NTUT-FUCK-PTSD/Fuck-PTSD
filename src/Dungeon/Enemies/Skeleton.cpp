@@ -101,6 +101,7 @@ void Skeleton::Move() {
             if (m_WillMovePosition == GetPlayerPosition()) {
                 AttackPlayer();
                 m_Attack = !m_Attack;
+                UpdateProperties();
                 return;
             }
             // Set the new position
@@ -119,14 +120,7 @@ void Skeleton::Move() {
         }
     }
     m_Attack = !m_Attack;
-    if (m_Attack) {
-        m_NormalFrames = m_AttackFrames;
-        m_ShadowFrames = m_ShadowAttackFrames;
-    } else {
-        m_NormalFrames = m_SkeletonNormalFrames;
-        m_ShadowFrames = m_SkeletonShadowFrames;
-    }
-    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
+    UpdateProperties();
 }
 
 void Skeleton::Update() {
@@ -145,5 +139,16 @@ void Skeleton::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+}
+
+void Skeleton::UpdateProperties() {
+    if (m_Attack) {
+        m_NormalFrames = m_AttackFrames;
+        m_ShadowFrames = m_ShadowAttackFrames;
+    } else {
+        m_NormalFrames = m_SkeletonNormalFrames;
+        m_ShadowFrames = m_SkeletonShadowFrames;
+    }
+    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
 }
 }  // namespace Dungeon::Enemies

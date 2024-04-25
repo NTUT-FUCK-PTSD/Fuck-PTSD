@@ -34,6 +34,9 @@ Enemies::Zombie::Zombie(
         std::uniform_int_distribution<std::size_t>::param_type{0, 3}
     );
 
+    m_ZombieNormalFrames = m_NormalFrames;
+    m_ZombieShadowFrames = m_ShadowFrames;
+
     SetHealth(2);  // 1 heart
     SetDamage(2);  // 1 heart
     SetCoin(1);
@@ -48,6 +51,7 @@ void Zombie::Move() {
         if (m_WillMovePosition == GetPlayerPosition()) {
             AttackPlayer();
             m_Attack = !m_Attack;
+            UpdateProperties();
             return;
         }
         m_CanMove = true;
@@ -64,6 +68,7 @@ void Zombie::Move() {
             if (m_WillMovePosition == GetPlayerPosition()) {
                 AttackPlayer();
                 m_Attack = !m_Attack;
+                UpdateProperties();
                 return;
             }
             m_CanMove = true;
@@ -86,22 +91,10 @@ void Zombie::Move() {
         );
     }
     m_Attack = !m_Attack;
+    UpdateProperties();
 }
-void Zombie::Update() {
-    UpdateFace();
-    if (m_Direction == 0) {
-        m_SpriteSheet->SetFrames(
-            GetShadow() ? m_ShadowBackFrames : m_BackFrames
-        );
-    } else if (m_Attack) {
-        m_SpriteSheet->SetFrames(
-            GetShadow() ? m_ShadowAttackFrames : m_AttackFrames
-        );
-    } else {
-        m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
-    }
 
-    // Collision
+void Zombie::Update() {
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
         m_Animation->MoveByTime(
@@ -124,5 +117,20 @@ void Zombie::UpdateFace() {
         return;
     }
     SetFace(false);
+}
+
+void Zombie::UpdateProperties() {
+    UpdateFace();
+    if (m_Direction == 0) {
+        m_NormalFrames = m_BackFrames;
+        m_ShadowFrames = m_ShadowBackFrames;
+    } else if (m_Attack) {
+        m_NormalFrames = m_AttackFrames;
+        m_ShadowFrames = m_ShadowAttackFrames;
+    } else {
+        m_NormalFrames = m_ZombieNormalFrames;
+        m_ShadowFrames = m_ZombieShadowFrames;
+    }
+    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
 }
 }  // namespace Dungeon::Enemies

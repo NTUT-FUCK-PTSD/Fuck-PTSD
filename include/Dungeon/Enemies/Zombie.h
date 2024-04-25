@@ -21,7 +21,11 @@ public:
     void UpdateFace();
 
 private:
+    void UpdateProperties();
+
     const glm::vec2          m_FrameSize = {24, 25};
+    std::vector<std::size_t> m_ZombieNormalFrames;
+    std::vector<std::size_t> m_ZombieShadowFrames;
     std::vector<std::size_t> m_AttackFrames;
     std::vector<std::size_t> m_ShadowAttackFrames;
     std::vector<std::size_t> m_BackFrames;

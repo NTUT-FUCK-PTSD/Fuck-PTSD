@@ -17,6 +17,8 @@ public:
     void Update() override;
 
 private:
+    void UpdateProperties();
+
     const glm::vec2          m_FrameSize = {24, 28};
     std::vector<std::size_t> m_SkeletonNormalFrames;
     std::vector<std::size_t> m_SkeletonShadowFrames;
