@@ -1,5 +1,7 @@
 #include "Dungeon/Enemies/BlueSlime.h"
 
+#include "Game/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(
     const s_Enemy&                       u_Enemy,
@@ -47,7 +49,6 @@ void BlueSlime::Move() {
             m_WillMovePosition = m_InitPosition;
         }
         m_NeedToMove = true;
-        m_AnimationType = 0;
     } else if (m_State == 3) {
         if (GetGamePosition() == m_InitPosition) {
             m_WillMovePosition = m_InitPosition + m_Move;
@@ -55,9 +56,10 @@ void BlueSlime::Move() {
             m_WillMovePosition = m_InitPosition;
         }
         m_NeedToMove = true;
-        m_AnimationType = 2;
     }
     if (IsVaildMove(m_WillMovePosition)) {
+        auto direction = m_WillMovePosition - GetGamePosition();
+        UpdateAnimationType(direction);
         if (m_WillMovePosition == GetPlayerPosition()) {
             AttackPlayer();
             m_State++;
@@ -97,7 +99,6 @@ void BlueSlime::Update() {
 void BlueSlime::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
         m_NeedToMove = false;
-        m_AnimationType = 0;
         Enemy::AttackPlayer();
     }
 }

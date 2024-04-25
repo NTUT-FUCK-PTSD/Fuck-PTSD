@@ -1,5 +1,7 @@
 #include "Dungeon/Enemies/GreenSlime.h"
 
+#include "Game/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::GreenSlime::GreenSlime(
     const s_Enemy&                       u_Enemy,

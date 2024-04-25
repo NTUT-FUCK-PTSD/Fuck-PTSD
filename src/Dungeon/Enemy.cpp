@@ -105,6 +105,23 @@ void Enemy::AttackPlayer() {
         m_CanMove = false;
         m_WillMovePosition = GetGamePosition();
         m_AttackPlayer = true;
+        m_Animation->MoveByTime(
+            200,
+            ToolBoxs::GamePostoPos(GetGamePosition()),
+            m_AnimationType + 5
+        );
+    }
+}
+
+void Enemy::UpdateAnimationType(const glm::vec2& direction) {
+    if (direction.x > 0) {
+        m_AnimationType = 1;
+    } else if (direction.x < 0) {
+        m_AnimationType = 3;
+    } else if (direction.y > 0) {
+        m_AnimationType = 0;
+    } else if (direction.y < 0) {
+        m_AnimationType = 2;
     }
 }
 

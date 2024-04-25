@@ -1,6 +1,7 @@
 #include "Dungeon/Enemies/Ghost.h"
 
 #include "Dungeon/AStar.h"
+#include "Game/ToolBoxs.h"
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
@@ -94,13 +95,11 @@ void Ghost::Update() {
     // Collision
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition)
-        );
+        m_Animation
+            ->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 4);
         m_CanMove = false;
     }
-    m_Animation->UpdateAnimation(false);
+    m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }

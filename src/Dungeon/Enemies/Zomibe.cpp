@@ -1,5 +1,7 @@
 #include "Dungeon/Enemies/Zombie.h"
 
+#include "Game/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::Zombie::Zombie(
     const s_Enemy&                       u_Enemy,

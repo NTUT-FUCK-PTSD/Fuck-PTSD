@@ -1,7 +1,6 @@
 #ifndef SKELETON_H
 #define SKELETON_H
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -27,8 +26,6 @@ private:
     bool m_Attack = false;
     bool m_CanDropHead = false;
     // bool m_DropHead = false;
-    std::unique_ptr<Animation> m_Animation;
-    uint16_t                   m_AnimationType;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

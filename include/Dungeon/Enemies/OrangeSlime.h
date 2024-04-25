@@ -3,7 +3,6 @@
 
 #include <random>
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -21,7 +20,11 @@ public:
 
     void AttackPlayer() override;
 
+    void UpdateState();
+
 private:
+    void UpdateFace(const glm::vec2& direction);
+
     const glm::vec2 m_FrameSize = {26, 26};
 
     std::size_t m_State = 0;
@@ -33,8 +36,6 @@ private:
     std::size_t                                m_StartIdx = 0;
 
     std::vector<glm::vec2> m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-
-    std::unique_ptr<Animation> m_Animation;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

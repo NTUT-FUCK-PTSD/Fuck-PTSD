@@ -1,5 +1,7 @@
 #include "Dungeon/Enemies/OrangeSlime.h"
 
+#include "Game/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(
     const s_Enemy&                       u_Enemy,
@@ -50,16 +52,15 @@ void OrangeSlime::Move() {
     } else if (m_State == 1) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
-        SetFace(true);
     } else if (m_State == 2) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
     } else if (m_State == 3) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
         m_NeedToMove = true;
-        SetFace(false);
     }
     if (IsVaildMove(m_WillMovePosition)) {
+        UpdateState();
         if (m_WillMovePosition == GetPlayerPosition()) {
             AttackPlayer();
             m_State++;
@@ -76,6 +77,7 @@ void OrangeSlime::Move() {
         );
     } else {
         m_CanMove = false;
+        return;
     }
 
     m_State++;
@@ -106,5 +108,19 @@ void OrangeSlime::AttackPlayer() {
         m_NeedToMove = false;
         Enemy::AttackPlayer();
     }
+}
+
+void OrangeSlime::UpdateFace(const glm::vec2& direction) {
+    if (direction.x > 0) {
+        SetFace(false);
+    } else if (direction.x < 0) {
+        SetFace(true);
+    }
+}
+
+void OrangeSlime::UpdateState() {
+    auto direction = m_WillMovePosition - GetGamePosition();
+    UpdateFace(direction);
+    UpdateAnimationType(direction);
 }
 }  // namespace Dungeon::Enemies

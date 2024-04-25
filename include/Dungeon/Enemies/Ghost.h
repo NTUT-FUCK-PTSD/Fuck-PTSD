@@ -1,7 +1,6 @@
 #ifndef GHOST_H
 #define GHOST_H
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -29,8 +28,6 @@ private:
     std::size_t m_LastDistance = 0;
 
     bool m_Transparent = false;
-
-    std::unique_ptr<Animation> m_Animation;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

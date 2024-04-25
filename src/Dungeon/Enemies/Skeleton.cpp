@@ -1,5 +1,7 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
+#include "Game/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
     const s_Enemy&                       u_Enemy,
@@ -80,20 +82,7 @@ void Skeleton::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                m_Attack = !m_Attack;
-                return;
-            }
-            m_CanMove = true;
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(GetGamePosition()),
-                false
-            );
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(m_WillMovePosition),
-                true
-            );
+            // Set Animation
             if (direction.x > 0) {
                 SetFace(false);
                 m_AnimationType = 1;
@@ -105,6 +94,23 @@ void Skeleton::Move() {
             } else if (direction.y < 0) {
                 m_AnimationType = 2;
             }
+            // Check if player is in the next position
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                AttackPlayer();
+                m_Attack = !m_Attack;
+                return;
+            }
+            // Set the new position
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()),
+                false
+            );
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition),
+                true
+            );
+            // notify the map that the entity is moving
+            m_CanMove = true;
         } else {
             m_CanMove = false;
         }
@@ -139,7 +145,6 @@ void Skeleton::Update() {
 
 void Skeleton::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
-        m_AnimationType = 0;
         Enemy::AttackPlayer();
     }
 }

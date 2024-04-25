@@ -3,7 +3,6 @@
 
 #include <random>
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -18,11 +17,14 @@ public:
 
     void Update() override;
 
+    void UpdateFace();
+
 private:
     void        RandomMove();
     void        MoveBat();
     std::size_t m_Tick = 2;
 
+private:
     const glm::vec2 m_FrameSize = {24, 24};
     std::size_t     m_State = 0;
 
@@ -32,8 +34,6 @@ private:
     std::random_device                         m_RandomDevice;
     std::mt19937                               m_RandomGenerator;
     std::uniform_int_distribution<std::size_t> m_Distribution;
-
-    std::unique_ptr<Animation> m_Animation;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

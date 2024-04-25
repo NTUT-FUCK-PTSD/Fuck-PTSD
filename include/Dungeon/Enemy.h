@@ -1,15 +1,12 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <string>
+#include "Util/GameObject.hpp"
 
 #include "Dungeon/SimpleMapData.h"
-#include "Dungeon/Tile.h"
+#include "Game/Animation.h"
+#include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
-#include "SpriteSheet.hpp"
-#include "ToolBoxs.h"
-
-#include "Util/GameObject.hpp"
 
 namespace Dungeon {
 // Abstract class
@@ -106,6 +103,8 @@ protected:
 
     virtual void AttackPlayer();
 
+    virtual void UpdateAnimationType(const glm::vec2& direction);
+
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
@@ -115,7 +114,9 @@ protected:
     bool                         m_CanMove = false;
     glm::vec2                    m_WillMovePosition;
 
-    bool m_AttackPlayer = false;
+    bool                       m_AttackPlayer = false;
+    std::unique_ptr<Animation> m_Animation;
+    std::size_t                m_AnimationType = 0;
 
 private:
     std::size_t m_BeatDelay;
