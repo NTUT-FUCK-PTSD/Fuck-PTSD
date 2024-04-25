@@ -4,14 +4,18 @@
 namespace Display {
 class Window {
 public:
+    struct UpdateData {};
+
     // init class window
     explicit Window();
     virtual ~Window() = default;
 
     //  about music
-    static void BeatHeart();
+    void BeatHeart();
 
-    static void BeatIndicator();
+    void BeatIndicator();
+
+    // about game
 
     void Update();
 
