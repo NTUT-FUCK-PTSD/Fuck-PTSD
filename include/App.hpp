@@ -6,6 +6,7 @@
 #include "Core/Context.hpp"
 #include "Core/Drawable.hpp"
 #include "Display/BeatHeart.h"
+#include "Display/BeatIndicator.h"
 #include "Dungeon/Map.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"

@@ -51,7 +51,7 @@ void Music::Tempo::ReadTempoFile(const std::string& path) {
 
 bool Music::Tempo::IsTempoInRange(
     const std::size_t triggerRange,
-    const std::size_t       time,
+    const std::size_t time,
     const std::size_t MusicLoopCounter
 ) {
     // TODO: //
@@ -122,6 +122,15 @@ std::size_t Music::Tempo::GetBeatTime() {
 void Music::Tempo::LopReset() {
     m_CurrentBeatIdx = 0;
     m_IsBeatClick = std::vector<bool>(m_BeatListLen, false);
+}
+
+std::size_t Music::Tempo::GetBeatValue(std::size_t idx) {
+    const auto beatIdx = idx % m_BeatListLen;
+    return m_BeatList.at(beatIdx);
+}
+
+std::size_t Music::Tempo::GetBeatListLen() {
+    return m_BeatListLen;
 }
 
 void Music::Tempo::Update(

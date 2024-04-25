@@ -89,6 +89,9 @@ void App::Start() {
     Display::BeatHeart::Init();
     m_Camera->AddUIChild(Display::BeatHeart::GetGameElement());
 
+    Display::BeatIndicator::Init();
+    m_Camera->AddUIChild(Display::BeatIndicator::GetGameElement());
+
     // display the tempo heart in music System
     // m_Camera->AddUIChild(m_MusicSystem->getGameObject());
 
@@ -243,10 +246,10 @@ void App::Update() {
 
     // Update the All System
 
-
     // LOG_INFO(Music::Player::GetMusicLength());
 
     Display::BeatHeart::Update();
+    Display::BeatIndicator::Update();
     Music::Tempo::Update(musicTime, 0u, Music::Player::LoopCounter());
 
     m_MainCharacter->Update();
