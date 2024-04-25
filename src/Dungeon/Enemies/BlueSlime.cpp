@@ -38,7 +38,6 @@ Enemies::BlueSlime::BlueSlime(
 
 namespace Dungeon::Enemies {
 void BlueSlime::Move() {
-    m_NeedToMove = false;
     if (m_State > 3) {
         m_State = 0;
     }
@@ -48,14 +47,12 @@ void BlueSlime::Move() {
         } else {
             m_WillMovePosition = m_InitPosition;
         }
-        m_NeedToMove = true;
     } else if (m_State == 3) {
         if (GetGamePosition() == m_InitPosition) {
             m_WillMovePosition = m_InitPosition + m_Move;
         } else {
             m_WillMovePosition = m_InitPosition;
         }
-        m_NeedToMove = true;
     }
     if (IsVaildMove(m_WillMovePosition)) {
         auto direction = m_WillMovePosition - GetGamePosition();
@@ -77,6 +74,7 @@ void BlueSlime::Move() {
     }
     m_State++;
 }
+
 void BlueSlime::Update() {
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
@@ -85,7 +83,6 @@ void BlueSlime::Update() {
             ToolBoxs::GamePostoPos(m_WillMovePosition),
             m_AnimationType
         );
-        m_NeedToMove = false;
         m_CanMove = false;
     }
 
@@ -94,12 +91,5 @@ void BlueSlime::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
-}
-
-void BlueSlime::AttackPlayer() {
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        m_NeedToMove = false;
-        Enemy::AttackPlayer();
-    }
 }
 }  // namespace Dungeon::Enemies
