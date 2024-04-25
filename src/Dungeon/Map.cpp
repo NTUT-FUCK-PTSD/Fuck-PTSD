@@ -20,11 +20,11 @@ Map::Map(
     m_Level = std::make_unique<Level>(path);
     m_Available = LoadLevel(levelNum);
 
-    // Add testing
-    auto mapIndex = GamePostion2MapIndex({1, 1});
-    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
-    m_MapData->AddEnemy(mapIndex, enemy);
-    m_Children.push_back(enemy);
+    // Add enemy testing
+    // auto mapIndex = GamePostion2MapIndex({1, 1});
+    // auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0},
+    // m_MapData); m_MapData->AddEnemy(mapIndex, enemy);
+    // m_Children.push_back(enemy);
 }
 
 Map::~Map() {
@@ -254,9 +254,6 @@ void Map::CameraUpdate() {
     }
 
     for (auto& tile : m_MapData->GetTilesQueue()) {
-        if (tile->GetTile().x == 0 && tile->GetTile().y == 0) {
-            tile->SetOverlay(true);
-        }
         if (CheckShowPosition(
                 {tile->GetTile().x, tile->GetTile().y},
                 cameraPos

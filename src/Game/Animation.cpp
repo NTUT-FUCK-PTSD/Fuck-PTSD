@@ -55,7 +55,6 @@ void Animation::UpdateAnimation(const bool isDirection) {
             || ((m_AnimationPosition == m_AnimationDestination) && !isDirection
             )) {
             m_AnimationPosition = m_AnimationDestination;
-            m_AnimationDestination = {0, 0};
             m_IsAnimatingInternal = false;
         } else {
             if (isDirection) {

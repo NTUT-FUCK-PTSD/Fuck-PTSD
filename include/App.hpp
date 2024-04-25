@@ -1,6 +1,7 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+<<<<<<< HEAD
 #include "Background.hpp"
 #include "Camera.h"
 #include "Core/Context.hpp"
@@ -18,9 +19,17 @@
 #include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "Util/Text.hpp"
+    =======
+>>>>>>> main
 #include "pch.hpp"  // IWYU pragma: export
 
-class App {
+#include "Dungeon/Map.h"
+#include "Game/Camera.h"
+// #include "Music/Music.h"
+#include "Player/Player.h"
+#include "Settings/Background.hpp"
+
+    class App {
 public:
     enum class State {
         START,

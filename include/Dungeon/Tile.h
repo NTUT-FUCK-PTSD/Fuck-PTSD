@@ -47,7 +47,7 @@ protected:
     std::shared_ptr<Util::SpriteSheet> m_SpriteSheet;
 
     bool m_Seen = false;
-    bool m_IsOverlay = false;
+    bool m_IsOverlay = true;
 };
 }  // namespace Dungeon
 

@@ -1,13 +1,8 @@
 #include "App.hpp"
-#include <thread>
-#include "Background.hpp"
-#include "Dungeon/MapHandler.h"
-#include "Player.h"
-#include "ToolBoxs.h"
+
 #include "Util/Input.hpp"
-#include "Util/Keycode.hpp"
-#include "Util/Logger.hpp"
-#include "Util/Time.hpp"
+
+#include "Dungeon/MapHandler.h"
 
 using namespace tinyxml2;
 
