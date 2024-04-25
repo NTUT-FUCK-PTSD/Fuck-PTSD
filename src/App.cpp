@@ -106,6 +106,10 @@ void App::Update() {
     //     Display::BeatHeart::SwitchHeart(100);
     // }
 
+    auto musicTime =
+        static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
+        % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
+
     if (Music::Tempo::IsSwitch()) {
         LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
         LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
@@ -126,7 +130,7 @@ void App::Update() {
          || Util::Input::IsKeyDown(Util::Keycode::A))
         && Music::Tempo::IsTempoInRange(
             500,
-            Util::Time::GetElapsedTimeMs(),
+            musicTime,
             Music::Player::LoopCounter()
         )) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
@@ -238,9 +242,7 @@ void App::Update() {
     // m_MusicSystem->Update();
 
     // Update the All System
-    auto musicTime =
-        static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
-        % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
+
 
     // LOG_INFO(Music::Player::GetMusicLength());
 

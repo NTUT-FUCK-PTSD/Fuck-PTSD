@@ -28,7 +28,7 @@ public:
     [[nodiscard]]
     static bool IsTempoInRange(
         const std::size_t triggerRange,
-        const float       time,
+        const std::size_t       time,
         const std::size_t MusicLoopCounter
     );
 
