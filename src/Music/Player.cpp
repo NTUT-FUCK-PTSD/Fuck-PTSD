@@ -18,8 +18,8 @@ void Music::Player::PlayMusic(
     float              speed
 ) {
     m_Wav->load(path.c_str());
+    m_Wav->setLooping(loop);
     m_MusicHandle = m_MusicSystem.play(*m_Wav);
-    m_MusicSystem.setLooping(m_MusicHandle, loop);
     m_MusicSystem.setVolume(m_MusicHandle, volume);
     m_MusicSystem.setRelativePlaySpeed(m_MusicHandle, speed);
 }
@@ -47,6 +47,10 @@ std::size_t Music::Player::LoopCounter() {
 
 float Music::Player::GetMusicTime() {
     return m_MusicSystem.getStreamTime(m_MusicHandle);
+}
+
+float Music::Player::GetMusicLength() {
+    return m_Wav->getLength();
 }
 
 std::shared_ptr<SoLoud::Wav> Music::Player::m_Wav =

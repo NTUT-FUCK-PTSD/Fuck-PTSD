@@ -34,6 +34,8 @@ public:
 
     static float GetMusicTime();
 
+    static float GetMusicLength();
+
 private:
     static SoLoud::Soloud               m_MusicSystem;
     static std::shared_ptr<SoLoud::Wav> m_Wav;

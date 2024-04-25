@@ -54,10 +54,10 @@ void App::Start() {
     }
     // play lobby music
     Music::Player::StopMusic();
-    Music::Player::PlayMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
+    Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
     Music::Player::SetVolume(0.1f);
 
-    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/zone1_1.txt");
+    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
 
     // play zone1 leve1
     // m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
@@ -107,6 +107,8 @@ void App::Update() {
     // }
 
     if (Music::Tempo::IsSwitch()) {
+        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
+        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
     }
@@ -236,7 +238,11 @@ void App::Update() {
     // m_MusicSystem->Update();
 
     // Update the All System
-    auto musicTime = Music::Player::GetMusicTime() * 1000;
+    auto musicTime =
+        static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
+        % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
+
+    // LOG_INFO(Music::Player::GetMusicLength());
 
     Display::BeatHeart::Update();
     Music::Tempo::Update(musicTime, 0u, Music::Player::LoopCounter());

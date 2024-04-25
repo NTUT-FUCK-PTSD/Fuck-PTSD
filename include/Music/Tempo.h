@@ -39,7 +39,7 @@ public:
     static std::size_t GetBeatTime();
 
     static void Update(
-        const float       musicPlaytTime,
+        const std::size_t musicPlaytTime,
         const std::size_t triggerOffset,
         const std::size_t MusicLoopCounter
     );

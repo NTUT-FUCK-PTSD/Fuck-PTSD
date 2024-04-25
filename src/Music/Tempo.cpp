@@ -61,6 +61,9 @@ bool Music::Tempo::IsTempoInRange(
     }
 
     auto time_int = static_cast<std::size_t>(time);
+    if (time_int > m_BeatList.back()) {
+        return false;
+    }
 
     auto [isOnTempo, BeforeTempo, AfterTempo] =
         Helper::BinarySearch(m_BeatList, time_int);
@@ -122,7 +125,7 @@ void Music::Tempo::LopReset() {
 }
 
 void Music::Tempo::Update(
-    const float       musicPlaytTime,
+    const std::size_t musicPlaytTime,
     const std::size_t triggerOffset,
     const std::size_t MusicLoopCounter
 ) {
@@ -131,12 +134,16 @@ void Music::Tempo::Update(
         LopReset();
     }
 
-    if (m_BeatList.back() < static_cast<std::size_t>(musicPlaytTime)) {
+    if (m_CurrentBeatIdx == m_BeatList.size() - 1) {
+        return;
+    }
+
+    if (m_BeatList.back() < musicPlaytTime) {
+        return;
         throw std::runtime_error("out of range");
     }
 
-    if (m_BeatList[m_CurrentBeatIdx] + triggerOffset
-        < static_cast<std::size_t>(musicPlaytTime)) {
+    if (m_BeatList.at(m_CurrentBeatIdx) + triggerOffset < musicPlaytTime) {
         m_IsBeatSwitch = true;
         m_CurrentBeatIdx++;
     }
