@@ -247,11 +247,6 @@ bool Map::CheckShowPosition(
 
 void Map::CameraUpdate() {
     glm::vec2 cameraPos = m_MainCharacter->GetGamePosition();
-    m_Transform.translation = {0, 0};
-
-    if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
-        m_OverlayRed = false;
-    }
 
     for (auto& tile : m_MapData->GetTilesQueue()) {
         if (CheckShowPosition(
@@ -289,10 +284,11 @@ void Map::TempoUpdate(bool isPlayer) {
         for (auto& enemy : m_MapData->GetEnemyQueue()) {
             enemy->TempoMove();
         }
-        return;
+    } else {
+        m_ShadowRenderDP.clear();
+        m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     }
-    m_ShadowRenderDP.clear();
-    m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
+    CameraUpdate();
 }
 
 void Map::PlayerTrigger() {
@@ -309,7 +305,12 @@ void Map::TempoTrigger(const std::size_t index) {
 
 void Map::Update() {
     std::size_t mapIndex = 0;
-    CameraUpdate();
+    m_Transform.translation = {0, 0};
+
+    if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
+        m_OverlayRed = false;
+    }
+
     m_MiniMap->Update();
     std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
     for (auto& enemy : EnemyQueue) {
