@@ -77,7 +77,11 @@ void Bat::MoveBat() {
     }
     if (m_State == m_Tick - 1) {
         m_NeedToMove = true;
-        m_RandomPool = {0, 1, 2, 3};
+        for (std::size_t i = 0; i < 4; i++) {
+            if (IsVaildMove(GetGamePosition() + m_Movement[i])) {
+                m_RandomPool.push_back(i);
+            }
+        }
         RandomMove();
     }
     m_State++;

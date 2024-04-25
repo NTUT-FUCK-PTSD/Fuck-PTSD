@@ -29,7 +29,8 @@ private:
     std::size_t     m_State = 0;
 
     bool                     m_NeedToMove = false;
-    std::vector<std::size_t> m_RandomPool = {0, 1, 2, 3};
+    std::vector<std::size_t> m_RandomPool = {};
+    std::vector<glm::vec2>   m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     std::random_device                         m_RandomDevice;
     std::mt19937                               m_RandomGenerator;
