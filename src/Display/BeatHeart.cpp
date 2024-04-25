@@ -39,10 +39,13 @@ std::shared_ptr<GameElement> Display::BeatHeart::GetGameElement() {
     return m_GameElement;
 }
 
+float                        Display::BeatHeart::m_ZIndex = 100;
+std::size_t                  Display::BeatHeart::m_AfterSwitchTime = 0;
+std::shared_ptr<SpriteSheet> Display::BeatHeart::m_HeartImage = nullptr;
+glm::vec2 Display::BeatHeart::m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+
 std::shared_ptr<GameElement> Display::BeatHeart::m_GameElement =
     std::make_shared<GameElement>();
-
-std::shared_ptr<SpriteSheet> Display::BeatHeart::m_HeartImage = nullptr;
 
 std::string Display::BeatHeart::m_HeartImagePath = ASSETS_DIR
     "/gui/TEMP_beat_heart.png";
@@ -52,9 +55,3 @@ glm::vec2 Display::BeatHeart::m_Position = {
   -(static_cast<int>(WINDOW_HEIGHT) / 2) + (52 * DUNGEON_SCALE) / 2
       + DUNGEON_TILE_WIDTH
 };
-
-glm::vec2 Display::BeatHeart::m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
-
-float Display::BeatHeart::m_ZIndex = 100;
-
-std::size_t Display::BeatHeart::m_AfterSwitchTime = 0;

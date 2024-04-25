@@ -97,6 +97,19 @@ bool Music::Tempo::IsTempoInRange(
     }
 }
 
+bool Music::Tempo::IsSwitch() {
+    if (m_IsBeatSwitch) {
+        m_IsBeatSwitch = false;
+        return true;
+    }
+
+    return false;
+}
+
+std::size_t Music::Tempo::GetBeatIdx() {
+    return m_CurrentBeatIdx;
+}
+
 std::size_t Music::Tempo::GetBeatTime() {
     return m_BeatList.at(m_CurrentBeatIdx);
 }
@@ -121,6 +134,7 @@ void Music::Tempo::Update(
 
     if (m_BeatList[m_CurrentBeatIdx] + triggerOffset
         < static_cast<std::size_t>(musicPlaytTime)) {
+        m_IsBeatSwitch = true;
         m_CurrentBeatIdx++;
     }
 }
@@ -130,3 +144,5 @@ std::vector<bool>        Music::Tempo::m_IsBeatClick;
 std::size_t              Music::Tempo::m_BeatListLen = 0;
 std::size_t              Music::Tempo::m_CurrentBeatIdx = 0;
 std::size_t              Music::Tempo::m_CurrentBeatLopTimes = 0;
+
+bool Music::Tempo::m_IsBeatSwitch = false;

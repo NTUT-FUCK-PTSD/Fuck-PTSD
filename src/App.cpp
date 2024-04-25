@@ -99,10 +99,15 @@ void App::Update() {
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
-    auto tempoIndex = Music::Tempo::m_CurrentBeatIdx;
-    if (m_BeforeTempoIndex != tempoIndex) {
-        m_BeforeTempoIndex = tempoIndex;
-        m_DungeonMap->TempoTrigger(tempoIndex);
+    // auto tempoIndex = Music::Tempo::m_CurrentBeatIdx;
+    // if (m_BeforeTempoIndex != tempoIndex) {
+    //     m_BeforeTempoIndex = tempoIndex;
+    //     m_DungeonMap->TempoTrigger(tempoIndex);
+    //     Display::BeatHeart::SwitchHeart(100);
+    // }
+
+    if (Music::Tempo::IsSwitch()) {
+        m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
     }
 
@@ -226,10 +231,12 @@ void App::Update() {
 
     // m_MusicSystem->Update();
 
+    // Update the All System
     auto musicTime = Music::Player::GetMusicTime() * 1000;
 
-    Music::Tempo::Update(musicTime, 0u);
     Display::BeatHeart::Update();
+    Music::Tempo::Update(musicTime, 0u);
+
     m_MainCharacter->Update();
     m_Camera->Update();
 }

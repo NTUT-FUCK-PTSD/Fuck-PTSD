@@ -23,10 +23,16 @@ public:
     static void ReadTempoFile(const std::string& path);
 
     [[nodiscard]]
+    static bool IsSwitch();
+
+    [[nodiscard]]
     static bool IsTempoInRange(
         const std::size_t triggerRange,
         const float       time
     );
+
+    [[nodiscard]]
+    static std::size_t GetBeatIdx();
 
     [[nodiscard]]
     static std::size_t GetBeatTime();
@@ -37,11 +43,12 @@ public:
     );
 
     static std::size_t m_BeatListLen;
-    static std::size_t m_CurrentBeatIdx;
 
 private:
     static void LopReset();
 
+    static bool                     m_IsBeatSwitch;
+    static std::size_t              m_CurrentBeatIdx;
     static std::vector<std::size_t> m_BeatList;
     static std::vector<bool>        m_IsBeatClick;
     static std::size_t              m_CurrentBeatLopTimes;
