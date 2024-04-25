@@ -76,12 +76,7 @@ void Animation::UpdateAnimation(const bool isDirection) {
             m_AnimationPosition += move * ratio;
         }
     }
-    float positionY = ToolBoxs::PosToGamePos({0,
-                                              m_AnimationPosition.y
-                                                  - DUNGEON_TILE_WIDTH
-                                                  - DUNGEON_TILE_WIDTH})
-                          .y;
-    m_AnimationZIndex = positionY;
+    m_AnimationZIndex = CalculateZIndex(m_AnimationDestination);
 }
 
 bool Animation::IsAnimating() {
@@ -101,7 +96,11 @@ float Animation::GetAnimationZIndex() {
 }
 
 void Animation::UpdateGamePosition(const glm::vec2& gamePosition) {
+    m_IsAnimating = false;
+    m_IsAnimatingInternal = false;
     m_AnimationPosition = ToolBoxs::GamePostoPos(gamePosition);
+    m_AnimationDestination = m_AnimationPosition;
+    m_AnimationZIndex = CalculateZIndex(m_AnimationPosition);
 }
 
 unsigned long Animation::GetAnimationStartMs() {
@@ -119,4 +118,11 @@ glm::vec2 Animation::GetAnimationDestination() {
 void Animation::SetAnimationStop() {
     m_IsAnimating = false;
     m_IsAnimatingInternal = false;
+}
+
+float Animation::CalculateZIndex(const glm::vec2& position) {
+    return ToolBoxs::PosToGamePos(
+               {0, position.y - DUNGEON_TILE_WIDTH - DUNGEON_TILE_WIDTH}
+    )
+        .y;
 }
