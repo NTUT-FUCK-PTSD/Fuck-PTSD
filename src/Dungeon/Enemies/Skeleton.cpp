@@ -1,5 +1,6 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
+#include "Enemy.h"
 #include "Game/ToolBoxs.h"
 
 namespace Dungeon {
@@ -67,6 +68,8 @@ Enemies::Skeleton::Skeleton(
         SetCoin(4);
         m_CanDropHead = true;
     }
+    m_SkeletonNormalFrames = m_NormalFrames;
+    m_SkeletonShadowFrames = m_ShadowFrames;
 
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
@@ -116,17 +119,17 @@ void Skeleton::Move() {
         }
     }
     m_Attack = !m_Attack;
-}
-void Skeleton::Update() {
     if (m_Attack) {
-        m_SpriteSheet->SetFrames(
-            GetShadow() ? m_ShadowAttackFrames : m_AttackFrames
-        );
+        m_NormalFrames = m_AttackFrames;
+        m_ShadowFrames = m_ShadowAttackFrames;
     } else {
-        m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
+        m_NormalFrames = m_SkeletonNormalFrames;
+        m_ShadowFrames = m_SkeletonShadowFrames;
     }
+    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
+}
 
-    // Collision
+void Skeleton::Update() {
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
         m_Animation->MoveByTime(
@@ -136,17 +139,11 @@ void Skeleton::Update() {
         );
         m_CanMove = false;
     }
+
     m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
 }
-
-void Skeleton::AttackPlayer() {
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        Enemy::AttackPlayer();
-    }
-}
-
 }  // namespace Dungeon::Enemies
