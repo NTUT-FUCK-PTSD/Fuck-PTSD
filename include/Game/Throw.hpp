@@ -19,6 +19,7 @@
 namespace Game {
 class Throw {
 public:
+
     static void ThrowOut(Dungeon::Map* dungeonMap) {
         auto playerPosition = dungeonMap->GetMapData()->GetPlayerPosition();
         auto int_player = static_cast<glm::ivec2>(playerPosition);

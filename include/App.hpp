@@ -9,6 +9,9 @@
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
 
+
+#include "Game/System.h"
+#include "Game/Actions.h"
 class App {
 public:
     enum class State {

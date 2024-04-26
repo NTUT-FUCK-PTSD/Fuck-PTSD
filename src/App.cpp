@@ -76,6 +76,12 @@ void App::Start() {
     // display the tempo heart in music System
     m_Camera->AddUIChild(m_MusicSystem->getGameObject());
 
+    // helper
+    Settings::Helper::Init(m_DungeonMap.get());
+
+    // add tools throw system
+    Game::System::Init(m_DungeonMap.get());
+
     m_CurrentState = State::UPDATE;
 }
 
@@ -94,9 +100,10 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
-        Game::Throw::ThrowOut(m_DungeonMap.get());
+//        Game::Throw::ThrowOut(m_DungeonMap.get());
+        Game::Actions::ThrowOutWeapon();
 
-//         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        //         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
         // m_AniCameraDestination = {0, 0};
         // m_AniPlayerDestination = {0, 0};
 
@@ -113,28 +120,28 @@ void App::Update() {
         //     }
         // }
 
-//        auto b = m_DungeonMap->GetMapData()->GetPlayerPosition();
-//        auto c = m_DungeonMap->GamePostion2MapIndex(b);
-//
-//        auto d = Settings::Helper::GamePosToMapIdx(b);
-//        LOG_INFO("value: {} {}", c, d);
-//        auto t = m_DungeonMap->GamePostion2MapIndex(b);
-//        auto c = m_DungeonMap->GetMapData()->GetTiles(t);
-//        c[0]->SetVisible(false);
+        //        auto b = m_DungeonMap->GetMapData()->GetPlayerPosition();
+        //        auto c = m_DungeonMap->GamePostion2MapIndex(b);
+        //
+        //        auto d = Settings::Helper::GamePosToMapIdx(b);
+        //        LOG_INFO("value: {} {}", c, d);
+        //        auto t = m_DungeonMap->GamePostion2MapIndex(b);
+        //        auto c = m_DungeonMap->GetMapData()->GetTiles(t);
+        //        c[0]->SetVisible(false);
 
-//        const auto size = m_DungeonMap->GetMapData()->GetSize();
-//        for (int i = 0; i < size.y; ++i) {
-//            for (int j = 0; j < size.x; ++j) {
-//                // auto mapIndex = j + i * size.x;
-//                auto b = m_DungeonMap->GetMapData()->IsTilesEmpty(i);
-//
-//                if (!b) {
-//                    LOG_INFO(
-//                        m_DungeonMap->GetMapData()->GetTiles(i)[0]->GetZIndex()
-//                    );
-//                }
-//            }
-//        }
+        //        const auto size = m_DungeonMap->GetMapData()->GetSize();
+        //        for (int i = 0; i < size.y; ++i) {
+        //            for (int j = 0; j < size.x; ++j) {
+        //                // auto mapIndex = j + i * size.x;
+        //                auto b = m_DungeonMap->GetMapData()->IsTilesEmpty(i);
+        //
+        //                if (!b) {
+        //                    LOG_INFO(
+        //                        m_DungeonMap->GetMapData()->GetTiles(i)[0]->GetZIndex()
+        //                    );
+        //                }
+        //            }
+        //        }
     }
 
     // player move
@@ -249,6 +256,7 @@ void App::Update() {
     // LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
     // LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
 
+    Game::System::Update();
     m_MusicSystem->Update();
     m_MainCharacter->Update();
     m_Camera->Update();
