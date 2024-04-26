@@ -110,7 +110,13 @@ const std::map<std::size_t, std::string> DUNGEON_TILETYPES = {
   {123, "conductor_wall_pipe4"}   // NOT IMPLEMENTED
 };
 
-const std::
+const std::unordered_map<std::size_t, std::string> DUNGEON_TOOLTYPE= {
+  {1e6, "weapon_dagger"}
+};
+
+const std::unordered_map<std::size_t, glm::ivec2> DUNGEON_TOOLSIZES = {
+  {static_cast<std::size_t>(1e6), {1, 2}},
+};
 
 const std::map<std::size_t, glm::ivec2> DUNGEON_TILESIZES = {
   {0, {3, 2}},    {1, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},

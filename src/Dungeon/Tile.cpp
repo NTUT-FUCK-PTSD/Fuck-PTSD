@@ -8,7 +8,8 @@ namespace Dungeon {
 Tile::Tile(const s_Tile& u_Tile)
     : m_Tile(u_Tile) {
     if (u_Tile.type >= 1e6) {
-        m_Filepath (ASSETS_DIR "/items/" + )
+        m_Filepath = (ASSETS_DIR "/items/")
+                     + (DUNGEON_TOOLTYPE.find(u_Tile.type)->second) + (".png");
     } else {
         m_Filepath = (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(m_Tile.type)
                      + ".png";
@@ -26,7 +27,11 @@ void Tile::Initialize() {
     m_ZIndex = (m_Tile.y) / 1e2;
     m_SpriteSheet = std::make_shared<Util::SpriteSheet>(m_Filepath);
 
-    m_TileSize = DUNGEON_TILESIZES.at(m_Tile.type);
+    if (m_Tile.type >= 1e6) {
+        m_TileSize = DUNGEON_TOOLSIZES.find(m_Tile.type)->second;
+    } else {
+        m_TileSize = DUNGEON_TILESIZES.at(m_Tile.type);
+    }
     m_ImgSize =
         ToolBoxs::CountImagePixel(m_Filepath, m_TileSize.x, m_TileSize.y);
     m_Drawable = m_SpriteSheet;

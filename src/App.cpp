@@ -68,6 +68,7 @@ void App::Start() {
         ASSETS_DIR "/dungeon/MY DUNGEON.xml",
         1
     );
+
     m_DungeonMap->SetDrawable(std::make_shared<Dungeon::MapHandler>(m_DungeonMap
     ));
     m_Camera->AddChild(m_DungeonMap);
@@ -95,7 +96,7 @@ void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
         Game::Throw::ThrowOut(m_DungeonMap.get());
 
-        // m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+//         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
         // m_AniCameraDestination = {0, 0};
         // m_AniPlayerDestination = {0, 0};
 

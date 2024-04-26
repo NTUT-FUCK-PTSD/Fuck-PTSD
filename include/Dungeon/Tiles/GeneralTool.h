@@ -22,6 +22,14 @@ public:
         }
     };
 
+    explicit GeneralTool(s_Tile u_tile, const bool generalFloor = true)
+        : Tile(u_tile) {
+        m_MagicNumber = 6;
+        if (generalFloor) {
+            UpdateDrawable();
+        }
+    }
+
     ~GeneralTool() override = default;
 
     bool IsWall() override { return false; };

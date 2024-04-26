@@ -25,14 +25,26 @@ public:
         auto translateIdx = Settings::Helper::GamePosToMapIdx(playerPosition);
 
         const auto st =
-            Dungeon::TileFactory::CreateTile(Dungeon::s_Tile{int_player.x, int_player.y, 106, 1, 1, 0});
+            Dungeon::TileFactory::CreateTile(Dungeon::s_Tile{int_player.x, int_player.y, static_cast<std::size_t>(1e6), 0, 1, 0});
 //        auto t = std::make_shared<Dungeon::Tiles::GeneralTool>(
 //            st,
 //            ASSETS_DIR "/items/weapon_dagger.png"
 //        );
 
+        auto a = std::make_shared<Util::Image>(ASSETS_DIR"/items/weapon_dagger.png");
+        auto b = std::make_shared<Util::GameObject>();
+        b->SetDrawable(a);
+        b->SetZIndex(100);
+
+
         dungeonMap->GetMapData()->AddTile(translateIdx, st);
-        LOG_INFO(dungeonMap->GetMapData()->GetTiles(translateIdx).size());
+        LOG_INFO(dungeonMap->GetMapData()->GetTiles(translateIdx)[0]->GetZIndex());
+        dungeonMap->GetMapData()->GetTiles(translateIdx)[0]->AddChild(b);
+//        dungeonMap->GetMapData()->GetTiles(translateIdx)[1]->SetZIndex(1);
+        LOG_INFO(dungeonMap->GetMapData()->GetTiles(translateIdx)[1]->GetZIndex());
+        dungeonMap->CameraUpdate();
+
+
     }
 };
 }  // namespace Game
