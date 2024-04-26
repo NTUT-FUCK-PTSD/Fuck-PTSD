@@ -29,6 +29,8 @@ public:
     void          SetAnimationStop();
 
 private:
+    float CalculateZIndex(const glm::vec2& position);
+
     const std::vector<glm::vec2> m_MoveAnimation = {
       {0, DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
       {DUNGEON_TILE_WIDTH * DUNGEON_SCALE / 7.5f,

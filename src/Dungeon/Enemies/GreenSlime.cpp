@@ -35,8 +35,10 @@ void GreenSlime::Move() {
     m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 0);
 }  // Green_Slime does not move
 void GreenSlime::Update() {
+    m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 }  // namespace Dungeon::Enemies
