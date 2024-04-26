@@ -1,6 +1,6 @@
 #include "Dungeon/Tiles/GeneralFloor.h"
 
-#include "Game/ToolBoxs.h"
+#include "Settings/ToolBoxs.h"
 #include "Settings/Window.hpp"
 
 namespace Dungeon {

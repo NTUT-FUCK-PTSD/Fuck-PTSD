@@ -4,6 +4,8 @@
 
 #include "Dungeon/MapHandler.h"
 
+#include "Game/Throw.hpp"
+
 using namespace tinyxml2;
 
 extern "C" {
@@ -91,6 +93,8 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
+        Game::Throw::ThrowOut(m_DungeonMap.get());
+
         // m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
         // m_AniCameraDestination = {0, 0};
         // m_AniPlayerDestination = {0, 0};
@@ -108,19 +112,28 @@ void App::Update() {
         //     }
         // }
 
-        const auto size = m_DungeonMap->GetMapData()->GetSize();
-        for (int i = 0; i < size.y; ++i) {
-            for (int j = 0; j < size.x; ++j) {
-                // auto mapIndex = j + i * size.x;
-                auto b = m_DungeonMap->GetMapData()->IsTilesEmpty(i);
+//        auto b = m_DungeonMap->GetMapData()->GetPlayerPosition();
+//        auto c = m_DungeonMap->GamePostion2MapIndex(b);
+//
+//        auto d = Settings::Helper::GamePosToMapIdx(b);
+//        LOG_INFO("value: {} {}", c, d);
+//        auto t = m_DungeonMap->GamePostion2MapIndex(b);
+//        auto c = m_DungeonMap->GetMapData()->GetTiles(t);
+//        c[0]->SetVisible(false);
 
-                if (!b) {
-                    LOG_INFO(
-                        m_DungeonMap->GetMapData()->GetTiles(i)[0]->GetZIndex()
-                    );
-                }
-            }
-        }
+//        const auto size = m_DungeonMap->GetMapData()->GetSize();
+//        for (int i = 0; i < size.y; ++i) {
+//            for (int j = 0; j < size.x; ++j) {
+//                // auto mapIndex = j + i * size.x;
+//                auto b = m_DungeonMap->GetMapData()->IsTilesEmpty(i);
+//
+//                if (!b) {
+//                    LOG_INFO(
+//                        m_DungeonMap->GetMapData()->GetTiles(i)[0]->GetZIndex()
+//                    );
+//                }
+//            }
+//        }
     }
 
     // player move

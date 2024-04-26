@@ -1,8 +1,8 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include <glm/fwd.hpp>
 #include "Settings/Window.hpp"
+#include "glm/fwd.hpp"
 
 class Animation final {
 public:

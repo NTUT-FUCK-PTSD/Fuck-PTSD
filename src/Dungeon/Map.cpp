@@ -488,3 +488,6 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
 }
 
 }  // namespace Dungeon
+
+glm::ivec2 Dungeon::Map::m_Size = {0, 0};
+std::unique_ptr<Dungeon::Level> Dungeon::Map::m_Level = nullptr;

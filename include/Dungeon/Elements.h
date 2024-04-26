@@ -110,6 +110,8 @@ const std::map<std::size_t, std::string> DUNGEON_TILETYPES = {
   {123, "conductor_wall_pipe4"}   // NOT IMPLEMENTED
 };
 
+const std::
+
 const std::map<std::size_t, glm::ivec2> DUNGEON_TILESIZES = {
   {0, {3, 2}},    {1, {3, 2}},    {2, {1, 1}},   {3, {3, 1}},
   {4, {3, 1}},    {5, {3, 1}},    {6, {1, 1}},   {7, {3, 1}},

@@ -4,10 +4,10 @@
 #include "pch.hpp"  // IWYU pragma: export
 
 #include "Dungeon/Map.h"
-#include "Game/Camera.h"
 #include "Music/Music.h"
 #include "Player/Player.h"
 #include "Settings/Background.hpp"
+#include "Settings/Camera.h"
 
 class App {
 public:

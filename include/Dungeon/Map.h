@@ -40,6 +40,8 @@ public:
 
     bool IsOverlayRed() const { return m_OverlayRed; }
 
+    static glm::ivec2               m_Size;
+    static std::unique_ptr<Level>   m_Level;
 private:
     bool m_Available;
     void LoadTile();
@@ -62,9 +64,8 @@ private:
 
     const std::size_t        HalfColNumber = DUNGEON_COL_NUMBER / 2;
     const std::size_t        HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
-    std::unique_ptr<Level>   m_Level;
     std::size_t              m_LevelNum;
-    glm::ivec2               m_Size;
+
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;
     std::shared_ptr<Player>  m_MainCharacter;

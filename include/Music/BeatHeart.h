@@ -7,9 +7,9 @@
 
 #include <iostream>
 
-#include "Game/ToolBoxs.h"
 #include "Settings/GameElement.h"
 #include "Settings/SpriteSheet.hpp"
+#include "Settings/ToolBoxs.h"
 #include "Settings/Window.hpp"
 
 namespace Music {

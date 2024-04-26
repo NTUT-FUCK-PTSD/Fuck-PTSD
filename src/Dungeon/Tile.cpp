@@ -7,8 +7,12 @@ namespace Dungeon {
 
 Tile::Tile(const s_Tile& u_Tile)
     : m_Tile(u_Tile) {
-    m_Filepath = (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(m_Tile.type)
-                 + ".png";
+    if (u_Tile.type >= 1e6) {
+        m_Filepath (ASSETS_DIR "/items/" + )
+    } else {
+        m_Filepath = (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(m_Tile.type)
+                     + ".png";
+    }
     Initialize();
 }
 
@@ -81,8 +85,7 @@ void Tile::UpdateTranslation() {
     m_Transform.translation = {
       (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
       -DUNGEON_TILE_WIDTH - (m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE)
-          + (m_MagicNumber / 2.0 * DUNGEON_SCALE)
-    };
+          + (m_MagicNumber / 2.0 * DUNGEON_SCALE)};
 }
 
 void Tile::UpdateDrawable() {
