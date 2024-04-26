@@ -200,5 +200,3 @@ float SimpleMapData::Heuristic(const glm::vec2& start, const glm::vec2& end) {
     return AStar::Heuristic(start, end);
 }
 }  // namespace Dungeon
-
-glm::vec2 Dungeon::SimpleMapData::m_PlayerPosition = {0, 0};

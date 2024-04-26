@@ -8,7 +8,6 @@
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
-#include "Dungeon/Tile.h"
 #include "Player/Player.h"
 
 namespace Dungeon {

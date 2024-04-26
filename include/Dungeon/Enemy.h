@@ -68,6 +68,13 @@ public:
 
     bool GetSeen() const { return m_Seen; }
 
+    glm::vec2 GetPlayerPosition() {
+        return m_SimpleMapData->GetPlayerPosition();
+    }
+    float Heuristic(const glm::vec2& start, const glm::vec2& end) {
+        return m_SimpleMapData->Heuristic(start, end);
+    }
+
 protected:
     virtual void Move() = 0;
 
