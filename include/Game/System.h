@@ -12,7 +12,7 @@ class System final {
 public:
     static void Init(Dungeon::Map *dungeonMap);
 
-    static void AddWeapon(std::shared_ptr<Game::Graphs::IBase> baseType, const std::size_t posposMI);
+    static void AddWeapon(std::shared_ptr<Game::Graphs::IBase> baseType, const std::size_t posMI);
 
     static std::shared_ptr<Util::GameObject> GetGameObject();
 

@@ -99,9 +99,12 @@ void App::Update() {
         m_DungeonMap->TempoTrigger(tempoIndex);
     }
 
+
+
+
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
 //        Game::Throw::ThrowOut(m_DungeonMap.get());
-        Game::Actions::ThrowOutWeapon();
+//        Game::Actions::ThrowOutWeapon();
 
         //         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
         // m_AniCameraDestination = {0, 0};
@@ -144,8 +147,29 @@ void App::Update() {
         //        }
     }
 
+    if (Util::Input::IsKeyDown(Util::Keycode::UP) && Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+        LOG_INFO("Throw Mode");
+        m_ThrowMode = true;
+    }
+
+
+
+    // player throw weapon
+    if (m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W)
+                          || Util::Input::IsKeyDown(Util::Keycode::D)
+                          || Util::Input::IsKeyDown(Util::Keycode::S)
+                          || Util::Input::IsKeyDown(Util::Keycode::A))
+        && m_MusicSystem->TempoTrigger()) {
+        for (const auto& elem: m_MapTableCodeDire) {
+            if (Util::Input::IsKeyDown(elem.first)) {
+                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
+            }
+        }
+        m_ThrowMode = false;
+    }
+
     // player move
-    if ((Util::Input::IsKeyDown(Util::Keycode::W)
+    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W)
          || Util::Input::IsKeyDown(Util::Keycode::D)
          || Util::Input::IsKeyDown(Util::Keycode::S)
          || Util::Input::IsKeyDown(Util::Keycode::A))
@@ -187,6 +211,10 @@ void App::Update() {
                 && m_DungeonMap->GetMapData()->IsPositionPlayerAct(
                     m_MainCharacter->GetGamePosition() + direction[i]
                 )) {
+
+
+
+                // origin mapdata actions
                 playerDestination = m_MainCharacter->GetGamePosition()
                                     + direction[i];
                 m_MainCharacter->SetFaceTo(playerDirection[i]);
@@ -265,3 +293,11 @@ void App::Update() {
 void App::End() {  // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
 }
+
+
+std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
+  {Util::Keycode::W, Player::Direction::UP},
+  {Util::Keycode::D, Player::Direction::RIGHT},
+  {Util::Keycode::S, Player::Direction::DOWN},
+  {Util::Keycode::A, Player::Direction::LEFT},
+};

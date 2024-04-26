@@ -16,14 +16,34 @@
 namespace Game {
 class Actions {
 public:
-    static void ThrowOutWeapon() {
-        auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM();
+    static void ThrowOutWeapon(Dungeon::Map *dungeonMap, const Player::Direction direction) {
+        LOG_INFO("Throw out.");
+
+        // get current player pos
+        const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM();
+
+        // translate direction
+        const auto direMI = Settings::Helper::Direct2MI(direction);
+
+        std::size_t weaponEndMI = 0;
+        auto weaponNextPos = static_cast<glm::ivec2>(playerGP);
+
+        while (true) {
+            if (dungeonMap->GetMapData()->IsPositionWall(weaponNextPos + direMI)) {
+                break;
+            }
+
+            // DOTO:
+            weaponNextPos += direMI;
+        }
+
+        weaponEndMI = Settings::Helper::GamePosToMapIdx(weaponNextPos);
 
         const auto image = std::make_shared<Util::Image>(Config::IMAGE_DAGGER_PATH);
         const auto object = std::make_shared<Graphs::DaggerGameObj>();
         object->SetDrawable(image);
 
-        System::AddWeapon(object, playerMI);
+        System::AddWeapon(object, weaponEndMI);
     };
 };
 }

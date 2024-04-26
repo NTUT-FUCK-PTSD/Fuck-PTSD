@@ -16,7 +16,7 @@ public:
     ~DaggerGameObj() override = default;
 
     void Update() override {
-        LOG_INFO("This is Dagger weapon");
+//        LOG_INFO("This is Dagger weapon");
     };
 };
 }  // namespace Graphs

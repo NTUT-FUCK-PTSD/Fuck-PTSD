@@ -11,6 +11,7 @@
 #include <glm/vec2.hpp>
 
 #include "Dungeon/Map.h"
+#include <exception>
 
 namespace Settings {
 class Helper {
@@ -37,6 +38,17 @@ public:
           playerPos, mapIdx
         };
     };
+
+    inline static glm::ivec2 Direct2MI(Player::Direction direction) {
+                switch (direction) {
+                case Player::Direction::UP: return {0, -1};
+                case Player::Direction::LEFT: return {-1, 0};
+                case Player::Direction::DOWN: return {0, 1};
+                case Player::Direction::RIGHT: return {1,0};
+                case Player::Direction::NONE: throw std::runtime_error("direction can not be none");
+                }
+    }
+
 private:
     static Dungeon::Map* m_DungeonMap;
 };
