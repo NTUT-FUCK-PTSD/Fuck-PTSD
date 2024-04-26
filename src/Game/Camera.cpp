@@ -46,6 +46,19 @@ void Camera::Update() {
     m_Renderer->ClearChildren();
 }
 
+void Camera::SetPosition(const glm::vec2 position) {
+    if (position == m_Position) {
+        return;
+    }
+    if (m_IsShaking) {
+        m_Position = m_OrginalPosition;
+        m_ShakeDuringTimeMs = 0;
+        m_IsShaking = false;
+    }
+
+    m_Animation->MoveByTime(0, position);
+}
+
 void Camera::MoveByTime(
     const unsigned long duringTimeMs,
     const glm::vec2&    destination

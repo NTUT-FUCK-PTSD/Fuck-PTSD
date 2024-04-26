@@ -45,7 +45,7 @@ public:
      */
     void Update();
 
-    void SetPosition(const glm::vec2 position) { m_Position = position; }
+    void SetPosition(const glm::vec2 position);
 
     glm::vec2 GetPosition() { return m_Position; }
 
