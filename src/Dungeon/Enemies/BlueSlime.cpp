@@ -8,9 +8,6 @@ Enemies::BlueSlime::BlueSlime(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     m_NormalFrames = {4, 5, 6, 7};
     m_ShadowFrames = {12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

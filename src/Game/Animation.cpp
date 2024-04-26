@@ -5,13 +5,9 @@
 #include "Game/ToolBoxs.h"
 
 Animation::Animation(const glm::vec2& animationPosition)
-    : m_AnimationPosition(animationPosition) {
-    float positionY = ToolBoxs::PosToGamePos({0,
-                                              m_AnimationPosition.y
-                                                  - DUNGEON_TILE_WIDTH
-                                                  - DUNGEON_TILE_WIDTH})
-                          .y;
-    m_AnimationZIndex = positionY;
+    : m_AnimationDestination(animationPosition),
+      m_AnimationPosition(animationPosition) {
+    m_AnimationZIndex = CalculateZIndex(animationPosition);
 }
 
 void Animation::MoveByTime(
@@ -77,6 +73,7 @@ void Animation::UpdateAnimation(const bool isDirection) {
         }
     }
     m_AnimationZIndex = CalculateZIndex(m_AnimationDestination);
+    LOG_INFO(m_AnimationZIndex);
 }
 
 bool Animation::IsAnimating() {
@@ -121,6 +118,7 @@ void Animation::SetAnimationStop() {
 }
 
 float Animation::CalculateZIndex(const glm::vec2& position) {
+    // Zindex = y+0.33
     return ToolBoxs::PosToGamePos(
                {0, position.y - DUNGEON_TILE_WIDTH - DUNGEON_TILE_WIDTH}
     )

@@ -9,9 +9,6 @@ Enemies::Skeleton::Skeleton(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     if (u_Enemy.type == 3) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};

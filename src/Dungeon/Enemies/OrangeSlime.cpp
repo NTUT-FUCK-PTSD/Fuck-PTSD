@@ -10,9 +10,6 @@ Enemies::OrangeSlime::OrangeSlime(
     : Enemy(u_Enemy, simpleMapData),
       m_RandomGenerator(m_RandomDevice()),
       m_Distribution(0, 3) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

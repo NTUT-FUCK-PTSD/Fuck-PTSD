@@ -9,9 +9,6 @@ Enemies::Bat::Bat(
 )
     : Enemy(u_Enemy, simpleMapData),
       m_RandomGenerator(m_RandomDevice()) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
 

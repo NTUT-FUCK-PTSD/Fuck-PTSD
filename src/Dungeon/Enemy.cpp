@@ -11,13 +11,16 @@ Enemy::Enemy(
 )
     : m_SimpleMapData(simpleMapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
+      m_Animation(
+          std::make_unique<Animation>(ToolBoxs::GamePostoPos(m_GamePosition))
+      ),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
     m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
-    SetZIndex(static_cast<float>(m_GamePosition.y + 0.125f));
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Enemy::SetShadow(const bool shadow) {
