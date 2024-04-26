@@ -22,9 +22,9 @@ void MiniMap::BuildMiniMap() {
             SetVisible(mapIndex, true);
             m_Children[mapIndex]->m_Transform.scale = {m_Scale, m_Scale};
             m_Children[mapIndex]->m_Transform.translation = {
-              static_cast<int>(WINDOW_WIDTH) / 2 - DUNGEON_TILE_WIDTH
+              static_cast<int>(WINDOW_WIDTH / 2) - DUNGEON_TILE_WIDTH
                   - (2 * (m_MapData->GetSize().x - (j + 1))) * m_Scale,
-              -(static_cast<int>(WINDOW_HEIGHT) / 2)
+              -(static_cast<int>(WINDOW_HEIGHT / 2))
                   + (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH)
                   + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale
             };
@@ -36,22 +36,19 @@ void MiniMap::BuildMiniMap() {
 
 void MiniMap::UpdateTileColor(const std::size_t mapIndex) {
     if (!m_MapData->IsTilesEmpty(mapIndex)) {
-        if (m_MapData->GetTileBack(mapIndex)->IsWall()) {
-            if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 102) {
+        if (m_MapData->GetTile(mapIndex)->IsWall()) {
+            if (m_MapData->GetTile(mapIndex)->GetTile().type == 102) {
                 SetColor(mapIndex, CubeColor::gray);
-            } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type
-                       == 107) {
+            } else if (m_MapData->GetTile(mapIndex)->GetTile().type == 107) {
                 SetColor(mapIndex, CubeColor::stone);
-            } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 104
-                       || m_MapData->GetTileBack(mapIndex)->GetTile().type
-                              == 105
-                       || m_MapData->GetTileBack(mapIndex)->GetTile().type
-                              == 110) {
+            } else if (m_MapData->GetTile(mapIndex)->GetTile().type == 104
+                       || m_MapData->GetTile(mapIndex)->GetTile().type == 105
+                       || m_MapData->GetTile(mapIndex)->GetTile().type == 110) {
                 SetColor(mapIndex, CubeColor::metrognome);
             } else {
                 SetColor(mapIndex, CubeColor::wall);
             }
-        } else if (m_MapData->GetTileBack(mapIndex)->IsDoor()) {
+        } else if (m_MapData->GetTile(mapIndex)->IsDoor()) {
             SetColor(mapIndex, CubeColor::green);
         } else {
             SetColor(mapIndex, CubeColor::white);
@@ -89,7 +86,7 @@ void MiniMap::Update() {
             }
             // Update Tiles
             if (!m_MapData->IsTilesEmpty(mapIndex)) {
-                if (!m_MapData->GetTileBack(mapIndex)->GetSeen()) {
+                if (!m_MapData->GetTile(mapIndex)->GetSeen()) {
                     continue;
                 }
             } else {

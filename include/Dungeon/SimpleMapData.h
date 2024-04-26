@@ -43,16 +43,11 @@ public:
     bool IsPositionPlayerAct(const glm::vec2& position) const;
 
     void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
-    void RemoveTile(
-        const std::size_t           position,
-        const std::shared_ptr<Tile> tile
-    );
+    void RemoveTile(const std::size_t position);
     void ClearTiles();
-    void PopBackTile(const std::size_t position);
-    bool IsTilesEmpty(const std::size_t position) const;
-    std::vector<std::shared_ptr<Tile>> GetTiles(const std::size_t position
-    ) const;
-    std::shared_ptr<Tile> GetTileBack(const std::size_t position) const;
+    std::vector<std::shared_ptr<Tile>> GetTiles() const;
+    bool                  IsTilesEmpty(const std::size_t position) const;
+    std::shared_ptr<Tile> GetTile(const std::size_t position) const;
     std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
 
     void SetHasEntity(const std::size_t position, const bool hasEntity);
@@ -63,12 +58,12 @@ protected:
     std::vector<bool> m_HasEntity;
 
 private:
-    glm::ivec2                                      m_LevelIndexMin;
-    glm::ivec2                                      m_LevelIndexMax;
-    glm::ivec2                                      m_Size;
-    std::vector<std::vector<std::shared_ptr<Tile>>> m_Tiles;
-    std::vector<std::shared_ptr<Tile>>              m_TilesQueue;
-    glm::vec2                                       m_PlayerPosition;
+    glm::ivec2                         m_LevelIndexMin;
+    glm::ivec2                         m_LevelIndexMax;
+    glm::ivec2                         m_Size;
+    std::vector<std::shared_ptr<Tile>> m_Tiles;
+    std::vector<std::shared_ptr<Tile>> m_TilesQueue;
+    glm::vec2                          m_PlayerPosition;
 };
 }  // namespace Dungeon
 

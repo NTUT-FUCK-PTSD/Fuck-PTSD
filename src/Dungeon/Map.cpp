@@ -81,20 +81,6 @@ void Map::LoadTile() {
     std::size_t mapIndex = 0, tmpMapIndex = 0;
     for (auto& tile : m_Level->GetTiles()) {
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
-        if (tile.type == 23 || tile.type == 24 || tile.type == 103
-            || tile.type == 106 || tile.type == 111 || tile.type == 118) {
-            m_MapData->AddTile(
-                mapIndex,
-                TileFactory::CreateTile(s_Tile{
-                  tile.x,
-                  tile.y,
-                  0,
-                  tile.zone,
-                  tile.torch,
-                  tile.cracked
-                })
-            );
-        }
         m_MapData->AddTile(mapIndex, TileFactory::CreateTile(tile));
     }
 
@@ -109,7 +95,7 @@ void Map::LoadTile() {
 
             // generate border
             if (!m_MapData->IsTilesEmpty(mapIndex)
-                && m_MapData->GetTileBack(mapIndex)->GetTile().type != 102) {
+                && m_MapData->GetTile(mapIndex)->GetTile().type != 102) {
                 for (auto& dir : m_Direction) {
                     tmpMapIndex = j + dir.x + (i + dir.y) * m_Size.x;
                     if (i + dir.y >= 0 && i + dir.y < m_Size.y && j + dir.x >= 0
@@ -142,7 +128,7 @@ void Map::LoadTile() {
             if ((1 + i >= m_Size.y)
                 || (1 + i >= 0 && m_MapData->IsTilesEmpty(mapIndex + m_Size.x)
                 )) {
-                m_MapData->GetTileBack(mapIndex)->SetCloseDisplayB24(true);
+                m_MapData->GetTile(mapIndex)->SetCloseDisplayB24(true);
             }
         }
     }
@@ -155,23 +141,25 @@ void Map::LoadTile() {
 void Map::DoorUpdate(std::size_t i, std::size_t j) {
     std::size_t mapIndex = j + i * m_Size.x, tmpMapIndex = 0;
     // door direction detection
-    auto tmp = m_MapData->GetTileBack(mapIndex);
+    auto tmp = m_MapData->GetTile(mapIndex);
     if (tmp->GetTile().type == 103 || tmp->GetTile().type == 106
         || tmp->GetTile().type == 111 || tmp->GetTile().type == 118) {
         std::size_t doorCount = 0;
         for (std::size_t k = 2; k < 4; k++) {
             tmpMapIndex = j + m_Direction[k].x
                           + (i + m_Direction[k].y) * m_Size.x;
-            if (j + m_Direction[k].x >= 0 && j + m_Direction[k].x < m_Size.x
-                && i + m_Direction[k].y >= 0 && i + m_Direction[k].y < m_Size.y
+            if (j + m_Direction[k].x >= 0
+                && j + m_Direction[k].x < static_cast<std::size_t>(m_Size.x)
+                && i + m_Direction[k].y >= 0
+                && i + m_Direction[k].y < static_cast<std::size_t>(m_Size.y)
                 && !m_MapData->IsTilesEmpty(tmpMapIndex)
-                && (m_MapData->GetTileBack(tmpMapIndex)->IsWall()
-                    || m_MapData->GetTileBack(tmpMapIndex)->IsDoor())) {
+                && (m_MapData->GetTile(tmpMapIndex)->IsWall()
+                    || m_MapData->GetTile(tmpMapIndex)->IsDoor())) {
                 doorCount++;
             }
         }
         if (doorCount >= 2) {
-            m_MapData->PopBackTile(mapIndex);
+            m_MapData->RemoveTile(mapIndex);
             if (tmp->GetTile().type == 111) {
                 m_MapData->AddTile(
                     mapIndex,
@@ -360,7 +348,7 @@ bool Map::isVaildMove(const glm::ivec2& position) {
     if (m_MapData->IsTilesEmpty(mapIndex)) {
         return false;
     }
-    if (m_MapData->GetTileBack(mapIndex)->IsWall()) {
+    if (m_MapData->GetTile(mapIndex)->IsWall()) {
         return false;
     }
     return true;
@@ -379,7 +367,7 @@ void Map::RemoveEnemy(const std::size_t position) {
 }
 
 void Map::RemoveWall(const std::size_t position) {
-    auto tile = m_MapData->GetTileBack(position)->GetTile();
+    auto tile = m_MapData->GetTile(position)->GetTile();
 
     if (tile.type == 102) {
         return;
@@ -388,22 +376,22 @@ void Map::RemoveWall(const std::size_t position) {
         std::remove(
             m_Children.begin(),
             m_Children.end(),
-            m_MapData->GetTileBack(position)
+            m_MapData->GetTile(position)
         ),
         m_Children.end()
     );
-    m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
+    m_MapData->RemoveTile(position);
     m_MapData->AddTile(
         position,
         TileFactory::CreateTile(
-            s_Tile{tile.x, tile.y, 0, tile.zone, tile.torch, tile.cracked}
+            s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
         )
     );
-    m_Children.push_back(m_MapData->GetTileBack(position));
+    m_Children.push_back(m_MapData->GetTile(position));
 }
 
 void Map::OpenDoor(const std::size_t position) {
-    auto tile = m_MapData->GetTileBack(position)->GetTile();
+    auto tile = m_MapData->GetTile(position)->GetTile();
     auto doorType = tile.type;
     auto gamePosition = glm::vec2(tile.x, tile.y);
 
@@ -413,30 +401,41 @@ void Map::OpenDoor(const std::size_t position) {
             auto tmpMapIndex = GamePostion2MapIndex(tmpPosition);
             if (m_MapData->IsPositionDoor(tmpPosition)
                 && doorType
-                       == m_MapData->GetTileBack(tmpMapIndex)->GetTile().type) {
+                       == m_MapData->GetTile(tmpMapIndex)->GetTile().type) {
                 m_Children.erase(
                     std::remove(
                         m_Children.begin(),
                         m_Children.end(),
-                        m_MapData->GetTileBack(tmpMapIndex)
+                        m_MapData->GetTile(tmpMapIndex)
                     ),
                     m_Children.end()
                 );
-                m_MapData->RemoveTile(
-                    tmpMapIndex,
-                    m_MapData->GetTileBack(tmpMapIndex)
+                m_MapData->RemoveTile(tmpMapIndex);
+                m_MapData->AddTile(
+                    position,
+                    TileFactory::CreateTile(
+                        s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
+                    )
                 );
+                m_Children.push_back(m_MapData->GetTile(position));
             }
         }
         m_Children.erase(
             std::remove(
                 m_Children.begin(),
                 m_Children.end(),
-                m_MapData->GetTileBack(position)
+                m_MapData->GetTile(position)
             ),
             m_Children.end()
         );
-        m_MapData->RemoveTile(position, m_MapData->GetTileBack(position));
+        m_MapData->RemoveTile(position);
+        m_MapData->AddTile(
+            position,
+            TileFactory::CreateTile(
+                s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
+            )
+        );
+        m_Children.push_back(m_MapData->GetTile(position));
     }
 }
 
