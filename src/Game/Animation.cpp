@@ -73,7 +73,6 @@ void Animation::UpdateAnimation(const bool isDirection) {
         }
     }
     m_AnimationZIndex = CalculateZIndex(m_AnimationDestination);
-    LOG_INFO(m_AnimationZIndex);
 }
 
 bool Animation::IsAnimating() {
