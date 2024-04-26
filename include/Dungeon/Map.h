@@ -48,6 +48,9 @@ private:
 
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
+    std::vector<glm::ivec2> m_Direction =
+        {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+
     const std::size_t ALLOW_EXTRA_DRAW = 4;
     bool              CheckShowPosition(
                      const glm::vec2& position1,
@@ -58,6 +61,8 @@ private:
     // use reference to avoid copy
     void EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy);
     bool CanPlayerSeePosition(const glm::vec2& position);
+
+    void DoorUpdate(std::size_t i, std::size_t j);
 
     const std::size_t        HalfColNumber = DUNGEON_COL_NUMBER / 2;
     const std::size_t        HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
