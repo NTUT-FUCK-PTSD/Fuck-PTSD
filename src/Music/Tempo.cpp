@@ -86,7 +86,7 @@ void Music::Tempo::Update() {
 void Music::Tempo::keyBoardClick() {
     m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
 
-    LOG_INFO(m_tempoIndex);
+//    LOG_INFO(m_tempoIndex);
 
     if (m_isWrongTimeClick == false) {
         m_tempoIndex++;
