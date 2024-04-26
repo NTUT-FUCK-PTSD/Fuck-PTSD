@@ -91,9 +91,36 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
-        m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
-        m_AniCameraDestination = {0, 0};
-        m_AniPlayerDestination = {0, 0};
+        // m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        // m_AniCameraDestination = {0, 0};
+        // m_AniPlayerDestination = {0, 0};
+
+        // const auto size = m_DungeonMap->GetMapData()->GetSize();
+        // for (int i = 0; i < size.y; ++i) {
+        //     for (int j = 0; j < size.x; ++j) {
+        //         auto mapIndex = j + i *
+        //         m_DungeonMap->GetMapData()->GetSize().x; auto enemy =
+        //         m_DungeonMap->GetMapData()->GetEnemy(mapIndex);
+
+        //         if (enemy) {
+        //             LOG_INFO(enemy->GetHealth());
+        //         }
+        //     }
+        // }
+
+        const auto size = m_DungeonMap->GetMapData()->GetSize();
+        for (int i = 0; i < size.y; ++i) {
+            for (int j = 0; j < size.x; ++j) {
+                // auto mapIndex = j + i * size.x;
+                auto b = m_DungeonMap->GetMapData()->IsTilesEmpty(i);
+
+                if (!b) {
+                    LOG_INFO(
+                        m_DungeonMap->GetMapData()->GetTiles(i)[0]->GetZIndex()
+                    );
+                }
+            }
+        }
     }
 
     // player move
