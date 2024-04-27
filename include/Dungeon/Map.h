@@ -48,8 +48,25 @@ private:
 
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
-    std::vector<glm::ivec2> m_Direction =
-        {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+    constexpr static const glm::vec2 TOP_LEFT = glm::vec2(-1.0f, -1.0f);
+    constexpr static const glm::vec2 TOP = glm::vec2(0.0f, -1.0f);
+    constexpr static const glm::vec2 TOP_RIGHT = glm::vec2(1.0f, -1.0f);
+    constexpr static const glm::vec2 LEFT = glm::vec2(-1.0f, 0.0f);
+    constexpr static const glm::vec2 RIGHT = glm::vec2(1.0f, 0.0f);
+    constexpr static const glm::vec2 BOTTOM_LEFT = glm::vec2(-1.0f, 1.0f);
+    constexpr static const glm::vec2 BOTTOM = glm::vec2(0.0f, 1.0f);
+    constexpr static const glm::vec2 BOTTOM_RIGHT = glm::vec2(1.0f, 1.0f);
+
+    std::vector<glm::ivec2> m_Direction = {
+      RIGHT,
+      LEFT,
+      BOTTOM,
+      TOP,
+      BOTTOM_RIGHT,
+      TOP_RIGHT,
+      BOTTOM_LEFT,
+      TOP_LEFT
+    };
 
     const std::size_t ALLOW_EXTRA_DRAW = 4;
     bool              CheckShowPosition(
