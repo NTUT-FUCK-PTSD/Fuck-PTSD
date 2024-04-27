@@ -33,6 +33,8 @@ public:
 
     bool GetSeen() const;
 
+    void SetCameraUpdate(bool cameraUpdate);
+
 protected:
     void         UpdateScale();
     virtual void UpdateTranslation();

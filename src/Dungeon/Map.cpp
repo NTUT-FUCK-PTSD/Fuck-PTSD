@@ -258,14 +258,14 @@ void Map::CameraUpdate() {
                 {tile->GetTile().x, tile->GetTile().y},
                 cameraPos
             )) {
-            tile->SetVisible(true);
+            tile->SetCameraUpdate(true);
             if (CanPlayerSeePosition({tile->GetTile().x, tile->GetTile().y})) {
                 tile->SetOverlay(false);
             } else {
                 tile->SetOverlay(true);
             }
         } else {
-            tile->SetVisible(false);
+            tile->SetCameraUpdate(false);
         }
     }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {

@@ -132,6 +132,13 @@ bool Tile::GetSeen() const {
     return m_Seen;
 }
 
+void Tile::SetCameraUpdate(bool cameraUpdate) {
+    SetVisible(cameraUpdate);
+    if (m_Torch) {
+        m_Torch->SetVisible(cameraUpdate);
+    }
+}
+
 void Tile::SetTorch(bool torch) {
     if (!torch) {
         if (m_Torch) {
@@ -157,6 +164,7 @@ void Tile::SetTorch(bool torch) {
     );
     m_Torch->m_Transform.translation.y += DUNGEON_TILE_WIDTH * DUNGEON_SCALE
                                           / 2;
+    m_Torch->SetVisible(false);
     AddChild(m_Torch);
 }
 
