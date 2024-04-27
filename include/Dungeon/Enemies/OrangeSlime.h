@@ -3,6 +3,7 @@
 
 #include <random>
 
+#include "Dungeon/Direction.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -32,7 +33,7 @@ private:
     std::uniform_int_distribution<std::size_t> m_Distribution;
     std::size_t                                m_StartIdx = 0;
 
-    std::vector<glm::vec2> m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    std::vector<glm::vec2> m_Movement = {BOTTOM, RIGHT, TOP, LEFT};
 };
 }  // namespace Enemies
 }  // namespace Dungeon

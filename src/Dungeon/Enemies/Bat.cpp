@@ -1,5 +1,6 @@
 #include "Dungeon/Enemies/Bat.h"
 
+#include "Direction.h"
 #include "Game/ToolBoxs.h"
 
 namespace Dungeon {
@@ -123,19 +124,19 @@ void Bat::RandomMove() {
         switch (m_RandomPool[index]) {
         case 0:
             m_AnimationType = 0;
-            m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1);
+            m_WillMovePosition = GetGamePosition() + TOP;
             break;
         case 1:
             m_AnimationType = 1;
-            m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0);
+            m_WillMovePosition = GetGamePosition() + RIGHT;
             break;
         case 2:
             m_AnimationType = 2;
-            m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
+            m_WillMovePosition = GetGamePosition() + BOTTOM;
             break;
         case 3:
             m_AnimationType = 3;
-            m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
+            m_WillMovePosition = GetGamePosition() + LEFT;
             break;
         }
         if (IsVaildMove(m_WillMovePosition)) {

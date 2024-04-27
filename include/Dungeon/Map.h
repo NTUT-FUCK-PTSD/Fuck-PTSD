@@ -3,11 +3,12 @@
 
 #include "Util/GameObject.hpp"
 
-#include "Camera.h"
+#include "Dungeon/Direction.h"
 #include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
+#include "Game/Camera.h"
 #include "Player/Player.h"
 
 namespace Dungeon {
@@ -47,15 +48,6 @@ private:
     void TempoUpdate(bool isPlayer);
 
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-
-    constexpr static const glm::vec2 TOP_LEFT = glm::vec2(-1.0f, -1.0f);
-    constexpr static const glm::vec2 TOP = glm::vec2(0.0f, -1.0f);
-    constexpr static const glm::vec2 TOP_RIGHT = glm::vec2(1.0f, -1.0f);
-    constexpr static const glm::vec2 LEFT = glm::vec2(-1.0f, 0.0f);
-    constexpr static const glm::vec2 RIGHT = glm::vec2(1.0f, 0.0f);
-    constexpr static const glm::vec2 BOTTOM_LEFT = glm::vec2(-1.0f, 1.0f);
-    constexpr static const glm::vec2 BOTTOM = glm::vec2(0.0f, 1.0f);
-    constexpr static const glm::vec2 BOTTOM_RIGHT = glm::vec2(1.0f, 1.0f);
 
     std::vector<glm::ivec2> m_Direction = {
       RIGHT,
