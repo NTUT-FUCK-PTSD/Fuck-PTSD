@@ -106,3 +106,7 @@ void SpriteSheet::Update() {
 void SpriteSheet::SetAlpha(const Uint8 alpha) {
     m_SpriteSheet->SetAlpha(alpha);
 }
+
+void SpriteSheet::SetColorMod(const SDL_Color color) {
+    m_SpriteSheet->SetColorMod(color);
+}
