@@ -1,5 +1,7 @@
 #include "Dungeon/Tile.h"
+#include <memory>
 
+#include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
 #include "ToolBoxs.h"
 
@@ -27,6 +29,7 @@ void Tile::Initialize() {
         ToolBoxs::CountImagePixel(m_Filepath, m_TileSize.x, m_TileSize.y);
     m_Drawable = m_SpriteSheet;
     m_SpriteSheet->SetColorMod({0, 0, 0, 255});
+    SetTorch(m_Tile.torch == 1);
 }
 
 void Tile::SetIndex(std::size_t index) {
@@ -56,7 +59,7 @@ void Tile::SetOverlay(bool visible) {
             return;
         }
     }
-    if (m_IsOverlay == visible) {
+    if (GetOverlay() == visible) {
         return;
     }
     m_IsOverlay = visible;
@@ -64,6 +67,9 @@ void Tile::SetOverlay(bool visible) {
         (visible == true ? SDL_Color({100, 100, 100, 255})
                          : SDL_Color({255, 255, 255, 255}));
     m_SpriteSheet->SetColorMod(color);
+    if (m_Torch) {
+        m_TorchAnimation->SetColorMod(color);
+    }
 }
 std::size_t Tile::GetIndex() {
     return m_Index;
@@ -71,6 +77,10 @@ std::size_t Tile::GetIndex() {
 
 s_Tile Tile::GetTile() {
     return m_Tile;
+}
+
+bool Tile::GetOverlay() {
+    return m_IsOverlay;
 }
 
 void Tile::UpdateScale() {
@@ -120,6 +130,34 @@ void Tile::UpdateDrawable() {
 
 bool Tile::GetSeen() const {
     return m_Seen;
+}
+
+void Tile::SetTorch(bool torch) {
+    if (!torch) {
+        if (m_Torch) {
+            RemoveChild(m_Torch);
+            m_Torch.reset();
+        }
+        return;
+    }
+    m_TorchAnimation = std::make_shared<SpriteSheet>(
+        ASSETS_DIR "/level/wall_torch.png",
+        glm::vec2(12, 26),
+        std::vector<std::size_t>{0, 1, 2, 3},
+        true,
+        100,
+        true,
+        100
+    );
+    m_TorchAnimation->SetColorMod({0, 0, 0, 255});
+    m_Torch = std::make_shared<GameObject>(m_TorchAnimation, m_ZIndex + 0.1f);
+    m_Torch->m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    m_Torch->m_Transform.translation = ToolBoxs::GamePostoPos(
+        {m_Tile.x, m_Tile.y}
+    );
+    m_Torch->m_Transform.translation.y += DUNGEON_TILE_WIDTH * DUNGEON_SCALE
+                                          / 2;
+    AddChild(m_Torch);
 }
 
 }  // namespace Dungeon
