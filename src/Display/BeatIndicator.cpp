@@ -16,7 +16,7 @@ void Display::BeatIndicator::Init() {
 
     // count tempo number
     std::size_t counter = 0;
-    for (counter; counter < Music::Tempo::GetBeatListLen(); ++counter) {
+    for (; counter < Music::Tempo::GetBeatListLen(); ++counter) {
         if (Music::Tempo::GetBeatValue(counter) > 2000) {
             break;
         }
