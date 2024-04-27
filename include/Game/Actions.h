@@ -48,6 +48,7 @@ public:
 
                 // Bug: Remove enemy, but still show on window
                 a->SetVisible(false);
+                
                 mapdata->RemoveEnemy(weaponEndMI);
             };
 
