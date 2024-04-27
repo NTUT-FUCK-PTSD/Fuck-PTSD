@@ -1,6 +1,6 @@
 #include "Dungeon/Enemies/GreenSlime.h"
 
-#include "Game/ToolBoxs.h"
+#include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
 Enemies::GreenSlime::GreenSlime(

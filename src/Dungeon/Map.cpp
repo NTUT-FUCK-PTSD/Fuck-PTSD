@@ -244,26 +244,26 @@ void Map::CameraUpdate() {
                 {tile->GetTile().x, tile->GetTile().y},
                 cameraPos
             )) {
-            tile->SetVisible(true);
+            tile->SetCameraUpdate(true);
             if (CanPlayerSeePosition({tile->GetTile().x, tile->GetTile().y})) {
                 tile->SetOverlay(false);
             } else {
                 tile->SetOverlay(true);
             }
         } else {
-            tile->SetVisible(false);
+            tile->SetCameraUpdate(false);
         }
     }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
-            enemy->SetVisible(true);
+            enemy->SetCameraUpdate(true);
             if (CanPlayerSeePosition(enemy->GetGamePosition())) {
                 enemy->SetShadow(false);
             } else {
                 enemy->SetShadow(true);
             }
         } else {
-            enemy->SetVisible(false);
+            enemy->SetCameraUpdate(false);
         }
     }
 }
@@ -510,3 +510,6 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
 }
 
 }  // namespace Dungeon
+
+glm::ivec2                      Dungeon::Map::m_Size = {0, 0};
+std::unique_ptr<Dungeon::Level> Dungeon::Map::m_Level = nullptr;

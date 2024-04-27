@@ -4,7 +4,7 @@
 #include "Util/GameObject.hpp"
 
 #include "Dungeon/SimpleMapData.h"
-#include "Game/Animation.h"
+#include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
 
@@ -74,6 +74,8 @@ public:
     float Heuristic(const glm::vec2& start, const glm::vec2& end) {
         return m_SimpleMapData->Heuristic(start, end);
     }
+
+    void SetCameraUpdate(bool cameraUpdate);
 
 protected:
     virtual void Move() = 0;

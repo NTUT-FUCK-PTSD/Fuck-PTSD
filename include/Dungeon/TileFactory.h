@@ -7,6 +7,7 @@
 #include "Dungeon/Tiles/FloorTar.h"
 #include "Dungeon/Tiles/GeneralDoor.h"
 #include "Dungeon/Tiles/GeneralFloor.h"
+#include "Dungeon/Tiles/GeneralTool.h"
 #include "Dungeon/Tiles/GeneralWall.h"
 #include "Dungeon/Tiles/NecroDancerStage.h"
 #include "Dungeon/Tiles/WireDoor.h"
@@ -42,6 +43,8 @@ public:
                 return std::make_shared<Tiles::ConductorWallPipe>(u_Tile);
             }
             return std::make_shared<Tiles::GeneralWall>(u_Tile);
+        } else if (u_Tile.type >= 1e6) {
+            return std::make_shared<Tiles::GeneralTool>(u_Tile);
         }
         LOG_ERROR(
             "TileFactory::CreateTile: Unknown tile type: "

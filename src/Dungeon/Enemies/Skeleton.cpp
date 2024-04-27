@@ -1,7 +1,7 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
 #include "Enemy.h"
-#include "Game/ToolBoxs.h"
+#include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(

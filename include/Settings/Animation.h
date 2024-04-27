@@ -1,7 +1,6 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include <glm/fwd.hpp>
 #include "Settings/Window.hpp"
 
 class Animation final {

@@ -1,13 +1,36 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include "Background.hpp"
+#include "Camera.h"
+#include "Core/Context.hpp"
+#include "Core/Drawable.hpp"
+#include "Display/BeatHeart.h"
+#include "Display/BeatIndicator.h"
+#include "Dungeon/Map.h"
+#include "Music/Player.h"
+#include "Music/Tempo.h"
+#include "Player.h"
+#include "Player/Equipment/Shovel.h"
+#include "Player/Items/Coin.h"
+#include "Player/Items/Diamond.h"
+#include "Player/Items/Heart.h"
+#include "Player/Items/Tools.h"
+#include "SpriteSheet.hpp"
+#include "Util/Text.hpp"
+
 #include "pch.hpp"  // IWYU pragma: export
 
 #include "Dungeon/Map.h"
-#include "Game/Camera.h"
-#include "Music/Music.h"
 #include "Player/Player.h"
 #include "Settings/Background.hpp"
+#include "Settings/Camera.h"
+
+#include "Game/Actions.h"
+#include "Game/System.h"
+#include "Music/Player.h"
+
+#include "Util/Keycode.hpp"
 
 class App {
 public:
@@ -35,10 +58,11 @@ private:
     std::shared_ptr<Background> m_Background;
     bool                        m_FirstTime = true;
     bool                        m_IsMainMenu = true;
+    bool                        m_ThrowMode = false;
 
     // music
-    std::shared_ptr<Music::Player> m_MusicSystem =
-        std::make_shared<Music::Player>();
+    // std::shared_ptr<Music::Player> m_MusicSystem =
+    //     std::make_shared<Music::Player>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
@@ -57,6 +81,8 @@ private:
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
     std::size_t                   m_BeforeTempoIndex = 0;
     std::size_t                   m_TempoIndex = 0;
+
+    static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
 };
 
 #endif

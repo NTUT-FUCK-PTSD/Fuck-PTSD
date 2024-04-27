@@ -1,12 +1,14 @@
 #ifndef TILE_H
 #define TILE_H
 
+#include <memory>
 #include <string>
-
-#include "Dungeon/Elements.h"
 
 #include "Util/GameObject.hpp"
 #include "Util/SpriteSheet.hpp"
+
+#include "Dungeon/Elements.h"
+#include "Settings/SpriteSheet.hpp"
 
 namespace Dungeon {
 
@@ -23,7 +25,7 @@ public:
     virtual void SetOverlay(bool visible);
     std::size_t  GetIndex();
     s_Tile       GetTile();
-    bool         GetVisible();
+    bool         GetOverlay();
     virtual bool IsWall() = 0;
     virtual bool IsDoor() = 0;
 
@@ -31,9 +33,13 @@ public:
 
     bool GetSeen() const;
 
+    void SetCameraUpdate(bool cameraUpdate);
+
 protected:
     void         UpdateScale();
     virtual void UpdateTranslation();
+
+    void SetTorch(bool torch);
 
     s_Tile      m_Tile;
     std::string m_Filepath;
@@ -48,6 +54,9 @@ protected:
 
     bool m_Seen = false;
     bool m_IsOverlay = true;
+
+    std::shared_ptr<SpriteSheet>      m_TorchAnimation;
+    std::shared_ptr<Util::GameObject> m_Torch;
 };
 }  // namespace Dungeon
 

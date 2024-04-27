@@ -152,6 +152,8 @@ public:
 
     void SetAlpha(const Uint8 alpha);
 
+    void SetColorMod(const SDL_Color& color);
+
 private:
     /**
      * @brief Update the animation frames.
