@@ -103,48 +103,18 @@ void App::Update() {
 
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
-//        Game::Throw::ThrowOut(m_DungeonMap.get());
-//        Game::Actions::ThrowOutWeapon();
+
+        auto i = std::make_shared<Util::Image>(ASSETS_DIR"/items/test.png");
+        auto a = std::make_shared<Util::GameObject>();
+        a->m_Transform.scale = {0.5, 0.5};
+        a->SetDrawable(i);
+        a->SetZIndex(100);
+        m_Camera->AddUIChild(a);
 
         //         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
         // m_AniCameraDestination = {0, 0};
         // m_AniPlayerDestination = {0, 0};
 
-        // const auto size = m_DungeonMap->GetMapData()->GetSize();
-        // for (int i = 0; i < size.y; ++i) {
-        //     for (int j = 0; j < size.x; ++j) {
-        //         auto mapIndex = j + i *
-        //         m_DungeonMap->GetMapData()->GetSize().x; auto enemy =
-        //         m_DungeonMap->GetMapData()->GetEnemy(mapIndex);
-
-        //         if (enemy) {
-        //             LOG_INFO(enemy->GetHealth());
-        //         }
-        //     }
-        // }
-
-        //        auto b = m_DungeonMap->GetMapData()->GetPlayerPosition();
-        //        auto c = m_DungeonMap->GamePostion2MapIndex(b);
-        //
-        //        auto d = Settings::Helper::GamePosToMapIdx(b);
-        //        LOG_INFO("value: {} {}", c, d);
-        //        auto t = m_DungeonMap->GamePostion2MapIndex(b);
-        //        auto c = m_DungeonMap->GetMapData()->GetTiles(t);
-        //        c[0]->SetVisible(false);
-
-        //        const auto size = m_DungeonMap->GetMapData()->GetSize();
-        //        for (int i = 0; i < size.y; ++i) {
-        //            for (int j = 0; j < size.x; ++j) {
-        //                // auto mapIndex = j + i * size.x;
-        //                auto b = m_DungeonMap->GetMapData()->IsTilesEmpty(i);
-        //
-        //                if (!b) {
-        //                    LOG_INFO(
-        //                        m_DungeonMap->GetMapData()->GetTiles(i)[0]->GetZIndex()
-        //                    );
-        //                }
-        //            }
-        //        }
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::UP) && Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
@@ -166,6 +136,13 @@ void App::Update() {
             }
         }
         m_ThrowMode = false;
+
+        // test
+        m_MainCharacter
+            ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
+        m_MainCharacter->Update();
+        m_Camera->MoveByTime(200, m_AniCameraDestination);
+        m_DungeonMap->PlayerTrigger();
     }
 
     // player move
@@ -278,11 +255,6 @@ void App::Update() {
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-
-    //    LOG_INFO(rusty_extern_c_integer());
-
-    // LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
-    // LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
 
     Game::System::Update();
     m_MusicSystem->Update();
