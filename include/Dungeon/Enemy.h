@@ -101,6 +101,8 @@ public:
 
     bool GetSeen() const { return m_Seen; }
 
+    void SetCameraUpdate(bool cameraUpdate);
+
 protected:
     virtual void Move() = 0;
 

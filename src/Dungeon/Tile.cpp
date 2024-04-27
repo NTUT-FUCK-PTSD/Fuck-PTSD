@@ -134,8 +134,8 @@ bool Tile::GetSeen() const {
 
 void Tile::SetCameraUpdate(bool cameraUpdate) {
     SetVisible(cameraUpdate);
-    if (m_Torch) {
-        m_Torch->SetVisible(cameraUpdate);
+    for (auto& child : m_Children) {
+        child->SetVisible(cameraUpdate);
     }
 }
 

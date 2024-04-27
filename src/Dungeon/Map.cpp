@@ -270,14 +270,14 @@ void Map::CameraUpdate() {
     }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
-            enemy->SetVisible(true);
+            enemy->SetCameraUpdate(true);
             if (CanPlayerSeePosition(enemy->GetGamePosition())) {
                 enemy->SetShadow(false);
             } else {
                 enemy->SetShadow(true);
             }
         } else {
-            enemy->SetVisible(false);
+            enemy->SetCameraUpdate(false);
         }
     }
 }
