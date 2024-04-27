@@ -22,7 +22,16 @@ void App::Start() {
         m_Camera->AddChild(m_Background->GetGameElement());
 
         // play main background music
-        m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg", true);
+        // m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg",
+        // true);
+        Music::Player::Init();
+        Music::Player::PlayMusic(
+            ASSETS_DIR "/music/intro_onlyMusic.ogg",
+            true,
+            0.5f,
+            1.0f
+        );
+
         //    m_MusicSystem->skipToTargetTime(118.2f);
     }
 
@@ -31,7 +40,7 @@ void App::Start() {
         m_IsMainMenu = false;
     }
 
-    m_MusicSystem->Update();
+    // m_MusicSystem->Update();
     m_Camera->Update();
 
     if (Util::Input::IfExit()) {
@@ -41,13 +50,15 @@ void App::Start() {
         return;
     }
     // play lobby music
-    //    m_MusicSystem->playMusic(ASSETS_DIR"/music/lobby.ogg", true);
-    //    m_MusicSystem->readTempoFile(ASSETS_DIR"/music/lobby.txt");
-    //    m_MusicSystem->setSpeed(1.2);
+    Music::Player::StopMusic();
+    Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
+    Music::Player::SetVolume(0.1f);
+
+    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
 
     // play zone1 leve1
-    m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
-    m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
+    // m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
+    // m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
 
     // remove background
     m_Camera->RemoveChild(m_Background->GetGameElement());
@@ -73,8 +84,14 @@ void App::Start() {
     ));
     m_Camera->AddChild(m_DungeonMap);
 
+    Display::BeatHeart::Init();
+    m_Camera->AddUIChild(Display::BeatHeart::GetGameElement());
+
+    Display::BeatIndicator::Init();
+    m_Camera->AddUIChild(Display::BeatIndicator::GetGameElement());
+
     // display the tempo heart in music System
-    m_Camera->AddUIChild(m_MusicSystem->getGameObject());
+    // m_Camera->AddUIChild(m_MusicSystem->getGameObject());
 
     // helper
     Settings::Helper::Init(m_DungeonMap.get());
@@ -82,21 +99,31 @@ void App::Start() {
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
 
+    Music::Player::Init();
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+    // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 
-    // add coin
-    //    if (Util::Input::IsKeyDown(Util::Keycode::B)) {
-    //        m_Coin->plusCoinNumber(10);
-    //        m_Diamond->plusDiamondNumber(10);
-    //    }
-    auto tempoIndex = m_MusicSystem->getTempoIndex();
-    if (m_BeforeTempoIndex != tempoIndex) {
-        m_BeforeTempoIndex = tempoIndex;
-        m_DungeonMap->TempoTrigger(tempoIndex);
+    // auto tempoIndex = Music::Tempo::m_CurrentBeatIdx;
+    // if (m_BeforeTempoIndex != tempoIndex) {
+    //     m_BeforeTempoIndex = tempoIndex;
+    //     m_DungeonMap->TempoTrigger(tempoIndex);
+    //     Display::BeatHeart::SwitchHeart(100);
+    // }
+
+    auto musicTime =
+        static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
+        % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
+
+    if (Music::Tempo::IsSwitch()) {
+        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
+        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
+        m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
+        Display::BeatHeart::SwitchHeart(100);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -124,7 +151,11 @@ void App::Update() {
             || Util::Input::IsKeyDown(Util::Keycode::D)
             || Util::Input::IsKeyDown(Util::Keycode::S)
             || Util::Input::IsKeyDown(Util::Keycode::A))
-        && m_MusicSystem->TempoTrigger()) {
+        && Music::Tempo::IsTempoInRange(
+            200,
+            musicTime,
+            Music::Player::LoopCounter()
+        )) {
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
                 Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
@@ -141,11 +172,7 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W)
-         || Util::Input::IsKeyDown(Util::Keycode::D)
-         || Util::Input::IsKeyDown(Util::Keycode::S)
-         || Util::Input::IsKeyDown(Util::Keycode::A))
-        && m_MusicSystem->TempoTrigger()) {
+    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -235,7 +262,7 @@ void App::Update() {
         || Util::Input::IsKeyDown(Util::Keycode::D)
         || Util::Input::IsKeyDown(Util::Keycode::S)
         || Util::Input::IsKeyDown(Util::Keycode::A)) {
-        m_MusicSystem->clickEvent();
+        // m_MusicSystem->clickEvent();
     }
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) || Util::Input::IfExit()) {
@@ -243,7 +270,10 @@ void App::Update() {
     }
 
     Game::System::Update();
-    m_MusicSystem->Update();
+    Display::BeatHeart::Update();
+    Display::BeatIndicator::Update();
+    Music::Tempo::Update(musicTime, 0u, Music::Player::LoopCounter());
+
     m_MainCharacter->Update();
     m_Camera->Update();
 }

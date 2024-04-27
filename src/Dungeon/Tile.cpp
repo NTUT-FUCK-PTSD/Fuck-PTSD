@@ -24,7 +24,7 @@ Tile::Tile(const s_Tile& u_Tile, const std::string& filepath)
 }
 
 void Tile::Initialize() {
-    m_ZIndex = (m_Tile.y) / 1e2;
+    m_ZIndex = m_Tile.y;
     m_SpriteSheet = std::make_shared<Util::SpriteSheet>(m_Filepath);
 
     if (m_Tile.type >= 1e6) {
