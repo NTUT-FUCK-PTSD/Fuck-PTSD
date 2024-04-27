@@ -44,12 +44,12 @@ public:
 
             // DOTO:
             if (mapdata->IsHasEntity(weaponEndMI)) {
-                auto a = mapdata->GetEnemy(weaponEndMI);
+                //                auto a = mapdata->GetEnemy(weaponEndMI);
 
                 // Bug: Remove enemy, but still show on window
-                a->SetVisible(false);
-                
-                mapdata->RemoveEnemy(weaponEndMI);
+                //                a->SetVisible(false);
+                dungeonMap->RemoveEnemy(weaponEndMI);
+                //                mapdata->RemoveEnemy(weaponEndMI);
             };
 
             weaponNextPos += direMI;

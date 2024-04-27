@@ -4,8 +4,6 @@
 
 #include "Dungeon/MapHandler.h"
 
-#include "Game/Throw.hpp"
-
 using namespace tinyxml2;
 
 extern "C" {
