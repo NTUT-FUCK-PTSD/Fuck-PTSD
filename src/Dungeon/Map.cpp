@@ -258,26 +258,26 @@ void Map::CameraUpdate() {
                 {tile->GetTile().x, tile->GetTile().y},
                 cameraPos
             )) {
-            tile->SetVisible(true);
+            tile->SetCameraUpdate(true);
             if (CanPlayerSeePosition({tile->GetTile().x, tile->GetTile().y})) {
                 tile->SetOverlay(false);
             } else {
                 tile->SetOverlay(true);
             }
         } else {
-            tile->SetVisible(false);
+            tile->SetCameraUpdate(false);
         }
     }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
-            enemy->SetVisible(true);
+            enemy->SetCameraUpdate(true);
             if (CanPlayerSeePosition(enemy->GetGamePosition())) {
                 enemy->SetShadow(false);
             } else {
                 enemy->SetShadow(true);
             }
         } else {
-            enemy->SetVisible(false);
+            enemy->SetCameraUpdate(false);
         }
     }
 }
@@ -391,7 +391,7 @@ void Map::RemoveWall(const std::size_t position) {
     m_MapData->AddTile(
         position,
         TileFactory::CreateTile(
-            s_Tile{tile.x, tile.y, 0, tile.zone, tile.torch, tile.cracked}
+            s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
         )
     );
     m_Children.push_back(m_MapData->GetTileBack(position));
