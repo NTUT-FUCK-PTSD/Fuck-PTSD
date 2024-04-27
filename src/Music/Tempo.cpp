@@ -100,6 +100,7 @@ bool Music::Tempo::IsTempoInRange(
         m_IsBeatClick.at(dis) = true;
         return true;
     }
+    return false;
 }
 
 bool Music::Tempo::IsSwitch() {
