@@ -8,6 +8,7 @@ void Music::Player::PlayMusic(const std::string& path, bool loop) {
     // play main background music
 
     m_Wav->load(path.c_str());
+    m_Wav->setLooping(loop);
     m_MusicHandle = m_MusicSystem.play(*m_Wav);
 }
 
