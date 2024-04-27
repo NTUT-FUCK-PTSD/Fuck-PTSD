@@ -90,9 +90,7 @@ void Map::LoadTile() {
             if (m_MapData->IsTilesEmpty(mapIndex)) {
                 continue;
             }
-
             DoorUpdate(i, j);
-
             // generate border
             if (!m_MapData->IsTilesEmpty(mapIndex)
                 && m_MapData->GetTile(mapIndex)->GetTile().type != 102) {
@@ -109,8 +107,7 @@ void Map::LoadTile() {
                               102,
                               0,
                               0,
-                              0
-                            })
+                              0})
                         );
                     }
                 }

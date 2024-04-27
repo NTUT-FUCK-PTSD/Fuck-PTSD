@@ -74,7 +74,6 @@ public:
     float Heuristic(const glm::vec2& start, const glm::vec2& end) {
         return m_SimpleMapData->Heuristic(start, end);
     }
-
     void SetCameraUpdate(bool cameraUpdate);
 
 protected:

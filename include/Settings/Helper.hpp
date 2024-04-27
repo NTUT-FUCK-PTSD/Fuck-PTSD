@@ -7,10 +7,10 @@
 
 #include <array>
 #include <cstddef>
+#include <exception>
 
 #include <glm/vec2.hpp>
 
-#include <exception>
 #include "Dungeon/Map.h"
 
 namespace Settings {
