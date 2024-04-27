@@ -1,11 +1,29 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include "Background.hpp"
+#include "Camera.h"
+#include "Core/Context.hpp"
+#include "Core/Drawable.hpp"
+#include "Display/BeatHeart.h"
+#include "Display/BeatIndicator.h"
+#include "Dungeon/Map.h"
+#include "Music/Player.h"
+#include "Music/Tempo.h"
+#include "Player.h"
+#include "Player/Equipment/Shovel.h"
+#include "Player/Items/Coin.h"
+#include "Player/Items/Diamond.h"
+#include "Player/Items/Heart.h"
+#include "Player/Items/Tools.h"
+#include "SpriteSheet.hpp"
+#include "Util/Text.hpp"
+
 #include "pch.hpp"  // IWYU pragma: export
 
 #include "Dungeon/Map.h"
 #include "Game/Camera.h"
-#include "Music/Music.h"
+// #include "Music/Music.h"
 #include "Player/Player.h"
 #include "Settings/Background.hpp"
 
@@ -37,8 +55,8 @@ private:
     bool                        m_IsMainMenu = true;
 
     // music
-    std::shared_ptr<Music::Player> m_MusicSystem =
-        std::make_shared<Music::Player>();
+    // std::shared_ptr<Music::Player> m_MusicSystem =
+    //     std::make_shared<Music::Player>();
 
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};

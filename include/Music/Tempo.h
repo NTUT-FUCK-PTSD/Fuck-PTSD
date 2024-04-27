@@ -1,72 +1,66 @@
-//
-// Created by adven on 2024/3/27.
-//
+#ifndef TEMPO_H
+#define TEMPO_H
 
-#ifndef FUCK_PTSD_TEMPO_H
-#define FUCK_PTSD_TEMPO_H
-
+#include <exception>
 #include <fstream>
-#include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
 
 #include "Util/Logger.hpp"
 
+#include "Helper.h"
+
 namespace Music {
-class Tempo final {
+class Tempo {
 public:
+    // constructor
     explicit Tempo();
-    ~Tempo();
 
-    // must read one line in file, it not be '\n'
-    void readTempoFile(const std::string& txtFilePath);
+    // destructor
+    virtual ~Tempo() = default;
 
-    bool canBeClick();
+    static void ReadTempoFile(const std::string& path);
 
-    void keyBoardClick();
+    [[nodiscard]]
+    static bool IsSwitch();
 
-    std::size_t getTempo();
-    std::size_t getTempoIndex() const;
-
-    void setMusicSpeed(float speed) { m_MusicSpeed = speed; };
-    void setShowBeat(bool state) { isShowHeartBeat = state; };
-    void setRange(std::size_t range) { m_range = range; };
-    void setOffset(int16_t offset) { m_offset = offset; };
-
-    void setMusicCurrentTime(std::size_t time) {
-        m_duringTime = time + m_offset;
-    };
-    void Update();
-
-    std::vector<std::size_t> GetTempoTriggerList();
-
-protected:
-    void UpdateTime();
-    void UpdateTempoIndex();
-
-private:
-    std::vector<std::size_t> txtToVector(
-        const std::string& line,
-        const char         splitChar
+    [[nodiscard]]
+    static bool IsTempoInRange(
+        const std::size_t triggerRange,
+        const std::size_t time,
+        const std::size_t MusicLoopCounter
     );
 
-    float m_MusicSpeed = 1.0f;
+    [[nodiscard]]
+    static std::size_t GetBeatIdx();
 
-    bool        isShowHeartBeat = false;
-    bool        m_isWrongTimeClick = false;
-    std::size_t m_punishTimes = 0;
+    [[nodiscard]]
+    static std::size_t GetBeatTime();
 
-    std::size_t m_duringTime = 0;
-    std::size_t m_range = 500;
-    int16_t     m_offset = 0;  // (ms)
+    [[nodiscard]]
+    static std::size_t GetBeatValue(std::size_t idx);
 
-    std::size_t              m_currentTempoTime = 0;
-    std::size_t              m_tempoIndex = 0;
-    std::size_t              m_currentTempoIndex = 0;
-    std::size_t              m_tempoListLength = 0;
-    std::vector<std::size_t> m_tempoList;
+    [[nodiscard]]
+    static std::size_t GetBeatListLen();
+
+    static void Update(
+        const std::size_t musicPlaytTime,
+        const std::size_t triggerOffset,
+        const std::size_t MusicLoopCounter
+    );
+
+    static std::size_t m_BeatListLen;
+
+private:
+    static void LopReset();
+
+    static bool                     m_IsBeatSwitch;
+    static std::size_t              m_CurrentBeatIdx;
+    static std::vector<std::size_t> m_BeatList;
+    static std::vector<bool>        m_IsBeatClick;
+    static std::size_t              m_CurrentBeatLopTimes;
 };
 }  // namespace Music
 
-#endif  // FUCK_PTSD_TEMPO_H
+#endif  // TEMPO_H

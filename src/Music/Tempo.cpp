@@ -1,15 +1,17 @@
-//
-// Created by adven on 2024/3/27.
-//
 #include "Music/Tempo.h"
-#include "Util/Logger.hpp"
 
-Music::Tempo::Tempo() {}
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
-Music::Tempo::~Tempo() {}
+#include "Music/Player.h"
 
-void Music::Tempo::readTempoFile(const std::string& txtFilePath) {
-    std::ifstream txtTempoFile(txtFilePath);
+// TODO: OUT of Range
+
+void Music::Tempo::ReadTempoFile(const std::string& path) {
+    // read tempo file
+
+    std::ifstream txtTempoFile(path);
 
     if (!txtTempoFile.is_open()) {
         LOG_ERROR("fuck it can not open this file");
@@ -19,137 +21,148 @@ void Music::Tempo::readTempoFile(const std::string& txtFilePath) {
     std::string line;
     std::getline(txtTempoFile, line);
 
-    m_tempoList = txtToVector(line, ',');
+    // m_tempoList = txtToVector(line, ',');
+
+    // translate string that tempo file to int vector
+    std::stringstream        ss(line);
+    std::string              item;
+    std::size_t              transform = 0;
+    std::vector<std::size_t> elems;
+    while (std::getline(ss, item, ',')) {
+        transform = std::stoi(item);
+        elems.push_back(std::move(transform));
+    }
+
+    LOG_ERROR("hello");
+
+    if (elems.empty()) {
+        // throw std::exception("tempo list is empty");
+        return;
+    }
+
+    // save to class member
+    m_BeatListLen = elems.size();
+    m_IsBeatClick = std::vector<bool>(m_BeatListLen, false);
+    m_BeatList = std::move(elems);
 
     // 关闭文件流
     txtTempoFile.close();
 }
 
-std::vector<std::size_t> Music::Tempo::txtToVector(
-    const std::string& line,
-    const char         splitChar
+bool Music::Tempo::IsTempoInRange(
+    const std::size_t triggerRange,
+    const std::size_t time,
+    const std::size_t MusicLoopCounter
 ) {
-    std::stringstream        ss(line);
-    std::string              item;
-    std::size_t              transform = 0;
-    std::vector<std::size_t> elems;
-    while (std::getline(ss, item, splitChar)) {
-        transform = std::stoi(item);
-        elems.push_back(std::move(transform));
+    // TODO: //
+    if (m_CurrentBeatLopTimes != MusicLoopCounter) {
+        m_CurrentBeatLopTimes = MusicLoopCounter;
+        LopReset();
     }
 
-    m_tempoListLength = elems.size();
-    return elems;
-}
+    auto time_int = static_cast<std::size_t>(time);
+    if (time_int > m_BeatList.back()) {
+        return false;
+    }
 
-// bool Music::Tempo::canBeClick() {
-//     const std::size_t tempoIndex = m_tempoIndex;
-//
-//     const std::size_t triggerLower = m_tempoList[tempoIndex] - m_range;
-//     const std::size_t triggerUpper = m_tempoList[tempoIndex] + m_range;
-//
-//     // if yes = true, no = false;
-//     return m_duringTime >= triggerLower && m_duringTime <= triggerUpper;
-// }
+    auto [isOnTempo, BeforeTempo, AfterTempo] =
+        Helper::BinarySearch(m_BeatList, time_int);
 
-bool Music::Tempo::canBeClick() {
-    auto tempoIndex = m_tempoIndex + m_punishTimes;
+    if (isOnTempo) {
+        return true;
+    }
 
-    //    if (m_isWrongTimeClick == true) {
-    //        tempoIndex -= 1;
-    //    }
+    if (BeforeTempo < 0 || AfterTempo >= m_BeatListLen - 1) {
+        return false;
+    }
 
-    //    LOG_INFO(m_tempoList[tempoIndex]);
-    //    LOG_DEBUG(m_duringTime);
+    const auto BeforeTempoTime = m_BeatList.at(BeforeTempo);
+    const auto AfterTempoTime = m_BeatList.at(AfterTempo);
+    if (BeforeTempoTime + triggerRange <= time
+        || AfterTempoTime - triggerRange >= time
+        || m_IsBeatClick.at(BeforeTempo) || m_IsBeatClick.at(AfterTempo)) {
+        return false;
+    }
 
-    if (m_duringTime >= (m_tempoList[tempoIndex] - m_range) * m_MusicSpeed
-        && m_duringTime <= (m_tempoList[tempoIndex] + m_range) * m_MusicSpeed) {
+    const auto& v = m_BeatList;
+    if (BeforeTempoTime + triggerRange >= time) {
+        auto it = std::find(v.begin(), v.end(), BeforeTempoTime);
+
+        auto dis = std::distance(v.begin(), it);
+        m_IsBeatClick.at(dis) = true;
+        return true;
+    }
+
+    if (AfterTempoTime - triggerRange <= time) {
+        auto it = std::find(v.begin(), v.end(), AfterTempoTime);
+
+        auto dis = std::distance(v.begin(), it);
+        m_IsBeatClick.at(dis) = true;
         return true;
     }
     return false;
 }
 
-std::size_t Music::Tempo::getTempo() {
-    return m_tempoList.empty() ? 0 : m_currentTempoTime;
-};
-
-void Music::Tempo::Update() {
-    m_currentTempoTime = m_tempoList.empty()
-                             ? 0
-                             : m_tempoList[m_currentTempoIndex] * m_MusicSpeed;
-
-    //    LOG_INFO(m_currentTempoIndex);
-    UpdateTempoIndex();
-    UpdateTime();
-}
-
-void Music::Tempo::keyBoardClick() {
-    m_punishTimes = m_punishTimes < 1 ? m_punishTimes + 1 : m_punishTimes;
-
-    LOG_INFO(m_tempoIndex);
-
-    if (m_isWrongTimeClick == false) {
-        m_tempoIndex++;
+bool Music::Tempo::IsSwitch() {
+    if (m_IsBeatSwitch) {
+        m_IsBeatSwitch = false;
+        return true;
     }
 
-    m_isWrongTimeClick = true;
-};
+    return false;
+}
 
-void Music::Tempo::UpdateTime() {
-    if (m_tempoList.empty()) {
+std::size_t Music::Tempo::GetBeatIdx() {
+    return m_CurrentBeatIdx;
+}
+
+std::size_t Music::Tempo::GetBeatTime() {
+    return m_BeatList.at(m_CurrentBeatIdx);
+}
+
+void Music::Tempo::LopReset() {
+    m_CurrentBeatIdx = 0;
+    m_IsBeatClick = std::vector<bool>(m_BeatListLen, false);
+}
+
+std::size_t Music::Tempo::GetBeatValue(std::size_t idx) {
+    const auto beatIdx = idx % m_BeatListLen;
+    return m_BeatList.at(beatIdx);
+}
+
+std::size_t Music::Tempo::GetBeatListLen() {
+    return m_BeatListLen;
+}
+
+void Music::Tempo::Update(
+    const std::size_t musicPlaytTime,
+    const std::size_t triggerOffset,
+    const std::size_t MusicLoopCounter
+) {
+    if (m_CurrentBeatLopTimes != MusicLoopCounter) {
+        m_CurrentBeatLopTimes = MusicLoopCounter;
+        LopReset();
+    }
+
+    if (m_CurrentBeatIdx == m_BeatList.size() - 1) {
         return;
     }
 
-    // song of looping end time, the bug
-    if (m_tempoIndex == 0 && m_duringTime > 5000) {
+    if (m_BeatList.back() < musicPlaytTime) {
         return;
+        throw std::runtime_error("out of range");
     }
 
-    //    LOG_INFO(m_isWrongTimeClick);
-
-    // getTempo return value
-    if (m_duringTime
-            >= (m_tempoList[m_currentTempoIndex] - m_range) * m_MusicSpeed
-        && m_duringTime
-               <= (m_tempoList[m_currentTempoIndex] + m_range) * m_MusicSpeed) {
-        return;
+    if (m_BeatList.at(m_CurrentBeatIdx) + triggerOffset < musicPlaytTime) {
+        m_IsBeatSwitch = true;
+        m_CurrentBeatIdx++;
     }
-
-    m_currentTempoIndex++;
-    m_isWrongTimeClick = false;
-
-    if (m_duringTime >= (m_tempoList[m_tempoIndex] - m_range) * m_MusicSpeed
-        && m_duringTime
-               <= (m_tempoList[m_tempoIndex] + m_range) * m_MusicSpeed) {
-        return;
-    } else if (m_duringTime
-                   <= (m_tempoList[m_tempoIndex + 1] - m_range) * m_MusicSpeed
-               && m_duringTime <= (m_tempoList[m_tempoIndex + 1] + m_range)
-                                      * m_MusicSpeed) {
-        return;
-    }
-
-    m_punishTimes = m_punishTimes == 0 ? m_punishTimes : m_punishTimes - 1;
-    m_tempoIndex++;
-
-    //    if (isShowHeartBeat) {
-    //        LOG_DEBUG(m_punishTimes);
-    //        LOG_INFO(m_duringTime);
-    //        LOG_INFO(m_currentTempoTime);
-    //    }
 }
 
-void Music::Tempo::UpdateTempoIndex() {
-    m_tempoIndex = m_tempoIndex + 1 >= m_tempoListLength ? 0 : m_tempoIndex;
-    m_currentTempoIndex = m_currentTempoIndex + 1 >= m_tempoListLength
-                              ? 0
-                              : m_currentTempoIndex;
-}
+std::vector<std::size_t> Music::Tempo::m_BeatList;
+std::vector<bool>        Music::Tempo::m_IsBeatClick;
+std::size_t              Music::Tempo::m_BeatListLen = 0;
+std::size_t              Music::Tempo::m_CurrentBeatIdx = 0;
+std::size_t              Music::Tempo::m_CurrentBeatLopTimes = 0;
 
-std::size_t Music::Tempo::getTempoIndex() const {
-    return m_currentTempoIndex;
-}
-
-std::vector<std::size_t> Music::Tempo::GetTempoTriggerList() {
-    return m_tempoList;
-}
+bool Music::Tempo::m_IsBeatSwitch = false;
