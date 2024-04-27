@@ -2,13 +2,13 @@
 
 #include <algorithm>
 #include <queue>
-#include <unordered_set>
 
 namespace Dungeon {
 std::vector<glm::ivec2> AStar::FindPath(
     const glm::ivec2&                    start,
     const glm::ivec2&                    end,
-    const std::shared_ptr<SimpleMapData> mapData
+    const std::shared_ptr<SimpleMapData> mapData,
+    float                                maxDistance
 ) {
     std::vector<glm::ivec2> path;
     std::vector<glm::ivec2> directions = {
@@ -42,6 +42,9 @@ std::vector<glm::ivec2> AStar::FindPath(
 
     while (!frontier.empty()) {
         std::pair<float, glm::ivec2> current = frontier.top();
+        if (maxDistance > 0 && current.first > maxDistance) {
+            break;
+        }
         frontier.pop();
         if (Heuristic(current.second, end)
             < Heuristic(lastminPath.second, end)) {

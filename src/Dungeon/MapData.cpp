@@ -79,7 +79,7 @@ bool MapData::EnemyCompare(
         return false;
     }
 
-    return Heuristic(GetPlayerPosition(), lhs->GetGamePosition())
-           < Heuristic(GetPlayerPosition(), rhs->GetGamePosition());
+    return lhs->Heuristic(lhs->GetPlayerPosition(), lhs->GetGamePosition())
+           < rhs->Heuristic(rhs->GetPlayerPosition(), rhs->GetGamePosition());
 }
 }  // namespace Dungeon

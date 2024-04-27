@@ -3,7 +3,7 @@
 namespace Dungeon {
 namespace Tiles {
 WireDoor::WireDoor(const s_Tile& u_Tile)
-    : GeneralDoorFront(u_Tile, (ASSETS_DIR "/level/door_front.png"), false) {
+    : GeneralDoor(u_Tile, (ASSETS_DIR "/level/door_front.png"), false) {
     UpdateDrawable();
 }
 }  // namespace Tiles

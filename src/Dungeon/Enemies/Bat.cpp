@@ -1,5 +1,8 @@
 #include "Dungeon/Enemies/Bat.h"
 
+#include "Direction.h"
+#include "Settings/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::Bat::Bat(
     const s_Enemy&                       u_Enemy,
@@ -7,9 +10,6 @@ Enemies::Bat::Bat(
 )
     : Enemy(u_Enemy, simpleMapData),
       m_RandomGenerator(m_RandomDevice()) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
 
@@ -75,7 +75,11 @@ void Bat::MoveBat() {
     }
     if (m_State == m_Tick - 1) {
         m_NeedToMove = true;
-        m_RandomPool = {0, 1, 2, 3};
+        for (std::size_t i = 0; i < 4; i++) {
+            if (IsVaildMove(GetGamePosition() + m_Movement[i])) {
+                m_RandomPool.push_back(i);
+            }
+        }
         RandomMove();
     }
     m_State++;
@@ -84,10 +88,8 @@ void Bat::Update() {
     // Collision
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition)
-        );
+        m_Animation
+            ->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 4);
         m_NeedToMove = false;
         m_CanMove = false;
     }
@@ -96,7 +98,7 @@ void Bat::Update() {
     // }
 
     // Update animation
-    m_Animation->UpdateAnimation(false);
+    m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
@@ -120,20 +122,31 @@ void Bat::RandomMove() {
             }
         );
         switch (m_RandomPool[index]) {
-        case 0: m_WillMovePosition = GetGamePosition() + glm::vec2(0, 1); break;
-        case 1:
-            m_WillMovePosition = GetGamePosition() + glm::vec2(0, -1);
+        case 0:
+            m_AnimationType = 0;
+            m_WillMovePosition = GetGamePosition() + TOP;
             break;
-        case 2: m_WillMovePosition = GetGamePosition() + glm::vec2(1, 0); break;
+        case 1:
+            m_AnimationType = 1;
+            m_WillMovePosition = GetGamePosition() + RIGHT;
+            break;
+        case 2:
+            m_AnimationType = 2;
+            m_WillMovePosition = GetGamePosition() + BOTTOM;
+            break;
         case 3:
-            m_WillMovePosition = GetGamePosition() + glm::vec2(-1, 0);
+            m_AnimationType = 3;
+            m_WillMovePosition = GetGamePosition() + LEFT;
             break;
         }
         if (IsVaildMove(m_WillMovePosition)) {
+            UpdateFace();
+            // Check if player is in the next position
             if (m_WillMovePosition == GetPlayerPosition()) {
                 AttackPlayer();
                 return;
             }
+            // Move to the next position
             m_SimpleMapData->SetHasEntity(
                 GamePostion2MapIndex(GetGamePosition()),
                 false
@@ -142,12 +155,8 @@ void Bat::RandomMove() {
                 GamePostion2MapIndex(m_WillMovePosition),
                 true
             );
+            // notify can move
             m_CanMove = true;
-            if (m_RandomPool[index] == 2) {
-                SetFace(true);
-            } else if (m_RandomPool[index] == 3) {
-                SetFace(false);
-            }
             return;
         } else {
             m_CanMove = false;
@@ -155,4 +164,13 @@ void Bat::RandomMove() {
         m_RandomPool.erase(m_RandomPool.begin() + index);
     }
 }
+
+void Bat::UpdateFace() {
+    if (m_AnimationType == 1) {
+        SetFace(true);
+    } else if (m_AnimationType == 3) {
+        SetFace(false);
+    }
+}
+
 }  // namespace Dungeon::Enemies

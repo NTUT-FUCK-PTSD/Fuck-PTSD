@@ -1,6 +1,7 @@
 #include "Dungeon/Enemies/Ghost.h"
 
 #include "Dungeon/AStar.h"
+#include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
@@ -8,9 +9,6 @@ Enemies::Ghost::Ghost(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     m_NormalFrames = {0, 1};
     m_ShadowFrames = {2, 3};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -28,6 +26,9 @@ Enemies::Ghost::Ghost(
     SetHealth(2);  // 1 heart
     SetDamage(1);  // 0.5 heart
     SetCoin(2);
+
+    m_LastDistance =
+        Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
 }
 }  // namespace Dungeon
 
@@ -67,6 +68,18 @@ void Ghost::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
+            if (direction.x > 0) {
+                SetFace(false);
+                m_AnimationType = 1;
+            } else if (direction.x < 0) {
+                SetFace(true);
+                m_AnimationType = 3;
+            } else if (direction.y > 0) {
+                m_AnimationType = 0;
+            } else if (direction.y < 0) {
+                m_AnimationType = 2;
+            }
+
             if (m_WillMovePosition == GetPlayerPosition()) {
                 AttackPlayer();
                 return;
@@ -80,11 +93,7 @@ void Ghost::Move() {
                 GamePostion2MapIndex(m_WillMovePosition),
                 true
             );
-            if (direction.x > 0) {
-                SetFace(false);
-            } else if (direction.x < 0) {
-                SetFace(true);
-            }
+            tmp -= 1;
         } else {
             m_CanMove = false;
         }
@@ -94,13 +103,11 @@ void Ghost::Update() {
     // Collision
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition)
-        );
+        m_Animation
+            ->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 4);
         m_CanMove = false;
     }
-    m_Animation->UpdateAnimation(false);
+    m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }

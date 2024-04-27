@@ -5,8 +5,7 @@
 #include "Dungeon/Tiles/DoorMetalFront.h"
 #include "Dungeon/Tiles/DoorMetalSide.h"
 #include "Dungeon/Tiles/FloorTar.h"
-#include "Dungeon/Tiles/GeneralDoorFront.h"
-#include "Dungeon/Tiles/GeneralDoorSide.h"
+#include "Dungeon/Tiles/GeneralDoor.h"
 #include "Dungeon/Tiles/GeneralFloor.h"
 #include "Dungeon/Tiles/GeneralTool.h"
 #include "Dungeon/Tiles/GeneralWall.h"
@@ -26,13 +25,14 @@ public:
             }
             return std::make_shared<Tiles::GeneralFloor>(u_Tile);
         } else if (u_Tile.type >= 50 && u_Tile.type <= 52) {
+            // side door
             if (u_Tile.type == 52) {
                 return std::make_shared<Tiles::DoorMetalSide>(u_Tile);
             }
-            return std::make_shared<Tiles::GeneralDoorSide>(u_Tile);
+            return std::make_shared<Tiles::GeneralDoor>(u_Tile);
         } else if (u_Tile.type >= 100 && u_Tile.type <= 123) {
             if (u_Tile.type == 103 || u_Tile.type == 106) {
-                return std::make_shared<Tiles::GeneralDoorFront>(u_Tile);
+                return std::make_shared<Tiles::GeneralDoor>(u_Tile);
             } else if (u_Tile.type == 111) {
                 return std::make_shared<Tiles::DoorMetalFront>(u_Tile);
             } else if (u_Tile.type >= 112 && u_Tile.type <= 117) {

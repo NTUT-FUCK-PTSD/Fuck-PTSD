@@ -1,14 +1,14 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
+#include "Enemy.h"
+#include "Settings/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
     const s_Enemy&                       u_Enemy,
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     if (u_Enemy.type == 3) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};
@@ -65,6 +65,8 @@ Enemies::Skeleton::Skeleton(
         SetCoin(4);
         m_CanDropHead = true;
     }
+    m_SkeletonNormalFrames = m_NormalFrames;
+    m_SkeletonShadowFrames = m_ShadowFrames;
 
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
@@ -80,20 +82,7 @@ void Skeleton::Move() {
         auto direction = m_WillMovePosition - GetGamePosition();
 
         if (IsVaildMove(m_WillMovePosition)) {
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                m_Attack = !m_Attack;
-                return;
-            }
-            m_CanMove = true;
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(GetGamePosition()),
-                false
-            );
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(m_WillMovePosition),
-                true
-            );
+            // Set Animation
             if (direction.x > 0) {
                 SetFace(false);
                 m_AnimationType = 1;
@@ -105,22 +94,33 @@ void Skeleton::Move() {
             } else if (direction.y < 0) {
                 m_AnimationType = 2;
             }
+            // Check if player is in the next position
+            if (m_WillMovePosition == GetPlayerPosition()) {
+                AttackPlayer();
+                m_Attack = !m_Attack;
+                UpdateProperties();
+                return;
+            }
+            // Set the new position
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(GetGamePosition()),
+                false
+            );
+            m_SimpleMapData->SetHasEntity(
+                GamePostion2MapIndex(m_WillMovePosition),
+                true
+            );
+            // notify the map that the entity is moving
+            m_CanMove = true;
         } else {
             m_CanMove = false;
         }
     }
     m_Attack = !m_Attack;
+    UpdateProperties();
 }
-void Skeleton::Update() {
-    if (m_Attack) {
-        m_SpriteSheet->SetFrames(
-            GetShadow() ? m_ShadowAttackFrames : m_AttackFrames
-        );
-    } else {
-        m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
-    }
 
-    // Collision
+void Skeleton::Update() {
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
         m_Animation->MoveByTime(
@@ -130,6 +130,7 @@ void Skeleton::Update() {
         );
         m_CanMove = false;
     }
+
     m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
@@ -137,11 +138,14 @@ void Skeleton::Update() {
     SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
-void Skeleton::AttackPlayer() {
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        m_AnimationType = 0;
-        Enemy::AttackPlayer();
+void Skeleton::UpdateProperties() {
+    if (m_Attack) {
+        m_NormalFrames = m_AttackFrames;
+        m_ShadowFrames = m_ShadowAttackFrames;
+    } else {
+        m_NormalFrames = m_SkeletonNormalFrames;
+        m_ShadowFrames = m_SkeletonShadowFrames;
     }
+    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
 }
-
 }  // namespace Dungeon::Enemies

@@ -1,14 +1,13 @@
 #include "Dungeon/Enemies/BlueSlime.h"
 
+#include "Settings/ToolBoxs.h"
+
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(
     const s_Enemy&                       u_Enemy,
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : Enemy(u_Enemy, simpleMapData) {
-    m_Animation = std::make_unique<Animation>(
-        ToolBoxs::GamePostoPos(GetGamePosition())
-    );
     m_NormalFrames = {4, 5, 6, 7};
     m_ShadowFrames = {12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -36,7 +35,6 @@ Enemies::BlueSlime::BlueSlime(
 
 namespace Dungeon::Enemies {
 void BlueSlime::Move() {
-    m_NeedToMove = false;
     if (m_State > 3) {
         m_State = 0;
     }
@@ -46,18 +44,16 @@ void BlueSlime::Move() {
         } else {
             m_WillMovePosition = m_InitPosition;
         }
-        m_NeedToMove = true;
-        m_AnimationType = 0;
     } else if (m_State == 3) {
         if (GetGamePosition() == m_InitPosition) {
             m_WillMovePosition = m_InitPosition + m_Move;
         } else {
             m_WillMovePosition = m_InitPosition;
         }
-        m_NeedToMove = true;
-        m_AnimationType = 2;
     }
     if (IsVaildMove(m_WillMovePosition)) {
+        auto direction = m_WillMovePosition - GetGamePosition();
+        UpdateAnimationType(direction);
         if (m_WillMovePosition == GetPlayerPosition()) {
             AttackPlayer();
             m_State++;
@@ -75,6 +71,7 @@ void BlueSlime::Move() {
     }
     m_State++;
 }
+
 void BlueSlime::Update() {
     if (m_CanMove && !m_Animation->IsAnimating()) {
         SetGamePosition(m_WillMovePosition);
@@ -83,7 +80,6 @@ void BlueSlime::Update() {
             ToolBoxs::GamePostoPos(m_WillMovePosition),
             m_AnimationType
         );
-        m_NeedToMove = false;
         m_CanMove = false;
     }
 
@@ -92,13 +88,5 @@ void BlueSlime::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
-}
-
-void BlueSlime::AttackPlayer() {
-    if (GetPlayerPosition() == m_WillMovePosition) {
-        m_NeedToMove = false;
-        m_AnimationType = 0;
-        Enemy::AttackPlayer();
-    }
 }
 }  // namespace Dungeon::Enemies

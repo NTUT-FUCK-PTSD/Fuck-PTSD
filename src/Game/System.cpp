@@ -14,9 +14,7 @@ void Game::System::AddWeapon(
 ) {
     m_IBaseList.push_back(baseType);
 
-    const auto& tile = m_DungeonMap->GetMapData()->GetTiles(posMI);
-    const auto  tileBottom = tile.size() - 1;
-    const auto& object = tile[tileBottom];
+    const auto& object = m_DungeonMap->GetMapData()->GetTile(posMI);
 
     baseType->m_Transform.translation = object->GetTransform().translation;
     baseType->MI = posMI;
