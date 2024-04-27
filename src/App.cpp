@@ -99,8 +99,6 @@ void App::Start() {
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
 
-    Music::Player::Init();
-
     m_CurrentState = State::UPDATE;
 }
 
@@ -120,8 +118,8 @@ void App::Update() {
         % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 
     if (Music::Tempo::IsSwitch()) {
-        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
-        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
+        //        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
+        //        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
     }
@@ -152,7 +150,7 @@ void App::Update() {
             || Util::Input::IsKeyDown(Util::Keycode::S)
             || Util::Input::IsKeyDown(Util::Keycode::A))
         && Music::Tempo::IsTempoInRange(
-            200,
+            500,
             musicTime,
             Music::Player::LoopCounter()
         )) {
