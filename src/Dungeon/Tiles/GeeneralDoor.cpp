@@ -30,7 +30,6 @@ void GeneralDoor::init(const bool general) {
         s_Tile({m_Tile.x, m_Tile.y, 0, m_Tile.zone, 0, m_Tile.cracked}),
         true
     );
-    m_Floor->SetOverlay(false);
     AddChild(m_Floor);
 }
 

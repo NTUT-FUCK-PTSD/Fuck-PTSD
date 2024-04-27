@@ -100,7 +100,8 @@ void Tile::UpdateTranslation() {
     m_Transform.translation = {
       (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
       -DUNGEON_TILE_WIDTH - (m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE)
-          + (m_MagicNumber / 2.0 * DUNGEON_SCALE)};
+          + (m_MagicNumber / 2.0 * DUNGEON_SCALE)
+    };
 }
 
 void Tile::UpdateDrawable() {
