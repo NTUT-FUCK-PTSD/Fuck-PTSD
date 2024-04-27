@@ -136,12 +136,4 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
         child->SetVisible(cameraUpdate);
     }
 }
-
-void Enemy::SetCameraUpdate(bool cameraUpdate) {
-    SetVisible(cameraUpdate);
-    for (auto& child : m_Children) {
-        child->SetVisible(cameraUpdate);
-    }
-}
-
 }  // namespace Dungeon
