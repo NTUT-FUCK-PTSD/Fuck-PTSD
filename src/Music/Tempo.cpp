@@ -108,7 +108,6 @@ bool Music::Tempo::IsSwitch() {
         m_IsBeatSwitch = false;
         return true;
     }
-
     return false;
 }
 

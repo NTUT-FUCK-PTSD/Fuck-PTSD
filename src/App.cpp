@@ -77,6 +77,7 @@ void App::Start() {
         ASSETS_DIR "/dungeon/MY DUNGEON.xml",
         1
     );
+
     m_DungeonMap->SetDrawable(std::make_shared<Dungeon::MapHandler>(m_DungeonMap
     ));
     m_Camera->AddChild(m_DungeonMap);
@@ -89,6 +90,12 @@ void App::Start() {
 
     // display the tempo heart in music System
     // m_Camera->AddUIChild(m_MusicSystem->getGameObject());
+
+    // helper
+    Settings::Helper::Init(m_DungeonMap.get());
+
+    // add tools throw system
+    Game::System::Init(m_DungeonMap.get());
 
     m_CurrentState = State::UPDATE;
 }
@@ -109,28 +116,59 @@ void App::Update() {
         % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 
     if (Music::Tempo::IsSwitch()) {
-        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
-        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
+        //        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
+        //        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
-        m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
-        m_AniCameraDestination = {0, 0};
-        m_AniPlayerDestination = {0, 0};
+        auto i = std::make_shared<Util::Image>(ASSETS_DIR "/items/test.png");
+        auto a = std::make_shared<Util::GameObject>();
+        a->m_Transform.scale = {0.5, 0.5};
+        a->SetDrawable(i);
+        a->SetZIndex(100);
+        m_Camera->AddUIChild(a);
+
+        //         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        // m_AniCameraDestination = {0, 0};
+        // m_AniPlayerDestination = {0, 0};
     }
 
-    // player move
-    if ((Util::Input::IsKeyDown(Util::Keycode::W)
-         || Util::Input::IsKeyDown(Util::Keycode::D)
-         || Util::Input::IsKeyDown(Util::Keycode::S)
-         || Util::Input::IsKeyDown(Util::Keycode::A))
+    if (Util::Input::IsKeyDown(Util::Keycode::UP)
+        && Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+        LOG_INFO("Throw Mode");
+        m_ThrowMode = true;
+    }
+
+    // player throw weapon
+    if (m_ThrowMode
+        && (Util::Input::IsKeyDown(Util::Keycode::W)
+            || Util::Input::IsKeyDown(Util::Keycode::D)
+            || Util::Input::IsKeyDown(Util::Keycode::S)
+            || Util::Input::IsKeyDown(Util::Keycode::A))
         && Music::Tempo::IsTempoInRange(
             500,
             musicTime,
             Music::Player::LoopCounter()
         )) {
+        for (const auto& elem : m_MapTableCodeDire) {
+            if (Util::Input::IsKeyDown(elem.first)) {
+                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
+            }
+        }
+        m_ThrowMode = false;
+
+        // test
+        m_MainCharacter
+            ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
+        m_MainCharacter->Update();
+        m_Camera->MoveByTime(200, m_AniCameraDestination);
+        m_DungeonMap->PlayerTrigger();
+    }
+
+    // player move
+    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -140,34 +178,31 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D
-        };
+          Util::Keycode::D};
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT
-        };
+          Player::Direction::RIGHT};
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
                 && m_DungeonMap->GetMapData()->IsPositionPlayerAct(
                     m_MainCharacter->GetGamePosition() + direction[i]
                 )) {
+                // origin mapdata actions
                 playerDestination = m_MainCharacter->GetGamePosition()
                                     + direction[i];
                 m_MainCharacter->SetFaceTo(playerDirection[i]);
@@ -204,12 +239,10 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                    };
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y
-                    };
+                      m_AniCameraDestination.y + aniCameraDirection[i].y};
                 }
             }
         }
@@ -232,17 +265,7 @@ void App::Update() {
         m_CurrentState = State::END;
     }
 
-    //    LOG_INFO(rusty_extern_c_integer());
-
-    // LOG_INFO("Music's tempo index: {}", m_MusicSystem->getTempoIndex());
-    // LOG_INFO("Music's tempo time: {}ms", m_MusicSystem->getTempoTime());
-
-    // m_MusicSystem->Update();
-
-    // Update the All System
-
-    // LOG_INFO(Music::Player::GetMusicLength());
-
+    Game::System::Update();
     Display::BeatHeart::Update();
     Display::BeatIndicator::Update();
     Music::Tempo::Update(musicTime, 0u, Music::Player::LoopCounter());
@@ -254,3 +277,10 @@ void App::Update() {
 void App::End() {  // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
 }
+
+std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
+  {Util::Keycode::W, Player::Direction::UP},
+  {Util::Keycode::D, Player::Direction::RIGHT},
+  {Util::Keycode::S, Player::Direction::DOWN},
+  {Util::Keycode::A, Player::Direction::LEFT},
+};

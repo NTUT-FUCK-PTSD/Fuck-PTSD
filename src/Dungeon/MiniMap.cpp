@@ -26,8 +26,7 @@ void MiniMap::BuildMiniMap() {
                   - (2 * (m_MapData->GetSize().x - (j + 1))) * m_Scale,
               -(static_cast<int>(WINDOW_HEIGHT) / 2)
                   + (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH)
-                  + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale
-            };
+                  + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale};
             UpdateTileColor(mapIndex);
             SetVisible(mapIndex, false);
         }
@@ -39,8 +38,7 @@ void MiniMap::UpdateTileColor(const std::size_t mapIndex) {
         if (m_MapData->GetTileBack(mapIndex)->IsWall()) {
             if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 102) {
                 SetColor(mapIndex, CubeColor::gray);
-            } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type
-                       == 107) {
+            } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 107) {
                 SetColor(mapIndex, CubeColor::stone);
             } else if (m_MapData->GetTileBack(mapIndex)->GetTile().type == 104
                        || m_MapData->GetTileBack(mapIndex)->GetTile().type

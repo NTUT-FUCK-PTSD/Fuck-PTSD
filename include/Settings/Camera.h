@@ -3,7 +3,7 @@
 
 #include "Util/Renderer.hpp"
 
-#include "Game/Animation.h"
+#include "Animation.h"
 
 class Camera final {
 public:

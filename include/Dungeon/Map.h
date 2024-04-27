@@ -9,6 +9,7 @@
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
 #include "Dungeon/Tile.h"
+#include "Player.h"
 #include "Player/Player.h"
 
 namespace Dungeon {
@@ -40,6 +41,9 @@ public:
 
     bool IsOverlayRed() const { return m_OverlayRed; }
 
+    static glm::ivec2             m_Size;
+    static std::unique_ptr<Level> m_Level;
+
 private:
     bool m_Available;
     void LoadTile();
@@ -60,11 +64,10 @@ private:
     void EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy);
     bool CanPlayerSeePosition(const glm::vec2& position);
 
-    const std::size_t        HalfColNumber = DUNGEON_COL_NUMBER / 2;
-    const std::size_t        HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
-    std::unique_ptr<Level>   m_Level;
-    std::size_t              m_LevelNum;
-    glm::ivec2               m_Size;
+    const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
+    const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
+    std::size_t       m_LevelNum;
+
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;
     std::shared_ptr<Player>  m_MainCharacter;

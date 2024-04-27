@@ -6,7 +6,7 @@
 #include "Util/Color.hpp"
 #include "Util/Image.hpp"
 
-#include "Game/ToolBoxs.h"
+#include "Settings/ToolBoxs.h"
 
 //
 Coin::Coin() {

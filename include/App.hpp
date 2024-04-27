@@ -22,10 +22,15 @@
 #include "pch.hpp"  // IWYU pragma: export
 
 #include "Dungeon/Map.h"
-#include "Game/Camera.h"
-// #include "Music/Music.h"
 #include "Player/Player.h"
 #include "Settings/Background.hpp"
+#include "Settings/Camera.h"
+
+#include "Game/Actions.h"
+#include "Game/System.h"
+#include "Music/Player.h"
+
+#include "Util/Keycode.hpp"
 
 class App {
 public:
@@ -53,6 +58,7 @@ private:
     std::shared_ptr<Background> m_Background;
     bool                        m_FirstTime = true;
     bool                        m_IsMainMenu = true;
+    bool                        m_ThrowMode = false;
 
     // music
     // std::shared_ptr<Music::Player> m_MusicSystem =
@@ -75,6 +81,8 @@ private:
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
     std::size_t                   m_BeforeTempoIndex = 0;
     std::size_t                   m_TempoIndex = 0;
+
+    static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
 };
 
 #endif

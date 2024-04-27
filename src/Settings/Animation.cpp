@@ -1,8 +1,8 @@
-#include "Game/Animation.h"
+#include "Settings/Animation.h"
 
 #include "Util/Time.hpp"
 
-#include "Game/ToolBoxs.h"
+#include "Settings/ToolBoxs.h"
 
 Animation::Animation(const glm::vec2& animationPosition)
     : m_AnimationPosition(animationPosition) {

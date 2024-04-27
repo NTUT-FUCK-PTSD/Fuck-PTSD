@@ -91,8 +91,7 @@ void Map::LoadTile() {
                   0,
                   tile.zone,
                   tile.torch,
-                  tile.cracked
-                })
+                  tile.cracked})
             );
         }
         m_MapData->AddTile(mapIndex, TileFactory::CreateTile(tile));
@@ -134,8 +133,7 @@ void Map::LoadTile() {
                               52,
                               tmp->GetTile().zone,
                               tmp->GetTile().torch,
-                              tmp->GetTile().cracked
-                            })
+                              tmp->GetTile().cracked})
                         );
                     } else {
                         if (tmp->GetTile().type == 103
@@ -148,8 +146,7 @@ void Map::LoadTile() {
                                   50,
                                   tmp->GetTile().zone,
                                   tmp->GetTile().torch,
-                                  tmp->GetTile().cracked
-                                })
+                                  tmp->GetTile().cracked})
                             );
                         } else {
                             m_MapData->AddTile(
@@ -160,8 +157,7 @@ void Map::LoadTile() {
                                   51,
                                   tmp->GetTile().zone,
                                   tmp->GetTile().torch,
-                                  tmp->GetTile().cracked
-                                })
+                                  tmp->GetTile().cracked})
                             );
                         }
                     }
@@ -183,8 +179,7 @@ void Map::LoadTile() {
                               102,
                               0,
                               0,
-                              0
-                            })
+                              0})
                         );
                     }
                 }
@@ -470,8 +465,7 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
         glm::vec2 checkPosition = playerPosition + direction * i;
         checkPosition = {
           std::round(checkPosition.x),
-          std::round(checkPosition.y)
-        };
+          std::round(checkPosition.y)};
         mapIndex = m_MapData->GamePosition2MapIndex(checkPosition);
 
         if (position == checkPosition) {
@@ -488,3 +482,6 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
 }
 
 }  // namespace Dungeon
+
+glm::ivec2                      Dungeon::Map::m_Size = {0, 0};
+std::unique_ptr<Dungeon::Level> Dungeon::Map::m_Level = nullptr;
