@@ -72,7 +72,7 @@ void Animation::UpdateAnimation(const bool isDirection) {
             m_AnimationPosition += move * ratio;
         }
     }
-    m_AnimationZIndex = CalculateZIndex(m_AnimationDestination);
+    m_AnimationZIndex = CalculateZIndex(m_AnimationPosition);
 }
 
 bool Animation::IsAnimating() {
