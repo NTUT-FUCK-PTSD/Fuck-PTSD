@@ -152,7 +152,7 @@ public:
 
     void SetAlpha(const Uint8 alpha);
 
-    void SetColorMod(const SDL_Color color);
+    void SetColorMod(const SDL_Color& color);
 
 private:
     /**
