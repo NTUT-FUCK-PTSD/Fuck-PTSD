@@ -9,12 +9,10 @@
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
 
-
-#include "Game/System.h"
 #include "Game/Actions.h"
+#include "Game/System.h"
 
 #include "Util/Keycode.hpp"
-
 
 class App {
 public:
@@ -42,7 +40,7 @@ private:
     std::shared_ptr<Background> m_Background;
     bool                        m_FirstTime = true;
     bool                        m_IsMainMenu = true;
-    bool m_ThrowMode = false;
+    bool                        m_ThrowMode = false;
 
     // music
     std::shared_ptr<Music::Player> m_MusicSystem =
