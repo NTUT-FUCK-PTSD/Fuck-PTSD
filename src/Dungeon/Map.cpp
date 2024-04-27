@@ -391,7 +391,7 @@ void Map::RemoveWall(const std::size_t position) {
     m_MapData->AddTile(
         position,
         TileFactory::CreateTile(
-            s_Tile{tile.x, tile.y, 0, tile.zone, tile.torch, tile.cracked}
+            s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
         )
     );
     m_Children.push_back(m_MapData->GetTileBack(position));
