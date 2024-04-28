@@ -87,4 +87,5 @@ target_link_libraries(${PROJECT_NAME}
         Framework
         #rusty_bridge
         soloud
+        eventpp
 )

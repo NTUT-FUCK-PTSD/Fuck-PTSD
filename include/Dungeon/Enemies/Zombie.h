@@ -17,8 +17,6 @@ public:
 
     void Move() override;
 
-    void Update() override;
-
     void UpdateFace();
 
 private:
@@ -32,7 +30,9 @@ private:
     std::vector<std::size_t> m_BackFrames;
     std::vector<std::size_t> m_ShadowBackFrames;
 
-    bool                   m_Attack = false;
+    bool m_Attack = false;
+    bool m_CanMove = true;
+
     std::size_t            m_Direction = 0;
     std::vector<glm::vec2> m_Movement = {TOP, RIGHT, BOTTOM, LEFT};
 

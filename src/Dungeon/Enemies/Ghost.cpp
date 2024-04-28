@@ -1,7 +1,6 @@
 #include "Dungeon/Enemies/Ghost.h"
 
 #include "Dungeon/AStar.h"
-#include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
@@ -29,6 +28,7 @@ Enemies::Ghost::Ghost(
 
     m_LastDistance =
         Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
+    m_AnimationType = 4;
 }
 }  // namespace Dungeon
 
@@ -79,39 +79,10 @@ void Ghost::Move() {
             } else if (direction.y < 0) {
                 m_AnimationType = 2;
             }
-
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                return;
-            }
-            m_CanMove = true;
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(GetGamePosition()),
-                false
-            );
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(m_WillMovePosition),
-                true
-            );
+            CanMove();
             tmp -= 1;
-        } else {
-            m_CanMove = false;
         }
     }
-}
-void Ghost::Update() {
-    // Collision
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation
-            ->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 4);
-        m_CanMove = false;
-    }
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Ghost::AttackPlayer() {

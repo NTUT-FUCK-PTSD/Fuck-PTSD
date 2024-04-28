@@ -1,8 +1,5 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
-#include "Enemy.h"
-#include "Settings/ToolBoxs.h"
-
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
     const s_Enemy&                       u_Enemy,
@@ -94,48 +91,11 @@ void Skeleton::Move() {
             } else if (direction.y < 0) {
                 m_AnimationType = 2;
             }
-            // Check if player is in the next position
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                m_Attack = !m_Attack;
-                UpdateProperties();
-                return;
-            }
-            // Set the new position
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(GetGamePosition()),
-                false
-            );
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(m_WillMovePosition),
-                true
-            );
-            // notify the map that the entity is moving
-            m_CanMove = true;
-        } else {
-            m_CanMove = false;
+            CanMove();
         }
     }
     m_Attack = !m_Attack;
     UpdateProperties();
-}
-
-void Skeleton::Update() {
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition),
-            m_AnimationType
-        );
-        m_CanMove = false;
-    }
-
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Skeleton::UpdateProperties() {

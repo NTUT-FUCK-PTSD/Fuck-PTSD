@@ -19,6 +19,8 @@ public:
     void SetScale(double scale);
 
     void Update();
+    void UpdatePlayer();
+    void UpdateCubeColor(const std::size_t mapIndex);
 
 private:
     void BuildMiniMap();

@@ -18,8 +18,6 @@ public:
 
     void Move() override;
 
-    void Update() override;
-
     void AttackPlayer() override;
 
 private:

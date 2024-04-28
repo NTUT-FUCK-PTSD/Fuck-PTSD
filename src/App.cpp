@@ -1,7 +1,9 @@
 #include "App.hpp"
 
+#include "Map.h"
 #include "Util/Input.hpp"
 
+#include "Dungeon/MapEvent.h"
 #include "Dungeon/MapHandler.h"
 
 using namespace tinyxml2;
@@ -67,13 +69,18 @@ void App::Start() {
     m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
     m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png"
     );
+    Dungeon::MapEvent::AttackPlayer.append([this](const std::size_t damage) {
+        m_MainCharacter->lostHP(damage);
+    });
+    Dungeon::MapEvent::ResetMap.append([this]() {
+        m_MainCharacter->SetGamePosition({0, 0});
+    });
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
     m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
         m_Camera,
-        m_MainCharacter,
         ASSETS_DIR "/dungeon/MY DUNGEON.xml",
         1
     );
@@ -168,7 +175,16 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
+    else if (!m_ThrowMode
+             && (Util::Input::IsKeyDown(Util::Keycode::W)
+                 || Util::Input::IsKeyDown(Util::Keycode::D)
+                 || Util::Input::IsKeyDown(Util::Keycode::S)
+                 || Util::Input::IsKeyDown(Util::Keycode::A))
+             && Music::Tempo::IsTempoInRange(
+                 500,
+                 musicTime,
+                 Music::Player::LoopCounter()
+             )) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -178,24 +194,28 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D};
+          Util::Keycode::D
+        };
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT};
+          Player::Direction::RIGHT
+        };
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+        };
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+        };
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
@@ -239,16 +259,19 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                    };
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y};
+                      m_AniCameraDestination.y + aniCameraDirection[i].y
+                    };
                 }
             }
         }
         m_MainCharacter
             ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
         m_MainCharacter->Update();
+        Dungeon::MapEvent::PlayerMove(m_MainCharacter->GetGamePosition());
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->PlayerTrigger();
     }

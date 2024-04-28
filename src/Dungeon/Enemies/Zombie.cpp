@@ -45,12 +45,6 @@ void Zombie::Move() {
     m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
 
     if (IsVaildMove(m_WillMovePosition)) {
-        if (m_WillMovePosition == GetPlayerPosition()) {
-            AttackPlayer();
-            m_Attack = !m_Attack;
-            UpdateProperties();
-            return;
-        }
         m_CanMove = true;
     } else {
         switch (m_Direction) {
@@ -62,12 +56,6 @@ void Zombie::Move() {
         m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
 
         if (IsVaildMove(m_WillMovePosition) && m_Attack) {
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                m_Attack = !m_Attack;
-                UpdateProperties();
-                return;
-            }
             m_CanMove = true;
         } else {
             m_CanMove = false;
@@ -78,34 +66,11 @@ void Zombie::Move() {
     }
 
     if (m_CanMove) {
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(GetGamePosition()),
-            false
-        );
-        m_SimpleMapData->SetHasEntity(
-            m_SimpleMapData->GamePosition2MapIndex(m_WillMovePosition),
-            true
-        );
+        CanMove();
     }
     m_Attack = !m_Attack;
+    m_AnimationType = m_Direction;
     UpdateProperties();
-}
-
-void Zombie::Update() {
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition),
-            m_Direction
-        );
-        m_CanMove = false;
-    }
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Zombie::UpdateFace() {

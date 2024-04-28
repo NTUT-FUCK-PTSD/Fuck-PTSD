@@ -2,17 +2,15 @@
 
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
-
+#include "MapEvent.h"
 namespace Dungeon {
 
 Map::Map(
     const std::shared_ptr<Camera> camera,
-    const std::shared_ptr<Player> mainCharacter,
     const std::string&            path,
     const std::size_t             levelNum
 )
-    : m_Camera(camera),
-      m_MainCharacter(mainCharacter) {
+    : m_Camera(camera) {
     // ZIndex 98~100 is for UI
     m_ZIndex = 98;
     m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
@@ -25,32 +23,59 @@ Map::Map(
     // auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0},
     // m_MapData); m_MapData->AddEnemy(mapIndex, enemy);
     // m_Children.push_back(enemy);
+
+    InitEvent();
+}
+
+void Map::InitEvent() {
+    MapEvent::AttackPlayer.append([this](const std::size_t damage) {
+        (void)damage;
+        m_Camera->Shake(100, 10);
+        m_OverlayRed = true;
+        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
+    });
+
+    MapEvent::EnemyMove.append(
+        [this](const std::size_t srcMapIndex, const std::size_t destMapIndex) {
+            if (m_MapData->GetEnemy(srcMapIndex)) {
+                m_MapData->GetEnemy(srcMapIndex)
+                    ->SetGamePosition(MapIndex2GamePosition(destMapIndex));
+                m_MapData->MoveEnemy(srcMapIndex, destMapIndex);
+                m_MiniMap->UpdateCubeColor(destMapIndex);
+            }
+        }
+    );
+
+    MapEvent::PlayerMove.append([this](const glm::vec2& gamePosition) {
+        m_MapData->SetPlayerPosition(gamePosition);
+    });
+
+    MapEvent::ResetMap.append([this]() {
+        m_Children.clear();
+        if (m_MapData) {
+            m_MapData->ClearTiles();
+            m_MapData->ClearEnemies();
+        }
+        if (m_MiniMap) {
+            m_Camera->RemoveUIChild(m_MiniMap);
+        }
+
+        m_Camera->SetPosition({0, 0});
+    });
 }
 
 Map::~Map() {
-    m_Children.clear();
-    m_MapData->ClearTiles();
-    m_MapData->ClearEnemies();
-    m_Camera->RemoveUIChild(m_MiniMap);
+    MapEvent::ResetMap();
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    m_Children.clear();
-    if (m_MapData) {
-        m_MapData->ClearTiles();
-        m_MapData->ClearEnemies();
-    }
-    if (m_MiniMap) {
-        m_Camera->RemoveUIChild(m_MiniMap);
-    }
+    MapEvent::ResetMap();
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
         return false;
     }
     m_LevelNum = levelNum;
-    m_Camera->SetPosition({0, 0});
-    m_MainCharacter->SetGamePosition({0, 0});
 
     m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin()
              + 3;  // add 3 for the border
@@ -59,7 +84,6 @@ bool Map::LoadLevel(const std::size_t levelNum) {
         m_Level->GetLevelIndexMax(),
         m_Size
     );
-    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
 
     LoadTile();
     LoadEnemy();
@@ -72,6 +96,7 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     m_ShadowRenderDP.clear();
     m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     CameraUpdate();
+    m_MiniMap->Update();
     return true;
 }
 
@@ -107,7 +132,8 @@ void Map::LoadTile() {
                               102,
                               0,
                               0,
-                              0})
+                              0
+                            })
                         );
                     }
                 }
@@ -234,7 +260,7 @@ bool Map::CheckShowPosition(
 }
 
 void Map::CameraUpdate() {
-    glm::vec2 cameraPos = m_MainCharacter->GetGamePosition();
+    glm::vec2 cameraPos = m_MapData->GetPlayerPosition();
 
     for (auto& tile : m_MapData->GetTilesQueue()) {
         if (CheckShowPosition(
@@ -247,6 +273,9 @@ void Map::CameraUpdate() {
             } else {
                 tile->SetOverlay(true);
             }
+            m_MiniMap->UpdateCubeColor(
+                GamePostion2MapIndex({tile->GetTile().x, tile->GetTile().y})
+            );
         } else {
             tile->SetCameraUpdate(false);
         }
@@ -259,6 +288,9 @@ void Map::CameraUpdate() {
             } else {
                 enemy->SetShadow(true);
             }
+            m_MiniMap->UpdateCubeColor(
+                GamePostion2MapIndex(enemy->GetGamePosition())
+            );
         } else {
             enemy->SetCameraUpdate(false);
         }
@@ -266,7 +298,6 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate(bool isPlayer) {
-    m_MapData->SetPlayerPosition(m_MainCharacter->GetGamePosition());
     m_TempoAttack = false;
     if (!isPlayer) {
         for (auto& enemy : m_MapData->GetEnemyQueue()) {
@@ -278,7 +309,6 @@ void Map::TempoUpdate(bool isPlayer) {
     }
     Update();
     CameraUpdate();
-    m_MiniMap->Update();
 }
 
 void Map::PlayerTrigger() {
@@ -294,36 +324,25 @@ void Map::TempoTrigger(const std::size_t index) {
 }
 
 void Map::Update() {
-    std::size_t mapIndex = 0;
     m_Transform.translation = {0, 0};
 
     if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
         m_OverlayRed = false;
     }
 
-    std::vector<std::shared_ptr<Enemy>> EnemyQueue(m_MapData->GetEnemyQueue());
-    for (auto& enemy : EnemyQueue) {
-        if (!enemy->GetSeen()) {
-            continue;
-        }
-        if (enemy->GetCanMove()) {
-            mapIndex = GamePostion2MapIndex(enemy->GetGamePosition());
-
-            m_MapData->RemoveEnemy(mapIndex);
-            m_MapData->AddEnemy(
-                GamePostion2MapIndex(enemy->GetWillMovePosition()),
-                enemy
-            );
-        }
-        enemy->Update();
-
-        EnemyAttackHandle(enemy);
-    }
+    MapEvent::DrawableUpdate();
 }
 
 std::size_t Map::GamePostion2MapIndex(const glm::ivec2& position) const {
     return (position.x - m_Level->GetLevelIndexMin().x + 1)
            + (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
+}
+
+glm::ivec2 Map::MapIndex2GamePosition(const std::size_t index) const {
+    return {
+      static_cast<int>(index % m_Size.x) + m_Level->GetLevelIndexMin().x - 1,
+      static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1
+    };
 }
 
 std::shared_ptr<MapData> Map::GetMapData() const {
@@ -436,25 +455,14 @@ void Map::OpenDoor(const std::size_t position) {
     }
 }
 
-void Map::EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy) {
-    if (enemy->DidAttack() && !m_TempoAttack) {
-        m_TempoAttack = true;
-        m_OverlayRed = true;
-
-        m_MainCharacter->lostHP(enemy->GetDamage());
-        m_Camera->Shake(100, 10);
-        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
-    }
-}
-
 bool Map::CanPlayerSeePosition(const glm::vec2& position) {
     // BresenhamLine Algorithm
     // glm::vec2 targetPosition = position;
-    // glm::vec2 sourcePosition = m_MainCharacter->GetGamePosition();
+    // glm::vec2 sourcePosition = m_MapData->GetPlayerPosition();
 
     // I don't know why but the target and source position are reversed
     // so I have to reverse them
-    glm::vec2 targetPosition = m_MainCharacter->GetGamePosition();
+    glm::vec2 targetPosition = m_MapData->GetPlayerPosition();
     glm::vec2 sourcePosition = position;
 
     std::vector<glm::vec2> integerCoordinates;

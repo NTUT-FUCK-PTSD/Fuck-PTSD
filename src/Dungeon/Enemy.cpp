@@ -1,7 +1,9 @@
 #include "Dungeon/Enemy.h"
 
 #include "Dungeon/AStar.h"
-#include "ToolBoxs.h"
+#include "Dungeon/MapEvent.h"
+#include "Map.h"
+#include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
 
@@ -21,6 +23,11 @@ Enemy::Enemy(
     SetGamePosition(m_GamePosition);
     m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
     SetZIndex(m_Animation->GetAnimationZIndex());
+    m_DrawableUpdate = MapEvent::DrawableUpdate.append([this]() { Update(); });
+}
+
+Enemy::~Enemy() {
+    MapEvent::DrawableUpdate.remove(m_DrawableUpdate);
 }
 
 void Enemy::SetShadow(const bool shadow) {
@@ -40,14 +47,6 @@ void Enemy::SetShadow(const bool shadow) {
 }
 
 void Enemy::SetGamePosition(const glm::vec2& gamePosition) {
-    m_SimpleMapData->SetHasEntity(
-        m_SimpleMapData->GamePosition2MapIndex(m_GamePosition),
-        false
-    );
-    m_SimpleMapData->SetHasEntity(
-        m_SimpleMapData->GamePosition2MapIndex(gamePosition),
-        true
-    );
     m_GamePosition = gamePosition;
     m_WillMovePosition = gamePosition;
     // drawable would be updated depending on the enemy derived class
@@ -80,14 +79,6 @@ bool Enemy::IsVaildMove(const glm::vec2& position) {
     return m_SimpleMapData->IsPositionWalkable(position);
 }
 
-bool Enemy::DidAttack() {
-    if (m_AttackPlayer) {
-        m_AttackPlayer = false;
-        return true;
-    }
-    return false;
-}
-
 glm::vec2 Enemy::FindNextToPlayer() {
     if (GetPlayerPosition() == GetGamePosition()) {
         return GetGamePosition();
@@ -107,9 +98,8 @@ glm::vec2 Enemy::FindNextToPlayer() {
 
 void Enemy::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
-        m_CanMove = false;
+        MapEvent::AttackPlayer(GetDamage());
         m_WillMovePosition = GetGamePosition();
-        m_AttackPlayer = true;
         m_Animation->MoveByTime(
             200,
             ToolBoxs::GamePostoPos(GetGamePosition()),
@@ -134,6 +124,36 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
     SetVisible(cameraUpdate);
     for (auto& child : m_Children) {
         child->SetVisible(cameraUpdate);
+    }
+}
+
+void Enemy::Update() {
+    // Update animation
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
+    }
+
+    // Update z index
+    SetZIndex(m_Animation->GetAnimationZIndex());
+}
+
+void Enemy::CanMove() {
+    if (m_WillMovePosition == GetPlayerPosition()) {
+        AttackPlayer();
+        return;
+    }
+    if (!m_Animation->IsAnimating()) {
+        MapEvent::EnemyMove(
+            GamePostion2MapIndex(m_GamePosition),
+            GamePostion2MapIndex(m_WillMovePosition)
+        );
+        SetGamePosition(m_WillMovePosition);
+        m_Animation->MoveByTime(
+            200,
+            ToolBoxs::GamePostoPos(m_WillMovePosition),
+            m_AnimationType
+        );
     }
 }
 }  // namespace Dungeon

@@ -1,7 +1,6 @@
 #include "Settings/Camera.h"
 
 #include "glm/gtc/random.hpp"
-#include "glm/gtx/compatibility.hpp"
 
 #include "Util/Time.hpp"
 

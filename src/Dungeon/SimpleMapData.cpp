@@ -13,6 +13,7 @@ SimpleMapData::SimpleMapData(
       m_Size(size) {
     m_Tiles.resize(GetSize().x * GetSize().y);
     m_HasEntity.resize(GetSize().x * GetSize().y, false);
+    m_PlayerPosition = {0, 0};
 }
 
 void SimpleMapData::AddTile(
