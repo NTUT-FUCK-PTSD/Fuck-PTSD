@@ -34,7 +34,9 @@ void Game::System::Update() {
         return;
     }
 
-    for (auto& elem : m_IBaseList) {
+    for (std::size_t i = 0; i < m_IBaseList.size(); ++i) {
+        auto& elem = m_IBaseList.at(i);
+
         elem->Update(m_DungeonMap);
     }
 }

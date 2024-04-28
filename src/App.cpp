@@ -88,9 +88,6 @@ void App::Start() {
     Display::BeatIndicator::Init();
     m_Camera->AddUIChild(Display::BeatIndicator::GetGameElement());
 
-    // display the tempo heart in music System
-    // m_Camera->AddUIChild(m_MusicSystem->getGameObject());
-
     // helper
     Settings::Helper::Init(m_DungeonMap.get());
 
@@ -116,8 +113,6 @@ void App::Update() {
         % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 
     if (Music::Tempo::IsSwitch()) {
-        //        LOG_DEBUG("Current cycle: {}", Music::Player::LoopCounter());
-        //        LOG_DEBUG("Current idx: {}", Music::Tempo::GetBeatIdx());
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
     }
@@ -137,6 +132,7 @@ void App::Update() {
 
     if (Util::Input::IsKeyDown(Util::Keycode::UP)
         && Util::Input::IsKeyDown(Util::Keycode::DOWN)) {
+        m_MainCharacter->PrepareThrowOut(true);
         LOG_INFO("Throw Mode");
         m_ThrowMode = true;
     }
@@ -152,6 +148,7 @@ void App::Update() {
             musicTime,
             Music::Player::LoopCounter()
         )) {
+        m_MainCharacter->PrepareThrowOut(false);
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
                 Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);

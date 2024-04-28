@@ -11,6 +11,27 @@
 
 Throw::Throw() {
     //    const auto ItemImage = std::make_shared<Util::Image>(m_ImagePathItem);
+
+    GenWin();
+    GenItem();
+    GeneralLowerText();
+    GeneralUpperText();
+
+    m_Throw->SetVisible(false);
+};
+
+void Throw::GenWin() {
+    m_NormalSlot = std::make_shared<Util::Image>(m_ImagePathWindow);
+    m_ThrowSlot = std::make_shared<Util::Image>(m_ImagePathThrow);
+    m_Window->SetDrawable(m_NormalSlot);
+    m_Window->SetZIndex(m_ZIndex + 1);
+    m_Window->SetScale(m_Scale);
+    m_Window->SetPosition(m_Position);
+
+    m_Throw->AddChild(m_Window);
+}
+
+void Throw::GenItem() {
     const auto ItemSize = ToolBoxs::CountImagePixel(m_ImagePathItem, 1, 2);
 
     const auto ItemImage = std::make_shared<SpriteSheet>(
@@ -22,13 +43,31 @@ Throw::Throw() {
         true,
         100
     );
-    const auto WindowImage = std::make_shared<Util::Image>(m_ImagePathWindow);
+    m_Item->SetDrawable(ItemImage);
+    m_Item->SetZIndex(m_ZIndex);
+    m_Item->SetScale(m_Scale);
+    m_Item->SetPosition({m_Position.x, m_Position.y + 5});
+
+    m_Throw->AddChild(m_Item);
+}
+
+void Throw::GeneralUpperText() {
     const auto UpperTextObject = std::make_shared<Util::Text>(
         m_TextStylePath,
         m_FontSize,
         m_Content,
         m_FontColor
     );
+
+    m_UpperText->SetDrawable(UpperTextObject);
+    m_UpperText->SetZIndex(m_ZIndex);
+    m_UpperText->SetScale(m_Scale);
+    m_UpperText->SetPosition(m_Position);
+
+    m_Throw->AddChild(m_UpperText);
+}
+
+void Throw::GeneralLowerText() {
     const auto LowerTextObject = std::make_shared<Util::Text>(
         m_TextStylePath,
         m_FontSize,
@@ -36,41 +75,36 @@ Throw::Throw() {
         m_FontColor
     );
 
-    m_Window->SetDrawable(WindowImage);
-    m_Item->SetDrawable(ItemImage);
-    m_Text->SetDrawable(UpperTextObject);
     m_LowerText->SetDrawable(LowerTextObject);
-
-    m_Window->SetZIndex(m_ZIndex + 1);
-    m_Item->SetZIndex(m_ZIndex);
-    m_Text->SetZIndex(m_ZIndex);
+    m_LowerText->SetPosition(m_Position);
     m_LowerText->SetZIndex(m_ZIndex);
-
-    m_Window->SetScale(m_Scale);
-    m_Item->SetScale(m_Scale);
-    m_Text->SetScale(m_Scale);
     m_LowerText->SetScale(m_Scale);
 
-    m_Window->SetPosition(m_Position);
-    m_Item->SetPosition({m_Position.x, m_Position.y + 5});
-    m_Text->SetPosition(m_Position);
-    m_LowerText->SetPosition(m_Position);
-
-    m_Throw->AddChild(m_Window);
-    m_Throw->AddChild(m_Item);
-    m_Throw->AddChild(m_Text);
     m_Throw->AddChild(m_LowerText);
-
-    m_Throw->SetVisible(false);
-};
+}
 
 void Throw::setPosition(const glm::vec2 position) {
     m_Window->SetPosition(position);
     m_Item->SetPosition({position.x, position.y + 5});
-    m_Text->SetPosition({position.x + 15, position.y - 40});
-    m_LowerText->SetPosition({position.x + 15, position.y - 60});
+    m_UpperText->SetPosition({position.x + 30, position.y - 40});
+    m_LowerText->SetPosition({position.x + 27, position.y - 60});
 }
 
 std::shared_ptr<GameElement> Throw::GetGameObject() const {
     return m_Throw;
+}
+
+void Throw::PrepareThrowOut(bool state) {
+    if (!state) {
+        m_LowerText->SetVisible(true);
+        m_UpperText->SetVisible(true);
+
+        m_Window->SetDrawable(m_NormalSlot);
+        return;
+    }
+
+    m_LowerText->SetVisible(false);
+    m_UpperText->SetVisible(false);
+
+    m_Window->SetDrawable(m_ThrowSlot);
 }

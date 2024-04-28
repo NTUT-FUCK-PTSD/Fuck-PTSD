@@ -19,9 +19,14 @@ public:
             dungeonMap->GetMapData()->GetPlayerPosition()
         ));
         if (value == MI) {
-            SetVisible(false);
+            m_Vis = false;
         }
+
+        SetVisible(m_Vis);
     };
+
+private:
+    bool m_Vis = true;
 };
 }  // namespace Graphs
 }  // namespace Game
