@@ -6,7 +6,7 @@
 #define FUCK_PTSD_TOOLSYSTEM_HPP
 
 #include <map>
-#include "Player/Equipment/IEquip.h"
+#include "Player/Factory/IEquip.h"
 #include "ToolFactory.h"
 class Tool final {
 public:

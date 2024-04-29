@@ -5,7 +5,8 @@
 #ifndef FUCK_PTSD_IEQUIP_HPP
 #define FUCK_PTSD_IEQUIP_HPP
 
-#include <GameElement.h>
+#include <string>
+#include "Settings/GameElement.h"
 
 class IEquip : public GameElement {
 public:

@@ -5,7 +5,9 @@
 #ifndef FUCK_PTSD_TOOLFACTORY_H
 #define FUCK_PTSD_TOOLFACTORY_H
 
-#include "Player/Equipment/IEquip.h"
+#include <any>
+#include <memory>
+#include "Player/Factory/IEquip.h"
 #include "Settings/Hash.h"
 
 using namespace Settings::Hash;
@@ -20,9 +22,9 @@ public:
         const std::string& type
     ) {
         switch (Settings::Hash::HashConvert(name)) {
-        case "BOMB"_hash: GenBomb(); break;
-        case "SHOVEL"_hash: GenShovel(); break;
-        case "WEAPON"_hash: GenWeapon(); break;
+        case "BOMB"_hash: GenBomb(type); break;
+        case "SHOVEL"_hash: GenShovel(type); break;
+        case "WEAPON"_hash: GenWeapon(type); break;
         default: throw std::runtime_error("Tool type is not available"); break;
         }
 
@@ -30,9 +32,9 @@ public:
     };
 
 private:
-    void GenBomb();
-    void GenShovel();
-    void GenWeapon();
+    void GenBomb(const std::string& type);
+    void GenShovel(const std::string& type);
+    void GenWeapon(const std::string& type);
 
     std::shared_ptr<IEquip> m_Result;
 };
