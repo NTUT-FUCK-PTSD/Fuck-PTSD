@@ -65,6 +65,10 @@ endif()
 list(APPEND DEP_INCLUDES_FOLDERS
         ${DEPENDENCY_INCLUDE_DIRS}
         ${PTSD_SOURCE_DIR}/include
+        ${soloud_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD/3rdparty/sdl2/include
+        ${CUSTOMIZE_PATH}
 )
 
 message(STATUS "soloud: ${soloud_SOURCE_DIR}")
