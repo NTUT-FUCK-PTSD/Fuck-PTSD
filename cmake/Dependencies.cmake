@@ -57,7 +57,7 @@ FetchContent_GetProperties(soloud)
 if (NOT soloud_POPULATED)
     FetchContent_Populate(soloud)
     set(SDL2_INCLUDE_DIRS
-            ${PTSD_SOURCE_DIR}3rdparty/sdl2/include
+            ${PTSD_SOURCE_DIR}/3rdparty/sdl2/include
     )
     add_subdirectory(${soloud_SOURCE_DIR}/contrib)
 endif()
@@ -67,7 +67,7 @@ list(APPEND DEP_INCLUDES_FOLDERS
         ${PTSD_SOURCE_DIR}/include
         ${soloud_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${PTSD_SOURCE_DIR}3rdparty/sdl2/include
+        ${PTSD_SOURCE_DIR}/3rdparty/sdl2/include
         ${CUSTOMIZE_PATH}
 )
 
