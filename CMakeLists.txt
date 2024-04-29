@@ -76,6 +76,7 @@ endif()
 
 
 target_include_directories(${PROJECT_NAME} PRIVATE
+        ${HEADER_FILES}
         ${DEP_INCLUDES_FOLDERS}
 )
 
