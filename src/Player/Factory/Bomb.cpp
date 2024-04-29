@@ -21,6 +21,16 @@ Bomb::Bomb(std::size_t number) {
     SetVisible(false);
 }
 
+void Bomb::SetPosition(const glm::vec2& Position) {
+    this->m_Transform.translation = Position;
+
+    const auto& list = GetChildren();
+    list[0]->m_Transform.translation = Position + m_SlotOffset;
+    list[1]->m_Transform.translation = Position + m_ItemOffset;
+    list[2]->m_Transform.translation = Position + m_FirstOffset;
+    list[3]->m_Transform.translation = Position + m_SecondOffset;
+}
+
 void Bomb::GenSlot() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& slot = std::make_shared<Util::Image>(

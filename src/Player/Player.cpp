@@ -6,7 +6,7 @@ Player::Player()
       m_Player(std::make_shared<GameElement>()),
       m_Coin(std::make_unique<Coin>()),
       m_Heart(std::make_unique<Heart>()),
-      m_Tool(std::make_unique<Tool>()),
+      m_Tool(std::make_unique<Players::Tools>()),
       m_Diamond(std::make_unique<Diamond>()),
       m_Window(std::make_shared<GameElement>()) {
 

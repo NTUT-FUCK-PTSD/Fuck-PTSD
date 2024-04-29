@@ -11,6 +11,13 @@ public:
     explicit Dagger();
     virtual ~Dagger() = default;
 
+    void SetPosition(const glm::vec2& Position) override;
+
+    [[nodiscard]]
+    Pos GetWinPos() const override {
+        return Pos::ROW;
+    }
+
     [[nodiscard]]
     std::string GetName() const override {
         return "WEAPON";

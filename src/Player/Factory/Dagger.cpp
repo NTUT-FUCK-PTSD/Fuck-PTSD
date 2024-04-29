@@ -17,6 +17,14 @@ Dagger::Dagger() {
     SetVisible(false);
 }
 
+void Dagger::SetPosition(const glm::vec2& Position) {
+    this->m_Transform.translation = Position;
+
+    const auto& list = GetChildren();
+    list[0]->m_Transform.translation = Position + glm::vec2{0, -5};
+    list[1]->m_Transform.translation = Position + glm::vec2{0, 0.4};
+}
+
 void Dagger::GenItem() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& size = Settings::Helper::CountImgPixel(

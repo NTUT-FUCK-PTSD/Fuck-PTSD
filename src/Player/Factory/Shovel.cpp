@@ -8,10 +8,18 @@
 #include "UGameElement.h"
 
 Shovel::Shovel() {
-    GenSlot();
     GenItem();
+    GenSlot();
 
     SetVisible(false);
+}
+
+void Shovel::SetPosition(const glm::vec2& Position) {
+    this->m_Transform.translation = Position;
+
+    const auto& list = GetChildren();
+    list[0]->m_Transform.translation = Position + glm::vec2{0, -5};
+    list[1]->m_Transform.translation = Position + glm::vec2{0, 0.4};
 }
 
 void Shovel::GenSlot() {

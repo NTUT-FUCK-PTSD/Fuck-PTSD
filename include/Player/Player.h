@@ -11,7 +11,9 @@
 #include "Items/Coin.h"
 #include "Items/Diamond.h"
 #include "Items/Heart.h"
-#include "Items/Tool.h"
+
+
+#include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
@@ -105,7 +107,7 @@ private:
 
     std::unique_ptr<Coin>        m_Coin;
     std::unique_ptr<Heart>       m_Heart;
-    std::unique_ptr<Tool>        m_Tool;
+    std::unique_ptr<Players::Tools>        m_Tool;
     std::unique_ptr<Diamond>     m_Diamond;
     std::shared_ptr<GameElement> m_Window;
 

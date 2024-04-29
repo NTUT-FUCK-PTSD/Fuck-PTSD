@@ -12,6 +12,13 @@ public:
     explicit Shovel();
     virtual ~Shovel() = default;
 
+    void SetPosition(const glm::vec2& Position) override;
+
+    [[nodiscard]]
+    Pos GetWinPos() const override {
+        return Pos::ROW;
+    }
+
     std::string GetName() const override{
         return "SHOVEL";
     }

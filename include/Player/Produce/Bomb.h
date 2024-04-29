@@ -13,11 +13,19 @@ public:
     explicit Bomb(std::size_t number);
     virtual ~Bomb() = default;
 
+    void SetPosition(const glm::vec2& Position) override;
+
+    [[nodiscard]]
+    Pos GetWinPos() const override {
+        return Pos::COL;
+    }
+
     [[nodiscard]]
     std::string GetName() const override {
         return std::string(m_Name.begin(), m_Name.end());
     }
 
+    [[nodiscard]]
     std::string GetType() const override { return "1"; }
 
 private:

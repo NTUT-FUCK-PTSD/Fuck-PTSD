@@ -23,7 +23,7 @@ private:
 public:
     std::shared_ptr<Core::Drawable> GetDrawable() { return m_Drawable; }
 
-    void SetPosition(const glm::vec2& Position) {
+    virtual void SetPosition(const glm::vec2& Position) {
         m_Transform.translation = Position;
     }
 

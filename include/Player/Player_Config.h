@@ -31,7 +31,7 @@ static constexpr std::string_view IMAGE_SLOT_DAGGER = ASSETS_DIR
 
 static constexpr std::string_view IMAGE_DAGGER = ASSETS_DIR "/items/weapon_dagger.png";
 
-static constexpr glm::vec2 VAL_FONT_SCALE = {5, 5};
+static constexpr glm::vec2 VAL_FONT_SCALE = {3, 3};
 
 static constexpr std::size_t VAL_FONT_SIZE = 6;
 
