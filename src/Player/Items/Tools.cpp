@@ -37,6 +37,11 @@ void Tools::SetWeapon(WeaponEnum::Type type) {
     }
 }
 
+void Tools::PrepareThrowOut(bool state) {
+    auto p = getListIdx(m_colPosIdx, THROW);
+    m_colEquipList.at(p)->PrepareThrowOut(state);
+}
+
 void Tools::RemoveThrow() {
     auto f = getListIdx(m_colPosIdx, THROW);
     m_colPosIdx.erase(m_colPosIdx.begin() + f);

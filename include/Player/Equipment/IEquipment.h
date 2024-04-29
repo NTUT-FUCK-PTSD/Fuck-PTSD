@@ -27,6 +27,11 @@ public:
         return;
     };
 
+    [[maybe_unused]]
+    virtual void PrepareThrowOut(bool state = false) {
+        return;
+    };
+
     // getter
     virtual Direction                    GetDirection() = 0;
     virtual bool                         GetIsThrow() { return false; };

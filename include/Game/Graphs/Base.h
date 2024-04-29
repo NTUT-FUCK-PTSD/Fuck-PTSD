@@ -9,7 +9,9 @@ namespace Game {
 namespace Graphs {
 class IBase : public Util::GameObject {
 public:
-    std::size_t  MI = 0;
+    virtual ~IBase() = default;
+    std::size_t MI = 0;
+
     virtual void Update(Dungeon::Map* dungeonMap) = 0;
 };
 }  // namespace Graphs
