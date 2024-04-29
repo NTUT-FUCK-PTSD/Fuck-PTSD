@@ -55,6 +55,9 @@ FetchContent_Declare(
 FetchContent_GetProperties(soloud)
 if (NOT soloud_POPULATED)
     FetchContent_Populate(soloud)
+    set(SDL2_INCLUDE_DIRS
+        ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD/3rdparty/sdl2/include
+    )
     add_subdirectory(${soloud_SOURCE_DIR}/contrib)
 endif()
 
