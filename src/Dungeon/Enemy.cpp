@@ -2,7 +2,6 @@
 
 #include "Dungeon/AStar.h"
 #include "Dungeon/MapEvent.h"
-#include "Map.h"
 #include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
@@ -12,16 +11,16 @@ Enemy::Enemy(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : m_SimpleMapData(simpleMapData),
-      m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_Animation(
           std::make_unique<Animation>(ToolBoxs::GamePostoPos(m_GamePosition))
       ),
+      m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
-    m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
+    m_Transform.translation = m_Animation->GetAnimationPosition();
     SetZIndex(m_Animation->GetAnimationZIndex());
     m_DrawableUpdate = MapEvent::DrawableUpdate.append([this]() { Update(); });
 }
@@ -65,9 +64,9 @@ void Enemy::SetLord(const bool lord) {
 }
 
 void Enemy::TempoMove() {
-    if (GetVisible() == false || m_Seen == false) {
-        return;
-    }
+    // if (GetVisible() == false || m_Seen == false) {
+    //     return;
+    // }
     if (m_BeatDelay > 0) {
         m_BeatDelay--;
         return;

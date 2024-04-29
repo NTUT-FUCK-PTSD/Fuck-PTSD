@@ -37,10 +37,23 @@ void Map::InitEvent() {
 
     MapEvent::EnemyMove.append(
         [this](const std::size_t srcMapIndex, const std::size_t destMapIndex) {
-            if (m_MapData->GetEnemy(srcMapIndex)) {
-                m_MapData->GetEnemy(srcMapIndex)
-                    ->SetGamePosition(MapIndex2GamePosition(destMapIndex));
+            auto enemy = m_MapData->GetEnemy(srcMapIndex);
+            if (enemy) {
+                auto gamePosition = MapIndex2GamePosition(destMapIndex);
+                enemy->SetGamePosition(gamePosition);
                 m_MapData->MoveEnemy(srcMapIndex, destMapIndex);
+                if (CheckShowPosition(
+                        gamePosition,
+                        m_MapData->GetPlayerPosition()
+                    )) {
+                    enemy->SetCameraUpdate(true);
+                    if (CanPlayerSeePosition(gamePosition)) {
+                        enemy->SetShadow(false);
+                    } else {
+                        enemy->SetShadow(true);
+                    }
+                }
+                m_MiniMap->UpdateCubeColor(srcMapIndex);
                 m_MiniMap->UpdateCubeColor(destMapIndex);
             }
         }
@@ -48,6 +61,7 @@ void Map::InitEvent() {
 
     MapEvent::PlayerMove.append([this](const glm::vec2& gamePosition) {
         m_MapData->SetPlayerPosition(gamePosition);
+        CameraUpdate();
     });
 
     MapEvent::ResetMap.append([this]() {
@@ -308,7 +322,6 @@ void Map::TempoUpdate(bool isPlayer) {
         m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     }
     Update();
-    CameraUpdate();
 }
 
 void Map::PlayerTrigger() {

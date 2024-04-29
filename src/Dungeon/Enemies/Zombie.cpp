@@ -1,7 +1,5 @@
 #include "Dungeon/Enemies/Zombie.h"
 
-#include "Settings/ToolBoxs.h"
-
 namespace Dungeon {
 Enemies::Zombie::Zombie(
     const s_Enemy&                       u_Enemy,
@@ -42,33 +40,27 @@ Enemies::Zombie::Zombie(
 
 namespace Dungeon::Enemies {
 void Zombie::Move() {
-    m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
-
-    if (IsVaildMove(m_WillMovePosition)) {
-        m_CanMove = true;
-    } else {
-        switch (m_Direction) {
-        case 0: m_Direction = 2; break;
-        case 1: m_Direction = 3; break;
-        case 2: m_Direction = 0; break;
-        case 3: m_Direction = 1; break;
-        }
-        m_WillMovePosition = m_GamePosition + m_Movement[m_Direction];
-
-        if (IsVaildMove(m_WillMovePosition) && m_Attack) {
-            m_CanMove = true;
-        } else {
-            m_CanMove = false;
-        }
-    }
-    if (!m_Attack) {
-        m_WillMovePosition = m_GamePosition;
-    }
-
-    if (m_CanMove) {
-        CanMove();
-    }
     m_Attack = !m_Attack;
+    if (m_Attack) {
+        m_WillMovePosition = GetGamePosition() + m_Movement[m_Direction];
+
+        if (IsVaildMove(m_WillMovePosition)) {
+            CanMove();
+        } else {
+            switch (m_Direction) {
+            case 0: m_Direction = 2; break;
+            case 1: m_Direction = 3; break;
+            case 2: m_Direction = 0; break;
+            case 3: m_Direction = 1; break;
+            }
+            m_WillMovePosition = GetGamePosition() + m_Movement[m_Direction];
+
+            if (IsVaildMove(m_WillMovePosition)) {
+                CanMove();
+            }
+        }
+    }
+
     m_AnimationType = m_Direction;
     UpdateProperties();
 }

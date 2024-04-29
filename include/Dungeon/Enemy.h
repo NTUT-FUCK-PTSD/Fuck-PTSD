@@ -85,7 +85,6 @@ protected:
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
     std::vector<std::size_t>     m_NormalFrames;
     std::vector<std::size_t>     m_ShadowFrames;
-    glm::vec2                    m_GamePosition;
     glm::vec2                    m_WillMovePosition;
 
     std::unique_ptr<Animation> m_Animation;
@@ -93,6 +92,8 @@ protected:
     std::size_t m_AnimationType = 0;
 
 private:
+    glm::vec2 m_GamePosition;
+
     std::size_t m_ID;
     std::size_t m_BeatDelay;
     bool        m_Lord;
