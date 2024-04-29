@@ -17,7 +17,6 @@ FetchContent_Declare(
 
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/tinyxml2
 )
-FetchContent_MakeAvailable(tinyxml2)
 
 FetchContent_Declare(
         fmt
@@ -27,7 +26,6 @@ FetchContent_Declare(
         # GIT_TAG 10.2.1
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fmt
 )
-FetchContent_MakeAvailable(fmt)
 
 message(STATUS "PTSD NOT FOUND, fetching from source!")
 set(PTSD_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD")
@@ -39,7 +37,6 @@ FetchContent_Declare(
         # GIT_TAG v1.2.7
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/PTSD
 )
-FetchContent_MakeAvailable(PTSD)
 
 message(STATUS "PTSD: ${PTSD_SOURCE_DIR}")
 
@@ -53,6 +50,8 @@ FetchContent_Declare(
 
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/soloud
 )
+
+FetchContent_MakeAvailable(tinyxml2 fmt PTSD)
 
 FetchContent_GetProperties(soloud)
 if (NOT soloud_POPULATED)
