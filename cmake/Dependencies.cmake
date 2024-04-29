@@ -62,4 +62,9 @@ if (NOT soloud_POPULATED)
     add_subdirectory(${soloud_SOURCE_DIR}/contrib)
 endif()
 
+list(APPEND DEP_INCLUDES_FOLDERS
+        ${DEPENDENCY_INCLUDE_DIRS}
+        ${PTSD_SOURCE_DIR}/include
+)
+
 message(STATUS "soloud: ${soloud_SOURCE_DIR}")
