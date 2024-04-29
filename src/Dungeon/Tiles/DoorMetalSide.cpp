@@ -5,7 +5,7 @@
 namespace Dungeon {
 namespace Tiles {
 DoorMetalSide::DoorMetalSide(const s_Tile& u_Tile)
-    : GeneralDoorSide(u_Tile, false) {
+    : GeneralDoor(u_Tile, false) {
     m_MagicNumber = 15;
     UpdateDoorMetalSideDrawable();
 }
@@ -19,10 +19,11 @@ void DoorMetalSide::UpdateDoorMetalSideDrawable() {
     };
     m_SpriteSheet->SetDrawRect(
         {static_cast<int>(
-             m_ImgSize.x * (m_Index % static_cast<int>(m_TileSize.x))
+             m_ImgSize.x * (m_Index % static_cast<size_t>(m_TileSize.x))
          ),
          static_cast<int>(
-             m_ImgSize.y * (m_Index / static_cast<int>(m_TileSize.x))
+             m_ImgSize.y
+             * static_cast<size_t>(m_Index / static_cast<float>(m_TileSize.x))
          ),
          static_cast<int>(m_ImgSize.x),
          static_cast<int>(m_ImgSize.y - m_OffSetY)}

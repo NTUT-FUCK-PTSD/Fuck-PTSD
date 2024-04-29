@@ -1,7 +1,6 @@
 #ifndef GHOST_H
 #define GHOST_H
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -26,11 +25,9 @@ public:
 private:
     const glm::vec2 m_FrameSize = {24, 24};
 
-    std::size_t m_LastDistance = 0;
+    std::size_t m_LastDistance;
 
     bool m_Transparent = false;
-
-    std::unique_ptr<Animation> m_Animation;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

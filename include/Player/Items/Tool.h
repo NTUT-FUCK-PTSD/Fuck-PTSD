@@ -33,10 +33,8 @@ public:
     }
 
 private:
-    const std::map<std::string, std::string> m_BaseTool = {
-      {"BOMB", "1"},
-      {"SHOVEL", "Shovel"},
-      {"WEAPON", "Dagger"}};
+    const std::map<std::string, std::string> m_BaseTool =
+        {{"BOMB", "1"}, {"SHOVEL", "Shovel"}, {"WEAPON", "Dagger"}};
 
     std::vector<std::shared_ptr<IEquip>> m_ToolList;
 

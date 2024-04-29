@@ -1,15 +1,12 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <string>
+#include "Util/GameObject.hpp"
 
 #include "Dungeon/SimpleMapData.h"
-#include "Dungeon/Tile.h"
+#include "Settings/Animation.h"
+#include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
-#include "SpriteSheet.hpp"
-#include "ToolBoxs.h"
-
-#include "Util/GameObject.hpp"
 
 namespace Dungeon {
 // Abstract class
@@ -34,54 +31,24 @@ public:
         m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
     }
 
-    [[nodiscard]]
     glm::vec2 GetPlayerPosition() const {
         return m_SimpleMapData->GetPlayerPosition();
     }
-    [[nodiscard]]
-    bool GetCanMove() const {
-        return m_CanMove;
-    }
-    [[nodiscard]]
-    const glm::vec2& GetGamePosition() const {
-        return m_GamePosition;
-    }
-    [[nodiscard]]
-    std::size_t GetBeatDelay() const {
-        return m_BeatDelay;
-    }
-    [[nodiscard]]
-    bool GetLord() const {
-        return m_Lord;
-    }
-    [[nodiscard]]
-    bool GetShadow() const {
-        return m_Shadow;
-    }
-    [[nodiscard]]
-    std::size_t GetDamage() const {
-        return m_Damage;
-    }
-    [[nodiscard]]
-    std::size_t GetHealth() const {
-        return m_Health;
-    }
-    [[nodiscard]]
-    std::size_t GetCoin() const {
-        return m_Coin;
-    }
-    [[nodiscard]]
-    const glm::vec2& GetWillMovePosition() const {
-        return m_WillMovePosition;
-    }
+    bool             GetCanMove() const { return m_CanMove; }
+    const glm::vec2& GetGamePosition() const { return m_GamePosition; }
+    std::size_t      GetID() const { return m_ID; }
+    std::size_t      GetBeatDelay() const { return m_BeatDelay; }
+    bool             GetLord() const { return m_Lord; }
+    bool             GetShadow() const { return m_Shadow; }
+    std::size_t      GetDamage() const { return m_Damage; }
+    std::size_t      GetHealth() const { return m_Health; }
+    std::size_t      GetCoin() const { return m_Coin; }
+    const glm::vec2& GetWillMovePosition() const { return m_WillMovePosition; }
     // DidAttack() is used to check if the enemy has attacked the player
     // it only returns true once after the enemy has attacked the player
     [[nodiscard]]
     bool DidAttack();
-    [[nodiscard]]
-    bool GetVisible() const {
-        return m_Visible;
-    }
+    bool GetVisible() const { return m_Visible; }
 
     virtual glm::vec2 FindNextToPlayer();  // Set available WillMovePosition to
                                            // slowly close PlayerPosition
@@ -101,12 +68,20 @@ public:
 
     bool GetSeen() const { return m_Seen; }
 
+    glm::vec2 GetPlayerPosition() {
+        return m_SimpleMapData->GetPlayerPosition();
+    }
+    float Heuristic(const glm::vec2& start, const glm::vec2& end) {
+        return m_SimpleMapData->Heuristic(start, end);
+    }
     void SetCameraUpdate(bool cameraUpdate);
 
 protected:
     virtual void Move() = 0;
 
     virtual void AttackPlayer();
+
+    virtual void UpdateAnimationType(const glm::vec2& direction);
 
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 
@@ -117,9 +92,12 @@ protected:
     bool                         m_CanMove = false;
     glm::vec2                    m_WillMovePosition;
 
-    bool m_AttackPlayer = false;
+    bool                       m_AttackPlayer = false;
+    std::unique_ptr<Animation> m_Animation;
+    std::size_t                m_AnimationType = 0;
 
 private:
+    std::size_t m_ID;
     std::size_t m_BeatDelay;
     bool        m_Lord;
     bool        m_Shadow = false;

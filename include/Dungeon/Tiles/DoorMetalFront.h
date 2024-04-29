@@ -1,11 +1,11 @@
 #ifndef DOORMETALFRONT_H
 #define DOORMETALFRONT_H
 
-#include "Dungeon/Tiles/GeneralDoorFront.h"
+#include "Dungeon/Tiles/GeneralDoor.h"
 
 namespace Dungeon {
 namespace Tiles {
-class DoorMetalFront final : public GeneralDoorFront {
+class DoorMetalFront final : public GeneralDoor {
 public:
     explicit DoorMetalFront(const s_Tile& u_Tile);
     virtual ~DoorMetalFront() override = default;

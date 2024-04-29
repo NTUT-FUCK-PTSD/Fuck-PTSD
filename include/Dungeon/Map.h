@@ -1,16 +1,16 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <memory>
 #include "Util/GameObject.hpp"
 
-#include "Camera.h"
+#include "Dungeon/Direction.h"
 #include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
-#include "Dungeon/Tile.h"
-#include "Player.h"
 #include "Player/Player.h"
+#include "Settings/Camera.h"
 
 namespace Dungeon {
 class Map final : public Util::GameObject {
@@ -41,8 +41,9 @@ public:
 
     bool IsOverlayRed() const { return m_OverlayRed; }
 
-    static glm::ivec2             m_Size;
-    static std::unique_ptr<Level> m_Level;
+    static glm::ivec2 GetSize() { return m_Size; }
+    static glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
+    static glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
 
 private:
     bool m_Available;
@@ -52,6 +53,17 @@ private:
     void TempoUpdate(bool isPlayer);
 
     std::vector<glm::vec2> m_EnemyMove = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
+
+    std::vector<glm::ivec2> m_Direction = {
+      RIGHT,
+      LEFT,
+      BOTTOM,
+      TOP,
+      BOTTOM_RIGHT,
+      TOP_RIGHT,
+      BOTTOM_LEFT,
+      TOP_LEFT
+    };
 
     const std::size_t ALLOW_EXTRA_DRAW = 4;
     bool              CheckShowPosition(
@@ -64,9 +76,13 @@ private:
     void EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy);
     bool CanPlayerSeePosition(const glm::vec2& position);
 
-    const std::size_t HalfColNumber = DUNGEON_COL_NUMBER / 2;
-    const std::size_t HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
-    std::size_t       m_LevelNum;
+    void DoorUpdate(std::size_t i, std::size_t j);
+
+    const std::size_t             HalfColNumber = DUNGEON_COL_NUMBER / 2;
+    const std::size_t             HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
+    static glm::ivec2             m_Size;
+    std::size_t                   m_LevelNum;
+    static std::unique_ptr<Level> m_Level;
 
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;

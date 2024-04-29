@@ -3,7 +3,7 @@
 namespace Dungeon {
 namespace Tiles {
 DoorMetalFront::DoorMetalFront(const s_Tile& u_Tile)
-    : GeneralDoorFront(u_Tile, false) {
+    : GeneralDoor(u_Tile, false) {
     m_MagicNumber = 26;
     UpdateDrawable();
 }

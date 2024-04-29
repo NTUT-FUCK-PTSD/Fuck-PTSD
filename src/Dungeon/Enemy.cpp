@@ -11,12 +11,16 @@ Enemy::Enemy(
 )
     : m_SimpleMapData(simpleMapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
+      m_Animation(
+          std::make_unique<Animation>(ToolBoxs::GamePostoPos(m_GamePosition))
+      ),
+      m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
     m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
-    SetZIndex(static_cast<float>(m_GamePosition.y + 0.125f));
+    SetZIndex(m_Animation->GetAnimationZIndex());
 }
 
 void Enemy::SetShadow(const bool shadow) {
@@ -91,7 +95,8 @@ glm::vec2 Enemy::FindNextToPlayer() {
     auto path = Dungeon::AStar::FindPath(
         GetGamePosition(),
         GetPlayerPosition(),
-        m_SimpleMapData
+        m_SimpleMapData,
+        10
     );
     if (path.empty()) {
         return GetGamePosition();
@@ -105,6 +110,23 @@ void Enemy::AttackPlayer() {
         m_CanMove = false;
         m_WillMovePosition = GetGamePosition();
         m_AttackPlayer = true;
+        m_Animation->MoveByTime(
+            200,
+            ToolBoxs::GamePostoPos(GetGamePosition()),
+            m_AnimationType + 5
+        );
+    }
+}
+
+void Enemy::UpdateAnimationType(const glm::vec2& direction) {
+    if (direction.x > 0) {
+        m_AnimationType = 1;
+    } else if (direction.x < 0) {
+        m_AnimationType = 3;
+    } else if (direction.y > 0) {
+        m_AnimationType = 0;
+    } else if (direction.y < 0) {
+        m_AnimationType = 2;
     }
 }
 
@@ -114,5 +136,4 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
         child->SetVisible(cameraUpdate);
     }
 }
-
 }  // namespace Dungeon

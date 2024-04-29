@@ -1,7 +1,6 @@
 #ifndef SKELETON_H
 #define SKELETON_H
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -17,18 +16,18 @@ public:
 
     void Update() override;
 
-    void AttackPlayer() override;
-
 private:
+    void UpdateProperties();
+
     const glm::vec2          m_FrameSize = {24, 28};
+    std::vector<std::size_t> m_SkeletonNormalFrames;
+    std::vector<std::size_t> m_SkeletonShadowFrames;
     std::vector<std::size_t> m_AttackFrames;
     std::vector<std::size_t> m_ShadowAttackFrames;
 
     bool m_Attack = false;
     bool m_CanDropHead = false;
     // bool m_DropHead = false;
-    std::unique_ptr<Animation> m_Animation;
-    uint16_t                   m_AnimationType;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

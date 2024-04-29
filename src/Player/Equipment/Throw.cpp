@@ -14,8 +14,8 @@ Throw::Throw() {
 
     GenWin();
     GenItem();
-    GeneralLowerText();
-    GeneralUpperText();
+    GenSecondLine();
+    GenFirstLine();
 
     m_Throw->SetVisible(false);
 };
@@ -51,7 +51,7 @@ void Throw::GenItem() {
     m_Throw->AddChild(m_Item);
 }
 
-void Throw::GeneralUpperText() {
+void Throw::GenFirstLine() {
     const auto UpperTextObject = std::make_shared<Util::Text>(
         m_TextStylePath,
         m_FontSize,
@@ -67,7 +67,7 @@ void Throw::GeneralUpperText() {
     m_Throw->AddChild(m_UpperText);
 }
 
-void Throw::GeneralLowerText() {
+void Throw::GenSecondLine() {
     const auto LowerTextObject = std::make_shared<Util::Text>(
         m_TextStylePath,
         m_FontSize,

@@ -22,7 +22,7 @@ public:
     void         SetIndex(std::size_t index);
     void         SetCloseDisplayB24(bool closeDisplayb24);
     void         SetRotation(float rotation);
-    void         SetOverlay(bool visible);
+    virtual void SetOverlay(bool visible);
     std::size_t  GetIndex();
     s_Tile       GetTile();
     bool         GetOverlay();

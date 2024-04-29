@@ -1,7 +1,6 @@
 #ifndef GREEN_SLIME_H
 #define GREEN_SLIME_H
 
-#include "Animation.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -18,8 +17,7 @@ public:
     void Update() override;
 
 private:
-    const glm::vec2            m_FrameSize = {26, 26};
-    std::unique_ptr<Animation> m_Animation;
+    const glm::vec2 m_FrameSize = {26, 26};
 };
 }  // namespace Enemies
 }  // namespace Dungeon

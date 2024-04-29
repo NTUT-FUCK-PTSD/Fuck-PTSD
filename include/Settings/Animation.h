@@ -2,7 +2,6 @@
 #define ANIMATION_H
 
 #include "Settings/Window.hpp"
-#include "glm/fwd.hpp"
 
 class Animation final {
 public:
@@ -32,11 +31,20 @@ private:
     float CalculateZIndex(const glm::vec2& position);
 
     const std::vector<glm::vec2> m_MoveAnimation = {
-      {0, DUNGEON_TILE_WIDTH},
-      {DUNGEON_TILE_WIDTH * 2 / 5, DUNGEON_TILE_WIDTH},
-      {-DUNGEON_TILE_WIDTH / 4, DUNGEON_TILE_WIDTH},
-      {-DUNGEON_TILE_WIDTH * 2 / 5, DUNGEON_TILE_WIDTH},
-      {0, 0}
+      {0, DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {DUNGEON_TILE_WIDTH * DUNGEON_SCALE / 7.5f,
+       DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE / 12.0f,
+       DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE / 7.5f,
+       DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {0.0f, 0.0f},
+      {0, -DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {DUNGEON_TILE_WIDTH * DUNGEON_SCALE / 3.0f,
+       DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {0, DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f},
+      {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE / 3.0f,
+       DUNGEON_TILE_WIDTH* DUNGEON_SCALE / 3.0f}
     };
 
     bool          m_IsAnimating = false;

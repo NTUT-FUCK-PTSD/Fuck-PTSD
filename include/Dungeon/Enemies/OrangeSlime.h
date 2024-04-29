@@ -3,7 +3,7 @@
 
 #include <random>
 
-#include "Animation.h"
+#include "Dungeon/Direction.h"
 #include "Dungeon/Enemy.h"
 
 namespace Dungeon {
@@ -19,22 +19,21 @@ public:
 
     void Update() override;
 
-    void AttackPlayer() override;
+    void UpdateState();
 
 private:
+    void UpdateFace(const glm::vec2& direction);
+
     const glm::vec2 m_FrameSize = {26, 26};
 
     std::size_t m_State = 0;
-    bool        m_NeedToMove = false;
 
     std::random_device                         m_RandomDevice;
     std::mt19937                               m_RandomGenerator;
     std::uniform_int_distribution<std::size_t> m_Distribution;
     std::size_t                                m_StartIdx = 0;
 
-    std::vector<glm::vec2> m_Movement = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-
-    std::unique_ptr<Animation> m_Animation;
+    std::vector<glm::vec2> m_Movement = {BOTTOM, RIGHT, TOP, LEFT};
 };
 }  // namespace Enemies
 }  // namespace Dungeon

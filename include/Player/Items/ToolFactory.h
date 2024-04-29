@@ -22,9 +22,15 @@ public:
         const std::string& type
     ) {
         switch (Settings::Hash::HashConvert(name)) {
+<<<<<<< HEAD
         case "BOMB"_hash: GenBomb(type); break;
         case "SHOVEL"_hash: GenShovel(type); break;
         case "WEAPON"_hash: GenWeapon(type); break;
+=======
+        case "BOMB"_hash: GenBomb(); break;
+        case "SHOVEL"_hash: GenShovel(); break;
+        case "WEAPON"_hash: GenWeapon(); break;
+>>>>>>> main
         default: throw std::runtime_error("Tool type is not available"); break;
         }
 
@@ -32,9 +38,15 @@ public:
     };
 
 private:
+<<<<<<< HEAD
     void GenBomb(const std::string& type);
     void GenShovel(const std::string& type);
     void GenWeapon(const std::string& type);
+=======
+    void GenBomb();
+    void GenShovel();
+    void GenWeapon();
+>>>>>>> main
 
     std::shared_ptr<IEquip> m_Result;
 };
