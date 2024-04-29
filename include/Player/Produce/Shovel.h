@@ -5,7 +5,7 @@
 #ifndef FUCK_PTSD_2024_4_29_SHOVEL_H
 #define FUCK_PTSD_2024_4_29_SHOVEL_H
 
-#include "IEquip.h"
+#include "Player/Factory/IEquip.h"
 
 class Shovel : public IEquip {
 public:

@@ -5,10 +5,10 @@
 #ifndef FUCK_PTSD_2024_4_29_DAGGER_H
 #define FUCK_PTSD_2024_4_29_DAGGER_H
 
-#include "IEquip.h"
+#include "Player/Factory/IEquip.h"
 class Dagger : public IEquip {
 public:
-    explicit Dagger() = default;
+    explicit Dagger();
     virtual ~Dagger() = default;
 
     [[nodiscard]]

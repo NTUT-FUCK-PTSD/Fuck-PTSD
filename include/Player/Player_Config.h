@@ -2,8 +2,8 @@
 // Created by adven on 2024/4/28.
 //
 
-#ifndef FUCK_PTSD_CONFIG_H
-#define FUCK_PTSD_CONFIG_H
+#ifndef FUCK_PTSD_PLAYER_CONFIG_H
+#define FUCK_PTSD_PLAYER_CONFIG_H
 
 #include <glm/vec2.hpp>
 #include <string_view>
@@ -26,6 +26,11 @@ static constexpr std::string_view IMAGE_SLOT_SHOVEL = ASSETS_DIR
 static constexpr std::string_view IMAGE_SHOVEL_BASIC = ASSETS_DIR
     "/items/shovel_basic.png";
 
+static constexpr std::string_view IMAGE_SLOT_DAGGER = ASSETS_DIR
+    "/gui/hud_slot_2.png";
+
+static constexpr std::string_view IMAGE_DAGGER = ASSETS_DIR "/items/weapon_dagger.png";
+
 static constexpr glm::vec2 VAL_FONT_SCALE = {5, 5};
 
 static constexpr std::size_t VAL_FONT_SIZE = 6;
@@ -40,4 +45,4 @@ static const Util::Color VAL_COLOR_WHITE = Util::Color(255, 255, 255);
 
 }  // namespace Players::Config
 
-#endif  // FUCK_PTSD_CONFIG_H
+#endif  // FUCK_PTSD_PLAYER_CONFIG_H

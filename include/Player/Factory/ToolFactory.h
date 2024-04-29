@@ -24,7 +24,7 @@ public:
         switch (Settings::Hash::HashConvert(name)) {
         case "BOMB"_hash: GenBomb(type); break;
         case "SHOVEL"_hash: GenShovel(type); break;
-        // case "WEAPON"_hash: GenWeapon(type); break;
+        case "WEAPON"_hash: GenWeapon(type); break;
         default: throw std::runtime_error("Tool type is not available"); break;
         }
 

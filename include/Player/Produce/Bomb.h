@@ -6,7 +6,7 @@
 #define FUCK_PTSD_2024_4_29_BOMB_H
 
 #include <string_view>
-#include "IEquip.h"
+#include "Player/Factory/IEquip.h"
 
 class Bomb : public IEquip {
 public:
