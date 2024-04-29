@@ -3,6 +3,7 @@
 //
 
 #include "Factory/Bomb.h"
+#include "Player/Config.h"
 #include "Settings/Helper.hpp"
 #include "SpriteSheet.hpp"
 
@@ -16,5 +17,8 @@ Bomb::Bomb(std::size_t number) {
 }
 
 void Bomb::GenSlot() {
-    const auto slotSize = Settings::Helper::
+    const auto& obj = std::make_shared<Util::GameObject>();
+    const auto& slot = std::make_shared<Util::Image>(
+        static_cast<std::string>(Players::Config::IMAGE_SLOT_BOMB)
+    );
 }
