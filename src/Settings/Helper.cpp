@@ -9,9 +9,9 @@ void Settings::Helper::Init(Dungeon::Map* dungeonMap) {
 }
 
 std::size_t Settings::Helper::GamePosToMapIdx(glm::ivec2 gamePos) {
-    return (gamePos.x - Dungeon::Map::m_Level->GetLevelIndexMin().x + 1)
-           + (gamePos.y - Dungeon::Map::m_Level->GetLevelIndexMin().y + 1)
-                 * Dungeon::Map::m_Size.x;
+    return (gamePos.x - m_DungeonMap->GetLevelIndexMax().x + 1)
+           + (gamePos.y - m_DungeonMap->GetLevelIndexMin().y + 1)
+                 * m_DungeonMap->GetSize().x;
 };
 
 Settings::Helper::PlayerPos Settings::Helper::GetPlayerPosDM() {
@@ -44,7 +44,7 @@ glm::vec2 Settings::Helper::CountImgPixel(
 
     const auto result = glm::vec2(
         ImageSize[0] / static_cast<float>(widthNumber),
-        ImageSize[1] / static_cast<float>(widthNumber)
+        ImageSize[1] / static_cast<float>(heightNumber)
     );
 
     return result;

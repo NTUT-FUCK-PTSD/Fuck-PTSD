@@ -5,15 +5,13 @@
 #include "Factory/Shovel.h"
 
 void Players::Items::ToolFactory::GenBomb(const std::string& type) {
-    const auto bomb = std::make_shared<Bomb>(std::stoi(type));
-    m_Result = bomb;
+    m_Result = std::make_shared<Bomb>(std::stoi(type));
+    // m_Result = bomb;
 }
 
 void Players::Items::ToolFactory::GenShovel(const std::string& type) {
     switch (Settings::Hash::HashConvert(type)) {
-    case "Shovel"_hash:
-        m_Result = std::make_shared<Shovel>();
-        // ...
+    case "Shovel"_hash: m_Result = std::make_shared<Shovel>(); break;
     default: throw std::runtime_error("Shovel's type is not available");
     }
 }

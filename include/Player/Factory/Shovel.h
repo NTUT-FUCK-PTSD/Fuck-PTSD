@@ -9,8 +9,20 @@
 
 class Shovel : public IEquip {
 public:
-    explicit Shovel() = default;
+    explicit Shovel();
     virtual ~Shovel() = default;
+
+    std::string GetName() const override{
+        return "SHOVEL";
+    }
+
+    std::string GetType() const override {
+        return "Basic";
+    }
+
+private:
+    void GenSlot();
+    void GenItem();
 };
 
 #endif  // FUCK_PTSD_2024_4_29_SHOVEL_H

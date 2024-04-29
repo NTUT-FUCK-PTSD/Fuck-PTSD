@@ -1,27 +1,14 @@
 #include "Player.h"
 
-#include "Equipment/TypeEquip.h"
-
 Player::Player()
     : m_Body(std::make_shared<GameElement>()),
       m_Head(std::make_shared<GameElement>()),
       m_Player(std::make_shared<GameElement>()),
       m_Coin(std::make_unique<Coin>()),
       m_Heart(std::make_unique<Heart>()),
-      m_Tools(std::make_unique<Tools>()),
+      m_Tool(std::make_unique<Tool>()),
       m_Diamond(std::make_unique<Diamond>()),
       m_Window(std::make_shared<GameElement>()) {
-    // create tool Throw
-    m_Tools->SetThrow();
-
-    // create tool bomb
-    m_Tools->SetBomb();
-
-    // create tool shovel
-    m_Tools->SetShovel(m_ShovelType);
-
-    // create tool Weapon
-    m_Tools->SetWeapon(m_WeaponType);
 
     // init Animation
     m_Animation = std::make_unique<Animation>(m_Position);
@@ -140,7 +127,7 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
     m_Window->AddChild(m_Coin->GetGameObject());
     m_Window->AddChild(m_Heart->GetGameObject());
     m_Window->AddChild(m_Diamond->GetGameObject());
-    m_Window->AddChild(m_Tools->GetGameObject());
+    m_Window->AddChild(m_Tool->GetGameObject());
     m_Window->SetVisible(false);
     return m_Window;
 }
@@ -177,24 +164,25 @@ void Player::gainHeart(std::size_t value) {
 //     m_Tools->SetShovelType();
 // }
 
-bool Player::IsShovelExist() {
-    return true;
-}
+// bool Player::IsShovelExist() {
+//     return true;
+// }
 
-bool Player::IsWeaponExist() {
-    return true;
-}
+// bool Player::IsWeaponExist() {
+//     return true;
+// }
 
-ShovelEnum::Type Player::GetShovelType() {
-    return m_ShovelType;
-}
+// ShovelEnum::Type Player::GetShovelType() {
+//     return m_ShovelType;
+// }
 
-WeaponEnum::Type Player::GetWeaponType() {
-    return m_WeaponType;
-}
+// WeaponEnum::Type Player::GetWeaponType() {
+//     return m_WeaponType;
+// }
 
 void Player::PrepareThrowOut(bool state) {
-    m_Tools->PrepareThrowOut(state);
+    // m_Tools->PrepareThrowOut(state);
+    return;
 }
 
 void Player::MoveByTime(

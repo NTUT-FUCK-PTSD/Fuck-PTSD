@@ -11,11 +11,9 @@
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "Player.h"
-#include "Player/Equipment/Shovel.h"
 #include "Player/Items/Coin.h"
 #include "Player/Items/Diamond.h"
 #include "Player/Items/Heart.h"
-#include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "Util/Text.hpp"
 
