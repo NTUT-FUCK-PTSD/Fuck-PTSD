@@ -46,8 +46,10 @@ message(STATUS "PTSD: ${PTSD_SOURCE_DIR}")
 message(STATUS "soloud NOT FOUND, fetching from source!")
 FetchContent_Declare(
         soloud
-        GIT_REPOSITORY https://github.com/onon1101/soloud.git
-        GIT_TAG onon1101-patch-2
+        URL             https://github.com/onon1101/soloud/archive/refs/tags/0.0.1.zip
+        URL_HASH        MD5=cf2fc645ac84f54c4478cea4b0fc9053
+#        GIT_REPOSITORY https://github.com/onon1101/soloud.git
+#        GIT_TAG onon1101-patch-2
 
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/soloud
 )
@@ -62,17 +64,3 @@ if (NOT soloud_POPULATED)
 endif()
 
 message(STATUS "soloud: ${soloud_SOURCE_DIR}")
-
-
-#FetchContent_GetProperties(PTSD)
-#if(NOT PTSD_POPULATED)
-#    FetchContent_Populate(PTSD)
-#    add_subdirectory(${PTSD_SOURCE_DIR} ${PTSD_BINARY_DIR})
-#endif()
-
-#include_directories(${PTSD_SOURCE_DIR}/include)
-
-#add_library(PTSD INTERFACE)
-
-#target_include_directories(PTSD INTERFACE ${asio_SOURCE_DIR}/PTSD/include)
-
