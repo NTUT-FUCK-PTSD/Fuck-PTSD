@@ -52,8 +52,8 @@ private:
 private:
     void GenWin();
     void GenItem();
-    void GeneralUpperText();
-    void GeneralLowerText();
+    void GenFirstLine();
+    void GenSecondLine();
 };
 
 #endif  // FUCK_PTSD_THROW_H
