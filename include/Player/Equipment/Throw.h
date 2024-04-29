@@ -20,6 +20,8 @@ public:
     std::shared_ptr<GameElement> GetGameObject() const override;
     Direction GetDirection() override { return IEquipment::Direction::COL; };
 
+    void PrepareThrowOut(bool state = false) override;
+
 private:
     std::size_t m_ZIndex = 99;
     glm::vec2   m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
@@ -35,13 +37,23 @@ private:
     //    ASSETS_DIR "/gui/diamond.png"
 
     std::string m_ImagePathWindow = ASSETS_DIR "/gui/hud_slot_throw.png";
+    std::string m_ImagePathThrow = ASSETS_DIR "/gui/hud_slot_throw2.png";
     std::string m_ImagePathItem = ASSETS_DIR "/items/weapon_dagger.png";
 
     std::shared_ptr<GameElement> m_Window = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Item = std::make_shared<GameElement>();
-    std::shared_ptr<GameElement> m_Text = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_UpperText = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_LowerText = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_Throw = std::make_shared<GameElement>();
+
+    std::shared_ptr<Util::Image> m_NormalSlot;
+    std::shared_ptr<Util::Image> m_ThrowSlot;
+
+private:
+    void GenWin();
+    void GenItem();
+    void GenFirstLine();
+    void GenSecondLine();
 };
 
 #endif  // FUCK_PTSD_THROW_H

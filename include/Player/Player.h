@@ -75,6 +75,8 @@ public:
     bool             IsWeaponExist();
     WeaponEnum::Type GetWeaponType();
 
+    void PrepareThrowOut(bool state);
+
     void MoveByTime(
         const unsigned long duringTimeMs,
         const glm::vec2&    destination,

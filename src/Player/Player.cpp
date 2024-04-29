@@ -193,6 +193,10 @@ WeaponEnum::Type Player::GetWeaponType() {
     return m_WeaponType;
 }
 
+void Player::PrepareThrowOut(bool state) {
+    m_Tools->PrepareThrowOut(state);
+}
+
 void Player::MoveByTime(
     const unsigned long duringTimeMs,
     const glm::vec2&    destination,
