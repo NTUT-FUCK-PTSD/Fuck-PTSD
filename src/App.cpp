@@ -1,6 +1,5 @@
 #include "App.hpp"
 
-
 #include <Util/Input.hpp>
 #include <Util/Logger.hpp>
 #include "Actions.h"
@@ -80,7 +79,7 @@ void App::Start() {
     Dungeon::MapEvent::AttackPlayer.append([this](const std::size_t damage) {
         m_MainCharacter->lostHP(damage);
     });
-    Dungeon::MapEvent::ResetMap.append([this]() {
+    Dungeon::MapEvent::EventDispatcher.appendListener("ResetMap", [this]() {
         m_MainCharacter->SetGamePosition({0, 0});
     });
     m_Camera->AddChild(m_MainCharacter->GetGameElement());

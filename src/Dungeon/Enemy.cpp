@@ -22,11 +22,17 @@ Enemy::Enemy(
     SetGamePosition(m_GamePosition);
     m_Transform.translation = m_Animation->GetAnimationPosition();
     SetZIndex(m_Animation->GetAnimationZIndex());
-    m_DrawableUpdate = MapEvent::DrawableUpdate.append([this]() { Update(); });
+    m_DrawableUpdate = MapEvent::EventDispatcher.appendListener(
+        "DrawableUpdate",
+        [this]() { Update(); }
+    );
 }
 
 Enemy::~Enemy() {
-    MapEvent::DrawableUpdate.remove(m_DrawableUpdate);
+    MapEvent::EventDispatcher.removeListener(
+        "DrawableUpdate",
+        m_DrawableUpdate
+    );
 }
 
 void Enemy::SetShadow(const bool shadow) {

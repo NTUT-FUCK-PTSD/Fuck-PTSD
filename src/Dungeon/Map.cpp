@@ -64,7 +64,7 @@ void Map::InitEvent() {
         CameraUpdate();
     });
 
-    MapEvent::ResetMap.append([this]() {
+    MapEvent::EventDispatcher.appendListener("ResetMap", [this]() {
         m_Children.clear();
         if (m_MapData) {
             m_MapData->ClearTiles();
@@ -79,11 +79,11 @@ void Map::InitEvent() {
 }
 
 Map::~Map() {
-    MapEvent::ResetMap();
+    MapEvent::EventDispatcher.dispatch("ResetMap");
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    MapEvent::ResetMap();
+    MapEvent::EventDispatcher.dispatch("ResetMap");
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
@@ -343,7 +343,7 @@ void Map::Update() {
         m_OverlayRed = false;
     }
 
-    MapEvent::DrawableUpdate();
+    MapEvent::EventDispatcher.dispatch("DrawableUpdate");
 }
 
 std::size_t Map::GamePostion2MapIndex(const glm::ivec2& position) const {
