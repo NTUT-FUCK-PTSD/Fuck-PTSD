@@ -2,6 +2,9 @@
 // Created by 陳世昂 on 2024/4/29.
 //
 
+#include <exception>
+#include "Produce/Dagger.h"
+
 #include "Player/Items/Tools.h"
 
 Players::Tools::Tools() {
@@ -23,24 +26,31 @@ Players::Tools::Tools() {
 void Players::Tools::AddTool(const std::shared_ptr<IEquip>& ge) {
     m_ToolList.push_back(ge);
     m_GameElement->AddChild(ge);
+
+    ReArrange();
 };
+
+std::shared_ptr<IEquip> Players::Tools::GetTool(std::size_t idx) {
+    if (idx >= m_ToolList.size()) {
+        throw std::runtime_error("tools idx is out of range");
+    }
+
+    return m_ToolList.at(idx);
+}
+
+template <class T>
+T* Players::Tools::GetTool(std::size_t idx) {
+    return dynamic_cast<T>(m_ToolList.at(2).get());
+}
+
+std::vector<std::shared_ptr<IEquip>> Players::Tools::GetAllTools() {
+    return m_ToolList;
+}
 
 std::shared_ptr<Util::GameObject> Players::Tools::GetGameObject()  {
     return static_cast<std::shared_ptr<Util::GameObject>>(m_GameElement);
 }
 
-void Players::Tools::RePosition() {
-    std::vector<glm::vec2> pos = {
-      {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 55},
-      {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 195},
-      {-int(WINDOW_WIDTH) / 2 + 65, WINDOW_HEIGHT / 2 - 335},
-    };
-
-    std::size_t idx = 0;
-    for (const auto& elem : m_ToolList) {
-        elem->SetPosition(pos[idx++]);
-    }
-}
 
 void Players::Tools::ReArrange() {
 
@@ -54,8 +64,6 @@ void Players::Tools::ReArrange() {
             continue;
         }
         elem->SetPosition(initCol);
-        LOG_INFO(initCol);
-//        elem->SetPosition({-655,-335});
         initCol += glm::vec2{0, 140};
     }
 }

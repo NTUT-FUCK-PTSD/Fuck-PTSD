@@ -9,6 +9,7 @@
 
 //#include "Dungeon/Map.h"
 #include "config.hpp"
+#include "Produce/Dagger.h"
 #include "Player/Factory/IEquip.h"
 #include "Player/Factory/ToolFactory.h"
 
@@ -19,16 +20,25 @@ public:
 
     void AddTool(const std::shared_ptr<IEquip>& ge);
 
+    std::string Print() {return "test";}
+
+    std::shared_ptr<IEquip> GetTool(std::size_t idx);
+
+    template <class T>
+    T* GetTool(std::size_t idx);
+
+    std::vector<std::shared_ptr<IEquip>> GetAllTools();
+
     std::shared_ptr<Util::GameObject> GetGameObject();
 
 private:
-    void RePosition();
     void ReArrange();
 
     const std::map<std::string, std::string> m_BaseTool = {
       {"BOMB", "1"},
       {"SHOVEL", "Shovel"},
       {"WEAPON", "Dagger"}};
+
 
     std::shared_ptr<Util::GameElement> m_GameElement;
 

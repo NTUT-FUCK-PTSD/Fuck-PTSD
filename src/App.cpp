@@ -4,6 +4,8 @@
 
 #include "Dungeon/MapHandler.h"
 
+#include "Produce/Dagger.h"
+
 using namespace tinyxml2;
 
 extern "C" {
@@ -93,6 +95,10 @@ void App::Start() {
 
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
+
+    Dagger* m = dynamic_cast<Dagger*>(m_MainCharacter->GetAllTools()->GetTool(2).get());
+    LOG_DEBUG(m->GetName());
+//    const auto& m = m_MainCharacter->GetAllTools()->GetTool<Dagger>(2);
 
     m_CurrentState = State::UPDATE;
 }

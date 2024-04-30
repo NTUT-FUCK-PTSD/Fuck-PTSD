@@ -70,6 +70,7 @@ public:
     );
 
     // tool's handle
+    std::shared_ptr<Players::Tools> GetAllTools();
     // about Shovel
     // bool             IsShovelExist();
     // ShovelEnum::Type GetShovelType();
@@ -107,7 +108,7 @@ private:
 
     std::unique_ptr<Coin>        m_Coin;
     std::unique_ptr<Heart>       m_Heart;
-    std::unique_ptr<Players::Tools>        m_Tool;
+    std::shared_ptr<Players::Tools>        m_Tool;
     std::unique_ptr<Diamond>     m_Diamond;
     std::shared_ptr<GameElement> m_Window;
 
