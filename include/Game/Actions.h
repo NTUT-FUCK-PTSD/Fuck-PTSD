@@ -8,7 +8,7 @@
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
 
-#include "Game/Config.h"
+#include "Game/Game_config.h"
 #include "Game/Graphs/Dagger.h"
 #include "Game/System.h"
 #include "Settings/Helper.hpp"

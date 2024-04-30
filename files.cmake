@@ -11,6 +11,6 @@ list(APPEND CUSTOMIZE_PATH
         ${CMAKE_CURRENT_BINARY_DIR}/include/Music
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Dungeon/Enemies
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Game/Graphs
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/Game/System
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/Game/Systems
 
 )
