@@ -8,8 +8,8 @@
 #include <glm/vec2.hpp>
 #include <string_view>
 
-#include "Dungeon/Map.h"
 #include "Util/Color.hpp"
+#include "config.hpp"
 
 namespace Players::Config {
 static constexpr std::string_view IMAGE_SLOT_BOMB = ASSETS_DIR

@@ -23,21 +23,18 @@
 namespace Game::Systems {
 class HPIS final {
 public:
-    explicit HPIS(Player* player)
-        : m_Players(player) {
+    // explicit HPIS(Player* player);
 
-          };
-
-    void WeaponChange() {
-        const auto& item = dynamic_cast<Dagger*>(
-            m_Players->GetToolMod()->GetTool(2).get()
-        );
-        const auto& _throw = std::make_shared<Game::Warehouse::Throw>(Config::IMAGE_DAGGER_PATH);
-        m_Players->GetToolMod()->AddTool(_throw);
-    };
+    /**
+     * @note Create-with System-Init
+     */
+    static void Init(Player* player);
 
 private:
-    Player* m_Players;
+    static Player* m_Players;
+
+private:
+    static void IsExistWeaponThrow();
 };
 }  // namespace Game::Systems
 

@@ -31,24 +31,19 @@ void Players::Tools::AddTool(const std::shared_ptr<IEquip>& ge) {
     ReArrange();
 };
 
-std::shared_ptr<IEquip> Players::Tools::GetTool(std::size_t idx) {
-    if (idx >= m_ToolList.size()) {
-        throw std::runtime_error("tools idx is out of range");
-    }
+// std::shared_ptr<IEquip> Players::Tools::GetTool(std::size_t idx) {
+//     if (idx >= m_ToolList.size()) {
+//         throw std::runtime_error("tools idx is out of range");
+//     }
 
-    const auto& result = m_ToolList.at(idx);
-    const auto& iter = m_BaseTool.find(result->GetName());
+//     const auto& result = m_ToolList.at(idx);
+//     const auto& iter = m_BaseTool.find(result->GetName());
 
-    if (iter != m_BaseTool.end()) {
-        return result;
-    }
-    return nullptr;
-}
-
-template <class T>
-T* Players::Tools::GetTool(std::size_t idx) {
-    return dynamic_cast<T>(m_ToolList.at(2).get());
-}
+//     if (iter != m_BaseTool.end()) {
+//         return result;
+//     }
+//     return nullptr;
+// }
 
 std::vector<std::shared_ptr<IEquip>> Players::Tools::GetAllTools() {
     return m_ToolList;
@@ -70,7 +65,7 @@ void Players::Tools::ReArrange() {
         }
         LOG_INFO(initCol);
         elem->SetPosition(initCol);
-//        initCol += glm::vec2{0, 140};
+        //        initCol += glm::vec2{0, 140};
         initCol += glm::vec2{0, -140};
     }
 }

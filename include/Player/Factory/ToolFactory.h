@@ -17,19 +17,11 @@ class ToolFactory {
 public:
     explicit ToolFactory() = default;
 
+    [[nodiscard]]
     std::shared_ptr<IEquip> MakeTool(
         const std::string& name,
         const std::string& type
-    ) {
-        switch (Settings::Hash::HashConvert(name)) {
-        case "BOMB"_hash: GenBomb(type); break;
-        case "SHOVEL"_hash: GenShovel(type); break;
-        case "WEAPON"_hash: GenWeapon(type); break;
-        default: throw std::runtime_error("Tools type is not available"); break;
-        }
-
-        return m_Result;
-    };
+    );
 
 private:
     void GenBomb(const std::string& type);

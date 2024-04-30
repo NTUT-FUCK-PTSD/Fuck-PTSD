@@ -4,6 +4,20 @@
 #include "Produce/Dagger.h"
 #include "Produce/Shovel.h"
 
+std::shared_ptr<IEquip> Players::Items::ToolFactory::MakeTool(
+    const std::string& name,
+    const std::string& type
+) {
+    switch (Settings::Hash::HashConvert(name)) {
+    case "BOMB"_hash: GenBomb(type); break;
+    case "SHOVEL"_hash: GenShovel(type); break;
+    case "WEAPON"_hash: GenWeapon(type); break;
+    default: throw std::runtime_error("Tools type is not available"); break;
+    }
+
+    return m_Result;
+}
+
 void Players::Items::ToolFactory::GenBomb(const std::string& type) {
     m_Result = std::make_shared<Bomb>(std::stoi(type));
 }

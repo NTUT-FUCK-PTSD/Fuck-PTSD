@@ -5,6 +5,7 @@
 #include "Dungeon/MapHandler.h"
 
 #include "Produce/Dagger.h"
+#include "Util/Logger.hpp"
 
 using namespace tinyxml2;
 
@@ -97,7 +98,9 @@ void App::Start() {
     Game::System::Init(m_DungeonMap.get());
 
     m_HPISystem = std::make_shared<Game::Systems::HPIS>(m_MainCharacter.get());
-    m_HPISystem->WeaponChange();
+
+    // auto t = m_MainCharacter->GetToolMod()->GetTool<Dagger>(2);
+    // LOG_INFO(t->GetName());
 
     m_CurrentState = State::UPDATE;
 }
