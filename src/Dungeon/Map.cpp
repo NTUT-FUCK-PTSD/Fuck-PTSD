@@ -2,7 +2,10 @@
 
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
-#include "MapEvent.h"
+
+#include "Event/EventArgs.h"
+#include "Event/EventType.h"
+#include "eventpp/utilities/argumentadapter.h"
 namespace Dungeon {
 
 Map::Map(
@@ -28,7 +31,7 @@ Map::Map(
 }
 
 void Map::InitEvent() {
-    MapEvent::Dispatcher.appendListener(
+    Event::Dispatcher.appendListener(
         EventType::AttackPlayer,
         [this](const EventArgs&) {
             m_Camera->Shake(100, 10);
@@ -37,40 +40,44 @@ void Map::InitEvent() {
         }
     );
 
-    MapEvent::Dispatcher.appendListener(
+    Event::Dispatcher.appendListener(
         EventType::EnemyMove,
-        [this](const EventArgs& e) {
-            auto enemy = m_MapData->GetEnemy(e.from);
-            if (enemy) {
-                auto gamePosition = MapIndex2GamePosition(e.to);
-                enemy->SetGamePosition(gamePosition);
-                m_MapData->MoveEnemy(e.from, e.to);
-                if (CheckShowPosition(
-                        gamePosition,
-                        m_MapData->GetPlayerPosition()
-                    )) {
-                    enemy->SetCameraUpdate(true);
-                    if (CanPlayerSeePosition(gamePosition)) {
-                        enemy->SetShadow(false);
-                    } else {
-                        enemy->SetShadow(true);
+        eventpp::argumentAdapter<void(const EnemyMoveEventArgs&)>(
+            [this](const EnemyMoveEventArgs& e) {
+                auto enemy = m_MapData->GetEnemy(e.GetFrom());
+                if (enemy) {
+                    auto gamePosition = MapIndex2GamePosition(e.GetTo());
+                    enemy->SetGamePosition(gamePosition);
+                    m_MapData->MoveEnemy(e.GetFrom(), e.GetTo());
+                    if (CheckShowPosition(
+                            gamePosition,
+                            m_MapData->GetPlayerPosition()
+                        )) {
+                        enemy->SetCameraUpdate(true);
+                        if (CanPlayerSeePosition(gamePosition)) {
+                            enemy->SetShadow(false);
+                        } else {
+                            enemy->SetShadow(true);
+                        }
                     }
+                    m_MiniMap->UpdateCubeColor(e.GetFrom());
+                    m_MiniMap->UpdateCubeColor(e.GetTo());
                 }
-                m_MiniMap->UpdateCubeColor(e.from);
-                m_MiniMap->UpdateCubeColor(e.to);
             }
-        }
+        )
     );
 
-    MapEvent::Dispatcher.appendListener(
+    Event::Dispatcher.appendListener(
         EventType::PlayerMove,
-        [this](const EventArgs& e) {
-            PlayerMove(e.gamePosition);
-            CameraUpdate();
-        }
+        eventpp::argumentAdapter<void(const PlayerMoveEventArgs&)>(
+            [this](const PlayerMoveEventArgs& e) {
+                PlayerMove(e.GetGamePosition());
+                CameraUpdate();
+            }
+        )
     );
 
-    MapEvent::Dispatcher.appendListener(
+    Event::Dispatcher.appendListener(
         EventType::ResetMap,
         [this](const EventArgs&) {
             m_Children.clear();
@@ -88,16 +95,16 @@ void Map::InitEvent() {
 }
 
 Map::~Map() {
-    MapEvent::Dispatcher.dispatch(
+    Event::Dispatcher.dispatch(
         EventType::ResetMap,
-        EventArgs{.type = EventType::ResetMap}
+        EventArgs(EventType::ResetMap)
     );
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    MapEvent::Dispatcher.dispatch(
+    Event::Dispatcher.dispatch(
         EventType::ResetMap,
-        EventArgs{.type = EventType::ResetMap}
+        EventArgs(EventType::ResetMap)
     );
 
     if (!m_Level->LoadLevel(levelNum)) {
@@ -358,9 +365,9 @@ void Map::Update() {
         m_OverlayRed = false;
     }
 
-    MapEvent::Dispatcher.dispatch(
+    Event::Dispatcher.dispatch(
         EventType::DrawableUpdate,
-        EventArgs{.type = EventType::DrawableUpdate}
+        EventArgs(EventType::DrawableUpdate)
     );
 }
 

@@ -1,13 +1,13 @@
 #include "Dungeon/MiniMap.h"
 
-#include "Dungeon/MapEvent.h"
+#include "Event/Event.h"
 
 namespace Dungeon {
 MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
     : m_MapData(mapData) {
     BuildMiniMap();
     Update();
-    MapEvent::Dispatcher.appendListener(
+    Event::Dispatcher.appendListener(
         EventType::DrawableUpdate,
         [this](const EventArgs&) { UpdatePlayer(); }
     );

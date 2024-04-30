@@ -1,4 +1,4 @@
-#include "Dungeon/MapEvent.h"
+#include "Event/Event.h"
 
 eventpp::EventDispatcher<EventType, void(const EventArgs&), EventPolicies>
-    Dungeon::MapEvent::Dispatcher;
+    Event::Dispatcher;

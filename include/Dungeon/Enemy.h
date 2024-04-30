@@ -3,8 +3,8 @@
 
 #include "Util/GameObject.hpp"
 
-#include "Dungeon/MapEvent.h"
 #include "Dungeon/SimpleMapData.h"
+#include "Event/Event.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
@@ -103,7 +103,7 @@ private:
 
     bool m_Seen = false;
 
-    MapEvent::DispatcherHandle m_DrawableUpdate;
+    Event::DispatcherHandle m_DrawableUpdate;
 };
 }  // namespace Dungeon
 
