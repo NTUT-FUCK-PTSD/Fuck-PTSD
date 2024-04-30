@@ -9,7 +9,6 @@ Player::Player()
       m_Tool(std::make_shared<Players::Tools>()),
       m_Diamond(std::make_unique<Diamond>()),
       m_Window(std::make_shared<GameElement>()) {
-
     // init Animation
     m_Animation = std::make_unique<Animation>(m_Position);
 
@@ -160,11 +159,11 @@ void Player::gainHeart(std::size_t value) {
     m_Heart->gainHeart(value);
 }
 
-std::shared_ptr<Players::Tools> Player::GetAllTools() {
+std::shared_ptr<Players::Tools> Player::GetToolMod() {
     return m_Tool;
 }
 
-    // void Player::useDefaultSettingsTool() {
+// void Player::useDefaultSettingsTool() {
 //     m_Tools->SetShovelType();
 // }
 

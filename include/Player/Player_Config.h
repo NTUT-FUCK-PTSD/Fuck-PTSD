@@ -29,7 +29,14 @@ static constexpr std::string_view IMAGE_SHOVEL_BASIC = ASSETS_DIR
 static constexpr std::string_view IMAGE_SLOT_DAGGER = ASSETS_DIR
     "/gui/hud_slot_2.png";
 
-static constexpr std::string_view IMAGE_DAGGER = ASSETS_DIR "/items/weapon_dagger.png";
+static constexpr std::string_view IMAGE_SLOT_THROW = ASSETS_DIR
+    "/gui/hud_slot_throw.png";
+
+static constexpr std::string_view IMAGE_SLOT_THROW2 = ASSETS_DIR
+    "/gui/hud_slot_throw2.png";
+
+static constexpr std::string_view IMAGE_DAGGER = ASSETS_DIR
+    "/items/weapon_dagger.png";
 
 static constexpr glm::vec2 VAL_FONT_SCALE = {3, 3};
 

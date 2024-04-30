@@ -12,7 +12,6 @@
 #include "Items/Diamond.h"
 #include "Items/Heart.h"
 
-
 #include "Player/Items/Tools.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
@@ -70,7 +69,7 @@ public:
     );
 
     // tool's handle
-    std::shared_ptr<Players::Tools> GetAllTools();
+    std::shared_ptr<Players::Tools> GetToolMod();
     // about Shovel
     // bool             IsShovelExist();
     // ShovelEnum::Type GetShovelType();
@@ -106,11 +105,11 @@ private:
     std::shared_ptr<GameElement> m_Head;
     std::shared_ptr<GameElement> m_Player;
 
-    std::unique_ptr<Coin>        m_Coin;
-    std::unique_ptr<Heart>       m_Heart;
-    std::shared_ptr<Players::Tools>        m_Tool;
-    std::unique_ptr<Diamond>     m_Diamond;
-    std::shared_ptr<GameElement> m_Window;
+    std::unique_ptr<Coin>           m_Coin;
+    std::unique_ptr<Heart>          m_Heart;
+    std::shared_ptr<Players::Tools> m_Tool;
+    std::unique_ptr<Diamond>        m_Diamond;
+    std::shared_ptr<GameElement>    m_Window;
 
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};

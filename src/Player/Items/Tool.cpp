@@ -3,6 +3,7 @@
 //
 
 #include <exception>
+#include <iterator>
 #include "Produce/Dagger.h"
 
 #include "Player/Items/Tools.h"
@@ -24,7 +25,7 @@ Players::Tools::Tools() {
 };
 
 void Players::Tools::AddTool(const std::shared_ptr<IEquip>& ge) {
-    m_ToolList.push_back(ge);
+    m_ToolList.insert(m_ToolList.begin(), ge);
     m_GameElement->AddChild(ge);
 
     ReArrange();
@@ -35,7 +36,13 @@ std::shared_ptr<IEquip> Players::Tools::GetTool(std::size_t idx) {
         throw std::runtime_error("tools idx is out of range");
     }
 
-    return m_ToolList.at(idx);
+    const auto& result = m_ToolList.at(idx);
+    const auto& iter = m_BaseTool.find(result->GetName());
+
+    if (iter != m_BaseTool.end()) {
+        return result;
+    }
+    return nullptr;
 }
 
 template <class T>
@@ -47,23 +54,23 @@ std::vector<std::shared_ptr<IEquip>> Players::Tools::GetAllTools() {
     return m_ToolList;
 }
 
-std::shared_ptr<Util::GameObject> Players::Tools::GetGameObject()  {
+std::shared_ptr<Util::GameObject> Players::Tools::GetGameObject() {
     return static_cast<std::shared_ptr<Util::GameObject>>(m_GameElement);
 }
 
-
 void Players::Tools::ReArrange() {
-
     auto initCol = m_ColInitPos;
     auto initRow = m_RowInitPos;
 
     for (const auto& elem : m_ToolList) {
         if (elem->GetWinPos() == IEquip::ROW) {
             elem->SetPosition(initRow);
-            initRow += glm::vec2{-100, 0};
+            initRow += glm::vec2{100, 0};
             continue;
         }
+        LOG_INFO(initCol);
         elem->SetPosition(initCol);
-        initCol += glm::vec2{0, 140};
+//        initCol += glm::vec2{0, 140};
+        initCol += glm::vec2{0, -140};
     }
 }

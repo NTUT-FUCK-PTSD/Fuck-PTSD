@@ -8,6 +8,7 @@
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
 #include "Dungeon/Map.h"
+#include "HPIS.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "Player.h"
@@ -28,6 +29,7 @@
 #include "Game/System.h"
 #include "Music/Player.h"
 
+#include <memory>
 #include "Util/Keycode.hpp"
 
 class App {
@@ -58,7 +60,6 @@ private:
     bool                        m_IsMainMenu = true;
     bool                        m_ThrowMode = false;
 
-
     // settings
     glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
     glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
@@ -77,7 +78,10 @@ private:
     std::size_t                   m_BeforeTempoIndex = 0;
     std::size_t                   m_TempoIndex = 0;
 
+    // addition
     static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
+
+    std::shared_ptr<Game::Systems::HPIS> m_HPISystem;
 };
 
 #endif

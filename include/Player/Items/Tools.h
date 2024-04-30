@@ -52,7 +52,7 @@ private:
       static_cast<int>(WINDOW_HEIGHT) / 2 - 195};
 
     static constexpr glm::vec2 m_RowInitPos = {
-      static_cast<int>(-WINDOW_WIDTH) / 2 + 165,
+      static_cast<int>(-WINDOW_WIDTH) / 2 + 65,
       static_cast<int>(WINDOW_HEIGHT) / 2 - 55};
 };
 }

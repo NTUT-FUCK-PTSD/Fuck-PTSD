@@ -7,10 +7,16 @@
 
 #include <string>
 
-namespace Game{
+namespace Game {
 namespace Config {
-    static const std::string IMAGE_DAGGER_PATH = ASSETS_DIR"/items/weapon_dagger.png";
-}
-}
+static const std::string IMAGE_DAGGER_PATH = ASSETS_DIR
+    "/items/weapon_dagger.png";
+
+/**
+ * @note Special Function's stage
+ */
+enum class SF { INIT = 0, FIRST, SECOND, THRIED };
+}  // namespace Config
+}  // namespace Game
 
 #endif  // FUCK_PTSD_GAME_CONFIG_H
