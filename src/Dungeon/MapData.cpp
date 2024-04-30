@@ -1,7 +1,5 @@
 #include "Dungeon/MapData.h"
 
-#include <fmt/core.h>
-
 namespace Dungeon {
 MapData::MapData(
     const glm::vec2& levelIndexMin,
