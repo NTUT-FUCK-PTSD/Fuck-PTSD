@@ -87,11 +87,17 @@ void Map::InitEvent() {
 }
 
 Map::~Map() {
-    MapEvent::Dispatcher.dispatch(EventType::ResetMap, Event{});
+    MapEvent::Dispatcher.dispatch(
+        EventType::ResetMap,
+        Event{.type = EventType::ResetMap}
+    );
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    MapEvent::Dispatcher.dispatch(EventType::ResetMap, Event{});
+    MapEvent::Dispatcher.dispatch(
+        EventType::ResetMap,
+        Event{.type = EventType::ResetMap}
+    );
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
