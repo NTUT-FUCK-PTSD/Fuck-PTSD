@@ -9,6 +9,7 @@
 #include "Dungeon/MapHandler.h"
 #include "HPIS.h"
 #include "Helper.hpp"
+#include "MapEvent.h    "
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
@@ -76,12 +77,14 @@ void App::Start() {
     m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
     m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png"
     );
-    Dungeon::MapEvent::AttackPlayer.append([this](const std::size_t damage) {
-        m_MainCharacter->lostHP(damage);
-    });
-    Dungeon::MapEvent::EventDispatcher.appendListener("ResetMap", [this]() {
-        m_MainCharacter->SetGamePosition({0, 0});
-    });
+    Dungeon::MapEvent::Dispatcher.appendListener(
+        EventType::AttackPlayer,
+        [this](const Event& e) { m_MainCharacter->lostHP(e.damage); }
+    );
+    Dungeon::MapEvent::Dispatcher.appendListener(
+        EventType::ResetMap,
+        [this](const Event&) { m_MainCharacter->SetGamePosition({0, 0}); }
+    );
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
     m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
 
@@ -276,7 +279,13 @@ void App::Update() {
         m_MainCharacter
             ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
         m_MainCharacter->Update();
-        Dungeon::MapEvent::PlayerMove(m_MainCharacter->GetGamePosition());
+        Dungeon::MapEvent::Dispatcher.dispatch(
+            EventType::PlayerMove,
+            Event{
+              .type = EventType::PlayerMove,
+              .position = m_MainCharacter->GetGamePosition()
+            }
+        );
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->PlayerTrigger();
     }

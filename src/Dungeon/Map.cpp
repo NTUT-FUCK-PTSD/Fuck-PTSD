@@ -2,7 +2,6 @@
 
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
-#include "MapEvent.h"
 namespace Dungeon {
 
 Map::Map(
@@ -28,20 +27,23 @@ Map::Map(
 }
 
 void Map::InitEvent() {
-    MapEvent::AttackPlayer.append([this](const std::size_t damage) {
-        (void)damage;
-        m_Camera->Shake(100, 10);
-        m_OverlayRed = true;
-        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
-    });
+    MapEvent::Dispatcher.appendListener(
+        EventType::AttackPlayer,
+        [this](const Event&) {
+            m_Camera->Shake(100, 10);
+            m_OverlayRed = true;
+            m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
+        }
+    );
 
-    MapEvent::EnemyMove.append(
-        [this](const std::size_t srcMapIndex, const std::size_t destMapIndex) {
-            auto enemy = m_MapData->GetEnemy(srcMapIndex);
+    MapEvent::Dispatcher.appendListener(
+        EventType::EnemyMove,
+        [this](const Event& e) {
+            auto enemy = m_MapData->GetEnemy(e.from);
             if (enemy) {
-                auto gamePosition = MapIndex2GamePosition(destMapIndex);
+                auto gamePosition = MapIndex2GamePosition(e.to);
                 enemy->SetGamePosition(gamePosition);
-                m_MapData->MoveEnemy(srcMapIndex, destMapIndex);
+                m_MapData->MoveEnemy(e.from, e.to);
                 if (CheckShowPosition(
                         gamePosition,
                         m_MapData->GetPlayerPosition()
@@ -53,37 +55,43 @@ void Map::InitEvent() {
                         enemy->SetShadow(true);
                     }
                 }
-                m_MiniMap->UpdateCubeColor(srcMapIndex);
-                m_MiniMap->UpdateCubeColor(destMapIndex);
+                m_MiniMap->UpdateCubeColor(e.from);
+                m_MiniMap->UpdateCubeColor(e.to);
             }
         }
     );
 
-    MapEvent::PlayerMove.append([this](const glm::vec2& gamePosition) {
-        m_MapData->SetPlayerPosition(gamePosition);
-        CameraUpdate();
-    });
-
-    MapEvent::EventDispatcher.appendListener("ResetMap", [this]() {
-        m_Children.clear();
-        if (m_MapData) {
-            m_MapData->ClearTiles();
-            m_MapData->ClearEnemies();
+    MapEvent::Dispatcher.appendListener(
+        EventType::PlayerMove,
+        [this](const Event& e) {
+            PlayerMove(e.position);
+            CameraUpdate();
         }
-        if (m_MiniMap) {
-            m_Camera->RemoveUIChild(m_MiniMap);
-        }
+    );
 
-        m_Camera->SetPosition({0, 0});
-    });
+    MapEvent::Dispatcher.appendListener(
+        EventType::ResetMap,
+        [this](const Event&) {
+            m_Children.clear();
+            if (m_MapData) {
+                m_MapData->ClearTiles();
+                m_MapData->ClearEnemies();
+            }
+            if (m_MiniMap) {
+                m_Camera->RemoveUIChild(m_MiniMap);
+            }
+
+            m_Camera->SetPosition({0, 0});
+        }
+    );
 }
 
 Map::~Map() {
-    MapEvent::EventDispatcher.dispatch("ResetMap");
+    MapEvent::Dispatcher.dispatch(EventType::ResetMap, Event{});
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    MapEvent::EventDispatcher.dispatch("ResetMap");
+    MapEvent::Dispatcher.dispatch(EventType::ResetMap, Event{});
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
@@ -343,7 +351,10 @@ void Map::Update() {
         m_OverlayRed = false;
     }
 
-    MapEvent::EventDispatcher.dispatch("DrawableUpdate");
+    MapEvent::Dispatcher.dispatch(
+        EventType::DrawableUpdate,
+        Event{.type = EventType::DrawableUpdate}
+    );
 }
 
 std::size_t Map::GamePostion2MapIndex(const glm::ivec2& position) const {
@@ -360,27 +371,6 @@ glm::ivec2 Map::MapIndex2GamePosition(const std::size_t index) const {
 
 std::shared_ptr<MapData> Map::GetMapData() const {
     return m_MapData;
-}
-
-bool Map::isVaildPosition(const glm::ivec2& position) {
-    if (position.x < m_Level->GetLevelIndexMin().x
-        || position.x > m_Level->GetLevelIndexMax().x
-        || position.y < m_Level->GetLevelIndexMin().y
-        || position.y > m_Level->GetLevelIndexMax().y) {
-        return false;
-    }
-    return true;
-}
-
-bool Map::isVaildMove(const glm::ivec2& position) {
-    std::size_t mapIndex = GamePostion2MapIndex(position);
-    if (m_MapData->IsTilesEmpty(mapIndex)) {
-        return false;
-    }
-    if (m_MapData->GetTile(mapIndex)->IsWall()) {
-        return false;
-    }
-    return true;
 }
 
 void Map::RemoveEnemy(const std::size_t position) {
@@ -527,6 +517,9 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
     return true;
 }
 
+void Map::PlayerMove(const glm::vec2& position) {
+    m_MapData->SetPlayerPosition(position);
+}
 }  // namespace Dungeon
 
 glm::ivec2                      Dungeon::Map::m_Size = {0, 0};

@@ -1,10 +1,4 @@
 #include "Dungeon/MapEvent.h"
-#include "eventpp/callbacklist.h"
 
-namespace Dungeon {
-eventpp::CallbackList<void(const glm::vec2&)>  MapEvent::PlayerMove;
-eventpp::CallbackList<void(const std::size_t)> MapEvent::AttackPlayer;
-eventpp::CallbackList<void(const std::size_t, const std::size_t)>
-                                              MapEvent::EnemyMove;
-eventpp::EventDispatcher<std::string, void()> MapEvent::EventDispatcher;
-}  // namespace Dungeon
+eventpp::EventDispatcher<EventType, void(const Event&), EventPolicies>
+    Dungeon::MapEvent::Dispatcher;

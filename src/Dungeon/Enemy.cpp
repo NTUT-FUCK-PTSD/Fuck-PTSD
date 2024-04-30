@@ -1,7 +1,6 @@
 #include "Dungeon/Enemy.h"
 
 #include "Dungeon/AStar.h"
-#include "Dungeon/MapEvent.h"
 #include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
@@ -22,15 +21,15 @@ Enemy::Enemy(
     SetGamePosition(m_GamePosition);
     m_Transform.translation = m_Animation->GetAnimationPosition();
     SetZIndex(m_Animation->GetAnimationZIndex());
-    m_DrawableUpdate = MapEvent::EventDispatcher.appendListener(
-        "DrawableUpdate",
-        [this]() { Update(); }
+    m_DrawableUpdate = MapEvent::Dispatcher.appendListener(
+        EventType::DrawableUpdate,
+        [this](const Event&) { Update(); }
     );
 }
 
 Enemy::~Enemy() {
-    MapEvent::EventDispatcher.removeListener(
-        "DrawableUpdate",
+    MapEvent::Dispatcher.removeListener(
+        EventType::DrawableUpdate,
         m_DrawableUpdate
     );
 }
@@ -103,7 +102,10 @@ glm::vec2 Enemy::FindNextToPlayer() {
 
 void Enemy::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
-        MapEvent::AttackPlayer(GetDamage());
+        MapEvent::Dispatcher.dispatch(
+            EventType::AttackPlayer,
+            Event{.type = EventType::AttackPlayer, .damage = GetDamage()}
+        );
         m_WillMovePosition = GetGamePosition();
         m_Animation->MoveByTime(
             200,
@@ -149,9 +151,13 @@ void Enemy::CanMove() {
         return;
     }
     if (!m_Animation->IsAnimating()) {
-        MapEvent::EnemyMove(
-            GamePostion2MapIndex(m_GamePosition),
-            GamePostion2MapIndex(m_WillMovePosition)
+        MapEvent::Dispatcher.dispatch(
+            EventType::EnemyMove,
+            Event{
+              .type = EventType::EnemyMove,
+              .from = GamePostion2MapIndex(m_GamePosition),
+              .to = GamePostion2MapIndex(m_WillMovePosition)
+            }
         );
         SetGamePosition(m_WillMovePosition);
         m_Animation->MoveByTime(

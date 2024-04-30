@@ -86,6 +86,8 @@ public:
         const uint16_t      direction
     );
 
+    void RevertAnimation();
+
 private:
     // ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
     // WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;

@@ -47,6 +47,8 @@ public:
     static glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
     static glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
 
+    void PlayerMove(const glm::vec2& position);
+
 private:
     bool m_Available;
     void LoadTile();
@@ -72,8 +74,6 @@ private:
                      const glm::vec2& position1,
                      const glm::vec2& position2
                  );
-    bool isVaildPosition(const glm::ivec2& position);
-    bool isVaildMove(const glm::ivec2& position);
     bool CanPlayerSeePosition(const glm::vec2& position);
 
     void DoorUpdate(std::size_t i, std::size_t j);

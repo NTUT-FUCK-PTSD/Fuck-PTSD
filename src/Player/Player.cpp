@@ -197,3 +197,8 @@ void Player::MoveByTime(
     m_GamePosition = ToolBoxs::PosToGamePos(destination);
     m_Animation->MoveByTime(duringTimeMs, destination, direction);
 }
+
+void Player::RevertAnimation() {
+    m_Animation->SetAnimationStop();
+    m_Animation->UpdateGamePosition(m_GamePosition);
+}

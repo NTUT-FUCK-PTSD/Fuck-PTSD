@@ -1,10 +1,9 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "eventpp/callbacklist.h"
-
 #include "Util/GameObject.hpp"
 
+#include "Dungeon/MapEvent.h"
 #include "Dungeon/SimpleMapData.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
@@ -104,8 +103,7 @@ private:
 
     bool m_Seen = false;
 
-    eventpp::internal_::CallbackListBase<void(), eventpp::DefaultPolicies>::
-        Handle m_DrawableUpdate;
+    MapEvent::DispatcherHandle m_DrawableUpdate;
 };
 }  // namespace Dungeon
 
