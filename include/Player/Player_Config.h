@@ -8,7 +8,7 @@
 #include <glm/vec2.hpp>
 #include <string_view>
 
-#include "Util/Color.hpp"
+#include <Util/Color.hpp>
 #include "Window.hpp"
 #include "config.hpp"
 
