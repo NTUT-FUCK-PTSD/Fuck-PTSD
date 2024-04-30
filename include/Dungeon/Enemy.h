@@ -1,6 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include "Event/Object.h"
 #include "Util/GameObject.hpp"
 
 #include "Dungeon/SimpleMapData.h"
@@ -11,7 +12,7 @@
 
 namespace Dungeon {
 // Abstract class
-class Enemy : public Util::GameObject {
+class Enemy : public Object, public Util::GameObject {
 public:
     Enemy(
         const s_Enemy&                       u_Enemy,

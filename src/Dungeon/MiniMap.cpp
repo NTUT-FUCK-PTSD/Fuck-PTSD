@@ -9,7 +9,7 @@ MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
     Update();
     Event::Dispatcher.appendListener(
         EventType::DrawableUpdate,
-        [this](const EventArgs&) { UpdatePlayer(); }
+        [this](const Object*, const EventArgs&) { UpdatePlayer(); }
     );
 }
 

@@ -81,15 +81,18 @@ void App::Start() {
     );
     Event::Dispatcher.appendListener(
         EventType::AttackPlayer,
-        eventpp::argumentAdapter<void(const AttackPlayerEventArgs&)>(
-            [this](const AttackPlayerEventArgs& e) {
+        eventpp::argumentAdapter<
+            void(const Object*, const AttackPlayerEventArgs&)>(
+            [this](const Object*, const AttackPlayerEventArgs& e) {
                 m_MainCharacter->lostHP(e.GetDamage());
             }
         )
     );
     Event::Dispatcher.appendListener(
         EventType::ResetMap,
-        [this](const EventArgs&) { m_MainCharacter->SetGamePosition({0, 0}); }
+        [this](const Object*, const EventArgs&) {
+            m_MainCharacter->SetGamePosition({0, 0});
+        }
     );
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
     m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
@@ -287,6 +290,7 @@ void App::Update() {
         m_MainCharacter->Update();
         Event::Dispatcher.dispatch(
             EventType::PlayerMove,
+            m_MainCharacter.get(),
             PlayerMoveEventArgs(m_MainCharacter->GetGamePosition())
         );
         m_Camera->MoveByTime(200, m_AniCameraDestination);

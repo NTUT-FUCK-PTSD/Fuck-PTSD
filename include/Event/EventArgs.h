@@ -32,17 +32,14 @@ private:
 
 class EnemyMoveEventArgs : public EventArgs {
 public:
-    explicit EnemyMoveEventArgs(const std::size_t from, const std::size_t to)
+    explicit EnemyMoveEventArgs(const std::size_t mapIndex)
         : EventArgs(EventType::EnemyMove),
-          m_Form(from),
-          m_To(to) {}
+          m_MapIndex(mapIndex) {}
 
-    std::size_t GetFrom() const { return m_Form; }
-    std::size_t GetTo() const { return m_To; }
+    std::size_t GetMapIndex() const { return m_MapIndex; }
 
 private:
-    std::size_t m_Form;
-    std::size_t m_To;
+    std::size_t m_MapIndex;
 };
 
 class AttackPlayerEventArgs : public EventArgs {

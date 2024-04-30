@@ -7,6 +7,7 @@
 
 #include <memory>
 #include "Animation.h"
+#include "Event/Object.h"
 #include "Game/Warehouse/Coin.h"
 #include "Game/Warehouse/Diamond.h"
 #include "Game/Warehouse/Heart.h"
@@ -16,7 +17,7 @@
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
-class Player {
+class Player : public Object {
 public:
     enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
 

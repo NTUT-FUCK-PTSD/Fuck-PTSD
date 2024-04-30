@@ -5,6 +5,7 @@
 
 #include "Event/EventArgs.h"
 #include "Event/EventType.h"
+#include "Event/Object.h"
 #include "eventpp/utilities/argumentadapter.h"
 namespace Dungeon {
 
@@ -33,7 +34,7 @@ Map::Map(
 void Map::InitEvent() {
     Event::Dispatcher.appendListener(
         EventType::AttackPlayer,
-        [this](const EventArgs&) {
+        [this](const Object*, const EventArgs&) {
             m_Camera->Shake(100, 10);
             m_OverlayRed = true;
             m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
@@ -42,35 +43,41 @@ void Map::InitEvent() {
 
     Event::Dispatcher.appendListener(
         EventType::EnemyMove,
-        eventpp::argumentAdapter<void(const EnemyMoveEventArgs&)>(
-            [this](const EnemyMoveEventArgs& e) {
-                auto enemy = m_MapData->GetEnemy(e.GetFrom());
-                if (enemy) {
-                    auto gamePosition = MapIndex2GamePosition(e.GetTo());
-                    enemy->SetGamePosition(gamePosition);
-                    m_MapData->MoveEnemy(e.GetFrom(), e.GetTo());
-                    if (CheckShowPosition(
-                            gamePosition,
-                            m_MapData->GetPlayerPosition()
-                        )) {
-                        enemy->SetCameraUpdate(true);
-                        if (CanPlayerSeePosition(gamePosition)) {
-                            enemy->SetShadow(false);
-                        } else {
-                            enemy->SetShadow(true);
-                        }
+        eventpp::argumentAdapter<void(const Enemy*, const EnemyMoveEventArgs&)>(
+            [this](const Enemy* sender, const EnemyMoveEventArgs& e) {
+                // Notice sender is const Enemy* but we need to modify it
+                auto fromMapIndex = GamePostion2MapIndex(
+                    sender->GetGamePosition()
+                );
+                auto toMapIndex = e.GetMapIndex();
+                auto enemy = m_MapData->GetEnemy(fromMapIndex);
+                auto toGamePosition = MapIndex2GamePosition(toMapIndex);
+
+                enemy->SetGamePosition(toGamePosition);
+                m_MapData->MoveEnemy(fromMapIndex, toMapIndex);
+                if (CheckShowPosition(
+                        toGamePosition,
+                        m_MapData->GetPlayerPosition()
+                    )) {
+                    enemy->SetCameraUpdate(true);
+                    if (CanPlayerSeePosition(toGamePosition)) {
+                        enemy->SetShadow(false);
+                    } else {
+                        enemy->SetShadow(true);
                     }
-                    m_MiniMap->UpdateCubeColor(e.GetFrom());
-                    m_MiniMap->UpdateCubeColor(e.GetTo());
                 }
+                m_MiniMap->UpdateCubeColor(fromMapIndex);
+                m_MiniMap->UpdateCubeColor(toMapIndex);
             }
+
         )
     );
 
     Event::Dispatcher.appendListener(
         EventType::PlayerMove,
-        eventpp::argumentAdapter<void(const PlayerMoveEventArgs&)>(
-            [this](const PlayerMoveEventArgs& e) {
+        eventpp::argumentAdapter<
+            void(const Object*, const PlayerMoveEventArgs&)>(
+            [this](const Object*, const PlayerMoveEventArgs& e) {
                 PlayerMove(e.GetGamePosition());
                 CameraUpdate();
             }
@@ -79,7 +86,7 @@ void Map::InitEvent() {
 
     Event::Dispatcher.appendListener(
         EventType::ResetMap,
-        [this](const EventArgs&) {
+        [this](const Object*, const EventArgs&) {
             m_Children.clear();
             if (m_MapData) {
                 m_MapData->ClearTiles();
@@ -95,17 +102,13 @@ void Map::InitEvent() {
 }
 
 Map::~Map() {
-    Event::Dispatcher.dispatch(
-        EventType::ResetMap,
-        EventArgs(EventType::ResetMap)
-    );
+    Event::Dispatcher
+        .dispatch(EventType::ResetMap, this, EventArgs(EventType::ResetMap));
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    Event::Dispatcher.dispatch(
-        EventType::ResetMap,
-        EventArgs(EventType::ResetMap)
-    );
+    Event::Dispatcher
+        .dispatch(EventType::ResetMap, this, EventArgs(EventType::ResetMap));
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
@@ -367,6 +370,7 @@ void Map::Update() {
 
     Event::Dispatcher.dispatch(
         EventType::DrawableUpdate,
+        this,
         EventArgs(EventType::DrawableUpdate)
     );
 }

@@ -24,7 +24,7 @@ Enemy::Enemy(
     SetZIndex(m_Animation->GetAnimationZIndex());
     m_DrawableUpdate = Event::Dispatcher.appendListener(
         EventType::DrawableUpdate,
-        [this](const EventArgs&) { Update(); }
+        [this](const Object*, const EventArgs&) { Update(); }
     );
 }
 
@@ -105,6 +105,7 @@ void Enemy::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
         Event::Dispatcher.dispatch(
             EventType::AttackPlayer,
+            this,
             AttackPlayerEventArgs(GetDamage())
         );
         m_WillMovePosition = GetGamePosition();
@@ -154,10 +155,8 @@ void Enemy::CanMove() {
     if (!m_Animation->IsAnimating()) {
         Event::Dispatcher.dispatch(
             EventType::EnemyMove,
-            EnemyMoveEventArgs(
-                GamePostion2MapIndex(m_GamePosition),
-                GamePostion2MapIndex(m_WillMovePosition)
-            )
+            this,
+            EnemyMoveEventArgs(GamePostion2MapIndex(m_WillMovePosition))
         );
         SetGamePosition(m_WillMovePosition);
         m_Animation->MoveByTime(

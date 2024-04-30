@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "Event/Object.h"
 #include "Util/GameObject.hpp"
 
 #include "Dungeon/Direction.h"
@@ -13,7 +14,7 @@
 #include "Settings/Camera.h"
 
 namespace Dungeon {
-class Map final : public Util::GameObject {
+class Map final : public Object, public Util::GameObject {
 public:
     Map(const std::shared_ptr<Camera> camera,
         const std::string&            path,
