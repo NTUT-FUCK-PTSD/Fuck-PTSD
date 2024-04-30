@@ -6,7 +6,6 @@
 
 #include "Dungeon/MapHandler.h"
 
-#include "Produce/Dagger.h"
 #include "Util/Logger.hpp"
 
 using namespace tinyxml2;

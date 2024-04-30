@@ -1,36 +1,19 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include <Core/Context.hpp>
+#include <Core/Drawable.hpp>
+#include <Util/Keycode.hpp>
+#include <Util/Text.hpp>
+#include <memory>
+
 #include "Background.hpp"
 #include "Camera.h"
-#include "Core/Context.hpp"
-#include "Core/Drawable.hpp"
-#include "Display/BeatHeart.h"
-#include "Display/BeatIndicator.h"
 #include "Dungeon/Map.h"
-#include "HPIS.h"
-#include "Music/Player.h"
-#include "Music/Tempo.h"
 #include "Player.h"
-#include "Player/Items/Coin.h"
-#include "Player/Items/Diamond.h"
-#include "Player/Items/Heart.h"
-#include "SpriteSheet.hpp"
-#include "Util/Text.hpp"
-
-#include "pch.hpp"  // IWYU pragma: export
-
-#include "Dungeon/Map.h"
-#include "Player/Player.h"
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
-
-#include "Game/Actions.h"
-#include "Game/System.h"
-#include "Music/Player.h"
-
-#include <memory>
-#include "Util/Keycode.hpp"
+#include "pch.hpp"  // IWYU pragma: export
 
 class App {
 public:
