@@ -5,7 +5,7 @@
 #include <Settings/UGameElement.h>
 #include <memory>
 
-#include "Game/Player_Config.h"
+#include "Game/Player_config.h"
 #include "Game/Warehouse/Bomb.h"
 #include "Settings/Helper.hpp"
 #include "SpriteSheet.hpp"
