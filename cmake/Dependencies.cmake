@@ -18,7 +18,6 @@ FetchContent_Declare(
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/tinyxml2
 )
 
-include(FetchContent)
 FetchContent_Declare(
     eventpp
     GIT_REPOSITORY https://github.com/wqking/eventpp
