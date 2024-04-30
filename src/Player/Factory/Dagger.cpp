@@ -5,7 +5,7 @@
 #include "Dagger.h"
 #include <memory>
 #include "Helper.hpp"
-#include "Player_Config.h"
+#include "Player_config.h"
 #include "SpriteSheet.hpp"
 #include "UGameElement.h"
 #include "Util/SpriteSheet.hpp"
