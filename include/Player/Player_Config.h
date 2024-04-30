@@ -9,22 +9,15 @@
 #include <string_view>
 
 #include "Util/Color.hpp"
+#include "Window.hpp"
 #include "config.hpp"
 
 namespace Players::Config {
 static constexpr std::string_view IMAGE_SLOT_BOMB = ASSETS_DIR
     "/gui/hud_slot_bomb.png";
 
-static constexpr std::string_view IMAGE_BOMB = ASSETS_DIR "/items/bomb.png";
-
-static constexpr std::string_view STY_FONT = ASSETS_DIR
-    "/font/necrosans-6/necrosans-6.otf";
-
 static constexpr std::string_view IMAGE_SLOT_SHOVEL = ASSETS_DIR
     "/gui/hud_slot_1.png";
-
-static constexpr std::string_view IMAGE_SHOVEL_BASIC = ASSETS_DIR
-    "/items/shovel_basic.png";
 
 static constexpr std::string_view IMAGE_SLOT_DAGGER = ASSETS_DIR
     "/gui/hud_slot_2.png";
@@ -35,8 +28,16 @@ static constexpr std::string_view IMAGE_SLOT_THROW = ASSETS_DIR
 static constexpr std::string_view IMAGE_SLOT_THROW2 = ASSETS_DIR
     "/gui/hud_slot_throw2.png";
 
+static constexpr std::string_view IMAGE_SHOVEL_BASIC = ASSETS_DIR
+    "/items/shovel_basic.png";
+
+static constexpr std::string_view IMAGE_BOMB = ASSETS_DIR "/items/bomb.png";
+
 static constexpr std::string_view IMAGE_DAGGER = ASSETS_DIR
     "/items/weapon_dagger.png";
+
+static constexpr std::string_view STY_FONT = ASSETS_DIR
+    "/font/necrosans-6/necrosans-6.otf";
 
 static constexpr glm::vec2 VAL_FONT_SCALE = {3, 3};
 

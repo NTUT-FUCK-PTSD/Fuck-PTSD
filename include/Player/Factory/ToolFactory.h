@@ -24,10 +24,9 @@ public:
     );
 
 private:
-    void GenBomb(const std::string& type);
-    void GenShovel(const std::string& type);
-    void GenWeapon(const std::string& type);
-
+    void                    GenBomb(const std::string& type);
+    void                    GenShovel(const std::string& type);
+    void                    GenWeapon(const std::string& type);
     std::shared_ptr<IEquip> m_Result;
 };
 }  // namespace Players::Items

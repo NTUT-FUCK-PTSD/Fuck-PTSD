@@ -80,8 +80,6 @@ private:
 
     // addition
     static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
-
-    std::shared_ptr<Game::Systems::HPIS> m_HPISystem;
 };
 
 #endif

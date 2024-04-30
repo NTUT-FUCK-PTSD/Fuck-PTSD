@@ -1,5 +1,7 @@
 #include "App.hpp"
 
+#include "HPIS.h"
+#include "System.h"
 #include "Util/Input.hpp"
 
 #include "Dungeon/MapHandler.h"
@@ -97,7 +99,10 @@ void App::Start() {
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
 
-    m_HPISystem = std::make_shared<Game::Systems::HPIS>(m_MainCharacter.get());
+    Game::Systems::HPIS::Init(m_MainCharacter.get());
+
+    // m_HPISystem =
+    // std::make_shared<Game::Systems::HPIS>(m_MainCharacter.get());
 
     // auto t = m_MainCharacter->GetToolMod()->GetTool<Dagger>(2);
     // LOG_INFO(t->GetName());
