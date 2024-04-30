@@ -137,7 +137,7 @@ void Skeleton::Update() {
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
 
-    UpdateHeart(m_Transform.translation);
+    //    UpdateHeart(m_Transform.translation);
 }
 
 void Skeleton::UpdateProperties() {

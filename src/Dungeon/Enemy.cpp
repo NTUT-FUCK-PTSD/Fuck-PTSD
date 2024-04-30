@@ -29,8 +29,6 @@ Enemy::Enemy(
     m_EmptyHeart = std::make_shared<Util::Image>(
         Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
     );
-
-    this->InitHeartImage();
 }
 
 void Enemy::SetShadow(const bool shadow) {
@@ -148,20 +146,23 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
     }
 }
 
-void Enemy::InitHeartImage() {
+void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
     const auto& hp = m_Health;
 
-    for (std::size_t ii = 0; ii <= hp; ii += 2) {
+    float zindex = 0.01;
+    for (std::size_t ii = 0; ii < hp; ii += 2) {
         const auto& obj = std::make_shared<Util::GameElement>();
         //        obj->SetDrawable(Dungeon::config::PTR_IMAGE_FULL_HEART_SM);
         obj->SetDrawable(m_FullHeart);
-        obj->SetZIndex(99.0f);
-        obj->SetPosition(m_GamePosition);
+        obj->SetZIndex(99.0f + zindex);
+        obj->SetPosition(pixelPos);
         obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 
         AddChild(obj);
-        m_HeartList.push_back(obj.get());
         LOG_INFO("test");
+        m_HeartList.push_back(obj.get());
+
+        zindex = zindex + 0.01;
     }
 }
 
@@ -170,15 +171,17 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
     glm::vec2 eachOffsetPos;
 
     [&initOffsetPos, &eachOffsetPos, this]() {
-        auto  heartNumber = this->m_Health % 2;
+        const auto heartNumber = m_HeartList.size();
+        LOG_INFO(heartNumber);
         float x_width = static_cast<float>(
-            heartNumber * 12 + (heartNumber / 2) * 2
+            heartNumber * 24 + (heartNumber - 1) * 16
         );
-        initOffsetPos = glm::vec2{-x_width / 2, 40};
-        eachOffsetPos = glm::vec2{x_width};
+        initOffsetPos = glm::vec2{-(x_width / 3), 40};
+        eachOffsetPos = glm::vec2{x_width / m_HeartList.size(), 0};
     }();
 
     auto pos = pixelPos + initOffsetPos;
+    LOG_INFO(pos);
     for (const auto& elem : m_HeartList) {
         elem->SetPosition(pos);
         pos += eachOffsetPos;

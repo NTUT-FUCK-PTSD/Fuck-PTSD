@@ -89,6 +89,8 @@ void OrangeSlime::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    //    UpdateHeart(m_Transform.translation);
 }
 
 void OrangeSlime::UpdateFace(const glm::vec2& direction) {

@@ -112,6 +112,8 @@ void Ghost::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    //    UpdateHeart(m_Transform.translation);
 }
 
 void Ghost::AttackPlayer() {

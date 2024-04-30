@@ -34,9 +34,12 @@ Enemies::Zombie::Zombie(
     m_ZombieNormalFrames = m_NormalFrames;
     m_ZombieShadowFrames = m_ShadowFrames;
 
-    SetHealth(2);  // 1 heart
+    //    SetHealth(2);  // 1 heart
+    SetHealth(4);  // 1 heart
     SetDamage(2);  // 1 heart
     SetCoin(1);
+
+    InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -106,6 +109,8 @@ void Zombie::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 
 void Zombie::UpdateFace() {

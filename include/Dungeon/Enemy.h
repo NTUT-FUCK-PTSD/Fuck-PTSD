@@ -84,7 +84,7 @@ protected:
 
     virtual void UpdateAnimationType(const glm::vec2& direction);
 
-    void InitHeartImage();
+    void InitHealthBarImage(const glm::vec2 pixelPos);
 
     virtual void UpdateHeart(const glm::vec2& pixelPos);
 
