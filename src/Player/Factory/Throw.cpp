@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <stdexcept>
-#include "Config.h"
+#include "Game_config.h"
 #include "Helper.hpp"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"

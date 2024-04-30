@@ -3,9 +3,9 @@
 
 #include <memory>
 #include <stdexcept>
-#include "Game/Config.h"
+#include "Game/Game_config.h"
 #include "Player/Factory/IEquip.h"
-#include "Player_Config.h"
+#include "Player_config.h"
 #include "Util/Image.hpp"
 #include "glm/fwd.hpp"
 
