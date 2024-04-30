@@ -17,7 +17,7 @@ struct Event {
     std::size_t damage;
     std::size_t from;
     std::size_t to;
-    glm::vec2   position;
+    glm::vec2   gamePosition;
 };
 
 struct EventPolicies {

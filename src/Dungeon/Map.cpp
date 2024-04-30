@@ -64,7 +64,7 @@ void Map::InitEvent() {
     MapEvent::Dispatcher.appendListener(
         EventType::PlayerMove,
         [this](const Event& e) {
-            PlayerMove(e.position);
+            PlayerMove(e.gamePosition);
             CameraUpdate();
         }
     );

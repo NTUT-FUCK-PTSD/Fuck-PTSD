@@ -283,7 +283,7 @@ void App::Update() {
             EventType::PlayerMove,
             Event{
               .type = EventType::PlayerMove,
-              .position = m_MainCharacter->GetGamePosition()
+              .gamePosition = m_MainCharacter->GetGamePosition()
             }
         );
         m_Camera->MoveByTime(200, m_AniCameraDestination);
