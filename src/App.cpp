@@ -78,11 +78,11 @@ void App::Start() {
     );
     Dungeon::MapEvent::Dispatcher.appendListener(
         EventType::AttackPlayer,
-        [this](const Event& e) { m_MainCharacter->lostHP(e.damage); }
+        [this](const EventArgs& e) { m_MainCharacter->lostHP(e.damage); }
     );
     Dungeon::MapEvent::Dispatcher.appendListener(
         EventType::ResetMap,
-        [this](const Event&) { m_MainCharacter->SetGamePosition({0, 0}); }
+        [this](const EventArgs&) { m_MainCharacter->SetGamePosition({0, 0}); }
     );
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
     m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
@@ -280,7 +280,7 @@ void App::Update() {
         m_MainCharacter->Update();
         Dungeon::MapEvent::Dispatcher.dispatch(
             EventType::PlayerMove,
-            Event{
+            EventArgs{
               .type = EventType::PlayerMove,
               .gamePosition = m_MainCharacter->GetGamePosition()
             }

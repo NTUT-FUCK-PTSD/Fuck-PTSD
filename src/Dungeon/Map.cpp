@@ -2,6 +2,7 @@
 
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
+#include "MapEvent.h"
 namespace Dungeon {
 
 Map::Map(
@@ -29,7 +30,7 @@ Map::Map(
 void Map::InitEvent() {
     MapEvent::Dispatcher.appendListener(
         EventType::AttackPlayer,
-        [this](const Event&) {
+        [this](const EventArgs&) {
             m_Camera->Shake(100, 10);
             m_OverlayRed = true;
             m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
@@ -38,7 +39,7 @@ void Map::InitEvent() {
 
     MapEvent::Dispatcher.appendListener(
         EventType::EnemyMove,
-        [this](const Event& e) {
+        [this](const EventArgs& e) {
             auto enemy = m_MapData->GetEnemy(e.from);
             if (enemy) {
                 auto gamePosition = MapIndex2GamePosition(e.to);
@@ -63,7 +64,7 @@ void Map::InitEvent() {
 
     MapEvent::Dispatcher.appendListener(
         EventType::PlayerMove,
-        [this](const Event& e) {
+        [this](const EventArgs& e) {
             PlayerMove(e.gamePosition);
             CameraUpdate();
         }
@@ -71,7 +72,7 @@ void Map::InitEvent() {
 
     MapEvent::Dispatcher.appendListener(
         EventType::ResetMap,
-        [this](const Event&) {
+        [this](const EventArgs&) {
             m_Children.clear();
             if (m_MapData) {
                 m_MapData->ClearTiles();
@@ -89,14 +90,14 @@ void Map::InitEvent() {
 Map::~Map() {
     MapEvent::Dispatcher.dispatch(
         EventType::ResetMap,
-        Event{.type = EventType::ResetMap}
+        EventArgs{.type = EventType::ResetMap}
     );
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
     MapEvent::Dispatcher.dispatch(
         EventType::ResetMap,
-        Event{.type = EventType::ResetMap}
+        EventArgs{.type = EventType::ResetMap}
     );
 
     if (!m_Level->LoadLevel(levelNum)) {
@@ -359,7 +360,7 @@ void Map::Update() {
 
     MapEvent::Dispatcher.dispatch(
         EventType::DrawableUpdate,
-        Event{.type = EventType::DrawableUpdate}
+        EventArgs{.type = EventType::DrawableUpdate}
     );
 }
 

@@ -12,7 +12,7 @@ enum class EventType {
     EnemyMove,
 };
 
-struct Event {
+struct EventArgs {
     EventType   type;
     std::size_t damage;
     std::size_t from;
@@ -21,7 +21,7 @@ struct Event {
 };
 
 struct EventPolicies {
-    static EventType getEvent(const Event& e) { return e.type; }
+    static EventType getEvent(const EventArgs& e) { return e.type; }
 };
 
 namespace Dungeon {
@@ -29,10 +29,12 @@ class MapEvent final {
 public:
     MapEvent() = delete;
     ~MapEvent() = delete;
-    using DispatcherHandle = eventpp::
-        EventDispatcher<EventType, void(const Event&), EventPolicies>::Handle;
+    using DispatcherHandle = eventpp::EventDispatcher<
+        EventType,
+        void(const EventArgs&),
+        EventPolicies>::Handle;
     static eventpp::
-        EventDispatcher<EventType, void(const Event&), EventPolicies>
+        EventDispatcher<EventType, void(const EventArgs&), EventPolicies>
             Dispatcher;
 };
 }  // namespace Dungeon
