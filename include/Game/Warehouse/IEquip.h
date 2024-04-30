@@ -5,11 +5,14 @@
 #ifndef FUCK_PTSD_IEQUIP_HPP
 #define FUCK_PTSD_IEQUIP_HPP
 
-#include <GameElement.h>
+#include <string>
+#include "Settings/UGameElement.h"
 
-class IEquip : public GameElement {
+class IEquip : public Util::GameElement {
 public:
     enum Pos { COL = 0, ROW };
+
+    virtual Pos GetWinPos() const = 0;
 
     virtual std::string GetName() const = 0;
 

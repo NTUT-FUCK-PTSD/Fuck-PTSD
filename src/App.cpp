@@ -1,10 +1,18 @@
 #include "App.hpp"
 
-#include "Map.h"
-#include "Util/Input.hpp"
 
+#include <Util/Input.hpp>
+#include <Util/Logger.hpp>
+#include "Actions.h"
+#include "Display/BeatHeart.h"
+#include "Display/BeatIndicator.h"
 #include "Dungeon/MapEvent.h"
 #include "Dungeon/MapHandler.h"
+#include "HPIS.h"
+#include "Helper.hpp"
+#include "Music/Player.h"
+#include "Music/Tempo.h"
+#include "System.h"
 
 using namespace tinyxml2;
 
@@ -101,19 +109,20 @@ void App::Start() {
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
 
+    Game::Systems::HPIS::Init(m_MainCharacter.get());
+
+    // m_HPISystem =
+    // std::make_shared<Game::Systems::HPIS>(m_MainCharacter.get());
+
+    // auto t = m_MainCharacter->GetToolMod()->GetTool<Dagger>(2);
+    // LOG_INFO(t->GetName());
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
-
-    // auto tempoIndex = Music::Tempo::m_CurrentBeatIdx;
-    // if (m_BeforeTempoIndex != tempoIndex) {
-    //     m_BeforeTempoIndex = tempoIndex;
-    //     m_DungeonMap->TempoTrigger(tempoIndex);
-    //     Display::BeatHeart::SwitchHeart(100);
-    // }
 
     auto musicTime =
         static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)

@@ -1,8 +1,8 @@
 //
 // Created by adven on 2024/3/22.
 //
-#include "Player/Items/Diamond.h"
-#include "Player/Items/Coin.h"
+#include "Game/Warehouse/Diamond.h"
+#include "Game/Warehouse/Coin.h"
 #include "Util/Color.hpp"
 #include "Util/Image.hpp"
 #include "Util/Logger.hpp"
