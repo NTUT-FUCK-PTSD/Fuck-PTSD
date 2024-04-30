@@ -7,6 +7,7 @@
 #include <Util/Text.hpp>
 #include <memory>
 
+#include "App.hpp"
 #include "Background.hpp"
 #include "Camera.h"
 #include "Dungeon/Map.h"
