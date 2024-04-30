@@ -7,6 +7,7 @@
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
+#include "UGameElement.h"
 
 namespace Dungeon {
 // Abstract class
@@ -64,7 +65,7 @@ public:
         }
     };
 
-    virtual void Update() {};
+    virtual void Update(){};
 
     bool GetSeen() const { return m_Seen; }
 
@@ -82,6 +83,14 @@ protected:
     virtual void AttackPlayer();
 
     virtual void UpdateAnimationType(const glm::vec2& direction);
+
+    void InitHeartImage();
+
+    virtual void UpdateHeart(const glm::vec2& pixelPos);
+
+    std::shared_ptr<Util::Image>    m_FullHeart;
+    std::shared_ptr<Util::Image>    m_EmptyHeart;
+    std::vector<Util::GameElement*> m_HeartList;
 
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 

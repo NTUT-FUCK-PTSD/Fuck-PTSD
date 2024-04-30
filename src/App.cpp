@@ -104,12 +104,6 @@ void App::Start() {
 
     Game::Systems::HPIS::Init(m_MainCharacter.get());
 
-    // m_HPISystem =
-    // std::make_shared<Game::Systems::HPIS>(m_MainCharacter.get());
-
-    // auto t = m_MainCharacter->GetToolMod()->GetTool<Dagger>(2);
-    // LOG_INFO(t->GetName());
-
     m_CurrentState = State::UPDATE;
 }
 
@@ -126,17 +120,18 @@ void App::Update() {
         Display::BeatHeart::SwitchHeart(100);
     }
 
-    if (Util::Input::IsKeyDown(Util::Keycode::N)) {
-        auto i = std::make_shared<Util::Image>(ASSETS_DIR "/items/test.png");
-        auto a = std::make_shared<Util::GameObject>();
-        a->m_Transform.scale = {0.5, 0.5};
-        a->SetDrawable(i);
-        a->SetZIndex(100);
-        m_Camera->AddUIChild(a);
+    if (Util::Input::IsKeyDown(Util::Keycode::T)) {
+        const auto&  m = m_MainCharacter->GetGamePosition();
+        const auto&& b = Settings::Helper::GamePosToMapIdx(m + glm::vec2{1, 0});
+        if (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
+            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
+        }
+    }
 
-        //         m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
-        // m_AniCameraDestination = {0, 0};
-        // m_AniPlayerDestination = {0, 0};
+    if (Util::Input::IsKeyDown(Util::Keycode::N)) {
+        m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        m_AniCameraDestination = {0, 0};
+        m_AniPlayerDestination = {0, 0};
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::UP)
@@ -174,16 +169,7 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode
-             && (Util::Input::IsKeyDown(Util::Keycode::W)
-                 || Util::Input::IsKeyDown(Util::Keycode::D)
-                 || Util::Input::IsKeyDown(Util::Keycode::S)
-                 || Util::Input::IsKeyDown(Util::Keycode::A))
-             && Music::Tempo::IsTempoInRange(
-                 500,
-                 musicTime,
-                 Music::Player::LoopCounter()
-             )) {
+    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -193,28 +179,24 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D
-        };
+          Util::Keycode::D};
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT
-        };
+          Player::Direction::RIGHT};
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
@@ -258,12 +240,10 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                    };
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y
-                    };
+                      m_AniCameraDestination.y + aniCameraDirection[i].y};
                 }
             }
         }

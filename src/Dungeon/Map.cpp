@@ -3,6 +3,8 @@
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
 
+#include "Dungeon_config.h"
+
 namespace Dungeon {
 
 Map::Map(
@@ -19,6 +21,14 @@ Map::Map(
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path);
     m_Available = LoadLevel(levelNum);
+
+    Dungeon::config::PTR_IMAGE_FULL_HEART_SM = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_FULL_HEART_SM.data()
+    );
+
+    Dungeon::config::PTR_IMAGE_EMPTY_HEART_SM = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
+    );
 
     // Add enemy testing
     // auto mapIndex = GamePostion2MapIndex({1, 1});
@@ -166,8 +176,7 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                       52,
                       tmp->GetTile().zone,
                       tmp->GetTile().torch,
-                      tmp->GetTile().cracked
-                    })
+                      tmp->GetTile().cracked})
                 );
             } else {
                 if (tmp->GetTile().type == 103 || tmp->GetTile().type == 118) {
@@ -179,8 +188,7 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                           50,
                           tmp->GetTile().zone,
                           tmp->GetTile().torch,
-                          tmp->GetTile().cracked
-                        })
+                          tmp->GetTile().cracked})
                     );
                 } else {
                     m_MapData->AddTile(
@@ -191,8 +199,7 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                           51,
                           tmp->GetTile().zone,
                           tmp->GetTile().torch,
-                          tmp->GetTile().cracked
-                        })
+                          tmp->GetTile().cracked})
                     );
                 }
             }
