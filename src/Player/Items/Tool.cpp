@@ -4,9 +4,9 @@
 
 #include <exception>
 #include <iterator>
-#include "Produce/Dagger.h"
+#include "Game/Warehouse/Dagger.h"
 
-#include "Player/Items/Tools.h"
+#include "Game/Warehouse/Tools.h"
 
 Players::Tools::Tools() {
     m_ToolFactory = std::make_shared<Players::Items::ToolFactory>();

@@ -7,12 +7,12 @@
 
 #include <memory>
 #include "Animation.h"
+#include "Game/Warehouse/Coin.h"
+#include "Game/Warehouse/Diamond.h"
+#include "Game/Warehouse/Heart.h"
 #include "GameElement.h"
-#include "Items/Coin.h"
-#include "Items/Diamond.h"
-#include "Items/Heart.h"
 
-#include "Player/Items/Tools.h"
+#include "Game/Warehouse/Tools.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 

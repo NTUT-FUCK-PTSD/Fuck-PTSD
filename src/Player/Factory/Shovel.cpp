@@ -1,9 +1,9 @@
 
-#include "Player/Produce/Shovel.h"
+#include "Game/Warehouse/Shovel.h"
 #include <memory>
 #include <vector>
 #include "Helper.hpp"
-#include "Player/Player_Config.h"
+#include "Player_Config.h"
 #include "SpriteSheet.hpp"
 #include "UGameElement.h"
 

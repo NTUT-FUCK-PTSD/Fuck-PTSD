@@ -7,7 +7,7 @@
 
 #include <any>
 #include <memory>
-#include "Player/Factory/IEquip.h"
+#include "Game/Warehouse/IEquip.h"
 #include "Settings/Hash.h"
 
 using namespace Settings::Hash;

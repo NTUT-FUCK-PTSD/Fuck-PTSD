@@ -1,8 +1,8 @@
-#include "Player/Factory/ToolFactory.h"
+#include "Game/Factory/ToolFactory.h"
 
-#include "Produce/Bomb.h"
-#include "Produce/Dagger.h"
-#include "Produce/Shovel.h"
+#include "Game/Warehouse/Bomb.h"
+#include "Game/Warehouse/Dagger.h"
+#include "Game/Warehouse/Shovel.h"
 
 std::shared_ptr<IEquip> Players::Items::ToolFactory::MakeTool(
     const std::string& name,

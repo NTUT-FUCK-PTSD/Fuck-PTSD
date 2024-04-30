@@ -4,7 +4,7 @@
 #include <memory>
 #include <stdexcept>
 #include "Game/Game_config.h"
-#include "Player/Factory/IEquip.h"
+#include "IEquip.h"
 #include "Player_config.h"
 #include "Util/Image.hpp"
 #include "glm/fwd.hpp"
@@ -50,6 +50,7 @@ private:
 
     static constexpr glm::vec2 m_SlotOffset = {0, 0};
     static constexpr glm::vec2 m_ItemOffset = {0, 5};
+
 private:
 #ifdef _WIN32
     static constexpr glm::vec2 m_FirstTxtOffset = {25, -40};

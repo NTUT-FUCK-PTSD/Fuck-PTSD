@@ -2,10 +2,10 @@
 // Created by 陳世昂 on 2024/4/29.
 //
 
-#include "Produce/Dagger.h"
+#include "Dagger.h"
 #include <memory>
 #include "Helper.hpp"
-#include "Player/Player_Config.h"
+#include "Player_Config.h"
 #include "SpriteSheet.hpp"
 #include "UGameElement.h"
 #include "Util/SpriteSheet.hpp"

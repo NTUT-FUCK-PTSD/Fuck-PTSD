@@ -7,7 +7,7 @@
 
 #include "Player.h"
 
-#include "Player/Produce/Dagger.h"
+#include "Game/Warehouse/Dagger.h"
 
 #include "Util/Logger.hpp"
 

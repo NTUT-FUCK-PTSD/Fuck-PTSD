@@ -6,7 +6,7 @@
 #define FUCK_PTSD_2024_4_29_BOMB_H
 
 #include <string_view>
-#include "Player/Factory/IEquip.h"
+#include "IEquip.h"
 
 class Bomb : public IEquip {
 public:
@@ -26,7 +26,9 @@ public:
     }
 
     [[nodiscard]]
-    std::string GetType() const override { return "1"; }
+    std::string GetType() const override {
+        return "1";
+    }
 
 private:
     void GenSlot();

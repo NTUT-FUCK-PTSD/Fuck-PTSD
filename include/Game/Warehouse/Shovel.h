@@ -5,7 +5,7 @@
 #ifndef FUCK_PTSD_2024_4_29_SHOVEL_H
 #define FUCK_PTSD_2024_4_29_SHOVEL_H
 
-#include "Player/Factory/IEquip.h"
+#include "IEquip.h"
 
 class Shovel : public IEquip {
 public:
@@ -19,13 +19,9 @@ public:
         return Pos::ROW;
     }
 
-    std::string GetName() const override{
-        return "SHOVEL";
-    }
+    std::string GetName() const override { return "SHOVEL"; }
 
-    std::string GetType() const override {
-        return "Basic";
-    }
+    std::string GetType() const override { return "Basic"; }
 
 private:
     void GenSlot();

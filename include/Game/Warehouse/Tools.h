@@ -9,9 +9,9 @@
 #include <memory>
 
 // #include "Dungeon/Map.h"
-#include "Player/Factory/IEquip.h"
-#include "Player/Factory/ToolFactory.h"
-#include "Produce/Dagger.h"
+#include "Game/Factory/ToolFactory.h"
+#include "Game/Warehouse/Dagger.h"
+#include "Game/Warehouse/IEquip.h"
 #include "config.hpp"
 
 namespace Players {

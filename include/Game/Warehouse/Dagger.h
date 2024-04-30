@@ -5,7 +5,7 @@
 #ifndef FUCK_PTSD_2024_4_29_DAGGER_H
 #define FUCK_PTSD_2024_4_29_DAGGER_H
 
-#include "Player/Factory/IEquip.h"
+#include "Game/Warehouse/IEquip.h"
 class Dagger : public IEquip {
 public:
     explicit Dagger();
