@@ -9,7 +9,6 @@
 #include "Dungeon/MapHandler.h"
 #include "HPIS.h"
 #include "Helper.hpp"
-#include "MapEvent.h    "
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
