@@ -1,12 +1,16 @@
 #include "App.hpp"
 
-#include "HPIS.h"
-#include "System.h"
-#include "Util/Input.hpp"
-
+#include <Util/Input.hpp>
+#include <Util/Logger.hpp>
+#include "Actions.h"
+#include "Display/BeatHeart.h"
+#include "Display/BeatIndicator.h"
 #include "Dungeon/MapHandler.h"
-
-#include "Util/Logger.hpp"
+#include "HPIS.h"
+#include "Helper.hpp"
+#include "Music/Player.h"
+#include "Music/Tempo.h"
+#include "System.h"
 
 using namespace tinyxml2;
 
