@@ -66,7 +66,7 @@ Enemies::Skeleton::Skeleton(
         m_CanDropHead = true;
     }
 
-    SetHealth(4);
+    SetHealth(6);
     m_SkeletonNormalFrames = m_NormalFrames;
     m_SkeletonShadowFrames = m_ShadowFrames;
 

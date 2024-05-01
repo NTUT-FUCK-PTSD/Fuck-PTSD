@@ -117,7 +117,8 @@ void Map::LoadTile() {
                               102,
                               0,
                               0,
-                              0})
+                              0
+                            })
                         );
                     }
                 }
@@ -176,7 +177,8 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                       52,
                       tmp->GetTile().zone,
                       tmp->GetTile().torch,
-                      tmp->GetTile().cracked})
+                      tmp->GetTile().cracked
+                    })
                 );
             } else {
                 if (tmp->GetTile().type == 103 || tmp->GetTile().type == 118) {
@@ -188,7 +190,8 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                           50,
                           tmp->GetTile().zone,
                           tmp->GetTile().torch,
-                          tmp->GetTile().cracked})
+                          tmp->GetTile().cracked
+                        })
                     );
                 } else {
                     m_MapData->AddTile(
@@ -199,7 +202,8 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                           51,
                           tmp->GetTile().zone,
                           tmp->GetTile().torch,
-                          tmp->GetTile().cracked})
+                          tmp->GetTile().cracked
+                        })
                     );
                 }
             }
@@ -260,9 +264,9 @@ void Map::CameraUpdate() {
     }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
-            enemy->SetCameraUpdate(true);
             if (CanPlayerSeePosition(enemy->GetGamePosition())) {
                 enemy->SetShadow(false);
+                enemy->SetCameraUpdate(true);
             } else {
                 enemy->SetShadow(true);
             }

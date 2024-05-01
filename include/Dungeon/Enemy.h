@@ -3,6 +3,7 @@
 
 #include "Util/GameObject.hpp"
 
+#include <memory>
 #include "Dungeon/SimpleMapData.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
@@ -65,7 +66,7 @@ public:
         }
     };
 
-    virtual void Update(){};
+    virtual void Update() {};
 
     bool GetSeen() const { return m_Seen; }
 

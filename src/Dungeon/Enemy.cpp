@@ -1,8 +1,10 @@
 #include "Dungeon/Enemy.h"
 
+#include <memory>
 #include "Dungeon/AStar.h"
 #include "Dungeon_config.h"
 #include "ToolBoxs.h"
+#include "UGameElement.h"
 
 namespace Dungeon {
 
@@ -156,6 +158,7 @@ void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
         obj->SetDrawable(m_FullHeart);
         obj->SetZIndex(99.0f + zindex);
         obj->SetPosition(pixelPos);
+        obj->SetVisible(false);
         obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 
         AddChild(obj);
@@ -167,27 +170,33 @@ void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
 }
 
 void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
-    glm::vec2 initOffsetPos = {0, 40};
-    glm::vec2 eachOffsetPos = {-10, 0};
+    const auto numberOfHeart = m_HeartList.size();
 
-    if (m_HeartList.size() >= 2) {
-        [&initOffsetPos, &eachOffsetPos, this]() {
-            const auto heartNumber = m_HeartList.size();
-            LOG_INFO(heartNumber);
-            float x_width = static_cast<float>(
-                heartNumber * 24 + (heartNumber - 1) * 2
-            );
-            initOffsetPos = glm::vec2{-(x_width / 2) + x_width / 6, 40};
-            eachOffsetPos = glm::vec2{x_width / 3, 0};
+    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false) {
+        [&]() {
+            for (const auto& elem : m_HeartList) {
+                elem->SetVisible(false);
+            }
         }();
+        return;
     }
 
-    auto pos = pixelPos + initOffsetPos;
-    LOG_INFO(pos);
-    for (const auto& elem : m_HeartList) {
-        elem->SetPosition(pos);
-        pos += eachOffsetPos;
+    int       startIdx = numberOfHeart * -1 + 1;
+    auto      pos = pixelPos + glm::vec2{0.0f, 40.0f};
+    glm::vec2 x_offset;
+
+    for (std::size_t ii = 0; ii < numberOfHeart; ii++) {
+        x_offset = {startIdx * 18 + pos.x, pos.y};
+        m_HeartList[ii]->SetPosition(x_offset);
+        startIdx += 2;
     }
+
+    // auto pos = pixelPos + initOffsetPos;
+    // LOG_INFO(pos);
+    // for (const auto& elem : m_HeartList) {
+    //     elem->SetPosition(pos);
+    //     pos += eachOffsetPos;
+    // }
 };
 
 }  // namespace Dungeon
