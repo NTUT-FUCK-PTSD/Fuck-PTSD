@@ -67,7 +67,7 @@ std::shared_ptr<GameElement> Player::GetGameElement() {
     return m_Player;
 }
 
-glm::vec2 Player::GetGamePosition() {
+glm::vec2 Player::GetGamePosition() const {
     return m_GamePosition;
 }
 
@@ -131,7 +131,7 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
     return m_Window;
 }
 
-Player::Direction Player::GetFaceTo() {
+Player::Direction Player::GetFaceTo() const {
     return m_FaceTo;
 }
 
@@ -194,11 +194,12 @@ void Player::MoveByTime(
     const uint16_t      direction
 ) {
     // Update GamePosition but not draw
+    m_BeforeGamePosition = m_GamePosition;
     m_GamePosition = ToolBoxs::PosToGamePos(destination);
     m_Animation->MoveByTime(duringTimeMs, destination, direction);
 }
 
 void Player::RevertAnimation() {
     m_Animation->SetAnimationStop();
-    m_Animation->UpdateGamePosition(m_GamePosition);
+    m_Animation->UpdateGamePosition(m_BeforeGamePosition);
 }

@@ -10,7 +10,6 @@
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
-#include "Game/Player.h"
 #include "Settings/Camera.h"
 
 namespace Dungeon {

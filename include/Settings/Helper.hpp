@@ -11,6 +11,7 @@
 #include <glm/vec2.hpp>
 
 #include "Dungeon/Map.h"
+#include "Game/Player.h"
 namespace Settings {
 class Helper {
 public:

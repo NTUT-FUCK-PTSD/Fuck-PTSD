@@ -1,6 +1,7 @@
 #include "App.hpp"
 
 #include "Event/EventArgs.h"
+#include "Event/EventType.h"
 #include "eventpp/utilities/argumentadapter.h"
 
 #include <Util/Input.hpp>
@@ -84,7 +85,9 @@ void App::Start() {
         eventpp::argumentAdapter<
             void(const Object*, const AttackPlayerEventArgs&)>(
             [this](const Object*, const AttackPlayerEventArgs& e) {
-                m_MainCharacter->lostHP(e.GetDamage());
+                if (Event::GetAttackPlayer()) {
+                    m_MainCharacter->lostHP(e.GetDamage());
+                }
             }
         )
     );
@@ -142,6 +145,7 @@ void App::Update() {
     if (Music::Tempo::IsSwitch()) {
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
+        Event::SetAttackPlayer(true);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -291,7 +295,7 @@ void App::Update() {
         Event::Dispatcher.dispatch(
             EventType::PlayerMove,
             m_MainCharacter.get(),
-            PlayerMoveEventArgs(m_MainCharacter->GetGamePosition())
+            EventArgs(EventType::PlayerMove)
         );
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->PlayerTrigger();

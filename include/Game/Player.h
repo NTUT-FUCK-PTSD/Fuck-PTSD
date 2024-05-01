@@ -28,9 +28,9 @@ public:
     // some getter
     std::shared_ptr<GameElement> GetGameElement();
     [[nodiscard]]
-    glm::vec2                    GetGamePosition();
+    glm::vec2                    GetGamePosition() const;
     std::shared_ptr<GameElement> GetWindowElement();
-    Direction                    GetFaceTo();
+    Direction                    GetFaceTo() const;
 
     // set player's settings
     void SetGamePosition(const glm::vec2& position);
@@ -116,6 +116,7 @@ private:
 
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};
+    glm::vec2 m_BeforeGamePosition = {0, 0};
 
     float m_ZIndex = 0.5;
 

@@ -1,6 +1,7 @@
 #include "Dungeon/Enemy.h"
 
 #include "Dungeon/AStar.h"
+#include "Event/Event.h"
 #include "Event/EventArgs.h"
 #include "Settings/ToolBoxs.h"
 
@@ -108,6 +109,7 @@ void Enemy::AttackPlayer() {
             this,
             AttackPlayerEventArgs(GetDamage())
         );
+        Event::SetAttackPlayer(false);
         m_WillMovePosition = GetGamePosition();
         m_Animation->MoveByTime(
             200,

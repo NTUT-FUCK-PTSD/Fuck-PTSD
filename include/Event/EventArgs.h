@@ -18,18 +18,6 @@ private:
     EventType type;
 };
 
-class PlayerMoveEventArgs : public EventArgs {
-public:
-    explicit PlayerMoveEventArgs(const glm::vec2& gamePosition)
-        : EventArgs(EventType::PlayerMove),
-          m_GamePosition(gamePosition) {}
-
-    glm::vec2 GetGamePosition() const { return m_GamePosition; }
-
-private:
-    glm::vec2 m_GamePosition;
-};
-
 class EnemyMoveEventArgs : public EventArgs {
 public:
     explicit EnemyMoveEventArgs(const std::size_t mapIndex)

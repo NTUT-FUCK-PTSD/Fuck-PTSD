@@ -4,4 +4,5 @@ eventpp::EventDispatcher<
     EventType,
     void(const Object* sender, const EventArgs& e),
     EventPolicies>
-    Event::Dispatcher;
+     Event::Dispatcher;
+bool Event::m_AttackPlayer = false;
