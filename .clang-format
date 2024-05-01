@@ -30,5 +30,5 @@ BraceWrapping:
   BeforeElse: false
   AfterFunction: false
 SortIncludes: CaseSensitive
-LineEnding: LF
+# LineEnding: LF
 MaxEmptyLinesToKeep: 1

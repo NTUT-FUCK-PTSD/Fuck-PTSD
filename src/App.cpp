@@ -1,14 +1,15 @@
 #include "App.hpp"
 
+#include <Util/Input.hpp>
+#include "Actions.h"
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
+#include "Dungeon/MapHandler.h"
+#include "HPIS.h"
+#include "Helper.hpp"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
-#include "Player.h"
-#include "Util/Input.hpp"
-
-#include "Dungeon/MapHandler.h"
-#include "Util/Logger.hpp"
+#include "System.h"
 
 using namespace tinyxml2;
 
@@ -106,6 +107,8 @@ void App::Start() {
     // Display::BeatIndicator::Pause(false);
     // Display::BeatHeart::Pause(false);
 
+    Game::Systems::HPIS::Init(m_MainCharacter.get());
+
     m_CurrentState = State::UPDATE;
 }
 
@@ -113,13 +116,6 @@ void App::Update() {
     LOG_INFO(Music::Player::GetMusicTime());
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
-
-    // auto tempoIndex = Music::Tempo::m_CurrentBeatIdx;
-    // if (m_BeforeTempoIndex != tempoIndex) {
-    //     m_BeforeTempoIndex = tempoIndex;
-    //     m_DungeonMap->TempoTrigger(tempoIndex);
-    //     Display::BeatHeart::SwitchHeart(100);
-    // }
 
     auto musicTime =
         static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)

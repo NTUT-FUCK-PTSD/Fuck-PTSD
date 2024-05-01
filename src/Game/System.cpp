@@ -23,7 +23,7 @@ void Game::System::AddWeapon(
     //        m_GameObject->AddChild(baseType);
 }
 
-// std::shared_ptr<Util::GameObject> Game::System::GetGameObject() {
+// std::shared_ptr<Util::GameObject> Game::Systems::GetGameObject() {
 //     return m_GameObject;
 // }
 
@@ -39,6 +39,6 @@ void Game::System::Update() {
     }
 }
 
-// std::shared_ptr<Util::GameObject> Game::System::m_GameObject = nullptr;
+// std::shared_ptr<Util::GameObject> Game::Systems::m_GameObject = nullptr;
 Dungeon::Map* Game::System::m_DungeonMap = nullptr;
 std::vector<std::shared_ptr<Game::Graphs::IBase>> Game::System::m_IBaseList;

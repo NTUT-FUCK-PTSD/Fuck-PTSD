@@ -5,12 +5,14 @@
 #ifndef FUCK_PTSD_PLAYER_H
 #define FUCK_PTSD_PLAYER_H
 
+#include <memory>
 #include "Animation.h"
+#include "Game/Warehouse/Coin.h"
+#include "Game/Warehouse/Diamond.h"
+#include "Game/Warehouse/Heart.h"
 #include "GameElement.h"
-#include "Items/Coin.h"
-#include "Items/Diamond.h"
-#include "Items/Heart.h"
-#include "Items/Tools.h"
+
+#include "Game/Warehouse/Tools.h"
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
@@ -67,13 +69,14 @@ public:
     );
 
     // tool's handle
+    std::shared_ptr<Players::Tools> GetToolMod();
     // about Shovel
-    bool             IsShovelExist();
-    ShovelEnum::Type GetShovelType();
+    // bool             IsShovelExist();
+    // ShovelEnum::Type GetShovelType();
 
     // about Weapon
-    bool             IsWeaponExist();
-    WeaponEnum::Type GetWeaponType();
+    // bool             IsWeaponExist();
+    // WeaponEnum::Type GetWeaponType();
 
     void PrepareThrowOut(bool state);
 
@@ -84,8 +87,8 @@ public:
     );
 
 private:
-    ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
-    WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;
+    // ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
+    // WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;
 
     std::string m_HeadImagePath;
     std::string m_BodyImagePath;
@@ -102,11 +105,11 @@ private:
     std::shared_ptr<GameElement> m_Head;
     std::shared_ptr<GameElement> m_Player;
 
-    std::unique_ptr<Coin>        m_Coin;
-    std::unique_ptr<Heart>       m_Heart;
-    std::unique_ptr<Tools>       m_Tools;
-    std::unique_ptr<Diamond>     m_Diamond;
-    std::shared_ptr<GameElement> m_Window;
+    std::unique_ptr<Coin>           m_Coin;
+    std::unique_ptr<Heart>          m_Heart;
+    std::shared_ptr<Players::Tools> m_Tool;
+    std::unique_ptr<Diamond>        m_Diamond;
+    std::shared_ptr<GameElement>    m_Window;
 
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};

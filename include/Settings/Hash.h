@@ -11,10 +11,10 @@ namespace Settings {
 namespace Hash {
 typedef std::size_t ht;
 
-constexpr ht prime = 0x100000001B3ull;
-constexpr ht basis = 0xCBF29CE484222325ull;
+static constexpr ht prime = 0x100000001B3ull;
+static constexpr ht basis = 0xCBF29CE484222325ull;
 
-static ht HashConvert(const std::string& str) {
+static auto HashConvert(const std::string& str) -> ht {
     ht ret = basis;
 
     for (std::size_t i = 0; i < str.size(); ++i) {
@@ -23,9 +23,10 @@ static ht HashConvert(const std::string& str) {
     }
 
     return ret;
-}
+};
 
-constexpr ht hash_compile_time(const char* str, ht last_value = basis) {
+static constexpr auto hash_compile_time(const char* str, ht last_value = basis)
+    -> ht {
     return *str ? hash_compile_time(str + 1, (*str ^ last_value) * prime)
                 : last_value;
 }
