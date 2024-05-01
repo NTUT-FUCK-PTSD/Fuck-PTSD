@@ -21,9 +21,11 @@ private:
     static Dungeon::Map* m_Map;
 
 public:
-    static auto MakeTile(std::string weaponType) -> void {
-        LOG_INFO(weaponType);
-    };
+    static auto MakeTile(
+        glm::ivec2  direGP,
+        glm::ivec2  playerGP,
+        std::string weaponType
+    ) -> void;
 };
 }  // namespace Game::Systems
 

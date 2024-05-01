@@ -1,6 +1,7 @@
 #include "HPIS.h"
 #include "ISC.h"
 #include "Player.h"
+#include "Settings/Helper.hpp"
 #include "Signal.h"
 
 // Game::Systems::HPIS::HPIS(Player* player)
@@ -29,7 +30,12 @@ void Game::Systems::HPIS::IsExistWeaponThrow() {
 }
 
 void Game::Systems::HPIS::ThrowOut(const Player::Direction direction) {
-    ISC::Handle(Signal::ADD_DROP_WEAPON, "atds");
+    LOG_INFO("Throw out.");
+
+    const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM();
+    const auto direGP = Settings::Helper::Direct2MI(direction);
+
+    ISC::Handle(Signal::ADD_DROP_WEAPON, direGP, playerGP, "atds");
 }
 
 Player* Game::Systems::HPIS::m_Players = nullptr;
