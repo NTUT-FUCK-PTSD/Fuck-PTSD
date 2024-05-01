@@ -192,7 +192,6 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
     }
 
     for (std::size_t i = 0; i < numberOfHeart - m_Health / 2; i++) {
-        LOG_INFO("heart");
         m_HeartList[numberOfHeart - i - 1]->SetDrawable(m_EmptyHeart);
     }
 };

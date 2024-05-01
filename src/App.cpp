@@ -11,6 +11,7 @@
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
+#include "Systems/HEIS.h"
 
 using namespace tinyxml2;
 
@@ -101,8 +102,8 @@ void App::Start() {
 
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
-
     Game::Systems::HPIS::Init(m_MainCharacter.get());
+    Game::Systems::HEIS::Init(m_DungeonMap.get());
 
     m_CurrentState = State::UPDATE;
 }
@@ -216,10 +217,9 @@ void App::Update() {
                     if (m_DungeonMap->GetMapData()->IsHasEntity(mapIndex)) {
                         m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2
                         );
-                        //                        m_DungeonMap->RemoveEnemy(
-                        //                            m_DungeonMap->GamePostion2MapIndex(playerDestination
-                        //                            )
-                        //                        );
+
+                        Game::Systems::HEIS::DetectHealth(mapIndex);
+
                         m_Camera->Shake(150, 10);
                     } else if (m_DungeonMap->GetMapData()->IsPositionWall(
                                    playerDestination
