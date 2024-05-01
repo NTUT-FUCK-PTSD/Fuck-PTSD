@@ -214,10 +214,12 @@ void App::Update() {
                         playerDestination
                     )) {
                     if (m_DungeonMap->GetMapData()->IsHasEntity(mapIndex)) {
-                        m_DungeonMap->RemoveEnemy(
-                            m_DungeonMap->GamePostion2MapIndex(playerDestination
-                            )
+                        m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2
                         );
+                        //                        m_DungeonMap->RemoveEnemy(
+                        //                            m_DungeonMap->GamePostion2MapIndex(playerDestination
+                        //                            )
+                        //                        );
                         m_Camera->Shake(150, 10);
                     } else if (m_DungeonMap->GetMapData()->IsPositionWall(
                                    playerDestination

@@ -34,6 +34,8 @@ Enemies::OrangeSlime::OrangeSlime(
         m_Movement[(m_StartIdx + i) % 4] +=
             m_Movement[(m_StartIdx + i - 1) % 4];
     }
+
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -90,7 +92,7 @@ void OrangeSlime::Update() {
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
 
-    //    UpdateHeart(m_Transform.translation);
+    UpdateHeart(m_Transform.translation);
 }
 
 void OrangeSlime::UpdateFace(const glm::vec2& direction) {

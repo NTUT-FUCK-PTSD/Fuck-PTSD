@@ -39,7 +39,7 @@ Enemies::Zombie::Zombie(
     SetDamage(2);  // 1 heart
     SetCoin(1);
 
-    //    InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -110,7 +110,7 @@ void Zombie::Update() {
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
 
-    //    UpdateHeart(m_Transform.translation);
+    UpdateHeart(m_Transform.translation);
 }
 
 void Zombie::UpdateFace() {

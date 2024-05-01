@@ -61,6 +61,7 @@ Enemies::Bat::Bat(
     }
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -106,7 +107,7 @@ void Bat::Update() {
     // Update z index
     SetZIndex(m_Animation->GetAnimationZIndex());
 
-    //    UpdateHeart(m_Transform.translation);
+    UpdateHeart(m_Transform.translation);
 }
 
 void Bat::RandomMove() {

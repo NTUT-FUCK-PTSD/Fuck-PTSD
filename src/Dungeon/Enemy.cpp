@@ -162,7 +162,6 @@ void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
         obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 
         AddChild(obj);
-        LOG_INFO("test");
         m_HeartList.push_back(obj.get());
 
         zindex = zindex + 0.01;
@@ -172,7 +171,8 @@ void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
 void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
     const auto numberOfHeart = m_HeartList.size();
 
-    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false) {
+    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false
+        || m_IsBeAttacked == false) {
         [&]() {
             for (const auto& elem : m_HeartList) {
                 elem->SetVisible(false);
@@ -191,12 +191,10 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
         startIdx += 2;
     }
 
-    // auto pos = pixelPos + initOffsetPos;
-    // LOG_INFO(pos);
-    // for (const auto& elem : m_HeartList) {
-    //     elem->SetPosition(pos);
-    //     pos += eachOffsetPos;
-    // }
+    for (std::size_t i = 0; i < numberOfHeart - m_Health / 2; i++) {
+        LOG_INFO("heart");
+        m_HeartList[numberOfHeart - i - 1]->SetDrawable(m_EmptyHeart);
+    }
 };
 
 }  // namespace Dungeon
