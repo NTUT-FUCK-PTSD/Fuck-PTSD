@@ -10,7 +10,7 @@ public:
     explicit EventArgs(const EventType type)
         : type(type) {}
 
-    virtual ~EventArgs() = delete;
+    virtual ~EventArgs() = default;
 
     EventType GetType() const { return type; }
 

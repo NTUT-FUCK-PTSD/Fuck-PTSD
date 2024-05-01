@@ -17,7 +17,7 @@ struct EventPolicies {
 class Event final {
 public:
     Event() = delete;
-    ~Event() = delete;
+    ~Event() = default;
     using DispatcherHandle = eventpp::EventDispatcher<
         EventType,
         void(const Object* sender, const EventArgs& e),
