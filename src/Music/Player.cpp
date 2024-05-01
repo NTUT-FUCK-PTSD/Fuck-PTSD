@@ -25,6 +25,19 @@ void Music::Player::PlayMusic(
     m_MusicSystem.setRelativePlaySpeed(m_MusicHandle, speed);
 }
 
+void Music::Player::PauseMusic(bool state) {
+    if (state) {
+        m_MusicSystem.setPauseAll(state);
+    } else {
+        m_MusicSystem.setPause(m_MusicHandle, state);
+    }
+    // if (state) {
+    //     m_MusicSystem.pause();
+    // } else {
+    //     m_MusicSystem.setPause(m_MusicHandle, false);
+    // }
+}
+
 void Music::Player::StopMusic() {
     m_MusicSystem.stop(m_MusicHandle);
 }
