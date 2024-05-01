@@ -12,6 +12,7 @@
 #include "Music/Tempo.h"
 #include "System.h"
 #include "Systems/HEIS.h"
+#include "Systems/HPIS.h"
 
 using namespace tinyxml2;
 
@@ -121,12 +122,14 @@ void App::Update() {
         Display::BeatHeart::SwitchHeart(100);
     }
 
+
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
-        const auto&  m = m_MainCharacter->GetGamePosition();
-        const auto&& b = Settings::Helper::GamePosToMapIdx(m + glm::vec2{1, 0});
-        if (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
-            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
-        }
+        Game::Systems::HPIS::ThrowOut(Player::Direction::NONE);
+//        const auto&  m = m_MainCharacter->GetGamePosition();
+//        const auto&& b = Settings::Helper::GamePosToMapIdx(m + glm::vec2{1, 0});
+//        if (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
+//            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
+//        }
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {

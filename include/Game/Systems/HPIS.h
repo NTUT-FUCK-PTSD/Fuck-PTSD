@@ -21,6 +21,8 @@
  *
  */
 namespace Game::Systems {
+class ISC;
+
 class HPIS final {
 public:
     // explicit HPIS(Player* player);

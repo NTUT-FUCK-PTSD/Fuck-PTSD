@@ -8,9 +8,10 @@
  * @note handle-enemy-interactive-system
  */
 #include "Dungeon/Map.h"
+#include "Player.h"
 
 namespace Game::Systems {
-class HEIS {
+class HEIS final {
 public:
     static auto Init(Dungeon::Map* dungeon) -> void;
 
@@ -18,6 +19,11 @@ public:
 
 private:
     static Dungeon::Map* m_Map;
+
+public:
+    static auto MakeTile(std::string weaponType) -> void {
+        LOG_INFO(weaponType);
+    };
 };
 }  // namespace Game::Systems
 

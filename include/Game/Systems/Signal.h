@@ -6,9 +6,7 @@
 #define FUCK_PTSD_SIGNAL_H
 
 namespace Game::Systems {
-enum class Signal {
-
-};
+enum class Signal { ADD_DROP_WEAPON = 0 };
 }
 
 #endif  // FUCK_PTSD_SIGNAL_H
