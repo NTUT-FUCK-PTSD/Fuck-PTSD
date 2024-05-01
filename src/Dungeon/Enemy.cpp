@@ -167,18 +167,20 @@ void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
 }
 
 void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
-    glm::vec2 initOffsetPos;
-    glm::vec2 eachOffsetPos;
+    glm::vec2 initOffsetPos = {0, 40};
+    glm::vec2 eachOffsetPos = {-10, 0};
 
-    [&initOffsetPos, &eachOffsetPos, this]() {
-        const auto heartNumber = m_HeartList.size();
-        LOG_INFO(heartNumber);
-        float x_width = static_cast<float>(
-            heartNumber * 24 + (heartNumber - 1) * 16
-        );
-        initOffsetPos = glm::vec2{-(x_width / 3), 40};
-        eachOffsetPos = glm::vec2{x_width / m_HeartList.size(), 0};
-    }();
+    if (m_HeartList.size() >= 2) {
+        [&initOffsetPos, &eachOffsetPos, this]() {
+            const auto heartNumber = m_HeartList.size();
+            LOG_INFO(heartNumber);
+            float x_width = static_cast<float>(
+                heartNumber * 24 + (heartNumber - 1) * 2
+            );
+            initOffsetPos = glm::vec2{-(x_width / 2) + x_width / 6, 40};
+            eachOffsetPos = glm::vec2{x_width / 3, 0};
+        }();
+    }
 
     auto pos = pixelPos + initOffsetPos;
     LOG_INFO(pos);
