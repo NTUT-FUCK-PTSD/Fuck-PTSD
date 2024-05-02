@@ -4,17 +4,14 @@
 
 namespace Dungeon {
 MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
-    : m_MapData(mapData) {
+    : m_MapData(mapData),
+      m_UpdateHandle(Event::EventQueue) {
     BuildMiniMap();
     Update();
-    m_UpdateHandle = Event::Dispatcher.appendListener(
+    m_UpdateHandle.appendListener(
         EventType::DrawableUpdate,
         [this](const Object*, const EventArgs&) { UpdatePlayer(); }
     );
-}
-
-MiniMap::~MiniMap() {
-    Event::Dispatcher.removeListener(EventType::DrawableUpdate, m_UpdateHandle);
 }
 
 void MiniMap::BuildMiniMap() {

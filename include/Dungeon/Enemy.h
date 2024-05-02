@@ -11,6 +11,7 @@
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
 #include "UGameElement.h"
+#include "eventpp/utilities/scopedremover.h"
 
 namespace Dungeon {
 // Abstract class
@@ -20,7 +21,7 @@ public:
         const s_Enemy&                       u_Enemy,
         const std::shared_ptr<SimpleMapData> simpleMapData
     );
-    virtual ~Enemy();
+    virtual ~Enemy() = default;
 
     void SetShadow(const bool shadow);
     void SetGamePosition(const glm::vec2& gamePosition);
@@ -109,7 +110,7 @@ private:
 
     bool m_Seen = false;
 
-    Event::DispatcherHandle m_DrawableUpdate;
+    Event::Remover m_DrawableUpdate;
 };
 }  // namespace Dungeon
 

@@ -1,6 +1,7 @@
 #include "Dungeon/Map.h"
 
 #include "Dungeon_config.h"
+#include "Event/Event.h"
 
 namespace Dungeon {
 Map::Map(
@@ -8,7 +9,8 @@ Map::Map(
     const std::string&            path,
     const std::size_t             levelNum
 )
-    : m_Camera(camera) {
+    : m_Camera(camera),
+      m_Event(Event::EventQueue) {
     // ZIndex 98~100 is for UI
     m_ZIndex = 98;
     m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
@@ -34,11 +36,11 @@ Map::Map(
 }
 
 Map::~Map() {
-    Event::Dispatcher.dispatch(this, EventArgs(EventType::ResetMap));
+    Event::EventQueue.dispatch(this, EventArgs(EventType::ResetMap));
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    Event::Dispatcher.dispatch(this, EventArgs(EventType::ResetMap));
+    Event::EventQueue.dispatch(this, EventArgs(EventType::ResetMap));
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;

@@ -3,13 +3,14 @@
 
 #include <memory>
 
-#include "Event/Object.h"
 #include "Util/GameObject.hpp"
 
 #include "Dungeon/Direction.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
+#include "Event/Event.h"
+#include "Event/Object.h"
 #include "Settings/Camera.h"
 
 namespace Dungeon {
@@ -96,6 +97,8 @@ private:
     std::shared_ptr<MiniMap> m_MiniMap;
 
     std::size_t m_TempoIndex = 0;
+
+    Event::Remover m_Event;
 };
 
 }  // namespace Dungeon

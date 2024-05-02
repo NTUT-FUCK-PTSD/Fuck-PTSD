@@ -1,8 +1,8 @@
 #include "Event/Event.h"
 
-eventpp::EventDispatcher<
+eventpp::EventQueue<
     EventType,
     void(const Object* sender, const EventArgs& e),
     EventPolicies>
-     Event::Dispatcher;
+     Event::EventQueue;
 bool Event::m_AttackPlayer = false;

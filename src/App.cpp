@@ -81,7 +81,7 @@ void App::Start() {
     m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
     m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png"
     );
-    Event::Dispatcher.appendListener(
+    Event::EventQueue.appendListener(
         EventType::AttackPlayer,
         eventpp::argumentAdapter<
             void(const Object*, const AttackPlayerEventArgs&)>(
@@ -92,7 +92,7 @@ void App::Start() {
             }
         )
     );
-    Event::Dispatcher.appendListener(
+    Event::EventQueue.appendListener(
         EventType::ResetMap,
         [this](const Object*, const EventArgs&) {
             m_MainCharacter->SetGamePosition({0, 0});
@@ -298,7 +298,7 @@ void App::Update() {
         m_MainCharacter
             ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
         m_MainCharacter->Update();
-        Event::Dispatcher.dispatch(
+        Event::EventQueue.dispatch(
             m_MainCharacter.get(),
             EventArgs(EventType::PlayerMove)
         );

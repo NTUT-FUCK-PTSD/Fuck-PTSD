@@ -7,7 +7,7 @@
 
 namespace Dungeon {
 void Map::InitEvent() {
-    Event::Dispatcher.appendListener(
+    m_Event.appendListener(
         EventType::AttackPlayer,
         [this](const Object*, const EventArgs&) {
             if (Event::GetAttackPlayer()) {
@@ -18,7 +18,7 @@ void Map::InitEvent() {
         }
     );
 
-    Event::Dispatcher.appendListener(
+    m_Event.appendListener(
         EventType::EnemyMove,
         eventpp::argumentAdapter<void(const Enemy*, const EnemyMoveEventArgs&)>(
             [this](const Enemy* sender, const EnemyMoveEventArgs& e) {
@@ -50,7 +50,7 @@ void Map::InitEvent() {
         )
     );
 
-    Event::Dispatcher.appendListener(
+    m_Event.appendListener(
         EventType::PlayerMove,
         eventpp::argumentAdapter<void(const Player*, const EventArgs&)>(
             [this](const Player* sender, const EventArgs&) {
@@ -60,7 +60,7 @@ void Map::InitEvent() {
         )
     );
 
-    Event::Dispatcher.appendListener(
+    m_Event.appendListener(
         EventType::ResetMap,
         [this](const Object*, const EventArgs&) {
             m_Children.clear();

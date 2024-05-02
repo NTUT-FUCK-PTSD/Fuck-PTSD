@@ -18,7 +18,8 @@ Enemy::Enemy(
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
-      m_Lord(u_Enemy.lord == 1) {
+      m_Lord(u_Enemy.lord == 1),
+      m_DrawableUpdate(Event::EventQueue) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
     m_Animation = std::make_unique<Animation>(
@@ -33,16 +34,9 @@ Enemy::Enemy(
     m_EmptyHeart = std::make_shared<Util::Image>(
         Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
     );
-    m_DrawableUpdate = Event::Dispatcher.appendListener(
+    m_DrawableUpdate.appendListener(
         EventType::DrawableUpdate,
         [this](const Object*, const EventArgs&) { Update(); }
-    );
-}
-
-Enemy::~Enemy() {
-    Event::Dispatcher.removeListener(
-        EventType::DrawableUpdate,
-        m_DrawableUpdate
     );
 }
 
@@ -115,7 +109,7 @@ glm::vec2 Enemy::FindNextToPlayer() {
 
 void Enemy::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
-        Event::Dispatcher.dispatch(this, AttackPlayerEventArgs(GetDamage()));
+        Event::EventQueue.dispatch(this, AttackPlayerEventArgs(GetDamage()));
         Event::SetAttackPlayer(false);
         m_WillMovePosition = GetGamePosition();
         m_Animation->MoveByTime(
@@ -175,7 +169,7 @@ void Enemy::CanMove() {
         return;
     }
     if (!m_Animation->IsAnimating()) {
-        Event::Dispatcher.dispatch(
+        Event::EventQueue.dispatch(
             this,
             EnemyMoveEventArgs(GamePostion2MapIndex(m_WillMovePosition))
         );

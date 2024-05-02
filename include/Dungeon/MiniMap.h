@@ -12,7 +12,7 @@ namespace Dungeon {
 class MiniMap : public Util::GameObject {
 public:
     MiniMap(std::shared_ptr<MapData> mapData);
-    ~MiniMap();
+    ~MiniMap() = default;
     void SetColor(const glm::vec2& position, CubeColor color);
     void SetColor(const std::size_t position, CubeColor color);
     void SetVisible(const glm::vec2& position, bool visible);
@@ -34,7 +34,7 @@ private:
     bool       m_PlayerStatus = false;
     double     m_Scale = DUNGEON_SCALE + 1;
 
-    Event::DispatcherHandle m_UpdateHandle;
+    Event::Remover m_UpdateHandle;
 };
 }  // namespace Dungeon
 

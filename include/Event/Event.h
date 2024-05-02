@@ -2,10 +2,11 @@
 #define EVENT_H
 
 #include <glm/glm.hpp>
-#include "Event/EventType.h"
-#include "eventpp/eventdispatcher.h"
+#include "eventpp/eventqueue.h"
+#include "eventpp/utilities/scopedremover.h"
 
 #include "Event/EventArgs.h"
+#include "Event/EventType.h"
 #include "Event/Object.h"
 
 struct EventPolicies {
@@ -18,16 +19,21 @@ class Event final {
 public:
     Event() = delete;
     ~Event() = default;
-    using DispatcherHandle = eventpp::EventDispatcher<
-        EventType,
-        void(const Object* sender, const EventArgs& e),
-        EventPolicies>::Handle;
+    // using EventQueueHandle = eventpp::EventQueue<
+    //     EventType,
+    //     void(const Object* sender, const EventArgs& e),
+    //     EventPolicies>::Handle;
 
-    static eventpp::EventDispatcher<
+    static eventpp::EventQueue<
         EventType,
         void(const Object* sender, const EventArgs& e),
         EventPolicies>
-        Dispatcher;
+        EventQueue;
+
+    using Remover = eventpp::ScopedRemover<eventpp::EventQueue<
+        EventType,
+        void(const Object* sender, const EventArgs& e),
+        EventPolicies>>;
 
     static void SetAttackPlayer(bool attackPlayer) {
         m_AttackPlayer = attackPlayer;
