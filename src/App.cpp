@@ -1,7 +1,6 @@
 #include "App.hpp"
 
 #include <Util/Input.hpp>
-#include <Util/Logger.hpp>
 #include "Actions.h"
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
@@ -106,10 +105,17 @@ void App::Start() {
     Game::Systems::HPIS::Init(m_MainCharacter.get());
     Game::Systems::HEIS::Init(m_DungeonMap.get());
 
+    // Music::Player::PauseMusic(true);
+    // Music::Player::PauseMusic(false);
+    // Music::Tempo::Pause(false);
+    // Display::BeatIndicator::Pause(false);
+    // Display::BeatHeart::Pause(false);
+
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+    LOG_INFO(Music::Player::GetMusicTime());
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 

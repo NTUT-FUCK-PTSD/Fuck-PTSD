@@ -64,7 +64,15 @@ void Display::BeatIndicator::Init() {
     }
 }
 
+void Display::BeatIndicator::Pause(bool state) {
+    m_IsPause = state;
+}
+
 void Display::BeatIndicator::Update() {
+    if (m_IsPause) {
+        return;
+    }
+
     auto currentTime = Util::Time::GetElapsedTimeMs();
 
     const auto intervalTime = currentTime - m_lastTime;
@@ -136,6 +144,7 @@ std::shared_ptr<GameElement> Display::BeatIndicator::GetGameElement() {
     return m_GameElement;
 }
 
+bool        Display::BeatIndicator::m_IsPause = false;
 std::string Display::BeatIndicator::m_IndicatorImagePath = "";
 glm::vec2   Display::BeatIndicator::m_Position = {0, -310};
 // glm::vec2   Display::BeatIndicator::m_Scale;

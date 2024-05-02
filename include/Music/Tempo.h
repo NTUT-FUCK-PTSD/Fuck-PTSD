@@ -22,6 +22,8 @@ public:
 
     static void ReadTempoFile(const std::string& path);
 
+    static void Pause(bool state);
+
     [[nodiscard]]
     static bool IsSwitch();
 
@@ -55,6 +57,7 @@ public:
 private:
     static void LopReset();
 
+    static bool                     m_IsPause;
     static bool                     m_IsBeatSwitch;
     static std::size_t              m_CurrentBeatIdx;
     static std::vector<std::size_t> m_BeatList;

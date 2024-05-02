@@ -19,6 +19,8 @@ public:
     explicit BeatHeart();
     virtual ~BeatHeart() = default;
 
+    void Pause(bool state);
+
     void Update();
 
     [[nodiscard]]
@@ -40,6 +42,7 @@ private:
 
     float m_MusicSpeed = 1.0f;
 
+    bool        m_IsPause = false;
     std::size_t m_triggerTime = 0;
     std::size_t m_CurrentMusicTime = 0;
     int16_t     m_offset = 0;
