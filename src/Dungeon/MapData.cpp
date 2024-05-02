@@ -65,6 +65,10 @@ std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
     return v;
 }
 
+std::vector<std::shared_ptr<Enemy>> MapData::GetUnsortedEnemies() const {
+    return m_EnemyQueue;
+}
+
 bool MapData::EnemyCompare(
     std::shared_ptr<Enemy>& lhs,
     std::shared_ptr<Enemy>& rhs

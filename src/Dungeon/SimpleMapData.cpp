@@ -172,7 +172,7 @@ void SimpleMapData::SetPlayerPosition(const glm::vec2& playerPosition) {
     m_PlayerPosition = playerPosition;
 }
 
-std::vector<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
+std::vector<std::shared_ptr<Tile>> SimpleMapData::GetUnsortedTiles() const {
     return m_TilesQueue;
 }
 

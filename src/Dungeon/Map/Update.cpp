@@ -4,7 +4,7 @@ namespace Dungeon {
 void Map::CameraUpdate() {
     glm::vec2 cameraPos = m_MapData->GetPlayerPosition();
 
-    for (auto& tile : m_MapData->GetTilesQueue()) {
+    for (auto& tile : m_MapData->GetUnsortedTiles()) {
         if (CheckShowPosition(
                 {tile->GetTile().x, tile->GetTile().y},
                 cameraPos
@@ -22,7 +22,7 @@ void Map::CameraUpdate() {
             tile->SetCameraUpdate(false);
         }
     }
-    for (auto& enemy : m_MapData->GetEnemyQueue()) {
+    for (auto& enemy : m_MapData->GetUnsortedEnemies()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
             enemy->SetCameraUpdate(true);
             if (CanPlayerSeePosition(enemy->GetGamePosition())) {

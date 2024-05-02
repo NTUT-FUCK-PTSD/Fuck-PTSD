@@ -59,7 +59,7 @@ void Map::LoadTile() {
         }
     }
 
-    for (auto& tile : m_MapData->GetTilesQueue()) {
+    for (auto& tile : m_MapData->GetUnsortedTiles()) {
         m_Children.push_back(tile);
     }
 }

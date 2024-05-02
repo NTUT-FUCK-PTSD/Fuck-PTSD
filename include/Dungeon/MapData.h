@@ -23,6 +23,7 @@ public:
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
+    std::vector<std::shared_ptr<Enemy>> GetUnsortedEnemies() const;
 
 protected:
     static bool EnemyCompare(
