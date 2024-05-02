@@ -2,15 +2,15 @@
 #define EVENT_H
 
 #include <glm/glm.hpp>
+#include "Event/EventType.h"
 #include "eventpp/eventdispatcher.h"
 
 #include "Event/EventArgs.h"
 #include "Event/Object.h"
 
 struct EventPolicies {
-    template <typename T>
-    static EventType getEvent(const T& event) {
-        return event.getType();
+    static EventType getEvent(const Object*, const EventArgs& event) {
+        return event.GetType();
     }
 };
 

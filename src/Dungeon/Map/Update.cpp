@@ -71,10 +71,6 @@ void Map::Update() {
         m_OverlayRed = false;
     }
 
-    Event::Dispatcher.dispatch(
-        EventType::DrawableUpdate,
-        this,
-        EventArgs(EventType::DrawableUpdate)
-    );
+    Event::Dispatcher.dispatch(this, EventArgs(EventType::DrawableUpdate));
 }
 }  // namespace Dungeon

@@ -299,7 +299,6 @@ void App::Update() {
             ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
         m_MainCharacter->Update();
         Event::Dispatcher.dispatch(
-            EventType::PlayerMove,
             m_MainCharacter.get(),
             EventArgs(EventType::PlayerMove)
         );

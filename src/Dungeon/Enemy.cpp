@@ -115,11 +115,7 @@ glm::vec2 Enemy::FindNextToPlayer() {
 
 void Enemy::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
-        Event::Dispatcher.dispatch(
-            EventType::AttackPlayer,
-            this,
-            AttackPlayerEventArgs(GetDamage())
-        );
+        Event::Dispatcher.dispatch(this, AttackPlayerEventArgs(GetDamage()));
         Event::SetAttackPlayer(false);
         m_WillMovePosition = GetGamePosition();
         m_Animation->MoveByTime(
@@ -180,7 +176,6 @@ void Enemy::CanMove() {
     }
     if (!m_Animation->IsAnimating()) {
         Event::Dispatcher.dispatch(
-            EventType::EnemyMove,
             this,
             EnemyMoveEventArgs(GamePostion2MapIndex(m_WillMovePosition))
         );

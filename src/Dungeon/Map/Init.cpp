@@ -34,13 +34,11 @@ Map::Map(
 }
 
 Map::~Map() {
-    Event::Dispatcher
-        .dispatch(EventType::ResetMap, this, EventArgs(EventType::ResetMap));
+    Event::Dispatcher.dispatch(this, EventArgs(EventType::ResetMap));
 }
 
 bool Map::LoadLevel(const std::size_t levelNum) {
-    Event::Dispatcher
-        .dispatch(EventType::ResetMap, this, EventArgs(EventType::ResetMap));
+    Event::Dispatcher.dispatch(this, EventArgs(EventType::ResetMap));
 
     if (!m_Level->LoadLevel(levelNum)) {
         m_Available = false;
