@@ -4,6 +4,7 @@
 #include "Dungeon/TileFactory.h"
 
 #include "Dungeon_config.h"
+#include "Util/Logger.hpp"
 
 namespace Dungeon {
 
@@ -521,8 +522,12 @@ void Map::AddItem(
     const std::size_t           position,
     const std::shared_ptr<Item> item
 ) {
-    m_MapData->AddItem(position, item);
-    AddChild(item);
+    if (m_MapData->IsItemsEmpty(position)) {
+        m_MapData->AddItem(position, item);
+        AddChild(item);
+    } else {
+        LOG_CRITICAL("Item already exists at position: {0}", position);
+    }
 }
 
 void Map::RemoveItem(const std::size_t position) {
