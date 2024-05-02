@@ -45,10 +45,14 @@ public:
     static glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
     static glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
 
+    void AddItem(const std::size_t position, const std::shared_ptr<Item> item);
+    void RemoveItem(const std::size_t position);
+
 private:
     bool m_Available;
     void LoadTile();
     void LoadEnemy();
+    void LoadItem();  // TODO
 
     void TempoUpdate(bool isPlayer);
 
