@@ -75,7 +75,7 @@ void Zombie::UpdateFace() {
 
 void Zombie::UpdateProperties() {
     UpdateFace();
-    if (m_Direction == 0) {
+    if (m_Direction == 2) {
         m_NormalFrames = m_BackFrames;
         m_ShadowFrames = m_ShadowBackFrames;
     } else if (m_Attack) {
