@@ -1,6 +1,7 @@
 #include "HPIS.h"
 #include "ISC.h"
 #include "Player.h"
+#include "Player_config.h"
 #include "Settings/Helper.hpp"
 #include "Signal.h"
 
@@ -24,9 +25,11 @@ void Game::Systems::HPIS::Init(Player* player) {
 
 void Game::Systems::HPIS::IsExistWeaponThrow() {
     const auto& _throw = std::make_shared<Game::Warehouse::Throw>(
-        Config::IMAGE_DAGGER_PATH
+        //        Config::IMAGE_DAGGER_PATH
+        Players::Config::IMAGE_SPEAR.data()
     );
-    m_Players->GetToolMod()->AddTool(_throw);
+    //    m_Players->GetToolMod()->AddTool(_throw, "Throw", "Dagger");
+    m_Players->GetToolMod()->AddTool(_throw, "THROW", "Spear");
 }
 
 void Game::Systems::HPIS::ThrowOut(const Player::Direction direction) {

@@ -2,6 +2,8 @@
 // Created by adven on 2024/5/1.
 //
 #include "HEIS.h"
+#include "Game_config.h"
+#include "Graphs/Dagger.h"
 #include "Helper.hpp"
 
 auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
@@ -24,6 +26,7 @@ auto Game::Systems::HEIS::MakeTile(
 
     auto&& currGP = static_cast<glm::ivec2>(playerGP);
 
+    // is wall
     while (true) {
         mi = Settings::Helper::GamePosToMapIdx(currGP);
 
@@ -38,11 +41,19 @@ auto Game::Systems::HEIS::MakeTile(
         }
     }
 
-    const auto dropFloor = []() {
-
-    };
-
-    dropFloor();
+    const auto pixelSize =
+        ToolBoxs::CountImagePixel(Game::Config::IMAGE_DAGGER_PATH, 1, 2);
+    const auto image = std::make_shared<SpriteSheet>(
+        Config::IMAGE_DAGGER_PATH,
+        pixelSize,
+        std::vector<std::size_t>{0, 1},
+        false,
+        100,
+        false,
+        100
+    );
+    const auto object = std::make_shared<Graphs::DaggerGameObj>();
+    object->SetDrawable(image);
 }
 
 Dungeon::Map* Game::Systems::HEIS::m_Map = nullptr;

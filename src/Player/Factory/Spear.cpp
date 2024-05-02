@@ -1,39 +1,35 @@
 //
-// Created by 陳世昂 on 2024/4/29.
+// Created by adven on 2024/5/2.
 //
 
-#include "Dagger.h"
-#include <memory>
-#include "Helper.hpp"
+#include "Game/Warehouse/Spear.h"
 #include "Player_config.h"
-#include "SpriteSheet.hpp"
-#include "UGameElement.h"
-#include "Util/SpriteSheet.hpp"
+#include "Settings/Helper.hpp"
 
-Dagger::Dagger() {
+Spear::Spear() {
     GenItem();
     GenSlot();
 
     SetVisible(false);
 }
 
-void Dagger::SetPosition(const glm::vec2& Position) {
-    this->m_Transform.translation = Position;
+void Spear::SetPosition(const glm::vec2& Position) {
+    m_Transform.translation = Position;
 
     const auto& list = GetChildren();
     list[0]->m_Transform.translation = Position + glm::vec2{0, -5};
     list[1]->m_Transform.translation = Position + glm::vec2{0, 0.4};
 }
 
-void Dagger::GenItem() {
+void Spear::GenItem() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& size = Settings::Helper::CountImgPixel(
-        Players::Config::IMAGE_DAGGER.data(),
+        Players::Config::IMAGE_SPEAR.data(),
         1,
         2
     );
     const auto& item = std::make_shared<SpriteSheet>(
-        Players::Config::IMAGE_DAGGER.data(),
+        Players::Config::IMAGE_SPEAR.data(),
         size,
         std::vector<std::size_t>{0},
         false,
@@ -50,7 +46,7 @@ void Dagger::GenItem() {
     AddChild(obj);
 }
 
-void Dagger::GenSlot() {
+void Spear::GenSlot() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& slot = std::make_shared<Util::SpriteSheet>(
         Players::Config::IMAGE_SLOT_ATTACK.data()

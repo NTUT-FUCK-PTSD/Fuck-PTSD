@@ -19,7 +19,7 @@ static constexpr std::string_view IMAGE_SLOT_BOMB = ASSETS_DIR
 static constexpr std::string_view IMAGE_SLOT_SHOVEL = ASSETS_DIR
     "/gui/hud_slot_1.png";
 
-static constexpr std::string_view IMAGE_SLOT_DAGGER = ASSETS_DIR
+static constexpr std::string_view IMAGE_SLOT_ATTACK = ASSETS_DIR
     "/gui/hud_slot_2.png";
 
 static constexpr std::string_view IMAGE_SLOT_THROW = ASSETS_DIR
@@ -35,6 +35,12 @@ static constexpr std::string_view IMAGE_BOMB = ASSETS_DIR "/items/bomb.png";
 
 static constexpr std::string_view IMAGE_DAGGER = ASSETS_DIR
     "/items/weapon_dagger.png";
+
+static constexpr std::string_view IMAGE_SPEAR = ASSETS_DIR
+    "/items/weapon_spear.png";
+
+static constexpr std::string_view IMAGE_BOW = ASSETS_DIR
+    "/items/weapon_bow.png";
 
 static constexpr std::string_view STY_FONT = ASSETS_DIR
     "/font/necrosans-6/necrosans-6.otf";

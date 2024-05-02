@@ -122,14 +122,8 @@ void App::Update() {
         Display::BeatHeart::SwitchHeart(100);
     }
 
-
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
-        Game::Systems::HPIS::ThrowOut(Player::Direction::NONE);
-//        const auto&  m = m_MainCharacter->GetGamePosition();
-//        const auto&& b = Settings::Helper::GamePosToMapIdx(m + glm::vec2{1, 0});
-//        if (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
-//            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
-//        }
+        m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -287,6 +281,4 @@ void App::End() {  // NOLINT(this method will mutate members in the future)
 std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::W, Player::Direction::UP},
   {Util::Keycode::D, Player::Direction::RIGHT},
-  {Util::Keycode::S, Player::Direction::DOWN},
-  {Util::Keycode::A, Player::Direction::LEFT},
-};
+  {Util::Keycode::S, Player::Direction::DOWN}};
