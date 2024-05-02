@@ -29,6 +29,8 @@ Enemies::Ghost::Ghost(
 
     m_LastDistance =
         Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
+
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -112,6 +114,8 @@ void Ghost::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 
 void Ghost::AttackPlayer() {

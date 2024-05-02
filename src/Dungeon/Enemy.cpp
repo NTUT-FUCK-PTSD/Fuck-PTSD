@@ -1,7 +1,10 @@
 #include "Dungeon/Enemy.h"
 
+#include <memory>
 #include "Dungeon/AStar.h"
+#include "Dungeon_config.h"
 #include "ToolBoxs.h"
+#include "UGameElement.h"
 
 namespace Dungeon {
 
@@ -21,6 +24,13 @@ Enemy::Enemy(
     SetGamePosition(m_GamePosition);
     m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    m_FullHeart = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_FULL_HEART_SM.data()
+    );
+    m_EmptyHeart = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
+    );
 }
 
 void Enemy::SetShadow(const bool shadow) {
@@ -50,6 +60,7 @@ void Enemy::SetGamePosition(const glm::vec2& gamePosition) {
     );
     m_GamePosition = gamePosition;
     m_WillMovePosition = gamePosition;
+
     // drawable would be updated depending on the enemy derived class
     // m_Transform.translation = ToolBoxs::GamePostoPos(gamePosition);
     // SetZIndex(m_GamePosition.y + float(0.25));
@@ -136,4 +147,53 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
         child->SetVisible(cameraUpdate);
     }
 }
+
+void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
+    const auto& hp = m_Health;
+
+    float zindex = 0.01;
+    for (std::size_t ii = 0; ii < hp; ii += 2) {
+        const auto& obj = std::make_shared<Util::GameElement>();
+        //        obj->SetDrawable(Dungeon::config::PTR_IMAGE_FULL_HEART_SM);
+        obj->SetDrawable(m_FullHeart);
+        obj->SetZIndex(99.0f + zindex);
+        obj->SetPosition(pixelPos);
+        obj->SetVisible(false);
+        obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+
+        AddChild(obj);
+        m_HeartList.push_back(obj.get());
+
+        zindex = zindex + 0.01;
+    }
+}
+
+void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
+    const auto numberOfHeart = m_HeartList.size();
+
+    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false
+        || m_IsBeAttacked == false) {
+        [&]() {
+            for (const auto& elem : m_HeartList) {
+                elem->SetVisible(false);
+            }
+        }();
+        return;
+    }
+
+    int       startIdx = numberOfHeart * -1 + 1;
+    auto      pos = pixelPos + glm::vec2{0.0f, 40.0f};
+    glm::vec2 x_offset;
+
+    for (std::size_t ii = 0; ii < numberOfHeart; ii++) {
+        x_offset = {startIdx * 18 + pos.x, pos.y};
+        m_HeartList[ii]->SetPosition(x_offset);
+        startIdx += 2;
+    }
+
+    for (std::size_t i = 0; i < numberOfHeart - m_Health / 2; i++) {
+        m_HeartList[numberOfHeart - i - 1]->SetDrawable(m_EmptyHeart);
+    }
+};
+
 }  // namespace Dungeon

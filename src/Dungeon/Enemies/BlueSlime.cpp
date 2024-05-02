@@ -30,6 +30,8 @@ Enemies::BlueSlime::BlueSlime(
     if (!IsVaildMove(m_InitPosition + m_Move)) {
         m_Move = -m_Move;
     }
+
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -88,5 +90,7 @@ void BlueSlime::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 }  // namespace Dungeon::Enemies

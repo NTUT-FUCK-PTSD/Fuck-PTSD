@@ -65,6 +65,8 @@ Enemies::Skeleton::Skeleton(
         SetCoin(4);
         m_CanDropHead = true;
     }
+
+    SetHealth(6);
     m_SkeletonNormalFrames = m_NormalFrames;
     m_SkeletonShadowFrames = m_ShadowFrames;
 
@@ -72,6 +74,8 @@ Enemies::Skeleton::Skeleton(
     m_WillMovePosition = GetGamePosition();
 
     m_Attack = false;
+
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -136,6 +140,8 @@ void Skeleton::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 
 void Skeleton::UpdateProperties() {

@@ -3,6 +3,8 @@
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon/TileFactory.h"
 
+#include "Dungeon_config.h"
+
 namespace Dungeon {
 
 Map::Map(
@@ -19,6 +21,14 @@ Map::Map(
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path);
     m_Available = LoadLevel(levelNum);
+
+    Dungeon::config::PTR_IMAGE_FULL_HEART_SM = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_FULL_HEART_SM.data()
+    );
+
+    Dungeon::config::PTR_IMAGE_EMPTY_HEART_SM = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
+    );
 
     // Add enemy testing
     // auto mapIndex = GamePostion2MapIndex({1, 1});
@@ -107,7 +117,8 @@ void Map::LoadTile() {
                               102,
                               0,
                               0,
-                              0})
+                              0
+                            })
                         );
                     }
                 }
@@ -253,9 +264,9 @@ void Map::CameraUpdate() {
     }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {
         if (CheckShowPosition(enemy->GetGamePosition(), cameraPos)) {
-            enemy->SetCameraUpdate(true);
             if (CanPlayerSeePosition(enemy->GetGamePosition())) {
                 enemy->SetShadow(false);
+                enemy->SetCameraUpdate(true);
             } else {
                 enemy->SetShadow(true);
             }

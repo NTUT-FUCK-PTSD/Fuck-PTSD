@@ -25,6 +25,8 @@ Enemies::GreenSlime::GreenSlime(
     SetHealth(2);    // 1 heart
     SetDamage(100);  // 50 hearts
     SetCoin(1);
+
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 namespace Dungeon::Enemies {
@@ -37,5 +39,7 @@ void GreenSlime::Update() {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 }  // namespace Dungeon::Enemies

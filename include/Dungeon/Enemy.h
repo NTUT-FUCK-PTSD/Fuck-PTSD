@@ -3,10 +3,12 @@
 
 #include "Util/GameObject.hpp"
 
+#include <memory>
 #include "Dungeon/SimpleMapData.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
+#include "UGameElement.h"
 
 namespace Dungeon {
 // Abstract class
@@ -58,13 +60,20 @@ public:
         return m_SimpleMapData->GamePosition2MapIndex(position);
     }
     virtual void Struck(const std::size_t damage) {
-        m_Health -= damage;
+        m_IsBeAttacked = true;
+        if (m_Health >= damage) {
+            m_Health -= damage;
+        } else {
+            m_Health = 0;
+        }
         if (m_Health <= 0) {
+            m_Health = 0;
+            LOG_INFO("zero");
             SetVisible(false);
         }
     };
 
-    virtual void Update() {};
+    virtual void Update(){};
 
     bool GetSeen() const { return m_Seen; }
 
@@ -83,6 +92,14 @@ protected:
 
     virtual void UpdateAnimationType(const glm::vec2& direction);
 
+    void InitHealthBarImage(const glm::vec2 pixelPos);
+
+    virtual void UpdateHeart(const glm::vec2& pixelPos);
+
+    std::shared_ptr<Util::Image>    m_FullHeart;
+    std::shared_ptr<Util::Image>    m_EmptyHeart;
+    std::vector<Util::GameElement*> m_HeartList;
+
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
@@ -100,6 +117,7 @@ private:
     std::size_t m_ID;
     std::size_t m_BeatDelay;
     bool        m_Lord;
+    bool        m_IsBeAttacked;
     bool        m_Shadow = false;
     std::size_t m_Damage = 0;
     std::size_t m_Health = 0;  // Notice: 1 heart = 2 health(same as damage)

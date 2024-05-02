@@ -61,6 +61,7 @@ Enemies::Bat::Bat(
     }
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
+    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -105,6 +106,8 @@ void Bat::Update() {
 
     // Update z index
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 
 void Bat::RandomMove() {
@@ -118,8 +121,7 @@ void Bat::RandomMove() {
             m_RandomGenerator,
             std::uniform_int_distribution<std::size_t>::param_type{
               0,
-              m_RandomPool.size() - 1
-            }
+              m_RandomPool.size() - 1}
         );
         switch (m_RandomPool[index]) {
         case 0:
