@@ -21,6 +21,8 @@
  *
  */
 namespace Game::Systems {
+class ISC;
+
 class HPIS final {
 public:
     // explicit HPIS(Player* player);
@@ -30,10 +32,15 @@ public:
      */
     static void Init(Player* player);
 
+    static void ThrowOut(const Player::Direction direction);
+
 private:
     static Player* m_Players;
 
 private:
+    /**
+     * @note It's for check player that Presence of throwing weapons
+     */
     static void IsExistWeaponThrow();
 };
 }  // namespace Game::Systems

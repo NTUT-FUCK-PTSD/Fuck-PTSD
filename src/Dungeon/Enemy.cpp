@@ -1,9 +1,12 @@
 #include "Dungeon/Enemy.h"
 
+#include <memory>
 #include "Dungeon/AStar.h"
+#include "Dungeon_config.h"
 #include "Event/Event.h"
 #include "Event/EventArgs.h"
 #include "Settings/ToolBoxs.h"
+#include "UGameElement.h"
 
 namespace Dungeon {
 
@@ -12,17 +15,24 @@ Enemy::Enemy(
     const std::shared_ptr<SimpleMapData> simpleMapData
 )
     : m_SimpleMapData(simpleMapData),
-      m_Animation(
-          std::make_unique<Animation>(ToolBoxs::GamePostoPos(m_GamePosition))
-      ),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
+    m_Animation = std::make_unique<Animation>(
+        ToolBoxs::GamePostoPos(m_GamePosition)
+    );
     m_Transform.translation = m_Animation->GetAnimationPosition();
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    m_FullHeart = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_FULL_HEART_SM.data()
+    );
+    m_EmptyHeart = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
+    );
     m_DrawableUpdate = Event::Dispatcher.appendListener(
         EventType::DrawableUpdate,
         [this](const Object*, const EventArgs&) { Update(); }
@@ -55,6 +65,7 @@ void Enemy::SetShadow(const bool shadow) {
 void Enemy::SetGamePosition(const glm::vec2& gamePosition) {
     m_GamePosition = gamePosition;
     m_WillMovePosition = gamePosition;
+
     // drawable would be updated depending on the enemy derived class
     // m_Transform.translation = ToolBoxs::GamePostoPos(gamePosition);
     // SetZIndex(m_GamePosition.y + float(0.25));
@@ -138,6 +149,17 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
     }
 }
 
+void Enemy::Struck(const std::size_t damage) {
+    m_IsBeAttacked = true;
+    if (m_Health >= damage) {
+        m_Health -= damage;
+    } else {
+        m_Health = 0;
+        LOG_INFO("zero");
+        SetVisible(false);
+    }
+};
+
 void Enemy::Update() {
     // Update animation
     m_Animation->UpdateAnimation(true);
@@ -147,6 +169,8 @@ void Enemy::Update() {
 
     // Update z index
     SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
 }
 
 void Enemy::CanMove() {
@@ -168,4 +192,58 @@ void Enemy::CanMove() {
         );
     }
 }
+
+void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
+    const auto& hp = m_Health;
+
+    float zindex = 0.01;
+    for (std::size_t ii = 0; ii < hp; ii += 2) {
+        const auto& obj = std::make_shared<Util::GameElement>();
+        //        obj->SetDrawable(Dungeon::config::PTR_IMAGE_FULL_HEART_SM);
+        obj->SetDrawable(m_FullHeart);
+        obj->SetZIndex(99.0f + zindex);
+        obj->SetPosition(pixelPos);
+        obj->SetVisible(false);
+        obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+
+        AddChild(obj);
+        m_HeartList.push_back(obj.get());
+
+        zindex = zindex + 0.01;
+    }
+}
+
+void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
+    const auto numberOfHeart = m_HeartList.size();
+
+    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false
+        || m_IsBeAttacked == false) {
+        [&]() {
+            for (const auto& elem : m_HeartList) {
+                elem->SetVisible(false);
+            }
+        }();
+        return;
+    }
+
+    int       startIdx = numberOfHeart * -1 + 1;
+    auto      pos = pixelPos + glm::vec2{0.0f, 40.0f};
+    glm::vec2 x_offset;
+
+    for (std::size_t ii = 0; ii < numberOfHeart; ii++) {
+        x_offset = {startIdx * 18 + pos.x, pos.y};
+        m_HeartList[ii]->SetPosition(x_offset);
+        startIdx += 2;
+    }
+
+    for (std::size_t i = 0; i < numberOfHeart - m_Health / 2; i++) {
+        m_HeartList[numberOfHeart - i - 1]->SetDrawable(m_EmptyHeart);
+    }
+};
+
+void Enemy::InitHealth(const std::size_t health) {
+    m_Health = health;
+    InitHealthBarImage(m_Transform.translation);
+}
+
 }  // namespace Dungeon

@@ -1,5 +1,7 @@
 #include "Dungeon/Map.h"
 
+#include "Dungeon_config.h"
+
 namespace Dungeon {
 Map::Map(
     const std::shared_ptr<Camera> camera,
@@ -13,6 +15,14 @@ Map::Map(
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path);
     m_Available = LoadLevel(levelNum);
+
+    Dungeon::config::PTR_IMAGE_FULL_HEART_SM = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_FULL_HEART_SM.data()
+    );
+
+    Dungeon::config::PTR_IMAGE_EMPTY_HEART_SM = std::make_shared<Util::Image>(
+        Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
+    );
 
     // Add enemy testing
     // auto mapIndex = GamePostion2MapIndex({1, 1});
@@ -50,6 +60,7 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     LoadEnemy();
     if (m_MiniMap) {
         m_Camera->RemoveUIChild(m_MiniMap);
+        m_MiniMap.reset();
     }
     m_MiniMap = std::make_shared<MiniMap>(m_MapData);
     m_Camera->AddUIChild(m_MiniMap);

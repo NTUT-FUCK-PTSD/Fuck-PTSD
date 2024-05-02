@@ -4,11 +4,13 @@
 #include "Event/Object.h"
 #include "Util/GameObject.hpp"
 
+#include <memory>
 #include "Dungeon/SimpleMapData.h"
 #include "Event/Event.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
+#include "UGameElement.h"
 
 namespace Dungeon {
 // Abstract class
@@ -25,7 +27,7 @@ public:
     void SetBeatDelay(const std::size_t beatDelay) { m_BeatDelay = beatDelay; }
     void SetLord(const bool lord);
     void SetDamage(const std::size_t damage) { m_Damage = damage; }
-    void SetHealth(const std::size_t health) { m_Health = health; }
+    void InitHealth(const std::size_t health);
     void SetCoin(const std::size_t coin) { m_Coin = coin; }
     void CanMove();
 
@@ -54,13 +56,7 @@ public:
     std::size_t GamePostion2MapIndex(const glm::ivec2& position) const {
         return m_SimpleMapData->GamePosition2MapIndex(position);
     }
-    virtual void Struck(const std::size_t damage) {
-        m_Health -= damage;
-        if (m_Health <= 0) {
-            SetVisible(false);
-        }
-    };
-
+    virtual void Struck(const std::size_t damage);
     virtual void Update();
 
     bool GetSeen() const { return m_Seen; }
@@ -80,6 +76,14 @@ protected:
 
     virtual void UpdateAnimationType(const glm::vec2& direction);
 
+    void InitHealthBarImage(const glm::vec2& pixelPos);
+
+    virtual void UpdateHeart(const glm::vec2& pixelPos);
+
+    std::shared_ptr<Util::Image>    m_FullHeart;
+    std::shared_ptr<Util::Image>    m_EmptyHeart;
+    std::vector<Util::GameElement*> m_HeartList;
+
     std::shared_ptr<SimpleMapData> m_SimpleMapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
@@ -97,6 +101,7 @@ private:
     std::size_t m_ID;
     std::size_t m_BeatDelay;
     bool        m_Lord;
+    bool        m_IsBeAttacked = false;
     bool        m_Shadow = false;
     std::size_t m_Damage = 0;
     std::size_t m_Health = 0;  // Notice: 1 heart = 2 health(same as damage)

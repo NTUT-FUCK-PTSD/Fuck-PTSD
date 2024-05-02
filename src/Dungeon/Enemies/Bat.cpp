@@ -11,20 +11,6 @@ Enemies::Bat::Bat(
     m_ShadowFrames = {4, 5, 6, 7};
 
     switch (u_Enemy.type) {
-    case 6:
-        m_SpriteSheet = std::make_shared<SpriteSheet>(
-            ASSETS_DIR "/entities/bat.png",
-            m_FrameSize,
-            m_NormalFrames,
-            true,
-            100,
-            true,
-            100
-        );
-        SetHealth(2);  // 1 heart
-        SetDamage(1);  // 0.5 heart
-        SetCoin(2);
-        break;
     case 7:
         m_SpriteSheet = std::make_shared<SpriteSheet>(
             ASSETS_DIR "/entities/bat_red.png",
@@ -35,8 +21,8 @@ Enemies::Bat::Bat(
             true,
             100
         );
-        SetHealth(2);  // 1 heart
-        SetDamage(2);  // 1 heart
+        InitHealth(2);  // 1 heart
+        SetDamage(2);   // 1 heart
         SetCoin(3);
         m_Tick = 1;
         break;
@@ -50,10 +36,24 @@ Enemies::Bat::Bat(
             true,
             100
         );
-        SetHealth(2);  // 1 heart
-        SetDamage(3);  // 1.5 heart
+        InitHealth(2);  // 1 heart
+        SetDamage(3);   // 1.5 heart
         SetCoin(20);
         m_Tick = 1;
+        break;
+    default:
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        InitHealth(2);  // 1 heart
+        SetDamage(1);   // 0.5 heart
+        SetCoin(2);
         break;
     }
     m_Drawable = m_SpriteSheet;

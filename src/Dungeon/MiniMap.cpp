@@ -7,10 +7,14 @@ MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
     : m_MapData(mapData) {
     BuildMiniMap();
     Update();
-    Event::Dispatcher.appendListener(
+    m_UpdateHandle = Event::Dispatcher.appendListener(
         EventType::DrawableUpdate,
         [this](const Object*, const EventArgs&) { UpdatePlayer(); }
     );
+}
+
+MiniMap::~MiniMap() {
+    Event::Dispatcher.removeListener(EventType::DrawableUpdate, m_UpdateHandle);
 }
 
 void MiniMap::BuildMiniMap() {

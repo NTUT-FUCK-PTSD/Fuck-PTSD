@@ -22,8 +22,8 @@ Enemies::Ghost::Ghost(
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
 
-    SetHealth(2);  // 1 heart
-    SetDamage(1);  // 0.5 heart
+    InitHealth(2);  // 1 heart
+    SetDamage(1);   // 0.5 heart
     SetCoin(2);
 
     m_LastDistance =

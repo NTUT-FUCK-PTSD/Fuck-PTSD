@@ -21,8 +21,8 @@ Enemies::BlueSlime::BlueSlime(
     m_WillMovePosition = GetGamePosition();
     m_InitPosition = GetGamePosition();
 
-    SetHealth(4);  // 2 hearts
-    SetDamage(2);  // 1 heart
+    InitHealth(4);  // 2 hearts
+    SetDamage(2);   // 1 heart
     SetCoin(2);
 
     if (!IsVaildMove(m_InitPosition + m_Move)) {

@@ -32,8 +32,8 @@ Enemies::Zombie::Zombie(
     m_ZombieNormalFrames = m_NormalFrames;
     m_ZombieShadowFrames = m_ShadowFrames;
 
-    SetHealth(2);  // 1 heart
-    SetDamage(2);  // 1 heart
+    InitHealth(2);  // 1 heart
+    SetDamage(2);   // 1 heart
     SetCoin(1);
 }
 }  // namespace Dungeon

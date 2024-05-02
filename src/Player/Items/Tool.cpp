@@ -63,7 +63,6 @@ void Players::Tools::ReArrange() {
             initRow += glm::vec2{100, 0};
             continue;
         }
-        LOG_INFO(initCol);
         elem->SetPosition(initCol);
         //        initCol += glm::vec2{0, 140};
         initCol += glm::vec2{0, -140};
