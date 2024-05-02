@@ -23,6 +23,7 @@ EVENTPP_MAKE_EVENT(
     EnemyMoveEventArgs,
     EventArgs,
     EventType::EnemyMove,
+    // (type, getter, setter)
     (std::size_t, GetMapIndex)
 );
 
