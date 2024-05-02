@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Dungeon/Item.h"
 #include "Dungeon/Tile.h"
 
 namespace Dungeon {
@@ -42,6 +43,7 @@ public:
     bool IsPositionInteractive(const glm::ivec2& position) const;
     bool IsPositionPlayerAct(const glm::vec2& position) const;
 
+    // tile
     void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
     void RemoveTile(const std::size_t position);
     void ClearTiles();
@@ -49,6 +51,13 @@ public:
     bool                  IsTilesEmpty(const std::size_t position) const;
     std::shared_ptr<Tile> GetTile(const std::size_t position) const;
     std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
+
+    // item
+    void AddItem(const std::size_t position, const std::shared_ptr<Item> item);
+    void RemoveItem(const std::size_t position);
+    void ClearItems();
+    std::shared_ptr<Item> GetItem(const std::size_t position) const;
+    bool                  IsItemsEmpty(const std::size_t position) const;
 
     void SetHasEntity(const std::size_t position, const bool hasEntity);
 
@@ -62,6 +71,7 @@ private:
     glm::ivec2                         m_LevelIndexMax;
     glm::ivec2                         m_Size;
     std::vector<std::shared_ptr<Tile>> m_Tiles;
+    std::vector<std::shared_ptr<Item>> m_Items;
     std::vector<std::shared_ptr<Tile>> m_TilesQueue;
     glm::vec2                          m_PlayerPosition;
 };

@@ -11,7 +11,8 @@ SimpleMapData::SimpleMapData(
     : m_LevelIndexMin(levelIndexMin),
       m_LevelIndexMax(levelIndexMax),
       m_Size(size) {
-    m_Tiles.resize(GetSize().x * GetSize().y);
+    m_Tiles.resize(GetSize().x * GetSize().y, nullptr);
+    m_Items.resize(GetSize().x * GetSize().y, nullptr);
     m_HasEntity.resize(GetSize().x * GetSize().y, false);
 }
 
@@ -177,5 +178,29 @@ std::vector<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
 
 float SimpleMapData::Heuristic(const glm::vec2& start, const glm::vec2& end) {
     return AStar::Heuristic(start, end);
+}
+
+void SimpleMapData::AddItem(
+    const std::size_t           position,
+    const std::shared_ptr<Item> item
+) {
+    m_Items.at(position) = item;
+}
+
+void SimpleMapData::RemoveItem(const std::size_t position) {
+    m_Items.at(position).reset();
+}
+
+void SimpleMapData::ClearItems() {
+    m_Items.clear();
+    m_Items.resize(GetSize().x * GetSize().y, nullptr);
+}
+
+std::shared_ptr<Item> SimpleMapData::GetItem(const std::size_t position) const {
+    return m_Items.at(position);
+}
+
+bool SimpleMapData::IsItemsEmpty(const std::size_t position) const {
+    return !m_Items.at(position);
 }
 }  // namespace Dungeon
