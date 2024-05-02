@@ -22,6 +22,8 @@ public:
         float              speed
     );
 
+    static void PauseMusic(bool state);
+
     static void StopMusic();
 
     static void Shutdown();

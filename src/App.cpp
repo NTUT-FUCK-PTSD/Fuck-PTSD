@@ -1,7 +1,6 @@
 #include "App.hpp"
 
 #include <Util/Input.hpp>
-#include <Util/Logger.hpp>
 #include "Actions.h"
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
@@ -102,18 +101,19 @@ void App::Start() {
     // add tools throw system
     Game::System::Init(m_DungeonMap.get());
 
+    // Music::Player::PauseMusic(true);
+    // Music::Player::PauseMusic(false);
+    // Music::Tempo::Pause(false);
+    // Display::BeatIndicator::Pause(false);
+    // Display::BeatHeart::Pause(false);
+
     Game::Systems::HPIS::Init(m_MainCharacter.get());
-
-    // m_HPISystem =
-    // std::make_shared<Game::Systems::HPIS>(m_MainCharacter.get());
-
-    // auto t = m_MainCharacter->GetToolMod()->GetTool<Dagger>(2);
-    // LOG_INFO(t->GetName());
 
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
+    LOG_INFO(Music::Player::GetMusicTime());
     // LOG_INFO(Util::Time::GetElapsedTimeMs());
     //    LOG_INFO(1 / Util::Time::GetDeltaTime());
 

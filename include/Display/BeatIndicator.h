@@ -10,11 +10,15 @@ class BeatIndicator {
 public:
     static void Init();
 
+    static void Pause(bool state);
+
     static std::shared_ptr<GameElement> GetGameElement();
 
     static void Update();
 
 private:
+    static bool m_IsPause;
+
     static std::string m_IndicatorImagePath;
     static glm::vec2   m_Position;
     // static glm::vec2                                 m_Scale;
