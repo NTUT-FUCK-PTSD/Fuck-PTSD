@@ -1,8 +1,7 @@
 #include "App.hpp"
 
-#include "Event/EventArgs.h"
-#include "Event/EventType.h"
 #include "eventpp/utilities/argumentadapter.h"
+#include "eventpp/utilities/conditionalfunctor.h"
 
 #include <Util/Input.hpp>
 #include "Actions.h"
@@ -83,12 +82,21 @@ void App::Start() {
     );
     Event::EventQueue.appendListener(
         EventType::AttackPlayer,
-        eventpp::argumentAdapter<
-            void(const Object*, const AttackPlayerEventArgs&)>(
-            [this](const Object*, const AttackPlayerEventArgs& e) {
-                if (Event::GetAttackPlayer()) {
-                    m_MainCharacter->lostHP(e.GetDamage());
+        eventpp::conditionalFunctor(
+            eventpp::argumentAdapter<
+                void(const Object*, const AttackPlayerEventArgs&)>(
+                [this](const Object*, const AttackPlayerEventArgs& e) {
+                    if (Event::GetAttackPlayer()) {
+                        m_MainCharacter->lostHP(e.GetDamage());
+                    }
                 }
+            ),
+            // This lambda is the condition. We use dynamic_cast to check if
+            // the event is desired. This is for demonstration purpose, in
+            // production you may use a better way than dynamic_cast.
+            [](const Object*, const EventArgs& e) {
+                return dynamic_cast<const AttackPlayerEventArgs*>(&e)
+                       != nullptr;
             }
         )
     );
