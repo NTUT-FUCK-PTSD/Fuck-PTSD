@@ -2,6 +2,7 @@
 // Created by adven on 2024/5/1.
 //
 #include "HEIS.h"
+#include "Game/System.h"
 #include "Game_config.h"
 #include "Graphs/Dagger.h"
 #include "Helper.hpp"
@@ -27,20 +28,22 @@ auto Game::Systems::HEIS::MakeTile(
     auto&& currGP = static_cast<glm::ivec2>(playerGP);
 
     // is wall
-    while (true) {
+    while (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
         mi = Settings::Helper::GamePosToMapIdx(currGP);
-
-        // is wall?
-        if (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
-            break;
-        }
 
         if (m_Map->GetMapData()->IsHasEntity(mi)) {
             m_Map->RemoveEnemy(mi);
-            currGP += direGP;
         }
+
+        currGP += direGP;
+
+        //        // is wall?
+        //        if (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
+        //            break;
+        //        }
     }
 
+    // renderer weapon on floor
     const auto pixelSize =
         ToolBoxs::CountImagePixel(Game::Config::IMAGE_DAGGER_PATH, 1, 2);
     const auto image = std::make_shared<SpriteSheet>(
@@ -54,6 +57,8 @@ auto Game::Systems::HEIS::MakeTile(
     );
     const auto object = std::make_shared<Graphs::DaggerGameObj>();
     object->SetDrawable(image);
+
+    System::AddWeapon(object, mi);
 }
 
 Dungeon::Map* Game::Systems::HEIS::m_Map = nullptr;

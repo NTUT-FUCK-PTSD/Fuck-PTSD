@@ -123,7 +123,7 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
-        m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
+        //        m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -153,7 +153,9 @@ void App::Update() {
         m_MainCharacter->PrepareThrowOut(false);
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
-                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
+                //                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(),
+                //                elem.second);
+                Game::Systems::HPIS::ThrowOut(elem.second);
             }
         }
         m_ThrowMode = false;
