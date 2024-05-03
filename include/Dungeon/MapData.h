@@ -3,10 +3,11 @@
 
 #include <vector>
 
+#include "Dungeon/EMfwd.h"
 #include "Dungeon/Tile.h"
 
+
 namespace Dungeon {
-class Enemy;
 class MapData final {
 public:
     MapData(

@@ -1,7 +1,9 @@
 #include "Dungeon/Enemies/Ghost.h"
 
 #include "Dungeon/AStar.h"
+#include "Dungeon/MapData.h"
 #include "Settings/ToolBoxs.h"
+
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(

@@ -1,6 +1,6 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
-#include "Enemy.h"
+#include "Dungeon/MapData.h"
 #include "Settings/ToolBoxs.h"
 
 namespace Dungeon {

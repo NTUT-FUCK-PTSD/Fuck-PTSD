@@ -1,5 +1,6 @@
 #include "Dungeon/Enemies/GreenSlime.h"
 
+#include "Dungeon/MapData.h"
 #include "Settings/ToolBoxs.h"
 
 namespace Dungeon {

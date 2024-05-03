@@ -1,6 +1,8 @@
 #include "Dungeon/Enemies/OrangeSlime.h"
 
+#include "Dungeon/MapData.h"
 #include "Settings/ToolBoxs.h"
+
 
 namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(

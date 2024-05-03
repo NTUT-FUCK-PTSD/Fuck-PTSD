@@ -1,7 +1,9 @@
 #include "Dungeon/Enemy.h"
 
 #include <memory>
+
 #include "Dungeon/AStar.h"
+#include "Dungeon/MapData.h"
 #include "Dungeon_config.h"
 #include "ToolBoxs.h"
 #include "UGameElement.h"
@@ -191,6 +193,17 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
     for (std::size_t i = 0; i < numberOfHeart - m_Health / 2; i++) {
         m_HeartList[numberOfHeart - i - 1]->SetDrawable(m_EmptyHeart);
     }
-};
+}
 
+glm::vec2 Enemy::GetPlayerPosition() const {
+    return m_MapData->GetPlayerPosition();
+}
+
+std::size_t Enemy::GamePostion2MapIndex(const glm::ivec2& position) const {
+    return m_MapData->GamePosition2MapIndex(position);
+}
+
+float Enemy::Heuristic(const glm::vec2& start, const glm::vec2& end) {
+    return m_MapData->Heuristic(start, end);
+}
 }  // namespace Dungeon

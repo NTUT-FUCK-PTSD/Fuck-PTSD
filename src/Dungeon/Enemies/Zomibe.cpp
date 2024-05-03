@@ -1,6 +1,8 @@
 #include "Dungeon/Enemies/Zombie.h"
 
+#include "Dungeon/MapData.h"
 #include "Settings/ToolBoxs.h"
+
 
 namespace Dungeon {
 Enemies::Zombie::Zombie(

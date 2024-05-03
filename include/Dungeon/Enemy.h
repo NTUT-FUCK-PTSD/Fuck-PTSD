@@ -4,7 +4,8 @@
 #include "Util/GameObject.hpp"
 
 #include <memory>
-#include "Dungeon/MapData.h"
+#include "Dungeon/EMfwd.h"
+#include "Dungeon/Elements.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
@@ -30,19 +31,17 @@ public:
         m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
     }
 
-    glm::vec2 GetPlayerPosition() const {
-        return m_MapData->GetPlayerPosition();
-    }
-    bool             GetCanMove() const { return m_CanMove; }
-    const glm::vec2& GetGamePosition() const { return m_GamePosition; }
-    std::size_t      GetID() const { return m_ID; }
-    std::size_t      GetBeatDelay() const { return m_BeatDelay; }
-    bool             GetLord() const { return m_Lord; }
-    bool             GetShadow() const { return m_Shadow; }
-    std::size_t      GetDamage() const { return m_Damage; }
-    std::size_t      GetHealth() const { return m_Health; }
-    std::size_t      GetCoin() const { return m_Coin; }
-    const glm::vec2& GetWillMovePosition() const { return m_WillMovePosition; }
+    glm::vec2       GetPlayerPosition() const;
+    bool            GetCanMove() const { return m_CanMove; }
+    const glm::vec2 GetGamePosition() const { return m_GamePosition; }
+    std::size_t     GetID() const { return m_ID; }
+    std::size_t     GetBeatDelay() const { return m_BeatDelay; }
+    bool            GetLord() const { return m_Lord; }
+    bool            GetShadow() const { return m_Shadow; }
+    std::size_t     GetDamage() const { return m_Damage; }
+    std::size_t     GetHealth() const { return m_Health; }
+    std::size_t     GetCoin() const { return m_Coin; }
+    const glm::vec2 GetWillMovePosition() const { return m_WillMovePosition; }
     // DidAttack() is used to check if the enemy has attacked the player
     // it only returns true once after the enemy has attacked the player
     [[nodiscard]]
@@ -51,11 +50,9 @@ public:
 
     virtual glm::vec2 FindNextToPlayer();  // Set available WillMovePosition to
                                            // slowly close PlayerPosition
-    void        TempoMove();
-    bool        IsVaildMove(const glm::vec2& position);
-    std::size_t GamePostion2MapIndex(const glm::ivec2& position) const {
-        return m_MapData->GamePosition2MapIndex(position);
-    }
+    void         TempoMove();
+    bool         IsVaildMove(const glm::vec2& position);
+    std::size_t  GamePostion2MapIndex(const glm::ivec2& position) const;
     virtual void Struck(const std::size_t damage) {
         m_IsBeAttacked = true;
         if (m_Health >= damage) {
@@ -74,11 +71,8 @@ public:
 
     bool GetSeen() const { return m_Seen; }
 
-    glm::vec2 GetPlayerPosition() { return m_MapData->GetPlayerPosition(); }
-    float     Heuristic(const glm::vec2& start, const glm::vec2& end) {
-        return m_MapData->Heuristic(start, end);
-    }
-    void SetCameraUpdate(bool cameraUpdate);
+    float Heuristic(const glm::vec2& start, const glm::vec2& end);
+    void  SetCameraUpdate(bool cameraUpdate);
 
 protected:
     virtual void Move() = 0;

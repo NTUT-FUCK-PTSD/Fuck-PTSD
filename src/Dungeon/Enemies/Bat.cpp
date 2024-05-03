@@ -1,6 +1,7 @@
 #include "Dungeon/Enemies/Bat.h"
 
 #include "Direction.h"
+#include "Dungeon/MapData.h"
 #include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
