@@ -7,10 +7,7 @@ namespace Dungeon {
 namespace Enemies {
 class Ghost final : public Dungeon::Enemy {
 public:
-    Ghost(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    Ghost(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData);
 
     void SetTransparent(bool transparent);
 

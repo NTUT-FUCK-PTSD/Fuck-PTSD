@@ -4,10 +4,10 @@
 
 namespace Dungeon {
 Enemies::GreenSlime::GreenSlime(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> MapData
 )
-    : Enemy(u_Enemy, simpleMapData) {
+    : Enemy(u_Enemy, MapData) {
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

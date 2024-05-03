@@ -4,7 +4,7 @@
 #include "Util/GameObject.hpp"
 
 #include <memory>
-#include "Dungeon/SimpleMapData.h"
+#include "Dungeon/MapData.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
@@ -14,10 +14,7 @@ namespace Dungeon {
 // Abstract class
 class Enemy : public Util::GameObject {
 public:
-    Enemy(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData);
     virtual ~Enemy() = default;
 
     void SetShadow(const bool shadow);
@@ -34,7 +31,7 @@ public:
     }
 
     glm::vec2 GetPlayerPosition() const {
-        return m_SimpleMapData->GetPlayerPosition();
+        return m_MapData->GetPlayerPosition();
     }
     bool             GetCanMove() const { return m_CanMove; }
     const glm::vec2& GetGamePosition() const { return m_GamePosition; }
@@ -57,7 +54,7 @@ public:
     void        TempoMove();
     bool        IsVaildMove(const glm::vec2& position);
     std::size_t GamePostion2MapIndex(const glm::ivec2& position) const {
-        return m_SimpleMapData->GamePosition2MapIndex(position);
+        return m_MapData->GamePosition2MapIndex(position);
     }
     virtual void Struck(const std::size_t damage) {
         m_IsBeAttacked = true;
@@ -73,15 +70,13 @@ public:
         }
     };
 
-    virtual void Update(){};
+    virtual void Update() {};
 
     bool GetSeen() const { return m_Seen; }
 
-    glm::vec2 GetPlayerPosition() {
-        return m_SimpleMapData->GetPlayerPosition();
-    }
-    float Heuristic(const glm::vec2& start, const glm::vec2& end) {
-        return m_SimpleMapData->Heuristic(start, end);
+    glm::vec2 GetPlayerPosition() { return m_MapData->GetPlayerPosition(); }
+    float     Heuristic(const glm::vec2& start, const glm::vec2& end) {
+        return m_MapData->Heuristic(start, end);
     }
     void SetCameraUpdate(bool cameraUpdate);
 
@@ -100,7 +95,7 @@ protected:
     std::shared_ptr<Util::Image>    m_EmptyHeart;
     std::vector<Util::GameElement*> m_HeartList;
 
-    std::shared_ptr<SimpleMapData> m_SimpleMapData;
+    std::shared_ptr<MapData> m_MapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
     std::vector<std::size_t>     m_NormalFrames;

@@ -5,10 +5,10 @@
 
 namespace Dungeon {
 Enemies::Bat::Bat(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> MapData
 )
-    : Enemy(u_Enemy, simpleMapData),
+    : Enemy(u_Enemy, MapData),
       m_RandomGenerator(m_RandomDevice()) {
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
@@ -121,7 +121,8 @@ void Bat::RandomMove() {
             m_RandomGenerator,
             std::uniform_int_distribution<std::size_t>::param_type{
               0,
-              m_RandomPool.size() - 1}
+              m_RandomPool.size() - 1
+            }
         );
         switch (m_RandomPool[index]) {
         case 0:
@@ -149,11 +150,11 @@ void Bat::RandomMove() {
                 return;
             }
             // Move to the next position
-            m_SimpleMapData->SetHasEntity(
+            m_MapData->SetHasEntity(
                 GamePostion2MapIndex(GetGamePosition()),
                 false
             );
-            m_SimpleMapData->SetHasEntity(
+            m_MapData->SetHasEntity(
                 GamePostion2MapIndex(m_WillMovePosition),
                 true
             );

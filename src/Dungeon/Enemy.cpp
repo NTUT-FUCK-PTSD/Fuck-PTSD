@@ -8,11 +8,8 @@
 
 namespace Dungeon {
 
-Enemy::Enemy(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
-)
-    : m_SimpleMapData(simpleMapData),
+Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData)
+    : m_MapData(MapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_Animation(
           std::make_unique<Animation>(ToolBoxs::GamePostoPos(m_GamePosition))
@@ -50,12 +47,12 @@ void Enemy::SetShadow(const bool shadow) {
 }
 
 void Enemy::SetGamePosition(const glm::vec2& gamePosition) {
-    m_SimpleMapData->SetHasEntity(
-        m_SimpleMapData->GamePosition2MapIndex(m_GamePosition),
+    m_MapData->SetHasEntity(
+        m_MapData->GamePosition2MapIndex(m_GamePosition),
         false
     );
-    m_SimpleMapData->SetHasEntity(
-        m_SimpleMapData->GamePosition2MapIndex(gamePosition),
+    m_MapData->SetHasEntity(
+        m_MapData->GamePosition2MapIndex(gamePosition),
         true
     );
     m_GamePosition = gamePosition;
@@ -88,7 +85,7 @@ void Enemy::TempoMove() {
 }
 
 bool Enemy::IsVaildMove(const glm::vec2& position) {
-    return m_SimpleMapData->IsPositionWalkable(position);
+    return m_MapData->IsPositionWalkable(position);
 }
 
 bool Enemy::DidAttack() {
@@ -106,7 +103,7 @@ glm::vec2 Enemy::FindNextToPlayer() {
     auto path = Dungeon::AStar::FindPath(
         GetGamePosition(),
         GetPlayerPosition(),
-        m_SimpleMapData,
+        m_MapData,
         10
     );
     if (path.empty()) {

@@ -5,10 +5,10 @@
 
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> MapData
 )
-    : Enemy(u_Enemy, simpleMapData) {
+    : Enemy(u_Enemy, MapData) {
     if (u_Enemy.type == 3) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};
@@ -106,11 +106,11 @@ void Skeleton::Move() {
                 return;
             }
             // Set the new position
-            m_SimpleMapData->SetHasEntity(
+            m_MapData->SetHasEntity(
                 GamePostion2MapIndex(GetGamePosition()),
                 false
             );
-            m_SimpleMapData->SetHasEntity(
+            m_MapData->SetHasEntity(
                 GamePostion2MapIndex(m_WillMovePosition),
                 true
             );

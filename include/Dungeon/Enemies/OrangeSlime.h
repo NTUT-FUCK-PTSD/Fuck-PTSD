@@ -10,10 +10,7 @@ namespace Dungeon {
 namespace Enemies {
 class OrangeSlime final : public Dungeon::Enemy {
 public:
-    OrangeSlime(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    OrangeSlime(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData);
 
     void Move() override;
 

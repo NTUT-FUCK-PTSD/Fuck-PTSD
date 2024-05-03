@@ -13,23 +13,23 @@ namespace Dungeon {
 class EnemyFactory final {
 public:
     static std::shared_ptr<Enemy> CreateEnemy(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
+        const s_Enemy&                 u_Enemy,
+        const std::shared_ptr<MapData> MapData
     ) {
         // clang-format off
         switch (u_Enemy.type) {
-        case 0: return  std::make_shared<Enemies::GreenSlime>(u_Enemy, simpleMapData);
-        case 1: return  std::make_shared<Enemies::BlueSlime>(u_Enemy, simpleMapData);
-        case 2: return  std::make_shared<Enemies::OrangeSlime>(u_Enemy, simpleMapData);
-        case 3: return  std::make_shared<Enemies::Skeleton>(u_Enemy, simpleMapData);
-        case 4: return  std::make_shared<Enemies::Skeleton>(u_Enemy, simpleMapData);
-        case 5: return  std::make_shared<Enemies::Skeleton>(u_Enemy, simpleMapData);
-        case 6: return  std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
-        case 7: return  std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
-        case 8: return  std::make_shared<Enemies::Bat>(u_Enemy, simpleMapData);
-        case 11: return std::make_shared<Enemies::Ghost>(u_Enemy, simpleMapData);
-        case 12: return std::make_shared<Enemies::Zombie>(u_Enemy, simpleMapData);
-        default: return std::make_shared<Enemies::GreenSlime>(u_Enemy, simpleMapData);
+        case 0: return  std::make_shared<Enemies::GreenSlime>(u_Enemy, MapData);
+        case 1: return  std::make_shared<Enemies::BlueSlime>(u_Enemy, MapData);
+        case 2: return  std::make_shared<Enemies::OrangeSlime>(u_Enemy, MapData);
+        case 3: return  std::make_shared<Enemies::Skeleton>(u_Enemy, MapData);
+        case 4: return  std::make_shared<Enemies::Skeleton>(u_Enemy, MapData);
+        case 5: return  std::make_shared<Enemies::Skeleton>(u_Enemy, MapData);
+        case 6: return  std::make_shared<Enemies::Bat>(u_Enemy, MapData);
+        case 7: return  std::make_shared<Enemies::Bat>(u_Enemy, MapData);
+        case 8: return  std::make_shared<Enemies::Bat>(u_Enemy, MapData);
+        case 11: return std::make_shared<Enemies::Ghost>(u_Enemy, MapData);
+        case 12: return std::make_shared<Enemies::Zombie>(u_Enemy, MapData);
+        default: return std::make_shared<Enemies::GreenSlime>(u_Enemy, MapData);
         }
         // clang-format on
     }

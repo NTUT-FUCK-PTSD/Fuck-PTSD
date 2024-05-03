@@ -4,10 +4,10 @@
 
 namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> MapData
 )
-    : Enemy(u_Enemy, simpleMapData),
+    : Enemy(u_Enemy, MapData),
       m_RandomGenerator(m_RandomDevice()),
       m_Distribution(0, 3) {
     m_NormalFrames = {0, 1, 2, 3};
@@ -60,14 +60,8 @@ void OrangeSlime::Move() {
             return;
         }
         m_CanMove = true;
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(GetGamePosition()),
-            false
-        );
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(m_WillMovePosition),
-            true
-        );
+        m_MapData->SetHasEntity(GamePostion2MapIndex(GetGamePosition()), false);
+        m_MapData->SetHasEntity(GamePostion2MapIndex(m_WillMovePosition), true);
     } else {
         m_CanMove = false;
         return;

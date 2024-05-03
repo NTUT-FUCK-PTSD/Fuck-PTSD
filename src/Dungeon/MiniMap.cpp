@@ -1,5 +1,7 @@
 #include "Dungeon/MiniMap.h"
 
+#include "Dungeon/Enemy.h"
+
 namespace Dungeon {
 MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
     : m_MapData(mapData) {
@@ -26,7 +28,8 @@ void MiniMap::BuildMiniMap() {
                   - (2 * (m_MapData->GetSize().x - (j + 1))) * m_Scale,
               -(static_cast<int>(WINDOW_HEIGHT / 2))
                   + (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH)
-                  + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale};
+                  + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale
+            };
             UpdateTileColor(mapIndex);
             SetVisible(mapIndex, false);
         }

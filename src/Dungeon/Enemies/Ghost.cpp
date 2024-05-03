@@ -5,10 +5,10 @@
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> MapData
 )
-    : Enemy(u_Enemy, simpleMapData) {
+    : Enemy(u_Enemy, MapData) {
     m_NormalFrames = {0, 1};
     m_ShadowFrames = {2, 3};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -87,11 +87,11 @@ void Ghost::Move() {
                 return;
             }
             m_CanMove = true;
-            m_SimpleMapData->SetHasEntity(
+            m_MapData->SetHasEntity(
                 GamePostion2MapIndex(GetGamePosition()),
                 false
             );
-            m_SimpleMapData->SetHasEntity(
+            m_MapData->SetHasEntity(
                 GamePostion2MapIndex(m_WillMovePosition),
                 true
             );

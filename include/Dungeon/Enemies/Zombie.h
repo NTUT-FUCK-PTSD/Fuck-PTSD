@@ -10,10 +10,7 @@ namespace Dungeon {
 namespace Enemies {
 class Zombie final : public Dungeon::Enemy {
 public:
-    Zombie(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    Zombie(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData);
 
     void Move() override;
 
