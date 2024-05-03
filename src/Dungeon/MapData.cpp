@@ -1,4 +1,5 @@
 #include "Dungeon/MapData.h"
+#include <cstddef>
 
 #include "Dungeon/AStar.h"
 #include "Dungeon/Enemy.h"
@@ -12,10 +13,10 @@ MapData::MapData(
     : m_LevelIndexMin(levelIndexMin),
       m_LevelIndexMax(levelIndexMax),
       m_Size(size) {
-    m_Tiles.resize(GetSize().x * GetSize().y);
+    m_Tiles.resize(GetSize().x * GetSize().y, nullptr);
     m_HasEntity.resize(GetSize().x * GetSize().y, false);
-
-    m_Enemies.resize(GetSize().x * GetSize().y);
+    m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
+    m_Items.resize(GetSize().x * GetSize().y, nullptr);
 }
 
 void MapData::AddEnemy(
@@ -28,7 +29,7 @@ void MapData::AddEnemy(
 }
 
 void MapData::RemoveEnemy(const std::size_t position) {
-    if (m_Enemies.at(position) == nullptr) {
+    if (!m_Enemies.at(position)) {
         return;
     }
     // m_Enemies.at(position)->SetVisible(false);
@@ -53,7 +54,7 @@ void MapData::MoveEnemy(const std::size_t src, const std::size_t dest) {
 
 void MapData::ClearEnemies() {
     m_Enemies.clear();
-    m_Enemies.resize(GetSize().x * GetSize().y);
+    m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
     m_HasEntity.clear();
     m_HasEntity.resize(GetSize().x * GetSize().y, false);
     m_EnemyQueue.clear();
@@ -257,5 +258,29 @@ std::vector<std::shared_ptr<Tile>> MapData::GetUnsortedTiles() const {
 
 float MapData::Heuristic(const glm::vec2& start, const glm::vec2& end) {
     return AStar::Heuristic(start, end);
+}
+
+void MapData::AddItem(
+    const std::size_t           position,
+    const std::shared_ptr<Item> item
+) {
+    m_Items.at(position) = item;
+}
+
+void MapData::RemoveItem(const std::size_t position) {
+    m_Items.at(position).reset();
+}
+
+void MapData::ClearItems() {
+    m_Items.clear();
+    m_Items.resize(GetSize().x * GetSize().y, nullptr);
+}
+
+std::shared_ptr<Item> MapData::GetItem(const std::size_t position) const {
+    return m_Items.at(position);
+}
+
+bool MapData::IsItemsEmpty(const std::size_t position) const {
+    return !m_Items.at(position);
 }
 }  // namespace Dungeon

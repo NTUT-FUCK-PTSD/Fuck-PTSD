@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Dungeon/EMfwd.h"
+#include "Dungeon/Item.h"
 #include "Dungeon/Tile.h"
 
 namespace Dungeon {
@@ -15,6 +16,16 @@ public:
         const glm::vec2& size
     );
 
+    // tile
+    void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
+    void RemoveTile(const std::size_t position);
+    void ClearTiles();
+    std::vector<std::shared_ptr<Tile>> GetTiles() const;
+    bool                  IsTilesEmpty(const std::size_t position) const;
+    std::shared_ptr<Tile> GetTile(const std::size_t position) const;
+    std::vector<std::shared_ptr<Tile>> GetUnsortedTiles() const;
+
+    // enemy
     void AddEnemy(
         const std::size_t            position,
         const std::shared_ptr<Enemy> enemy
@@ -26,6 +37,13 @@ public:
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
     std::vector<std::shared_ptr<Enemy>> GetUnsortedEnemies() const;
+
+    // item
+    void AddItem(const std::size_t position, const std::shared_ptr<Item> item);
+    void RemoveItem(const std::size_t position);
+    void ClearItems();
+    std::shared_ptr<Item> GetItem(const std::size_t position) const;
+    bool                  IsItemsEmpty(const std::size_t position) const;
 
     glm::ivec2 GetLevelIndexMax() const;
     glm::ivec2 GetLevelIndexMin() const;
@@ -53,14 +71,6 @@ public:
     bool IsPositionInteractive(const glm::ivec2& position) const;
     bool IsPositionPlayerAct(const glm::vec2& position) const;
 
-    void AddTile(const std::size_t position, const std::shared_ptr<Tile> tile);
-    void RemoveTile(const std::size_t position);
-    void ClearTiles();
-    std::vector<std::shared_ptr<Tile>> GetTiles() const;
-    bool                  IsTilesEmpty(const std::size_t position) const;
-    std::shared_ptr<Tile> GetTile(const std::size_t position) const;
-    std::vector<std::shared_ptr<Tile>> GetUnsortedTiles() const;
-
     void SetHasEntity(const std::size_t position, const bool hasEntity);
 
     float Heuristic(const glm::vec2& start, const glm::vec2& end);
@@ -70,16 +80,20 @@ private:
         std::shared_ptr<Enemy>& lhs,
         std::shared_ptr<Enemy>& rhs
     );
-    std::vector<bool> m_HasEntity;
 
-    std::vector<std::shared_ptr<Enemy>> m_Enemies;
-    std::vector<std::shared_ptr<Enemy>> m_EnemyQueue;
-    glm::ivec2                          m_LevelIndexMin;
-    glm::ivec2                          m_LevelIndexMax;
-    glm::ivec2                          m_Size;
+    glm::ivec2 m_LevelIndexMin;
+    glm::ivec2 m_LevelIndexMax;
+    glm::ivec2 m_Size;
+
     std::vector<std::shared_ptr<Tile>>  m_Tiles;
     std::vector<std::shared_ptr<Tile>>  m_TilesQueue;
-    glm::vec2                           m_PlayerPosition = {0.0f, 0.0f};
+    std::vector<std::shared_ptr<Enemy>> m_Enemies;
+    std::vector<std::shared_ptr<Enemy>> m_EnemyQueue;
+    std::vector<std::shared_ptr<Item>>  m_Items;
+
+    std::vector<bool> m_HasEntity;
+
+    glm::vec2 m_PlayerPosition = {0.0f, 0.0f};
 };
 }  // namespace Dungeon
 
