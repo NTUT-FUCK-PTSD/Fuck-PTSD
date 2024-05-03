@@ -14,8 +14,6 @@ public:
 
     void Move() override;
 
-    void Update() override;
-
 private:
     void UpdateProperties();
 

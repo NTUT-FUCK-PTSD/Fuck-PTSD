@@ -22,11 +22,9 @@ Enemies::GreenSlime::GreenSlime(
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
 
-    SetHealth(2);    // 1 heart
+    InitHealth(2);   // 1 heart
     SetDamage(100);  // 50 hearts
     SetCoin(1);
-
-    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 namespace Dungeon::Enemies {
