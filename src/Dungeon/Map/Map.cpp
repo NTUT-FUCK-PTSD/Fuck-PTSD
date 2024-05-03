@@ -182,6 +182,23 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
 void Map::PlayerMove(const glm::vec2& position) {
     m_MapData->SetPlayerPosition(position);
 }
+
+void Map::AddItem(
+    const std::size_t           position,
+    const std::shared_ptr<Item> item
+) {
+    if (m_MapData->IsItemsEmpty(position)) {
+        m_MapData->AddItem(position, item);
+        AddChild(item);
+    } else {
+        LOG_CRITICAL("Item already exists at position: {0}", position);
+    }
+}
+
+void Map::RemoveItem(const std::size_t position) {
+    RemoveChild(m_MapData->GetItem(position));
+    m_MapData->RemoveItem(position);
+}
 }  // namespace Dungeon
 
 glm::ivec2                      Dungeon::Map::m_Size = {0, 0};

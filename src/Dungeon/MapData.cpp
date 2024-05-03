@@ -7,7 +7,7 @@ MapData::MapData(
     const glm::vec2& size
 )
     : SimpleMapData(levelIndexMin, levelIndexMax, size) {
-    m_Enemies.resize(GetSize().x * GetSize().y);
+    m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
 }
 
 void MapData::AddEnemy(
@@ -20,7 +20,7 @@ void MapData::AddEnemy(
 }
 
 void MapData::RemoveEnemy(const std::size_t position) {
-    if (m_Enemies.at(position) == nullptr) {
+    if (!m_Enemies.at(position)) {
         return;
     }
     // m_Enemies.at(position)->SetVisible(false);
@@ -45,7 +45,7 @@ void MapData::MoveEnemy(const std::size_t src, const std::size_t dest) {
 
 void MapData::ClearEnemies() {
     m_Enemies.clear();
-    m_Enemies.resize(GetSize().x * GetSize().y);
+    m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
     m_HasEntity.clear();
     m_HasEntity.resize(GetSize().x * GetSize().y, false);
     m_EnemyQueue.clear();
