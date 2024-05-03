@@ -18,7 +18,6 @@
 #include "Systems/HEIS.h"
 #include "Systems/HPIS.h"
 
-
 using namespace tinyxml2;
 
 extern "C" {
@@ -165,7 +164,7 @@ void App::Update() {
         //        const auto&  m = m_MainCharacter->GetGamePosition();
         //        const auto&& b = Settings::Helper::GamePosToMapIdx(m +
         //        glm::vec2{1, 0}); if
-        //        (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
+        //        (m_DungeonMap->GetMapData()->IsEnemyEmpty(b)) {
         //            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
         //        }
     }
@@ -268,7 +267,7 @@ void App::Update() {
                 if (m_DungeonMap->GetMapData()->IsPositionInteractive(
                         playerDestination
                     )) {
-                    if (m_DungeonMap->GetMapData()->IsHasEntity(mapIndex)) {
+                    if (m_DungeonMap->GetMapData()->IsEnemyEmpty(mapIndex)) {
                         m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2
                         );
 

@@ -186,7 +186,7 @@ void Map::AddItem(
     const std::size_t           position,
     const std::shared_ptr<Item> item
 ) {
-    if (m_MapData->IsItemsEmpty(position)) {
+    if (m_MapData->IsItemEmpty(position)) {
         m_MapData->AddItem(position, item);
         AddChild(item);
     } else {

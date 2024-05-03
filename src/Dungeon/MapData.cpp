@@ -14,7 +14,6 @@ MapData::MapData(
       m_LevelIndexMax(levelIndexMax),
       m_Size(size) {
     m_Tiles.resize(GetSize().x * GetSize().y, nullptr);
-    m_HasEntity.resize(GetSize().x * GetSize().y, false);
     m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
     m_Items.resize(GetSize().x * GetSize().y, nullptr);
 }
@@ -24,12 +23,11 @@ void MapData::AddEnemy(
     const std::shared_ptr<Enemy> enemy
 ) {
     m_Enemies.at(position) = enemy;
-    SetHasEntity(position, true);
     m_EnemyQueue.push_back(enemy);
 }
 
 void MapData::RemoveEnemy(const std::size_t position) {
-    if (!m_Enemies.at(position)) {
+    if (!IsEnemyEmpty(position)) {
         return;
     }
     // m_Enemies.at(position)->SetVisible(false);
@@ -42,21 +40,16 @@ void MapData::RemoveEnemy(const std::size_t position) {
         m_EnemyQueue.end()
     );
     m_Enemies.at(position) = nullptr;
-    SetHasEntity(position, false);
 }
 
 void MapData::MoveEnemy(const std::size_t src, const std::size_t dest) {
     m_Enemies.at(dest) = m_Enemies.at(src);
     m_Enemies.at(src) = nullptr;
-    SetHasEntity(src, false);
-    SetHasEntity(dest, true);
 }
 
 void MapData::ClearEnemies() {
     m_Enemies.clear();
     m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
-    m_HasEntity.clear();
-    m_HasEntity.resize(GetSize().x * GetSize().y, false);
     m_EnemyQueue.clear();
 }
 
@@ -131,7 +124,7 @@ std::vector<std::shared_ptr<Tile>> MapData::GetTiles() const {
     return m_Tiles;
 }
 
-bool MapData::IsTilesEmpty(const std::size_t position) const {
+bool MapData::IsTileEmpty(const std::size_t position) const {
     return !m_Tiles.at(position);
 }
 
@@ -167,15 +160,15 @@ bool MapData::IsPositionValid(const glm::ivec2& position) const {
            && position.y <= GetLevelIndexMax().y;
 }
 
-bool MapData::IsHasEntity(const std::size_t position) const {
-    return m_HasEntity.at(position);
+bool MapData::IsEnemyEmpty(const std::size_t position) const {
+    return bool(m_Enemies.at(position));
 }
 
 bool MapData::IsWalkable(const std::size_t position) const {
     auto tile = GetTile(position);
 
     return tile && !tile->IsWall() && !tile->IsDoor()
-           && !m_HasEntity.at(position);
+           && !IsEnemyEmpty(position);
 }
 
 bool MapData::IsPositionWalkable(const glm::ivec2& position) const {
@@ -221,7 +214,7 @@ bool MapData::IsPositionInteractive(const glm::ivec2& position) const {
     auto tile = GetTile(GamePosition2MapIndex(position));
     return IsPositionValid(position) && tile
            && (IsPositionDoor(position) || IsPositionWall(position)
-               || IsHasEntity(GamePosition2MapIndex(position))
+               || IsEnemyEmpty(GamePosition2MapIndex(position))
                || IsPositionPlayer(position) || IsPositionCoin(position)
                || IsPositionDiamond(position) || IsPositionHeart(position)
                || IsPositionTool(position));
@@ -238,10 +231,6 @@ glm::ivec2 MapData::GetSize() const {
 
 void MapData::SetSize(const glm::ivec2& size) {
     m_Size = size;
-}
-
-void MapData::SetHasEntity(const std::size_t position, const bool hasEntity) {
-    m_HasEntity.at(position) = hasEntity;
 }
 
 glm::vec2 MapData::GetPlayerPosition() {
@@ -280,7 +269,7 @@ std::shared_ptr<Item> MapData::GetItem(const std::size_t position) const {
     return m_Items.at(position);
 }
 
-bool MapData::IsItemsEmpty(const std::size_t position) const {
+bool MapData::IsItemEmpty(const std::size_t position) const {
     return !m_Items.at(position);
 }
 }  // namespace Dungeon

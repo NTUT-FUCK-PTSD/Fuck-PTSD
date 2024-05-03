@@ -15,18 +15,18 @@ void Map::LoadTile() {
     for (int i = 1; i < m_Size.y - 1; i++) {
         for (int j = 1; j < m_Size.x - 1; j++) {
             mapIndex = j + i * m_Size.x;
-            if (m_MapData->IsTilesEmpty(mapIndex)) {
+            if (m_MapData->IsTileEmpty(mapIndex)) {
                 continue;
             }
             DoorUpdate(i, j);
             // generate border
-            if (!m_MapData->IsTilesEmpty(mapIndex)
+            if (!m_MapData->IsTileEmpty(mapIndex)
                 && m_MapData->GetTile(mapIndex)->GetTile().type != 102) {
                 for (auto& dir : m_Direction) {
                     tmpMapIndex = j + dir.x + (i + dir.y) * m_Size.x;
                     if (i + dir.y >= 0 && i + dir.y < m_Size.y && j + dir.x >= 0
                         && j + dir.x < m_Size.x
-                        && m_MapData->IsTilesEmpty(tmpMapIndex)) {
+                        && m_MapData->IsTileEmpty(tmpMapIndex)) {
                         m_MapData->AddTile(
                             tmpMapIndex,
                             TileFactory::CreateTile(s_Tile{
@@ -48,11 +48,11 @@ void Map::LoadTile() {
     for (int i = 0; i < m_Size.y; i++) {
         for (int j = 0; j < m_Size.x; j++) {
             mapIndex = j + i * m_Size.x;
-            if (m_MapData->IsTilesEmpty(mapIndex)) {
+            if (m_MapData->IsTileEmpty(mapIndex)) {
                 continue;
             }
             if ((1 + i >= m_Size.y)
-                || (1 + i >= 0 && m_MapData->IsTilesEmpty(mapIndex + m_Size.x)
+                || (1 + i >= 0 && m_MapData->IsTileEmpty(mapIndex + m_Size.x)
                 )) {
                 m_MapData->GetTile(mapIndex)->SetCloseDisplayB24(true);
             }
@@ -78,7 +78,7 @@ void Map::DoorUpdate(std::size_t i, std::size_t j) {
                 && j + m_Direction[k].x < static_cast<std::size_t>(m_Size.x)
                 && i + m_Direction[k].y >= 0
                 && i + m_Direction[k].y < static_cast<std::size_t>(m_Size.y)
-                && !m_MapData->IsTilesEmpty(tmpMapIndex)
+                && !m_MapData->IsTileEmpty(tmpMapIndex)
                 && (m_MapData->GetTile(tmpMapIndex)->IsWall()
                     || m_MapData->GetTile(tmpMapIndex)->IsDoor())) {
                 doorCount++;
