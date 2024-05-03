@@ -6,7 +6,6 @@
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Tile.h"
 
-
 namespace Dungeon {
 class MapData final {
 public:
@@ -20,11 +19,13 @@ public:
         const std::size_t            position,
         const std::shared_ptr<Enemy> enemy
     );
-    void                                RemoveEnemy(const std::size_t position);
-    void                                ClearEnemies();
+    void RemoveEnemy(const std::size_t position);
+    void MoveEnemy(const std::size_t src, const std::size_t dest);
+    void ClearEnemies();
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
+    std::vector<std::shared_ptr<Enemy>> GetUnsortedEnemies() const;
 
     glm::ivec2 GetLevelIndexMax() const;
     glm::ivec2 GetLevelIndexMin() const;
@@ -58,7 +59,7 @@ public:
     std::vector<std::shared_ptr<Tile>> GetTiles() const;
     bool                  IsTilesEmpty(const std::size_t position) const;
     std::shared_ptr<Tile> GetTile(const std::size_t position) const;
-    std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
+    std::vector<std::shared_ptr<Tile>> GetUnsortedTiles() const;
 
     void SetHasEntity(const std::size_t position, const bool hasEntity);
 
@@ -78,7 +79,7 @@ private:
     glm::ivec2                          m_Size;
     std::vector<std::shared_ptr<Tile>>  m_Tiles;
     std::vector<std::shared_ptr<Tile>>  m_TilesQueue;
-    glm::vec2                           m_PlayerPosition;
+    glm::vec2                           m_PlayerPosition = {0.0f, 0.0f};
 };
 }  // namespace Dungeon
 

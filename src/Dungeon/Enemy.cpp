@@ -5,23 +5,26 @@
 #include "Dungeon/AStar.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon_config.h"
-#include "ToolBoxs.h"
+#include "Event/Event.h"
+#include "Event/EventArgs.h"
+#include "Settings/ToolBoxs.h"
 #include "UGameElement.h"
 
 namespace Dungeon {
 
-Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData)
-    : m_MapData(MapData),
+Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
+    : m_MapData(mapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
-      m_Animation(
-          std::make_unique<Animation>(ToolBoxs::GamePostoPos(m_GamePosition))
-      ),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
-      m_Lord(u_Enemy.lord == 1) {
+      m_Lord(u_Enemy.lord == 1),
+      m_DrawableUpdate(Event::EventQueue) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
     SetGamePosition(m_GamePosition);
-    m_Transform.translation = ToolBoxs::GamePostoPos(m_GamePosition);
+    m_Animation = std::make_unique<Animation>(
+        ToolBoxs::GamePostoPos(m_GamePosition)
+    );
+    m_Transform.translation = m_Animation->GetAnimationPosition();
     SetZIndex(m_Animation->GetAnimationZIndex());
 
     m_FullHeart = std::make_shared<Util::Image>(
@@ -29,6 +32,10 @@ Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData)
     );
     m_EmptyHeart = std::make_shared<Util::Image>(
         Dungeon::config::IMAGE_EMPTY_HEART_SM.data()
+    );
+    m_DrawableUpdate.appendListener(
+        EventType::DrawableUpdate,
+        [this](const Object*, const EventArgs&) { Update(); }
     );
 }
 
@@ -49,14 +56,6 @@ void Enemy::SetShadow(const bool shadow) {
 }
 
 void Enemy::SetGamePosition(const glm::vec2& gamePosition) {
-    m_MapData->SetHasEntity(
-        m_MapData->GamePosition2MapIndex(m_GamePosition),
-        false
-    );
-    m_MapData->SetHasEntity(
-        m_MapData->GamePosition2MapIndex(gamePosition),
-        true
-    );
     m_GamePosition = gamePosition;
     m_WillMovePosition = gamePosition;
 
@@ -76,9 +75,9 @@ void Enemy::SetLord(const bool lord) {
 }
 
 void Enemy::TempoMove() {
-    if (GetVisible() == false || m_Seen == false) {
-        return;
-    }
+    // if (GetVisible() == false || m_Seen == false) {
+    //     return;
+    // }
     if (m_BeatDelay > 0) {
         m_BeatDelay--;
         return;
@@ -88,14 +87,6 @@ void Enemy::TempoMove() {
 
 bool Enemy::IsVaildMove(const glm::vec2& position) {
     return m_MapData->IsPositionWalkable(position);
-}
-
-bool Enemy::DidAttack() {
-    if (m_AttackPlayer) {
-        m_AttackPlayer = false;
-        return true;
-    }
-    return false;
 }
 
 glm::vec2 Enemy::FindNextToPlayer() {
@@ -117,9 +108,9 @@ glm::vec2 Enemy::FindNextToPlayer() {
 
 void Enemy::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
-        m_CanMove = false;
+        Event::EventQueue.dispatch(this, AttackPlayerEventArgs(GetDamage()));
+        Event::SetAttackPlayer(false);
         m_WillMovePosition = GetGamePosition();
-        m_AttackPlayer = true;
         m_Animation->MoveByTime(
             200,
             ToolBoxs::GamePostoPos(GetGamePosition()),
@@ -147,7 +138,50 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
     }
 }
 
-void Enemy::InitHealthBarImage(const glm::vec2 pixelPos) {
+void Enemy::Struck(const std::size_t damage) {
+    m_IsBeAttacked = true;
+    if (m_Health >= damage) {
+        m_Health -= damage;
+    } else {
+        m_Health = 0;
+        LOG_INFO("zero");
+        SetVisible(false);
+    }
+};
+
+void Enemy::Update() {
+    // Update animation
+    m_Animation->UpdateAnimation(true);
+    if (m_Animation->IsAnimating()) {
+        m_Transform.translation = m_Animation->GetAnimationPosition();
+    }
+
+    // Update z index
+    SetZIndex(m_Animation->GetAnimationZIndex());
+
+    UpdateHeart(m_Transform.translation);
+}
+
+void Enemy::CanMove() {
+    if (m_WillMovePosition == GetPlayerPosition()) {
+        AttackPlayer();
+        return;
+    }
+    if (!m_Animation->IsAnimating()) {
+        Event::EventQueue.dispatch(
+            this,
+            EnemyMoveEventArgs(GamePostion2MapIndex(m_WillMovePosition))
+        );
+        SetGamePosition(m_WillMovePosition);
+        m_Animation->MoveByTime(
+            200,
+            ToolBoxs::GamePostoPos(m_WillMovePosition),
+            m_AnimationType
+        );
+    }
+}
+
+void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
     const auto& hp = m_Health;
 
     float zindex = 0.01;
@@ -206,4 +240,9 @@ std::size_t Enemy::GamePostion2MapIndex(const glm::ivec2& position) const {
 float Enemy::Heuristic(const glm::vec2& start, const glm::vec2& end) {
     return m_MapData->Heuristic(start, end);
 }
+void Enemy::InitHealth(const std::size_t health) {
+    m_Health = health;
+    InitHealthBarImage(m_Transform.translation);
+}
+
 }  // namespace Dungeon

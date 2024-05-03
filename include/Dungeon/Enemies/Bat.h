@@ -8,14 +8,11 @@
 
 namespace Dungeon {
 namespace Enemies {
-class Bat : public Dungeon::Enemy {
+class Bat final : public Dungeon::Enemy {
 public:
-    Bat(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> MapData);
-    virtual ~Bat() = default;
+    Bat(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
 
     void Move() override;
-
-    void Update() override;
 
     void UpdateFace();
 
@@ -28,7 +25,6 @@ private:
     const glm::vec2 m_FrameSize = {24, 24};
     std::size_t     m_State = 0;
 
-    bool                     m_NeedToMove = false;
     std::vector<std::size_t> m_RandomPool = {};
     std::vector<glm::vec2>   m_Movement = {TOP, RIGHT, BOTTOM, LEFT};
 

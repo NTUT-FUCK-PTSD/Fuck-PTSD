@@ -1,7 +1,5 @@
 #include "Dungeon/MapData.h"
 
-#include <fmt/core.h>
-
 #include "Dungeon/AStar.h"
 #include "Dungeon/Enemy.h"
 
@@ -46,6 +44,13 @@ void MapData::RemoveEnemy(const std::size_t position) {
     SetHasEntity(position, false);
 }
 
+void MapData::MoveEnemy(const std::size_t src, const std::size_t dest) {
+    m_Enemies.at(dest) = m_Enemies.at(src);
+    m_Enemies.at(src) = nullptr;
+    SetHasEntity(src, false);
+    SetHasEntity(dest, true);
+}
+
 void MapData::ClearEnemies() {
     m_Enemies.clear();
     m_Enemies.resize(GetSize().x * GetSize().y);
@@ -66,6 +71,10 @@ std::vector<std::shared_ptr<Enemy>> MapData::GetEnemyQueue() const {
     auto v(m_EnemyQueue);
     sort(v.begin(), v.end(), EnemyCompare);
     return v;
+}
+
+std::vector<std::shared_ptr<Enemy>> MapData::GetUnsortedEnemies() const {
+    return m_EnemyQueue;
 }
 
 bool MapData::EnemyCompare(
@@ -242,7 +251,7 @@ void MapData::SetPlayerPosition(const glm::vec2& playerPosition) {
     m_PlayerPosition = playerPosition;
 }
 
-std::vector<std::shared_ptr<Tile>> MapData::GetTilesQueue() const {
+std::vector<std::shared_ptr<Tile>> MapData::GetUnsortedTiles() const {
     return m_TilesQueue;
 }
 

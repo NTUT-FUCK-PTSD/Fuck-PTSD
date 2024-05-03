@@ -7,6 +7,7 @@
 
 #include <memory>
 #include "Animation.h"
+#include "Event/Object.h"
 #include "Game/Warehouse/Coin.h"
 #include "Game/Warehouse/Diamond.h"
 #include "Game/Warehouse/Heart.h"
@@ -16,7 +17,7 @@
 #include "SpriteSheet.hpp"
 #include "ToolBoxs.h"
 
-class Player {
+class Player : public Object {
 public:
     enum Direction { UP = 0, RIGHT, DOWN, LEFT, NONE };
 
@@ -27,9 +28,9 @@ public:
     // some getter
     std::shared_ptr<GameElement> GetGameElement();
     [[nodiscard]]
-    glm::vec2                    GetGamePosition();
+    glm::vec2                    GetGamePosition() const;
     std::shared_ptr<GameElement> GetWindowElement();
-    Direction                    GetFaceTo();
+    Direction                    GetFaceTo() const;
 
     // set player's settings
     void SetGamePosition(const glm::vec2& position);
@@ -86,6 +87,8 @@ public:
         const uint16_t      direction
     );
 
+    void RevertAnimation();
+
 private:
     // ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
     // WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;
@@ -113,6 +116,7 @@ private:
 
     glm::vec2 m_Position = {0, 0};
     glm::vec2 m_GamePosition = {0, 0};
+    glm::vec2 m_BeforeGamePosition = {0, 0};
 
     float m_ZIndex = 0.5;
 

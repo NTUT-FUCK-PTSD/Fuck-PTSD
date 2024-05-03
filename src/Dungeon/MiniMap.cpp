@@ -1,12 +1,18 @@
 #include "Dungeon/MiniMap.h"
 
 #include "Dungeon/Enemy.h"
+#include "Event/Event.h"
 
 namespace Dungeon {
 MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
-    : m_MapData(mapData) {
+    : m_MapData(mapData),
+      m_UpdateHandle(Event::EventQueue) {
     BuildMiniMap();
     Update();
+    m_UpdateHandle.appendListener(
+        EventType::DrawableUpdate,
+        [this](const Object*, const EventArgs&) { UpdatePlayer(); }
+    );
 }
 
 void MiniMap::BuildMiniMap() {
@@ -83,43 +89,8 @@ void MiniMap::Update() {
     for (int i = 0; i < m_MapData->GetSize().y; i++) {
         for (int j = 0; j < m_MapData->GetSize().x; j++) {
             auto mapIndex = j + i * m_MapData->GetSize().x;
-            if (!m_ColorCubes[mapIndex]->GetAvailable()) {
-                continue;
-            }
-            // Update Tiles
-            if (!m_MapData->IsTilesEmpty(mapIndex)) {
-                if (!m_MapData->GetTile(mapIndex)->GetSeen()) {
-                    continue;
-                }
-            } else {
-                SetVisible(mapIndex, false);
-                continue;
-            }
-            // Update Enemy
-            auto enemy = m_MapData->GetEnemy(mapIndex);
-            if (enemy) {
-                if (!enemy->GetSeen()) {
-                    continue;
-                }
-                SetColor(mapIndex, CubeColor::red);
-                SetVisible(mapIndex, true);
-                continue;
-            }
-            UpdateTileColor(mapIndex);
-            SetVisible(mapIndex, true);
+            UpdateCubeColor(mapIndex);
         }
-    }
-
-    // Update Player
-    auto dTime = Util::Time::GetElapsedTimeMs() - m_LastPlayerChanged;
-    if (dTime < 250) {
-        auto mapIndex = m_MapData->GamePosition2MapIndex(
-            m_MapData->GetPlayerPosition()
-        );
-        SetColor(mapIndex, CubeColor::blue);
-    } else if (dTime > 500) {
-        m_PlayerStatus = !m_PlayerStatus;
-        m_LastPlayerChanged = Util::Time::GetElapsedTimeMs();
     }
 }
 
@@ -127,5 +98,48 @@ void MiniMap::SetScale(double scale) {
     m_Scale = scale;
     BuildMiniMap();
     Update();
+}
+
+void MiniMap::UpdatePlayer() {
+    auto dTime = Util::Time::GetElapsedTimeMs() - m_LastPlayerChanged;
+    auto mapIndex = m_MapData->GamePosition2MapIndex(
+        m_MapData->GetPlayerPosition()
+    );
+
+    if (dTime < 250) {
+        SetColor(mapIndex, CubeColor::blue);
+    } else if (dTime > 250 && dTime < 500) {
+        UpdateCubeColor(mapIndex);
+    } else if (dTime > 500) {
+        m_PlayerStatus = !m_PlayerStatus;
+        m_LastPlayerChanged = Util::Time::GetElapsedTimeMs();
+    }
+}
+
+void MiniMap::UpdateCubeColor(const std::size_t mapIndex) {
+    if (!m_ColorCubes[mapIndex]->GetAvailable()) {
+        return;
+    }
+    // Update Tiles
+    if (!m_MapData->IsTilesEmpty(mapIndex)) {
+        if (!m_MapData->GetTile(mapIndex)->GetSeen()) {
+            return;
+        }
+    } else {
+        SetVisible(mapIndex, false);
+        return;
+    }
+    // Update Enemy
+    auto enemy = m_MapData->GetEnemy(mapIndex);
+    if (enemy) {
+        if (!enemy->GetSeen()) {
+            return;
+        }
+        SetColor(mapIndex, CubeColor::red);
+        SetVisible(mapIndex, true);
+        return;
+    }
+    UpdateTileColor(mapIndex);
+    SetVisible(mapIndex, true);
 }
 }  // namespace Dungeon

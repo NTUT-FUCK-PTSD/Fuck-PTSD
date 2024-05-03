@@ -1,10 +1,15 @@
 #include "App.hpp"
 
+#include "eventpp/utilities/argumentadapter.h"
+#include "eventpp/utilities/conditionalfunctor.h"
+
 #include <Util/Input.hpp>
 #include "Actions.h"
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
+#include "Dungeon/Enemy.h"
 #include "Dungeon/MapHandler.h"
+#include "Event/Event.h"
 #include "HPIS.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
@@ -12,6 +17,7 @@
 #include "System.h"
 #include "Systems/HEIS.h"
 #include "Systems/HPIS.h"
+
 
 using namespace tinyxml2;
 
@@ -76,13 +82,38 @@ void App::Start() {
     m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
     m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png"
     );
+    Event::EventQueue.appendListener(
+        EventType::AttackPlayer,
+        eventpp::conditionalFunctor(
+            eventpp::argumentAdapter<
+                void(const Object*, const AttackPlayerEventArgs&)>(
+                [this](const Object*, const AttackPlayerEventArgs& e) {
+                    if (Event::GetAttackPlayer()) {
+                        m_MainCharacter->lostHP(e.GetDamage());
+                    }
+                }
+            ),
+            // This lambda is the condition. We use dynamic_cast to check if
+            // the event is desired. This is for demonstration purpose, in
+            // production you may use a better way than dynamic_cast.
+            [](const Object*, const EventArgs& e) {
+                return dynamic_cast<const AttackPlayerEventArgs*>(&e)
+                       != nullptr;
+            }
+        )
+    );
+    Event::EventQueue.appendListener(
+        EventType::ResetMap,
+        [this](const Object*, const EventArgs&) {
+            m_MainCharacter->SetGamePosition({0, 0});
+        }
+    );
     m_Camera->AddChild(m_MainCharacter->GetGameElement());
     m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
 
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
         m_Camera,
-        m_MainCharacter,
         ASSETS_DIR "/dungeon/MY DUNGEON.xml",
         1
     );
@@ -126,16 +157,17 @@ void App::Update() {
     if (Music::Tempo::IsSwitch()) {
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
+        Event::SetAttackPlayer(true);
     }
-
 
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
         Game::Systems::HPIS::ThrowOut(Player::Direction::NONE);
-//        const auto&  m = m_MainCharacter->GetGamePosition();
-//        const auto&& b = Settings::Helper::GamePosToMapIdx(m + glm::vec2{1, 0});
-//        if (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
-//            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
-//        }
+        //        const auto&  m = m_MainCharacter->GetGamePosition();
+        //        const auto&& b = Settings::Helper::GamePosToMapIdx(m +
+        //        glm::vec2{1, 0}); if
+        //        (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
+        //            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
+        //        }
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -179,7 +211,16 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
+    else if (!m_ThrowMode
+             && (Util::Input::IsKeyDown(Util::Keycode::W)
+                 || Util::Input::IsKeyDown(Util::Keycode::D)
+                 || Util::Input::IsKeyDown(Util::Keycode::S)
+                 || Util::Input::IsKeyDown(Util::Keycode::A))
+             && Music::Tempo::IsTempoInRange(
+                 500,
+                 musicTime,
+                 Music::Player::LoopCounter()
+             )) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -189,24 +230,28 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D};
+          Util::Keycode::D
+        };
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT};
+          Player::Direction::RIGHT
+        };
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+        };
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+        };
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
@@ -251,16 +296,22 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                    };
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y};
+                      m_AniCameraDestination.y + aniCameraDirection[i].y
+                    };
                 }
             }
         }
         m_MainCharacter
             ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
         m_MainCharacter->Update();
+        Event::EventQueue.dispatch(
+            m_MainCharacter.get(),
+            EventArgs(EventType::PlayerMove)
+        );
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->PlayerTrigger();
     }

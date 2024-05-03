@@ -6,9 +6,9 @@
 namespace Dungeon {
 Enemies::GreenSlime::GreenSlime(
     const s_Enemy&                 u_Enemy,
-    const std::shared_ptr<MapData> MapData
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, MapData) {
+    : Enemy(u_Enemy, mapData) {
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -23,11 +23,9 @@ Enemies::GreenSlime::GreenSlime(
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
 
-    SetHealth(2);    // 1 heart
+    InitHealth(2);   // 1 heart
     SetDamage(100);  // 50 hearts
     SetCoin(1);
-
-    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 namespace Dungeon::Enemies {

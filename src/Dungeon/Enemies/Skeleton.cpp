@@ -1,34 +1,14 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
 #include "Dungeon/MapData.h"
-#include "Settings/ToolBoxs.h"
 
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
     const s_Enemy&                 u_Enemy,
-    const std::shared_ptr<MapData> MapData
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, MapData) {
-    if (u_Enemy.type == 3) {
-        m_NormalFrames = {0, 1, 2, 3};
-        m_AttackFrames = {4, 5, 6, 7};
-        m_ShadowFrames = {16, 17, 18, 19};
-        m_ShadowAttackFrames = {20, 21, 22, 23};
-
-        m_SpriteSheet = std::make_shared<SpriteSheet>(
-            ASSETS_DIR "/entities/skeleton.png",
-            m_FrameSize,
-            m_NormalFrames,
-            true,
-            100,
-            true,
-            100
-        );
-        SetHealth(2);  // 1 heart
-        SetDamage(1);  // 0.5 heart
-        SetCoin(2);
-        m_CanDropHead = false;
-    } else if (u_Enemy.type == 4) {
+    : Enemy(u_Enemy, mapData) {
+    if (u_Enemy.type == 4) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};
         m_ShadowFrames = {17, 18, 19, 20};
@@ -42,8 +22,8 @@ Enemies::Skeleton::Skeleton(
             true,
             100
         );
-        SetHealth(4);  // 2 hearts
-        SetDamage(3);  // 1.5 hearts
+        InitHealth(4);  // 2 hearts
+        SetDamage(3);   // 1.5 hearts
         SetCoin(2);
         m_CanDropHead = true;
     } else if (u_Enemy.type == 5) {
@@ -60,13 +40,32 @@ Enemies::Skeleton::Skeleton(
             true,
             100
         );
-        SetHealth(6);  // 3 hearts
-        SetDamage(4);  // 2 hearts
+        InitHealth(6);  // 3 hearts
+        SetDamage(4);   // 2 hearts
         SetCoin(4);
         m_CanDropHead = true;
+    } else {
+        // Default Skeleton type = 3
+        m_NormalFrames = {0, 1, 2, 3};
+        m_AttackFrames = {4, 5, 6, 7};
+        m_ShadowFrames = {16, 17, 18, 19};
+        m_ShadowAttackFrames = {20, 21, 22, 23};
+
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/skeleton.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        InitHealth(2);  // 1 heart
+        SetDamage(1);   // 0.5 heart
+        SetCoin(2);
+        m_CanDropHead = false;
     }
 
-    SetHealth(6);
     m_SkeletonNormalFrames = m_NormalFrames;
     m_SkeletonShadowFrames = m_ShadowFrames;
 
@@ -74,8 +73,6 @@ Enemies::Skeleton::Skeleton(
     m_WillMovePosition = GetGamePosition();
 
     m_Attack = false;
-
-    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -98,50 +95,11 @@ void Skeleton::Move() {
             } else if (direction.y < 0) {
                 m_AnimationType = 2;
             }
-            // Check if player is in the next position
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                m_Attack = !m_Attack;
-                UpdateProperties();
-                return;
-            }
-            // Set the new position
-            m_MapData->SetHasEntity(
-                GamePostion2MapIndex(GetGamePosition()),
-                false
-            );
-            m_MapData->SetHasEntity(
-                GamePostion2MapIndex(m_WillMovePosition),
-                true
-            );
-            // notify the map that the entity is moving
-            m_CanMove = true;
-        } else {
-            m_CanMove = false;
+            CanMove();
         }
     }
     m_Attack = !m_Attack;
     UpdateProperties();
-}
-
-void Skeleton::Update() {
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition),
-            m_AnimationType
-        );
-        m_CanMove = false;
-    }
-
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
-
-    UpdateHeart(m_Transform.translation);
 }
 
 void Skeleton::UpdateProperties() {
