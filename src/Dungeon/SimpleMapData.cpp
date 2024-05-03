@@ -13,6 +13,7 @@ SimpleMapData::SimpleMapData(
       m_Size(size) {
     m_Tiles.resize(GetSize().x * GetSize().y);
     m_HasEntity.resize(GetSize().x * GetSize().y, false);
+    m_PlayerPosition = {0, 0};
 }
 
 void SimpleMapData::AddTile(
@@ -171,7 +172,7 @@ void SimpleMapData::SetPlayerPosition(const glm::vec2& playerPosition) {
     m_PlayerPosition = playerPosition;
 }
 
-std::vector<std::shared_ptr<Tile>> SimpleMapData::GetTilesQueue() const {
+std::vector<std::shared_ptr<Tile>> SimpleMapData::GetUnsortedTiles() const {
     return m_TilesQueue;
 }
 

@@ -1,8 +1,5 @@
 #include "Dungeon/Enemies/Bat.h"
 
-#include "Direction.h"
-#include "Settings/ToolBoxs.h"
-
 namespace Dungeon {
 Enemies::Bat::Bat(
     const s_Enemy&                       u_Enemy,
@@ -14,20 +11,6 @@ Enemies::Bat::Bat(
     m_ShadowFrames = {4, 5, 6, 7};
 
     switch (u_Enemy.type) {
-    case 6:
-        m_SpriteSheet = std::make_shared<SpriteSheet>(
-            ASSETS_DIR "/entities/bat.png",
-            m_FrameSize,
-            m_NormalFrames,
-            true,
-            100,
-            true,
-            100
-        );
-        SetHealth(2);  // 1 heart
-        SetDamage(1);  // 0.5 heart
-        SetCoin(2);
-        break;
     case 7:
         m_SpriteSheet = std::make_shared<SpriteSheet>(
             ASSETS_DIR "/entities/bat_red.png",
@@ -38,8 +21,8 @@ Enemies::Bat::Bat(
             true,
             100
         );
-        SetHealth(2);  // 1 heart
-        SetDamage(2);  // 1 heart
+        InitHealth(2);  // 1 heart
+        SetDamage(2);   // 1 heart
         SetCoin(3);
         m_Tick = 1;
         break;
@@ -53,29 +36,38 @@ Enemies::Bat::Bat(
             true,
             100
         );
-        SetHealth(2);  // 1 heart
-        SetDamage(3);  // 1.5 heart
+        InitHealth(2);  // 1 heart
+        SetDamage(3);   // 1.5 heart
         SetCoin(20);
         m_Tick = 1;
+        break;
+    default:
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        InitHealth(2);  // 1 heart
+        SetDamage(1);   // 0.5 heart
+        SetCoin(2);
         break;
     }
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
-    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
+    m_AnimationType = 4;
 }
 }  // namespace Dungeon
 
 namespace Dungeon::Enemies {
 void Bat::Move() {
-    MoveBat();
-}
-void Bat::MoveBat() {
-    m_NeedToMove = false;
     if (m_State > m_Tick - 1) {
         m_State = 0;
     }
     if (m_State == m_Tick - 1) {
-        m_NeedToMove = true;
         for (std::size_t i = 0; i < 4; i++) {
             if (IsVaildMove(GetGamePosition() + m_Movement[i])) {
                 m_RandomPool.push_back(i);
@@ -85,34 +77,9 @@ void Bat::MoveBat() {
     }
     m_State++;
 }
-void Bat::Update() {
-    // Collision
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation
-            ->MoveByTime(200, ToolBoxs::GamePostoPos(m_WillMovePosition), 4);
-        m_NeedToMove = false;
-        m_CanMove = false;
-    }
-    // else if (!m_CanMove && m_NeedToMove) {
-    //     RandomMove();
-    // }
-
-    // Update animation
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-
-    // Update z index
-    SetZIndex(m_Animation->GetAnimationZIndex());
-
-    UpdateHeart(m_Transform.translation);
-}
 
 void Bat::RandomMove() {
     if (m_RandomPool.empty()) {
-        m_NeedToMove = false;
         return;
     }
     std::size_t index = 0;
@@ -121,7 +88,8 @@ void Bat::RandomMove() {
             m_RandomGenerator,
             std::uniform_int_distribution<std::size_t>::param_type{
               0,
-              m_RandomPool.size() - 1}
+              m_RandomPool.size() - 1
+            }
         );
         switch (m_RandomPool[index]) {
         case 0:
@@ -143,25 +111,8 @@ void Bat::RandomMove() {
         }
         if (IsVaildMove(m_WillMovePosition)) {
             UpdateFace();
-            // Check if player is in the next position
-            if (m_WillMovePosition == GetPlayerPosition()) {
-                AttackPlayer();
-                return;
-            }
-            // Move to the next position
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(GetGamePosition()),
-                false
-            );
-            m_SimpleMapData->SetHasEntity(
-                GamePostion2MapIndex(m_WillMovePosition),
-                true
-            );
-            // notify can move
-            m_CanMove = true;
+            CanMove();
             return;
-        } else {
-            m_CanMove = false;
         }
         m_RandomPool.erase(m_RandomPool.begin() + index);
     }

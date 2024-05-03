@@ -79,9 +79,9 @@ target_link_libraries(Framework
 message(STATUS "test")
 target_link_libraries(${PROJECT_NAME}
         SDL2::SDL2main
-        fmt
         tinyxml2::tinyxml2
         Framework
         #rusty_bridge
         soloud
+        eventpp
 )

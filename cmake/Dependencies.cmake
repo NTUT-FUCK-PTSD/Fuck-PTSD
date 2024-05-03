@@ -19,12 +19,10 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(
-        fmt
-        URL             https://github.com/fmtlib/fmt/archive/refs/tags/10.2.1.zip
-        URL_HASH        MD5=1bba4e8bdd7b0fa98f207559ffa380a3
-        # GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        # GIT_TAG 10.2.1
-        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/fmt
+    eventpp
+    GIT_REPOSITORY https://github.com/wqking/eventpp
+    GIT_TAG        d2db8af2a46c79f8dc75759019fba487948e9442 # v0.1.3
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/eventpp
 )
 
 message(STATUS "PTSD NOT FOUND, fetching from source!")
@@ -51,7 +49,7 @@ FetchContent_Declare(
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/soloud
 )
 
-FetchContent_MakeAvailable(tinyxml2 fmt PTSD)
+FetchContent_MakeAvailable(tinyxml2 eventpp PTSD)
 
 FetchContent_GetProperties(soloud)
 if (NOT soloud_POPULATED)

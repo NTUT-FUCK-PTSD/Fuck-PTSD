@@ -1,7 +1,5 @@
 #include "Dungeon/Enemies/BlueSlime.h"
 
-#include "Settings/ToolBoxs.h"
-
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(
     const s_Enemy&                       u_Enemy,
@@ -23,15 +21,13 @@ Enemies::BlueSlime::BlueSlime(
     m_WillMovePosition = GetGamePosition();
     m_InitPosition = GetGamePosition();
 
-    SetHealth(4);  // 2 hearts
-    SetDamage(2);  // 1 heart
+    InitHealth(4);  // 2 hearts
+    SetDamage(2);   // 1 heart
     SetCoin(2);
 
     if (!IsVaildMove(m_InitPosition + m_Move)) {
         m_Move = -m_Move;
     }
-
-    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -56,41 +52,8 @@ void BlueSlime::Move() {
     if (IsVaildMove(m_WillMovePosition)) {
         auto direction = m_WillMovePosition - GetGamePosition();
         UpdateAnimationType(direction);
-        if (m_WillMovePosition == GetPlayerPosition()) {
-            AttackPlayer();
-            m_State++;
-            return;
-        }
-        m_CanMove = true;
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(GetGamePosition()),
-            false
-        );
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(m_WillMovePosition),
-            true
-        );
+        CanMove();
     }
     m_State++;
-}
-
-void BlueSlime::Update() {
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition),
-            m_AnimationType
-        );
-        m_CanMove = false;
-    }
-
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
-
-    UpdateHeart(m_Transform.translation);
 }
 }  // namespace Dungeon::Enemies

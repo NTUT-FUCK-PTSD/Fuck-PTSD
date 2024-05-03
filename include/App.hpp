@@ -1,13 +1,13 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include <memory>
+
 #include <Core/Context.hpp>
 #include <Core/Drawable.hpp>
 #include <Util/Keycode.hpp>
 #include <Util/Text.hpp>
-#include <memory>
 
-#include "App.hpp"
 #include "Background.hpp"
 #include "Camera.h"
 #include "Dungeon/Map.h"

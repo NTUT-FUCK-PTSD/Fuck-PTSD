@@ -17,11 +17,13 @@ public:
         const std::size_t            position,
         const std::shared_ptr<Enemy> enemy
     );
-    void                                RemoveEnemy(const std::size_t position);
-    void                                ClearEnemies();
+    void RemoveEnemy(const std::size_t position);
+    void MoveEnemy(const std::size_t src, const std::size_t dest);
+    void ClearEnemies();
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
+    std::vector<std::shared_ptr<Enemy>> GetUnsortedEnemies() const;
 
 protected:
     static bool EnemyCompare(

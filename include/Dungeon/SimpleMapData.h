@@ -48,7 +48,7 @@ public:
     std::vector<std::shared_ptr<Tile>> GetTiles() const;
     bool                  IsTilesEmpty(const std::size_t position) const;
     std::shared_ptr<Tile> GetTile(const std::size_t position) const;
-    std::vector<std::shared_ptr<Tile>> GetTilesQueue() const;
+    std::vector<std::shared_ptr<Tile>> GetUnsortedTiles() const;
 
     void SetHasEntity(const std::size_t position, const bool hasEntity);
 
