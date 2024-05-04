@@ -7,6 +7,7 @@
 #include "Dungeon/ColorCube.h"
 #include "Dungeon/MapData.h"
 #include "Event/Event.h"
+#include "Settings/Window.hpp"
 
 namespace Dungeon {
 class MiniMap : public Util::GameObject {

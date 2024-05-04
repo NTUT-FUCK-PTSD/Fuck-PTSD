@@ -1,11 +1,13 @@
 #include "Dungeon/Enemies/Bat.h"
 
+#include "Dungeon/MapData.h"
+
 namespace Dungeon {
 Enemies::Bat::Bat(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, simpleMapData),
+    : Enemy(u_Enemy, mapData),
       m_RandomGenerator(m_RandomDevice()) {
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};

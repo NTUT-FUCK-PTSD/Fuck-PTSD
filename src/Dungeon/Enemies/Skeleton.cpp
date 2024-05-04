@@ -1,11 +1,13 @@
 #include "Dungeon/Enemies/Skeleton.h"
 
+#include "Dungeon/MapData.h"
+
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, simpleMapData) {
+    : Enemy(u_Enemy, mapData) {
     if (u_Enemy.type == 4) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};

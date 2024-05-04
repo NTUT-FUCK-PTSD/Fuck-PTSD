@@ -1,8 +1,9 @@
 #include "Event/Event.h"
 #include "Dungeon/Map.h"
 
+#include "Dungeon/Enemy.h"
 #include "Event/EventArgs.h"
-#include "Player.h"
+#include "Game/Player.h"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
 

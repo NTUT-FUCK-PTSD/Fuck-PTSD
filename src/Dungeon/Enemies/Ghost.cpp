@@ -1,13 +1,14 @@
 #include "Dungeon/Enemies/Ghost.h"
 
 #include "Dungeon/AStar.h"
+#include "Dungeon/MapData.h"
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, simpleMapData) {
+    : Enemy(u_Enemy, mapData) {
     m_NormalFrames = {0, 1};
     m_ShadowFrames = {2, 3};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

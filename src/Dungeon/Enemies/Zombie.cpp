@@ -1,11 +1,12 @@
 #include "Dungeon/Enemies/Zombie.h"
+#include "MapData.h"
 
 namespace Dungeon {
 Enemies::Zombie::Zombie(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, simpleMapData),
+    : Enemy(u_Enemy, mapData),
       m_RandomGenerator(m_RandomDevice()) {
     m_BackFrames = {0, 1, 2, 3, 4, 5, 6, 7};
     m_NormalFrames = {8, 9, 10, 11, 12, 13, 14, 15};

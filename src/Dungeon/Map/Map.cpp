@@ -1,5 +1,7 @@
 #include "Dungeon/Map.h"
+#include <memory>
 
+#include "Dungeon/Enemy.h"
 #include "Dungeon/TileFactory.h"
 
 namespace Dungeon {
@@ -36,12 +38,9 @@ std::shared_ptr<MapData> Map::GetMapData() const {
 }
 
 void Map::RemoveEnemy(const std::size_t position) {
+    std::shared_ptr<Enemy> enemy = m_MapData->GetEnemy(position);
     m_Children.erase(
-        std::remove(
-            m_Children.begin(),
-            m_Children.end(),
-            m_MapData->GetEnemy(position)
-        ),
+        std::remove(m_Children.begin(), m_Children.end(), enemy),
         m_Children.end()
     );
     m_MapData->RemoveEnemy(position);
@@ -187,7 +186,7 @@ void Map::AddItem(
     const std::size_t           position,
     const std::shared_ptr<Item> item
 ) {
-    if (m_MapData->IsItemsEmpty(position)) {
+    if (m_MapData->IsItemEmpty(position)) {
         m_MapData->AddItem(position, item);
         AddChild(item);
     } else {

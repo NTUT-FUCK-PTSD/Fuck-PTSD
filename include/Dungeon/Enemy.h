@@ -5,22 +5,19 @@
 #include "Util/GameObject.hpp"
 
 #include <memory>
-#include "Dungeon/SimpleMapData.h"
+#include "Dungeon/EMfwd.h"
+#include "Dungeon/Elements.h"
 #include "Event/Event.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
 #include "UGameElement.h"
-#include "eventpp/utilities/scopedremover.h"
 
 namespace Dungeon {
 // Abstract class
 class Enemy : public Object, public Util::GameObject {
 public:
-    Enemy(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
     virtual ~Enemy() = default;
 
     void SetShadow(const bool shadow);
@@ -36,9 +33,7 @@ public:
         m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
     }
 
-    glm::vec2 GetPlayerPosition() const {
-        return m_SimpleMapData->GetPlayerPosition();
-    }
+    glm::vec2        GetPlayerPosition() const;
     const glm::vec2& GetGamePosition() const { return m_GamePosition; }
     std::size_t      GetID() const { return m_ID; }
     std::size_t      GetBeatDelay() const { return m_BeatDelay; }
@@ -52,23 +47,17 @@ public:
 
     virtual glm::vec2 FindNextToPlayer();  // Set available WillMovePosition to
                                            // slowly close PlayerPosition
-    void        TempoMove();
-    bool        IsVaildMove(const glm::vec2& position);
-    std::size_t GamePostion2MapIndex(const glm::ivec2& position) const {
-        return m_SimpleMapData->GamePosition2MapIndex(position);
-    }
+    void         TempoMove();
+    bool         IsVaildMove(const glm::vec2& position);
+    std::size_t  GamePostion2MapIndex(const glm::ivec2& position) const;
     virtual void Struck(const std::size_t damage);
+
     virtual void Update();
 
     bool GetSeen() const { return m_Seen; }
 
-    glm::vec2 GetPlayerPosition() {
-        return m_SimpleMapData->GetPlayerPosition();
-    }
-    float Heuristic(const glm::vec2& start, const glm::vec2& end) {
-        return m_SimpleMapData->Heuristic(start, end);
-    }
-    void SetCameraUpdate(bool cameraUpdate);
+    float Heuristic(const glm::vec2& start, const glm::vec2& end);
+    void  SetCameraUpdate(bool cameraUpdate);
 
 protected:
     virtual void Move() = 0;
@@ -85,7 +74,7 @@ protected:
     std::shared_ptr<Util::Image>    m_EmptyHeart;
     std::vector<Util::GameElement*> m_HeartList;
 
-    std::shared_ptr<SimpleMapData> m_SimpleMapData;
+    std::shared_ptr<MapData> m_MapData;
 
     std::shared_ptr<SpriteSheet> m_SpriteSheet;
     std::vector<std::size_t>     m_NormalFrames;

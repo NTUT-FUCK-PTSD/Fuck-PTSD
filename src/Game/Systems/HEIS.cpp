@@ -3,6 +3,8 @@
 //
 #include "HEIS.h"
 
+#include "Dungeon/Enemy.h"
+
 auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
     m_Map = dungeon;
 }

@@ -7,6 +7,7 @@
 #include "Actions.h"
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
+#include "Dungeon/Enemy.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
 #include "HPIS.h"
@@ -163,7 +164,7 @@ void App::Update() {
         //        const auto&  m = m_MainCharacter->GetGamePosition();
         //        const auto&& b = Settings::Helper::GamePosToMapIdx(m +
         //        glm::vec2{1, 0}); if
-        //        (m_DungeonMap->GetMapData()->IsHasEntity(b)) {
+        //        (m_DungeonMap->GetMapData()->IsEnemyEmpty(b)) {
         //            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
         //        }
     }
@@ -266,7 +267,7 @@ void App::Update() {
                 if (m_DungeonMap->GetMapData()->IsPositionInteractive(
                         playerDestination
                     )) {
-                    if (m_DungeonMap->GetMapData()->IsHasEntity(mapIndex)) {
+                    if (m_DungeonMap->GetMapData()->IsEnemyEmpty(mapIndex)) {
                         m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2
                         );
 

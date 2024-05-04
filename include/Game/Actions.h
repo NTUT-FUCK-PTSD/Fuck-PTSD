@@ -43,7 +43,7 @@ public:
             }
 
             // DOTO:
-            if (mapdata->IsHasEntity(weaponEndMI)) {
+            if (mapdata->IsEnemyEmpty(weaponEndMI)) {
                 dungeonMap->RemoveEnemy(weaponEndMI);
             };
 

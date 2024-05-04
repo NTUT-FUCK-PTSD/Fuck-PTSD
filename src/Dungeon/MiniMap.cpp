@@ -1,5 +1,6 @@
 #include "Dungeon/MiniMap.h"
 
+#include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 
 namespace Dungeon {
@@ -42,7 +43,7 @@ void MiniMap::BuildMiniMap() {
 }
 
 void MiniMap::UpdateTileColor(const std::size_t mapIndex) {
-    if (!m_MapData->IsTilesEmpty(mapIndex)) {
+    if (!m_MapData->IsTileEmpty(mapIndex)) {
         if (m_MapData->GetTile(mapIndex)->IsWall()) {
             if (m_MapData->GetTile(mapIndex)->GetTile().type == 102) {
                 SetColor(mapIndex, CubeColor::gray);
@@ -120,7 +121,7 @@ void MiniMap::UpdateCubeColor(const std::size_t mapIndex) {
         return;
     }
     // Update Tiles
-    if (!m_MapData->IsTilesEmpty(mapIndex)) {
+    if (!m_MapData->IsTileEmpty(mapIndex)) {
         if (!m_MapData->GetTile(mapIndex)->GetSeen()) {
             return;
         }

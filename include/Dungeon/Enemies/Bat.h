@@ -10,8 +10,7 @@ namespace Dungeon {
 namespace Enemies {
 class Bat final : public Dungeon::Enemy {
 public:
-    Bat(const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData);
+    Bat(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
 
     void Move() override;
 

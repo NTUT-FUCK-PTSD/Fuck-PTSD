@@ -1,5 +1,7 @@
 #include "Dungeon/Map.h"
 
+#include "Dungeon/Enemy.h"
+
 namespace Dungeon {
 void Map::CameraUpdate() {
     glm::vec2 cameraPos = m_MapData->GetPlayerPosition();

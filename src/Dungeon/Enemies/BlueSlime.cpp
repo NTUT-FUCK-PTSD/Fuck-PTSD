@@ -1,11 +1,13 @@
 #include "Dungeon/Enemies/BlueSlime.h"
 
+#include "Dungeon/MapData.h"
+
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, simpleMapData) {
+    : Enemy(u_Enemy, mapData) {
     m_NormalFrames = {4, 5, 6, 7};
     m_ShadowFrames = {12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

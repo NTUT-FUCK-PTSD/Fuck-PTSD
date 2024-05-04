@@ -1,7 +1,9 @@
 #include "Dungeon/Enemy.h"
 
 #include <memory>
+
 #include "Dungeon/AStar.h"
+#include "Dungeon/MapData.h"
 #include "Dungeon_config.h"
 #include "Event/Event.h"
 #include "Event/EventArgs.h"
@@ -10,11 +12,8 @@
 
 namespace Dungeon {
 
-Enemy::Enemy(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
-)
-    : m_SimpleMapData(simpleMapData),
+Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
+    : m_MapData(mapData),
       m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
@@ -87,7 +86,7 @@ void Enemy::TempoMove() {
 }
 
 bool Enemy::IsVaildMove(const glm::vec2& position) {
-    return m_SimpleMapData->IsPositionWalkable(position);
+    return m_MapData->IsPositionWalkable(position);
 }
 
 glm::vec2 Enemy::FindNextToPlayer() {
@@ -97,7 +96,7 @@ glm::vec2 Enemy::FindNextToPlayer() {
     auto path = Dungeon::AStar::FindPath(
         GetGamePosition(),
         GetPlayerPosition(),
-        m_SimpleMapData,
+        m_MapData,
         10
     );
     if (path.empty()) {
@@ -228,8 +227,19 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
     for (std::size_t i = 0; i < numberOfHeart - m_Health / 2; i++) {
         m_HeartList[numberOfHeart - i - 1]->SetDrawable(m_EmptyHeart);
     }
-};
+}
 
+glm::vec2 Enemy::GetPlayerPosition() const {
+    return m_MapData->GetPlayerPosition();
+}
+
+std::size_t Enemy::GamePostion2MapIndex(const glm::ivec2& position) const {
+    return m_MapData->GamePosition2MapIndex(position);
+}
+
+float Enemy::Heuristic(const glm::vec2& start, const glm::vec2& end) {
+    return m_MapData->Heuristic(start, end);
+}
 void Enemy::InitHealth(const std::size_t health) {
     m_Health = health;
     InitHealthBarImage(m_Transform.translation);
