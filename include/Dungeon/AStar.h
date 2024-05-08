@@ -1,16 +1,16 @@
 #ifndef AStar_H
 #define AStar_H
 
-#include "Dungeon/SimpleMapData.h"
+#include "Dungeon/MapData.h"
 
 namespace Dungeon {
 class AStar final {
 public:
     static std::vector<glm::ivec2> FindPath(
-        const glm::ivec2&                    start,
-        const glm::ivec2&                    end,
-        const std::shared_ptr<SimpleMapData> mapData,
-        float                                maxDistance = -1
+        const glm::ivec2&              start,
+        const glm::ivec2&              end,
+        const std::shared_ptr<MapData> mapData,
+        float                          maxDistance = -1
     );
     static float Heuristic(const glm::vec2& start, const glm::vec2& end);
 
@@ -24,10 +24,10 @@ private:
         }
     };
     static std::vector<glm::ivec2> CalculatePath(
-        const std::vector<glm::ivec2>&       cameFrom,
-        const glm::ivec2&                    start,
-        const glm::ivec2&                    end,
-        const std::shared_ptr<SimpleMapData> mapData
+        const std::vector<glm::ivec2>& cameFrom,
+        const glm::ivec2&              start,
+        const glm::ivec2&              end,
+        const std::shared_ptr<MapData> mapData
     );
 };
 }  // namespace Dungeon

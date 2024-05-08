@@ -6,6 +6,8 @@
 
 #include "Dungeon/ColorCube.h"
 #include "Dungeon/MapData.h"
+#include "Event/Event.h"
+#include "Settings/Window.hpp"
 
 namespace Dungeon {
 class MiniMap : public Util::GameObject {
@@ -19,6 +21,8 @@ public:
     void SetScale(double scale);
 
     void Update();
+    void UpdatePlayer();
+    void UpdateCubeColor(const std::size_t mapIndex);
 
 private:
     void BuildMiniMap();
@@ -30,6 +34,8 @@ private:
     Util::ms_t m_LastPlayerChanged = 0;
     bool       m_PlayerStatus = false;
     double     m_Scale = DUNGEON_SCALE + 1;
+
+    Event::Remover m_UpdateHandle;
 };
 }  // namespace Dungeon
 

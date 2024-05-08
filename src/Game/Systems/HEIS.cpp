@@ -7,6 +7,8 @@
 #include "Graphs/Dagger.h"
 #include "Helper.hpp"
 
+#include "Dungeon/Enemy.h"
+
 auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
     m_Map = dungeon;
 }

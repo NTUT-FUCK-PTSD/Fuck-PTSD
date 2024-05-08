@@ -23,6 +23,10 @@ void Display::BeatHeart::Init() {
     m_GameElement->SetZIndex(m_ZIndex);
 }
 
+void Display::BeatHeart::Pause(bool state) {
+    m_IsPause = state;
+}
+
 void Display::BeatHeart::SwitchHeart(const std::size_t duringTime) {
     m_AfterSwitchTime = Util::Time::GetElapsedTimeMs() + duringTime;
 
@@ -30,6 +34,10 @@ void Display::BeatHeart::SwitchHeart(const std::size_t duringTime) {
 }
 
 void Display::BeatHeart::Update() {
+    if (m_IsPause) {
+        return;
+    }
+
     if (Util::Time::GetElapsedTimeMs() > m_AfterSwitchTime) {
         m_HeartImage->SetCurrentFrame(0);
     }
@@ -39,6 +47,7 @@ std::shared_ptr<GameElement> Display::BeatHeart::GetGameElement() {
     return m_GameElement;
 }
 
+bool                         Display::BeatHeart::m_IsPause = false;
 float                        Display::BeatHeart::m_ZIndex = 100;
 std::size_t                  Display::BeatHeart::m_AfterSwitchTime = 0;
 std::shared_ptr<SpriteSheet> Display::BeatHeart::m_HeartImage = nullptr;

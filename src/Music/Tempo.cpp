@@ -49,6 +49,10 @@ void Music::Tempo::ReadTempoFile(const std::string& path) {
     txtTempoFile.close();
 }
 
+void Music::Tempo::Pause(bool state) {
+    m_IsPause = state;
+}
+
 bool Music::Tempo::IsTempoInRange(
     const std::size_t triggerRange,
     const std::size_t time,
@@ -138,6 +142,10 @@ void Music::Tempo::Update(
     const std::size_t triggerOffset,
     const std::size_t MusicLoopCounter
 ) {
+    if (m_IsPause) {
+        return;
+    }
+
     if (m_CurrentBeatLopTimes != MusicLoopCounter) {
         m_CurrentBeatLopTimes = MusicLoopCounter;
         LopReset();
@@ -165,3 +173,4 @@ std::size_t              Music::Tempo::m_CurrentBeatIdx = 0;
 std::size_t              Music::Tempo::m_CurrentBeatLopTimes = 0;
 
 bool Music::Tempo::m_IsBeatSwitch = false;
+bool Music::Tempo::m_IsPause = false;

@@ -1,13 +1,13 @@
 #include "Dungeon/Enemies/OrangeSlime.h"
 
-#include "Settings/ToolBoxs.h"
+#include "Dungeon/MapData.h"
 
 namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(
-    const s_Enemy&                       u_Enemy,
-    const std::shared_ptr<SimpleMapData> simpleMapData
+    const s_Enemy&                 u_Enemy,
+    const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, simpleMapData),
+    : Enemy(u_Enemy, mapData),
       m_RandomGenerator(m_RandomDevice()),
       m_Distribution(0, 3) {
     m_NormalFrames = {0, 1, 2, 3};
@@ -24,8 +24,8 @@ Enemies::OrangeSlime::OrangeSlime(
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
 
-    SetHealth(2);  // 1 heart
-    SetDamage(1);  // 0.5 heart
+    InitHealth(2);  // 1 heart
+    SetDamage(1);   // 0.5 heart
     SetCoin(2);
     m_StartIdx = m_Distribution(m_RandomGenerator);
     m_State = -1;  // Start from -1 to make the first move
@@ -34,8 +34,6 @@ Enemies::OrangeSlime::OrangeSlime(
         m_Movement[(m_StartIdx + i) % 4] +=
             m_Movement[(m_StartIdx + i - 1) % 4];
     }
-
-    this->InitHealthBarImage(ToolBoxs::GamePostoPos(GetGamePosition()));
 }
 }  // namespace Dungeon
 
@@ -55,44 +53,13 @@ void OrangeSlime::Move() {
     }
     if (IsVaildMove(m_WillMovePosition)) {
         UpdateState();
-        if (m_WillMovePosition == GetPlayerPosition()) {
-            AttackPlayer();
-            return;
-        }
-        m_CanMove = true;
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(GetGamePosition()),
-            false
-        );
-        m_SimpleMapData->SetHasEntity(
-            GamePostion2MapIndex(m_WillMovePosition),
-            true
-        );
+        CanMove();
+        m_AnimationType = (m_StartIdx + m_State - 1) % 4;
     } else {
-        m_CanMove = false;
         return;
     }
 
     m_State++;
-}
-void OrangeSlime::Update() {
-    if (m_CanMove && !m_Animation->IsAnimating()) {
-        SetGamePosition(m_WillMovePosition);
-        m_Animation->MoveByTime(
-            200,
-            ToolBoxs::GamePostoPos(m_WillMovePosition),
-            (m_StartIdx + m_State - 1) % 4
-        );
-        m_CanMove = false;
-    }
-
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
-
-    UpdateHeart(m_Transform.translation);
 }
 
 void OrangeSlime::UpdateFace(const glm::vec2& direction) {

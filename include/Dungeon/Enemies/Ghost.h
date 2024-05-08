@@ -7,18 +7,13 @@ namespace Dungeon {
 namespace Enemies {
 class Ghost final : public Dungeon::Enemy {
 public:
-    Ghost(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    Ghost(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
 
     void SetTransparent(bool transparent);
 
     void Struck(const std::size_t damage) override;
 
     void Move() override;
-
-    void Update() override;
 
     void AttackPlayer() override;
 

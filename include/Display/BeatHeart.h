@@ -17,6 +17,8 @@ class BeatHeart final {
 public:
     static void Init();
 
+    static void Pause(bool state);
+
     static void SwitchHeart(const std::size_t duringTime);
 
     static std::shared_ptr<GameElement> GetGameElement();
@@ -24,6 +26,8 @@ public:
     static void Update();
 
 private:
+    static bool m_IsPause;
+
     static std::string m_HeartImagePath;
 
     static glm::vec2 m_Position;

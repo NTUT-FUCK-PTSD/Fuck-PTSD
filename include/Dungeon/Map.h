@@ -2,30 +2,33 @@
 #define MAP_H
 
 #include <memory>
+
 #include "Util/GameObject.hpp"
 
 #include "Dungeon/Direction.h"
-#include "Dungeon/Enemy.h"
 #include "Dungeon/Level.h"
 #include "Dungeon/MapData.h"
 #include "Dungeon/MiniMap.h"
-#include "Game/Player.h"
+#include "Event/Event.h"
+#include "Event/Object.h"
 #include "Settings/Camera.h"
 
 namespace Dungeon {
-class Map final : public Util::GameObject {
+class Map final : public Object, public Util::GameObject {
 public:
     Map(const std::shared_ptr<Camera> camera,
-        const std::shared_ptr<Player> mainCharacter,
         const std::string&            path,
         const std::size_t             levelNum = 1);
     ~Map();
+
+    void InitEvent();
 
     bool        IsAvailable() { return m_Available; }
     bool        LoadLevel(const std::size_t levelNum);
     std::size_t GetLevelNum() const;
 
     std::size_t GamePostion2MapIndex(const glm::ivec2& position) const;
+    glm::ivec2  MapIndex2GamePosition(const std::size_t index) const;
 
     std::shared_ptr<MapData> GetMapData() const;
 
@@ -45,10 +48,15 @@ public:
     static glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
     static glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
 
+    void PlayerMove(const glm::vec2& position);
+    void AddItem(const std::size_t position, const std::shared_ptr<Item> item);
+    void RemoveItem(const std::size_t position);
+
 private:
     bool m_Available;
     void LoadTile();
     void LoadEnemy();
+    void LoadItem();  // TODO
 
     void TempoUpdate(bool isPlayer);
 
@@ -70,10 +78,6 @@ private:
                      const glm::vec2& position1,
                      const glm::vec2& position2
                  );
-    bool isVaildPosition(const glm::ivec2& position);
-    bool isVaildMove(const glm::ivec2& position);
-    // use reference to avoid copy
-    void EnemyAttackHandle(const std::shared_ptr<Enemy>& enemy);
     bool CanPlayerSeePosition(const glm::vec2& position);
 
     void DoorUpdate(std::size_t i, std::size_t j);
@@ -86,7 +90,6 @@ private:
 
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;
-    std::shared_ptr<Player>  m_MainCharacter;
 
     bool          m_TempoAttack = false;
     bool          m_OverlayRed = false;
@@ -97,6 +100,8 @@ private:
     std::shared_ptr<MiniMap> m_MiniMap;
 
     std::size_t m_TempoIndex = 0;
+
+    Event::Remover m_Event;
 };
 
 }  // namespace Dungeon

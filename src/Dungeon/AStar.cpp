@@ -5,10 +5,10 @@
 
 namespace Dungeon {
 std::vector<glm::ivec2> AStar::FindPath(
-    const glm::ivec2&                    start,
-    const glm::ivec2&                    end,
-    const std::shared_ptr<SimpleMapData> mapData,
-    float                                maxDistance
+    const glm::ivec2&              start,
+    const glm::ivec2&              end,
+    const std::shared_ptr<MapData> mapData,
+    float                          maxDistance
 ) {
     std::vector<glm::ivec2> path;
     std::vector<glm::ivec2> directions = {
@@ -88,10 +88,10 @@ float AStar::Heuristic(const glm::vec2& start, const glm::vec2& end) {
 }
 
 std::vector<glm::ivec2> AStar::CalculatePath(
-    const std::vector<glm::ivec2>&       cameFrom,
-    const glm::ivec2&                    start,
-    const glm::ivec2&                    end,
-    const std::shared_ptr<SimpleMapData> mapData
+    const std::vector<glm::ivec2>& cameFrom,
+    const glm::ivec2&              start,
+    const glm::ivec2&              end,
+    const std::shared_ptr<MapData> mapData
 ) {
     std::vector<glm::ivec2> path;
     glm::ivec2              current = end;

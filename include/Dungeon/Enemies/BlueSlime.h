@@ -7,14 +7,9 @@ namespace Dungeon {
 namespace Enemies {
 class BlueSlime final : public Dungeon::Enemy {
 public:
-    BlueSlime(
-        const s_Enemy&                       u_Enemy,
-        const std::shared_ptr<SimpleMapData> simpleMapData
-    );
+    BlueSlime(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
 
     void Move() override;
-
-    void Update() override;
 
 private:
     const glm::vec2 m_FrameSize = {26, 25};

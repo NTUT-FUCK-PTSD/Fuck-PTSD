@@ -50,7 +50,7 @@ private:
     bool          m_IsAnimating = false;
     bool          m_IsAnimatingInternal = false;
     unsigned long m_AnimationStartMs = 0;
-    unsigned long m_AnimationDuringTimeMs;
+    unsigned long m_AnimationDuringTimeMs = 0;
     glm::vec2     m_AnimationDestination = {1e9, 1e9};
     uint16_t      m_AnimationDirection;
     glm::vec2     m_AnimationPosition = {-1e9, -1e9};
