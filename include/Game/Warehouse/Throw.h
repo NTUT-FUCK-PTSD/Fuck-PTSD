@@ -31,7 +31,7 @@ public:
 
     [[nodiscard]]
     std::string GetType() const override {
-        return "Throw";
+        return "Spear";
     }
 
 private:

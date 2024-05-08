@@ -19,7 +19,13 @@ class Tools final {
 public:
     Tools();
 
-    void AddTool(const std::shared_ptr<IEquip>& ge);
+    void AddTool(
+        const std::shared_ptr<IEquip>& ge,
+        const std::string&             name,
+        const std::string&             type
+    );
+
+    void RemoveTool(const std::string& name, const std::string& type);
 
     std::string Print() { return "test"; }
 
@@ -36,9 +42,11 @@ public:
 private:
     void ReArrange();
 
-    const std::map<std::string, std::string> m_BaseTool =
-        {{"BOMB", "1"}, {"SHOVEL", "Shovel"}, {"WEAPON", "Dagger"}};
-
+    std::map<std::string, std::string> m_BaseTool = {
+      {"BOMB", "1"},
+      {"SHOVEL", "Shovel"},
+      //      {"WEAPON", "Dagger"}};
+      {"WEAPON", "Spear"}};
     std::shared_ptr<Util::GameElement> m_GameElement;
 
     std::vector<std::shared_ptr<IEquip>> m_ToolList;
@@ -48,13 +56,11 @@ private:
 private:
     static constexpr glm::vec2 m_ColInitPos = {
       static_cast<int>(-WINDOW_WIDTH) / 2 + 65,
-      static_cast<int>(WINDOW_HEIGHT) / 2 - 195
-    };
+      static_cast<int>(WINDOW_HEIGHT) / 2 - 195};
 
     static constexpr glm::vec2 m_RowInitPos = {
       static_cast<int>(-WINDOW_WIDTH) / 2 + 65,
-      static_cast<int>(WINDOW_HEIGHT) / 2 - 55
-    };
+      static_cast<int>(WINDOW_HEIGHT) / 2 - 55};
 };
 
 }  // namespace Players

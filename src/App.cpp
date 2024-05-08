@@ -160,6 +160,7 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
+        //        m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
         Game::Systems::HPIS::ThrowOut(Player::Direction::NONE);
         //        const auto&  m = m_MainCharacter->GetGamePosition();
         //        const auto&& b = Settings::Helper::GamePosToMapIdx(m +
@@ -196,7 +197,9 @@ void App::Update() {
         m_MainCharacter->PrepareThrowOut(false);
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
-                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
+                //                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(),
+                //                elem.second);
+                Game::Systems::HPIS::ThrowOut(elem.second);
             }
         }
         m_ThrowMode = false;
@@ -343,6 +346,4 @@ void App::End() {  // NOLINT(this method will mutate members in the future)
 std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::W, Player::Direction::UP},
   {Util::Keycode::D, Player::Direction::RIGHT},
-  {Util::Keycode::S, Player::Direction::DOWN},
-  {Util::Keycode::A, Player::Direction::LEFT},
-};
+  {Util::Keycode::S, Player::Direction::DOWN}};
