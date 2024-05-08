@@ -33,7 +33,8 @@ auto Game::Systems::HEIS::MakeTile(
     while (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
         mi = Settings::Helper::GamePosToMapIdx(currGP);
 
-        if (m_Map->GetMapData()->IsHasEntity(mi)) {
+
+        if (m_Map->GetMapData()->IsEnemyEmpty(mi)) {
             m_Map->RemoveEnemy(mi);
         }
 
