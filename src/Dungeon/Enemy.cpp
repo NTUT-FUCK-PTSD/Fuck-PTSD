@@ -16,13 +16,12 @@ namespace Dungeon {
 
 Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
     : m_MapData(mapData),
-      m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1),
       m_DrawableUpdate(Event::EventQueue) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
-    SetGamePosition(m_GamePosition);
+    SetGamePosition({u_Enemy.x, u_Enemy.y});
     m_Animation = std::make_unique<Animation>(
         ToolBoxs::GamePostoPos(m_GamePosition)
     );
@@ -103,7 +102,7 @@ glm::vec2 Enemy::FindNextToPlayer() {
         m_MapData,
         10
     );
-    if (path.empty()) {
+    if (path.empty() || path.size() == 1) {
         return GetGamePosition();
     } else {
         return path[1];
@@ -167,6 +166,9 @@ void Enemy::Update() {
 }
 
 void Enemy::CanMove() {
+    if (m_WillMovePosition == GetGamePosition()) {
+        return;
+    }
     if (m_WillMovePosition == GetPlayerPosition()) {
         AttackPlayer();
         return;

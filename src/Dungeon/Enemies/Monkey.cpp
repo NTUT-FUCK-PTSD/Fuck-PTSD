@@ -45,5 +45,10 @@ Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
     m_MonkeyShadowFrames = m_ShadowFrames;
 }
 
-void Monkey::Move() {}
+void Monkey::Move() {
+    m_WillMovePosition = FindNextToPlayer();
+    auto direction = m_WillMovePosition - GetGamePosition();
+    UpdateAnimationType(direction);
+    CanMove();
+}
 }  // namespace Dungeon::Enemies
