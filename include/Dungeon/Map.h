@@ -13,6 +13,7 @@
 #include "Event/Object.h"
 #include "Game/Player.h"
 #include "Settings/Camera.h"
+#include "Settings/GameElement.h"
 
 namespace Dungeon {
 class Map final : public Object, public Util::GameObject {
@@ -106,6 +107,10 @@ private:
     std::size_t m_TempoIndex = 0;
 
     Event::Remover m_Event;
+
+    std::shared_ptr<GameElement> m_TileHead = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_EnemyHead = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_ItemHead = std::make_shared<GameElement>();
 };
 
 }  // namespace Dungeon

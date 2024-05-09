@@ -34,4 +34,11 @@ EVENTPP_MAKE_EVENT(
     (std::size_t, GetDamage)
 );
 
+EVENTPP_MAKE_EVENT(
+    EnemyRemoveEventArgs,
+    EventArgs,
+    EventType::EnemyRemove,
+    (std::size_t, GetMapIndex)
+);
+
 #endif  // EVENT_ARGS_H

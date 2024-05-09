@@ -19,6 +19,9 @@ Map::Map(
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path);
     m_Available = LoadLevel(levelNum, player);
+    AddChild(m_TileHead);
+    AddChild(m_EnemyHead);
+    AddChild(m_ItemHead);
 
     Dungeon::config::PTR_IMAGE_FULL_HEART_SM = std::make_shared<Util::Image>(
         Dungeon::config::IMAGE_FULL_HEART_SM.data()
@@ -32,7 +35,7 @@ Map::Map(
     auto mapIndex = GamePostion2MapIndex({1, 1});
     auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 9, 0, 0}, m_MapData);
     m_MapData->AddEnemy(mapIndex, enemy);
-    m_Children.push_back(enemy);
+    m_EnemyHead->AddChild(enemy);
 
     InitEvent();
 }
@@ -64,10 +67,6 @@ bool Map::LoadLevel(
 
     LoadTile();
     LoadEnemy();
-    if (m_MiniMap) {
-        m_Camera->RemoveUIChild(m_MiniMap);
-        m_MiniMap.reset();
-    }
     m_MiniMap = std::make_shared<MiniMap>(m_MapData);
     m_Camera->AddUIChild(m_MiniMap);
 
