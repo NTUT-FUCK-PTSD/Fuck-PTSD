@@ -210,7 +210,7 @@ void App::Update() {
 
         // test
         m_MainCharacter
-            ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
+            ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirection);
         m_MainCharacter->Update();
         m_Camera->MoveByTime(200, m_AniCameraDestination);
         m_DungeonMap->PlayerTrigger();
@@ -229,8 +229,8 @@ void App::Update() {
              )) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
-        if (m_PlayerMoveDirect != Player::NONE) {
-            m_PlayerMoveDirect = Player::NONE;
+        if (m_PlayerMoveDirection != Player::NONE) {
+            m_PlayerMoveDirection = Player::NONE;
         }
         const std::vector<Util::Keycode> key = {
           Util::Keycode::W,
@@ -298,7 +298,7 @@ void App::Update() {
                         m_Camera->Shake(100, 10);
                     }
                 } else {
-                    m_PlayerMoveDirect = playerDirection[i];
+                    m_PlayerMoveDirection = playerDirection[i];
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
@@ -312,7 +312,7 @@ void App::Update() {
             }
         }
         m_MainCharacter
-            ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirect);
+            ->MoveByTime(200, m_AniPlayerDestination, m_PlayerMoveDirection);
         m_MainCharacter->Update();
         Event::EventQueue.dispatch(
             m_MainCharacter.get(),

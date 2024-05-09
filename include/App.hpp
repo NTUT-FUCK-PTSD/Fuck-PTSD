@@ -50,7 +50,7 @@ private:
 
     State m_CurrentState = State::START;
 
-    Player::Direction m_PlayerMoveDirect = Player::Direction::NONE;
+    Player::Direction m_PlayerMoveDirection = Player::Direction::NONE;
 
     std::shared_ptr<Player> m_MainCharacter;
 
