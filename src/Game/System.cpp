@@ -16,7 +16,10 @@ void Game::System::AddWeapon(
 
     const auto& object = m_DungeonMap->GetMapData()->GetTile(posMI);
     LOG_INFO("{} {}", posMI, object->m_Filepath);
-    //    baseType->m_Transform.translation = glm::vec2{3, 3};
+    if (!object) {
+        return;
+    }
+    baseType->m_Transform.translation = object->GetTransform().translation;
     baseType->MI = posMI;
     baseType->SetZIndex(100);
     object->AddChild(baseType);
