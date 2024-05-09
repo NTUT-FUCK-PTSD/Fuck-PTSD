@@ -66,10 +66,14 @@ public:
             false,
             100
         );
-        const auto object = std::make_shared<Graphs::DaggerGameObj>();
+        //        const auto object = std::make_shared<Graphs::DaggerGameObj>();
+        const auto object = std::make_shared<Util::GameObject>();
         object->SetDrawable(image);
 
-        System::AddWeapon(object, weaponEndMI);
+        const auto& obj = dungeonMap->GetMapData()->GetTile(weaponEndMI);
+        obj->AddChild(object);
+
+        //        System::AddWeapon(object, weaponEndMI);
     };
 };
 }  // namespace Game
