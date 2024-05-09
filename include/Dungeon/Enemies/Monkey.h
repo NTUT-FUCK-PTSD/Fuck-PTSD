@@ -22,6 +22,7 @@ private:
     const glm::vec2          m_FrameSize = {25, 24};
     std::vector<std::size_t> m_BackFrames;
     std::vector<std::size_t> m_ShadowBackFrames;
+    std::size_t              m_HealthGrapple;
 
     bool m_Back = false;
 };

@@ -24,8 +24,9 @@ Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
             true,
             100
         );
-        InitHealth(4);  // 2 heart
-        SetDamage(0);   // 0 heart
+        InitHealth(4);        // 2 hearts
+        m_HealthGrapple = 8;  // 4 hearts
+        SetDamage(0);         // 0 heart
         SetCoin(1);
         break;
     case 10:
@@ -38,8 +39,9 @@ Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
             true,
             100
         );
-        InitHealth(4);  // 2 heart
-        SetDamage(0);   // 0 heart
+        InitHealth(4);         // 2 hearts
+        m_HealthGrapple = 12;  // 6 hearts
+        SetDamage(0);          // 0 heart
         SetCoin(3);
         break;
     }
@@ -75,10 +77,13 @@ void Monkey::AttackPlayer() {
         Event::EventQueue.dispatch(this, AttackPlayerEventArgs(GetDamage()));
         Event::SetAttackPlayer(false);
         m_Animation->SetAnimationStop();
-        m_Back = true;
-        m_SpriteSheet->SetFrames(
-            GetShadow() ? m_ShadowBackFrames : m_BackFrames
-        );
+        if (!m_Back) {
+            m_Back = true;
+            m_SpriteSheet->SetFrames(
+                GetShadow() ? m_ShadowBackFrames : m_BackFrames
+            );
+            InitHealth(m_HealthGrapple);
+        }
     }
 }
 
