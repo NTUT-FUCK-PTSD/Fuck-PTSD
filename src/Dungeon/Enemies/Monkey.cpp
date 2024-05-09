@@ -1,6 +1,10 @@
 #include "Dungeon/Enemies/Monkey.h"
 
 #include "Dungeon/MapData.h"
+#include "Enemy.h"
+#include "Event/Event.h"
+#include "Event/EventArgs.h"
+#include "Util/Logger.hpp"
 
 namespace Dungeon::Enemies {
 Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
@@ -41,14 +45,58 @@ Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
     }
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
-    m_MonkeyNormalFrames = m_NormalFrames;
-    m_MonkeyShadowFrames = m_ShadowFrames;
 }
 
 void Monkey::Move() {
+    if (m_Back) {
+        OnPlayer();
+        return;
+    }
     m_WillMovePosition = FindNextToPlayer();
     auto direction = m_WillMovePosition - GetGamePosition();
     UpdateAnimationType(direction);
-    CanMove();
+    UpdateProperties(direction);
+    if (!m_Back) {
+        CanMove();
+    }
+}
+
+void Monkey::UpdateProperties(const glm::vec2& direction) {
+    if (direction.x > 0) {
+        SetFace(false);
+    } else if (direction.x < 0) {
+        SetFace(true);
+    }
+    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
+}
+
+void Monkey::AttackPlayer() {
+    if (GetPlayerPosition() == m_WillMovePosition) {
+        Event::EventQueue.dispatch(this, AttackPlayerEventArgs(GetDamage()));
+        Event::SetAttackPlayer(false);
+        m_Animation->SetAnimationStop();
+        m_Back = true;
+        m_SpriteSheet->SetFrames(
+            GetShadow() ? m_ShadowBackFrames : m_BackFrames
+        );
+    }
+}
+
+void Monkey::Update() {
+    Enemy::Update();
+    if (m_Back) {
+        auto player = m_MapData->GetPlayer();
+        m_Transform.translation = player->GetTranslation();
+        SetZIndex(player->GetZIndex() + 0.3125f);
+    }
+}
+
+void Monkey::OnPlayer() {
+    if (GetGamePosition() != GetPlayerPosition()) {
+        Event::EventQueue.dispatch(
+            this,
+            EnemyMoveEventArgs(GamePostion2MapIndex(GetPlayerPosition()))
+        );
+    }
 }
 }  // namespace Dungeon::Enemies

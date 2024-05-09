@@ -71,6 +71,10 @@ glm::vec2 Player::GetGamePosition() const {
     return m_GamePosition;
 }
 
+glm::vec2 Player::GetTranslation() const {
+    return m_Position;
+}
+
 void Player::SetGamePosition(const glm::vec2& gamePosition) {
     m_GamePosition = gamePosition;
     m_Animation->UpdateGamePosition(gamePosition);
@@ -138,6 +142,10 @@ Player::Direction Player::GetFaceTo() const {
 
 Player::Direction Player::GetDirection() const {
     return m_Direction;
+}
+
+float Player::GetZIndex() const {
+    return m_ZIndex;
 }
 
 void Player::gainCoin(std::size_t number) {

@@ -9,15 +9,24 @@
 
 namespace Dungeon {
 void Map::InitEvent() {
-    m_Event.appendListener(
+    Event::EventQueue.appendListener(
         EventType::AttackPlayer,
-        [this](const Object*, const EventArgs&) {
-            if (Event::GetAttackPlayer()) {
-                m_Camera->Shake(100, 10);
-                m_OverlayRed = true;
-                m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
+        eventpp::conditionalFunctor(
+            eventpp::argumentAdapter<
+                void(const Object*, const AttackPlayerEventArgs&)>(
+                [this](const Object*, const AttackPlayerEventArgs& e) {
+                    if (Event::GetAttackPlayer() && e.GetDamage() > 0) {
+                        m_Camera->Shake(100, 10);
+                        m_OverlayRed = true;
+                        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
+                    }
+                }
+            ),
+            [](const Object*, const EventArgs& e) {
+                return dynamic_cast<const AttackPlayerEventArgs*>(&e)
+                       != nullptr;
             }
-        }
+        )
     );
 
     m_Event.appendListener(

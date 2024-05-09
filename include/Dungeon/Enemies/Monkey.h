@@ -11,12 +11,19 @@ public:
 
     void Move() override;
 
+    void AttackPlayer() override;
+
+    void UpdateProperties(const glm::vec2& direction);
+
+    void Update() override;
+
 private:
+    void                     OnPlayer();
     const glm::vec2          m_FrameSize = {25, 24};
     std::vector<std::size_t> m_BackFrames;
     std::vector<std::size_t> m_ShadowBackFrames;
-    std::vector<std::size_t> m_MonkeyNormalFrames;
-    std::vector<std::size_t> m_MonkeyShadowFrames;
+
+    bool m_Back = false;
 };
 }  // namespace Enemies
 }  // namespace Dungeon

@@ -29,9 +29,11 @@ public:
     std::shared_ptr<GameElement> GetGameElement();
     [[nodiscard]]
     glm::vec2                    GetGamePosition() const;
+    glm::vec2                    GetTranslation() const;
     std::shared_ptr<GameElement> GetWindowElement();
     Direction                    GetFaceTo() const;
     Direction                    GetDirection() const;
+    float                        GetZIndex() const;
 
     // set player's settings
     void SetGamePosition(const glm::vec2& position);
