@@ -277,7 +277,7 @@ void App::Update() {
                         m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2
                         );
 
-                        Game::Systems::HEIS::DetectHealth(mapIndex);
+                        // Game::Systems::HEIS::DetectHealth(mapIndex);
 
                         m_Camera->Shake(150, 10);
                     } else if (m_DungeonMap->GetMapData()->IsPositionWall(

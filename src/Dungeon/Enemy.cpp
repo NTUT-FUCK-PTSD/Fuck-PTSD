@@ -38,8 +38,6 @@ Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
         EventType::DrawableUpdate,
         [this](const Object*, const EventArgs&) { Update(); }
     );
-    m_HealthBar = std::make_shared<Util::GameObject>();
-    AddChild(m_HealthBar);
 }
 
 void Enemy::SetShadow(const bool shadow) {
@@ -147,8 +145,12 @@ void Enemy::Struck(const std::size_t damage) {
         m_Health -= damage;
     } else {
         m_Health = 0;
-        LOG_INFO("zero");
-        SetVisible(false);
+    }
+    if (m_Health == 0) {
+        Event::EventQueue.dispatch(
+            this,
+            EnemyRemoveEventArgs(GamePostion2MapIndex(GetGamePosition()))
+        );
     }
 };
 
@@ -251,6 +253,9 @@ float Enemy::Heuristic(const glm::vec2& start, const glm::vec2& end) {
     return m_MapData->Heuristic(start, end);
 }
 void Enemy::InitHealth(const std::size_t health) {
+    RemoveChild(m_HealthBar);
+    m_HealthBar = std::make_shared<Util::GameObject>();
+    AddChild(m_HealthBar);
     m_Health = health;
     InitHealthBarImage(m_Transform.translation);
 }
