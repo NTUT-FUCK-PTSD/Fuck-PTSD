@@ -10,6 +10,7 @@
 #include "Dungeon/Enemy.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
+#include "Game_config.h"
 #include "HPIS.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
@@ -145,10 +146,6 @@ void App::Start() {
 }
 
 void App::Update() {
-    LOG_INFO(Music::Player::GetMusicTime());
-    // LOG_INFO(Util::Time::GetElapsedTimeMs());
-    //    LOG_INFO(1 / Util::Time::GetDeltaTime());
-
     auto musicTime =
         static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
         % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
@@ -160,14 +157,26 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
-        //        m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
-        Game::Systems::HPIS::ThrowOut(Player::Direction::NONE);
-        //        const auto&  m = m_MainCharacter->GetGamePosition();
-        //        const auto&& b = Settings::Helper::GamePosToMapIdx(m +
-        //        glm::vec2{1, 0}); if
-        //        (m_DungeonMap->GetMapData()->IsEnemyEmpty(b)) {
-        //            LOG_INFO(m_DungeonMap->GetMapData()->GetEnemy(b)->GetHealth());
-        //        }
+        Game::Actions::ThrowOutWeapon(
+            m_DungeonMap.get(),
+            Player::Direction::RIGHT
+        );
+        //        const auto pixelSize =
+        //            ToolBoxs::CountImagePixel(Game::Config::IMAGE_DAGGER_PATH,
+        //            1, 2);
+        //        const auto image = std::make_shared<SpriteSheet>(
+        //            Game::Config::IMAGE_DAGGER_PATH,
+        //            pixelSize,
+        //            std::vector<std::size_t>{0, 1},
+        //            false,
+        //            100,
+        //            false,
+        //            100
+        //        );
+        //        const auto object =
+        //        std::make_shared<Game::Graphs::DaggerGameObj>();
+        //        object->SetDrawable(image);
+        //        Game::System::AddWeapon(object, 414);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -197,9 +206,8 @@ void App::Update() {
         m_MainCharacter->PrepareThrowOut(false);
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
-                //                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(),
-                //                elem.second);
-                Game::Systems::HPIS::ThrowOut(elem.second);
+                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
+                //                Game::Systems::HPIS::ThrowOut(elem.second);
             }
         }
         m_ThrowMode = false;
@@ -213,16 +221,7 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode
-             && (Util::Input::IsKeyDown(Util::Keycode::W)
-                 || Util::Input::IsKeyDown(Util::Keycode::D)
-                 || Util::Input::IsKeyDown(Util::Keycode::S)
-                 || Util::Input::IsKeyDown(Util::Keycode::A))
-             && Music::Tempo::IsTempoInRange(
-                 500,
-                 musicTime,
-                 Music::Player::LoopCounter()
-             )) {
+    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {
@@ -232,28 +231,24 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D
-        };
+          Util::Keycode::D};
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT
-        };
+          Player::Direction::RIGHT};
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
@@ -298,12 +293,10 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                    };
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y
-                    };
+                      m_AniCameraDestination.y + aniCameraDirection[i].y};
                 }
             }
         }
@@ -346,4 +339,5 @@ void App::End() {  // NOLINT(this method will mutate members in the future)
 std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::W, Player::Direction::UP},
   {Util::Keycode::D, Player::Direction::RIGHT},
-  {Util::Keycode::S, Player::Direction::DOWN}};
+  {Util::Keycode::S, Player::Direction::DOWN},
+  {Util::Keycode::A, Player::Direction::LEFT}};

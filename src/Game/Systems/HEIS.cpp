@@ -8,6 +8,7 @@
 #include "Helper.hpp"
 
 #include "Dungeon/Enemy.h"
+#include "System.h"
 
 auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
     m_Map = dungeon;
@@ -27,12 +28,11 @@ auto Game::Systems::HEIS::MakeTile(
 ) -> void {
     std::size_t mi = 0;
 
-    auto&& currGP = static_cast<glm::ivec2>(playerGP);
+    auto currGP = static_cast<glm::ivec2>(playerGP);
 
     // is wall
     while (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
         mi = Settings::Helper::GamePosToMapIdx(currGP);
-
 
         if (m_Map->GetMapData()->IsEnemyEmpty(mi)) {
             m_Map->RemoveEnemy(mi);
@@ -58,10 +58,11 @@ auto Game::Systems::HEIS::MakeTile(
         false,
         100
     );
-    const auto object = std::make_shared<Graphs::DaggerGameObj>();
+
+    auto object = std::make_shared<Graphs::DaggerGameObj>();
     object->SetDrawable(image);
 
-    System::AddWeapon(object, mi);
+    System::AddWeapon(std::dynamic_pointer_cast<Graphs::IBase>(object), mi);
 }
 
 Dungeon::Map* Game::Systems::HEIS::m_Map = nullptr;
