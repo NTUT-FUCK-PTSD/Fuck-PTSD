@@ -255,4 +255,21 @@ void Enemy::InitHealth(const std::size_t health) {
     InitHealthBarImage(m_Transform.translation);
 }
 
+std::set<Player::Direction> Enemy::GetRelativeDirection(
+    const glm::vec2& direction
+) {
+    std::set<Player::Direction> relativeDirection;
+    if (direction.x > 0) {
+        relativeDirection.insert(Player::Direction::RIGHT);
+    } else if (direction.x < 0) {
+        relativeDirection.insert(Player::Direction::LEFT);
+    }
+    if (direction.y > 0) {
+        relativeDirection.insert(Player::Direction::DOWN);
+    } else if (direction.y < 0) {
+        relativeDirection.insert(Player::Direction::UP);
+    }
+    return relativeDirection;
+}
+
 }  // namespace Dungeon

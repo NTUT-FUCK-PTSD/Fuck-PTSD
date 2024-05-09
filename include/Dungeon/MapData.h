@@ -74,6 +74,7 @@ public:
     bool IsPositionPlayerAct(const glm::vec2& position) const;
 
     float Heuristic(const glm::vec2& start, const glm::vec2& end);
+    std::shared_ptr<Player> GetPlayer() const;
 
 private:
     static bool EnemyCompare(

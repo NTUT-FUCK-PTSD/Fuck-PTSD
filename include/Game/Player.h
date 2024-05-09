@@ -31,6 +31,7 @@ public:
     glm::vec2                    GetGamePosition() const;
     std::shared_ptr<GameElement> GetWindowElement();
     Direction                    GetFaceTo() const;
+    Direction                    GetDirection() const;
 
     // set player's settings
     void SetGamePosition(const glm::vec2& position);

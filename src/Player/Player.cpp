@@ -136,6 +136,10 @@ Player::Direction Player::GetFaceTo() const {
     return m_BeforeFaceTo;
 }
 
+Player::Direction Player::GetDirection() const {
+    return m_Direction;
+}
+
 void Player::gainCoin(std::size_t number) {
     m_Coin->plusCoinNumber(number);
 }

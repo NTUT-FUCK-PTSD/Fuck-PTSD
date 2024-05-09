@@ -270,4 +270,8 @@ std::shared_ptr<Item> MapData::GetItem(const std::size_t position) const {
 bool MapData::IsItemEmpty(const std::size_t position) const {
     return !m_Items.at(position);
 }
+
+std::shared_ptr<Player> MapData::GetPlayer() const {
+    return m_Player;
+}
 }  // namespace Dungeon

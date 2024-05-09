@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <memory>
+#include <set>
 
 #include "Event/Object.h"
 #include "Util/GameObject.hpp"
@@ -9,6 +10,7 @@
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Elements.h"
 #include "Event/Event.h"
+#include "Game/Player.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
@@ -69,6 +71,10 @@ protected:
     void InitHealthBarImage(const glm::vec2& pixelPos);
 
     virtual void UpdateHeart(const glm::vec2& pixelPos);
+
+    // Get the direction of the enemy relative to the player
+    std::set<Player::Direction> GetRelativeDirection(const glm::vec2& direction
+    );
 
     std::shared_ptr<Util::Image>      m_FullHeart;
     std::shared_ptr<Util::Image>      m_EmptyHeart;

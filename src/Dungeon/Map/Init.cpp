@@ -30,7 +30,7 @@ Map::Map(
 
     // Add enemy testing
     auto mapIndex = GamePostion2MapIndex({1, 1});
-    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 9, 0, 0}, m_MapData);
+    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 11, 0, 0}, m_MapData);
     m_MapData->AddEnemy(mapIndex, enemy);
     m_Children.push_back(enemy);
 
