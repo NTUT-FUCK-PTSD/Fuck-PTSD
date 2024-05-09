@@ -1,7 +1,6 @@
 #include "Dungeon/Enemies/Ghost.h"
 
 #include "Dungeon/MapData.h"
-#include "glm/gtx/dual_quaternion.hpp"
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
