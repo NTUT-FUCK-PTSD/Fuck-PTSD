@@ -172,7 +172,10 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
-        m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+        m_DungeonMap->LoadLevel(
+            m_DungeonMap->GetLevelNum() + 1,
+            m_MainCharacter
+        );
         m_AniCameraDestination = {0, 0};
         m_AniPlayerDestination = {0, 0};
     }
