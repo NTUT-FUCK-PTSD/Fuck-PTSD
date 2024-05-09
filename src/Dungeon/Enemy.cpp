@@ -1,6 +1,7 @@
 #include "Dungeon/Enemy.h"
 
 #include <memory>
+#include <vector>
 
 #include "Dungeon/AStar.h"
 #include "Dungeon/MapData.h"
@@ -9,6 +10,7 @@
 #include "Event/EventArgs.h"
 #include "Settings/ToolBoxs.h"
 #include "UGameElement.h"
+#include "Util/Logger.hpp"
 
 namespace Dungeon {
 
@@ -37,6 +39,8 @@ Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
         EventType::DrawableUpdate,
         [this](const Object*, const EventArgs&) { Update(); }
     );
+    m_HealthBar = std::make_shared<Util::GameObject>();
+    AddChild(m_HealthBar);
 }
 
 void Enemy::SetShadow(const bool shadow) {
@@ -186,7 +190,7 @@ void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
 
     float zindex = 0.01;
     for (std::size_t ii = 0; ii < hp; ii += 2) {
-        const auto& obj = std::make_shared<Util::GameElement>();
+        const auto obj = std::make_shared<Util::GameElement>();
         //        obj->SetDrawable(Dungeon::config::PTR_IMAGE_FULL_HEART_SM);
         obj->SetDrawable(m_FullHeart);
         obj->SetZIndex(99.0f + zindex);
@@ -194,25 +198,28 @@ void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
         obj->SetVisible(false);
         obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 
-        AddChild(obj);
-        m_HeartList.push_back(obj.get());
+        m_HealthBar->AddChild(obj);
 
         zindex = zindex + 0.01;
     }
 }
 
 void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
+    const auto m_HeartList = m_HealthBar->GetChildren();
     const auto numberOfHeart = m_HeartList.size();
+
+    auto setVisible = [&](bool visible) {
+        for (const auto& elem : m_HeartList) {
+            elem->SetVisible(visible);
+        }
+    };
 
     if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false
         || m_IsBeAttacked == false) {
-        [&]() {
-            for (const auto& elem : m_HeartList) {
-                elem->SetVisible(false);
-            }
-        }();
+        setVisible(false);
         return;
     }
+    setVisible(true);
 
     int       startIdx = numberOfHeart * -1 + 1;
     auto      pos = pixelPos + glm::vec2{0.0f, 40.0f};
@@ -220,7 +227,8 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
 
     for (std::size_t ii = 0; ii < numberOfHeart; ii++) {
         x_offset = {startIdx * 18 + pos.x, pos.y};
-        m_HeartList[ii]->SetPosition(x_offset);
+        std::dynamic_pointer_cast<Util::GameElement>(m_HeartList[ii])
+            ->SetPosition(x_offset);
         startIdx += 2;
     }
 

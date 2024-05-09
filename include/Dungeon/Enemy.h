@@ -11,7 +11,6 @@
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
-#include "UGameElement.h"
 
 namespace Dungeon {
 // Abstract class
@@ -70,9 +69,9 @@ protected:
 
     virtual void UpdateHeart(const glm::vec2& pixelPos);
 
-    std::shared_ptr<Util::Image>    m_FullHeart;
-    std::shared_ptr<Util::Image>    m_EmptyHeart;
-    std::vector<Util::GameElement*> m_HeartList;
+    std::shared_ptr<Util::Image>      m_FullHeart;
+    std::shared_ptr<Util::Image>      m_EmptyHeart;
+    std::shared_ptr<Util::GameObject> m_HealthBar;
 
     std::shared_ptr<MapData> m_MapData;
 
