@@ -267,7 +267,6 @@ void App::Update() {
                 // origin mapdata actions
                 playerDestination = m_MainCharacter->GetGamePosition()
                                     + direction[i];
-                m_MainCharacter->SetFaceTo(playerDirection[i]);
                 auto mapIndex = m_DungeonMap->GamePostion2MapIndex(
                     playerDestination
                 );

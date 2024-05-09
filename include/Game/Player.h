@@ -101,7 +101,8 @@ private:
     glm::vec2                    BodySize;
     std::shared_ptr<SpriteSheet> HeadImage;
     std::shared_ptr<SpriteSheet> BodyImage;
-    Direction                    m_FaceTo = Direction::RIGHT;
+    Direction                    m_Direction = Direction::RIGHT;
+    Direction                    m_BeforeFaceTo = Direction::RIGHT;
 
     // game object
     std::shared_ptr<GameElement> m_Body;
