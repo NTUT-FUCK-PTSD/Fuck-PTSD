@@ -1,10 +1,11 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <memory>
+
 #include "Event/Object.h"
 #include "Util/GameObject.hpp"
 
-#include <memory>
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Elements.h"
 #include "Event/Event.h"
