@@ -178,10 +178,6 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
     return true;
 }
 
-void Map::PlayerMove(const glm::vec2& position) {
-    m_MapData->SetPlayerPosition(position);
-}
-
 void Map::AddItem(
     const std::size_t           position,
     const std::shared_ptr<Item> item

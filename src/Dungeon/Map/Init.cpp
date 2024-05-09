@@ -6,6 +6,7 @@
 namespace Dungeon {
 Map::Map(
     const std::shared_ptr<Camera> camera,
+    const std::shared_ptr<Player> player,
     const std::string&            path,
     const std::size_t             levelNum
 )
@@ -16,7 +17,7 @@ Map::Map(
     m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path);
-    m_Available = LoadLevel(levelNum);
+    m_Available = LoadLevel(levelNum, player);
 
     Dungeon::config::PTR_IMAGE_FULL_HEART_SM = std::make_shared<Util::Image>(
         Dungeon::config::IMAGE_FULL_HEART_SM.data()
@@ -39,7 +40,10 @@ Map::~Map() {
     Event::EventQueue.dispatch(this, EventArgs(EventType::ResetMap));
 }
 
-bool Map::LoadLevel(const std::size_t levelNum) {
+bool Map::LoadLevel(
+    const std::size_t             levelNum,
+    const std::shared_ptr<Player> player
+) {
     Event::EventQueue.dispatch(this, EventArgs(EventType::ResetMap));
 
     if (!m_Level->LoadLevel(levelNum)) {
@@ -53,7 +57,8 @@ bool Map::LoadLevel(const std::size_t levelNum) {
     m_MapData = std::make_shared<MapData>(
         m_Level->GetLevelIndexMin(),
         m_Level->GetLevelIndexMax(),
-        m_Size
+        m_Size,
+        player
     );
 
     LoadTile();

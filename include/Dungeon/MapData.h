@@ -1,19 +1,22 @@
 #ifndef MAP_DATA_H
 #define MAP_DATA_H
 
+#include <memory>
 #include <vector>
 
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Item.h"
 #include "Dungeon/Tile.h"
+#include "Game/Player.h"
 
 namespace Dungeon {
 class MapData final {
 public:
     MapData(
-        const glm::vec2& levelIndexMin,
-        const glm::vec2& levelIndexMax,
-        const glm::vec2& size
+        const glm::vec2&              levelIndexMin,
+        const glm::vec2&              levelIndexMax,
+        const glm::vec2&              size,
+        const std::shared_ptr<Player> player
     );
 
     // tile
@@ -49,12 +52,11 @@ public:
     glm::ivec2 GetLevelIndexMax() const;
     glm::ivec2 GetLevelIndexMin() const;
     glm::ivec2 GetSize() const;
-    glm::vec2  GetPlayerPosition();
+    glm::vec2  GetPlayerPosition() const;
 
     void SetLevelIndexMax(const glm::ivec2& levelIndexMax);
     void SetLevelIndexMin(const glm::ivec2& levelIndexMin);
     void SetSize(const glm::ivec2& size);
-    void SetPlayerPosition(const glm::vec2& playerPosition);
 
     std::size_t GamePosition2MapIndex(const glm::ivec2& position) const;
 
@@ -89,7 +91,7 @@ private:
     std::vector<std::shared_ptr<Enemy>> m_EnemyQueue;
     std::vector<std::shared_ptr<Item>>  m_Items;
 
-    glm::vec2 m_PlayerPosition = {0.0f, 0.0f};
+    std::shared_ptr<Player> m_Player;
 };
 }  // namespace Dungeon
 

@@ -113,6 +113,7 @@ void App::Start() {
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
         m_Camera,
+        m_MainCharacter,
         ASSETS_DIR "/dungeon/MY DUNGEON.xml",
         1
     );
@@ -346,4 +347,5 @@ void App::End() {  // NOLINT(this method will mutate members in the future)
 std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::W, Player::Direction::UP},
   {Util::Keycode::D, Player::Direction::RIGHT},
-  {Util::Keycode::S, Player::Direction::DOWN}};
+  {Util::Keycode::S, Player::Direction::DOWN}
+};

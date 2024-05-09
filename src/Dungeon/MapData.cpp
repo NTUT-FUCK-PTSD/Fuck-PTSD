@@ -6,13 +6,15 @@
 
 namespace Dungeon {
 MapData::MapData(
-    const glm::vec2& levelIndexMin,
-    const glm::vec2& levelIndexMax,
-    const glm::vec2& size
+    const glm::vec2&              levelIndexMin,
+    const glm::vec2&              levelIndexMax,
+    const glm::vec2&              size,
+    const std::shared_ptr<Player> player
 )
     : m_LevelIndexMin(levelIndexMin),
       m_LevelIndexMax(levelIndexMax),
-      m_Size(size) {
+      m_Size(size),
+      m_Player(player) {
     m_Tiles.resize(GetSize().x * GetSize().y, nullptr);
     m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
     m_Items.resize(GetSize().x * GetSize().y, nullptr);
@@ -207,7 +209,7 @@ bool MapData::IsPositionTool([[maybe_unused]] const glm::ivec2& position
 }
 
 bool MapData::IsPositionPlayer(const glm::vec2& position) const {
-    return position == m_PlayerPosition;
+    return position == GetPlayerPosition();
 }
 
 bool MapData::IsPositionInteractive(const glm::ivec2& position) const {
@@ -233,12 +235,8 @@ void MapData::SetSize(const glm::ivec2& size) {
     m_Size = size;
 }
 
-glm::vec2 MapData::GetPlayerPosition() {
-    return m_PlayerPosition;
-}
-
-void MapData::SetPlayerPosition(const glm::vec2& playerPosition) {
-    m_PlayerPosition = playerPosition;
+glm::vec2 MapData::GetPlayerPosition() const {
+    return m_Player->GetGamePosition();
 }
 
 std::vector<std::shared_ptr<Tile>> MapData::GetUnsortedTiles() const {

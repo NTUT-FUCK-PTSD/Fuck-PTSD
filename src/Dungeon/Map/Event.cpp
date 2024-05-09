@@ -61,10 +61,7 @@ void Map::InitEvent() {
         EventType::PlayerMove,
         eventpp::conditionalFunctor(
             eventpp::argumentAdapter<void(const Player*, const EventArgs&)>(
-                [this](const Player* sender, const EventArgs&) {
-                    PlayerMove(sender->GetGamePosition());
-                    CameraUpdate();
-                }
+                [this](const Player*, const EventArgs&) { CameraUpdate(); }
             ),
             [](const Object* sender, const EventArgs&) {
                 return dynamic_cast<const Player*>(sender) != nullptr;
