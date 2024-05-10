@@ -1,3 +1,7 @@
+//
+// Created by adven on 2024/5/10.
+//
+
 #include "App.hpp"
 
 #include "Util/Logger.hpp"
@@ -12,6 +16,7 @@
 #include "Dungeon/Enemy.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
+#include "Game/Graphs/Spear.h"
 #include "Game_config.h"
 #include "HPIS.h"
 #include "Helper.hpp"
@@ -21,136 +26,12 @@
 #include "Systems/HEIS.h"
 #include "Systems/HPIS.h"
 
-using namespace tinyxml2;
-
-extern "C" {
-int32_t rusty_extern_c_integer();
-}
-
-// show the start background and listen the keypress
-void App::Start() {
-    LOG_TRACE("Start");
-    if (m_FirstTime) {
-        m_FirstTime = false;
-        // create background
-        m_Background = std::make_shared<Background>();
-        m_Camera->AddChild(m_Background->GetGameElement());
-
-        // play main background music
-        // m_MusicSystem->playMusic(ASSETS_DIR "/music/intro_onlyMusic.ogg",
-        // true);
-        Music::Player::Init();
-        Music::Player::PlayMusic(
-            ASSETS_DIR "/music/intro_onlyMusic.ogg",
-            true,
-            0.5f,
-            1.0f
-        );
-
-        //    m_MusicSystem->skipToTargetTime(118.2f);
-    }
-
-    // Wait any key click
-    if (ToolBoxs::IsAnyKeyPress()) {
-        m_IsMainMenu = false;
-    }
-
-    // m_MusicSystem->Update();
-    m_Camera->Update();
-
-    if (Util::Input::IfExit()) {
-        m_CurrentState = State::END;
-    }
-    if (m_IsMainMenu) {
-        return;
-    }
-    // play lobby music
-    Music::Player::StopMusic();
-    Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
-    Music::Player::SetVolume(0.1f);
-
-    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
-
-    // play zone1 leve1
-    // m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
-    // m_MusicSystem->readTempoFile(ASSETS_DIR "/music/zone1_1.txt");
-
-    // remove background
-    m_Camera->RemoveChild(m_Background->GetGameElement());
-    m_Background.reset();
-
-    // create Player
-    m_MainCharacter = std::make_shared<Player>();
-    m_MainCharacter->SetHeadImage(ASSETS_DIR "/entities/player1_heads.png");
-    m_MainCharacter->SetBodyImage(ASSETS_DIR "/entities/player1_armor_body.png"
-    );
-    Event::EventQueue.appendListener(
-        EventType::AttackPlayer,
-        eventpp::conditionalFunctor(
-            eventpp::argumentAdapter<
-                void(const Object*, const AttackPlayerEventArgs&)>(
-                [this](const Object*, const AttackPlayerEventArgs& e) {
-                    if (Event::GetAttackPlayer()) {
-                        m_MainCharacter->lostHP(e.GetDamage());
-                    }
-                }
-            ),
-            // This lambda is the condition. We use dynamic_cast to check if
-            // the event is desired. This is for demonstration purpose, in
-            // production you may use a better way than dynamic_cast.
-            [](const Object*, const EventArgs& e) {
-                return dynamic_cast<const AttackPlayerEventArgs*>(&e)
-                       != nullptr;
-            }
-        )
-    );
-    Event::EventQueue.appendListener(
-        EventType::ResetMap,
-        [this](const Object*, const EventArgs&) {
-            m_MainCharacter->SetGamePosition({0, 0});
-        }
-    );
-    m_Camera->AddChild(m_MainCharacter->GetGameElement());
-    m_Camera->AddUIChild(m_MainCharacter->GetWindowElement());
-
-    // Test the Dungeon::Map
-    m_DungeonMap = std::make_shared<Dungeon::Map>(
-        m_Camera,
-        ASSETS_DIR "/dungeon/MY DUNGEON.xml",
-        1
-    );
-
-    m_DungeonMap->SetDrawable(std::make_shared<Dungeon::MapHandler>(m_DungeonMap
-    ));
-    m_Camera->AddChild(m_DungeonMap);
-
-    Display::BeatHeart::Init();
-    m_Camera->AddUIChild(Display::BeatHeart::GetGameElement());
-
-    Display::BeatIndicator::Init();
-    m_Camera->AddUIChild(Display::BeatIndicator::GetGameElement());
-
-    // helper
-    Settings::Helper::Init(m_DungeonMap.get());
-
-    // add tools throw system
-    Game::System::Init(m_DungeonMap.get());
-    Game::Systems::HPIS::Init(m_MainCharacter.get());
-    Game::Systems::HEIS::Init(m_DungeonMap.get());
-
-    // Music::Player::PauseMusic(true);
-    // Music::Player::PauseMusic(false);
-    // Music::Tempo::Pause(false);
-    // Display::BeatIndicator::Pause(false);
-    // Display::BeatHeart::Pause(false);
-
-    m_CurrentState = State::UPDATE;
-}
-
 void App::Update() {
     auto musicTime =
         static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
         % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
+
+    m_EventHandler.Update();
 
     if (Music::Tempo::IsSwitch()) {
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
@@ -159,20 +40,23 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
-        /* Game::Actions::ThrowOutWeapon( */
-        /*     m_DungeonMap.get(), */
-        /*     Player::Direction::RIGHT */
-        /* ); */
-        /* std::string imageagePath; */
-        /* auto        t = m_MainCharacter->GetToolMod()->GetAllTools(); */
-        /* std::for_each(t.begin(), t.end(), [imageagePath](const auto& elem) {
-         */
-        /*     if (elem->GetImagePath() != "") { */
-        /*         imageagePath(elem->GetImagePath()); */
-        /*     } */
-        /* }); */
-        /* auto t1 = m_MainCharacter->GetToolMod()->GetTool<IEquip>(3); */
-        /* LOG_INFO(t1->GetImagePath()); */
+        const auto& item = std::make_shared<Game::Graphs::Spear>();
+        const auto& size = Settings::Helper::CountImgPixel(
+            Players::Config::IMAGE_SPEAR.data(),
+            1,
+            2
+        );
+        const auto& item2 = std::make_shared<SpriteSheet>(
+            Players::Config::IMAGE_SPEAR.data(),
+            size,
+            std::vector<std::size_t>{0},
+            false,
+            100,
+            true,
+            100
+        );
+        item->SetDrawable(item2);
+        m_DungeonMap->AddItem(414, item);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -242,28 +126,24 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D
-        };
+          Util::Keycode::D};
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT
-        };
+          Player::Direction::RIGHT};
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-        };
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
@@ -308,12 +188,10 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                    };
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y
-                    };
+                      m_AniCameraDestination.y + aniCameraDirection[i].y};
                 }
             }
         }
@@ -349,13 +227,4 @@ void App::Update() {
     m_Camera->Update();
 }
 
-void App::End() {  // NOLINT(this method will mutate members in the future)
-    LOG_TRACE("End");
-}
-
-std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
-  {Util::Keycode::W, Player::Direction::UP},
-  {Util::Keycode::D, Player::Direction::RIGHT},
-  {Util::Keycode::S, Player::Direction::DOWN},
-  {Util::Keycode::A, Player::Direction::LEFT}
-};
+std::shared_ptr<Dungeon::Map> App::m_DungeonMap = nullptr;

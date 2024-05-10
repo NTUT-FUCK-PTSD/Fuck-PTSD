@@ -11,6 +11,7 @@
 #include "Background.hpp"
 #include "Camera.h"
 #include "Dungeon/Map.h"
+#include "Event/EventHandler.h"
 #include "Player.h"
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
@@ -28,11 +29,13 @@ public:
 
     void Start();
 
+    void BeforeUpdate();
+
     void Update();
 
     void End();  // NOLINT(readability-convert-member-functions-to-static)
 
-    std::string Print(std::string s) { return s; }
+    static std::shared_ptr<Dungeon::Map> m_DungeonMap;
 
 private:
     void ValidTask();
@@ -57,10 +60,8 @@ private:
     std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
 
     glm::vec2 m_CameraPosition = {0, 0};
-
-    std::shared_ptr<Dungeon::Map> m_DungeonMap;
-    std::size_t                   m_BeforeTempoIndex = 0;
-    std::size_t                   m_TempoIndex = 0;
+    
+    Events::EventHandler m_EventHandler;
 
     // addition
     static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
