@@ -5,6 +5,7 @@
 #include "eventpp/utilities/conditionalfunctor.h"
 
 #include <Util/Input.hpp>
+#include <algorithm>
 #include "Actions.h"
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
@@ -158,10 +159,20 @@ void App::Update() {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::T)) {
-        Game::Actions::ThrowOutWeapon(
-            m_DungeonMap.get(),
-            Player::Direction::RIGHT
-        );
+        /* Game::Actions::ThrowOutWeapon( */
+        /*     m_DungeonMap.get(), */
+        /*     Player::Direction::RIGHT */
+        /* ); */
+        /* std::string imageagePath; */
+        /* auto        t = m_MainCharacter->GetToolMod()->GetAllTools(); */
+        /* std::for_each(t.begin(), t.end(), [imageagePath](const auto& elem) {
+         */
+        /*     if (elem->GetImagePath() != "") { */
+        /*         imageagePath(elem->GetImagePath()); */
+        /*     } */
+        /* }); */
+        /* auto t1 = m_MainCharacter->GetToolMod()->GetTool<IEquip>(3); */
+        /* LOG_INFO(t1->GetImagePath()); */
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -191,8 +202,22 @@ void App::Update() {
         m_MainCharacter->PrepareThrowOut(false);
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
-                // LOG_INFO();
-                Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
+                std::string imageagePath = "";
+                auto        t = m_MainCharacter->GetToolMod()->GetAllTools();
+                std::for_each(
+                    t.begin(),
+                    t.end(),
+                    [&imageagePath](const auto& elem) {
+                        if (elem->GetImagePath() != "") {
+                            imageagePath = elem->GetImagePath();
+                        }
+                    }
+                );
+                Game::Actions::ThrowOutWeapon(
+                    m_DungeonMap.get(),
+                    elem.second,
+                    imageagePath
+                );
                 //                Game::Systems::HPIS::ThrowOut(elem.second);
             }
         }
@@ -207,16 +232,7 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode
-             && (Util::Input::IsKeyDown(Util::Keycode::W)
-                 || Util::Input::IsKeyDown(Util::Keycode::D)
-                 || Util::Input::IsKeyDown(Util::Keycode::S)
-                 || Util::Input::IsKeyDown(Util::Keycode::A))
-             && Music::Tempo::IsTempoInRange(
-                 500,
-                 musicTime,
-                 Music::Player::LoopCounter()
-             )) {
+    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {

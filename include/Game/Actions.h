@@ -19,7 +19,8 @@ class Actions {
 public:
     static void ThrowOutWeapon(
         Dungeon::Map*           dungeonMap,
-        const Player::Direction direction
+        const Player::Direction direction,
+        const std::string&      imagePath
     ) {
         LOG_INFO("Throw out.");
 
@@ -55,7 +56,8 @@ public:
         const auto pixelSize =
             ToolBoxs::CountImagePixel(Config::IMAGE_DAGGER_PATH, 1, 2);
         const auto image = std::make_shared<SpriteSheet>(
-            Config::IMAGE_DAGGER_PATH,
+            /* Config::IMAGE_DAGGER_PATH, */
+            imagePath,
             pixelSize,
             std::vector<std::size_t>{0, 1},
             false,
