@@ -40,7 +40,7 @@ void SpriteSheet::SetCurrentFrame(std::size_t index) {
 }
 
 void SpriteSheet::Draw(const Core::Matrices& data) {
-    if (m_Index > m_Frames.size()) {
+    if (m_Index >= m_Frames.size()) {
         m_Index = 0;
     }
     SDL_Rect displayRect{
@@ -112,4 +112,10 @@ void SpriteSheet::SetAlpha(const Uint8 alpha) {
 
 void SpriteSheet::SetColorMod(const SDL_Color& color) {
     m_SpriteSheet->SetColorMod(color);
+}
+
+void SpriteSheet::SetFrames(const std::vector<std::size_t>& frames) {
+    m_Frames = frames;
+    m_Index = 0;
+    m_IsChangeFrame = true;
 }
