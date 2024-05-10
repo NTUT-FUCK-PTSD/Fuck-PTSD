@@ -35,7 +35,7 @@ public:
         const std::string& expectedType
     ) {
         const auto&& result = std::static_pointer_cast<T>(m_ToolList.at(idx));
-        if (result != expectedType) {
+        if (result->GetType() != expectedType) {
             throw std::runtime_error("not expected type");
         }
         return result;

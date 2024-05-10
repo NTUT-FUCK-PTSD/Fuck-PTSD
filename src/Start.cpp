@@ -137,6 +137,8 @@ void App::Start() {
     // Display::BeatIndicator::Pause(false);
     // Display::BeatHeart::Pause(false);
 
+    BeforeUpdate();
+
     m_CurrentState = State::UPDATE;
 }
 
@@ -145,3 +147,12 @@ std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::D, Player::Direction::RIGHT},
   {Util::Keycode::S, Player::Direction::DOWN},
   {Util::Keycode::A, Player::Direction::LEFT}};
+
+std::shared_ptr<Player> App::m_MainCharacter = nullptr;
+bool                    App::m_ThrowMode = false;
+
+glm::vec2 App::m_AniPlayerDestination = {0, 0};
+glm::vec2 App::m_AniCameraDestination = {0, 0};
+
+Player::Direction       App::m_PlayerMoveDirect = Player::Direction::NONE;
+std::shared_ptr<Camera> App::m_Camera = std::make_shared<Camera>();
