@@ -41,8 +41,13 @@ auto musicTime = []() {
 void App::BeforeUpdate() {
     m_EventHandler.AddEvent(
         [this]() {
-            LOG_INFO("aa");
 
+        },
+        Util::Keycode::T
+    );
+
+    m_EventHandler.AddEvent(
+        [this]() {
             if (!m_ThrowMode
                 || !Music::Tempo::IsTempoInRange(
                     500,
@@ -110,8 +115,6 @@ void App::BeforeUpdate() {
 
     m_EventHandler.AddEvent(
         [this]() {
-            LOG_INFO("test");
-
             if (m_ThrowMode
                 || !Music::Tempo::IsTempoInRange(
                     500,
