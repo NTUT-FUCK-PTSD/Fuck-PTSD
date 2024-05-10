@@ -23,6 +23,8 @@ public:
 
     std::string GetType() const override { return "Basic"; }
 
+    std::string GetImagePath() const override {return "";}
+
 private:
     void GenSlot();
     void GenItem();

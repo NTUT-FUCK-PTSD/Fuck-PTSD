@@ -11,7 +11,6 @@
 
 #include "Util/Logger.hpp"
 
-#include <memory>
 #include "Warehouse/Throw.h"
 
 #include "Player_config.h"

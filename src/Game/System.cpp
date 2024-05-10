@@ -21,7 +21,7 @@ void Game::System::AddWeapon(
     }
     baseType->m_Transform.translation = object->GetTransform().translation;
     baseType->MI = posMI;
-    baseType->SetZIndex(100);
+    baseType->SetZIndex(object->GetZIndex() + 0.1f);
     object->AddChild(baseType);
 }
 

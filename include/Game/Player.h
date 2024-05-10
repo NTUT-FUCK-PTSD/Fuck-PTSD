@@ -5,7 +5,6 @@
 #ifndef FUCK_PTSD_PLAYER_H
 #define FUCK_PTSD_PLAYER_H
 
-#include <memory>
 #include "Animation.h"
 #include "Event/Object.h"
 #include "Game/Warehouse/Coin.h"

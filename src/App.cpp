@@ -1,5 +1,6 @@
 #include "App.hpp"
 
+#include "Util/Logger.hpp"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
 
@@ -190,6 +191,7 @@ void App::Update() {
         m_MainCharacter->PrepareThrowOut(false);
         for (const auto& elem : m_MapTableCodeDire) {
             if (Util::Input::IsKeyDown(elem.first)) {
+                // LOG_INFO();
                 Game::Actions::ThrowOutWeapon(m_DungeonMap.get(), elem.second);
                 //                Game::Systems::HPIS::ThrowOut(elem.second);
             }
@@ -205,7 +207,16 @@ void App::Update() {
     }
 
     // player move
-    else if (!m_ThrowMode && (Util::Input::IsKeyDown(Util::Keycode::W) || Util::Input::IsKeyDown(Util::Keycode::D) || Util::Input::IsKeyDown(Util::Keycode::S) || Util::Input::IsKeyDown(Util::Keycode::A)) && Music::Tempo::IsTempoInRange(500, musicTime, Music::Player::LoopCounter())) {
+    else if (!m_ThrowMode
+             && (Util::Input::IsKeyDown(Util::Keycode::W)
+                 || Util::Input::IsKeyDown(Util::Keycode::D)
+                 || Util::Input::IsKeyDown(Util::Keycode::S)
+                 || Util::Input::IsKeyDown(Util::Keycode::A))
+             && Music::Tempo::IsTempoInRange(
+                 500,
+                 musicTime,
+                 Music::Player::LoopCounter()
+             )) {
         glm::vec2 playerDestination = m_MainCharacter->GetGamePosition();
 
         if (m_PlayerMoveDirect != Player::NONE) {

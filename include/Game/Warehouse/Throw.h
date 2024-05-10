@@ -34,6 +34,11 @@ public:
         return "Spear";
     }
 
+    [[nodiscard]]
+    std::string GetImagePath() const override {
+        return "";
+    }
+
 private:
     std::string m_ItemImg;
     void        InitSlot();

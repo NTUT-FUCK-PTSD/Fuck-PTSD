@@ -21,6 +21,10 @@ void Spear::SetPosition(const glm::vec2& Position) {
     list[1]->m_Transform.translation = Position + glm::vec2{0, 0.4};
 }
 
+//std::string Spear::GetImagePath() const {
+//    return Players::Config::IMAGE_SPEAR.data();
+//}
+
 void Spear::GenItem() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& size = Settings::Helper::CountImgPixel(

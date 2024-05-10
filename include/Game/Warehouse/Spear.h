@@ -28,6 +28,12 @@ public:
         return "Spear";
     }
 
+    [[nodiscard]]
+    std::string GetImagePath() const override {
+        return ASSETS_DIR
+            "/items/weapon_spear.png";
+    }
+
 private:
     void GenSlot();
     void GenItem();

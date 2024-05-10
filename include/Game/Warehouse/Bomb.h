@@ -30,6 +30,11 @@ public:
         return "1";
     }
 
+    [[nodiscard]]
+    std::string GetImagePath() const override {
+        return "";
+    }
+
 private:
     void GenSlot();
     void GenItem();

@@ -9,6 +9,7 @@
 #include "SpriteSheet.hpp"
 #include "UGameElement.h"
 #include "Util/SpriteSheet.hpp"
+#include "Warehouse/Dagger.h"
 
 Dagger::Dagger() {
     GenItem();
@@ -24,6 +25,10 @@ void Dagger::SetPosition(const glm::vec2& Position) {
     list[0]->m_Transform.translation = Position + glm::vec2{0, -5};
     list[1]->m_Transform.translation = Position + glm::vec2{0, 0.4};
 }
+
+//std::string Dagger::GetImagePath() const {
+//    return Players::Config::IMAGE_DAGGER.data();
+//}
 
 void Dagger::GenItem() {
     const auto& obj = std::make_shared<Util::GameElement>();
