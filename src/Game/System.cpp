@@ -16,7 +16,6 @@ void Game::System::AddWeapon(
     m_IBaseList.push_back(baseType);
 
     const auto& object = m_DungeonMap->GetMapData()->GetTile(posMI);
-    LOG_INFO("{}", posMI);
     if (!object) {
         return;
     }
@@ -37,15 +36,6 @@ void Game::System::AddWeapon(
     itemType->SetZIndex(obj->GetZIndex() + 0.1f);
 
     m_DungeonMap->AddItem(posMI, std::move(itemType));
-    LOG_INFO("{}", posMI);
-    //    if (!object) {
-    //        return;
-    //    }
-    //
-    //    baseType->m_Transform.translation =
-    //    object->GetTransform().translation; baseType->MI = posMI;
-    //    baseType->SetZIndex(object->GetZIndex() + 0.1f);
-    //    object->AddChild(baseType);
 }
 
 void Game::System::Update() {

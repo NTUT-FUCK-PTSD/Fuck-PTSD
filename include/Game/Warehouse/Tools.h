@@ -27,6 +27,12 @@ public:
 
     void RemoveTool(const std::string& name, const std::string& type);
 
+    void DisappearTool(
+        bool               visiable,
+        const std::string& name,
+        const std::string& type
+    );
+
     std::string Print() { return "test"; }
 
     template <typename T>
@@ -56,6 +62,9 @@ private:
     std::shared_ptr<Util::GameElement> m_GameElement;
 
     std::vector<std::shared_ptr<IEquip>> m_ToolList;
+
+    std::map<std::string, std::string>   m_BufferBase;
+    std::vector<std::shared_ptr<IEquip>> m_BufferList;
 
     std::shared_ptr<Players::Items::ToolFactory> m_ToolFactory;
 
