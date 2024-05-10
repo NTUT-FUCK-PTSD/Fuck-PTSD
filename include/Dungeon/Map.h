@@ -96,7 +96,6 @@ private:
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;
 
-    bool          m_TempoAttack = false;
     bool          m_OverlayRed = false;
     unsigned long m_OverlayRedTime = 0;
 

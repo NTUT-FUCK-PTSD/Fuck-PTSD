@@ -32,8 +32,12 @@ Map::Map(
     );
 
     // Add enemy testing
-    auto mapIndex = GamePostion2MapIndex({1, 1});
-    auto enemy = EnemyFactory::CreateEnemy(s_Enemy{1, 1, 9, 0, 0}, m_MapData);
+    auto gamePos = glm::ivec2(2, 2);
+    auto mapIndex = GamePostion2MapIndex(gamePos);
+    auto enemy = EnemyFactory::CreateEnemy(
+        s_Enemy{gamePos.x, gamePos.y, 10, 0, 0},
+        m_MapData
+    );
     m_MapData->AddEnemy(mapIndex, enemy);
     m_EnemyHead->AddChild(enemy);
 
