@@ -4,7 +4,6 @@
 #include "Enemy.h"
 #include "Event/Event.h"
 #include "Event/EventArgs.h"
-#include "Util/Logger.hpp"
 
 namespace Dungeon::Enemies {
 Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
@@ -76,7 +75,6 @@ void Monkey::AttackPlayer() {
     if (GetPlayerPosition() == m_WillMovePosition) {
         Event::EventQueue.dispatch(this, AttackPlayerEventArgs(GetDamage()));
         Event::SetAttackPlayer(false);
-        m_Animation->SetAnimationStop();
         if (!m_Back) {
             m_Back = true;
             m_SpriteSheet->SetFrames(
@@ -89,7 +87,7 @@ void Monkey::AttackPlayer() {
 
 void Monkey::Update() {
     Enemy::Update();
-    if (m_Back) {
+    if (m_Back && !m_Animation->IsAnimating()) {
         auto player = m_MapData->GetPlayer();
         m_Transform.translation = player->GetTranslation();
         SetZIndex(player->GetZIndex() + 0.3125f);
