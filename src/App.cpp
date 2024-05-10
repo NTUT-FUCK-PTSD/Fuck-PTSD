@@ -1,5 +1,6 @@
 #include "App.hpp"
 
+#include "Util/Logger.hpp"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
 
@@ -259,54 +260,66 @@ void App::Update() {
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
         };
 
-        for (std::size_t i = 0; i < 4; i++) {
-            if (Util::Input::IsKeyDown(key[i])
-                && m_DungeonMap->GetMapData()->IsPositionPlayerAct(
-                    m_MainCharacter->GetGamePosition() + direction[i]
-                )) {
-                // origin mapdata actions
-                playerDestination = m_MainCharacter->GetGamePosition()
-                                    + direction[i];
-                auto mapIndex = m_DungeonMap->GamePostion2MapIndex(
-                    playerDestination
-                );
-                if (m_DungeonMap->GetMapData()->IsPositionInteractive(
-                        playerDestination
+        auto mapIndex = m_DungeonMap->GamePostion2MapIndex(playerDestination);
+        if (m_DungeonMap->GetMapData()->IsEnemyEmpty(mapIndex)) {
+            m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2);
+            m_Camera->Shake(150, 10);
+            m_PlayerMoveDirection = Player::UP;
+
+        } else {
+            for (std::size_t i = 0; i < 4; i++) {
+                if (Util::Input::IsKeyDown(key[i])
+                    && m_DungeonMap->GetMapData()->IsPositionPlayerAct(
+                        m_MainCharacter->GetGamePosition() + direction[i]
                     )) {
-                    if (m_DungeonMap->GetMapData()->IsEnemyEmpty(mapIndex)) {
-                        m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2
-                        );
+                    // origin mapdata actions
+                    playerDestination = m_MainCharacter->GetGamePosition()
+                                        + direction[i];
+                    auto mapIndex = m_DungeonMap->GamePostion2MapIndex(
+                        playerDestination
+                    );
+                    if (m_DungeonMap->GetMapData()->IsPositionInteractive(
+                            playerDestination
+                        )) {
+                        if (m_DungeonMap->GetMapData()->IsEnemyEmpty(mapIndex
+                            )) {
+                            m_DungeonMap->GetMapData()
+                                ->GetEnemy(mapIndex)
+                                ->Struck(2);
 
-                        // Game::Systems::HEIS::DetectHealth(mapIndex);
+                            // Game::Systems::HEIS::DetectHealth(mapIndex);
 
-                        m_Camera->Shake(150, 10);
-                    } else if (m_DungeonMap->GetMapData()->IsPositionWall(
-                                   playerDestination
-                               )) {
-                        m_DungeonMap->RemoveWall(
-                            m_DungeonMap->GamePostion2MapIndex(playerDestination
-                            )
-                        );
-                    } else if (m_DungeonMap->GetMapData()->IsPositionDoor(
-                                   playerDestination
-                               )) {
-                        m_DungeonMap->OpenDoor(
-                            m_DungeonMap->GamePostion2MapIndex(playerDestination
-                            )
-                        );
-                        m_Camera->Shake(100, 10);
+                            m_Camera->Shake(150, 10);
+                        } else if (m_DungeonMap->GetMapData()->IsPositionWall(
+                                       playerDestination
+                                   )) {
+                            m_DungeonMap->RemoveWall(
+                                m_DungeonMap->GamePostion2MapIndex(
+                                    playerDestination
+                                )
+                            );
+                        } else if (m_DungeonMap->GetMapData()->IsPositionDoor(
+                                       playerDestination
+                                   )) {
+                            m_DungeonMap->OpenDoor(
+                                m_DungeonMap->GamePostion2MapIndex(
+                                    playerDestination
+                                )
+                            );
+                            m_Camera->Shake(100, 10);
+                        }
+                    } else {
+                        m_PlayerMoveDirection = playerDirection[i];
+
+                        m_AniPlayerDestination = {
+                          m_AniPlayerDestination.x + aniPlayerDirection[i].x,
+                          m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                        };
+                        m_AniCameraDestination = {
+                          m_AniCameraDestination.x + aniCameraDirection[i].x,
+                          m_AniCameraDestination.y + aniCameraDirection[i].y
+                        };
                     }
-                } else {
-                    m_PlayerMoveDirection = playerDirection[i];
-
-                    m_AniPlayerDestination = {
-                      m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                    };
-                    m_AniCameraDestination = {
-                      m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y
-                    };
                 }
             }
         }
