@@ -23,7 +23,7 @@ Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
             true,
             100
         );
-        InitHealth(4);        // 2 hearts
+        InitHealth(2);        // 1 heart
         m_HealthGrapple = 8;  // 4 hearts
         SetDamage(0);         // 0 heart
         SetCoin(1);
@@ -46,6 +46,7 @@ Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
     }
     m_Drawable = m_SpriteSheet;
     m_WillMovePosition = GetGamePosition();
+    m_KnockbackAble = true;
 }
 
 void Monkey::Move() {
@@ -80,7 +81,12 @@ void Monkey::AttackPlayer() {
             m_SpriteSheet->SetFrames(
                 GetShadow() ? m_ShadowBackFrames : m_BackFrames
             );
+            auto deltaHealth = GetMaxHealth() - GetHealth();
             InitHealth(m_HealthGrapple);
+            ChangeHealthBar(GetHealth() - deltaHealth);
+
+            m_KnockbackAble = false;
+            OnPlayer();
         }
     }
 }
