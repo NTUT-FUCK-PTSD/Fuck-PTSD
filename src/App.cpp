@@ -161,22 +161,6 @@ void App::Update() {
             m_DungeonMap.get(),
             Player::Direction::RIGHT
         );
-        //        const auto pixelSize =
-        //            ToolBoxs::CountImagePixel(Game::Config::IMAGE_DAGGER_PATH,
-        //            1, 2);
-        //        const auto image = std::make_shared<SpriteSheet>(
-        //            Game::Config::IMAGE_DAGGER_PATH,
-        //            pixelSize,
-        //            std::vector<std::size_t>{0, 1},
-        //            false,
-        //            100,
-        //            false,
-        //            100
-        //        );
-        //        const auto object =
-        //        std::make_shared<Game::Graphs::DaggerGameObj>();
-        //        object->SetDrawable(image);
-        //        Game::System::AddWeapon(object, 414);
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::N)) {
@@ -231,24 +215,28 @@ void App::Update() {
           Util::Keycode::W,
           Util::Keycode::A,
           Util::Keycode::S,
-          Util::Keycode::D};
+          Util::Keycode::D
+        };
         const std::vector<glm::vec2> direction =
             {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
         const std::vector<Player::Direction> playerDirection = {
           Player::Direction::UP,
           Player::Direction::LEFT,
           Player::Direction::DOWN,
-          Player::Direction::RIGHT};
+          Player::Direction::RIGHT
+        };
         const std::vector<glm::vec2> aniPlayerDirection = {
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+          {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+        };
         const std::vector<glm::vec2> aniCameraDirection = {
           {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
           {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
           {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+          {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+        };
 
         for (std::size_t i = 0; i < 4; i++) {
             if (Util::Input::IsKeyDown(key[i])
@@ -293,10 +281,12 @@ void App::Update() {
 
                     m_AniPlayerDestination = {
                       m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                      m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                      m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                    };
                     m_AniCameraDestination = {
                       m_AniCameraDestination.x + aniCameraDirection[i].x,
-                      m_AniCameraDestination.y + aniCameraDirection[i].y};
+                      m_AniCameraDestination.y + aniCameraDirection[i].y
+                    };
                 }
             }
         }
@@ -340,4 +330,5 @@ std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::W, Player::Direction::UP},
   {Util::Keycode::D, Player::Direction::RIGHT},
   {Util::Keycode::S, Player::Direction::DOWN},
-  {Util::Keycode::A, Player::Direction::LEFT}};
+  {Util::Keycode::A, Player::Direction::LEFT}
+};

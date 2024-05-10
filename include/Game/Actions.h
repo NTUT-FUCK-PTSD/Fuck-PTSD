@@ -35,25 +35,22 @@ public:
         auto        weaponNextPos = static_cast<glm::ivec2>(playerGP);
 
         weaponEndMI = Settings::Helper::GamePosToMapIdx(playerGP);
-        LOG_INFO(weaponEndMI);
-        //        LOG_INFO(weaponEndMI);
         // looking for wall to stop flying weapon
-        //        while (true) {
-        //            weaponEndMI =
-        //            Settings::Helper::GamePosToMapIdx(weaponNextPos); if
-        //            (dungeonMap->GetMapData()->IsPositionWall(
-        //                    weaponNextPos + direMI
-        //                )) {
-        //                break;
-        //            }
-        //
-        //            // DOTO:
-        //            if (mapdata->IsEnemyEmpty(weaponEndMI)) {
-        //                dungeonMap->RemoveEnemy(weaponEndMI);
-        //            };
-        //
-        //            weaponNextPos += direMI;
-        //        }
+        while (true) {
+            weaponEndMI = Settings::Helper::GamePosToMapIdx(weaponNextPos);
+            if (dungeonMap->GetMapData()->IsPositionWall(
+                    weaponNextPos + direMI
+                )) {
+                break;
+            }
+
+            // DOTO:
+            if (mapdata->IsEnemyEmpty(weaponEndMI)) {
+                dungeonMap->RemoveEnemy(weaponEndMI);
+            };
+
+            weaponNextPos += direMI;
+        }
 
         const auto pixelSize =
             ToolBoxs::CountImagePixel(Config::IMAGE_DAGGER_PATH, 1, 2);

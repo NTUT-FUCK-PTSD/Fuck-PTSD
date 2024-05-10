@@ -15,7 +15,7 @@ void Game::System::AddWeapon(
     m_IBaseList.push_back(baseType);
 
     const auto& object = m_DungeonMap->GetMapData()->GetTile(posMI);
-    LOG_INFO("{} {}", posMI, object->m_Filepath);
+    /* LOG_INFO("{} {}", posMI, object->m_Filepath); */
     if (!object) {
         return;
     }
