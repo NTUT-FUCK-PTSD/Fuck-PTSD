@@ -62,12 +62,14 @@ void App::Start() {
     if (m_IsMainMenu) {
         return;
     }
-    // play lobby music
-    Music::Player::StopMusic();
-    Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
-    Music::Player::SetVolume(0.1f);
+    auto dungeonMusicLoad = [&]() {
+        // play lobby music
+        Music::Player::StopMusic();
+        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
+        Music::Player::SetVolume(0.1f);
 
-    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
+        Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
+    };
 
     // play zone1 leve1
     // m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
@@ -122,6 +124,8 @@ void App::Start() {
     m_DungeonMap->SetDrawable(std::make_shared<Dungeon::MapHandler>(m_DungeonMap
     ));
     m_Camera->AddChild(m_DungeonMap);
+
+    dungeonMusicLoad();
 
     Display::BeatHeart::Init();
     m_Camera->AddUIChild(Display::BeatHeart::GetGameElement());
@@ -272,6 +276,7 @@ void App::Update() {
                     && m_DungeonMap->GetMapData()->IsPositionPlayerAct(
                         m_MainCharacter->GetGamePosition() + direction[i]
                     )) {
+                    m_MainCharacter->SetFaceTo(playerDirection[i]);
                     // origin mapdata actions
                     playerDestination = m_MainCharacter->GetGamePosition()
                                         + direction[i];
