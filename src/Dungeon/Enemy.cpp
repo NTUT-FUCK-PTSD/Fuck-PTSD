@@ -140,6 +140,12 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
 }
 
 void Enemy::Struck(const std::size_t damage) {
+    if (m_KnockbackAble) {
+        auto delta = GetGamePosition() - GetPlayerPosition();
+        m_WillMovePosition = GetGamePosition() + delta;
+        m_AnimationType = 4;
+        CanMove();
+    }
     m_IsBeAttacked = true;
     if (m_Health >= damage) {
         m_Health -= damage;
@@ -260,7 +266,7 @@ void Enemy::InitHealth(const std::size_t health) {
     InitHealthBarImage(m_Transform.translation);
 }
 
-std::set<Player::Direction> Enemy::GetRelativeDirection(
+std::set<Player::Direction> Enemy::GetRelativeDirectionSet(
     const glm::vec2& direction
 ) {
     std::set<Player::Direction> relativeDirection;
@@ -275,6 +281,11 @@ std::set<Player::Direction> Enemy::GetRelativeDirection(
         relativeDirection.insert(Player::Direction::UP);
     }
     return relativeDirection;
+}
+
+void Enemy::ChangeHealthBar(const std::size_t health) {
+    m_Health = health;
+    UpdateHeart(m_Transform.translation);
 }
 
 }  // namespace Dungeon

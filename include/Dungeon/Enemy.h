@@ -43,6 +43,9 @@ public:
     bool             GetShadow() const { return m_Shadow; }
     std::size_t      GetDamage() const { return m_Damage; }
     std::size_t      GetHealth() const { return m_Health; }
+    std::size_t      GetMaxHealth() const {
+        return 2 * m_HealthBar->GetChildren().size();
+    }
     std::size_t      GetCoin() const { return m_Coin; }
     const glm::vec2& GetWillMovePosition() const { return m_WillMovePosition; }
     bool             GetVisible() const { return m_Visible; }
@@ -72,8 +75,11 @@ protected:
 
     virtual void UpdateHeart(const glm::vec2& pixelPos);
 
-    // Get the direction of the enemy relative to the player
-    std::set<Player::Direction> GetRelativeDirection(const glm::vec2& direction
+    void ChangeHealthBar(const std::size_t health);
+
+    // Return the set of directions that the enemy can move to
+    std::set<Player::Direction> GetRelativeDirectionSet(
+        const glm::vec2& direction
     );
 
     std::shared_ptr<Util::Image>      m_FullHeart;
@@ -90,6 +96,7 @@ protected:
     std::unique_ptr<Animation> m_Animation;
 
     std::size_t m_AnimationType = 0;
+    bool        m_KnockbackAble = false;
 
 private:
     glm::vec2 m_GamePosition;

@@ -49,7 +49,7 @@ void Ghost::Struck(const std::size_t damage) {
     Enemy::Struck(damage);
 }
 void Ghost::Move() {
-    auto relativeDirectionSet = GetRelativeDirection(
+    auto relativeDirectionSet = GetRelativeDirectionSet(
         GetGamePosition() - GetPlayerPosition()
     );
     if (relativeDirectionSet.count(m_MapData->GetPlayer()->GetDirection())) {
