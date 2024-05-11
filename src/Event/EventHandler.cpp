@@ -5,21 +5,15 @@
 #include "Event/EventHandler.h"
 
 static auto JudgeANDFunc = [](const std::vector<Util::Keycode>& keycode) {
-    for (auto i : keycode) {
-        if (!Util::Input::IsKeyDown(i)) {
-            return false;
-        }
-    }
-    return true;
+    return std::all_of(keycode.begin(), keycode.end(), [](const auto& item) {
+        return Util::Input::IsKeyDown(item);
+    });
 };
 
 static auto JudgeORFunc = [](const std::vector<Util::Keycode>& keycode) {
-    for (auto i : keycode) {
-        if (Util::Input::IsKeyDown(i)) {
-            return true;
-        }
-    }
-    return false;
+    return std::any_of(keycode.begin(), keycode.end(), [](const auto& item) {
+        return Util::Input::IsKeyDown(item);
+    });
 };
 
 namespace Events {

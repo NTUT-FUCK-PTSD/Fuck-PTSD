@@ -32,57 +32,10 @@ public:
 
     void Update();
 
-    //    void Update() {
-    //        std::for_each(
-    //            m_ListenEvent.begin(),
-    //            m_ListenEvent.end(),
-    //            [](const auto& elem) {
-    //                if (elem.first.size() == 1
-    //                    && Util::Input::IsKeyDown(elem.first[0])) {
-    //                    elem.second();
-    //                } else {
-    //                    bool cond = true;
-    //                    for (std::size_t i = 0; i < elem.first.size(); i++) {
-    //                        if (!Util::Input::IsKeyDown(elem.first[i])) {
-    //                            cond = false;
-    //                        }
-    //                    }
-    //
-    //                    if (cond) {
-    //                        elem.second();
-    //                    }
-    //                }
-    //            }
-    //        );
-    //
-    //        std::for_each(
-    //            m_ListenEventOr.begin(),
-    //            m_ListenEventOr.end(),
-    //            [](const auto& elem) {
-    //                if (elem.first.size() == 1
-    //                    && Util::Input::IsKeyDown(elem.first[0])) {
-    //                    elem.second();
-    //                } else {
-    //                    bool cond = false;
-    //                    for (std::size_t i = 0; i < elem.first.size(); i++) {
-    //                        if (Util::Input::IsKeyDown(elem.first[i])) {
-    //                            cond = true;
-    //                        }
-    //                    }
-    //
-    //                    if (cond) {
-    //                        elem.second();
-    //                    }
-    //                }
-    //            }
-    //        );
-    //    }
-
     void AddEvent(
         const std::function<void()>& fptr,
         std::vector<Util::Keycode>   code
     ) {
-        m_ListenEvent.insert({code, fptr});
         m_EventList.insert({code, TC{Comb::AND, fptr}});
     };
 
@@ -91,16 +44,8 @@ public:
         const std::vector<typename std::common_type<Args...>::type>&& vec = {
           args...};
 
-        m_ListenEventOr.insert({vec, fptr});
         m_EventList.insert({vec, TC{Comb::OR, fptr}});
     };
-
-    std::map<std::vector<Util::Keycode>, std::function<void()>> m_ListenEvent =
-        {};
-
-    std::multimap<std::vector<Util::Keycode>, std::function<void()>>
-        m_ListenEventOr = {};
-
     std::multimap<std::vector<Util::Keycode>, TC> m_EventList = {};
 };
 }  // namespace Events
