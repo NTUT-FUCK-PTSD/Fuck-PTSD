@@ -15,10 +15,12 @@
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 #include "Game/Systems/HandItem.h"
+#include "Hash.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "Systems/HEIS.h"
+#include "Systems/HPMA.h"
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -103,26 +105,24 @@ void App::ClickEvent() {
                     if (!Util::Input::IsKeyDown(elem.first)) {
                         return;
                     }
-                    const auto& imagePath = m_MainCharacter->GetToolMod()->GetWeapon()->GetImagePath();
+                    const auto& imagePath = m_MainCharacter->GetToolMod()
+                                                ->GetWeapon()
+                                                ->GetImagePath();
 
-                    if (m_MainCharacter->GetToolMod()->GetWeapon()->GetType() == "Dagger") {
-                        Game::Actions::ThrowOutWeapon<Game::Graphs::Dagger>(
-                            m_DungeonMap.get(),
-                            elem.second,
-                            imagePath
-                        );
-                    } else if (m_MainCharacter->GetToolMod()->GetWeapon()->GetType() == "Spear") {
-                        Game::Actions::ThrowOutWeapon<Game::Graphs::Spear>(
-                            m_DungeonMap.get(),
-                            elem.second,
-                            imagePath
-                        );
-                    }
+                    Game::Systems::HPMA hpma(m_DungeonMap.get());
+                    hpma.Dispatch(
+                        m_MainCharacter->GetToolMod()->GetWeapon()->GetType(),
+                        elem.second,
+                        imagePath
+                    );
                 }
             );
 
-            m_MainCharacter->GetToolMod()
-                ->DisappearTool(false, "WEAPON", m_MainCharacter->GetToolMod()->GetWeapon()->GetType());
+            m_MainCharacter->GetToolMod()->DisappearTool(
+                false,
+                "WEAPON",
+                m_MainCharacter->GetToolMod()->GetWeapon()->GetType()
+            );
 
             m_ThrowMode = false;
             m_MainCharacter
