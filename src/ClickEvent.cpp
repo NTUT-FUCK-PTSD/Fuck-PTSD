@@ -43,6 +43,9 @@ void App::ClickEvent() {
       ASSETS_DIR "/music/zone1_2.txt",
       ASSETS_DIR "/music/zone1_3.txt"};
 
+    /**
+     * @details Use to test functional.
+     */
     m_EventHandler.AddEvent(
         [this]() {
             const auto [b, a] = Settings::Helper::GetPlayerPosDM();
@@ -52,6 +55,9 @@ void App::ClickEvent() {
         Util::Keycode::T
     );
 
+    /**
+     * @details When the player move, detect how to hand item if exist.
+     */
     m_EventHandler.AddEvent(
         [this]() {
             const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
@@ -87,6 +93,9 @@ void App::ClickEvent() {
         Util::Keycode::A
     );
 
+    /**
+     * @details The Player throw out the weapon.
+     */
     m_EventHandler.AddEvent(
         [this]() {
             if (!m_ThrowMode
@@ -137,6 +146,9 @@ void App::ClickEvent() {
         Util::Keycode::A
     );
 
+    /**
+     * @details Prepare to throw out weapon.
+     */
     m_EventHandler.AddEvent(
         []() {
             LOG_INFO("Throw Mode");
@@ -160,11 +172,17 @@ void App::ClickEvent() {
         Util::Keycode::N
     );
 
+    /**
+     * @details Exit the Game
+     */
     m_EventHandler.AddEvent(
         [this]() { m_CurrentState = State::END; },
         Util::Keycode::ESCAPE
     );
 
+    /**
+     * @details Move the player
+     */
     m_EventHandler.AddEvent(
         [this]() {
             if (m_ThrowMode
