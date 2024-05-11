@@ -46,6 +46,7 @@ public:
 
         m_EventList.insert({vec, TC{Comb::OR, fptr}});
     };
+
     std::multimap<std::vector<Util::Keycode>, TC> m_EventList = {};
 };
 }  // namespace Events
