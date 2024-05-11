@@ -3,6 +3,7 @@
 //
 
 #include "Game/Systems/HandItem.h"
+#include "Game/Graphs/Coin.h"
 #include "Game/Warehouse/Food_1.h"
 #include "Game/Warehouse/Food_2.h"
 
@@ -28,6 +29,7 @@ void HandItem::DispatchByMI(
     case "Dagger"_hash: fptr = [this](std::size_t pos) { Dagger(pos); }; break;
     case "Food_1"_hash: Food_1(nextPos); break;
     case "Food_2"_hash: Food_2(nextPos); break;
+    case "Coin"_hash: Coin(nextPos); break;
     default: throw std::runtime_error("Can not Hand Item.");
     }
 
@@ -74,6 +76,16 @@ void HandItem::Food_2(std::size_t nextPos) {
     m_DungeonMap->RemoveItem(nextPos);
     const auto& obj = std::make_shared<Game::Warehouse::Food_2>();
     m_MainCharacter->GetToolMod()->AddTool(obj, obj->GetName(), obj->GetType());
+}
+
+void HandItem::Coin(std::size_t nextPos) {
+    const auto& coinNumber = std::static_pointer_cast<Game::Graphs::Coin>(
+                                 m_DungeonMap->GetMapData()->GetItem(nextPos)
+    )
+                                 ->GetNumber();
+
+    m_DungeonMap->RemoveItem(nextPos);
+    m_MainCharacter->gainCoin(coinNumber);
 }
 
 }  // namespace Game::Systems

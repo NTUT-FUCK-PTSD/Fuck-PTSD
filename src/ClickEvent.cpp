@@ -49,7 +49,6 @@ void App::ClickEvent() {
     m_EventHandler.AddEvent(
         [this]() {
             const auto [b, a] = Settings::Helper::GetPlayerPosDM();
-
             LOG_INFO(a);
         },
         Util::Keycode::T
@@ -158,6 +157,9 @@ void App::ClickEvent() {
         {Util::Keycode::UP, Util::Keycode::DOWN}
     );
 
+    /**
+     * @details To Next Level
+     */
     m_EventHandler.AddEvent(
         []() {
             Music::Player::PlayMusic(
