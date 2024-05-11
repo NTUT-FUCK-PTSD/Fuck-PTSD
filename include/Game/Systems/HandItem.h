@@ -44,7 +44,8 @@ private:
         m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
         m_MainCharacter->GetToolMod()->AddTool(a, b);
         const auto& _throw = std::make_shared<Game::Warehouse::Throw>(
-            Config::IMAGE_DAGGER_PATH
+            Config::IMAGE_DAGGER_PATH,
+            "Dagger"
         );
 
         m_MainCharacter->GetToolMod()->AddTool(_throw, "THROW", "Dagger");

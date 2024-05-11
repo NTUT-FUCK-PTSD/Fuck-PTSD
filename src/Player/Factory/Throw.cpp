@@ -11,8 +11,9 @@
 
 #include "exception"
 
-Game::Warehouse::Throw::Throw(std::string filePath) {
+Game::Warehouse::Throw::Throw(std::string filePath, const std::string& type) {
     m_ItemImg = filePath;
+    m_typeName = type;
 
     GenSlot();
     GenSlot2();

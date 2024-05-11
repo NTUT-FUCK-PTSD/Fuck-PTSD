@@ -43,14 +43,9 @@ void App::ClickEvent() {
 
     m_EventHandler.AddEvent(
         [this]() {
-            const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
-            );
-            LOG_INFO(playerMI);
+            const auto& item = m_MainCharacter->GetToolMod()->GetWeapon();
 
-            if (!m_DungeonMap->GetMapData()->IsItemEmpty(playerMI)) {
-                auto t = m_DungeonMap->GetMapData()->GetItem(playerMI);
-                LOG_INFO(typeid(t).name());
-            }
+            LOG_INFO(item->GetType());
         },
         Util::Keycode::T
     );
@@ -109,9 +104,11 @@ void App::ClickEvent() {
                         return;
                     }
 
-                    const auto& imagePath = m_MainCharacter->GetToolMod()
-                                                ->GetTool<IEquip>(3, "Spear")
-                                                ->GetImagePath();
+//                    const auto& imagePath = m_MainCharacter->GetToolMod()
+//                                                ->GetTool<IEquip>(3, "Spear")
+//                                                ->GetImagePath();
+
+                    const auto& imagePath = m_MainCharacter->GetToolMod()->GetWeapon()->GetImagePath();
 
                     Game::Actions::ThrowOutWeapon(
                         m_DungeonMap.get(),
@@ -120,8 +117,9 @@ void App::ClickEvent() {
                     );
                 }
             );
+
             m_MainCharacter->GetToolMod()
-                ->DisappearTool(false, "WEAPON", "Spear");
+                ->DisappearTool(false, "WEAPON", m_MainCharacter->GetToolMod()->GetWeapon()->GetType());
 
             m_ThrowMode = false;
             m_MainCharacter

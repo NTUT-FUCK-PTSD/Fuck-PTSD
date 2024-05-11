@@ -24,6 +24,14 @@ Players::Tools::Tools() {
     ReArrange();
 };
 
+std::shared_ptr<IEquip> Players::Tools::GetWeapon() {
+    const auto& iter = std::find_if(m_ToolList.begin(), m_ToolList.end(), [](const auto& elem){
+        return elem->GetName() =="WEAPON";
+    });
+
+    return *iter;
+}
+
 void Players::Tools::DisappearTool(
     bool               visiable,
     const std::string& name,
@@ -116,6 +124,10 @@ void Players::Tools::AddTool(
     const std::string&             name,
     const std::string&             type
 ) {
+    if (ge->GetName() != name || ge->GetType() != type) {
+        throw std::runtime_error("type or name not match");
+    }
+
     m_BaseTool.insert({name, type});
     m_ToolList.insert(m_ToolList.begin(), ge);
     m_GameElement->AddChild(ge);

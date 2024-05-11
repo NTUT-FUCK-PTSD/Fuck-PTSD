@@ -12,7 +12,7 @@
 namespace Game::Warehouse {
 class Throw : public IEquip {
 public:
-    explicit Throw(std::string filePath);
+    explicit Throw(std::string filePath, const std::string& type);
     virtual ~Throw() = default;
 
     void SpecialFunction(Config::SF sf);
@@ -31,16 +31,17 @@ public:
 
     [[nodiscard]]
     std::string GetType() const override {
-        return "Spear";
+        return m_typeName;
     }
 
     [[nodiscard]]
     std::string GetImagePath() const override {
-        return "";
+        return m_ItemImg;
     }
 
 private:
     std::string m_ItemImg;
+    std::string m_typeName;
     void        InitSlot();
     void        ToggleSlot();
 
