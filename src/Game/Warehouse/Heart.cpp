@@ -8,6 +8,10 @@ Heart::Heart() {
     resetHP();
 }
 
+std::size_t Heart::GetHealth() const {
+    return m_currentHP;
+}
+
 std::vector<std::shared_ptr<Util::GameObject>> Heart::getGameObjects() const {
     return {m_OneHeart, m_TwoHeart, m_ThreeHeart};
 }

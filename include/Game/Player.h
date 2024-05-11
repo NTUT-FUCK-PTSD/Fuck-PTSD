@@ -30,11 +30,13 @@ public:
     glm::vec2                    GetGamePosition() const;
     std::shared_ptr<GameElement> GetWindowElement();
     Direction                    GetFaceTo() const;
+    std::size_t                  GetHealth() const;
 
     // set player's settings
     void SetGamePosition(const glm::vec2& position);
     void SetBodyImagePath(const std::string& Path) { m_BodyImagePath = Path; };
     void SetHeadImagePath(const std::string& Path) { m_HeadImagePath = Path; }
+    void SetVisible(bool status);
     void SetFaceTo(Direction direction);
     void SetZIndex(float index);
 

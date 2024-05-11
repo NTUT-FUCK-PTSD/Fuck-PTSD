@@ -77,6 +77,11 @@ void Player::SetGamePosition(const glm::vec2& gamePosition) {
     SetPosition(ToolBoxs::GamePostoPos(gamePosition));
 }
 
+void Player::SetVisible(bool status) {
+    m_Body->SetVisible(status);
+    m_Head->SetVisible(status);
+}
+
 void Player::SetFaceTo(Direction direction) {
     if (direction != RIGHT && direction != LEFT) {
         // LOG_WARN("Player::SetFaceTo: Invalid direction");
@@ -149,6 +154,10 @@ void Player::gainDiamond(std::size_t number) {
 
 void Player::lostDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number * -1);
+}
+
+std::size_t Player::GetHealth() const {
+    return m_Heart->GetHealth();
 }
 
 void Player::lostHP(std::size_t value) {
