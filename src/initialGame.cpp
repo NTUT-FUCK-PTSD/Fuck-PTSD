@@ -14,7 +14,7 @@
 #include "Display/BeatIndicator.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
-#include "Game/Graphs/Black_Chest.h"
+#include "Game/Graphs/BlackChest.h"
 #include "HPIS.h"
 #include "Helper.hpp"
 #include "Music/Player.h"

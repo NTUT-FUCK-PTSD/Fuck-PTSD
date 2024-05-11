@@ -2,8 +2,8 @@
 // Created by 陳世昂 on 2024/5/11.
 //
 
-#ifndef FUCK_PTSD_BLACK_CHEST_H
-#define FUCK_PTSD_BLACK_CHEST_H
+#ifndef FUCK_PTSD_BLACKCHEST_H
+#define FUCK_PTSD_BLACKCHEST_H
 
 #include "Dungeon/Item.h"
 
@@ -43,4 +43,4 @@ public:
 };
 }  // namespace Game::Graphs
 
-#endif  // FUCK_PTSD_BLACK_CHEST_H
+#endif  // FUCK_PTSD_BLACKCHEST_H

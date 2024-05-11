@@ -9,10 +9,11 @@
 
 #include <iostream>
 #include <memory>
-#include "Black_Chest.h"
+#include "BlackChest.h"
 #include "Item.h"
 #include "Settings/Hash.h"
 #include "Util/Logger.hpp"
+#include "Warehouse/Throw.h"
 
 namespace Game::Systems {
 class HandItem {
@@ -40,9 +41,17 @@ private:
         );
 
         const auto& [a, b] = test->GetContent();
+        m_MainCharacter->GetToolMod()->RemoveTool("WEAPON", "Spear");
         m_MainCharacter->GetToolMod()->AddTool(a, b);
+        const auto& _throw = std::make_shared<Game::Warehouse::Throw>(
+            Config::IMAGE_DAGGER_PATH
+        );
+
+        m_MainCharacter->GetToolMod()->AddTool(_throw, "THROW", "Dagger");
+
         m_DungeonMap->RemoveItem(nextPos);
     }
+
     void HandSpear(std::size_t nextPos) {
         m_DungeonMap->RemoveItem(nextPos);
         m_MainCharacter->GetToolMod()->DisappearTool(true, "WEAPON", "Spear");

@@ -66,7 +66,7 @@ public:
             false,
             100
         );
-        //        const auto object = std::make_shared<Graphs::DaggerGameObj>();
+        //        const auto object = std::make_shared<Graphs::Dagger>();
         const auto object = std::make_shared<Graphs::Spear>();
 
         object->m_Transform.scale = {3, 3};
