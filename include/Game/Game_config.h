@@ -12,6 +12,20 @@ namespace Config {
 static const std::string IMAGE_DAGGER_PATH = ASSETS_DIR
     "/items/weapon_dagger.png";
 
+static constexpr std::string_view MUSIC_ZONE_12 = ASSETS_DIR
+    "/music/zone1_2.ogg";
+
+static constexpr std::string_view MUSIC_ZONE_13 = ASSETS_DIR
+    "/music/zone1_3.ogg";
+
+static constexpr std::string_view TEMPO_ZONE_12 = ASSETS_DIR
+    "/music/zone1_2.txt";
+
+static constexpr std::string_view TEMPO_ZONE_13 = ASSETS_DIR
+    "/music/zone1_3.txt";
+
+static std::size_t idx = 0;
+
 /**
  * @note Special Function's stage
  */

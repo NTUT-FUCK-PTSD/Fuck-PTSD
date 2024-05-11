@@ -33,6 +33,14 @@ auto musicTime = []() {
 };
 
 void App::ClickEvent() {
+    static const std::vector<std::string> MUSIC_LIST = {
+      ASSETS_DIR "/music/zone1_2.ogg",
+      ASSETS_DIR "/music/zone1_3.ogg"};
+
+    static const std::vector<std::string_view> TEMPO_LIST = {
+      ASSETS_DIR "/music/zone1_2.txt",
+      ASSETS_DIR "/music/zone1_3.txt"};
+
     m_EventHandler.AddEvent(
         [this]() {
             const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
@@ -139,6 +147,11 @@ void App::ClickEvent() {
 
     m_EventHandler.AddEvent(
         []() {
+            Music::Player::PlayMusic(
+                MUSIC_LIST[Game::Config::idx++].data(),
+                true
+            );
+            Music::Tempo::ReadTempoFile(TEMPO_LIST[Game::Config::idx++].data());
             m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
             m_AniCameraDestination = {0, 0};
             m_AniPlayerDestination = {0, 0};
