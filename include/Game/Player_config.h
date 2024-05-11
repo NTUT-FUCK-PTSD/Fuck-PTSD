@@ -42,6 +42,9 @@ static constexpr std::string_view IMAGE_SPEAR = ASSETS_DIR
 static constexpr std::string_view IMAGE_BOW = ASSETS_DIR
     "/items/weapon_bow.png";
 
+static constexpr std::string_view IMAGE_CHEST_BLACK = ASSETS_DIR
+    "/items/addchest_black.png";
+
 static constexpr std::string_view STY_FONT = ASSETS_DIR
     "/font/necrosans-6/necrosans-6.otf";
 
