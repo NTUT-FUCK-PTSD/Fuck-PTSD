@@ -12,20 +12,13 @@
 #include <Util/Input.hpp>
 #include <algorithm>
 #include "Actions.h"
-#include "Display/BeatHeart.h"
-#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemy.h"
-#include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
-#include "Game/Graphs/Spear.h"
-#include "Game_config.h"
-#include "HPIS.h"
+#include "Game/Systems/HandItem.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
-#include "System.h"
 #include "Systems/HEIS.h"
-#include "Systems/HPIS.h"
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -76,9 +69,16 @@ void App::ClickEvent() {
             );
 
             if (!m_DungeonMap->GetMapData()->IsItemEmpty(nextPos)) {
+                const auto& test =
+                    std::static_pointer_cast<Game::Graphs::BlackChest>(
+                        m_DungeonMap->GetMapData()->GetItem(nextPos)
+                    );
+
+                const auto& [a, b] = test->GetContent();
+                m_MainCharacter->GetToolMod()->AddTool(a, b);
                 m_DungeonMap->RemoveItem(nextPos);
-                m_MainCharacter->GetToolMod()
-                    ->DisappearTool(true, "WEAPON", "Spear");
+                //                m_MainCharacter->GetToolMod()
+                //                    ->DisappearTool(true, "WEAPON", "Spear");
             }
         },
         Util::Keycode::W,

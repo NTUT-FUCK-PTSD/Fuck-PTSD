@@ -19,6 +19,8 @@ class Tools final {
 public:
     Tools();
 
+    void AddTool(const std::string& name, const std::string& type);
+
     void AddTool(
         const std::shared_ptr<IEquip>& ge,
         const std::string&             name,

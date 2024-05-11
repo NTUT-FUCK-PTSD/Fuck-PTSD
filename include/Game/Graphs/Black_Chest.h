@@ -7,6 +7,8 @@
 
 #include "Dungeon/Item.h"
 
+#include "Game/Factory/ToolFactory.h"
+#include "Player_config.h"
 #include "Settings/Helper.hpp"
 
 namespace Game::Graphs {
@@ -31,6 +33,11 @@ public:
         m_Transform.scale = {3, 3};
     }
     virtual ~BlackChest() = default;
+
+    std::pair<std::string, std::string> GetContent() {
+        Players::Items::ToolFactory factor;
+        return {"WEAPON", "Dagger"};
+    };
 };
 }  // namespace Game::Graphs
 

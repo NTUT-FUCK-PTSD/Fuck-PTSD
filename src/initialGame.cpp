@@ -106,5 +106,5 @@ void App::initializeGame() {
     // Display::BeatHeart::Pause(false);
 
     const auto& blackChest = std::make_shared<Game::Graphs::BlackChest>();
-    m_DungeonMap->AddItem(444, blackChest);
+    m_DungeonMap->AddItem(446, blackChest);
 }
