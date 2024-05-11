@@ -7,7 +7,9 @@
 #include "eventpp/utilities/conditionalfunctor.h"
 
 #include <Util/Input.hpp>
+#include <future>
 #include <memory>
+#include <thread>
 #include "Display/BeatHeart.h"
 #include "Display/BeatIndicator.h"
 #include "Dungeon/MapHandler.h"
@@ -22,7 +24,10 @@
 
 void App::initializeGame() {
     // play lobby music
-    Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
+
+    std::async(std::launch::async, []() {
+        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
+    });
     Music::Player::SetVolume(0.1f);
 
     Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
