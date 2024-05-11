@@ -69,14 +69,20 @@ void App::ClickEvent() {
             );
 
             if (!m_DungeonMap->GetMapData()->IsItemEmpty(nextPos)) {
-                const auto& test =
-                    std::static_pointer_cast<Game::Graphs::BlackChest>(
-                        m_DungeonMap->GetMapData()->GetItem(nextPos)
-                    );
+                Game::Systems::HandItem hi(m_DungeonMap, m_MainCharacter);
+                hi.DispatchByMI(
+                    m_DungeonMap->GetMapData()->GetItem(nextPos),
+                    nextPos
+                );
 
-                const auto& [a, b] = test->GetContent();
-                m_MainCharacter->GetToolMod()->AddTool(a, b);
-                m_DungeonMap->RemoveItem(nextPos);
+                //                const auto& test =
+                //                    std::static_pointer_cast<Game::Graphs::BlackChest>(
+                //                        m_DungeonMap->GetMapData()->GetItem(nextPos)
+                //                    );
+                //
+                //                const auto& [a, b] = test->GetContent();
+                //                m_MainCharacter->GetToolMod()->AddTool(a, b);
+                //                m_DungeonMap->RemoveItem(nextPos);
                 //                m_MainCharacter->GetToolMod()
                 //                    ->DisappearTool(true, "WEAPON", "Spear");
             }

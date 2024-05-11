@@ -38,6 +38,8 @@ public:
         Players::Items::ToolFactory factor;
         return {"WEAPON", "Dagger"};
     };
+
+    std::string GetClassName() override { return "BlackChest"; }
 };
 }  // namespace Game::Graphs
 

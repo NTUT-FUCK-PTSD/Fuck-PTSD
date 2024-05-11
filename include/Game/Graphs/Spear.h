@@ -12,6 +12,8 @@ class Spear final : public Dungeon::Item {
 public:
     explicit Spear() = default;
     virtual ~Spear() = default;
+
+    std::string GetClassName() override { return "Spear"; }
 };
 }  // namespace Game::Graphs
 
