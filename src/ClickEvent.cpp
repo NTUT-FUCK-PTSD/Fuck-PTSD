@@ -110,11 +110,19 @@ void App::ClickEvent() {
 
                     const auto& imagePath = m_MainCharacter->GetToolMod()->GetWeapon()->GetImagePath();
 
-                    Game::Actions::ThrowOutWeapon(
-                        m_DungeonMap.get(),
-                        elem.second,
-                        imagePath
-                    );
+                    if (m_MainCharacter->GetToolMod()->GetWeapon()->GetType() == "Dagger") {
+                        Game::Actions::ThrowOutWeapon<Game::Graphs::Dagger>(
+                            m_DungeonMap.get(),
+                            elem.second,
+                            imagePath
+                        );
+                    } else if (m_MainCharacter->GetToolMod()->GetWeapon()->GetType() == "Spear") {
+                        Game::Actions::ThrowOutWeapon<Game::Graphs::Spear>(
+                            m_DungeonMap.get(),
+                            elem.second,
+                            imagePath
+                        );
+                    }
                 }
             );
 

@@ -26,7 +26,7 @@ void Game::Systems::HPIS::Init(Player* player) {
 void Game::Systems::HPIS::IsExistWeaponThrow() {
     const auto& _throw = std::make_shared<Game::Warehouse::Throw>(
         Players::Config::IMAGE_SPEAR.data(),
-        "Spear" x
+        "Spear"
     );
     //    m_Players->GetToolMod()->AddTool(_throw, "Throw", "Dagger");
     m_Players->GetToolMod()->AddTool(_throw, "THROW", "Spear");

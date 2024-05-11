@@ -58,8 +58,10 @@ void Players::Tools::DisappearTool(
         }
         m_BufferBase.erase(it);
 
-        for (auto i = 0; i <= m_BufferList.size(); i++) {
-            AddTool(m_BufferList.back(), name, type);
+        for (auto i = 0; i < m_BufferList.size(); i++) {
+            AddTool(m_BufferList[i], m_BufferList[i]->GetName(), m_BufferList[i]->GetType());
+        }
+        for (auto i = 0 ;i < m_BufferList.size(); i++) {
             m_BufferList.pop_back();
         }
     }

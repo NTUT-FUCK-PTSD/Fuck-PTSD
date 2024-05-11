@@ -31,6 +31,7 @@ public:
         switch (HashConvert(equip->GetClassName())) {
         case "BlackChest"_hash: HandBlackChest(nextPos); break;
         case "Spear"_hash: HandSpear(nextPos); break;
+        case"Dagger"_hash: HandDagger(nextPos); break;
         }
     };
 
@@ -56,6 +57,11 @@ private:
     void HandSpear(std::size_t nextPos) {
         m_DungeonMap->RemoveItem(nextPos);
         m_MainCharacter->GetToolMod()->DisappearTool(true, "WEAPON", "Spear");
+    }
+
+    void HandDagger(std::size_t nextPos) {
+        m_DungeonMap->RemoveItem(nextPos);
+        m_MainCharacter->GetToolMod()->DisappearTool(true, "WEAPON", "Dagger");
     }
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
