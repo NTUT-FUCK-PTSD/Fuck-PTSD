@@ -19,10 +19,12 @@
 #include "Music/Tempo.h"
 #include "System.h"
 
+namespace Update {
 auto musicTime = []() {
     return static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
            % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 };
+}
 
 void App::Update() {
     m_EventHandler.Update();
@@ -38,7 +40,7 @@ void App::Update() {
     Game::System::Update();
     Display::BeatHeart::Update();
     Display::BeatIndicator::Update();
-    Music::Tempo::Update(musicTime(), 0u, Music::Player::LoopCounter());
+    Music::Tempo::Update(Update::musicTime(), 0u, Music::Player::LoopCounter());
 
     m_MainCharacter->Update();
     m_Camera->Update();
