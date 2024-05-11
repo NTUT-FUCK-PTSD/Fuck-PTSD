@@ -43,9 +43,9 @@ void App::ClickEvent() {
 
     m_EventHandler.AddEvent(
         [this]() {
-            const auto& item = m_MainCharacter->GetToolMod()->GetWeapon();
+            const auto [b, a] = Settings::Helper::GetPlayerPosDM();
 
-            LOG_INFO(item->GetType());
+            LOG_INFO(a);
         },
         Util::Keycode::T
     );
@@ -103,11 +103,6 @@ void App::ClickEvent() {
                     if (!Util::Input::IsKeyDown(elem.first)) {
                         return;
                     }
-
-//                    const auto& imagePath = m_MainCharacter->GetToolMod()
-//                                                ->GetTool<IEquip>(3, "Spear")
-//                                                ->GetImagePath();
-
                     const auto& imagePath = m_MainCharacter->GetToolMod()->GetWeapon()->GetImagePath();
 
                     if (m_MainCharacter->GetToolMod()->GetWeapon()->GetType() == "Dagger") {
