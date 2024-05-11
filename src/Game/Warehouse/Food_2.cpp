@@ -1,18 +1,14 @@
 //
-// Created by 陳世昂 on 2024/4/29.
+// Created by adven on 2024/5/12.
 //
 
-#include <Settings/UGameElement.h>
-#include <memory>
-
-#include "Game/Player_config.h"
-#include "Game/Warehouse/Bomb.h"
+#include "Game/Warehouse/Food_2.h"
+#include "Player_config.h"
 #include "Settings/Helper.hpp"
 #include "SpriteSheet.hpp"
 
-Bomb::Bomb(std::size_t number) {
-    m_Number = number;
-
+namespace Game::Warehouse {
+Food_2::Food_2() {
     GenSlot();
     GenItem();
     GenFirstTextLine();
@@ -21,7 +17,7 @@ Bomb::Bomb(std::size_t number) {
     SetVisible(false);
 }
 
-void Bomb::SetPosition(const glm::vec2& Position) {
+void Food_2::SetPosition(const glm::vec2& Position) {
     this->m_Transform.translation = Position;
 
     const auto& list = GetChildren();
@@ -31,10 +27,10 @@ void Bomb::SetPosition(const glm::vec2& Position) {
     list[3]->m_Transform.translation = Position + m_SecondOffset;
 }
 
-void Bomb::GenSlot() {
+void Food_2::GenSlot() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& slot = std::make_shared<Util::Image>(
-        static_cast<std::string>(Players::Config::IMAGE_SLOT_BOMB)
+        Players::Config::IMAGE_SLOT_ITEM.data()
     );
 
     obj->SetDrawable(slot);
@@ -45,21 +41,23 @@ void Bomb::GenSlot() {
     AddChild(obj);
 }
 
-void Bomb::GenItem() {
-    const auto& obj = std::make_shared<Util::GameElement>();
-    const auto& item = std::make_shared<SpriteSheet>(
-        Players::Config::IMAGE_BOMB.data(),
-        ToolBoxs::CountImagePixel(
-            static_cast<std::string>(Players::Config::IMAGE_BOMB),
-            5,
-            2
-        ),
-        std::vector<std::size_t>{0, 1, 2, 3, 4},
-        false,
-        100,
-        true,
-        100
+void Food_2::GenItem() {
+    const auto&  obj = std::make_shared<Util::GameElement>();
+    const auto&& size = static_cast<glm::ivec2>(Settings::Helper::CountImgPixel(
+        Players::Config::IMAGE_FOOD_2.data(),
+        1,
+        2
+    ));
+    const auto&  item = std::make_shared<Util::SpriteSheet>(
+        Players::Config::IMAGE_FOOD_2.data()
     );
+
+    item->SetDrawRect({
+      0,
+      0,
+      size.x,
+      size.y,
+    });
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
@@ -69,12 +67,12 @@ void Bomb::GenItem() {
     AddChild(obj);
 }
 
-void Bomb::GenFirstTextLine() {
+void Food_2::GenFirstTextLine() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& text = std::make_shared<Util::Text>(
         Players::Config::STY_FONT.data(),
         Players::Config::VAL_FONT_SIZE,
-        static_cast<std::string>(m_FirstTxt),
+        m_FirstTxt.data(),
         Players::Config::VAL_COLOR_WHITE
     );
 
@@ -86,12 +84,12 @@ void Bomb::GenFirstTextLine() {
     AddChild(obj);
 }
 
-void Bomb::GenSecondTextLine() {
+void Food_2::GenSecondTextLine() {
     const auto& obj = std::make_shared<Util::GameElement>();
     const auto& text = std::make_shared<Util::Text>(
         Players::Config::STY_FONT.data(),
         Players::Config::VAL_FONT_SIZE,
-        static_cast<std::string>(m_SecondTxt),
+        m_SecondTxt.data(),
         Players::Config::VAL_COLOR_WHITE
     );
 
@@ -102,3 +100,4 @@ void Bomb::GenSecondTextLine() {
 
     AddChild(obj);
 }
+}  // namespace Game::Warehouse

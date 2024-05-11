@@ -20,7 +20,7 @@
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "Systems/HEIS.h"
-#include "Systems/HPMA.h"
+#include "Systems/HandThrow.h"
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -109,7 +109,7 @@ void App::ClickEvent() {
                                                 ->GetWeapon()
                                                 ->GetImagePath();
 
-                    Game::Systems::HPMA hpma(m_DungeonMap.get());
+                    Game::Systems::HandThrow hpma(m_DungeonMap.get());
                     hpma.Dispatch(
                         m_MainCharacter->GetToolMod()->GetWeapon()->GetType(),
                         elem.second,

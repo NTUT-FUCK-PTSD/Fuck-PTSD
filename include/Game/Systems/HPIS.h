@@ -28,7 +28,7 @@ public:
      */
     static void Init(Player* player);
 
-    static void ThrowOut(const Player::Direction direction);
+    //    static void ThrowOut(const Player::Direction direction);
 
     template <typename T>
     static void ThrowOut(

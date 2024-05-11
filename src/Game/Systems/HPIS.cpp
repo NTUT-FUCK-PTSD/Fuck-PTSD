@@ -1,9 +1,14 @@
 #include "HPIS.h"
+#include "Game/Game_config.h"
+#include "Game/Graphs/Dagger.h"
+#include "Game/Graphs/Spear.h"
+#include "Game/System.h"
 #include "ISC.h"
 #include "Player.h"
 #include "Player_config.h"
 #include "Settings/Helper.hpp"
 #include "Signal.h"
+#include "SpriteSheet.hpp"
 
 // Game::Systems::HPIS::HPIS(Player* player)
 //     : m_Players(player) {}
@@ -30,15 +35,6 @@ void Game::Systems::HPIS::IsExistWeaponThrow() {
     );
     //    m_Players->GetToolMod()->AddTool(_throw, "Throw", "Dagger");
     m_Players->GetToolMod()->AddTool(_throw, "THROW", "Spear");
-}
-
-void Game::Systems::HPIS::ThrowOut(const Player::Direction direction) {
-    LOG_INFO("Throw out.");
-
-    const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM();
-    const auto direGP = Settings::Helper::Direct2MI(direction);
-
-    ISC::Handle(Signal::ADD_DROP_WEAPON, direGP, playerGP, "atds");
 }
 
 template <typename T>

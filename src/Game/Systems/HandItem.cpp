@@ -3,6 +3,8 @@
 //
 
 #include "Game/Systems/HandItem.h"
+#include "Game/Warehouse/Food_1.h"
+#include "Game/Warehouse/Food_2.h"
 
 namespace Game::Systems {
 
@@ -24,6 +26,8 @@ void HandItem::DispatchByMI(
         break;
     case "Spear"_hash: fptr = [this](std::size_t pos) { Spear(pos); }; break;
     case "Dagger"_hash: fptr = [this](std::size_t pos) { Dagger(pos); }; break;
+    case "Food_1"_hash: Food_1(nextPos); break;
+    case "Food_2"_hash: Food_2(nextPos); break;
     default: throw std::runtime_error("Can not Hand Item.");
     }
 
@@ -58,6 +62,18 @@ void HandItem::Spear(std::size_t nextPos) {
 void HandItem::Dagger(std::size_t nextPos) {
     m_DungeonMap->RemoveItem(nextPos);
     m_MainCharacter->GetToolMod()->DisappearTool(true, "WEAPON", "Dagger");
+}
+
+void HandItem::Food_1(std::size_t nextPos) {
+    m_DungeonMap->RemoveItem(nextPos);
+    const auto& obj = std::make_shared<Game::Warehouse::Food_1>();
+    m_MainCharacter->GetToolMod()->AddTool(obj, obj->GetName(), obj->GetType());
+}
+
+void HandItem::Food_2(std::size_t nextPos) {
+    m_DungeonMap->RemoveItem(nextPos);
+    const auto& obj = std::make_shared<Game::Warehouse::Food_2>();
+    m_MainCharacter->GetToolMod()->AddTool(obj, obj->GetName(), obj->GetType());
 }
 
 }  // namespace Game::Systems
