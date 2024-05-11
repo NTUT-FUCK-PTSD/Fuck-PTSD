@@ -29,7 +29,9 @@ public:
 
     void Start();
 
-    void BeforeUpdate();
+    void initializeGame();
+
+    void ClickEvent();
 
     void Update();
 

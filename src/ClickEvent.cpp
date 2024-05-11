@@ -38,7 +38,7 @@ auto musicTime = []() {
            % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 };
 
-void App::BeforeUpdate() {
+void App::ClickEvent() {
     m_EventHandler.AddEvent(
         [this]() {
             const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
@@ -161,24 +161,28 @@ void App::BeforeUpdate() {
               Util::Keycode::W,
               Util::Keycode::A,
               Util::Keycode::S,
-              Util::Keycode::D};
+              Util::Keycode::D
+            };
             const std::vector<glm::vec2> direction =
                 {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
             const std::vector<Player::Direction> playerDirection = {
               Player::Direction::UP,
               Player::Direction::LEFT,
               Player::Direction::DOWN,
-              Player::Direction::RIGHT};
+              Player::Direction::RIGHT
+            };
             const std::vector<glm::vec2> aniPlayerDirection = {
               {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
               {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
               {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+            };
             const std::vector<glm::vec2> aniCameraDirection = {
               {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
               {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
               {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+            };
 
             for (std::size_t i = 0; i < 4; i++) {
                 if (Util::Input::IsKeyDown(key[i])
@@ -227,10 +231,12 @@ void App::BeforeUpdate() {
 
                         m_AniPlayerDestination = {
                           m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                          m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                          m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                        };
                         m_AniCameraDestination = {
                           m_AniCameraDestination.x + aniCameraDirection[i].x,
-                          m_AniCameraDestination.y + aniCameraDirection[i].y};
+                          m_AniCameraDestination.y + aniCameraDirection[i].y
+                        };
                     }
                 }
             }
