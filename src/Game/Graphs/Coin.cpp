@@ -12,9 +12,11 @@ Coin::Coin(std::size_t number)
     : m_Number(number) {
     if (number >= 10) {
         throw std::runtime_error("Coin number error");
+    } else if (number == 0) {
+        return;
     }
 
-    number += 1;
+    number -= 1;
 
     const auto& coinImagePath = m_CoinList.at(number);
     const auto& size = static_cast<glm::ivec2>(

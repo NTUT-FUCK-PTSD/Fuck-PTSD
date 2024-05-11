@@ -188,6 +188,7 @@ void Map::AddItem(
     if (m_MapData->IsItemEmpty(position)) {
         const auto& tile = GetMapData()->GetTile(position);
         item->m_Transform = tile->m_Transform;
+        item->SetZIndex(tile->GetZIndex() + 0.01f);
         m_MapData->AddItem(position, item);
         AddChild(item);
     } else {
