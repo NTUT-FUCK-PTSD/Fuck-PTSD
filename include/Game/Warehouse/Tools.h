@@ -33,8 +33,6 @@ public:
         const std::string& type
     );
 
-    std::string Print() { return "test"; }
-
     template <typename T>
     std::shared_ptr<T> GetTool(
         std::size_t        idx,
