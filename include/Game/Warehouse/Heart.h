@@ -34,6 +34,9 @@ public:
     [[nodiscard]]
     std::vector<std::shared_ptr<Util::GameObject>> getGameObjects() const;
 
+    [[nodiscard]]
+    std::size_t GetHealth() const;
+
     std::shared_ptr<GameElement> GetGameObject() const;
 
     enum STATE {
@@ -55,8 +58,7 @@ private:
     std::size_t     m_currentHP = 0;
     const glm::vec2 m_FirstPosition = {
       WINDOW_WIDTH / 2 - 220,
-      WINDOW_HEIGHT / 2 - 55
-    };
+      WINDOW_HEIGHT / 2 - 55};
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 

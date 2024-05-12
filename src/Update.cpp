@@ -17,6 +17,7 @@
 #include "Event/Event.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
+#include "Settings/DeadScreen.h"
 #include "System.h"
 
 namespace Update {
@@ -26,6 +27,8 @@ auto musicTime = []() {
 };
 }
 
+constexpr std::size_t IS_DEAD = 0;
+
 void App::Update() {
     m_EventHandler.Update();
 
@@ -33,6 +36,15 @@ void App::Update() {
         m_DungeonMap->TempoTrigger(Music::Tempo::GetBeatIdx());
         Display::BeatHeart::SwitchHeart(100);
         Event::SetAttackPlayer(true);
+
+        if (m_MainCharacter->GetHealth() == IS_DEAD) {
+            m_MainCharacter->SetVisible(false);
+            const auto& ds = std::make_shared<Settings::DeadScreen>();
+            ds->SetPosition({0, -200});
+            Music::Tempo::Pause(true);
+            Display::BeatIndicator::Pause(true);
+            m_Camera->AddUIChild(ds);
+        }
     }
     if (Util::Input::IfExit()) {
         m_CurrentState = State::END;
