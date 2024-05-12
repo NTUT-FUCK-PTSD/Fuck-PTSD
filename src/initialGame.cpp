@@ -29,6 +29,7 @@ void App::initializeGame() {
     // play lobby music
 
     std::async(std::launch::async, []() {
+        //        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
         Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
     });
     Music::Player::SetVolume(0.1f);

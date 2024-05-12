@@ -96,9 +96,16 @@ void Display::BeatIndicator::Update() {
         const std::size_t tempoIntervalTime =
             Music::Tempo::GetBeatValue(index + 1)
             - Music::Tempo::GetBeatValue(index);
-        const float moveSpeed = (intervalPixel
-                                 / static_cast<float>(tempoIntervalTime))
-                                * static_cast<float>(intervalTime);
+
+        const float&& moveSpeed = intervalPixel
+                                  / (tempoIntervalTime / intervalTime);
+
+        LOG_INFO(
+            "value {}",
+
+            moveSpeed
+
+        );
 
         const auto position = elem->GetPosition();
         const auto movePosition = glm::vec2({position.x + moveSpeed, position.y}
