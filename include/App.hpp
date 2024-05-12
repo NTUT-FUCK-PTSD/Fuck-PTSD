@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "Dungeon/Map.h"
 #include "Event/EventHandler.h"
+#include "Game/Game_config.h"
 #include "Player.h"
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
@@ -63,6 +64,16 @@ private:
     glm::vec2 m_CameraPosition = {0, 0};
 
     Events::EventHandler m_EventHandler;
+
+    std::vector<std::string_view> m_MusicList = {
+      Game::Config::MUSIC_ZONE_13,
+      Game::Config::MUSIC_ZONE_12,
+    };
+
+    std::vector<std::string_view> m_TempoList = {
+      Game::Config::TEMPO_ZONE_13,
+      Game::Config::TEMPO_ZONE_12,
+    };
 
     // addition
 };
