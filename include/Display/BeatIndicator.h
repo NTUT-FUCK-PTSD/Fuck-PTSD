@@ -40,6 +40,7 @@ private:
     // static glm::vec2                                 m_Scale;
     // static float                                     m_ZIndex;
     static std::size_t                               m_lastTime;
+    static std::size_t                               m_beatIdx;
     static std::size_t                               m_intervalSpace;
     static std::size_t                               m_startBeatIndex;
     static std::size_t                               m_tempoNumber;

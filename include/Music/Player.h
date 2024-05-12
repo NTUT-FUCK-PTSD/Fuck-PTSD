@@ -36,6 +36,8 @@ public:
 
     static float GetMusicTime();
 
+    static std::size_t GetMusicTimeLoop();
+
     static float GetMusicLength();
 
 private:
