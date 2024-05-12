@@ -2,28 +2,21 @@
 
 #include "Music/Tempo.h"
 
+#include <memory>
 #include "Util/Image.hpp"
 #include "Util/Time.hpp"
 
-void Display::BeatIndicator::Init() {
-    // init game element
-
-    auto m_blueIndicator = std::make_shared<Util::Image>(
-        ASSETS_DIR "/gui/TEMP_beat_marker.png"
-    );
-    m_GameElement = std::make_shared<GameElement>();
-    m_GameElement->SetVisible(false);
-
-    // count tempo number
-    std::size_t counter = 0;
-    for (; counter < Music::Tempo::GetBeatListLen(); ++counter) {
-        if (Music::Tempo::GetBeatValue(counter) > 2000) {
-            break;
+auto CountTempoNumber = []() -> std::size_t {
+    for (std::size_t index = 0; index < Music::Tempo::GetBeatListLen();
+         index++) {
+        if (Music::Tempo::GetBeatValue(index) > 2000) {
+            return index;
         }
     }
-    m_tempoNumber = counter;
+    return 0;
+};
 
-    // create beat indicator object
+void Display::BeatIndicator::GenLeftIndicator(std::size_t counter) {
     for (std::size_t i = 0; i < counter; i++) {
         auto object = std::make_shared<GameElement>();
         object->SetDrawable(m_blueIndicator);
@@ -31,10 +24,17 @@ void Display::BeatIndicator::Init() {
         object->SetScale({3.0, 2.5});
         object->SetPosition(m_Position);
         m_IndicatorList.push_back(object);
-
         m_GameElement->AddChild(object);
     }
+    auto position = m_Position;
+    for (const auto& elem : m_IndicatorList) {
+        elem->SetPosition(position);
 
+        position.x -= m_intervalSpace;
+    }
+}
+
+void Display::BeatIndicator::GenRightIndicator(std::size_t counter) {
     for (std::size_t i = 0; i < counter; i++) {
         auto object = std::make_shared<GameElement>();
         object->SetDrawable(m_blueIndicator);
@@ -42,26 +42,33 @@ void Display::BeatIndicator::Init() {
         object->SetScale({3.0, 2.5});
         object->SetPosition(m_Position);
         m_IndicatorListRight.push_back(object);
-
         m_GameElement->AddChild(object);
     }
 
-    // init position
-    auto intervalSpace = 720.0f / static_cast<float>(counter);
-
     auto position = m_Position;
-    for (const auto& elem : m_IndicatorList) {
-        elem->SetPosition(position);
-
-        position.x -= intervalSpace;
-    }
-
-    position = m_Position;
     for (const auto& elem : m_IndicatorListRight) {
         elem->SetPosition(position);
 
-        position.x += intervalSpace;
+        position.x += m_intervalSpace;
     }
+}
+
+void Display::BeatIndicator::Init() {
+    CreateImage();
+    m_tempoNumber = CountTempoNumber();
+    m_intervalSpace = 720.0f / static_cast<float>(m_tempoNumber);
+
+    GenLeftIndicator(m_tempoNumber);
+    GenRightIndicator(m_tempoNumber);
+}
+
+void Display::BeatIndicator::CreateImage() {
+    // init game element
+    m_blueIndicator = std::make_shared<Util::Image>(ASSETS_DIR
+                                                    "/gui/TEMP_beat_marker.png"
+    );
+    m_GameElement = std::make_shared<GameElement>();
+    m_GameElement->SetVisible(false);
 }
 
 void Display::BeatIndicator::Pause(bool state) {
@@ -84,6 +91,8 @@ void Display::BeatIndicator::Update() {
     }
 
     const auto intervalPixel = 720.0f / static_cast<float>(m_tempoNumber);
+    UpdateLeftIndi(m_startBeatIndex, intervalTime, intervalPixel);
+    UpdateRightIndi(m_startBeatIndex, intervalTime, intervalPixel);
 
     std::size_t index = m_startBeatIndex;
 
@@ -92,20 +101,24 @@ void Display::BeatIndicator::Update() {
         return;
     }
 
+    index = m_startBeatIndex;
+}
+
+void Display::BeatIndicator::UpdateLeftIndi(
+    std::size_t index,
+    std::size_t intervalTime,
+    std::size_t intervalPixel
+) {
     for (const auto& elem : m_IndicatorList) {
         const std::size_t tempoIntervalTime =
             Music::Tempo::GetBeatValue(index + 1)
             - Music::Tempo::GetBeatValue(index);
 
-        const float&& moveSpeed = intervalPixel
-                                  / (tempoIntervalTime / intervalTime);
-
-        LOG_INFO(
-            "value {}",
-
-            moveSpeed
-
-        );
+        // const float&& moveSpeed = (intervalPixel / tempoIntervalTime)
+        // * 16.6f;
+        const float moveSpeed = (intervalPixel
+                                 / static_cast<float>(tempoIntervalTime))
+                                * static_cast<float>(intervalTime);
 
         const auto position = elem->GetPosition();
         const auto movePosition = glm::vec2({position.x + moveSpeed, position.y}
@@ -119,8 +132,13 @@ void Display::BeatIndicator::Update() {
         }
         elem->SetPosition(movePosition);
     }
+}
 
-    index = m_startBeatIndex;
+void Display::BeatIndicator::UpdateRightIndi(
+    std::size_t index,
+    std::size_t intervalTime,
+    std::size_t intervalPixel
+) {
     for (const auto& elem : m_IndicatorListRight) {
         if (index + 1 == Music::Tempo::GetBeatListLen()) {
             m_startBeatIndex = 0;
@@ -158,9 +176,11 @@ glm::vec2   Display::BeatIndicator::m_Position = {0, -310};
 // float       Display::BeatIndicator::m_ZIndex;
 std::size_t Display::BeatIndicator::m_lastTime = 0;
 std::size_t Display::BeatIndicator::m_startBeatIndex = 0;
+std::size_t Display::BeatIndicator::m_intervalSpace = 0;
 std::size_t Display::BeatIndicator::m_tempoNumber = 0;
 std::vector<std::shared_ptr<GameElement>>
     Display::BeatIndicator::m_IndicatorList = {};
 std::vector<std::shared_ptr<GameElement>>
                              Display::BeatIndicator::m_IndicatorListRight = {};
 std::shared_ptr<GameElement> Display::BeatIndicator::m_GameElement = {};
+std::shared_ptr<Util::Image> Display::BeatIndicator::m_blueIndicator = nullptr;

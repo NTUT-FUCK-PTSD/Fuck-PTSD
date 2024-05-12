@@ -35,14 +35,6 @@ auto musicTime = []() {
 };
 
 void App::ClickEvent() {
-    static const std::vector<std::string> MUSIC_LIST = {
-      ASSETS_DIR "/music/zone1_2.ogg",
-      ASSETS_DIR "/music/zone1_3.ogg"};
-
-    static const std::vector<std::string_view> TEMPO_LIST = {
-      ASSETS_DIR "/music/zone1_2.txt",
-      ASSETS_DIR "/music/zone1_3.txt"};
-
     /**
      * @details Use to test functional.
      */
@@ -161,12 +153,11 @@ void App::ClickEvent() {
      * @details To Next Level
      */
     m_EventHandler.AddEvent(
-        []() {
-            Music::Player::PlayMusic(
-                MUSIC_LIST[Game::Config::idx++].data(),
-                true
-            );
-            Music::Tempo::ReadTempoFile(TEMPO_LIST[Game::Config::idx++].data());
+        [this]() {
+            Music::Player::PlayMusic(m_MusicList.back().data(), true);
+            Music::Tempo::ReadTempoFile(m_TempoList.back().data());
+            m_MusicList.pop_back();
+            m_TempoList.pop_back();
             m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
             m_AniCameraDestination = {0, 0};
             m_AniPlayerDestination = {0, 0};
@@ -205,24 +196,28 @@ void App::ClickEvent() {
               Util::Keycode::W,
               Util::Keycode::A,
               Util::Keycode::S,
-              Util::Keycode::D};
+              Util::Keycode::D
+            };
             const std::vector<glm::vec2> direction =
                 {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
             const std::vector<Player::Direction> playerDirection = {
               Player::Direction::UP,
               Player::Direction::LEFT,
               Player::Direction::DOWN,
-              Player::Direction::RIGHT};
+              Player::Direction::RIGHT
+            };
             const std::vector<glm::vec2> aniPlayerDirection = {
               {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
               {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
               {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+            };
             const std::vector<glm::vec2> aniCameraDirection = {
               {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
               {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
               {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
+              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+            };
 
             for (std::size_t i = 0; i < 4; i++) {
                 if (Util::Input::IsKeyDown(key[i])
@@ -271,10 +266,12 @@ void App::ClickEvent() {
 
                         m_AniPlayerDestination = {
                           m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                          m_AniPlayerDestination.y + aniPlayerDirection[i].y};
+                          m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                        };
                         m_AniCameraDestination = {
                           m_AniCameraDestination.x + aniCameraDirection[i].x,
-                          m_AniCameraDestination.y + aniCameraDirection[i].y};
+                          m_AniCameraDestination.y + aniCameraDirection[i].y
+                        };
                     }
                 }
             }
