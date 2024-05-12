@@ -49,6 +49,7 @@ void App::Update() {
     if (Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
+
     Game::System::Update();
     Display::BeatHeart::Update();
     Display::BeatIndicator::Update();
