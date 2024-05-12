@@ -17,6 +17,7 @@
 #include "Game/Graphs/BlackChest.h"
 #include "Game/Graphs/Food_1.h"
 #include "Game/Graphs/Food_2.h"
+#include "Graphs/Coin.h"
 #include "HPIS.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
@@ -114,5 +115,8 @@ void App::initializeGame() {
     m_DungeonMap->AddItem(731, apple);
 
     const auto& cheese = std::make_shared<Game::Graphs::Food_2>();
-    m_DungeonMap->AddItem(446, cheese);
+    m_DungeonMap->AddItem(733, cheese);
+
+    const auto& coin = std::make_shared<Game::Graphs::Coin>(2);
+    m_DungeonMap->AddItem(378, coin);
 }

@@ -34,6 +34,7 @@ private:
     void Dagger(std::size_t nextPos);
     void Food_1(std::size_t nextPos);
     void Food_2(std::size_t nextPos);
+    void Coin(std::size_t nextPos);
 
     std::shared_ptr<Dungeon::Map> m_DungeonMap;
     std::shared_ptr<Player>       m_MainCharacter;

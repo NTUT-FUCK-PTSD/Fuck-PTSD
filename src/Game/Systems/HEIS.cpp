@@ -2,12 +2,12 @@
 // Created by adven on 2024/5/1.
 //
 #include "HEIS.h"
+#include "Dungeon/Enemy.h"
+#include "Game/Graphs/Coin.h"
 #include "Game/System.h"
 #include "Game_config.h"
 #include "Graphs/Dagger.h"
 #include "Helper.hpp"
-
-#include "Dungeon/Enemy.h"
 #include "System.h"
 
 auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
@@ -17,7 +17,10 @@ auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
 auto Game::Systems::HEIS::DetectHealth(std::size_t mi) -> void {
     const auto& health = m_Map->GetMapData()->GetEnemy(mi)->GetHealth();
     if (health <= 0) {
+        const auto&& enemyCoin = m_Map->GetMapData()->GetEnemy(mi)->GetCoin();
         m_Map->RemoveEnemy(mi);
+        const auto& coin = std::make_shared<Game::Graphs::Coin>(enemyCoin);
+        m_Map->AddItem(mi, coin);
     }
 }
 
@@ -39,11 +42,6 @@ auto Game::Systems::HEIS::MakeTile(
         }
 
         currGP += direGP;
-
-        //        // is wall?
-        //        if (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
-        //            break;
-        //        }
     }
 
     // renderer weapon on floor
