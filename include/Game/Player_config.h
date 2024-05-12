@@ -48,6 +48,13 @@ static constexpr std::string_view IMAGE_CHEST_BLACK = ASSETS_DIR
 static constexpr std::string_view STY_FONT = ASSETS_DIR
     "/font/necrosans-6/necrosans-6.otf";
 
+static constexpr std::string_view IMAGE_FOOD_1 = ASSETS_DIR "/items/food_1.png";
+
+static constexpr std::string_view IMAGE_FOOD_2 = ASSETS_DIR "/items/food_2.png";
+
+static constexpr std::string_view IMAGE_SLOT_ITEM = ASSETS_DIR
+    "/gui/hud_slot_action1.png";
+
 static constexpr glm::vec2 VAL_FONT_SCALE = {3, 3};
 
 static constexpr std::size_t VAL_FONT_SIZE = 6;

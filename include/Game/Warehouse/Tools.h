@@ -35,6 +35,8 @@ public:
         const std::string& type
     );
 
+    std::shared_ptr<IEquip> GetWeapon();
+
     template <typename T>
     std::shared_ptr<T> GetTool(
         std::size_t        idx,

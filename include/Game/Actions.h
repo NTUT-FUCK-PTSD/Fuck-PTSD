@@ -18,6 +18,8 @@
 namespace Game {
 class Actions {
 public:
+
+    template<typename T>
     static void ThrowOutWeapon(
         Dungeon::Map*           dungeonMap,
         const Player::Direction direction,
@@ -66,8 +68,11 @@ public:
             false,
             100
         );
-        //        const auto object = std::make_shared<Graphs::Dagger>();
-        const auto object = std::make_shared<Graphs::Spear>();
+
+        const auto object = std::make_shared<T>();
+
+//        const auto object = std::make_shared<Graphs::Dagger>();
+//        const auto object = std::make_shared<Graphs::Spear>();
 
         object->m_Transform.scale = {3, 3};
         object->SetDrawable(image);

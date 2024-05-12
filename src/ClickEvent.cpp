@@ -15,10 +15,12 @@
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 #include "Game/Systems/HandItem.h"
+#include "Hash.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "Systems/HEIS.h"
+#include "Systems/HandThrow.h"
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -33,16 +35,19 @@ auto musicTime = []() {
 };
 
 void App::ClickEvent() {
+    static const std::vector<std::string> MUSIC_LIST = {
+      ASSETS_DIR "/music/zone1_2.ogg",
+      ASSETS_DIR "/music/zone1_3.ogg"};
+
+    static const std::vector<std::string_view> TEMPO_LIST = {
+      ASSETS_DIR "/music/zone1_2.txt",
+      ASSETS_DIR "/music/zone1_3.txt"};
+
     m_EventHandler.AddEvent(
         [this]() {
-            const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
-            );
-            LOG_INFO(playerMI);
+            const auto [b, a] = Settings::Helper::GetPlayerPosDM();
 
-            if (!m_DungeonMap->GetMapData()->IsItemEmpty(playerMI)) {
-                auto t = m_DungeonMap->GetMapData()->GetItem(playerMI);
-                LOG_INFO(typeid(t).name());
-            }
+            LOG_INFO(a);
         },
         Util::Keycode::T
     );
@@ -100,20 +105,24 @@ void App::ClickEvent() {
                     if (!Util::Input::IsKeyDown(elem.first)) {
                         return;
                     }
-
                     const auto& imagePath = m_MainCharacter->GetToolMod()
-                                                ->GetTool<IEquip>(3, "Spear")
+                                                ->GetWeapon()
                                                 ->GetImagePath();
 
-                    Game::Actions::ThrowOutWeapon(
-                        m_DungeonMap.get(),
+                    Game::Systems::HandThrow hpma(m_DungeonMap.get());
+                    hpma.Dispatch(
+                        m_MainCharacter->GetToolMod()->GetWeapon()->GetType(),
                         elem.second,
                         imagePath
                     );
                 }
             );
-            m_MainCharacter->GetToolMod()
-                ->DisappearTool(false, "WEAPON", "Spear");
+
+            m_MainCharacter->GetToolMod()->DisappearTool(
+                false,
+                "WEAPON",
+                m_MainCharacter->GetToolMod()->GetWeapon()->GetType()
+            );
 
             m_ThrowMode = false;
             m_MainCharacter
@@ -139,6 +148,11 @@ void App::ClickEvent() {
 
     m_EventHandler.AddEvent(
         []() {
+            Music::Player::PlayMusic(
+                MUSIC_LIST[Game::Config::idx++].data(),
+                true
+            );
+            Music::Tempo::ReadTempoFile(TEMPO_LIST[Game::Config::idx++].data());
             m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
             m_AniCameraDestination = {0, 0};
             m_AniPlayerDestination = {0, 0};
