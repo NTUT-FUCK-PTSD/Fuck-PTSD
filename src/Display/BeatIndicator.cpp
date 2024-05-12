@@ -153,7 +153,8 @@ void Display::BeatIndicator::UpdateLeftIndi(
         //        );
 
         if (movePosition.x >= 0) {
-            movePosition = glm::ivec2{-720.0f, -310.0f};
+            movePosition =
+                glm::ivec2{-720.0f + moveSpeed + position.x, -310.0f};
             //            elem->SetPosition({-720.0f, -310.0f});
         }
         elem->SetPosition(movePosition);
