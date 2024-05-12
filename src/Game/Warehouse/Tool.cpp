@@ -25,9 +25,11 @@ Players::Tools::Tools() {
 };
 
 std::shared_ptr<IEquip> Players::Tools::GetWeapon() {
-    const auto& iter = std::find_if(m_ToolList.begin(), m_ToolList.end(), [](const auto& elem){
-        return elem->GetName() =="WEAPON";
-    });
+    const auto& iter = std::find_if(
+        m_ToolList.begin(),
+        m_ToolList.end(),
+        [](const auto& elem) { return elem->GetName() == "WEAPON"; }
+    );
 
     return *iter;
 }
@@ -59,11 +61,13 @@ void Players::Tools::DisappearTool(
         m_BufferBase.erase(it);
 
         for (auto i = 0; i < m_BufferList.size(); i++) {
-            AddTool(m_BufferList[i], m_BufferList[i]->GetName(), m_BufferList[i]->GetType());
+            AddTool(
+                m_BufferList[i],
+                m_BufferList[i]->GetName(),
+                m_BufferList[i]->GetType()
+            );
         }
-        for (auto i = 0 ;i < m_BufferList.size(); i++) {
-            m_BufferList.pop_back();
-        }
+        m_BufferList.clear();
     }
 }
 
@@ -92,7 +96,8 @@ void Players::Tools::RemoveTool(
         if (m_ToolList[i]->GetName() == name
             && m_ToolList[i]->GetType() == type) {
             removeList.push_back(i);
-        } else if (m_ToolList[i]->GetName() == "THROW" && m_ToolList[i]->GetType() == type) {
+        } else if (m_ToolList[i]->GetName() == "THROW"
+                   && m_ToolList[i]->GetType() == type) {
             removeList.push_back(i);
         }
     }
