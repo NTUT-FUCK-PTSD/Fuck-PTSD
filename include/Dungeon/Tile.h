@@ -33,7 +33,8 @@ public:
 
     bool GetSeen() const;
 
-    void SetCameraUpdate(bool cameraUpdate);
+    void        SetCameraUpdate(bool cameraUpdate);
+    std::string m_Filepath;
 
 protected:
     void         UpdateScale();
@@ -41,8 +42,7 @@ protected:
 
     void SetTorch(bool torch);
 
-    s_Tile      m_Tile;
-    std::string m_Filepath;
+    s_Tile m_Tile;
 
     glm::vec2                          m_TileSize;
     glm::vec2                          m_ImgSize;

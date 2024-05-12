@@ -28,6 +28,12 @@ public:
         return "Dagger";
     }
 
+    [[nodiscard]]
+    std::string GetImagePath() const override {
+      return ASSETS_DIR
+            "/items/weapon_dagger.png";
+    };
+
 private:
     void GenSlot();
     void GenItem();

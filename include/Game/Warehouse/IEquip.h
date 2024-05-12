@@ -17,6 +17,8 @@ public:
     virtual std::string GetName() const = 0;
 
     virtual std::string GetType() const = 0;
+
+    virtual std::string GetImagePath() const = 0;
 };
 
 #endif  // FUCK_PTSD_IEQUIP_HPP

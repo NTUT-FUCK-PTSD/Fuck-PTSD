@@ -15,17 +15,15 @@ void Game::System::AddWeapon(
     m_IBaseList.push_back(baseType);
 
     const auto& object = m_DungeonMap->GetMapData()->GetTile(posMI);
-
+    /* LOG_INFO("{} {}", posMI, object->m_Filepath); */
+    if (!object) {
+        return;
+    }
     baseType->m_Transform.translation = object->GetTransform().translation;
     baseType->MI = posMI;
     baseType->SetZIndex(object->GetZIndex() + 0.1f);
     object->AddChild(baseType);
-    //        m_GameObject->AddChild(baseType);
 }
-
-// std::shared_ptr<Util::GameObject> Game::Systems::GetGameObject() {
-//     return m_GameObject;
-// }
 
 void Game::System::Update() {
     if (m_IBaseList.empty()) {
@@ -35,7 +33,7 @@ void Game::System::Update() {
     for (std::size_t i = 0; i < m_IBaseList.size(); ++i) {
         auto& elem = m_IBaseList.at(i);
 
-        elem->Update(m_DungeonMap);
+        //        elem->Update(m_DungeonMap);
     }
 }
 

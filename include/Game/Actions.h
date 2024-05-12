@@ -19,12 +19,14 @@ class Actions {
 public:
     static void ThrowOutWeapon(
         Dungeon::Map*           dungeonMap,
-        const Player::Direction direction
+        const Player::Direction direction,
+        const std::string&      imagePath
     ) {
         LOG_INFO("Throw out.");
 
         // get current player pos
         const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM();
+        //        LOG_INFO("{} {}", );
 
         // translate direction
         const auto direMI = Settings::Helper::Direct2MI(direction);
@@ -33,6 +35,7 @@ public:
         const auto& mapdata = dungeonMap->GetMapData();
         auto        weaponNextPos = static_cast<glm::ivec2>(playerGP);
 
+        weaponEndMI = Settings::Helper::GamePosToMapIdx(playerGP);
         // looking for wall to stop flying weapon
         while (true) {
             weaponEndMI = Settings::Helper::GamePosToMapIdx(weaponNextPos);
@@ -53,7 +56,8 @@ public:
         const auto pixelSize =
             ToolBoxs::CountImagePixel(Config::IMAGE_DAGGER_PATH, 1, 2);
         const auto image = std::make_shared<SpriteSheet>(
-            Config::IMAGE_DAGGER_PATH,
+            /* Config::IMAGE_DAGGER_PATH, */
+            imagePath,
             pixelSize,
             std::vector<std::size_t>{0, 1},
             false,
@@ -62,7 +66,12 @@ public:
             100
         );
         const auto object = std::make_shared<Graphs::DaggerGameObj>();
+        object->m_Transform.scale = {3, 3};
         object->SetDrawable(image);
+
+        //        const auto& obj =
+        //        dungeonMap->GetMapData()->GetTile(weaponEndMI);
+        //        obj->AddChild(object);
 
         System::AddWeapon(object, weaponEndMI);
     };
