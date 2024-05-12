@@ -114,11 +114,22 @@ void Display::BeatIndicator::UpdateLeftIndi(
             Music::Tempo::GetBeatValue(index + 1)
             - Music::Tempo::GetBeatValue(index);
 
-        // const float&& moveSpeed = (intervalPixel / tempoIntervalTime)
-        // * 16.6f;
-        const float moveSpeed = (intervalPixel
-                                 / static_cast<float>(tempoIntervalTime))
-                                * static_cast<float>(intervalTime);
+        const std::size_t&& moveSpeed =
+            (static_cast<long double>(intervalPixel)
+             / static_cast<long double>(tempoIntervalTime))
+            * intervalTime;
+
+        //        LOG_DEBUG(
+        //            "move: {}, {}, {}",
+        //            intervalPixel,
+        //            tempoIntervalTime,
+        //            intervalTime
+        //        );
+
+        //        const std::size_t moveSpeed = (intervalPixel
+        //                                       /
+        //                                       static_cast<float>(tempoIntervalTime))
+        //                                      * static_cast<float>(intervalTime);
 
         const auto position = elem->GetPosition();
         const auto movePosition = glm::vec2({position.x + moveSpeed, position.y}
@@ -132,6 +143,31 @@ void Display::BeatIndicator::UpdateLeftIndi(
         }
         elem->SetPosition(movePosition);
     }
+
+    /**
+     * @note debug
+     */
+    std::vector<std::size_t> list;
+    for (std::size_t i = 0; i < m_IndicatorList.size() - 1; i++) {
+        const auto& fptr = [i]() {
+            const auto& after = m_IndicatorList[i + 1]->GetPosition().x;
+            const auto& before = m_IndicatorList[i]->GetPosition().x;
+
+            if (after < before) {
+                return after - before;
+            } else if (after > before) {
+                return (after) + (-720 - before);
+            }
+        };
+
+        list.push_back(-fptr());
+
+        //        LOG_INFO("index: {}, interval: {}", i, fptr());
+    }
+    const auto max = std::max_element(list.begin(), list.end());
+    const auto min = std::min_element(list.begin(), list.end());
+    LOG_INFO("max: {}, min: {}", *max, *min);
+    list.clear();
 }
 
 void Display::BeatIndicator::UpdateRightIndi(
