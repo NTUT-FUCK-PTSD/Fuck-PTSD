@@ -3,6 +3,7 @@
 #include "Music/Tempo.h"
 
 #include <memory>
+#include "Music/Player.h"
 #include "Util/Image.hpp"
 #include "Util/Time.hpp"
 
@@ -101,7 +102,12 @@ void Display::BeatIndicator::Update() {
         return;
     }
 
-    index = m_startBeatIndex;
+    //    LOG_INFO(m_startBeatIndex);
+
+    if (Music::Tempo::GetBeatIdx() != m_beatIdx) {
+        m_beatIdx = Music::Tempo::GetBeatIdx();
+        m_startBeatIndex++;
+    }
 }
 
 void Display::BeatIndicator::UpdateLeftIndi(
@@ -109,6 +115,7 @@ void Display::BeatIndicator::UpdateLeftIndi(
     std::size_t intervalTime,
     std::size_t intervalPixel
 ) {
+    std::size_t index_t = index;
     for (const auto& elem : m_IndicatorList) {
         const std::size_t tempoIntervalTime =
             Music::Tempo::GetBeatValue(index + 1)
@@ -118,6 +125,10 @@ void Display::BeatIndicator::UpdateLeftIndi(
             (static_cast<long double>(intervalPixel)
              / static_cast<long double>(tempoIntervalTime))
             * intervalTime;
+
+        const auto t =
+            (static_cast<long double>(intervalPixel)
+             / static_cast<long double>(tempoIntervalTime));
 
         //        LOG_DEBUG(
         //            "move: {}, {}, {}",
@@ -132,16 +143,28 @@ void Display::BeatIndicator::UpdateLeftIndi(
         //                                      * static_cast<float>(intervalTime);
 
         const auto position = elem->GetPosition();
-        const auto movePosition = glm::vec2({position.x + moveSpeed, position.y}
-        );
+        auto movePosition = glm::vec2({position.x + moveSpeed, position.y});
 
-        index += 1;
+        //        LOG_INFO(
+        //            "{} {} {}",
+        //            Music::Player::GetMusicTimeLoop(),
+        //            Music::Tempo::GetBeatValue(index_t),
+        //            index_t
+        //        );
+
         if (movePosition.x >= 0) {
-            m_startBeatIndex += 1;
-            elem->SetPosition({-720.0f, -310.0f});
-            continue;
+            movePosition = glm::ivec2{-720.0f, -310.0f};
+            //            elem->SetPosition({-720.0f, -310.0f});
         }
         elem->SetPosition(movePosition);
+        LOG_DEBUG(
+            "index: {}, Position: {}, Time: {}, BeatValue: {}",
+            index_t,
+            -movePosition.x,
+            Music::Player::GetMusicTimeLoop(),
+            Music::Tempo::GetBeatValue(index_t)
+        );
+        index_t++;
     }
 
     /**
@@ -166,7 +189,7 @@ void Display::BeatIndicator::UpdateLeftIndi(
     }
     const auto max = std::max_element(list.begin(), list.end());
     const auto min = std::min_element(list.begin(), list.end());
-    LOG_INFO("max: {}, min: {}", *max, *min);
+    LOG_INFO("max: {}, min: {}, time: {}", *max, *min, intervalTime);
     list.clear();
 }
 
@@ -183,9 +206,14 @@ void Display::BeatIndicator::UpdateRightIndi(
         const std::size_t tempoIntervalTime =
             Music::Tempo::GetBeatValue(index + 1)
             - Music::Tempo::GetBeatValue(index);
-        const float moveSpeed = (intervalPixel
-                                 / static_cast<float>(tempoIntervalTime))
-                                * static_cast<float>(intervalTime);
+        //        const float moveSpeed = (intervalPixel
+        //                                 /
+        //                                 static_cast<float>(tempoIntervalTime))
+        //                                * static_cast<float>(intervalTime);
+        const std::size_t&& moveSpeed =
+            (static_cast<long double>(intervalPixel)
+             / static_cast<long double>(tempoIntervalTime))
+            * intervalTime;
 
         const auto position = elem->GetPosition();
         const auto movePosition = glm::vec2({position.x - moveSpeed, position.y}
@@ -211,6 +239,7 @@ glm::vec2   Display::BeatIndicator::m_Position = {0, -310};
 // glm::vec2   Display::BeatIndicator::m_Scale;
 // float       Display::BeatIndicator::m_ZIndex;
 std::size_t Display::BeatIndicator::m_lastTime = 0;
+std::size_t Display::BeatIndicator::m_beatIdx = 0;
 std::size_t Display::BeatIndicator::m_startBeatIndex = 0;
 std::size_t Display::BeatIndicator::m_intervalSpace = 0;
 std::size_t Display::BeatIndicator::m_tempoNumber = 0;
