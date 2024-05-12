@@ -24,6 +24,39 @@ Players::Tools::Tools() {
     ReArrange();
 };
 
+void Players::Tools::DisappearTool(
+    bool               visiable,
+    const std::string& name,
+    const std::string& type
+) {
+    if (!visiable) {
+        const auto& it = m_BaseTool.find(name);
+        m_BufferBase.insert({it->first, it->second});
+
+        std::for_each(
+            m_ToolList.begin(),
+            m_ToolList.end(),
+            [&](const auto& elem) {
+                if (elem->GetName() == name && elem->GetType() == type
+                    || (elem->GetName() == "THROW" && elem->GetType() == type))
+                    m_BufferList.push_back(elem);
+            }
+        );
+        RemoveTool(name, type);
+    } else {
+        const auto& it = m_BufferBase.find(name);
+        if (it == m_BufferBase.end()) {
+            throw std::runtime_error("Remove Tool Error");
+        }
+        m_BufferBase.erase(it);
+
+        for (auto i = 0; i <= m_BufferList.size(); i++) {
+            AddTool(m_BufferList.back(), name, type);
+            m_BufferList.pop_back();
+        }
+    }
+}
+
 void Players::Tools::RemoveTool(
     const std::string& name,
     const std::string& type
@@ -79,21 +112,7 @@ void Players::Tools::AddTool(
     m_GameElement->AddChild(ge);
 
     ReArrange();
-};
-
-// std::shared_ptr<IEquip> Players::Tools::GetTool(std::size_t idx) {
-//     if (idx >= m_ToolList.size()) {
-//         throw std::runtime_error("tools idx is out of range");
-//     }
-
-//     const auto& result = m_ToolList.at(idx);
-//     const auto& iter = m_BaseTool.find(result->GetName());
-
-//     if (iter != m_BaseTool.end()) {
-//         return result;
-//     }
-//     return nullptr;
-// }
+}
 
 std::vector<std::shared_ptr<IEquip>> Players::Tools::GetAllTools() {
     return m_ToolList;

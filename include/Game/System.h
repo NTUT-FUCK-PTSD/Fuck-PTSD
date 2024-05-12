@@ -17,6 +17,11 @@ public:
         const std::size_t                    posMI
     );
 
+    static void AddWeapon(
+        std::shared_ptr<Dungeon::Item> itemType,
+        std::size_t                    posMI
+    );
+
     static std::shared_ptr<Util::GameObject> GetGameObject();
 
     static void Update();

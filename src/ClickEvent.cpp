@@ -41,8 +41,39 @@ auto musicTime = []() {
 void App::BeforeUpdate() {
     m_EventHandler.AddEvent(
         [this]() {
-            LOG_INFO("aa");
+            const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
+            );
 
+            Player::Direction direction;
+            std::for_each(
+                m_MapTableCodeDire.begin(),
+                m_MapTableCodeDire.end(),
+                [&direction](const auto& elem) {
+                    if (Util::Input::IsKeyDown(elem.first)) {
+                        direction = elem.second;
+                    }
+                }
+            );
+
+            const auto value = Settings::Helper::Direct2MI(direction);
+            const auto nextPos = Settings::Helper::GamePosToMapIdx(
+                value + static_cast<glm::ivec2>(playerGP)
+            );
+
+            if (!m_DungeonMap->GetMapData()->IsItemEmpty(nextPos)) {
+                m_DungeonMap->RemoveItem(nextPos);
+                m_MainCharacter->GetToolMod()
+                    ->DisappearTool(true, "WEAPON", "Spear");
+            }
+        },
+        Util::Keycode::W,
+        Util::Keycode::D,
+        Util::Keycode::S,
+        Util::Keycode::A
+    );
+
+    m_EventHandler.AddEvent(
+        [this]() {
             if (!m_ThrowMode
                 || !Music::Tempo::IsTempoInRange(
                     500,
@@ -71,6 +102,8 @@ void App::BeforeUpdate() {
                     );
                 }
             );
+            m_MainCharacter->GetToolMod()
+                ->DisappearTool(false, "WEAPON", "Spear");
 
             m_ThrowMode = false;
             m_MainCharacter
@@ -110,8 +143,6 @@ void App::BeforeUpdate() {
 
     m_EventHandler.AddEvent(
         [this]() {
-            LOG_INFO("test");
-
             if (m_ThrowMode
                 || !Music::Tempo::IsTempoInRange(
                     500,

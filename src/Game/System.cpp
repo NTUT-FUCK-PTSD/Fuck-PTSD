@@ -1,6 +1,7 @@
 #include "Game/System.h"
 
 #include <iostream>
+#include <utility>
 
 #include "Settings/Helper.hpp"
 
@@ -15,14 +16,26 @@ void Game::System::AddWeapon(
     m_IBaseList.push_back(baseType);
 
     const auto& object = m_DungeonMap->GetMapData()->GetTile(posMI);
-    /* LOG_INFO("{} {}", posMI, object->m_Filepath); */
     if (!object) {
         return;
     }
+
     baseType->m_Transform.translation = object->GetTransform().translation;
     baseType->MI = posMI;
     baseType->SetZIndex(object->GetZIndex() + 0.1f);
     object->AddChild(baseType);
+}
+
+void Game::System::AddWeapon(
+    std::shared_ptr<Dungeon::Item> itemType,
+    std::size_t                    posMI
+) {
+    //    m_IBaseList.push_back(baseType);
+    const auto&& obj = m_DungeonMap->GetMapData()->GetTile(posMI);
+    itemType->m_Transform.translation = obj->m_Transform.translation;
+    itemType->SetZIndex(obj->GetZIndex() + 0.1f);
+
+    m_DungeonMap->AddItem(posMI, std::move(itemType));
 }
 
 void Game::System::Update() {
