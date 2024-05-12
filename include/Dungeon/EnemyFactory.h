@@ -6,6 +6,7 @@
 #include "Dungeon/Enemies/Ghost.h"
 #include "Dungeon/Enemies/GreenSlime.h"
 #include "Dungeon/Enemies/OrangeSlime.h"
+#include "Dungeon/Enemies/Shopkeeper.h"
 #include "Dungeon/Enemies/Skeleton.h"
 #include "Dungeon/Enemies/Zombie.h"
 
@@ -29,6 +30,7 @@ public:
         case 8: return  std::make_shared<Enemies::Bat>(u_Enemy, mapData);
         case 11: return std::make_shared<Enemies::Ghost>(u_Enemy, mapData);
         case 12: return std::make_shared<Enemies::Zombie>(u_Enemy, mapData);
+        case 600: return std::make_shared<Enemies::Shopkeeper>(u_Enemy, mapData);
         default: return std::make_shared<Enemies::GreenSlime>(u_Enemy, mapData);
         }
         // clang-format on
