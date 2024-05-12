@@ -228,6 +228,7 @@ void App::Update() {
     Music::Tempo::Update(musicTime, 0u, Music::Player::LoopCounter());
 
     m_MainCharacter->Update();
+
     m_Camera->Update();
 }
 

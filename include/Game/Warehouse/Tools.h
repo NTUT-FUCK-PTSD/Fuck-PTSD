@@ -33,15 +33,23 @@ public:
         const std::string& type
     );
 
-    std::string Print() { return "test"; }
-
     template <typename T>
     std::shared_ptr<T> GetTool(
         std::size_t        idx,
         const std::string& expectedType
     ) {
-        const auto&& result = std::static_pointer_cast<T>(m_ToolList.at(idx));
-        if (result->GetType() != expectedType) {
+        std::shared_ptr<T> result = nullptr;
+        std::for_each(
+            m_ToolList.begin(),
+            m_ToolList.end(),
+            [expectedType, &result](const auto& elem) {
+                if (elem->GetType() == expectedType) {
+                    result = elem;
+                }
+            }
+        );
+
+        if (!result) {
             throw std::runtime_error("not expected type");
         }
         return result;
