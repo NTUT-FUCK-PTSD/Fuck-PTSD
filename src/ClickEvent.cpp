@@ -2,6 +2,7 @@
 // Created by adven on 2024/5/10.
 //
 
+#include <typeinfo>
 #include "App.hpp"
 
 #include "Util/Logger.hpp"
@@ -11,20 +12,13 @@
 #include <Util/Input.hpp>
 #include <algorithm>
 #include "Actions.h"
-#include "Display/BeatHeart.h"
-#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemy.h"
-#include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
-#include "Game/Graphs/Spear.h"
-#include "Game_config.h"
-#include "HPIS.h"
+#include "Game/Systems/HandItem.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
-#include "System.h"
 #include "Systems/HEIS.h"
-#include "Systems/HPIS.h"
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -39,6 +33,20 @@ auto musicTime = []() {
 };
 
 void App::ClickEvent() {
+    m_EventHandler.AddEvent(
+        [this]() {
+            const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
+            );
+            LOG_INFO(playerMI);
+
+            if (!m_DungeonMap->GetMapData()->IsItemEmpty(playerMI)) {
+                auto t = m_DungeonMap->GetMapData()->GetItem(playerMI);
+                LOG_INFO(typeid(t).name());
+            }
+        },
+        Util::Keycode::T
+    );
+
     m_EventHandler.AddEvent(
         [this]() {
             const auto [playerGP, playerMI] = Settings::Helper::GetPlayerPosDM(
@@ -61,9 +69,11 @@ void App::ClickEvent() {
             );
 
             if (!m_DungeonMap->GetMapData()->IsItemEmpty(nextPos)) {
-                m_DungeonMap->RemoveItem(nextPos);
-                m_MainCharacter->GetToolMod()
-                    ->DisappearTool(true, "WEAPON", "Spear");
+                Game::Systems::HandItem hi(m_DungeonMap, m_MainCharacter);
+                hi.DispatchByMI(
+                    m_DungeonMap->GetMapData()->GetItem(nextPos),
+                    nextPos
+                );
             }
         },
         Util::Keycode::W,
@@ -161,28 +171,24 @@ void App::ClickEvent() {
               Util::Keycode::W,
               Util::Keycode::A,
               Util::Keycode::S,
-              Util::Keycode::D
-            };
+              Util::Keycode::D};
             const std::vector<glm::vec2> direction =
                 {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
             const std::vector<Player::Direction> playerDirection = {
               Player::Direction::UP,
               Player::Direction::LEFT,
               Player::Direction::DOWN,
-              Player::Direction::RIGHT
-            };
+              Player::Direction::RIGHT};
             const std::vector<glm::vec2> aniPlayerDirection = {
               {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
               {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
               {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-            };
+              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
             const std::vector<glm::vec2> aniCameraDirection = {
               {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
               {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
               {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
-            };
+              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}};
 
             for (std::size_t i = 0; i < 4; i++) {
                 if (Util::Input::IsKeyDown(key[i])
@@ -231,12 +237,10 @@ void App::ClickEvent() {
 
                         m_AniPlayerDestination = {
                           m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                          m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                        };
+                          m_AniPlayerDestination.y + aniPlayerDirection[i].y};
                         m_AniCameraDestination = {
                           m_AniCameraDestination.x + aniCameraDirection[i].x,
-                          m_AniCameraDestination.y + aniCameraDirection[i].y
-                        };
+                          m_AniCameraDestination.y + aniCameraDirection[i].y};
                     }
                 }
             }

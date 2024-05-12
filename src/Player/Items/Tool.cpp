@@ -102,6 +102,15 @@ void Players::Tools::RemoveTool(
     ReArrange();
 }
 
+void Players::Tools::AddTool(const std::string& name, const std::string& type) {
+    const auto& obj = m_ToolFactory->MakeTool(name, type);
+    m_BaseTool.insert({name, type});
+    m_ToolList.insert(m_ToolList.end(), obj);
+    m_GameElement->AddChild(obj);
+
+    ReArrange();
+}
+
 void Players::Tools::AddTool(
     const std::shared_ptr<IEquip>& ge,
     const std::string&             name,

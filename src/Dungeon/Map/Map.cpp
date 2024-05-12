@@ -29,8 +29,7 @@ std::size_t Map::GamePostion2MapIndex(const glm::ivec2& position) const {
 glm::ivec2 Map::MapIndex2GamePosition(const std::size_t index) const {
     return {
       static_cast<int>(index % m_Size.x) + m_Level->GetLevelIndexMin().x - 1,
-      static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1
-    };
+      static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1};
 }
 
 std::shared_ptr<MapData> Map::GetMapData() const {
@@ -187,6 +186,8 @@ void Map::AddItem(
     const std::shared_ptr<Item> item
 ) {
     if (m_MapData->IsItemEmpty(position)) {
+        const auto& tile = GetMapData()->GetTile(position);
+        item->m_Transform = tile->m_Transform;
         m_MapData->AddItem(position, item);
         AddChild(item);
     } else {

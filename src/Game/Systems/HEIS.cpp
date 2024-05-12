@@ -59,7 +59,7 @@ auto Game::Systems::HEIS::MakeTile(
         100
     );
 
-    auto object = std::make_shared<Graphs::DaggerGameObj>();
+    auto object = std::make_shared<Graphs::Dagger>();
     object->SetDrawable(image);
 
     System::AddWeapon(std::dynamic_pointer_cast<Graphs::IBase>(object), mi);

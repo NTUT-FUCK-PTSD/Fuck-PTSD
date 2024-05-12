@@ -14,7 +14,7 @@
 #include "Display/BeatIndicator.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
-#include "Game/Graphs/Black_Chest.h"
+#include "Game/Graphs/BlackChest.h"
 #include "HPIS.h"
 #include "Helper.hpp"
 #include "Music/Player.h"
@@ -106,20 +106,5 @@ void App::initializeGame() {
     // Display::BeatHeart::Pause(false);
 
     const auto& blackChest = std::make_shared<Game::Graphs::BlackChest>();
-    const auto& size = static_cast<glm::ivec2>(Settings::Helper::CountImgPixel(
-        Players::Config::IMAGE_CHEST_BLACK.data(),
-        1,
-        2
-    ));
-
-    const auto& blackChestImage = std::make_shared<Util::SpriteSheet>(
-        Players::Config::IMAGE_CHEST_BLACK.data()
-    );
-
-    blackChestImage->SetDrawRect({0, 0, size.x, size.y});
-    blackChest->SetDrawable(blackChestImage);
-    blackChest->SetZIndex(100);
-    blackChest->m_Transform.scale = {3, 3};
-
-    m_DungeonMap->AddItem(416, blackChest);
+    m_DungeonMap->AddItem(446, blackChest);
 }
