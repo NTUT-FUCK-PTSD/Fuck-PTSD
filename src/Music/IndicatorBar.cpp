@@ -5,6 +5,7 @@
 #include "Music/Music_config.h"
 #include "Music/Tempo.h"
 #include "UGameElement.h"
+#include "Util/Logger.hpp"
 #include "Util/Time.hpp"
 #include "glm/fwd.hpp"
 
@@ -28,12 +29,13 @@ void Music::IndicatorBar::CountTempoNumber() {
 }
 
 void Music::IndicatorBar::CountIndicatorIntervalSpace() {
-    m_IIS = WINDOW_WIDTH / m_TempoNumber;
+    constexpr std::size_t WINDOW_WIDTH_HALF = WINDOW_WIDTH / 2;
+    m_IIS = WINDOW_WIDTH_HALF / m_TempoNumber;
 }
 
 void Music::IndicatorBar::CreateImage() {
     m_IndicatorBlue = std::make_shared<Util::Image>(
-        Music::Config::IMAGE_BLUE_INDICATOR
+        Music::Config::IMAGE_BLUE_INDICATOR.data()
     );
     m_GameElement = std::make_shared<Util::GameElement>();
     m_GameElement->SetVisible(false);
@@ -72,7 +74,7 @@ void Music::IndicatorBar::CreateIndicatorRight() {
     auto position = m_CenterPos;
     for (const auto& elem : m_IndicatRight) {
         elem->SetPosition(position);
-
+        LOG_INFO(m_IIS);
         position.x += m_IIS;
     }
 }
@@ -87,6 +89,10 @@ void Music::IndicatorBar::UpdateTimer() {
     m_LastRecordTime = current;
 
     m_IIT = diff;
+}
+
+std::shared_ptr<Util::GameElement> Music::IndicatorBar::GetGameElement() {
+    return m_GameElement;
 }
 
 void Music::IndicatorBar::Update() {
@@ -122,12 +128,13 @@ void Music::IndicatorBar::UpdateIndicatorLeft(
     std::for_each(
         m_IndicatLeft.begin(),
         m_IndicatLeft.end(),
-        [idx = 0, intervalPixel, intervalTime](const auto& elem) mutable {
+        [idx = m_BeatIndex, intervalPixel, intervalTime](const auto& elem
+        ) mutable {
             const auto&& tit = TempoIntervalTime(idx);
             const auto&& moveSpeed =
                 MoveSpeed(intervalPixel, tit, intervalTime);
 
-            const auto&& pos = elem->GetPosition();
+            const auto&  pos = elem->GetPosition();
             const auto&& x_pos = pos.x + moveSpeed;
 
             glm::ivec2 movePos = {0, 0};
@@ -150,14 +157,16 @@ void Music::IndicatorBar::UpdateIndicatorRight(
     std::for_each(
         m_IndicatRight.begin(),
         m_IndicatRight.end(),
-        [idx = 0, intervalPixel, intervalTime](const auto& elem) mutable {
+        [idx = m_BeatIndex, intervalPixel, intervalTime](const auto& elem
+        ) mutable {
             const auto&& tit = TempoIntervalTime(idx);
             const auto&& moveSpeed =
                 MoveSpeed(intervalPixel, tit, intervalTime);
 
-            const auto&& pos = elem->GetPosition();
+            const auto&  pos = elem->GetPosition();
             const auto&& x_pos = pos.x - moveSpeed;
 
+            LOG_INFO("idx: {}, pos: {}, speed:{}", idx, pos.x, moveSpeed);
             glm::ivec2 movePos = {0, 0};
             if (x_pos <= 0) {
                 movePos = {720.0f - x_pos, m_CenterPos.y};
@@ -167,13 +176,44 @@ void Music::IndicatorBar::UpdateIndicatorRight(
             elem->SetPosition(movePos);
             idx++;
         }
-    );
+    ); /**
+        * @note debug
+        */
+    std::vector<std::size_t> list;
+    for (std::size_t i = 0; i < m_IndicatRight.size() - 1; i++) {
+        const auto& fptr = [i]() {
+            const auto& after = m_IndicatRight[i + 1]->GetPosition().x;
+            const auto& before = m_IndicatRight[i]->GetPosition().x;
+
+            if (after < before) {
+                return after - before;
+            } else if (after > before) {
+                return (after) + (-720 - before);
+            }
+        };
+
+        list.push_back(-fptr());
+
+        //        LOG_INFO("index: {}, interval: {}", i, fptr());
+    }
+    const auto max = std::max_element(list.begin(), list.end());
+    const auto min = std::min_element(list.begin(), list.end());
+    LOG_INFO("max: {}, min: {}, time: {}", *max, *min, intervalTime);
+    list.clear();
 }
 
 namespace Music {
-bool        m_IsPause = false;
-std::size_t IndicatorBar::m_TempoNumber = 0;
-std::size_t m_BeatIndex = 0;
-std::size_t m_LastRecordTime = 0;
-std::size_t m_IIT = 0;
+bool IndicatorBar::m_IsPause = false;
+
+std::size_t                        IndicatorBar::m_IIT = 0;
+std::size_t                        IndicatorBar::m_IIS = 0;
+std::size_t                        IndicatorBar::m_BeatIndex = 0;
+std::size_t                        IndicatorBar::m_LastRecordTime = 0;
+std::size_t                        IndicatorBar::m_TempoNumber = 0;
+std::shared_ptr<Util::Image>       IndicatorBar::m_IndicatorBlue = nullptr;
+std::shared_ptr<Util::GameElement> IndicatorBar::m_GameElement = nullptr;
+std::vector<std::shared_ptr<Util::GameElement>> IndicatorBar::m_IndicatLeft = {
+};
+std::vector<std::shared_ptr<Util::GameElement>> IndicatorBar::m_IndicatRight = {
+};
 }  // namespace Music
