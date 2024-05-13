@@ -1,4 +1,6 @@
 #include "App.hpp"
+#include "Music/BeatIndicator.h"
+#include "Music/IndicatorBar.h"
 #include "Player.h"
 #include "Player_config.h"
 #include "SpriteSheet.hpp"
@@ -20,15 +22,15 @@
 #include "Graphs/Coin.h"
 #include "HPIS.h"
 #include "Helper.hpp"
+#include "Music/BeatIndicator.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
 #include "Systems/HEIS.h"
-
 void App::initializeGame() {
     // play lobby music
 
-    std::async(std::launch::async, []() {
+    auto a = std::async(std::launch::async, []() {
         //        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
         Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
     });
@@ -92,8 +94,10 @@ void App::initializeGame() {
     Display::BeatHeart::Init();
     m_Camera->AddUIChild(Display::BeatHeart::GetGameElement());
 
-    Display::BeatIndicator::Init();
-    m_Camera->AddUIChild(Display::BeatIndicator::GetGameElement());
+    // Display::BeatIndicator::Init();
+    Music::IndicatorBar::Init();
+    m_Camera->AddUIChild(Music::IndicatorBar::GetGameElement());
+    // m_Camera->AddUIChild(Display::BeatIndicator::GetGameElement());
 
     // helper
     Settings::Helper::Init(m_DungeonMap.get());
