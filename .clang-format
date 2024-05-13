@@ -25,6 +25,8 @@ PenaltyBreakBeforeFirstCallParameter: 30
 PenaltyReturnTypeOnItsOwnLine: 60000
 IndentCaseLabels: false
 InsertNewlineAtEOF: true
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortBlocksOnASingleLine: Always
 BreakBeforeBraces: Custom
 BraceWrapping:
   BeforeElse: false
