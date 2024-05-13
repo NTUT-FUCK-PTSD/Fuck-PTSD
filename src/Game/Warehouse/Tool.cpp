@@ -136,7 +136,11 @@ void Players::Tools::AddTool(
     }
 
     m_BaseTool.insert({name, type});
-    m_ToolList.insert(m_ToolList.begin(), ge);
+    if (ge->GetWinPos() == IEquip::ROW) {
+        m_ToolList.insert(m_ToolList.end(), ge);
+    } else {
+        m_ToolList.insert(m_ToolList.begin(), ge);
+    }
     m_GameElement->AddChild(ge);
 
     ReArrange();
