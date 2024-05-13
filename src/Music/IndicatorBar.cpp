@@ -74,7 +74,7 @@ void Music::IndicatorBar::CreateIndicatorRight() {
     auto position = m_CenterPos;
     for (const auto& elem : m_IndicatRight) {
         elem->SetPosition(position);
-        LOG_INFO(m_IIS);
+        // LOG_INFO(m_IIS);
         position.x += m_IIS;
     }
 }
@@ -166,10 +166,10 @@ void Music::IndicatorBar::UpdateIndicatorRight(
             const auto&  pos = elem->GetPosition();
             const auto&& x_pos = pos.x - moveSpeed;
 
-            LOG_INFO("idx: {}, pos: {}, speed:{}", idx, pos.x, moveSpeed);
+            // LOG_INFO("idx: {}, pos: {}, speed:{}", idx, pos.x, moveSpeed);
             glm::ivec2 movePos = {0, 0};
             if (x_pos <= 0) {
-                movePos = {720.0f - x_pos, m_CenterPos.y};
+                movePos = {720.0f + x_pos, m_CenterPos.y};
             } else {
                 movePos = {x_pos, m_CenterPos.y};
             }
@@ -179,27 +179,27 @@ void Music::IndicatorBar::UpdateIndicatorRight(
     ); /**
         * @note debug
         */
-    std::vector<std::size_t> list;
-    for (std::size_t i = 0; i < m_IndicatRight.size() - 1; i++) {
-        const auto& fptr = [i]() {
-            const auto& after = m_IndicatRight[i + 1]->GetPosition().x;
-            const auto& before = m_IndicatRight[i]->GetPosition().x;
+    // std::vector<std::size_t> list;
+    // for (std::size_t i = 0; i < m_IndicatRight.size() - 1; i++) {
+    //     const auto& fptr = [i]() {
+    //         const auto& after = m_IndicatRight[i + 1]->GetPosition().x;
+    //         const auto& before = m_IndicatRight[i]->GetPosition().x;
 
-            if (after < before) {
-                return after - before;
-            } else if (after > before) {
-                return (after) + (-720 - before);
-            }
-        };
+    //         if (after > before) {
+    //             return after - before;
+    //         } else if (after < before) {
+    //             return (after) + (720 - before);
+    //         }
+    //     };
 
-        list.push_back(-fptr());
+    //     list.push_back(fptr());
 
-        //        LOG_INFO("index: {}, interval: {}", i, fptr());
-    }
-    const auto max = std::max_element(list.begin(), list.end());
-    const auto min = std::min_element(list.begin(), list.end());
-    LOG_INFO("max: {}, min: {}, time: {}", *max, *min, intervalTime);
-    list.clear();
+    //     //        LOG_INFO("index: {}, interval: {}", i, fptr());
+    // }
+    // const auto max = std::max_element(list.begin(), list.end());
+    // const auto min = std::min_element(list.begin(), list.end());
+    // LOG_INFO("max: {}, min: {}, time: {}", *max, *min, intervalTime);
+    // list.clear();
 }
 
 namespace Music {
