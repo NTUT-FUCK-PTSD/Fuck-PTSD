@@ -8,8 +8,8 @@ Shopkeeper::Shopkeeper(
     const std::shared_ptr<MapData>& mapData
 )
     : Enemy(u_Enemy, mapData) {
-    m_NormalFrames = {1, 2, 3, 4, 5, 6, 7, 8};
-    m_ShadowFrames = {9, 10, 11, 12, 13, 14, 15, 16};
+    m_NormalFrames = {0, 1, 2, 3, 4, 5, 6, 7};
+    m_ShadowFrames = {8, 9, 10, 11, 12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
         ASSETS_DIR "/entities/shopkeeper.png",
         m_FrameSize,
