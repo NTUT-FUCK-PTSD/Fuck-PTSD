@@ -102,9 +102,7 @@ void App::ClickEvent() {
                 m_MapTableCodeDire.begin(),
                 m_MapTableCodeDire.end(),
                 [](const auto& elem) {
-                    if (!Util::Input::IsKeyDown(elem.first)) {
-                        return;
-                    }
+                    if (!Util::Input::IsKeyDown(elem.first)) { return; }
                     const auto& imagePath = m_MainCharacter->GetToolMod()
                                                 ->GetWeapon()
                                                 ->GetImagePath();
@@ -118,6 +116,8 @@ void App::ClickEvent() {
                 }
             );
 
+            const auto state = m_MainCharacter->GetToolMod()->GetWeapon();
+            if (!state) { LOG_INFO("TEST"); }
             m_MainCharacter->GetToolMod()->DisappearTool(
                 false,
                 "WEAPON",
