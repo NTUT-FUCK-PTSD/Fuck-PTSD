@@ -97,6 +97,8 @@ protected:
 
     std::size_t m_AnimationType = 0;
     bool        m_KnockbackAble = false;
+    bool        m_Dead = false;
+    bool        m_UnnecssaryAnimation = false;
 
 private:
     glm::vec2 m_GamePosition;

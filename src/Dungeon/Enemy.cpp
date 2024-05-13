@@ -144,6 +144,7 @@ void Enemy::Struck(const std::size_t damage) {
         auto delta = GetGamePosition() - GetPlayerPosition();
         m_WillMovePosition = GetGamePosition() + delta;
         m_AnimationType = 4;
+        m_UnnecssaryAnimation = true;
         CanMove();
     }
     m_IsBeAttacked = true;
@@ -153,18 +154,25 @@ void Enemy::Struck(const std::size_t damage) {
         m_Health = 0;
     }
     if (m_Health == 0) {
-        Event::EventQueue.dispatch(
-            this,
-            EnemyRemoveEventArgs(GamePostion2MapIndex(GetGamePosition()))
-        );
+        m_Dead = true;
     }
 };
 
 void Enemy::Update() {
+    if (m_Dead && (!m_Animation->IsAnimating() || m_UnnecssaryAnimation)) {
+        Event::EventQueue.dispatch(
+            this,
+            EnemyRemoveEventArgs(GamePostion2MapIndex(GetGamePosition()))
+        );
+        return;
+    }
+
     // Update animation
     m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
+    } else {
+        m_UnnecssaryAnimation = false;
     }
 
     // Update z index
@@ -174,7 +182,7 @@ void Enemy::Update() {
 }
 
 void Enemy::CanMove() {
-    if (m_WillMovePosition == GetGamePosition()) {
+    if (m_Dead || m_WillMovePosition == GetGamePosition()) {
         return;
     }
     if (m_WillMovePosition == GetPlayerPosition()) {
@@ -224,8 +232,8 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
         }
     };
 
-    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false
-        || m_IsBeAttacked == false) {
+    if (m_Health == 0 || numberOfHeart == 0 || GetShadow() == true
+        || GetVisible() == false || m_IsBeAttacked == false) {
         setVisible(false);
         return;
     }

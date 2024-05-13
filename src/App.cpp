@@ -295,6 +295,7 @@ void App::Update() {
                             // Game::Systems::HEIS::DetectHealth(mapIndex);
 
                             m_Camera->Shake(150, 10);
+                            m_PlayerMoveDirection = playerDirection[i];
                         } else if (m_DungeonMap->GetMapData()->IsPositionWall(
                                        playerDestination
                                    )) {

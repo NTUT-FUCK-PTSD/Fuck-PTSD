@@ -93,6 +93,9 @@ void Monkey::AttackPlayer() {
 
 void Monkey::Update() {
     Enemy::Update();
+    if (m_Dead) {
+        return;
+    }
     if (m_Back && !m_Animation->IsAnimating()) {
         auto player = m_MapData->GetPlayer();
         m_Transform.translation = player->GetTranslation();
