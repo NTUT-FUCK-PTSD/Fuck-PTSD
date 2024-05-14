@@ -319,7 +319,7 @@ void App::ClickEvent() {
                 Music::Tempo::ReadTempoFile(m_TempoList.back().data());
                 m_MusicList.pop_back();
                 m_TempoList.pop_back();
-                m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+                m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1, m_MainCharacter);
                 m_AniCameraDestination = {0, 0};
                 m_AniPlayerDestination = {0, 0};
             }
