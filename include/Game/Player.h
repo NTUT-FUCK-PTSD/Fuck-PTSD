@@ -5,7 +5,6 @@
 #ifndef FUCK_PTSD_PLAYER_H
 #define FUCK_PTSD_PLAYER_H
 
-#include <memory>
 #include "Animation.h"
 #include "Event/Object.h"
 #include "Game/Warehouse/Coin.h"
@@ -34,11 +33,13 @@ public:
     Direction                    GetFaceTo() const;
     Direction                    GetDirection() const;
     float                        GetZIndex() const;
+    std::size_t                  GetHealth() const;
 
     // set player's settings
     void SetGamePosition(const glm::vec2& position);
     void SetBodyImagePath(const std::string& Path) { m_BodyImagePath = Path; };
     void SetHeadImagePath(const std::string& Path) { m_HeadImagePath = Path; }
+    void SetVisible(bool status);
     void SetFaceTo(Direction direction);
     void SetZIndex(float index);
 

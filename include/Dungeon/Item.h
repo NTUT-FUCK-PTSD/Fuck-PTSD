@@ -9,6 +9,8 @@ public:
     Item() = default;
     virtual ~Item() = default;
 
+    virtual std::string GetClassName() = 0;
+
 private:
 };
 }  // namespace Dungeon

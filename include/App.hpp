@@ -11,6 +11,7 @@
 #include "Background.hpp"
 #include "Camera.h"
 #include "Dungeon/Map.h"
+#include "Event/EventHandler.h"
 #include "Player.h"
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
@@ -28,42 +29,42 @@ public:
 
     void Start();
 
+    void initializeGame();
+
+    void ClickEvent();
+
     void Update();
 
     void End();  // NOLINT(readability-convert-member-functions-to-static)
 
-    std::string Print(std::string s) { return s; }
+    static bool                                       m_ThrowMode;
+    static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
+
+    static std::shared_ptr<Dungeon::Map> m_DungeonMap;
+    static std::shared_ptr<Player>       m_MainCharacter;
+
+    static glm::vec2 m_AniPlayerDestination;
+    static glm::vec2 m_AniCameraDestination;
+
+    static Player::Direction m_PlayerMoveDirect;
+
+    static std::shared_ptr<Camera> m_Camera;
 
 private:
     void ValidTask();
 
 private:
-    // mainmenu
     std::shared_ptr<Background> m_Background;
     bool                        m_FirstTime = true;
     bool                        m_IsMainMenu = true;
-    bool                        m_ThrowMode = false;
-
-    // settings
-    glm::vec2 m_AniPlayerDestination = {0.0f, 0.0f};
-    glm::vec2 m_AniCameraDestination = {0.0f, 0.0f};
 
     State m_CurrentState = State::START;
 
-    Player::Direction m_PlayerMoveDirection = Player::Direction::NONE;
-
-    std::shared_ptr<Player> m_MainCharacter;
-
-    std::shared_ptr<Camera> m_Camera = std::make_shared<Camera>();
-
     glm::vec2 m_CameraPosition = {0, 0};
 
-    std::shared_ptr<Dungeon::Map> m_DungeonMap;
-    std::size_t                   m_BeforeTempoIndex = 0;
-    std::size_t                   m_TempoIndex = 0;
+    Events::EventHandler m_EventHandler;
 
     // addition
-    static std::map<Util::Keycode, Player::Direction> m_MapTableCodeDire;
 };
 
 #endif

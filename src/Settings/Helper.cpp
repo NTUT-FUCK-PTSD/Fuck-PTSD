@@ -9,9 +9,7 @@ void Settings::Helper::Init(Dungeon::Map* dungeonMap) {
 }
 
 std::size_t Settings::Helper::GamePosToMapIdx(glm::ivec2 gamePos) {
-    return (gamePos.x - m_DungeonMap->GetLevelIndexMax().x + 1)
-           + (gamePos.y - m_DungeonMap->GetLevelIndexMin().y + 1)
-                 * m_DungeonMap->GetSize().x;
+    return m_DungeonMap->GamePostion2MapIndex(gamePos);
 };
 
 Settings::Helper::PlayerPos Settings::Helper::GetPlayerPosDM() {

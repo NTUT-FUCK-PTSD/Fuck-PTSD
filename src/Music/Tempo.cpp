@@ -33,8 +33,6 @@ void Music::Tempo::ReadTempoFile(const std::string& path) {
         elems.push_back(std::move(transform));
     }
 
-    LOG_ERROR("hello");
-
     if (elems.empty()) {
         // throw std::exception("tempo list is empty");
         return;

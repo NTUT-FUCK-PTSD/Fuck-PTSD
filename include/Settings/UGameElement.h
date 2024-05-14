@@ -29,12 +29,6 @@ public:
 
     void SetScale(const glm::vec2& Ratio) { m_Transform.scale = Ratio; }
 
-    // return Image Path
-    [[nodiscard]]
-    const std::string& GetImagePath() const {
-        return m_ImagePath;
-    }
-
     // return Image's Position
     [[nodiscard]]
     const glm::vec2& GetPosition() const {
