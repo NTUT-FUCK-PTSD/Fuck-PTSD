@@ -57,6 +57,5 @@ void DragonGreen::Move() {
         }
     }
     m_Attack = !m_Attack;
-    UpdateProperties();
 }
 }  // namespace Dungeon::Enemies

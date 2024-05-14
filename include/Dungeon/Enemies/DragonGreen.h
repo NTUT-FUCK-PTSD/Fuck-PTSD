@@ -19,7 +19,6 @@ public:
     bool IsBoss() const override { return true; }
 
 private:
-    void UpdateProperties();
 
     const glm::vec2 m_FrameSize = {54, 51};
 
