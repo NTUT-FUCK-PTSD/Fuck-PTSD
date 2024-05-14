@@ -25,7 +25,7 @@ auto musicTime = []() {
     return static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
            % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 };
-}
+}  // namespace Update
 constexpr std::size_t IS_DEAD = 0;
 
 void App::Update() {
