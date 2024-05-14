@@ -1577,7 +1577,7 @@
             <enemy beatDelay="1" lord="0" type="5" x="-1" y="14"></enemy>
             <enemy beatDelay="1" lord="0" type="5" x="-2" y="15"></enemy>
             <enemy beatDelay="1" lord="0" type="10" x="2" y="17"></enemy>
-            <enemy beatDelay="1" lord="0" type="408" x="8" y="14"></enemy>
+            <enemy beatDelay="1" lord="0" type="408" x="0" y="2"></enemy>
             <enemy beatDelay="1" lord="0" type="11" x="7" y="17"></enemy>
             <enemy beatDelay="1" lord="0" type="12" x="6" y="17"></enemy>
             <enemy beatDelay="1" lord="0" type="5" x="8" y="16"></enemy>
