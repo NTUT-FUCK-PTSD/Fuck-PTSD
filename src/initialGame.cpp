@@ -1,9 +1,6 @@
 #include "App.hpp"
-#include "Music/BeatIndicator.h"
 #include "Music/IndicatorBar.h"
 #include "Player.h"
-#include "Player_config.h"
-#include "SpriteSheet.hpp"
 #include "Util/Logger.hpp"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
@@ -13,7 +10,7 @@
 #include <memory>
 #include <thread>
 #include "Display/BeatHeart.h"
-#include "Display/BeatIndicator.h"
+#include "Dungeon/Enemies/DragonGreen.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
 #include "Game/Graphs/BlackChest.h"
@@ -22,19 +19,19 @@
 #include "Graphs/Coin.h"
 #include "HPIS.h"
 #include "Helper.hpp"
-#include "Music/BeatIndicator.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
 #include "Systems/HEIS.h"
+
 void App::initializeGame() {
     // play lobby music
 
     auto a = std::async(std::launch::async, []() {
         //        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
         Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
+        Music::Player::SetVolume(0);
     });
-    Music::Player::SetVolume(0.1f);
 
     Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
 
