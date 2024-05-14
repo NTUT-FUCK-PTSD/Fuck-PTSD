@@ -59,6 +59,8 @@ public:
     float Heuristic(const glm::vec2& start, const glm::vec2& end);
     void  SetCameraUpdate(bool cameraUpdate);
 
+    virtual bool IsBoss() const { return false; }
+
 protected:
     virtual void Move() = 0;
 

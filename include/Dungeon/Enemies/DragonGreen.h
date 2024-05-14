@@ -16,6 +16,8 @@ public:
 
     void Move() override;
 
+    bool IsBoss() const override { return true; }
+
 private:
     void UpdateProperties();
 

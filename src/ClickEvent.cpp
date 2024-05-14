@@ -27,8 +27,8 @@ struct ClickEventType {
     std::function<void()>      fptr;
 };
 
-static std::size_t BOSS_DEAD = false;
 using CET = ClickEventType;
+static std::size_t BOSS_DEAD = false;
 
 auto musicTime = []() {
     return static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
@@ -40,26 +40,7 @@ void App::ClickEvent() {
      * @details Use to test functional.
      */
     m_EventHandler.AddEvent(
-        [this]() {
-            const auto t = m_DungeonMap->GetMapData()->GetEnemies();
-            const auto state =
-                std::find_if(t.begin(), t.end(), [](const auto& elem) {
-                    return elem && elem->GetID() == 600;
-                    //    && elem->GetHealth() <= 0;
-                });
-
-            if (state == t.end()) {
-                LOG_INFO("dead");
-                BOSS_DEAD = true;
-            }
-            // LOG_INFO("{}", state->get()->GetHealth() <= 0);
-            // std::for_each(t.begin(), t.end(), [](const auto& elem) {
-            //     if (elem && elem->GetID() == 600) {
-            //         // LOG_INFO(elem->GetHealth());
-            //         BOSS_DEAD = elem->GetHealth() <= 0;
-            //     }
-            // });
-        },
+        [this]() { LOG_DEBUG(m_DungeonMap->GetMapData()->IsBossDead()); },
         Util::Keycode::T
     );
 
@@ -310,31 +291,15 @@ void App::ClickEvent() {
 
     m_EventHandler.AddEvent(
         [this]() {
-            // bool BOSS_DEAD = trueconst auto t =
-            // m_DungeonMap->GetMapData()->GetEnemies();
-            const auto t = m_DungeonMap->GetMapData()->GetEnemies();
-            const auto state =
-                std::find_if(t.begin(), t.end(), [](const auto& elem) {
-                    return elem && elem->GetID() == 600;
-                    //    && elem->GetHealth() <= 0;
-                });
-
-            if (state == t.end()) {
-                LOG_INFO("dead");
-                BOSS_DEAD = true;
-            };
-
             const auto tile = m_DungeonMap->GetMapData()->GetTile(
                 m_DungeonMap->GamePostion2MapIndex(
                     m_MainCharacter->GetGamePosition()
-                    // + static_cast<glm::vec2>(Settings::Helper::Direct2MI(
-                    //     m_MapTableCodeDire.at(Util::Keycode::A)
-                    // ))
                 )
             );
 
             // LOG_INFO(tile->GetTile().type);
-            if (tile->GetTile().type == 9 && BOSS_DEAD) {
+            if (tile->GetTile().type == 9
+                && m_DungeonMap->GetMapData()->IsBossDead()) {
                 Music::Player::PlayMusic(m_MusicList.back().data(), true);
                 Music::Tempo::ReadTempoFile(m_TempoList.back().data());
                 m_MusicList.pop_back();

@@ -1,11 +1,13 @@
 #ifndef MAP_DATA_H
 #define MAP_DATA_H
 
+#include <memory>
 #include <vector>
 
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Item.h"
 #include "Dungeon/Tile.h"
+#include "Enemy.h"
 
 namespace Dungeon {
 class MapData final {
@@ -35,6 +37,7 @@ public:
     void ClearEnemies();
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
+    std::shared_ptr<Enemy> GetBoss() const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
     std::vector<std::shared_ptr<Enemy>> GetUnsortedEnemies() const;
     bool IsEnemyEmpty(const std::size_t position) const;
@@ -70,6 +73,7 @@ public:
     bool IsPositionPlayer(const glm::vec2& position) const;
     bool IsPositionInteractive(const glm::ivec2& position) const;
     bool IsPositionPlayerAct(const glm::vec2& position) const;
+    bool IsBossDead() const;
 
     float Heuristic(const glm::vec2& start, const glm::vec2& end);
 
@@ -90,6 +94,8 @@ private:
     std::vector<std::shared_ptr<Item>>  m_Items;
 
     glm::vec2 m_PlayerPosition = {0.0f, 0.0f};
+
+    std::shared_ptr<Enemy> m_Boss = nullptr;
 };
 }  // namespace Dungeon
 
