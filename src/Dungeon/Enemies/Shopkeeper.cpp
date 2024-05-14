@@ -1,5 +1,5 @@
 #include "Shopkeeper.h"
-#include "Elements.h"
+
 #include "ToolBoxs.h"
 
 namespace Dungeon::Enemies {
@@ -28,15 +28,7 @@ Shopkeeper::Shopkeeper(
 }
 
 void Shopkeeper::Move() {
+    m_UnnecssaryAnimation = true;
     m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 0);
-}
-void Shopkeeper::Update() {
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
-
-    UpdateHeart(m_Transform.translation);
 }
 }  // namespace Dungeon::Enemies

@@ -11,20 +11,26 @@
 #include "Dungeon/MiniMap.h"
 #include "Event/Event.h"
 #include "Event/Object.h"
+#include "Game/Player.h"
 #include "Settings/Camera.h"
+#include "Settings/GameElement.h"
 
 namespace Dungeon {
 class Map final : public Object, public Util::GameObject {
 public:
     Map(const std::shared_ptr<Camera> camera,
+        const std::shared_ptr<Player> player,
         const std::string&            path,
         const std::size_t             levelNum = 1);
     ~Map();
 
     void InitEvent();
 
-    bool        IsAvailable() { return m_Available; }
-    bool        LoadLevel(const std::size_t levelNum);
+    bool IsAvailable() { return m_Available; }
+    bool LoadLevel(
+        const std::size_t             levelNum,
+        const std::shared_ptr<Player> player
+    );
     std::size_t GetLevelNum() const;
 
     std::size_t GamePostion2MapIndex(const glm::ivec2& position) const;
@@ -48,7 +54,6 @@ public:
     static glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
     static glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
 
-    void PlayerMove(const glm::vec2& position);
     void AddItem(const std::size_t position, const std::shared_ptr<Item> item);
     void RemoveItem(const std::size_t position);
 
@@ -91,7 +96,6 @@ private:
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;
 
-    bool          m_TempoAttack = false;
     bool          m_OverlayRed = false;
     unsigned long m_OverlayRedTime = 0;
 
@@ -102,6 +106,10 @@ private:
     std::size_t m_TempoIndex = 0;
 
     Event::Remover m_Event;
+
+    std::shared_ptr<GameElement> m_TileHead = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_EnemyHead = std::make_shared<GameElement>();
+    std::shared_ptr<GameElement> m_ItemHead = std::make_shared<GameElement>();
 };
 
 }  // namespace Dungeon

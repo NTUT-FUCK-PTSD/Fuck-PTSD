@@ -11,7 +11,7 @@ void Map::LoadEnemy() {
         mapIndex = GamePostion2MapIndex({enemy.x, enemy.y});
         auto _enemy = EnemyFactory::CreateEnemy(enemy, m_MapData);
         m_MapData->AddEnemy(mapIndex, _enemy);
-        AddChild(_enemy);
+        m_EnemyHead->AddChild(_enemy);
     }
 }
 }  // namespace Dungeon

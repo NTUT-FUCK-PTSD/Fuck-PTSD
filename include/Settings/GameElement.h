@@ -49,6 +49,8 @@ public:
     bool GetVisibility() const {
         return m_Visible;
     }
+
+    void ClearChildren() { m_Children.clear(); }
 };
 
 #endif  // I_LOVE_PTSD_ROLE_H

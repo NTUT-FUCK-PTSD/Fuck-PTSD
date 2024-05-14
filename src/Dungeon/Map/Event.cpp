@@ -3,21 +3,31 @@
 
 #include "Dungeon/Enemy.h"
 #include "Event/EventArgs.h"
+#include "Event/EventType.h"
 #include "Game/Player.h"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
 
 namespace Dungeon {
 void Map::InitEvent() {
-    m_Event.appendListener(
+    Event::EventQueue.appendListener(
         EventType::AttackPlayer,
-        [this](const Object*, const EventArgs&) {
-            if (Event::GetAttackPlayer()) {
-                m_Camera->Shake(100, 10);
-                m_OverlayRed = true;
-                m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
+        eventpp::conditionalFunctor(
+            eventpp::argumentAdapter<
+                void(const Object*, const AttackPlayerEventArgs&)>(
+                [this](const Object*, const AttackPlayerEventArgs& e) {
+                    if (Event::GetAttackPlayer() && e.GetDamage() > 0) {
+                        m_Camera->Shake(100, 10);
+                        m_OverlayRed = true;
+                        m_OverlayRedTime = Util::Time::GetElapsedTimeMs();
+                    }
+                }
+            ),
+            [](const Object*, const EventArgs& e) {
+                return dynamic_cast<const AttackPlayerEventArgs*>(&e)
+                       != nullptr;
             }
-        }
+        )
     );
 
     m_Event.appendListener(
@@ -61,10 +71,7 @@ void Map::InitEvent() {
         EventType::PlayerMove,
         eventpp::conditionalFunctor(
             eventpp::argumentAdapter<void(const Player*, const EventArgs&)>(
-                [this](const Player* sender, const EventArgs&) {
-                    PlayerMove(sender->GetGamePosition());
-                    CameraUpdate();
-                }
+                [this](const Player*, const EventArgs&) { CameraUpdate(); }
             ),
             [](const Object* sender, const EventArgs&) {
                 return dynamic_cast<const Player*>(sender) != nullptr;
@@ -75,10 +82,11 @@ void Map::InitEvent() {
     m_Event.appendListener(
         EventType::ResetMap,
         [this](const Object*, const EventArgs&) {
-            m_Children.clear();
             if (m_MapData) {
-                m_MapData->ClearTiles();
-                m_MapData->ClearEnemies();
+                m_TileHead->ClearChildren();
+                m_EnemyHead->ClearChildren();
+                m_ItemHead->ClearChildren();
+                m_MapData.reset();
             }
             if (m_MiniMap) {
                 m_Camera->RemoveUIChild(m_MiniMap);
@@ -86,6 +94,24 @@ void Map::InitEvent() {
 
             m_Camera->SetPosition({0, 0});
         }
+    );
+
+    m_Event.appendListener(
+        EventType::EnemyRemove,
+        eventpp::conditionalFunctor(
+            eventpp::argumentAdapter<
+                void(const Object*, const EnemyRemoveEventArgs&)>(
+
+                [this](const Object*, const EnemyRemoveEventArgs& e) {
+                    m_EnemyHead->RemoveChild(m_MapData->GetEnemy(e.GetMapIndex()
+                    ));
+                    m_MapData->RemoveEnemy(e.GetMapIndex());
+                }
+            ),
+            [](const Object*, const EventArgs& e) {
+                return dynamic_cast<const EnemyRemoveEventArgs*>(&e) != nullptr;
+            }
+        )
     );
 }
 }  // namespace Dungeon

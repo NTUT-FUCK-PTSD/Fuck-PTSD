@@ -60,7 +60,7 @@ void Map::LoadTile() {
     }
 
     for (auto& tile : m_MapData->GetUnsortedTiles()) {
-        m_Children.push_back(tile);
+        m_TileHead->AddChild(tile);
     }
 }
 

@@ -8,14 +8,16 @@
 #include "Dungeon/Item.h"
 #include "Dungeon/Tile.h"
 #include "Enemy.h"
+#include "Game/Player.h"
 
 namespace Dungeon {
 class MapData final {
 public:
     MapData(
-        const glm::vec2& levelIndexMin,
-        const glm::vec2& levelIndexMax,
-        const glm::vec2& size
+        const glm::vec2&              levelIndexMin,
+        const glm::vec2&              levelIndexMax,
+        const glm::vec2&              size,
+        const std::shared_ptr<Player> player
     );
 
     // tile
@@ -52,12 +54,11 @@ public:
     glm::ivec2 GetLevelIndexMax() const;
     glm::ivec2 GetLevelIndexMin() const;
     glm::ivec2 GetSize() const;
-    glm::vec2  GetPlayerPosition();
+    glm::vec2  GetPlayerPosition() const;
 
     void SetLevelIndexMax(const glm::ivec2& levelIndexMax);
     void SetLevelIndexMin(const glm::ivec2& levelIndexMin);
     void SetSize(const glm::ivec2& size);
-    void SetPlayerPosition(const glm::vec2& playerPosition);
 
     std::size_t GamePosition2MapIndex(const glm::ivec2& position) const;
 
@@ -76,6 +77,7 @@ public:
     bool IsBossDead() const;
 
     float Heuristic(const glm::vec2& start, const glm::vec2& end);
+    std::shared_ptr<Player> GetPlayer() const;
 
 private:
     static bool EnemyCompare(
@@ -96,6 +98,7 @@ private:
     glm::vec2 m_PlayerPosition = {0.0f, 0.0f};
 
     std::shared_ptr<Enemy> m_Boss = nullptr;
+    std::shared_ptr<Player> m_Player;
 };
 }  // namespace Dungeon
 

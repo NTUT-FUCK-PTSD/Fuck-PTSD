@@ -1,6 +1,7 @@
 #include "Dungeon/Map.h"
 
 #include "Dungeon/Enemy.h"
+#include "Util/Logger.hpp"
 
 namespace Dungeon {
 void Map::CameraUpdate() {
@@ -42,12 +43,10 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate(bool isPlayer) {
-    m_TempoAttack = false;
-    if (!isPlayer) {
-        for (auto& enemy : m_MapData->GetEnemyQueue()) {
-            enemy->TempoMove();
-        }
-    } else {
+    for (auto& enemy : m_MapData->GetEnemyQueue()) {
+        enemy->TempoMove();
+    }
+    if (isPlayer) {
         m_ShadowRenderDP.clear();
         m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     }
@@ -55,6 +54,7 @@ void Map::TempoUpdate(bool isPlayer) {
 }
 
 void Map::PlayerTrigger() {
+    m_TempoIndex++;
     TempoUpdate(true);
 }
 

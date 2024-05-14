@@ -30,15 +30,7 @@ Enemies::GreenSlime::GreenSlime(
 }  // namespace Dungeon
 namespace Dungeon::Enemies {
 void GreenSlime::Move() {
+    m_UnnecssaryAnimation = true;
     m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 0);
 }  // Green_Slime does not move
-void GreenSlime::Update() {
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
-        m_Transform.translation = m_Animation->GetAnimationPosition();
-    }
-    SetZIndex(m_Animation->GetAnimationZIndex());
-
-    UpdateHeart(m_Transform.translation);
-}
 }  // namespace Dungeon::Enemies

@@ -1,17 +1,19 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <memory>
+#include <set>
+
 #include "Event/Object.h"
 #include "Util/GameObject.hpp"
 
-#include <memory>
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Elements.h"
 #include "Event/Event.h"
+#include "Game/Player.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
-#include "UGameElement.h"
 
 namespace Dungeon {
 // Abstract class
@@ -41,6 +43,9 @@ public:
     bool             GetShadow() const { return m_Shadow; }
     std::size_t      GetDamage() const { return m_Damage; }
     std::size_t      GetHealth() const { return m_Health; }
+    std::size_t      GetMaxHealth() const {
+        return 2 * m_HealthBar->GetChildren().size();
+    }
     std::size_t      GetCoin() const { return m_Coin; }
     const glm::vec2& GetWillMovePosition() const { return m_WillMovePosition; }
     bool             GetVisible() const { return m_Visible; }
@@ -72,9 +77,16 @@ protected:
 
     virtual void UpdateHeart(const glm::vec2& pixelPos);
 
-    std::shared_ptr<Util::Image>    m_FullHeart;
-    std::shared_ptr<Util::Image>    m_EmptyHeart;
-    std::vector<Util::GameElement*> m_HeartList;
+    void ChangeHealthBar(const std::size_t health);
+
+    // Return the set of directions that the enemy can move to
+    std::set<Player::Direction> GetRelativeDirectionSet(
+        const glm::vec2& direction
+    );
+
+    std::shared_ptr<Util::Image>      m_FullHeart;
+    std::shared_ptr<Util::Image>      m_EmptyHeart;
+    std::shared_ptr<Util::GameObject> m_HealthBar;
 
     std::shared_ptr<MapData> m_MapData;
 
@@ -86,6 +98,9 @@ protected:
     std::unique_ptr<Animation> m_Animation;
 
     std::size_t m_AnimationType = 0;
+    bool        m_KnockbackAble = false;
+    bool        m_Dead = false;
+    bool        m_UnnecssaryAnimation = false;
 
 private:
     glm::vec2 m_GamePosition;

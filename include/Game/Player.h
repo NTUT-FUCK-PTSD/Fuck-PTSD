@@ -28,8 +28,11 @@ public:
     std::shared_ptr<GameElement> GetGameElement();
     [[nodiscard]]
     glm::vec2                    GetGamePosition() const;
+    glm::vec2                    GetTranslation() const;
     std::shared_ptr<GameElement> GetWindowElement();
     Direction                    GetFaceTo() const;
+    Direction                    GetDirection() const;
+    float                        GetZIndex() const;
     std::size_t                  GetHealth() const;
 
     // set player's settings
@@ -102,7 +105,8 @@ private:
     glm::vec2                    BodySize;
     std::shared_ptr<SpriteSheet> HeadImage;
     std::shared_ptr<SpriteSheet> BodyImage;
-    Direction                    m_FaceTo = Direction::RIGHT;
+    Direction                    m_Direction = Direction::RIGHT;
+    Direction                    m_BeforeFaceTo = Direction::RIGHT;
 
     // game object
     std::shared_ptr<GameElement> m_Body;
