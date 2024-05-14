@@ -1,8 +1,5 @@
 #include "App.hpp"
-<<<<<<< HEAD
-=======
 #include "Music/BeatIndicator.h"
->>>>>>> main
 #include "Music/IndicatorBar.h"
 #include "Player.h"
 #include "Util/Logger.hpp"
