@@ -35,16 +35,6 @@ auto musicTime = []() {
 };
 
 void App::ClickEvent() {
-    static const std::vector<std::string> MUSIC_LIST = {
-      ASSETS_DIR "/music/zone1_2.ogg",
-      ASSETS_DIR "/music/zone1_3.ogg"
-    };
-
-    static const std::vector<std::string_view> TEMPO_LIST = {
-      ASSETS_DIR "/music/zone1_2.txt",
-      ASSETS_DIR "/music/zone1_3.txt"
-    };
-
     /**
      * @details Use to test functional.
      */
@@ -163,12 +153,11 @@ void App::ClickEvent() {
      * @details To Next Level
      */
     m_EventHandler.AddEvent(
-        []() {
-            Music::Player::PlayMusic(
-                MUSIC_LIST[Game::Config::idx++].data(),
-                true
-            );
-            Music::Tempo::ReadTempoFile(TEMPO_LIST[Game::Config::idx++].data());
+        [this]() {
+            Music::Player::PlayMusic(m_MusicList.back().data(), true);
+            Music::Tempo::ReadTempoFile(m_TempoList.back().data());
+            m_MusicList.pop_back();
+            m_TempoList.pop_back();
             m_DungeonMap->LoadLevel(
                 m_DungeonMap->GetLevelNum() + 1,
                 m_MainCharacter
@@ -287,17 +276,14 @@ void App::ClickEvent() {
                         } else {
                             m_PlayerMoveDirect = playerDirection[i];
 
-                            m_AniPlayerDestination = {
-                              m_AniPlayerDestination.x
-                                  + aniPlayerDirection[i].x,
-                              m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                            };
-                            m_AniCameraDestination = {
-                              m_AniCameraDestination.x
-                                  + aniCameraDirection[i].x,
-                              m_AniCameraDestination.y + aniCameraDirection[i].y
-                            };
-                        }
+                        m_AniPlayerDestination = {
+                          m_AniPlayerDestination.x + aniPlayerDirection[i].x,
+                          m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                        };
+                        m_AniCameraDestination = {
+                          m_AniCameraDestination.x + aniCameraDirection[i].x,
+                          m_AniCameraDestination.y + aniCameraDirection[i].y
+                        };
                     }
                 }
             }
