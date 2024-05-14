@@ -34,9 +34,7 @@ void Camera::Update() {
         m_Position = m_Animation->GetAnimationPosition();
     }
 
-    if (m_IsShaking) {
-        ShakeUpdate();
-    }
+    if (m_IsShaking) { ShakeUpdate(); }
     m_Renderer->AddChildren(m_GameChildren);
     m_Renderer->Update(m_Position);
     m_Renderer->ClearChildren();
@@ -46,9 +44,7 @@ void Camera::Update() {
 }
 
 void Camera::SetPosition(const glm::vec2 position) {
-    if (position == m_Position) {
-        return;
-    }
+    if (position == m_Position) { return; }
     if (m_IsShaking) {
         m_Position = m_OrginalPosition;
         m_ShakeDuringTimeMs = 0;
@@ -62,9 +58,7 @@ void Camera::MoveByTime(
     const unsigned long duringTimeMs,
     const glm::vec2&    destination
 ) {
-    if (destination == m_Position) {
-        return;
-    }
+    if (destination == m_Position) { return; }
     if (m_IsShaking) {
         m_Position = m_OrginalPosition;
         m_ShakeDuringTimeMs = 0;
@@ -75,7 +69,7 @@ void Camera::MoveByTime(
 }
 
 void Camera::Shake(const unsigned long duringTimeMs, const float strength) {
-    if (m_Animation->IsAnimating()) {
+    if (m_Animation->IsAnimating() && !m_ShakeHold) {
         m_ShakeHoldDuringTimeMs = m_Animation->GetAnimationDuringTimeMs()
                                   - (Util::Time::GetElapsedTimeMs()
                                      - m_Animation->GetAnimationStartMs());
@@ -97,9 +91,7 @@ void Camera::Shake(const unsigned long duringTimeMs, const float strength) {
 }
 
 void Camera::ShakeUpdate() {
-    if (m_ShakeDuringTimeMs == 0) {
-        return;
-    }
+    if (m_ShakeDuringTimeMs == 0) { return; }
     unsigned long passTimeMs = Util::Time::GetElapsedTimeMs() - m_ShakeStartMs;
     if (passTimeMs > m_ShakeDuringTimeMs) {
         m_Animation->SetAnimationStop();

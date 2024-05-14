@@ -152,7 +152,6 @@ void Display::BeatIndicator::UpdateLeftIndi(
             //            elem->SetPosition({-720.0f, -310.0f});
         }
         elem->SetPosition(movePosition);
-
         index_t++;
     }
 
@@ -178,7 +177,6 @@ void Display::BeatIndicator::UpdateLeftIndi(
     }
     const auto max = std::max_element(list.begin(), list.end());
     const auto min = std::min_element(list.begin(), list.end());
-
     list.clear();
 }
 

@@ -29,8 +29,11 @@ DragonGreen::DragonGreen(
     InitHealth(6);
     SetDamage(1);
     SetCoin(2);
+<<<<<<< HEAD
     m_SkeletonNormalFrames = m_NormalFrames;
     m_SkeletonShadowFrames = m_ShadowFrames;
+=======
+>>>>>>> main
 
     m_Attack = false;
 }
@@ -56,6 +59,7 @@ void DragonGreen::Move() {
         }
     }
     m_Attack = !m_Attack;
+<<<<<<< HEAD
     UpdateProperties();
 }
 
@@ -69,4 +73,8 @@ void DragonGreen::UpdateProperties() {
     }
     m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
 }
+=======
+}
+
+>>>>>>> main
 }  // namespace Dungeon::Enemies
