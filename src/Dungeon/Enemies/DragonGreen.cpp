@@ -59,15 +59,4 @@ void DragonGreen::Move() {
     m_Attack = !m_Attack;
     UpdateProperties();
 }
-
-void DragonGreen::UpdateProperties() {
-    if (m_Attack) {
-        m_NormalFrames = m_AttackFrames;
-        m_ShadowFrames = m_ShadowAttackFrames;
-    } else {
-        m_NormalFrames = m_SkeletonNormalFrames;
-        m_ShadowFrames = m_SkeletonShadowFrames;
-    }
-    m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
-}
 }  // namespace Dungeon::Enemies
