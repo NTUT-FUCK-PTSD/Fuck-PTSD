@@ -10,8 +10,8 @@ DragonGreen::DragonGreen(
     const std::shared_ptr<MapData>& mapData
 )
     : Enemy(u_Enemy, mapData) {
-    m_NormalFrames = {0, 2};
-    m_ShadowFrames = {1, 3};
+    m_NormalFrames = {0, 1};
+    m_ShadowFrames = {2, 3};
 
     m_SpriteSheet = std::make_shared<SpriteSheet>(
         ASSETS_DIR "/entities/dragon_green.png",
