@@ -1,6 +1,7 @@
 #ifndef ENEMIESFACTORY_H
 #define ENEMIESFACTORY_H
 
+#include "DragonGreen.h"
 #include "Dungeon/Enemies/Bat.h"
 #include "Dungeon/Enemies/BlueSlime.h"
 #include "Dungeon/Enemies/Ghost.h"
@@ -30,7 +31,8 @@ public:
         case 8: return  std::make_shared<Enemies::Bat>(u_Enemy, mapData);
         case 11: return std::make_shared<Enemies::Ghost>(u_Enemy, mapData);
         case 12: return std::make_shared<Enemies::Zombie>(u_Enemy, mapData);
-        case 600: return std::make_shared<Enemies::Shopkeeper>(u_Enemy, mapData);
+        case 600: return std::make_shared<Enemies::DragonGreen>(u_Enemy, mapData);
+        // case 600: return std::make_shared<Enemies::Shopkeeper>(u_Enemy, mapData);
         default: return std::make_shared<Enemies::GreenSlime>(u_Enemy, mapData);
         }
         // clang-format on
