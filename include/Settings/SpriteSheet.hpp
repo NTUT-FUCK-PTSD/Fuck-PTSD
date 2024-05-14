@@ -1,6 +1,7 @@
 #ifndef SPRITESHEET_HPP
 #define SPRITESHEET_HPP
 
+#include "Util/Logger.hpp"
 #include "pch.hpp"
 
 #include <exception>
@@ -146,9 +147,7 @@ public:
      */
     void SetDrawRect(const SDL_Rect displayRect);
 
-    void SetFrames(const std::vector<std::size_t>& frames) {
-        m_Frames = frames;
-    }
+    void SetFrames(const std::vector<std::size_t>& frames);
 
     void SetAlpha(const Uint8 alpha);
 

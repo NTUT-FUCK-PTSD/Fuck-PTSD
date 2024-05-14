@@ -1,6 +1,5 @@
 #include "Dungeon/Enemies/Ghost.h"
 
-#include "Dungeon/AStar.h"
 #include "Dungeon/MapData.h"
 
 namespace Dungeon {
@@ -27,8 +26,6 @@ Enemies::Ghost::Ghost(
     SetDamage(1);   // 0.5 heart
     SetCoin(2);
 
-    m_LastDistance =
-        Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
     m_AnimationType = 4;
 }
 }  // namespace Dungeon
@@ -52,9 +49,10 @@ void Ghost::Struck(const std::size_t damage) {
     Enemy::Struck(damage);
 }
 void Ghost::Move() {
-    auto tmp =
-        Dungeon::AStar::Heuristic(GetGamePosition(), GetPlayerPosition());
-    if (m_LastDistance > tmp || (m_Transparent && m_LastDistance == tmp)) {
+    auto relativeDirectionSet = GetRelativeDirectionSet(
+        GetGamePosition() - GetPlayerPosition()
+    );
+    if (relativeDirectionSet.count(m_MapData->GetPlayer()->GetDirection())) {
         SetTransparent(true);
     } else {
         if (m_Transparent) {
@@ -62,7 +60,6 @@ void Ghost::Move() {
             return;
         }
     }
-    m_LastDistance = tmp;
 
     if (!m_Transparent) {
         m_WillMovePosition = FindNextToPlayer();
@@ -81,7 +78,6 @@ void Ghost::Move() {
                 m_AnimationType = 2;
             }
             CanMove();
-            tmp -= 1;
         }
     }
 }

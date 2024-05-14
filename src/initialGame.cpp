@@ -81,6 +81,7 @@ void App::initializeGame() {
     // Test the Dungeon::Map
     m_DungeonMap = std::make_shared<Dungeon::Map>(
         m_Camera,
+        m_MainCharacter,
         ASSETS_DIR "/dungeon/MY DUNGEON.xml",
         1
     );

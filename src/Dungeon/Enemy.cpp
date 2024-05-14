@@ -1,6 +1,7 @@
 #include "Dungeon/Enemy.h"
 
 #include <memory>
+#include <vector>
 
 #include "Dungeon/AStar.h"
 #include "Dungeon/MapData.h"
@@ -9,18 +10,18 @@
 #include "Event/EventArgs.h"
 #include "Settings/ToolBoxs.h"
 #include "UGameElement.h"
+#include "Util/Logger.hpp"
 
 namespace Dungeon {
 
 Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
     : m_MapData(mapData),
-      m_GamePosition({u_Enemy.x, u_Enemy.y}),
       m_ID(u_Enemy.type),
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1),
       m_DrawableUpdate(Event::EventQueue) {
     m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
-    SetGamePosition(m_GamePosition);
+    SetGamePosition({u_Enemy.x, u_Enemy.y});
     m_Animation = std::make_unique<Animation>(
         ToolBoxs::GamePostoPos(m_GamePosition)
     );
@@ -99,7 +100,7 @@ glm::vec2 Enemy::FindNextToPlayer() {
         m_MapData,
         10
     );
-    if (path.empty()) {
+    if (path.empty() || path.size() == 1) {
         return GetGamePosition();
     } else {
         return path[1];
@@ -139,21 +140,39 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
 }
 
 void Enemy::Struck(const std::size_t damage) {
+    if (m_KnockbackAble) {
+        auto delta = GetGamePosition() - GetPlayerPosition();
+        m_WillMovePosition = GetGamePosition() + delta;
+        m_AnimationType = 4;
+        m_UnnecssaryAnimation = true;
+        CanMove();
+    }
     m_IsBeAttacked = true;
     if (m_Health >= damage) {
         m_Health -= damage;
     } else {
         m_Health = 0;
-        LOG_INFO("zero");
-        SetVisible(false);
+    }
+    if (m_Health == 0) {
+        m_Dead = true;
     }
 };
 
 void Enemy::Update() {
+    if (m_Dead && (!m_Animation->IsAnimating() || m_UnnecssaryAnimation)) {
+        Event::EventQueue.dispatch(
+            this,
+            EnemyRemoveEventArgs(GamePostion2MapIndex(GetGamePosition()))
+        );
+        return;
+    }
+
     // Update animation
     m_Animation->UpdateAnimation(true);
     if (m_Animation->IsAnimating()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
+    } else {
+        m_UnnecssaryAnimation = false;
     }
 
     // Update z index
@@ -163,6 +182,9 @@ void Enemy::Update() {
 }
 
 void Enemy::CanMove() {
+    if (m_Dead || m_WillMovePosition == GetGamePosition()) {
+        return;
+    }
     if (m_WillMovePosition == GetPlayerPosition()) {
         AttackPlayer();
         return;
@@ -186,7 +208,7 @@ void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
 
     float zindex = 0.01;
     for (std::size_t ii = 0; ii < hp; ii += 2) {
-        const auto& obj = std::make_shared<Util::GameElement>();
+        const auto obj = std::make_shared<Util::GameElement>();
         //        obj->SetDrawable(Dungeon::config::PTR_IMAGE_FULL_HEART_SM);
         obj->SetDrawable(m_FullHeart);
         obj->SetZIndex(99.0f + zindex);
@@ -194,25 +216,28 @@ void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
         obj->SetVisible(false);
         obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
 
-        AddChild(obj);
-        m_HeartList.push_back(obj.get());
+        m_HealthBar->AddChild(obj);
 
         zindex = zindex + 0.01;
     }
 }
 
 void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
+    const auto m_HeartList = m_HealthBar->GetChildren();
     const auto numberOfHeart = m_HeartList.size();
 
-    if (numberOfHeart == 0 || GetShadow() == true || GetVisible() == false
-        || m_IsBeAttacked == false) {
-        [&]() {
-            for (const auto& elem : m_HeartList) {
-                elem->SetVisible(false);
-            }
-        }();
+    auto setVisible = [&](bool visible) {
+        for (const auto& elem : m_HeartList) {
+            elem->SetVisible(visible);
+        }
+    };
+
+    if (m_Health == 0 || numberOfHeart == 0 || GetShadow() == true
+        || GetVisible() == false || m_IsBeAttacked == false) {
+        setVisible(false);
         return;
     }
+    setVisible(true);
 
     int       startIdx = numberOfHeart * -1 + 1;
     auto      pos = pixelPos + glm::vec2{0.0f, 40.0f};
@@ -220,7 +245,8 @@ void Enemy::UpdateHeart(const glm::vec2& pixelPos) {
 
     for (std::size_t ii = 0; ii < numberOfHeart; ii++) {
         x_offset = {startIdx * 18 + pos.x, pos.y};
-        m_HeartList[ii]->SetPosition(x_offset);
+        std::dynamic_pointer_cast<Util::GameElement>(m_HeartList[ii])
+            ->SetPosition(x_offset);
         startIdx += 2;
     }
 
@@ -241,8 +267,33 @@ float Enemy::Heuristic(const glm::vec2& start, const glm::vec2& end) {
     return m_MapData->Heuristic(start, end);
 }
 void Enemy::InitHealth(const std::size_t health) {
+    RemoveChild(m_HealthBar);
+    m_HealthBar = std::make_shared<Util::GameObject>();
+    AddChild(m_HealthBar);
     m_Health = health;
     InitHealthBarImage(m_Transform.translation);
+}
+
+std::set<Player::Direction> Enemy::GetRelativeDirectionSet(
+    const glm::vec2& direction
+) {
+    std::set<Player::Direction> relativeDirection;
+    if (direction.x > 0) {
+        relativeDirection.insert(Player::Direction::RIGHT);
+    } else if (direction.x < 0) {
+        relativeDirection.insert(Player::Direction::LEFT);
+    }
+    if (direction.y > 0) {
+        relativeDirection.insert(Player::Direction::DOWN);
+    } else if (direction.y < 0) {
+        relativeDirection.insert(Player::Direction::UP);
+    }
+    return relativeDirection;
+}
+
+void Enemy::ChangeHealthBar(const std::size_t health) {
+    m_Health = health;
+    UpdateHeart(m_Transform.translation);
 }
 
 }  // namespace Dungeon

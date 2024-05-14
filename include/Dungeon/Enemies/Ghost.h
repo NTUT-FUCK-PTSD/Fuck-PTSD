@@ -20,8 +20,6 @@ public:
 private:
     const glm::vec2 m_FrameSize = {24, 24};
 
-    std::size_t m_LastDistance;
-
     bool m_Transparent = false;
 };
 }  // namespace Enemies

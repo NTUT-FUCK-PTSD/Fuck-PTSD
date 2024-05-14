@@ -38,10 +38,7 @@ std::shared_ptr<MapData> Map::GetMapData() const {
 
 void Map::RemoveEnemy(const std::size_t position) {
     std::shared_ptr<Enemy> enemy = m_MapData->GetEnemy(position);
-    m_Children.erase(
-        std::remove(m_Children.begin(), m_Children.end(), enemy),
-        m_Children.end()
-    );
+    m_EnemyHead->RemoveChild(enemy);
     m_MapData->RemoveEnemy(position);
 }
 
@@ -51,14 +48,7 @@ void Map::RemoveWall(const std::size_t position) {
     if (tile.type == 102) {
         return;
     }
-    m_Children.erase(
-        std::remove(
-            m_Children.begin(),
-            m_Children.end(),
-            m_MapData->GetTile(position)
-        ),
-        m_Children.end()
-    );
+    m_TileHead->RemoveChild(m_MapData->GetTile(position));
     m_MapData->RemoveTile(position);
     m_MapData->AddTile(
         position,
@@ -66,7 +56,7 @@ void Map::RemoveWall(const std::size_t position) {
             s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
         )
     );
-    m_Children.push_back(m_MapData->GetTile(position));
+    m_TileHead->AddChild(m_MapData->GetTile(position));
 }
 
 void Map::OpenDoor(const std::size_t position) {
@@ -81,32 +71,23 @@ void Map::OpenDoor(const std::size_t position) {
             if (m_MapData->IsPositionDoor(tmpPosition)
                 && doorType
                        == m_MapData->GetTile(tmpMapIndex)->GetTile().type) {
-                m_Children.erase(
-                    std::remove(
-                        m_Children.begin(),
-                        m_Children.end(),
-                        m_MapData->GetTile(tmpMapIndex)
-                    ),
-                    m_Children.end()
-                );
+                m_TileHead->RemoveChild(m_MapData->GetTile(tmpMapIndex));
                 m_MapData->RemoveTile(tmpMapIndex);
                 m_MapData->AddTile(
                     tmpMapIndex,
-                    TileFactory::CreateTile(
-                        s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
-                    )
+                    TileFactory::CreateTile(s_Tile{
+                      static_cast<int>(tmpPosition.x),
+                      static_cast<int>(tmpPosition.y),
+                      0,
+                      tile.zone,
+                      0,
+                      tile.cracked
+                    })
                 );
-                m_Children.push_back(m_MapData->GetTile(tmpMapIndex));
+                m_TileHead->AddChild(m_MapData->GetTile(tmpMapIndex));
             }
         }
-        m_Children.erase(
-            std::remove(
-                m_Children.begin(),
-                m_Children.end(),
-                m_MapData->GetTile(position)
-            ),
-            m_Children.end()
-        );
+        m_TileHead->RemoveChild(m_MapData->GetTile(position));
         m_MapData->RemoveTile(position);
         m_MapData->AddTile(
             position,
@@ -114,7 +95,7 @@ void Map::OpenDoor(const std::size_t position) {
                 s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
             )
         );
-        m_Children.push_back(m_MapData->GetTile(position));
+        m_TileHead->AddChild(m_MapData->GetTile(position));
     }
 }
 
@@ -177,10 +158,6 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
     return true;
 }
 
-void Map::PlayerMove(const glm::vec2& position) {
-    m_MapData->SetPlayerPosition(position);
-}
-
 void Map::AddItem(
     const std::size_t           position,
     const std::shared_ptr<Item> item
@@ -190,14 +167,14 @@ void Map::AddItem(
         item->m_Transform = tile->m_Transform;
         item->SetZIndex(tile->GetZIndex() + 0.01f);
         m_MapData->AddItem(position, item);
-        AddChild(item);
+        m_ItemHead->AddChild(item);
     } else {
         LOG_CRITICAL("Item already exists at position: {0}", position);
     }
 }
 
 void Map::RemoveItem(const std::size_t position) {
-    RemoveChild(m_MapData->GetItem(position));
+    m_ItemHead->RemoveChild(m_MapData->GetItem(position));
     m_MapData->RemoveItem(position);
 }
 }  // namespace Dungeon

@@ -71,6 +71,10 @@ glm::vec2 Player::GetGamePosition() const {
     return m_GamePosition;
 }
 
+glm::vec2 Player::GetTranslation() const {
+    return m_Position;
+}
+
 void Player::SetGamePosition(const glm::vec2& gamePosition) {
     m_GamePosition = gamePosition;
     m_Animation->UpdateGamePosition(gamePosition);
@@ -83,17 +87,18 @@ void Player::SetVisible(bool status) {
 }
 
 void Player::SetFaceTo(Direction direction) {
+    m_Direction = direction;
     if (direction != RIGHT && direction != LEFT) {
         // LOG_WARN("Player::SetFaceTo: Invalid direction");
         return;
     }
     if (direction == RIGHT) {
-        m_FaceTo = RIGHT;
+        m_BeforeFaceTo = RIGHT;
         m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
         m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
         return;
     }
-    m_FaceTo = LEFT;
+    m_BeforeFaceTo = LEFT;
     m_Body->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
     m_Head->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
 }
@@ -137,7 +142,15 @@ std::shared_ptr<GameElement> Player::GetWindowElement() {
 }
 
 Player::Direction Player::GetFaceTo() const {
-    return m_FaceTo;
+    return m_BeforeFaceTo;
+}
+
+Player::Direction Player::GetDirection() const {
+    return m_Direction;
+}
+
+float Player::GetZIndex() const {
+    return m_ZIndex;
 }
 
 void Player::gainCoin(std::size_t number) {
@@ -205,6 +218,7 @@ void Player::MoveByTime(
     // Update GamePosition but not draw
     m_BeforeGamePosition = m_GamePosition;
     m_GamePosition = ToolBoxs::PosToGamePos(destination);
+    SetFaceTo(static_cast<Direction>(direction));
     m_Animation->MoveByTime(duringTimeMs, destination, direction);
 }
 
