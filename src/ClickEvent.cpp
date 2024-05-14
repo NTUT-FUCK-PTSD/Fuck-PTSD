@@ -40,8 +40,13 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
-            const auto [b, a] = Settings::Helper::GetPlayerPosDM();
-            LOG_INFO(a);
+            const auto tile = m_DungeonMap->GetMapData()->GetTile(
+                m_DungeonMap->GamePostion2MapIndex(
+                    m_MainCharacter->GetGamePosition()
+                )
+            );
+
+            LOG_INFO(tile->GetTile().type);
         },
         Util::Keycode::T
     );
@@ -284,6 +289,36 @@ void App::ClickEvent() {
             );
             m_Camera->MoveByTime(200, m_AniCameraDestination);
             m_DungeonMap->PlayerTrigger();
+        },
+        Util::Keycode::W,
+        Util::Keycode::D,
+        Util::Keycode::S,
+        Util::Keycode::A
+    );
+
+    m_EventHandler.AddEvent(
+        [this]() {
+            bool BOSS_DEAD = true;
+
+            const auto tile = m_DungeonMap->GetMapData()->GetTile(
+                m_DungeonMap->GamePostion2MapIndex(
+                    m_MainCharacter->GetGamePosition()
+                    // + static_cast<glm::vec2>(Settings::Helper::Direct2MI(
+                    //     m_MapTableCodeDire.at(Util::Keycode::A)
+                    // ))
+                )
+            );
+
+            LOG_INFO(tile->GetTile().type);
+            if (tile->GetTile().type == 9 && BOSS_DEAD) {
+                Music::Player::PlayMusic(m_MusicList.back().data(), true);
+                Music::Tempo::ReadTempoFile(m_TempoList.back().data());
+                m_MusicList.pop_back();
+                m_TempoList.pop_back();
+                m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1);
+                m_AniCameraDestination = {0, 0};
+                m_AniPlayerDestination = {0, 0};
+            }
         },
         Util::Keycode::W,
         Util::Keycode::D,
