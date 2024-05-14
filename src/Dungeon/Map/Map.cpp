@@ -91,12 +91,12 @@ void Map::OpenDoor(const std::size_t position) {
                 );
                 m_MapData->RemoveTile(tmpMapIndex);
                 m_MapData->AddTile(
-                    position,
+                    tmpMapIndex,
                     TileFactory::CreateTile(
                         s_Tile{tile.x, tile.y, 0, tile.zone, 0, tile.cracked}
                     )
                 );
-                m_Children.push_back(m_MapData->GetTile(position));
+                m_Children.push_back(m_MapData->GetTile(tmpMapIndex));
             }
         }
         m_Children.erase(

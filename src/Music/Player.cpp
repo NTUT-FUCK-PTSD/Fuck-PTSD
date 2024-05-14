@@ -63,6 +63,11 @@ float Music::Player::GetMusicTime() {
     return m_MusicSystem.getStreamTime(m_MusicHandle);
 }
 
+std::size_t Music::Player::GetMusicTimeLoop() {
+    return static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
+           % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
+}
+
 float Music::Player::GetMusicLength() {
     return m_Wav->getLength();
 }

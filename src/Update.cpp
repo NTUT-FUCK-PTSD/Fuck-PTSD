@@ -6,6 +6,7 @@
 #include <thread>
 #include "App.hpp"
 
+#include "Music/IndicatorBar.h"
 #include "Util/Logger.hpp"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
@@ -25,8 +26,7 @@ auto musicTime = []() {
     return static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
            % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 };
-}
-
+}  // namespace Update
 constexpr std::size_t IS_DEAD = 0;
 
 void App::Update() {
@@ -46,13 +46,12 @@ void App::Update() {
             m_Camera->AddUIChild(ds);
         }
     }
-    if (Util::Input::IfExit()) {
-        m_CurrentState = State::END;
-    }
+    if (Util::Input::IfExit()) { m_CurrentState = State::END; }
 
     Game::System::Update();
     Display::BeatHeart::Update();
-    Display::BeatIndicator::Update();
+    // Display::BeatIndicator::Update();
+    Music::IndicatorBar::Update();
     Music::Tempo::Update(Update::musicTime(), 0u, Music::Player::LoopCounter());
 
     m_MainCharacter->Update();
