@@ -56,7 +56,9 @@ void Players::Tools::DisappearTool(
     } else {
         const auto& it = m_BufferBase.find(name);
         if (it == m_BufferBase.end()) {
-            throw std::runtime_error("Remove Tool Error");
+            LOG_ERROR("ReAdd Tool Error");
+            return;
+            // throw std::runtime_error("Remove Tool Error");
         }
         m_BufferBase.erase(it);
 
@@ -77,7 +79,9 @@ void Players::Tools::RemoveTool(
 ) {
     const auto& it = m_BaseTool.find(name);
     if (m_BaseTool.end() == it) {
-        throw std::runtime_error("Remove Tool Error");
+        LOG_ERROR("ReAdd Tool Error");
+        return;
+        // throw std::runtime_error("Remove Tool Error");
     }
     m_BaseTool.erase(it);
 
@@ -136,7 +140,11 @@ void Players::Tools::AddTool(
     }
 
     m_BaseTool.insert({name, type});
-    m_ToolList.insert(m_ToolList.begin(), ge);
+    if (ge->GetWinPos() == IEquip::ROW) {
+        m_ToolList.insert(m_ToolList.end(), ge);
+    } else {
+        m_ToolList.insert(m_ToolList.begin(), ge);
+    }
     m_GameElement->AddChild(ge);
 
     ReArrange();
