@@ -102,9 +102,7 @@ void App::ClickEvent() {
                 m_MapTableCodeDire.begin(),
                 m_MapTableCodeDire.end(),
                 [](const auto& elem) {
-                    if (!Util::Input::IsKeyDown(elem.first)) {
-                        return;
-                    }
+                    if (!Util::Input::IsKeyDown(elem.first)) { return; }
                     const auto& imagePath = m_MainCharacter->GetToolMod()
                                                 ->GetWeapon()
                                                 ->GetImagePath();
@@ -276,14 +274,17 @@ void App::ClickEvent() {
                         } else {
                             m_PlayerMoveDirect = playerDirection[i];
 
-                        m_AniPlayerDestination = {
-                          m_AniPlayerDestination.x + aniPlayerDirection[i].x,
-                          m_AniPlayerDestination.y + aniPlayerDirection[i].y
-                        };
-                        m_AniCameraDestination = {
-                          m_AniCameraDestination.x + aniCameraDirection[i].x,
-                          m_AniCameraDestination.y + aniCameraDirection[i].y
-                        };
+                            m_AniPlayerDestination = {
+                              m_AniPlayerDestination.x
+                                  + aniPlayerDirection[i].x,
+                              m_AniPlayerDestination.y + aniPlayerDirection[i].y
+                            };
+                            m_AniCameraDestination = {
+                              m_AniCameraDestination.x
+                                  + aniCameraDirection[i].x,
+                              m_AniCameraDestination.y + aniCameraDirection[i].y
+                            };
+                        }
                     }
                 }
             }
