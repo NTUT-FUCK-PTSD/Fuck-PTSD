@@ -10,9 +10,7 @@
 auto CountTempoNumber = []() -> std::size_t {
     for (std::size_t index = 0; index < Music::Tempo::GetBeatListLen();
          index++) {
-        if (Music::Tempo::GetBeatValue(index) > 2000) {
-            return index;
-        }
+        if (Music::Tempo::GetBeatValue(index) > 2000) { return index; }
     }
     return 0;
 };
@@ -77,9 +75,7 @@ void Display::BeatIndicator::Pause(bool state) {
 }
 
 void Display::BeatIndicator::Update() {
-    if (m_IsPause) {
-        return;
-    }
+    if (m_IsPause) { return; }
 
     auto currentTime = Util::Time::GetElapsedTimeMs();
 
@@ -87,9 +83,7 @@ void Display::BeatIndicator::Update() {
     m_lastTime = currentTime;
 
     // LOG_INFO(intervalTime);
-    if (intervalTime >= 100) {
-        return;
-    }
+    if (intervalTime >= 100) { return; }
 
     const auto intervalPixel = 720.0f / static_cast<float>(m_tempoNumber);
     UpdateLeftIndi(m_startBeatIndex, intervalTime, intervalPixel);
@@ -158,13 +152,7 @@ void Display::BeatIndicator::UpdateLeftIndi(
             //            elem->SetPosition({-720.0f, -310.0f});
         }
         elem->SetPosition(movePosition);
-        LOG_DEBUG(
-            "index: {}, Position: {}, Time: {}, BeatValue: {}",
-            index_t,
-            -movePosition.x,
-            Music::Player::GetMusicTimeLoop(),
-            Music::Tempo::GetBeatValue(index_t)
-        );
+
         index_t++;
     }
 
@@ -190,7 +178,7 @@ void Display::BeatIndicator::UpdateLeftIndi(
     }
     const auto max = std::max_element(list.begin(), list.end());
     const auto min = std::min_element(list.begin(), list.end());
-    LOG_INFO("max: {}, min: {}, time: {}", *max, *min, intervalTime);
+
     list.clear();
 }
 

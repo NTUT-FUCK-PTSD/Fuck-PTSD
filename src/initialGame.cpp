@@ -19,11 +19,11 @@
 #include "Graphs/Coin.h"
 #include "HPIS.h"
 #include "Helper.hpp"
+#include "Music/BeatIndicator.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
 #include "Systems/HEIS.h"
-
 void App::initializeGame() {
     // play lobby music
 
