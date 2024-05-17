@@ -69,7 +69,7 @@ void Camera::MoveByTime(
 }
 
 void Camera::Shake(const unsigned long duringTimeMs, const float strength) {
-    if (m_Animation->IsAnimating() && !m_ShakeHold) {
+    if (m_Animation->IsAnimating() && !m_IsShaking) {
         m_ShakeHoldDuringTimeMs = m_Animation->GetAnimationDuringTimeMs()
                                   - (Util::Time::GetElapsedTimeMs()
                                      - m_Animation->GetAnimationStartMs());

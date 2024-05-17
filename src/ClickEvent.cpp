@@ -229,10 +229,7 @@ void App::ClickEvent() {
 
             } else {
                 for (std::size_t i = 0; i < 4; i++) {
-                    if (Util::Input::IsKeyDown(key[i])
-                        && m_DungeonMap->GetMapData()->IsPositionPlayerAct(
-                            m_MainCharacter->GetGamePosition() + direction[i]
-                        )) {
+                    if (Util::Input::IsKeyDown(key[i])) {
                         // origin mapdata actions
                         playerDestination = m_MainCharacter->GetGamePosition()
                                             + direction[i];

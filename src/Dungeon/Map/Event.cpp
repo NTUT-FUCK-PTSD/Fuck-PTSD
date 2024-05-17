@@ -1,12 +1,15 @@
-#include "Event/Event.h"
 #include "Dungeon/Map.h"
 
-#include "Dungeon/Enemy.h"
-#include "Event/EventArgs.h"
-#include "Event/EventType.h"
-#include "Game/Player.h"
+#include "ToolBoxs.h"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
+
+#include "Dungeon/Enemy.h"
+#include "Event/Event.h"
+#include "Event/EventArgs.h"
+#include "Event/EventType.h"
+#include "Game/Graphs/Coin.h"
+#include "Game/Player.h"
 
 namespace Dungeon {
 void Map::InitEvent() {
@@ -88,9 +91,7 @@ void Map::InitEvent() {
                 m_ItemHead->ClearChildren();
                 m_MapData.reset();
             }
-            if (m_MiniMap) {
-                m_Camera->RemoveUIChild(m_MiniMap);
-            }
+            if (m_MiniMap) { m_Camera->RemoveUIChild(m_MiniMap); }
 
             m_Camera->SetPosition({0, 0});
         }
@@ -101,11 +102,14 @@ void Map::InitEvent() {
         eventpp::conditionalFunctor(
             eventpp::argumentAdapter<
                 void(const Object*, const EnemyRemoveEventArgs&)>(
-
                 [this](const Object*, const EnemyRemoveEventArgs& e) {
-                    m_EnemyHead->RemoveChild(m_MapData->GetEnemy(e.GetMapIndex()
-                    ));
-                    m_MapData->RemoveEnemy(e.GetMapIndex());
+                    const auto&& enemyCoin =
+                        m_MapData->GetEnemy(e.GetMapIndex())->GetCoin();
+                    RemoveEnemy(e.GetMapIndex());
+                    const auto& coin = std::make_shared<Game::Graphs::Coin>(
+                        enemyCoin
+                    );
+                    AddItem(e.GetMapIndex(), coin);
                 }
             ),
             [](const Object*, const EventArgs& e) {
