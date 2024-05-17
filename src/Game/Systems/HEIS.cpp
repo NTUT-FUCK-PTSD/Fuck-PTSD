@@ -14,16 +14,6 @@ auto Game::Systems::HEIS::Init(Dungeon::Map* dungeon) -> void {
     m_Map = dungeon;
 }
 
-auto Game::Systems::HEIS::DetectHealth(std::size_t mi) -> void {
-    const auto& health = m_Map->GetMapData()->GetEnemy(mi)->GetHealth();
-    if (health <= 0) {
-        const auto&& enemyCoin = m_Map->GetMapData()->GetEnemy(mi)->GetCoin();
-        m_Map->RemoveEnemy(mi);
-        const auto& coin = std::make_shared<Game::Graphs::Coin>(enemyCoin);
-        m_Map->AddItem(mi, coin);
-    }
-}
-
 auto Game::Systems::HEIS::MakeTile(
     glm::ivec2  direGP,
     glm::ivec2  playerGP,
@@ -37,9 +27,7 @@ auto Game::Systems::HEIS::MakeTile(
     while (m_Map->GetMapData()->IsPositionWall(currGP + direGP)) {
         mi = Settings::Helper::GamePosToMapIdx(currGP);
 
-        if (m_Map->GetMapData()->IsEnemyEmpty(mi)) {
-            m_Map->RemoveEnemy(mi);
-        }
+        if (m_Map->GetMapData()->IsEnemyEmpty(mi)) { m_Map->RemoveEnemy(mi); }
 
         currGP += direGP;
     }

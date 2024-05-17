@@ -15,8 +15,6 @@ class HEIS final {
 public:
     static auto Init(Dungeon::Map* dungeon) -> void;
 
-    static auto DetectHealth(std::size_t mi) -> void;
-
 private:
     static Dungeon::Map* m_Map;
 
