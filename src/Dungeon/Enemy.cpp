@@ -136,6 +136,16 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
 }
 
 void Enemy::Struck(const std::size_t damage) {
+    m_IsBeAttacked = true;
+    if (m_Health >= damage) {
+        m_Health -= damage;
+    } else {
+        m_Health = 0;
+    }
+    if (m_Health == 0) {
+        m_Dead = true;
+        return;
+    }
     if (m_KnockbackAble) {
         auto delta = GetGamePosition() - GetPlayerPosition();
         m_WillMovePosition = GetGamePosition() + delta;
@@ -143,13 +153,6 @@ void Enemy::Struck(const std::size_t damage) {
         m_UnnecssaryAnimation = true;
         CanMove();
     }
-    m_IsBeAttacked = true;
-    if (m_Health >= damage) {
-        m_Health -= damage;
-    } else {
-        m_Health = 0;
-    }
-    if (m_Health == 0) { m_Dead = true; }
 };
 
 void Enemy::Update() {
