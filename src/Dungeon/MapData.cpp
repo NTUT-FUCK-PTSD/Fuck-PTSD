@@ -1,5 +1,6 @@
 #include "Dungeon/MapData.h"
 #include <cstddef>
+#include <memory>
 
 #include "Dungeon/AStar.h"
 #include "Dungeon/Enemy.h"
@@ -26,13 +27,13 @@ void MapData::AddEnemy(
 ) {
     m_Enemies.at(position) = enemy;
     m_EnemyQueue.push_back(enemy);
+    if (enemy->IsBoss()) { m_Boss = enemy; }
 }
 
 void MapData::RemoveEnemy(const std::size_t position) {
-    if (!IsEnemyEmpty(position)) {
-        return;
-    }
+    if (!IsEnemyEmpty(position)) { return; }
     // m_Enemies.at(position)->SetVisible(false);
+
     m_EnemyQueue.erase(
         std::remove(
             m_EnemyQueue.begin(),
@@ -41,6 +42,8 @@ void MapData::RemoveEnemy(const std::size_t position) {
         ),
         m_EnemyQueue.end()
     );
+    const auto& enemy = m_Enemies.at(position);
+    if (enemy->IsBoss()) { m_Boss = nullptr; }
     m_Enemies.at(position) = nullptr;
 }
 
@@ -53,6 +56,11 @@ void MapData::ClearEnemies() {
     m_Enemies.clear();
     m_Enemies.resize(GetSize().x * GetSize().y, nullptr);
     m_EnemyQueue.clear();
+}
+
+std::shared_ptr<Enemy> MapData::GetBoss() const {
+    if (!m_Boss) { return nullptr; }
+    return m_Boss;
 }
 
 std::vector<std::shared_ptr<Enemy>> MapData::GetEnemies() const {
@@ -271,6 +279,9 @@ bool MapData::IsItemEmpty(const std::size_t position) const {
     return !m_Items.at(position);
 }
 
+bool MapData::IsBossDead() const {
+    return !m_Boss || (m_Boss && m_Boss->GetHealth() <= 0);
+}
 std::shared_ptr<Player> MapData::GetPlayer() const {
     return m_Player;
 }

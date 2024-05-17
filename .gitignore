@@ -14,7 +14,7 @@ doxydoc/
 # some plugins
 3rdparty/
 
-./**/.DS_Store
+./**/.DS_Store 
 
 # User-specific stuff
 .idea/**/workspace.xml

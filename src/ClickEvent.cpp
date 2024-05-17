@@ -28,6 +28,7 @@ struct ClickEventType {
 };
 
 using CET = ClickEventType;
+static std::size_t BOSS_DEAD = false;
 
 auto musicTime = []() {
     return static_cast<std::size_t>(Music::Player::GetMusicTime() * 1000)
@@ -39,10 +40,7 @@ void App::ClickEvent() {
      * @details Use to test functional.
      */
     m_EventHandler.AddEvent(
-        [this]() {
-            const auto [b, a] = Settings::Helper::GetPlayerPosDM();
-            LOG_INFO(a);
-        },
+        [this]() { LOG_DEBUG(m_DungeonMap->GetMapData()->IsBossDead()); },
         Util::Keycode::T
     );
 
@@ -297,6 +295,32 @@ void App::ClickEvent() {
             );
             m_Camera->MoveByTime(200, m_AniCameraDestination);
             m_DungeonMap->PlayerTrigger();
+        },
+        Util::Keycode::W,
+        Util::Keycode::D,
+        Util::Keycode::S,
+        Util::Keycode::A
+    );
+
+    m_EventHandler.AddEvent(
+        [this]() {
+            const auto tile = m_DungeonMap->GetMapData()->GetTile(
+                m_DungeonMap->GamePostion2MapIndex(
+                    m_MainCharacter->GetGamePosition()
+                )
+            );
+
+            // LOG_INFO(tile->GetTile().type);
+            if (tile->GetTile().type == 9
+                && m_DungeonMap->GetMapData()->IsBossDead()) {
+                Music::Player::PlayMusic(m_MusicList.back().data(), true);
+                Music::Tempo::ReadTempoFile(m_TempoList.back().data());
+                m_MusicList.pop_back();
+                m_TempoList.pop_back();
+                m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1, m_MainCharacter);
+                m_AniCameraDestination = {0, 0};
+                m_AniPlayerDestination = {0, 0};
+            }
         },
         Util::Keycode::W,
         Util::Keycode::D,

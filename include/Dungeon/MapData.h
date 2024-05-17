@@ -7,6 +7,7 @@
 #include "Dungeon/EMfwd.h"
 #include "Dungeon/Item.h"
 #include "Dungeon/Tile.h"
+#include "Enemy.h"
 #include "Game/Player.h"
 
 namespace Dungeon {
@@ -38,6 +39,7 @@ public:
     void ClearEnemies();
     std::vector<std::shared_ptr<Enemy>> GetEnemies() const;
     std::shared_ptr<Enemy> GetEnemy(const std::size_t position) const;
+    std::shared_ptr<Enemy> GetBoss() const;
     std::vector<std::shared_ptr<Enemy>> GetEnemyQueue() const;
     std::vector<std::shared_ptr<Enemy>> GetUnsortedEnemies() const;
     bool IsEnemyEmpty(const std::size_t position) const;
@@ -72,6 +74,7 @@ public:
     bool IsPositionPlayer(const glm::vec2& position) const;
     bool IsPositionInteractive(const glm::ivec2& position) const;
     bool IsPositionPlayerAct(const glm::vec2& position) const;
+    bool IsBossDead() const;
 
     float Heuristic(const glm::vec2& start, const glm::vec2& end);
     std::shared_ptr<Player> GetPlayer() const;
@@ -92,6 +95,7 @@ private:
     std::vector<std::shared_ptr<Enemy>> m_EnemyQueue;
     std::vector<std::shared_ptr<Item>>  m_Items;
 
+    std::shared_ptr<Enemy>  m_Boss = nullptr;
     std::shared_ptr<Player> m_Player;
 };
 }  // namespace Dungeon
