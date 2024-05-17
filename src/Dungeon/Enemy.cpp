@@ -49,9 +49,7 @@ void Enemy::SetShadow(const bool shadow) {
             return;
         }
     }
-    if (m_Shadow == shadow) {
-        return;
-    }
+    if (m_Shadow == shadow) { return; }
     m_Shadow = shadow;
     m_SpriteSheet->SetFrames(shadow ? m_ShadowFrames : m_NormalFrames);
 }
@@ -91,9 +89,7 @@ bool Enemy::IsVaildMove(const glm::vec2& position) {
 }
 
 glm::vec2 Enemy::FindNextToPlayer() {
-    if (GetPlayerPosition() == GetGamePosition()) {
-        return GetGamePosition();
-    }
+    if (GetPlayerPosition() == GetGamePosition()) { return GetGamePosition(); }
     auto path = Dungeon::AStar::FindPath(
         GetGamePosition(),
         GetPlayerPosition(),
@@ -140,13 +136,6 @@ void Enemy::SetCameraUpdate(bool cameraUpdate) {
 }
 
 void Enemy::Struck(const std::size_t damage) {
-    if (m_KnockbackAble) {
-        auto delta = GetGamePosition() - GetPlayerPosition();
-        m_WillMovePosition = GetGamePosition() + delta;
-        m_AnimationType = 4;
-        m_UnnecssaryAnimation = true;
-        CanMove();
-    }
     m_IsBeAttacked = true;
     if (m_Health >= damage) {
         m_Health -= damage;
@@ -155,6 +144,14 @@ void Enemy::Struck(const std::size_t damage) {
     }
     if (m_Health == 0) {
         m_Dead = true;
+        return;
+    }
+    if (m_KnockbackAble) {
+        auto delta = GetGamePosition() - GetPlayerPosition();
+        m_WillMovePosition = GetGamePosition() + delta;
+        m_AnimationType = 4;
+        m_UnnecssaryAnimation = true;
+        CanMove();
     }
 };
 
@@ -182,9 +179,7 @@ void Enemy::Update() {
 }
 
 void Enemy::CanMove() {
-    if (m_Dead || m_WillMovePosition == GetGamePosition()) {
-        return;
-    }
+    if (m_Dead || m_WillMovePosition == GetGamePosition()) { return; }
     if (m_WillMovePosition == GetPlayerPosition()) {
         AttackPlayer();
         return;
