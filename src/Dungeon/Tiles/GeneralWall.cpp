@@ -7,9 +7,7 @@ namespace Tiles {
 GeneralWall::GeneralWall(const s_Tile& u_Tile, const bool generalWall)
     : Tile(u_Tile) {
     m_MagicNumber = 6;
-    if (generalWall) {
-        UpdateDrawable();
-    }
+    if (generalWall) { UpdateDrawable(); }
 }
 
 GeneralWall::GeneralWall(
@@ -19,18 +17,16 @@ GeneralWall::GeneralWall(
 )
     : Tile(u_Tile, filePath) {
     m_MagicNumber = 6;
-    if (generalWall) {
-        UpdateDrawable();
-    }
+    if (generalWall) { UpdateDrawable(); }
 }
 
 void GeneralWall::UpdateTranslation() {
     Tile::UpdateTranslation();
     if (m_CloseDisplayb24) {
-        m_OffSetY = DUNGEON_TILE_WIDTH;
+        m_OffSetY = Window::TileWidth;
         m_Transform.translation = {
           m_Transform.translation.x,
-          m_Transform.translation.y + m_OffSetY / 2.0 * DUNGEON_SCALE
+          m_Transform.translation.y + m_OffSetY / 2.0 * Window::Scale
         };
     }
 }

@@ -14,7 +14,7 @@ void DoorMetalSide::UpdateDoorMetalSideDrawable() {
     UpdateScale();
     UpdateTranslation();
     m_Transform.translation = {
-      m_Transform.translation.x - DUNGEON_TILE_WIDTH,
+      m_Transform.translation.x - Window::TileWidth,
       m_Transform.translation.y
     };
     m_SpriteSheet->SetDrawRect(

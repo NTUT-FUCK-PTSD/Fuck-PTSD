@@ -69,11 +69,11 @@ void Game::Warehouse::Throw::GenSlot() {
 
     const auto& item = std::make_shared<Util::Image>(
         Players::Config::IMAGE_SLOT_THROW.data()
-        );
+    );
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS);
 
     AddChild(obj);
@@ -89,11 +89,11 @@ void Game::Warehouse::Throw::GenSlot2() {
 
     const auto& item = std::make_shared<Util::Image>(
         Players::Config::IMAGE_SLOT_THROW2.data()
-        );
+    );
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS);
 
     AddChild(obj);
@@ -115,7 +115,7 @@ void Game::Warehouse::Throw::GenItem() {
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS);
 
     AddChild(obj);
@@ -126,12 +126,13 @@ void Game::Warehouse::Throw::GenFirstTxt() {
     const auto& item = std::make_shared<Util::Text>(
         Players::Config::STY_FONT.data(),
         Players::Config::VAL_FONT_SIZE,
-        static_cast<std::string>(m_FistTxt),        Players::Config::VAL_COLOR_WHITE
+        static_cast<std::string>(m_FistTxt),
+        Players::Config::VAL_COLOR_WHITE
     );
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS);
 
     AddChild(obj);
@@ -142,12 +143,13 @@ void Game::Warehouse::Throw::GenSecondTxt() {
     const auto& item = std::make_shared<Util::Text>(
         Players::Config::STY_FONT.data(),
         Players::Config::VAL_FONT_SIZE,
-        static_cast<std::string>(m_SecondTxt),        Players::Config::VAL_COLOR_WHITE
+        static_cast<std::string>(m_SecondTxt),
+        Players::Config::VAL_COLOR_WHITE
     );
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS);
 
     AddChild(obj);

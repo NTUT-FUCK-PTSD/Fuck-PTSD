@@ -26,9 +26,9 @@ void Dagger::SetPosition(const glm::vec2& Position) {
     list[1]->m_Transform.translation = Position + glm::vec2{0, 0.4};
 }
 
-//std::string Dagger::GetImagePath() const {
-//    return Players::Config::IMAGE_DAGGER.data();
-//}
+// std::string Dagger::GetImagePath() const {
+//     return Players::Config::IMAGE_DAGGER.data();
+// }
 
 void Dagger::GenItem() {
     const auto& obj = std::make_shared<Util::GameElement>();
@@ -49,7 +49,7 @@ void Dagger::GenItem() {
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS);
 
     AddChild(obj);
@@ -65,7 +65,7 @@ void Dagger::GenSlot() {
     obj->SetDrawable(slot);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
     obj->SetPosition(Players::Config::VAL_INITPOS);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
 
     AddChild(obj);
 }

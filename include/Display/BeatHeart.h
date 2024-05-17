@@ -9,7 +9,6 @@
 #include "GameElement.h"
 #include "Settings/GameElement.h"
 #include "Settings/SpriteSheet.hpp"
-#include "Settings/Window.hpp"
 #include "SpriteSheet.hpp"
 
 namespace Display {

@@ -1,9 +1,12 @@
 
 #include "Game/Warehouse/Shovel.h"
+
 #include <memory>
 #include <vector>
+
 #include "Helper.hpp"
 #include "Player_config.h"
+#include "Settings/Window.hpp"
 #include "SpriteSheet.hpp"
 #include "UGameElement.h"
 
@@ -30,7 +33,7 @@ void Shovel::GenSlot() {
 
     obj->SetDrawable(slot);
     obj->SetPosition(Players::Config::VAL_INITPOS);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
 
     AddChild(obj);
@@ -56,7 +59,7 @@ void Shovel::GenItem() {
 
     obj->SetDrawable(item);
     obj->SetPosition(Players::Config::VAL_INITPOS);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
 
     AddChild(obj);

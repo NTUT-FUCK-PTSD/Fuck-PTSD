@@ -2,11 +2,13 @@
 
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
+#include "Settings/Window.hpp"
 
 namespace Dungeon {
 MiniMap::MiniMap(std::shared_ptr<MapData> mapData)
     : m_MapData(mapData),
       m_UpdateHandle(Event::EventQueue) {
+    m_Scale = Window::Scale + 1;
     BuildMiniMap();
     Update();
     m_UpdateHandle.appendListener(
@@ -30,10 +32,11 @@ void MiniMap::BuildMiniMap() {
             SetVisible(mapIndex, true);
             m_Children[mapIndex]->m_Transform.scale = {m_Scale, m_Scale};
             m_Children[mapIndex]->m_Transform.translation = {
-              static_cast<int>(WINDOW_WIDTH / 2) - DUNGEON_TILE_WIDTH
+              static_cast<int>(PTSD_Config::WINDOW_WIDTH / 2)
+                  - Window::TileWidth
                   - (2 * (m_MapData->GetSize().x - (j + 1))) * m_Scale,
-              -(static_cast<int>(WINDOW_HEIGHT / 2))
-                  + (52 * DUNGEON_SCALE + DUNGEON_TILE_WIDTH)
+              -(static_cast<int>(PTSD_Config::WINDOW_HEIGHT / 2))
+                  + (52 * Window::Scale + Window::TileWidth)
                   + (2 * (m_MapData->GetSize().y - (i + 1))) * m_Scale
             };
             UpdateTileColor(mapIndex);
@@ -70,9 +73,7 @@ void MiniMap::SetColor(const glm::vec2& position, CubeColor color) {
 }
 
 void MiniMap::SetColor(const std::size_t position, CubeColor color) {
-    if (m_ColorCubes[position]->GetColor() == color) {
-        return;
-    }
+    if (m_ColorCubes[position]->GetColor() == color) { return; }
     m_ColorCubes[position]->SetColor(color);
 }
 
@@ -117,14 +118,10 @@ void MiniMap::UpdatePlayer() {
 }
 
 void MiniMap::UpdateCubeColor(const std::size_t mapIndex) {
-    if (!m_ColorCubes[mapIndex]->GetAvailable()) {
-        return;
-    }
+    if (!m_ColorCubes[mapIndex]->GetAvailable()) { return; }
     // Update Tiles
     if (!m_MapData->IsTileEmpty(mapIndex)) {
-        if (!m_MapData->GetTile(mapIndex)->GetSeen()) {
-            return;
-        }
+        if (!m_MapData->GetTile(mapIndex)->GetSeen()) { return; }
     } else {
         SetVisible(mapIndex, false);
         return;
@@ -132,9 +129,7 @@ void MiniMap::UpdateCubeColor(const std::size_t mapIndex) {
     // Update Enemy
     auto enemy = m_MapData->GetEnemy(mapIndex);
     if (enemy) {
-        if (!enemy->GetSeen()) {
-            return;
-        }
+        if (!enemy->GetSeen()) { return; }
         SetColor(mapIndex, CubeColor::red);
         SetVisible(mapIndex, true);
         return;

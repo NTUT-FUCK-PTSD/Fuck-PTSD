@@ -87,8 +87,6 @@ private:
 
     void DoorUpdate(std::size_t i, std::size_t j);
 
-    const std::size_t             HalfColNumber = DUNGEON_COL_NUMBER / 2;
-    const std::size_t             HalfRowNumber = DUNGEON_ROW_NUMBER / 2;
     static glm::ivec2             m_Size;
     std::size_t                   m_LevelNum;
     static std::unique_ptr<Level> m_Level;

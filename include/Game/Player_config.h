@@ -63,8 +63,6 @@ static constexpr float VAL_ZINDEX = 99.0f;
 
 static constexpr glm::vec2 VAL_INITPOS = {0, 0};
 
-static const glm::vec2 VAL_SCALE = {DUNGEON_SCALE, DUNGEON_SCALE};
-
 static const Util::Color VAL_COLOR_WHITE = Util::Color(255, 255, 255);
 
 }  // namespace Players::Config

@@ -1,13 +1,14 @@
 #include "Music/IndicatorBar.h"
+
 #include <algorithm>
 #include <config.hpp>
 #include <memory>
+#include "glm/fwd.hpp"
+
 #include "Music/Music_config.h"
 #include "Music/Tempo.h"
 #include "UGameElement.h"
-#include "Util/Logger.hpp"
 #include "Util/Time.hpp"
-#include "glm/fwd.hpp"
 
 void Music::IndicatorBar::Init() {
     CountTempoNumber();
@@ -29,7 +30,7 @@ void Music::IndicatorBar::CountTempoNumber() {
 }
 
 void Music::IndicatorBar::CountIndicatorIntervalSpace() {
-    constexpr std::size_t WINDOW_WIDTH_HALF = WINDOW_WIDTH / 2;
+    auto WINDOW_WIDTH_HALF = PTSD_Config::WINDOW_WIDTH >> 1;
     m_IIS = WINDOW_WIDTH_HALF / m_TempoNumber;
 }
 

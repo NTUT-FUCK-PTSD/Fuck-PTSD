@@ -21,9 +21,7 @@ void MapHandler::Draw(const Core::Matrices& data) {
             EasterEgg();
             return;
         }
-        if (m_Map->IsOverlayRed()) {
-            m_Image->Draw(data);
-        }
+        if (m_Map->IsOverlayRed()) { m_Image->Draw(data); }
     }
 }
 
@@ -72,13 +70,19 @@ void MapHandler::EasterEgg() {
     auto& pos = m_Transform.translation;
     auto  HalfImgSize = m_EasterEgg->GetSize() / 2.0f;
 
-    if (pos.y + HalfImgSize.y >= static_cast<float>(WINDOW_HEIGHT) / 2
-        || pos.y - HalfImgSize.y + static_cast<float>(WINDOW_HEIGHT) / 2 <= 0) {
+    if (pos.y + HalfImgSize.y
+            >= static_cast<float>(PTSD_Config::WINDOW_HEIGHT) / 2
+        || pos.y - HalfImgSize.y
+                   + static_cast<float>(PTSD_Config::WINDOW_HEIGHT) / 2
+               <= 0) {
         ChangeEasterEggColor();
         dir.y *= -1;
     }
-    if (pos.x + HalfImgSize.x >= static_cast<float>(WINDOW_WIDTH) / 2
-        || pos.x - HalfImgSize.x + static_cast<float>(WINDOW_WIDTH) / 2 <= 0) {
+    if (pos.x + HalfImgSize.x
+            >= static_cast<float>(PTSD_Config::WINDOW_WIDTH) / 2
+        || pos.x - HalfImgSize.x
+                   + static_cast<float>(PTSD_Config::WINDOW_WIDTH) / 2
+               <= 0) {
         ChangeEasterEggColor();
         dir.x *= -1;
     }

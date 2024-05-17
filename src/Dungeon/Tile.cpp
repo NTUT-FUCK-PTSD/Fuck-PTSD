@@ -68,17 +68,13 @@ void Tile::SetOverlay(bool visible) {
             return;
         }
     }
-    if (GetOverlay() == visible) {
-        return;
-    }
+    if (GetOverlay() == visible) { return; }
     m_IsOverlay = visible;
     SDL_Color color =
         (visible == true ? SDL_Color({100, 100, 100, 255})
                          : SDL_Color({255, 255, 255, 255}));
     m_SpriteSheet->SetColorMod(color);
-    if (m_Torch) {
-        m_TorchAnimation->SetColorMod(color);
-    }
+    if (m_Torch) { m_TorchAnimation->SetColorMod(color); }
 }
 std::size_t Tile::GetIndex() {
     return m_Index;
@@ -93,43 +89,44 @@ bool Tile::GetOverlay() {
 }
 
 void Tile::UpdateScale() {
-    m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    m_Transform.scale = Window::GetScale();
 }
 
 void Tile::UpdateTranslation() {
     m_Transform.translation = {
-      (m_Tile.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE),
-      -DUNGEON_TILE_WIDTH - (m_Tile.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE)
-          + (m_MagicNumber / 2.0 * DUNGEON_SCALE)};
+      (m_Tile.x * Window::TileWidth * Window::Scale),
+      -Window::TileWidth - (m_Tile.y * Window::TileWidth * Window::Scale)
+          + (m_MagicNumber / 2.0 * Window::Scale)
+    };
 }
 
 void Tile::UpdateDrawable() {
     UpdateScale();
     UpdateTranslation();
 
-    if (m_ImgSize.x > DUNGEON_TILE_WIDTH) {
+    if (m_ImgSize.x > Window::TileWidth) {
         m_SpriteSheet->SetDrawRect(
             {static_cast<int>(
                  m_ImgSize.x * (m_Index % static_cast<int>(m_TileSize.x))
-                 + (m_ImgSize.x - DUNGEON_TILE_WIDTH) / 2
+                 + (m_ImgSize.x - Window::TileWidth) / 2
              ),
              static_cast<int>(
                  m_ImgSize.y * static_cast<int>(m_Index / m_TileSize.x)
-                 + (m_ImgSize.y - DUNGEON_TILE_WIDTH) / 2
+                 + (m_ImgSize.y - Window::TileWidth) / 2
              ),
-             static_cast<int>(DUNGEON_TILE_WIDTH),
-             static_cast<int>(DUNGEON_TILE_WIDTH - m_OffSetY)}
+             static_cast<int>(Window::TileWidth),
+             static_cast<int>(Window::TileWidth - m_OffSetY)}
         );
     } else {
         m_SpriteSheet->SetDrawRect(
             {static_cast<int>(
                  m_ImgSize.x * (m_Index % static_cast<int>(m_TileSize.x))
-                 + (m_ImgSize.x - DUNGEON_TILE_WIDTH) / 2
+                 + (m_ImgSize.x - Window::TileWidth) / 2
              ),
              static_cast<int>(
                  m_ImgSize.y * static_cast<int>(m_Index / m_TileSize.x)
              ),
-             static_cast<int>(DUNGEON_TILE_WIDTH),
+             static_cast<int>(Window::TileWidth),
              static_cast<int>(m_ImgSize.y - m_OffSetY)}
         );
     }
@@ -166,12 +163,11 @@ void Tile::SetTorch(bool torch) {
     );
     m_TorchAnimation->SetColorMod({0, 0, 0, 255});
     m_Torch = std::make_shared<GameObject>(m_TorchAnimation, m_ZIndex + 0.1f);
-    m_Torch->m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    m_Torch->m_Transform.scale = Window::GetScale();
     m_Torch->m_Transform.translation = ToolBoxs::GamePostoPos(
         {m_Tile.x, m_Tile.y}
     );
-    m_Torch->m_Transform.translation.y += DUNGEON_TILE_WIDTH * DUNGEON_SCALE
-                                          / 2;
+    m_Torch->m_Transform.translation.y += Window::TileWidth * Window::Scale / 2;
     m_Torch->SetVisible(false);
     AddChild(m_Torch);
 }

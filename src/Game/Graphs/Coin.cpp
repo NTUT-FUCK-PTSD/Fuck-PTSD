@@ -28,7 +28,7 @@ Coin::Coin(std::size_t number)
     coinImage->SetDrawRect({0, 0, size.x, size.y});
     SetDrawable(coinImage);
     SetZIndex(Players::Config::VAL_ZINDEX);
-    m_Transform.scale = Players::Config::VAL_SCALE;
+    m_Transform.scale = Window::GetScale();
 }
 
 std::size_t Coin::GetNumber() {

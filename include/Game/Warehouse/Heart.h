@@ -12,7 +12,6 @@
 #include "config.hpp"
 
 #include "Settings/GameElement.h"
-#include "Settings/Window.hpp"
 
 class Heart final {
 public:
@@ -56,14 +55,13 @@ private:
     //
     std::size_t     m_MaxHp = 12;
     std::size_t     m_currentHP = 0;
-    const glm::vec2 m_FirstPosition = {
-      WINDOW_WIDTH / 2 - 220,
-      WINDOW_HEIGHT / 2 - 55};
+    glm::vec2       m_FirstPosition;
     const glm::vec2 m_eachPositionDiff_X = {-80, 0};
     const glm::vec2 m_eachPositionDiff_Y = {0, -80};
 
     // Image Settings
-    const glm::vec2              m_Scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    glm::vec2 m_Scale;
+
     std::shared_ptr<Util::Image> m_FullHPImage = std::make_shared<Util::Image>(
         ASSETS_DIR "/gui/heart.png"
     );
