@@ -30,9 +30,6 @@ DragonGreen::DragonGreen(
     SetDamage(1);
     SetCoin(2);
 
-    m_SkeletonNormalFrames = m_NormalFrames;
-    m_SkeletonShadowFrames = m_ShadowFrames;
-
     m_Attack = false;
 }
 void DragonGreen::Move() {

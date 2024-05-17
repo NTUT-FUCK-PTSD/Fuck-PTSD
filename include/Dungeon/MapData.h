@@ -95,9 +95,7 @@ private:
     std::vector<std::shared_ptr<Enemy>> m_EnemyQueue;
     std::vector<std::shared_ptr<Item>>  m_Items;
 
-    glm::vec2 m_PlayerPosition = {0.0f, 0.0f};
-
-    std::shared_ptr<Enemy> m_Boss = nullptr;
+    std::shared_ptr<Enemy>  m_Boss = nullptr;
     std::shared_ptr<Player> m_Player;
 };
 }  // namespace Dungeon
