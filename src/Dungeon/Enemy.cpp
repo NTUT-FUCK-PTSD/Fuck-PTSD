@@ -148,10 +148,13 @@ void Enemy::Struck(const std::size_t damage) {
     }
     if (m_KnockbackAble) {
         auto delta = GetGamePosition() - GetPlayerPosition();
-        m_WillMovePosition = GetGamePosition() + delta;
-        m_AnimationType = 4;
-        m_UnnecssaryAnimation = true;
-        CanMove();
+        auto willMove = GetGamePosition() + delta;
+        if (IsVaildMove(willMove)) {
+            m_WillMovePosition = willMove;
+            m_AnimationType = 4;
+            m_UnnecssaryAnimation = true;
+            CanMove();
+        }
     }
 };
 
