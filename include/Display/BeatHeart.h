@@ -29,10 +29,6 @@ private:
 
     static std::string m_HeartImagePath;
 
-    static glm::vec2 m_Position;
-
-    static glm::vec2 m_Scale;
-
     static float m_ZIndex;
 
     static std::size_t m_AfterSwitchTime;
