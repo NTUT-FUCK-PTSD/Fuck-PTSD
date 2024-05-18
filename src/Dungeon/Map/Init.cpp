@@ -3,6 +3,7 @@
 #include "Dungeon/EnemyFactory.h"
 #include "Dungeon_config.h"
 #include "Event/Event.h"
+#include "Settings/Window.hpp"
 
 namespace Dungeon {
 Map::Map(
@@ -15,7 +16,7 @@ Map::Map(
       m_Event(Event::EventQueue) {
     // ZIndex 98~100 is for UI
     m_ZIndex = 98;
-    m_Transform.scale = {DUNGEON_SCALE + 1, DUNGEON_SCALE + 1};
+    m_Transform.scale = {Window::Scale + 1, Window::Scale + 1};
     m_Transform.translation = {0, 0};
     m_Level = std::make_unique<Level>(path);
     m_Available = LoadLevel(levelNum, player);

@@ -9,7 +9,6 @@
 #include "GameElement.h"
 #include "Settings/GameElement.h"
 #include "Settings/SpriteSheet.hpp"
-#include "Settings/Window.hpp"
 #include "SpriteSheet.hpp"
 
 namespace Display {
@@ -29,10 +28,6 @@ private:
     static bool m_IsPause;
 
     static std::string m_HeartImagePath;
-
-    static glm::vec2 m_Position;
-
-    static glm::vec2 m_Scale;
 
     static float m_ZIndex;
 

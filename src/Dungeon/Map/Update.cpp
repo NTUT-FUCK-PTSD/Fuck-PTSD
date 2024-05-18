@@ -59,15 +59,13 @@ void Map::PlayerTrigger() {
 }
 
 void Map::TempoTrigger(const std::size_t index) {
-    if (m_TempoIndex == index) {
-        return;
-    }
+    if (m_TempoIndex == index) { return; }
     m_TempoIndex = index;
     TempoUpdate(false);
 }
 
 void Map::Update() {
-    m_Transform.translation = {0, 0};
+    m_Transform.translation = m_MapData->GetPlayer()->GetTranslation();
 
     if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
         m_OverlayRed = false;

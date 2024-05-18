@@ -208,16 +208,16 @@ void App::ClickEvent() {
               Player::Direction::RIGHT
             };
             const std::vector<glm::vec2> aniPlayerDirection = {
-              {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
-              {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+              {0, Window::TileWidth * Window::Scale},
+              {-Window::TileWidth * Window::Scale, 0},
+              {0, -Window::TileWidth * Window::Scale},
+              {Window::TileWidth * Window::Scale, 0}
             };
             const std::vector<glm::vec2> aniCameraDirection = {
-              {0, -DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0},
-              {0, DUNGEON_TILE_WIDTH * DUNGEON_SCALE},
-              {-DUNGEON_TILE_WIDTH * DUNGEON_SCALE, 0}
+              {0, -Window::TileWidth * Window::Scale},
+              {Window::TileWidth * Window::Scale, 0},
+              {0, Window::TileWidth * Window::Scale},
+              {-Window::TileWidth * Window::Scale, 0}
             };
 
             auto mapIndex = m_DungeonMap->GamePostion2MapIndex(playerDestination
@@ -314,7 +314,10 @@ void App::ClickEvent() {
                 Music::Tempo::ReadTempoFile(m_TempoList.back().data());
                 m_MusicList.pop_back();
                 m_TempoList.pop_back();
-                m_DungeonMap->LoadLevel(m_DungeonMap->GetLevelNum() + 1, m_MainCharacter);
+                m_DungeonMap->LoadLevel(
+                    m_DungeonMap->GetLevelNum() + 1,
+                    m_MainCharacter
+                );
                 m_AniCameraDestination = {0, 0};
                 m_AniPlayerDestination = {0, 0};
             }

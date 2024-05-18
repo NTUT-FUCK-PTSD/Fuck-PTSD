@@ -47,15 +47,11 @@ public:
             m_ToolList.begin(),
             m_ToolList.end(),
             [expectedType, &result](const auto& elem) {
-                if (elem->GetType() == expectedType) {
-                    result = elem;
-                }
+                if (elem->GetType() == expectedType) { result = elem; }
             }
         );
 
-        if (!result) {
-            throw std::runtime_error("not expected type");
-        }
+        if (!result) { throw std::runtime_error("not expected type"); }
         return result;
     };
 
@@ -70,7 +66,8 @@ private:
       {"BOMB", "1"},
       {"SHOVEL", "Shovel"},
       //      {"WEAPON", "Dagger"}};
-      {"WEAPON", "Spear"}};
+      {"WEAPON", "Spear"}
+    };
     std::shared_ptr<Util::GameElement> m_GameElement;
 
     std::vector<std::shared_ptr<IEquip>> m_ToolList;
@@ -81,13 +78,9 @@ private:
     std::shared_ptr<Players::Items::ToolFactory> m_ToolFactory;
 
 private:
-    static constexpr glm::vec2 m_ColInitPos = {
-      static_cast<int>(-WINDOW_WIDTH) / 2 + 65,
-      static_cast<int>(WINDOW_HEIGHT) / 2 - 195};
+    glm::vec2 m_ColInitPos;
 
-    static constexpr glm::vec2 m_RowInitPos = {
-      static_cast<int>(-WINDOW_WIDTH) / 2 + 65,
-      static_cast<int>(WINDOW_HEIGHT) / 2 - 55};
+    glm::vec2 m_RowInitPos;
 };
 
 }  // namespace Players

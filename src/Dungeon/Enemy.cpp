@@ -9,8 +9,8 @@
 #include "Event/Event.h"
 #include "Event/EventArgs.h"
 #include "Settings/ToolBoxs.h"
+#include "Settings/Window.hpp"
 #include "UGameElement.h"
-#include "Util/Logger.hpp"
 
 namespace Dungeon {
 
@@ -20,7 +20,7 @@ Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
       m_BeatDelay(u_Enemy.beatDelay),
       m_Lord(u_Enemy.lord == 1),
       m_DrawableUpdate(Event::EventQueue) {
-    m_Transform.scale = {DUNGEON_SCALE, DUNGEON_SCALE};
+    m_Transform.scale = Window::GetScale();
     SetGamePosition({u_Enemy.x, u_Enemy.y});
     m_Animation = std::make_unique<Animation>(
         ToolBoxs::GamePostoPos(m_GamePosition)
@@ -212,7 +212,7 @@ void Enemy::InitHealthBarImage(const glm::vec2& pixelPos) {
         obj->SetZIndex(99.0f + zindex);
         obj->SetPosition(pixelPos);
         obj->SetVisible(false);
-        obj->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+        obj->SetScale(Window::GetScale());
 
         m_HealthBar->AddChild(obj);
 
@@ -292,6 +292,10 @@ std::set<Player::Direction> Enemy::GetRelativeDirectionSet(
 void Enemy::ChangeHealthBar(const std::size_t health) {
     m_Health = health;
     UpdateHeart(m_Transform.translation);
+}
+
+void Enemy::SetFace(bool faceTo) {
+    m_Transform.scale.x = faceTo ? Window::Scale : -Window::Scale;
 }
 
 }  // namespace Dungeon

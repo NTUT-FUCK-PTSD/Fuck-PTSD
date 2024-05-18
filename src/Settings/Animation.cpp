@@ -3,10 +3,27 @@
 #include "Util/Time.hpp"
 
 #include "Settings/ToolBoxs.h"
+#include "Settings/Window.hpp"
 
 Animation::Animation(const glm::vec2& animationPosition)
     : m_AnimationDestination(animationPosition),
       m_AnimationPosition(animationPosition) {
+    m_MoveAnimation = {
+      {0, Window::TileWidth * Window::Scale / 3.0f},
+      {Window::TileWidth * Window::Scale / 7.5f,
+       Window::TileWidth * Window::Scale / 3.0f},
+      {-Window::TileWidth * Window::Scale / 12.0f,
+       Window::TileWidth * Window::Scale / 3.0f},
+      {-Window::TileWidth * Window::Scale / 7.5f,
+       Window::TileWidth * Window::Scale / 3.0f},
+      {0.0f, 0.0f},
+      {0, -Window::TileWidth * Window::Scale / 3.0f},
+      {Window::TileWidth * Window::Scale / 3.0f,
+       Window::TileWidth * Window::Scale / 3.0f},
+      {0, Window::TileWidth * Window::Scale / 3.0f},
+      {-Window::TileWidth * Window::Scale / 3.0f,
+       Window::TileWidth * Window::Scale / 3.0f}
+    };
     m_AnimationZIndex = CalculateZIndex(animationPosition);
 }
 
@@ -119,7 +136,7 @@ void Animation::SetAnimationStop() {
 float Animation::CalculateZIndex(const glm::vec2& position) {
     // Zindex = y+0.33
     return ToolBoxs::PosToGamePos(
-               {0, position.y - DUNGEON_TILE_WIDTH - DUNGEON_TILE_WIDTH}
+               {0, position.y - Window::TileWidth - Window::TileWidth}
     )
         .y;
 }

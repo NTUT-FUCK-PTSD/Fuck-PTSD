@@ -8,6 +8,8 @@
 #include <Util/Keycode.hpp>
 #include <Util/Text.hpp>
 
+#include "pch.hpp"  // IWYU pragma: export
+
 #include "Background.hpp"
 #include "Camera.h"
 #include "Dungeon/Map.h"
@@ -16,10 +18,11 @@
 #include "Player.h"
 #include "Settings/Background.hpp"
 #include "Settings/Camera.h"
-#include "pch.hpp"  // IWYU pragma: export
+#include "Settings/Window.hpp"
 
 class App {
 public:
+    App() { Window::Init(); };
     enum class State {
         START,
         UPDATE,

@@ -13,9 +13,7 @@
 
 bool ToolBoxs::IsAnyKeyPress() {
     for (int i = 0; i < 512; i++) {
-        if (Util::Input::IsKeyPressed((Util::Keycode)i)) {
-            return true;
-        }
+        if (Util::Input::IsKeyPressed((Util::Keycode)i)) { return true; }
     }
     return false;
 }
@@ -42,14 +40,14 @@ glm::vec2 ToolBoxs::AddVec2(const glm::vec2& add01, const glm::vec2& add02) {
 
 glm::vec2 ToolBoxs::GamePostoPos(const glm::vec2& gamePosition) {
     return {
-      gamePosition.x * DUNGEON_TILE_WIDTH * DUNGEON_SCALE,
-      -gamePosition.y * DUNGEON_TILE_WIDTH * DUNGEON_SCALE
+      gamePosition.x * Window::TileWidth * Window::Scale,
+      -gamePosition.y * Window::TileWidth * Window::Scale
     };
 }
 
 glm::vec2 ToolBoxs::PosToGamePos(const glm::vec2& position) {
     return {
-      position.x / DUNGEON_TILE_WIDTH / DUNGEON_SCALE,
-      -position.y / DUNGEON_TILE_WIDTH / DUNGEON_SCALE
+      position.x / Window::TileWidth / Window::Scale,
+      -position.y / Window::TileWidth / Window::Scale
     };
 }

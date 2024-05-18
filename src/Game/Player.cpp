@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Settings/Window.hpp"
+
 Player::Player()
     : m_Body(std::make_shared<GameElement>()),
       m_Head(std::make_shared<GameElement>()),
@@ -28,7 +30,7 @@ void Player::SetBodyImage(const std::string& path) {
     );
     m_Body->SetDrawable(BodyImage);
     m_Body->SetPosition(m_Position);
-    m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Body->SetScale(Window::GetScale());
 }
 
 void Player::SetHeadImage(const std::string& path) {
@@ -44,19 +46,19 @@ void Player::SetHeadImage(const std::string& path) {
     );
     m_Head->SetDrawable(HeadImage);
     m_Head->SetPosition(m_Position);
-    m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Head->SetScale(Window::GetScale());
 }
 
 void Player::SetHeadImage(std::shared_ptr<SpriteSheet> image) {
     m_Head->SetDrawable(image);
     m_Head->SetPosition(m_Position);
-    m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Head->SetScale(Window::GetScale());
 }
 
 void Player::SetBodyImage(std::shared_ptr<SpriteSheet> image) {
     m_Body->SetDrawable(image);
     m_Body->SetPosition(m_Position);
-    m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Body->SetScale(Window::GetScale());
 }
 
 std::shared_ptr<GameElement> Player::GetGameElement() {
@@ -94,13 +96,13 @@ void Player::SetFaceTo(Direction direction) {
     }
     if (direction == RIGHT) {
         m_BeforeFaceTo = RIGHT;
-        m_Body->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
-        m_Head->SetScale({DUNGEON_SCALE, DUNGEON_SCALE});
+        m_Body->SetScale(Window::GetScale());
+        m_Head->SetScale(Window::GetScale());
         return;
     }
     m_BeforeFaceTo = LEFT;
-    m_Body->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
-    m_Head->SetScale({-DUNGEON_SCALE, DUNGEON_SCALE});
+    m_Body->SetScale({-Window::Scale, Window::Scale});
+    m_Head->SetScale({-Window::Scale, Window::Scale});
 }
 
 void Player::Update() {

@@ -4,7 +4,15 @@
 
 #include "Game/Warehouse/Heart.h"
 
+#include "Settings/Window.hpp"
+
 Heart::Heart() {
+    m_FirstPosition = {
+      PTSD_Config::WINDOW_WIDTH / 2 - 220,
+      PTSD_Config::WINDOW_HEIGHT / 2 - 55
+    };
+    m_Scale = Window::GetScale();
+
     resetHP();
 }
 

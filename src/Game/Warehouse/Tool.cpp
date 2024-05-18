@@ -9,6 +9,14 @@
 #include "Game/Warehouse/Tools.h"
 
 Players::Tools::Tools() {
+    m_ColInitPos = {
+      static_cast<int>(-PTSD_Config::WINDOW_WIDTH) / 2 + 65,
+      static_cast<int>(PTSD_Config::WINDOW_HEIGHT) / 2 - 195
+    };
+    m_RowInitPos = {
+      static_cast<int>(-PTSD_Config::WINDOW_WIDTH) / 2 + 65,
+      static_cast<int>(PTSD_Config::WINDOW_HEIGHT) / 2 - 55
+    };
     m_ToolFactory = std::make_shared<Players::Items::ToolFactory>();
 
     m_GameElement = std::make_shared<Util::GameElement>();

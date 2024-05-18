@@ -13,7 +13,6 @@
 #include "Game/Player.h"
 #include "Settings/Animation.h"
 #include "Settings/SpriteSheet.hpp"
-#include "Settings/Window.hpp"
 
 namespace Dungeon {
 // Abstract class
@@ -31,9 +30,7 @@ public:
     void SetCoin(const std::size_t coin) { m_Coin = coin; }
     void CanMove();
 
-    void SetFace(bool faceTo) {
-        m_Transform.scale.x = faceTo ? DUNGEON_SCALE : -DUNGEON_SCALE;
-    }
+    void SetFace(bool faceTo);
 
     glm::vec2        GetPlayerPosition() const;
     const glm::vec2& GetGamePosition() const { return m_GamePosition; }

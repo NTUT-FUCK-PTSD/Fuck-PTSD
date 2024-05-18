@@ -2,11 +2,14 @@
 // Created by adven on 2024/5/10.
 //
 
-#include <Util/Input.hpp>
-#include <Util/Logger.hpp>
+#include "App.hpp"
+
 #include <future>
 #include <thread>
-#include "App.hpp"
+
+#include <Util/Input.hpp>
+#include <Util/Logger.hpp>
+
 #include "Music/Player.h"
 
 void App::Start() {
@@ -19,7 +22,7 @@ void App::Start() {
 
         // play main background music
         Music::Player::Init();
-        
+
         std::async(std::launch::async, []() {
             Music::Player::PlayMusic(
                 ASSETS_DIR "/music/intro_onlyMusic.ogg",
@@ -33,19 +36,13 @@ void App::Start() {
     }
 
     // Wait any key click
-    if (ToolBoxs::IsAnyKeyPress()) {
-        m_IsMainMenu = false;
-    }
+    if (ToolBoxs::IsAnyKeyPress()) { m_IsMainMenu = false; }
 
     // m_MusicSystem->Update();
     m_Camera->Update();
 
-    if (Util::Input::IfExit()) {
-        m_CurrentState = State::END;
-    }
-    if (m_IsMainMenu) {
-        return;
-    }
+    if (Util::Input::IfExit()) { m_CurrentState = State::END; }
+    if (m_IsMainMenu) { return; }
 
     initializeGame();
     ClickEvent();
@@ -57,7 +54,8 @@ std::map<Util::Keycode, Player::Direction> App::m_MapTableCodeDire = {
   {Util::Keycode::W, Player::Direction::UP},
   {Util::Keycode::D, Player::Direction::RIGHT},
   {Util::Keycode::S, Player::Direction::DOWN},
-  {Util::Keycode::A, Player::Direction::LEFT}};
+  {Util::Keycode::A, Player::Direction::LEFT}
+};
 
 std::shared_ptr<Player> App::m_MainCharacter = nullptr;
 bool                    App::m_ThrowMode = false;

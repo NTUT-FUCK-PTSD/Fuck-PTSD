@@ -3,6 +3,7 @@
 
 #include "Dungeon/Enemy.h"
 #include "Dungeon/TileFactory.h"
+#include "Settings/Window.hpp"
 
 namespace Dungeon {
 std::size_t Map::GetLevelNum() const {
@@ -14,10 +15,13 @@ bool Map::CheckShowPosition(
     const glm::vec2& position2
 ) {
     return (
-        position1.x >= position2.x - (ALLOW_EXTRA_DRAW + HalfColNumber)
-        && position1.x <= position2.x + (ALLOW_EXTRA_DRAW + HalfColNumber)
-        && position1.y >= position2.y - (ALLOW_EXTRA_DRAW + HalfRowNumber)
-        && position1.y <= position2.y + (ALLOW_EXTRA_DRAW + HalfRowNumber)
+        position1.x >= position2.x - (ALLOW_EXTRA_DRAW + Window::HalfColNumber)
+        && position1.x
+               <= position2.x + (ALLOW_EXTRA_DRAW + Window::HalfColNumber)
+        && position1.y
+               >= position2.y - (ALLOW_EXTRA_DRAW + Window::HalfRowNumber)
+        && position1.y
+               <= position2.y + (ALLOW_EXTRA_DRAW + Window::HalfRowNumber)
     );
 }
 
@@ -29,7 +33,8 @@ std::size_t Map::GamePostion2MapIndex(const glm::ivec2& position) const {
 glm::ivec2 Map::MapIndex2GamePosition(const std::size_t index) const {
     return {
       static_cast<int>(index % m_Size.x) + m_Level->GetLevelIndexMin().x - 1,
-      static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1};
+      static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1
+    };
 }
 
 std::shared_ptr<MapData> Map::GetMapData() const {
@@ -45,9 +50,7 @@ void Map::RemoveEnemy(const std::size_t position) {
 void Map::RemoveWall(const std::size_t position) {
     auto tile = m_MapData->GetTile(position)->GetTile();
 
-    if (tile.type == 102) {
-        return;
-    }
+    if (tile.type == 102) { return; }
     m_TileHead->RemoveChild(m_MapData->GetTile(position));
     m_MapData->RemoveTile(position);
     m_MapData->AddTile(

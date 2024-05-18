@@ -39,7 +39,7 @@ void Bomb::GenSlot() {
 
     obj->SetDrawable(slot);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS + m_SlotOffset);
 
     AddChild(obj);
@@ -63,7 +63,7 @@ void Bomb::GenItem() {
 
     obj->SetDrawable(item);
     obj->SetZIndex(Players::Config::VAL_ZINDEX);
-    obj->SetScale(Players::Config::VAL_SCALE);
+    obj->SetScale(Window::GetScale());
     obj->SetPosition(Players::Config::VAL_INITPOS + m_ItemOffset);
 
     AddChild(obj);
