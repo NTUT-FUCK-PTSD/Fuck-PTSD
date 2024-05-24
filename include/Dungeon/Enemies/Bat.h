@@ -12,6 +12,8 @@ class Bat final : public Dungeon::Enemy {
 public:
     Bat(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
 
+    bool IsBoss() const override { return m_IsBoss; }
+
     void Move() override;
 
     void UpdateFace();
@@ -22,8 +24,9 @@ private:
     std::size_t m_Tick = 2;
 
 private:
-    const glm::vec2 m_FrameSize = {24, 24};
-    std::size_t     m_State = 0;
+    bool        m_IsBoss = false;
+    glm::vec2   m_FrameSize = {24, 24};
+    std::size_t m_State = 0;
 
     std::vector<std::size_t> m_RandomPool = {};
     std::vector<glm::vec2>   m_Movement = {TOP, RIGHT, BOTTOM, LEFT};

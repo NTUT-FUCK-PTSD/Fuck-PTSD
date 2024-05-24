@@ -43,6 +43,40 @@ Enemies::Bat::Bat(
         SetCoin(20);
         m_Tick = 1;
         break;
+    case 400:
+        m_FrameSize[0] = 36;
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat_miniboss_yellow.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        InitHealth(4);  // 2 hearts
+        SetDamage(3);   // 1.5 hearts
+        SetCoin(10);
+        m_IsBoss = true;
+        m_Tick = 1;
+        break;
+    case 401:
+        m_FrameSize[0] = 36;
+        m_SpriteSheet = std::make_shared<SpriteSheet>(
+            ASSETS_DIR "/entities/bat_miniboss_yellow.png",
+            m_FrameSize,
+            m_NormalFrames,
+            true,
+            100,
+            true,
+            100
+        );
+        InitHealth(6);  // 3 hearts
+        SetDamage(4);   // 2 hearts
+        SetCoin(15);
+        m_IsBoss = true;
+        m_Tick = 1;
+        break;
     default:
         m_SpriteSheet = std::make_shared<SpriteSheet>(
             ASSETS_DIR "/entities/bat.png",
@@ -66,9 +100,7 @@ Enemies::Bat::Bat(
 
 namespace Dungeon::Enemies {
 void Bat::Move() {
-    if (m_State > m_Tick - 1) {
-        m_State = 0;
-    }
+    if (m_State > m_Tick - 1) { m_State = 0; }
     if (m_State == m_Tick - 1) {
         for (std::size_t i = 0; i < 4; i++) {
             if (IsVaildMove(GetGamePosition() + m_Movement[i])) {
@@ -81,9 +113,7 @@ void Bat::Move() {
 }
 
 void Bat::RandomMove() {
-    if (m_RandomPool.empty()) {
-        return;
-    }
+    if (m_RandomPool.empty()) { return; }
     std::size_t index = 0;
     while (!m_RandomPool.empty()) {
         index = m_Distribution(
