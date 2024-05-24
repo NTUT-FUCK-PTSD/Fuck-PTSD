@@ -117,5 +117,20 @@ void Map::InitEvent() {
             }
         )
     );
+
+    m_Event.appendListener(
+        EventType::WallRemove,
+        eventpp::conditionalFunctor(
+            eventpp::argumentAdapter<
+                void(const Object*, const WallRemoveEventArgs&)>(
+                [this](const Object*, const WallRemoveEventArgs& e) {
+                    RemoveWall(e.GetMapIndex());
+                }
+            ),
+            [](const Object*, const EventArgs& e) {
+                return dynamic_cast<const WallRemoveEventArgs*>(&e) != nullptr;
+            }
+        )
+    );
 }
 }  // namespace Dungeon

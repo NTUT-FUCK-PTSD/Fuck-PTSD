@@ -8,6 +8,7 @@ enum class EventType {
     PlayerMove,
     EnemyMove,
     EnemyRemove,
+    WallRemove,
 };
 
 #endif  // EVENT_TYPE_H
