@@ -48,4 +48,12 @@ EVENTPP_MAKE_EVENT(
     (std::size_t, GetMapIndex)
 );
 
+EVENTPP_MAKE_EVENT(
+    FloorUpdateEventArgs,
+    EventArgs,
+    EventType::FloorUpdate,
+    (std::size_t, GetTempoIndex),
+    (bool, GetColored)
+);
+
 #endif  // EVENT_ARGS_H

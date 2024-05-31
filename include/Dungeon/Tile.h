@@ -8,6 +8,7 @@
 #include "Util/SpriteSheet.hpp"
 
 #include "Dungeon/Elements.h"
+#include "Event/Event.h"
 #include "Settings/SpriteSheet.hpp"
 
 namespace Dungeon {
@@ -57,6 +58,8 @@ protected:
 
     std::shared_ptr<SpriteSheet>      m_TorchAnimation;
     std::shared_ptr<Util::GameObject> m_Torch;
+
+    Event::Remover m_Event;
 };
 }  // namespace Dungeon
 

@@ -1,6 +1,8 @@
 #include "Dungeon/Map.h"
 
 #include "Dungeon/Enemy.h"
+#include "Event/EventArgs.h"
+#include "Event/EventType.h"
 #include "Util/Logger.hpp"
 
 namespace Dungeon {
@@ -59,9 +61,14 @@ void Map::PlayerTrigger() {
 }
 
 void Map::TempoTrigger(const std::size_t index) {
+    Event::EventQueue.dispatch(
+        this,
+        FloorUpdateEventArgs(index, m_CoinMultiple > 0)
+    );
     if (m_TempoIndex == index) { return; }
     m_TempoIndex = index;
     TempoUpdate(false);
+    m_CoinMultiple = false;
 }
 
 void Map::Update() {
