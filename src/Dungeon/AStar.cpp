@@ -42,9 +42,7 @@ std::vector<glm::ivec2> AStar::FindPath(
 
     while (!frontier.empty()) {
         std::pair<float, glm::ivec2> current = frontier.top();
-        if (maxDistance > 0 && current.first > maxDistance) {
-            break;
-        }
+        if (maxDistance > 0 && current.first > maxDistance) { break; }
         frontier.pop();
         if (Heuristic(current.second, end)
             < Heuristic(lastminPath.second, end)) {
@@ -59,9 +57,7 @@ std::vector<glm::ivec2> AStar::FindPath(
         for (const auto& direction : directions) {
             glm::ivec2 next = current.second + direction;
             // if the position is not walkable
-            if (mapData->IsPositionWalkable(next) == false) {
-                continue;
-            }
+            if (mapData->IsPositionWalkable(next) == false) { continue; }
 
             float newCost = current.first + Heuristic(current.second, next);
             std::size_t mapIndex = mapData->GamePosition2MapIndex(next);
@@ -84,7 +80,8 @@ std::vector<glm::ivec2> AStar::FindPath(
 }
 
 float AStar::Heuristic(const glm::vec2& start, const glm::vec2& end) {
-    return glm::distance(start, end);
+    auto distance = glm::abs(start - end);
+    return distance.x + distance.y;
 }
 
 std::vector<glm::ivec2> AStar::CalculatePath(

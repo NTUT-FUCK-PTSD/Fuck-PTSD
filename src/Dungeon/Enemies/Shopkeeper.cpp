@@ -29,6 +29,6 @@ Shopkeeper::Shopkeeper(
 
 void Shopkeeper::Move() {
     m_UnnecssaryAnimation = true;
-    m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 0);
+    m_Animation->MoveByTime(200, ToolBoxs::GamePostoPos(GetGamePosition()), 4);
 }
 }  // namespace Dungeon::Enemies

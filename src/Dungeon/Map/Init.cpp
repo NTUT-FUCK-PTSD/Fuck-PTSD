@@ -36,7 +36,7 @@ Map::Map(
     auto gamePos = glm::ivec2(2, 2);
     auto mapIndex = GamePostion2MapIndex(gamePos);
     auto enemy = EnemyFactory::CreateEnemy(
-        s_Enemy{gamePos.x, gamePos.y, 10, 0, 0},
+        s_Enemy{gamePos.x, gamePos.y, 407, 0, 0},
         m_MapData
     );
     m_MapData->AddEnemy(mapIndex, enemy);

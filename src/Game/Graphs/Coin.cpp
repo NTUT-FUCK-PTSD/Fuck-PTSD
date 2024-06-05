@@ -11,7 +11,8 @@ namespace Game::Graphs {
 Coin::Coin(std::size_t number)
     : m_Number(number) {
     if (number >= 10) {
-        throw std::runtime_error("Coin number error");
+        // throw std::runtime_error("Coin number error");
+        number = 10;
     } else if (number == 0) {
         return;
     }

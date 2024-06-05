@@ -41,4 +41,11 @@ EVENTPP_MAKE_EVENT(
     (std::size_t, GetMapIndex)
 );
 
+EVENTPP_MAKE_EVENT(
+    WallRemoveEventArgs,
+    EventArgs,
+    EventType::WallRemove,
+    (std::size_t, GetMapIndex)
+);
+
 #endif  // EVENT_ARGS_H
