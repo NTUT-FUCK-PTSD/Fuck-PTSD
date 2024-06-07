@@ -18,6 +18,8 @@ public:
 
     void UpdateFace();
 
+    void Struck(const std::size_t damage) override;
+
 private:
     void        RandomMove();
     void        MoveBat();

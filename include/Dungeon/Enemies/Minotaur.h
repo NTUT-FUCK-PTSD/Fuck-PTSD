@@ -10,6 +10,7 @@ public:
     Minotaur(const s_Enemy& u_Enemy, const std::shared_ptr<MapData>& mapData);
     void Move() override;
     void AttackPlayer() override;
+    void Struck(const std::size_t damage) override;
 
 private:
     void ChangeStatus(MinotaurState state);

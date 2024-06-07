@@ -1,6 +1,7 @@
 #include "Dungeon/Enemies/Bat.h"
 
 #include "Dungeon/MapData.h"
+#include "Event/EventArgs.h"
 
 namespace Dungeon {
 Enemies::Bat::Bat(
@@ -155,6 +156,15 @@ void Bat::UpdateFace() {
         SetFace(true);
     } else if (m_AnimationType == 3) {
         SetFace(false);
+    }
+}
+
+void Bat::Struck(const std::size_t damage) {
+    Enemy::Struck(damage);
+    if (m_IsBoss) {
+        if (m_Dead) {
+            Event::EventQueue.dispatch(this, UnlockStairsEventArgs(0));
+        }
     }
 }
 

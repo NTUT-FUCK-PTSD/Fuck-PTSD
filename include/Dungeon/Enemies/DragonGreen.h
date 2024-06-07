@@ -16,6 +16,8 @@ public:
 
     bool IsBoss() const override { return true; }
 
+    void Struck(const std::size_t damage) override;
+
 private:
     const glm::vec2 m_FrameSize = {54, 51};
 

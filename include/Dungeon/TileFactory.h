@@ -10,6 +10,7 @@
 #include "Dungeon/Tiles/GeneralTool.h"
 #include "Dungeon/Tiles/GeneralWall.h"
 #include "Dungeon/Tiles/NecroDancerStage.h"
+#include "Dungeon/Tiles/StairsLockedMiniboss.h"
 #include "Dungeon/Tiles/WireDoor.h"
 #include "Dungeon/Tiles/WirePhaseConductor.h"
 
@@ -20,6 +21,8 @@ public:
         if (u_Tile.type <= 24) {
             if (u_Tile.type == 8) {
                 return std::make_shared<Tiles::FloorTar>(u_Tile);
+            } else if (u.type == 9) {
+                return std::make_shared<Tiles::StairsLockedMiniboss>(u_Tile);
             } else if (u_Tile.type == 23 || u_Tile.type == 24) {
                 return std::make_shared<Tiles::WirePhaseConductor>(u_Tile);
             }

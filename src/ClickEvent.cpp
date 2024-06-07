@@ -308,7 +308,7 @@ void App::ClickEvent() {
             );
 
             // LOG_INFO(tile->GetTile().type);
-            if (tile->GetTile().type == 9
+            if (tile->GetTile().type == 2
                 && m_DungeonMap->GetMapData()->IsBossDead()) {
                 Music::Player::PlayMusic(m_MusicList.back().data(), true);
                 Music::Tempo::ReadTempoFile(m_TempoList.back().data());

@@ -140,4 +140,9 @@ void Minotaur::AttackPlayer() {
     }
 }
 
+void Minotaur::Struck(const std::size_t damage) {
+    Enemy::Struck(damage);
+    if (m_Dead) { Event::EventQueue.dispatch(this, UnlockStairsEventArgs(0)); }
+}
+
 }  // namespace Dungeon::Enemies
