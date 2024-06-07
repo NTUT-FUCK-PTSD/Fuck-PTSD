@@ -96,7 +96,7 @@ private:
     std::vector<std::shared_ptr<Item>>  m_Items;
 
     std::shared_ptr<Enemy>  m_Boss = nullptr;
-    std::shared_ptr<Player> m_Player;
+    std::shared_ptr<Player> m_Player = nullptr;
 };
 }  // namespace Dungeon
 
