@@ -5,26 +5,24 @@
 
 namespace Dungeon {
 namespace Tiles {
-GeneralDoor::GeneralDoor(const s_Tile& u_Tile, const bool generalDoorFront)
-    : Tile(u_Tile) {
+GeneralDoor::GeneralDoor(const s_Tile& _Tile, const bool generalDoorFront)
+    : Tile(_Tile) {
     init(generalDoorFront);
 }
 
 GeneralDoor::GeneralDoor(
-    const s_Tile&      u_Tile,
+    const s_Tile&      _Tile,
     const std::string& filePath,
     const bool         generalDoorFront
 )
-    : Tile(u_Tile, filePath) {
+    : Tile(_Tile, filePath) {
     init(generalDoorFront);
 }
 
 void GeneralDoor::init(const bool general) {
     m_ZIndex = m_ZIndex + 0.125f;
     m_MagicNumber = 7;
-    if (general) {
-        UpdateDrawable();
-    }
+    if (general) { UpdateDrawable(); }
 
     m_Floor = std::make_shared<GeneralFloor>(
         s_Tile({m_Tile.x, m_Tile.y, 0, m_Tile.zone, 0, m_Tile.cracked}),

@@ -10,6 +10,7 @@ enum class EventType {
     EnemyRemove,
     WallRemove,
     FloorUpdate,
+    UnlockStairs,
 };
 
 #endif  // EVENT_TYPE_H

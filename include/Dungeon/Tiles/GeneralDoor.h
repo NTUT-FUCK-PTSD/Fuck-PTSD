@@ -8,9 +8,9 @@ namespace Dungeon {
 namespace Tiles {
 class GeneralDoor : public Tile {
 public:
-    GeneralDoor(const s_Tile& u_Tile, const bool generaldoor = true);
+    GeneralDoor(const s_Tile& _Tile, const bool generaldoor = true);
     GeneralDoor(
-        const s_Tile&      u_Tile,
+        const s_Tile&      _Tile,
         const std::string& filePath,
         const bool         GeneralDoor = true
     );

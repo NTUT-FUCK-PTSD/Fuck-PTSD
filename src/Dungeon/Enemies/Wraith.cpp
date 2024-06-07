@@ -4,10 +4,10 @@
 
 namespace Dungeon {
 Enemies::Wraith::Wraith(
-    const s_Enemy&                 u_Enemy,
+    const s_Enemy&                 _Enemy,
     const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, mapData) {
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames = {0, 1, 2};
     m_ShadowFrames = {3, 4, 5};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

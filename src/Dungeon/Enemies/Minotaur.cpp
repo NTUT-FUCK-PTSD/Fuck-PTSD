@@ -4,10 +4,10 @@
 
 namespace Dungeon::Enemies {
 Minotaur::Minotaur(
-    const s_Enemy&                  u_Enemy,
+    const s_Enemy&                  _Enemy,
     const std::shared_ptr<MapData>& mapData
 )
-    : Enemy(u_Enemy, mapData) {
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames_ = {0, 1, 2, 3};
     m_AttackFrames = {4};
     m_StunnedFrames = {5, 6, 7, 8};
@@ -138,6 +138,11 @@ void Minotaur::AttackPlayer() {
         Enemy::AttackPlayer();
         ChangeStatus(MinotaurState::Stunned);
     }
+}
+
+void Minotaur::Struck(const std::size_t damage) {
+    Enemy::Struck(damage);
+    if (m_Dead) { Event::EventQueue.dispatch(this, UnlockStairsEventArgs(0)); }
 }
 
 }  // namespace Dungeon::Enemies

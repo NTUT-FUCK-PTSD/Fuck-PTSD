@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Tiles {
 class FloorTar final : public GeneralFloor {
 public:
-    explicit FloorTar(const s_Tile& u_Tile);
+    explicit FloorTar(const s_Tile& _Tile);
     virtual ~FloorTar() override = default;
 };
 }  // namespace Tiles

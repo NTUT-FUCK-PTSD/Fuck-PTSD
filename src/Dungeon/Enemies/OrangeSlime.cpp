@@ -4,10 +4,10 @@
 
 namespace Dungeon {
 Enemies::OrangeSlime::OrangeSlime(
-    const s_Enemy&                 u_Enemy,
+    const s_Enemy&                 _Enemy,
     const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, mapData),
+    : Enemy(_Enemy, mapData),
       m_RandomGenerator(m_RandomDevice()),
       m_Distribution(0, 3) {
     m_NormalFrames = {0, 1, 2, 3};
@@ -39,9 +39,7 @@ Enemies::OrangeSlime::OrangeSlime(
 
 namespace Dungeon::Enemies {
 void OrangeSlime::Move() {
-    if (m_State > 3) {
-        m_State = 0;
-    }
+    if (m_State > 3) { m_State = 0; }
     if (m_State == 0) {
         m_WillMovePosition = m_Movement[(m_StartIdx + m_State) % 4];
     } else if (m_State == 1) {

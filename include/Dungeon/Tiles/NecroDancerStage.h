@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Tiles {
 class NecroDancerStage final : public GeneralWall {
 public:
-    NecroDancerStage(const s_Tile& u_Tile);
+    NecroDancerStage(const s_Tile& _Tile);
     virtual ~NecroDancerStage() override = default;
 };
 }  // namespace Tiles

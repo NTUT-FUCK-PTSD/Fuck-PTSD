@@ -56,4 +56,11 @@ EVENTPP_MAKE_EVENT(
     (bool, GetColored)
 );
 
+EVENTPP_MAKE_EVENT(
+    UnlockStairsEventArgs,
+    EventArgs,
+    EventType::UnlockStairs,
+    (std::size_t, GetUnlockType)
+);
+
 #endif  // EVENT_ARGS_H

@@ -4,18 +4,18 @@
 
 namespace Dungeon {
 namespace Tiles {
-GeneralWall::GeneralWall(const s_Tile& u_Tile, const bool generalWall)
-    : Tile(u_Tile) {
+GeneralWall::GeneralWall(const s_Tile& _Tile, const bool generalWall)
+    : Tile(_Tile) {
     m_MagicNumber = 6;
     if (generalWall) { UpdateDrawable(); }
 }
 
 GeneralWall::GeneralWall(
-    const s_Tile&      u_Tile,
+    const s_Tile&      _Tile,
     const std::string& filePath,
     const bool         generalWall
 )
-    : Tile(u_Tile, filePath) {
+    : Tile(_Tile, filePath) {
     m_MagicNumber = 6;
     if (generalWall) { UpdateDrawable(); }
 }

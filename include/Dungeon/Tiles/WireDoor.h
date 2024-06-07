@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Tiles {
 class WireDoor final : public GeneralDoor {
 public:
-    explicit WireDoor(const s_Tile& u_Tile);
+    explicit WireDoor(const s_Tile& _Tile);
     virtual ~WireDoor() override = default;
 };
 }  // namespace Tiles

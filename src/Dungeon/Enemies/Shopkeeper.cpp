@@ -4,10 +4,10 @@
 
 namespace Dungeon::Enemies {
 Shopkeeper::Shopkeeper(
-    const s_Enemy&                  u_Enemy,
+    const s_Enemy&                  _Enemy,
     const std::shared_ptr<MapData>& mapData
 )
-    : Enemy(u_Enemy, mapData) {
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames = {0, 1, 2, 3, 4, 5, 6, 7};
     m_ShadowFrames = {8, 9, 10, 11, 12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(

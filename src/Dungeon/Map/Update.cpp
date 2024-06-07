@@ -72,12 +72,14 @@ void Map::TempoTrigger(const std::size_t index) {
 }
 
 void Map::Update() {
-    m_Transform.translation = m_MapData->GetPlayer()->GetTranslation();
+    if (m_Available) {
+        m_Transform.translation = m_MapData->GetPlayer()->GetTranslation();
 
-    if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
-        m_OverlayRed = false;
+        if (m_OverlayRedTime + 200 < Util::Time::GetElapsedTimeMs()) {
+            m_OverlayRed = false;
+        }
+
+        Event::EventQueue.dispatch(this, EventArgs(EventType::DrawableUpdate));
     }
-
-    Event::EventQueue.dispatch(this, EventArgs(EventType::DrawableUpdate));
 }
 }  // namespace Dungeon

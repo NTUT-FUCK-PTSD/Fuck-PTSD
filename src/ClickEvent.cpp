@@ -152,16 +152,18 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
-            Music::Player::PlayMusic(m_MusicList.back().data(), true);
-            Music::Tempo::ReadTempoFile(m_TempoList.back().data());
-            m_MusicList.pop_back();
-            m_TempoList.pop_back();
-            m_DungeonMap->LoadLevel(
+            bool loadLevel = m_DungeonMap->LoadLevel(
                 m_DungeonMap->GetLevelNum() + 1,
                 m_MainCharacter
             );
-            m_AniCameraDestination = {0, 0};
-            m_AniPlayerDestination = {0, 0};
+            if (loadLevel) {
+                Music::Player::PlayMusic(m_MusicList.back().data(), true);
+                Music::Tempo::ReadTempoFile(m_TempoList.back().data());
+                m_MusicList.pop_back();
+                m_TempoList.pop_back();
+                m_AniCameraDestination = {0, 0};
+                m_AniPlayerDestination = {0, 0};
+            }
         },
         Util::Keycode::N
     );
@@ -308,18 +310,20 @@ void App::ClickEvent() {
             );
 
             // LOG_INFO(tile->GetTile().type);
-            if (tile->GetTile().type == 9
+            if (tile->GetTile().type == 2
                 && m_DungeonMap->GetMapData()->IsBossDead()) {
-                Music::Player::PlayMusic(m_MusicList.back().data(), true);
-                Music::Tempo::ReadTempoFile(m_TempoList.back().data());
-                m_MusicList.pop_back();
-                m_TempoList.pop_back();
-                m_DungeonMap->LoadLevel(
+                bool loadLevel = m_DungeonMap->LoadLevel(
                     m_DungeonMap->GetLevelNum() + 1,
                     m_MainCharacter
                 );
-                m_AniCameraDestination = {0, 0};
-                m_AniPlayerDestination = {0, 0};
+                if (loadLevel) {
+                    Music::Player::PlayMusic(m_MusicList.back().data(), true);
+                    Music::Tempo::ReadTempoFile(m_TempoList.back().data());
+                    m_MusicList.pop_back();
+                    m_TempoList.pop_back();
+                    m_AniCameraDestination = {0, 0};
+                    m_AniPlayerDestination = {0, 0};
+                }
             }
         },
         Util::Keycode::W,

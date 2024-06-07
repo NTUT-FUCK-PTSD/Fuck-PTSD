@@ -1,18 +1,16 @@
 #include "Dungeon/Enemies/Bat.h"
 
 #include "Dungeon/MapData.h"
+#include "Event/EventArgs.h"
 
 namespace Dungeon {
-Enemies::Bat::Bat(
-    const s_Enemy&                 u_Enemy,
-    const std::shared_ptr<MapData> mapData
-)
-    : Enemy(u_Enemy, mapData),
+Enemies::Bat::Bat(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData)
+    : Enemy(_Enemy, mapData),
       m_RandomGenerator(m_RandomDevice()) {
     m_NormalFrames = {0, 1, 2, 3};
     m_ShadowFrames = {4, 5, 6, 7};
 
-    switch (u_Enemy.type) {
+    switch (_Enemy.type) {
     case 7:
         m_SpriteSheet = std::make_shared<SpriteSheet>(
             ASSETS_DIR "/entities/bat_red.png",
@@ -155,6 +153,13 @@ void Bat::UpdateFace() {
         SetFace(true);
     } else if (m_AnimationType == 3) {
         SetFace(false);
+    }
+}
+
+void Bat::Struck(const std::size_t damage) {
+    Enemy::Struck(damage);
+    if (IsBoss() && m_Dead) {
+        Event::EventQueue.dispatch(this, UnlockStairsEventArgs(0));
     }
 }
 

@@ -14,14 +14,14 @@
 
 namespace Dungeon {
 
-Enemy::Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
+Enemy::Enemy(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData)
     : m_MapData(mapData),
-      m_ID(u_Enemy.type),
-      m_BeatDelay(u_Enemy.beatDelay),
-      m_Lord(u_Enemy.lord == 1),
+      m_ID(_Enemy.type),
+      m_BeatDelay(_Enemy.beatDelay),
+      m_Lord(_Enemy.lord == 1),
       m_DrawableUpdate(Event::EventQueue) {
     m_Transform.scale = Window::GetScale();
-    SetGamePosition({u_Enemy.x, u_Enemy.y});
+    SetGamePosition({_Enemy.x, _Enemy.y});
     m_Animation = std::make_unique<Animation>(
         ToolBoxs::GamePostoPos(m_GamePosition)
     );

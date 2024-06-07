@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Tiles {
 class DoorMetalSide final : public GeneralDoor {
 public:
-    explicit DoorMetalSide(const s_Tile& u_Tile);
+    explicit DoorMetalSide(const s_Tile& _Tile);
     virtual ~DoorMetalSide() override = default;
 
     void UpdateDrawable() override;

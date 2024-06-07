@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Tiles {
 class WirePhaseConductor final : public GeneralFloor {
 public:
-    explicit WirePhaseConductor(const s_Tile& u_Tile);
+    explicit WirePhaseConductor(const s_Tile& _Tile);
     virtual ~WirePhaseConductor() override = default;
 };
 }  // namespace Tiles
