@@ -68,28 +68,6 @@ void Map::OpenDoor(const std::size_t position) {
     auto gamePosition = glm::vec2(tile.x, tile.y);
 
     if (doorType == 50 || doorType == 103 || doorType == 118) {
-        for (size_t i = 0; i < 4; i++) {
-            auto tmpPosition = gamePosition + m_EnemyMove[i];
-            auto tmpMapIndex = GamePostion2MapIndex(tmpPosition);
-            if (m_MapData->IsPositionDoor(tmpPosition)
-                && doorType
-                       == m_MapData->GetTile(tmpMapIndex)->GetTile().type) {
-                m_TileHead->RemoveChild(m_MapData->GetTile(tmpMapIndex));
-                m_MapData->RemoveTile(tmpMapIndex);
-                m_MapData->AddTile(
-                    tmpMapIndex,
-                    TileFactory::CreateTile(s_Tile{
-                      static_cast<int>(tmpPosition.x),
-                      static_cast<int>(tmpPosition.y),
-                      0,
-                      tile.zone,
-                      0,
-                      tile.cracked
-                    })
-                );
-                m_TileHead->AddChild(m_MapData->GetTile(tmpMapIndex));
-            }
-        }
         m_TileHead->RemoveChild(m_MapData->GetTile(position));
         m_MapData->RemoveTile(position);
         m_MapData->AddTile(
@@ -99,6 +77,29 @@ void Map::OpenDoor(const std::size_t position) {
             )
         );
         m_TileHead->AddChild(m_MapData->GetTile(position));
+        for (size_t i = 0; i < 4; i++) {
+            auto tmpPosition = gamePosition + m_EnemyMove[i];
+            auto tmpMapIndex = GamePostion2MapIndex(tmpPosition);
+            if (m_MapData->IsPositionDoor(tmpPosition)
+                && doorType
+                       == m_MapData->GetTile(tmpMapIndex)->GetTile().type) {
+                OpenDoor(tmpMapIndex);
+                // m_TileHead->RemoveChild(m_MapData->GetTile(tmpMapIndex));
+                // m_MapData->RemoveTile(tmpMapIndex);
+                // m_MapData->AddTile(
+                //     tmpMapIndex,
+                //     TileFactory::CreateTile(s_Tile{
+                //       static_cast<int>(tmpPosition.x),
+                //       static_cast<int>(tmpPosition.y),
+                //       0,
+                //       tile.zone,
+                //       0,
+                //       tile.cracked
+                //     })
+                // );
+                // m_TileHead->AddChild(m_MapData->GetTile(tmpMapIndex));
+            }
+        }
     }
 }
 

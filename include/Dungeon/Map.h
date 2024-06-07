@@ -108,6 +108,8 @@ private:
     std::shared_ptr<GameElement> m_TileHead = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_EnemyHead = std::make_shared<GameElement>();
     std::shared_ptr<GameElement> m_ItemHead = std::make_shared<GameElement>();
+
+    std::size_t m_CoinMultiple = 0;
 };
 
 }  // namespace Dungeon

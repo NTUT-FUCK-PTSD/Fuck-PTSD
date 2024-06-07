@@ -1,27 +1,66 @@
 #include "Dungeon/Tile.h"
-#include <memory>
 
+#include <memory>
+#include "eventpp/utilities/argumentadapter.h"
+#include "eventpp/utilities/conditionalfunctor.h"
+
+#include "Event/Event.h"
+#include "Event/EventArgs.h"
+#include "Event/EventType.h"
 #include "Settings/SpriteSheet.hpp"
 #include "Settings/Window.hpp"
 #include "ToolBoxs.h"
 
 namespace Dungeon {
 
-Tile::Tile(const s_Tile& u_Tile)
-    : m_Tile(u_Tile) {
-    if (u_Tile.type >= 1e6) {
+Tile::Tile(const s_Tile& __tile)
+    : m_Tile(__tile),
+      m_Event(Event::EventQueue) {
+    if (__tile.type >= 1e6) {
         m_Filepath = (ASSETS_DIR "/items/")
-                     + (DUNGEON_TOOLTYPE.find(u_Tile.type)->second) + (".png");
+                     + (DUNGEON_TOOLTYPE.find(__tile.type)->second) + (".png");
     } else {
-        m_Filepath = (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(m_Tile.type)
+        m_Filepath = (ASSETS_DIR "/level/") + DUNGEON_TILETYPES.at(__tile.type)
                      + ".png";
+        if (__tile.type == 0 || __tile.type == 1) {
+            auto number = __tile.x + __tile.y;
+            m_Index = (number & 1);
+            m_Event.appendListener(
+                EventType::FloorUpdate,
+                eventpp::conditionalFunctor(
+                    eventpp::argumentAdapter<
+                        void(const Object*, const FloorUpdateEventArgs&)>(
+                        [this](const Object*, const FloorUpdateEventArgs& e) {
+                            bool floorOdd = (m_Tile.x + m_Tile.y) & 1;
+                            bool tempoOdd = e.GetTempoIndex() & 1;
+                            bool condition = floorOdd ^ tempoOdd;
+                            SetIndex(
+                                (e.GetColored() ? (condition ? 4 + floorOdd : 0)
+                                                : condition)
+                            );
+                        }
+                    ),
+                    [](const Object*, const EventArgs& e) {
+                        return dynamic_cast<const FloorUpdateEventArgs*>(&e)
+                               != nullptr;
+                    }
+                )
+            );
+            if (__tile.zone == 5) {
+                auto _tile = __tile;
+                _tile.type = 25;
+                m_Filepath = (ASSETS_DIR "/level/")
+                             + DUNGEON_TILETYPES.at(_tile.type) + ".png";
+                m_Tile = _tile;
+            }
+        }
     }
     Initialize();
 }
 
-Tile::Tile(const s_Tile& u_Tile, const std::string& filepath)
-    : m_Tile(u_Tile),
-      m_Filepath(filepath) {
+Tile::Tile(const s_Tile& __tile, const std::string& filepath)
+    : m_Filepath(filepath),
+      m_Tile(__tile) {
     Initialize();
 }
 

@@ -164,10 +164,10 @@ std::size_t MapData::GamePosition2MapIndex(const glm::ivec2& position) const {
 }
 
 bool MapData::IsPositionValid(const glm::ivec2& position) const {
-    return position.x >= GetLevelIndexMin().x
-           && position.x <= GetLevelIndexMax().x
-           && position.y >= GetLevelIndexMin().y
-           && position.y <= GetLevelIndexMax().y;
+    return position.x >= GetLevelIndexMin().x - 1
+           && position.x <= GetLevelIndexMax().x + 1
+           && position.y >= GetLevelIndexMin().y - 1
+           && position.y <= GetLevelIndexMax().y + 1;
 }
 
 bool MapData::IsEnemyEmpty(const std::size_t position) const {
