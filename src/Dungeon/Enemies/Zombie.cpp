@@ -3,10 +3,10 @@
 
 namespace Dungeon {
 Enemies::Zombie::Zombie(
-    const s_Enemy&                 u_Enemy,
+    const s_Enemy&                 _Enemy,
     const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, mapData),
+    : Enemy(_Enemy, mapData),
       m_RandomGenerator(m_RandomDevice()) {
     m_BackFrames = {0, 1, 2, 3, 4, 5, 6, 7};
     m_NormalFrames = {8, 9, 10, 11, 12, 13, 14, 15};
@@ -56,9 +56,7 @@ void Zombie::Move() {
             }
             m_WillMovePosition = GetGamePosition() + m_Movement[m_Direction];
 
-            if (IsVaildMove(m_WillMovePosition)) {
-                CanMove();
-            }
+            if (IsVaildMove(m_WillMovePosition)) { CanMove(); }
         }
     }
 

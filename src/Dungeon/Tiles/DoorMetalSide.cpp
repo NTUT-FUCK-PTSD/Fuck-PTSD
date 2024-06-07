@@ -4,8 +4,8 @@
 
 namespace Dungeon {
 namespace Tiles {
-DoorMetalSide::DoorMetalSide(const s_Tile& u_Tile)
-    : GeneralDoor(u_Tile, false) {
+DoorMetalSide::DoorMetalSide(const s_Tile& _Tile)
+    : GeneralDoor(_Tile, false) {
     m_MagicNumber = 15;
     UpdateDoorMetalSideDrawable();
 }

@@ -6,7 +6,7 @@
 namespace Dungeon::Enemies {
 class Shopkeeper final : public Dungeon::Enemy {
 public:
-    Shopkeeper(const s_Enemy& u_Enemy, const std::shared_ptr<MapData>& mapData);
+    Shopkeeper(const s_Enemy& _Enemy, const std::shared_ptr<MapData>& mapData);
 
     void Move() override;
 

@@ -12,22 +12,18 @@ namespace Tiles {
 class GeneralTool : public Tile {
 public:
     explicit GeneralTool(
-        s_Tile             u_tile,
+        s_Tile             _Tile,
         const std::string& filePath,
         const bool         generalFloor = true
     )
-        : Tile(u_tile, filePath) {
-        if (generalFloor) {
-            UpdateDrawable();
-        }
+        : Tile(_Tile, filePath) {
+        if (generalFloor) { UpdateDrawable(); }
     };
 
-    explicit GeneralTool(s_Tile u_tile, const bool generalFloor = true)
-        : Tile(u_tile) {
+    explicit GeneralTool(s_Tile _Tile, const bool generalFloor = true)
+        : Tile(_Tile) {
         m_MagicNumber = 6;
-        if (generalFloor) {
-            UpdateDrawable();
-        }
+        if (generalFloor) { UpdateDrawable(); }
     }
 
     ~GeneralTool() override = default;

@@ -7,9 +7,9 @@ namespace Dungeon {
 namespace Tiles {
 class GeneralWall : public Tile {
 public:
-    GeneralWall(const s_Tile& u_Tile, const bool generalWall = true);
+    GeneralWall(const s_Tile& _Tile, const bool generalWall = true);
     GeneralWall(
-        const s_Tile&      u_Tile,
+        const s_Tile&      _Tile,
         const std::string& filePath,
         const bool         generalWall = true
     );

@@ -6,13 +6,13 @@
 #include "Event/EventArgs.h"
 
 namespace Dungeon::Enemies {
-Monkey::Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData)
-    : Enemy(u_Enemy, mapData) {
+Monkey::Monkey(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData)
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames = {0, 1, 2, 3};
     m_BackFrames = {4, 5};
     m_ShadowFrames = {6, 7, 8, 9};
     m_ShadowBackFrames = {10, 11};
-    switch (u_Enemy.type) {
+    switch (_Enemy.type) {
     case 9:
         m_SpriteSheet = std::make_shared<SpriteSheet>(
             ASSETS_DIR "/entities/monkey.png",
@@ -58,9 +58,7 @@ void Monkey::Move() {
     auto direction = m_WillMovePosition - GetGamePosition();
     UpdateAnimationType(direction);
     UpdateProperties(direction);
-    if (!m_Back) {
-        CanMove();
-    }
+    if (!m_Back) { CanMove(); }
 }
 
 void Monkey::UpdateProperties(const glm::vec2& direction) {
@@ -93,9 +91,7 @@ void Monkey::AttackPlayer() {
 
 void Monkey::Update() {
     Enemy::Update();
-    if (m_Dead) {
-        return;
-    }
+    if (m_Dead) { return; }
     if (m_Back && !m_Animation->IsAnimating()) {
         auto player = m_MapData->GetPlayer();
         m_Transform.translation = player->GetTranslation();

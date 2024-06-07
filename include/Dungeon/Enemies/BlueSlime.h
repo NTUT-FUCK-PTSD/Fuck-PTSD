@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Enemies {
 class BlueSlime final : public Dungeon::Enemy {
 public:
-    BlueSlime(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
+    BlueSlime(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData);
 
     void Move() override;
 

@@ -4,22 +4,35 @@
 #include "eventpp/utilities/conditionalfunctor.h"
 
 #include "Tiles/GeneralFloor.h"
+#include "ToolBoxs.h"
 
 namespace Dungeon {
 namespace Tiles {
 StairsLockedMiniboss::StairsLockedMiniboss(
-    const s_Tile& u_Tile,
+    const s_Tile& _Tile,
     const bool    generalFloor
 )
-    : GeneralFloor(u_Tile, generalFloor) {
+    : GeneralFloor(_Tile, generalFloor) {
     m_Event.appendListener(
-        EventType::FloorUpdate,
+        EventType::UnlockStairs,
         eventpp::conditionalFunctor(
             eventpp::argumentAdapter<
                 void(const Object*, const UnlockStairsEventArgs&)>(
                 [this](const Object*, const UnlockStairsEventArgs& e) {
                     if (e.GetUnlockType() == 0) {
+                        m_Tile.type = 2;
                         m_Filepath = ASSETS_DIR "/level/stairs.png";
+                        m_SpriteSheet = std::make_shared<Util::SpriteSheet>(
+                            m_Filepath
+                        );
+                        m_TileSize = DUNGEON_TILESIZES.at(m_Tile.type);
+                        m_ImgSize = ToolBoxs::CountImagePixel(
+                            m_Filepath,
+                            m_TileSize.x,
+                            m_TileSize.y
+                        );
+                        m_SpriteSheet->SetColorMod(m_Color);
+                        m_Drawable = m_SpriteSheet;
                         UpdateDrawable();
                     }
                 }

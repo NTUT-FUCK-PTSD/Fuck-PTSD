@@ -8,7 +8,7 @@ namespace Tiles {
 class StairsLockedMiniboss : public GeneralFloor {
 public:
     explicit StairsLockedMiniboss(
-        const s_Tile& u_Tile,
+        const s_Tile& _Tile,
         const bool    generalFloor = true
     );
     virtual ~StairsLockedMiniboss() override = default;

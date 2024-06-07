@@ -4,10 +4,10 @@
 
 namespace Dungeon {
 Enemies::BlueSlime::BlueSlime(
-    const s_Enemy&                 u_Enemy,
+    const s_Enemy&                 _Enemy,
     const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, mapData) {
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames = {4, 5, 6, 7};
     m_ShadowFrames = {12, 13, 14, 15};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -27,17 +27,13 @@ Enemies::BlueSlime::BlueSlime(
     SetDamage(2);   // 1 heart
     SetCoin(2);
 
-    if (!IsVaildMove(m_InitPosition + m_Move)) {
-        m_Move = -m_Move;
-    }
+    if (!IsVaildMove(m_InitPosition + m_Move)) { m_Move = -m_Move; }
 }
 }  // namespace Dungeon
 
 namespace Dungeon::Enemies {
 void BlueSlime::Move() {
-    if (m_State > 3) {
-        m_State = 0;
-    }
+    if (m_State > 3) { m_State = 0; }
     if (m_State == 1) {
         if (GetGamePosition() == m_InitPosition) {
             m_WillMovePosition = m_InitPosition + m_Move;

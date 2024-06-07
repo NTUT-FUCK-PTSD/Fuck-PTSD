@@ -76,7 +76,7 @@ void Tile::Initialize() {
     m_ImgSize =
         ToolBoxs::CountImagePixel(m_Filepath, m_TileSize.x, m_TileSize.y);
     m_Drawable = m_SpriteSheet;
-    m_SpriteSheet->SetColorMod({0, 0, 0, 255});
+    m_SpriteSheet->SetColorMod(m_Color);
     SetTorch(m_Tile.torch == 1);
 }
 
@@ -109,11 +109,11 @@ void Tile::SetOverlay(bool visible) {
     }
     if (GetOverlay() == visible) { return; }
     m_IsOverlay = visible;
-    SDL_Color color =
+    m_Color =
         (visible == true ? SDL_Color({100, 100, 100, 255})
                          : SDL_Color({255, 255, 255, 255}));
-    m_SpriteSheet->SetColorMod(color);
-    if (m_Torch) { m_TorchAnimation->SetColorMod(color); }
+    m_SpriteSheet->SetColorMod(m_Color);
+    if (m_Torch) { m_TorchAnimation->SetColorMod(m_Color); }
 }
 std::size_t Tile::GetIndex() {
     return m_Index;

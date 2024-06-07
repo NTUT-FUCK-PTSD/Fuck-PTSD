@@ -7,7 +7,7 @@ namespace Dungeon::Enemies {
 enum class MinotaurState { Normal, Attack, Stunned, Stunned2 };
 class Minotaur : public Enemy {
 public:
-    Minotaur(const s_Enemy& u_Enemy, const std::shared_ptr<MapData>& mapData);
+    Minotaur(const s_Enemy& _Enemy, const std::shared_ptr<MapData>& mapData);
     void Move() override;
     void AttackPlayer() override;
     void Struck(const std::size_t damage) override;

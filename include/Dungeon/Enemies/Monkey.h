@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Enemies {
 class Monkey final : public Dungeon::Enemy {
 public:
-    Monkey(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
+    Monkey(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData);
 
     void Move() override;
 

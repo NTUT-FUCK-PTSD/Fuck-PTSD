@@ -4,11 +4,11 @@
 
 namespace Dungeon {
 Enemies::Skeleton::Skeleton(
-    const s_Enemy&                 u_Enemy,
+    const s_Enemy&                 _Enemy,
     const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, mapData) {
-    if (u_Enemy.type == 4) {
+    : Enemy(_Enemy, mapData) {
+    if (_Enemy.type == 4) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};
         m_ShadowFrames = {17, 18, 19, 20};
@@ -26,7 +26,7 @@ Enemies::Skeleton::Skeleton(
         SetDamage(3);   // 1.5 hearts
         SetCoin(2);
         m_CanDropHead = true;
-    } else if (u_Enemy.type == 5) {
+    } else if (_Enemy.type == 5) {
         m_NormalFrames = {0, 1, 2, 3};
         m_AttackFrames = {4, 5, 6, 7};
         m_ShadowFrames = {17, 18, 19, 20};

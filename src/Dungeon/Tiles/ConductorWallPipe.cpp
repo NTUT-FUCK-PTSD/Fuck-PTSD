@@ -2,8 +2,8 @@
 
 namespace Dungeon {
 namespace Tiles {
-ConductorWallPipe::ConductorWallPipe(const s_Tile& u_Tile)
-    : GeneralWall(u_Tile, false) {
+ConductorWallPipe::ConductorWallPipe(const s_Tile& _Tile)
+    : GeneralWall(_Tile, false) {
     m_MagicNumber = 38;
     UpdateDrawable();
 }

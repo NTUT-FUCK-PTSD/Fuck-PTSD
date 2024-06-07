@@ -18,7 +18,7 @@ namespace Dungeon {
 // Abstract class
 class Enemy : public Object, public Util::GameObject {
 public:
-    Enemy(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
+    Enemy(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData);
     virtual ~Enemy() = default;
 
     void SetShadow(const bool shadow);

@@ -7,10 +7,7 @@
 namespace Dungeon::Enemies {
 class DragonGreen final : public Dungeon::Enemy {
 public:
-    DragonGreen(
-        const s_Enemy&                  u_Enemy,
-        const std::shared_ptr<MapData>& mapData
-    );
+    DragonGreen(const s_Enemy& _Enemy, const std::shared_ptr<MapData>& mapData);
 
     void Move() override;
 

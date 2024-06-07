@@ -6,10 +6,10 @@
 
 namespace Dungeon::Enemies {
 DragonGreen::DragonGreen(
-    const s_Enemy&                  u_Enemy,
+    const s_Enemy&                  _Enemy,
     const std::shared_ptr<MapData>& mapData
 )
-    : Enemy(u_Enemy, mapData) {
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames = {0, 1};
     m_ShadowFrames = {2, 3};
 

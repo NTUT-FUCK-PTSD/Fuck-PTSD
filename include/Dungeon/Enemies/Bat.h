@@ -10,7 +10,7 @@ namespace Dungeon {
 namespace Enemies {
 class Bat final : public Dungeon::Enemy {
 public:
-    Bat(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
+    Bat(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData);
 
     bool IsBoss() const override { return m_IsBoss; }
 

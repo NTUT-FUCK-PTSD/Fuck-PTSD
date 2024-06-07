@@ -15,8 +15,8 @@ namespace Dungeon {
 
 class Tile : public Util::GameObject {
 public:
-    Tile(const s_Tile& u_Tile);
-    Tile(const s_Tile& u_Tile, const std::string& filepath);
+    Tile(const s_Tile& _Tile);
+    Tile(const s_Tile& _Tile, const std::string& filepath);
     void Initialize();
     virtual ~Tile() override = default;
 
@@ -60,6 +60,8 @@ protected:
     std::shared_ptr<Util::GameObject> m_Torch;
 
     Event::Remover m_Event;
+
+    SDL_Color m_Color = {0, 0, 0, 255};
 };
 }  // namespace Dungeon
 

@@ -4,10 +4,10 @@
 
 namespace Dungeon {
 Enemies::Ghost::Ghost(
-    const s_Enemy&                 u_Enemy,
+    const s_Enemy&                 _Enemy,
     const std::shared_ptr<MapData> mapData
 )
-    : Enemy(u_Enemy, mapData) {
+    : Enemy(_Enemy, mapData) {
     m_NormalFrames = {0, 1};
     m_ShadowFrames = {2, 3};
     m_SpriteSheet = std::make_shared<SpriteSheet>(
@@ -32,9 +32,7 @@ Enemies::Ghost::Ghost(
 
 namespace Dungeon::Enemies {
 void Ghost::SetTransparent(bool transparent) {
-    if (m_Transparent == transparent) {
-        return;
-    }
+    if (m_Transparent == transparent) { return; }
     m_Transparent = transparent;
     if (m_Transparent) {
         m_SpriteSheet->SetAlpha(128);
@@ -43,9 +41,7 @@ void Ghost::SetTransparent(bool transparent) {
     }
 }
 void Ghost::Struck(const std::size_t damage) {
-    if (m_Transparent) {
-        return;
-    }
+    if (m_Transparent) { return; }
     Enemy::Struck(damage);
 }
 void Ghost::Move() {

@@ -7,7 +7,7 @@ namespace Dungeon {
 namespace Enemies {
 class Wraith final : public Dungeon::Enemy {
 public:
-    Wraith(const s_Enemy& u_Enemy, const std::shared_ptr<MapData> mapData);
+    Wraith(const s_Enemy& _Enemy, const std::shared_ptr<MapData> mapData);
 
     void Move() override;
 
