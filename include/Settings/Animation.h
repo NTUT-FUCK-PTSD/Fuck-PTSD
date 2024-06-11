@@ -1,8 +1,11 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "Util/Time.hpp"
+#include <list>
+
 #include "pch.hpp"  // IWYU pragma: export
+
+#include "Util/Time.hpp"
 
 struct AnimationData {
     Util::ms_t duringTimeMs;
