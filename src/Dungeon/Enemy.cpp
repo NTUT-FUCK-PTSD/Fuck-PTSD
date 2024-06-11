@@ -168,8 +168,7 @@ void Enemy::Update() {
     }
 
     // Update animation
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
+    if (m_Animation->UpdateAnimation()) {
         m_Transform.translation = m_Animation->GetAnimationPosition();
     } else {
         m_UnnecssaryAnimation = false;

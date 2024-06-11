@@ -106,8 +106,7 @@ void Player::SetFaceTo(Direction direction) {
 }
 
 void Player::Update() {
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
+    if (m_Animation->UpdateAnimation()) {
         m_Position = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());

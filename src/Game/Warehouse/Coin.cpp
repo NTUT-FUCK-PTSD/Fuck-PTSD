@@ -70,8 +70,7 @@ std::shared_ptr<GameElement> Coin::GetGameObject() {
 }
 
 void Coin::Update() {
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
+    if (m_Animation->UpdateAnimation()) {
         m_GamePosition = ToolBoxs::PosToGamePos(
             m_Animation->GetAnimationPosition()
         );

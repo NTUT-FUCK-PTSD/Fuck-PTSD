@@ -4,6 +4,7 @@
 #include "Util/Renderer.hpp"
 
 #include "Animation.h"
+#include "Util/Time.hpp"
 
 class Camera final {
 public:
@@ -69,17 +70,16 @@ private:
 
     std::unique_ptr<Animation> m_Animation;
 
-    glm::vec2     m_OrginalPosition = {0, 0};
-    bool          m_IsShaking = false;
-    unsigned long m_ShakeStartMs;
-    unsigned long m_ShakeDuringTimeMs = 0;
-    float         m_ShakeStrength = 0;
-    bool          m_ShakeHold = false;
-    glm::vec2     m_ShakeHoldDestination = {
-      0,
-      0
-    };  // The destination of the camera when shaking
-    unsigned long                                  m_ShakeHoldDuringTimeMs = 0;
+    // glm::vec2     m_OrginalPosition = {0, 0};
+    // bool          m_IsShaking = false;
+    Util::ms_t m_ShakeStartMs;
+    Util::ms_t m_ShakeDuringTimeMs = 0;
+    float      m_ShakeStrength = 0;
+    // bool          m_ShakeHold = false;
+    // glm::vec2     m_ShakeHoldDestination = {
+    //   0,
+    //   0
+    // };  // The destination of the camera when shaking
     std::vector<std::shared_ptr<Util::GameObject>> m_GameChildren;
     std::vector<std::shared_ptr<Util::GameObject>> m_UIChildren;
 };
