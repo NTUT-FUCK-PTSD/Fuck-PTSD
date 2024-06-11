@@ -182,6 +182,10 @@ void Player::gainHeart(std::size_t value) {
     m_Heart->gainHeart(value);
 }
 
+void Player::resetHP() {
+    m_Heart->resetHP();
+}
+
 std::shared_ptr<Players::Tools> Player::GetToolMod() {
     return m_Tool;
 }

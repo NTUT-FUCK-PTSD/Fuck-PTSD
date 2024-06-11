@@ -17,11 +17,14 @@ public:
 
     void SetPosition(const glm::vec2& Position) override;
 
+    void SetVisibleRecursive(const bool visible);
+
 private:
     void GenText();
 
     static constexpr std::string_view m_Context =
-        "YOU DIED! PRESS UP+DOWN TO CONTINUE";
+        "YOU DIED! PRESS R TO CONTINUE";
+    // "YOU DIED! PRESS UP+DOWN TO CONTINUE";
 };
 }  // namespace Settings
 

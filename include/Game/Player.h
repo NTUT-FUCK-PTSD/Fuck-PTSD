@@ -59,6 +59,7 @@ public:
     void lostHP(std::size_t value);
     void gainHeart(std::size_t value);
     void getHP(std::size_t value);
+    void resetHP();
 
     // set player's tool
     void useDefaultSettingsTool();

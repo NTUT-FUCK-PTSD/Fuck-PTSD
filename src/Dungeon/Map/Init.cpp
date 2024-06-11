@@ -79,6 +79,7 @@ bool Map::LoadLevel(
     m_ShadowRenderDP.resize(m_Size.x * m_Size.y, false);
     CameraUpdate();
     m_MiniMap->Update();
+    m_Available = true;
     return true;
 }
 }  // namespace Dungeon
