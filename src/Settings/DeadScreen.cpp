@@ -37,4 +37,12 @@ void DeadScreen::GenText() {
 
     AddChild(obj);
 }
+
+void DeadScreen::SetVisibleRecursive(const bool visible) {
+    SetVisible(visible);
+
+    for (const auto& obj : GetChildren()) {
+        obj->SetVisible(visible);
+    }
+}
 }  // namespace Settings

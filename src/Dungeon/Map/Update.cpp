@@ -45,6 +45,7 @@ void Map::CameraUpdate() {
 }
 
 void Map::TempoUpdate(bool isPlayer) {
+    if (!m_Available) { return; }
     for (auto& enemy : m_MapData->GetEnemyQueue()) {
         enemy->TempoMove();
     }

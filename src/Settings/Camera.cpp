@@ -29,14 +29,19 @@ void Camera::RemoveChild(std::shared_ptr<Util::GameObject> child) {
 }
 
 void Camera::Update() {
-    m_Animation->UpdateAnimation();
-    if (m_Animation->IsAnimating()) {
+    auto elapsedTimeMs = Util::Time::GetElapsedTimeMs();
+    auto randomShake = glm::vec2(0, 0);
+    if (m_ShakeStartMs + m_ShakeDuringTimeMs > elapsedTimeMs) {
+        randomShake = glm::vec2(
+            glm::linearRand(-m_ShakeStrength, m_ShakeStrength),
+            glm::linearRand(-m_ShakeStrength, m_ShakeStrength)
+        );
+    }
+    if (m_Animation->UpdateAnimation()) {
         m_Position = m_Animation->GetAnimationPosition();
     }
-
-    if (m_IsShaking) { ShakeUpdate(); }
     m_Renderer->AddChildren(m_GameChildren);
-    m_Renderer->Update(m_Position);
+    m_Renderer->Update(m_Position + randomShake);
     m_Renderer->ClearChildren();
     m_Renderer->AddChildren(m_UIChildren);
     m_Renderer->Update({0, 0});
@@ -45,76 +50,21 @@ void Camera::Update() {
 
 void Camera::SetPosition(const glm::vec2 position) {
     if (position == m_Position) { return; }
-    if (m_IsShaking) {
-        m_Position = m_OrginalPosition;
-        m_ShakeDuringTimeMs = 0;
-        m_IsShaking = false;
-    }
-
-    m_Animation->MoveByTime(0, position);
+    m_Animation->UpdateGamePosition(position);
+    m_Position = position;
 }
 
 void Camera::MoveByTime(
     const unsigned long duringTimeMs,
     const glm::vec2&    destination
 ) {
-    if (destination == m_Position) { return; }
-    if (m_IsShaking) {
-        m_Position = m_OrginalPosition;
-        m_ShakeDuringTimeMs = 0;
-        m_IsShaking = false;
-    }
-
     m_Animation->MoveByTime(duringTimeMs, destination);
 }
 
 void Camera::Shake(const unsigned long duringTimeMs, const float strength) {
-    if (m_Animation->IsAnimating() && !m_IsShaking) {
-        m_ShakeHoldDuringTimeMs = m_Animation->GetAnimationDuringTimeMs()
-                                  - (Util::Time::GetElapsedTimeMs()
-                                     - m_Animation->GetAnimationStartMs());
-        m_ShakeHoldDestination = m_Animation->GetAnimationDestination();
-        m_ShakeHold = true;
-        m_Animation->SetAnimationStop();
-    }
-    if (m_IsShaking) {
-        m_Position = m_OrginalPosition;
-        m_ShakeDuringTimeMs = 0;
-        m_IsShaking = false;
-    }
-    m_IsShaking = true;
     m_ShakeStartMs = Util::Time::GetElapsedTimeMs();
     m_ShakeDuringTimeMs = duringTimeMs;
     m_ShakeStrength = strength;
-    m_OrginalPosition = m_Position;
-    ShakeUpdate();
-}
-
-void Camera::ShakeUpdate() {
-    if (m_ShakeDuringTimeMs == 0) { return; }
-    unsigned long passTimeMs = Util::Time::GetElapsedTimeMs() - m_ShakeStartMs;
-    if (passTimeMs > m_ShakeDuringTimeMs) {
-        m_Animation->SetAnimationStop();
-        m_Position = m_OrginalPosition;
-        m_ShakeDuringTimeMs = 0;
-        m_IsShaking = false;
-        if (m_ShakeHold) {
-            m_Animation->MoveByTime(
-                m_ShakeHoldDuringTimeMs,
-                m_ShakeHoldDestination
-            );
-            m_ShakeHold = false;
-        }
-    } else {
-        m_Animation->MoveByTime(
-            50,
-            glm::linearRand(
-                m_OrginalPosition
-                    + glm::vec2(-m_ShakeStrength, -m_ShakeStrength),
-                m_OrginalPosition + glm::vec2(m_ShakeStrength, m_ShakeStrength)
-            )
-        );
-    }
 }
 
 void Camera::AddUIChild(const std::shared_ptr<Util::GameObject> child) {

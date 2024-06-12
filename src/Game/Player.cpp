@@ -106,8 +106,7 @@ void Player::SetFaceTo(Direction direction) {
 }
 
 void Player::Update() {
-    m_Animation->UpdateAnimation(true);
-    if (m_Animation->IsAnimating()) {
+    if (m_Animation->UpdateAnimation()) {
         m_Position = m_Animation->GetAnimationPosition();
     }
     SetZIndex(m_Animation->GetAnimationZIndex());
@@ -181,6 +180,10 @@ void Player::lostHP(std::size_t value) {
 
 void Player::gainHeart(std::size_t value) {
     m_Heart->gainHeart(value);
+}
+
+void Player::resetHP() {
+    m_Heart->resetHP();
 }
 
 std::shared_ptr<Players::Tools> Player::GetToolMod() {

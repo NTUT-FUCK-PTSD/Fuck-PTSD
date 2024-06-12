@@ -10,6 +10,7 @@
 #include <memory>
 #include <thread>
 #include "Display/BeatHeart.h"
+#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemies/DragonGreen.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
@@ -19,21 +20,21 @@
 #include "Graphs/Coin.h"
 #include "HPIS.h"
 #include "Helper.hpp"
-#include "Music/BeatIndicator.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "System.h"
 #include "Systems/HEIS.h"
+
 void App::initializeGame() {
     // play lobby music
 
     auto a = std::async(std::launch::async, []() {
         //        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
-        Music::Player::PlayMusic(ASSETS_DIR "/music/lobby.ogg", true);
-        Music::Player::SetVolume(0);
+        Music::Player::PlayMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
+        // Music::Player::SetVolume(0);
     });
 
-    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/lobby.txt");
+    Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/zone1_1.txt");
 
     // play zone1 leve1
     // m_MusicSystem->playMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
@@ -111,15 +112,16 @@ void App::initializeGame() {
     // Display::BeatIndicator::Pause(false);
     // Display::BeatHeart::Pause(false);
 
-    const auto& blackChest = std::make_shared<Game::Graphs::BlackChest>();
-    m_DungeonMap->AddItem(119, blackChest);
+    //     const auto& blackChest =
+    //     std::make_shared<Game::Graphs::BlackChest>();
+    //     m_DungeonMap->AddItem(119, blackChest);
 
-    const auto& apple = std::make_shared<Game::Graphs::Food_1>();
-    m_DungeonMap->AddItem(731, apple);
+    //     const auto& apple = std::make_shared<Game::Graphs::Food_1>();
+    //     m_DungeonMap->AddItem(731, apple);
 
-    const auto& cheese = std::make_shared<Game::Graphs::Food_2>();
-    m_DungeonMap->AddItem(733, cheese);
+    //     const auto& cheese = std::make_shared<Game::Graphs::Food_2>();
+    //     m_DungeonMap->AddItem(733, cheese);
 
-    const auto& coin = std::make_shared<Game::Graphs::Coin>(2);
-    m_DungeonMap->AddItem(378, coin);
+    //     const auto& coin = std::make_shared<Game::Graphs::Coin>(2);
+    //     m_DungeonMap->AddItem(378, coin);
 }

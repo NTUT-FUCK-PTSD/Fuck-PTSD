@@ -62,10 +62,12 @@ void Heart::gainHeart(const std::size_t number) {
 }
 
 void Heart::resetHP() {
-    auto HP = m_MaxHp / 2;
+    m_ElementList.clear();
+    m_Heart->ClearChildren();
+    auto hearts = m_MaxHp / 2;
     m_MaxHp = 0;
 
-    gainHeart(HP);
+    gainHeart(hearts);
 
     m_currentHP = m_MaxHp;
     UpdateHP();
@@ -109,7 +111,7 @@ void Heart::UpdateHP() {
 
 void Heart::minusHP(const std::size_t number) {
     if (number > m_currentHP) {
-        LOG_ERROR("the value of number is not available");
+        m_currentHP = 0;
         return;
     }
     m_currentHP -= number;
@@ -118,7 +120,7 @@ void Heart::minusHP(const std::size_t number) {
 
 void Heart::minusHeart(const float number) {
     if (number < 0) {
-        LOG_ERROR("the value of number is not available");
+        LOG_ERROR("the value of number is not allowed to be negative");
         return;
     }
 

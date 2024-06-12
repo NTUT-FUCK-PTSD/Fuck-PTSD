@@ -8,6 +8,7 @@
 #include <Util/Keycode.hpp>
 #include <Util/Text.hpp>
 
+#include "Settings/DeadScreen.h"
 #include "pch.hpp"  // IWYU pragma: export
 
 #include "Background.hpp"
@@ -22,7 +23,7 @@
 
 class App {
 public:
-    App() { Window::Init(); };
+    App();
     enum class State {
         START,
         UPDATE,
@@ -56,6 +57,7 @@ public:
 
 private:
     void ValidTask();
+    void SetDeadScreen(const bool deadScreenVisible);
 
 private:
     std::shared_ptr<Background> m_Background;
@@ -69,15 +71,18 @@ private:
     Events::EventHandler m_EventHandler;
 
     std::vector<std::string_view> m_MusicList = {
-      Game::Config::MUSIC_ZONE_13,
+      Game::Config::MUSIC_ZONE_11,
       Game::Config::MUSIC_ZONE_12,
+      Game::Config::MUSIC_ZONE_13,
     };
 
     std::vector<std::string_view> m_TempoList = {
-      Game::Config::TEMPO_ZONE_13,
+      Game::Config::TEMPO_ZONE_11,
       Game::Config::TEMPO_ZONE_12,
+      Game::Config::TEMPO_ZONE_13,
     };
 
+    std::shared_ptr<Settings::DeadScreen> m_DeadScreen;
     // addition
 };
 

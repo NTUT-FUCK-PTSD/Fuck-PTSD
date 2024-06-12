@@ -13,7 +13,6 @@
 
 #include <Util/Input.hpp>
 #include "Display/BeatHeart.h"
-#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 #include "Music/Player.h"
@@ -27,7 +26,6 @@ auto musicTime = []() {
            % static_cast<std::size_t>(Music::Player::GetMusicLength() * 1000);
 };
 }  // namespace Update
-constexpr std::size_t IS_DEAD = 0;
 
 void App::Update() {
     m_EventHandler.Update();
@@ -37,14 +35,7 @@ void App::Update() {
         Display::BeatHeart::SwitchHeart(100);
         Event::SetAttackPlayer(true);
 
-        if (m_MainCharacter->GetHealth() == IS_DEAD) {
-            m_MainCharacter->SetVisible(false);
-            const auto& ds = std::make_shared<Settings::DeadScreen>();
-            ds->SetPosition({0, -200});
-            Music::Tempo::Pause(true);
-            Display::BeatIndicator::Pause(true);
-            m_Camera->AddUIChild(ds);
-        }
+        SetDeadScreen(m_MainCharacter->GetHealth() == 0);
     }
     if (Util::Input::IfExit()) { m_CurrentState = State::END; }
 

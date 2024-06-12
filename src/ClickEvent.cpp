@@ -2,9 +2,11 @@
 // Created by adven on 2024/5/10.
 //
 
+#include <future>
 #include <typeinfo>
 #include "App.hpp"
 
+#include "Game_config.h"
 #include "Util/Logger.hpp"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
@@ -87,6 +89,7 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
+            if (m_MainCharacter->GetHealth() == 0) { return; }
             if (!m_ThrowMode
                 || !Music::Tempo::IsTempoInRange(
                     500,
@@ -157,10 +160,13 @@ void App::ClickEvent() {
                 m_MainCharacter
             );
             if (loadLevel) {
-                Music::Player::PlayMusic(m_MusicList.back().data(), true);
-                Music::Tempo::ReadTempoFile(m_TempoList.back().data());
-                m_MusicList.pop_back();
-                m_TempoList.pop_back();
+                Music::Player::PlayMusic(
+                    m_MusicList[m_DungeonMap->GetLevelNum() - 1].data(),
+                    true
+                );
+                Music::Tempo::ReadTempoFile(
+                    m_TempoList[m_DungeonMap->GetLevelNum() - 1].data()
+                );
                 m_AniCameraDestination = {0, 0};
                 m_AniPlayerDestination = {0, 0};
             }
@@ -181,6 +187,7 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
+            if (m_MainCharacter->GetHealth() == 0) { return; }
             if (m_ThrowMode
                 || !Music::Tempo::IsTempoInRange(
                     500,
@@ -258,6 +265,7 @@ void App::ClickEvent() {
                                         playerDestination
                                     )
                                 );
+                                m_Camera->Shake(100, 10);
                             } else if (m_DungeonMap->GetMapData()
                                            ->IsPositionDoor(playerDestination
                                            )) {
@@ -317,10 +325,13 @@ void App::ClickEvent() {
                     m_MainCharacter
                 );
                 if (loadLevel) {
-                    Music::Player::PlayMusic(m_MusicList.back().data(), true);
-                    Music::Tempo::ReadTempoFile(m_TempoList.back().data());
-                    m_MusicList.pop_back();
-                    m_TempoList.pop_back();
+                    Music::Player::PlayMusic(
+                        Game::Config::MUSIC_ZONE_11.data(),
+                        true
+                    );
+                    Music::Tempo::ReadTempoFile(
+                        Game::Config::TEMPO_ZONE_11.data()
+                    );
                     m_AniCameraDestination = {0, 0};
                     m_AniPlayerDestination = {0, 0};
                 }
@@ -330,6 +341,20 @@ void App::ClickEvent() {
         Util::Keycode::D,
         Util::Keycode::S,
         Util::Keycode::A
+    );
+
+    m_EventHandler.AddEvent(
+        [this]() {
+            m_MainCharacter->resetHP();
+            bool loadLevel = m_DungeonMap->LoadLevel(1, m_MainCharacter);
+            if (loadLevel) {
+                Music::Player::PlayMusic(ASSETS_DIR "/music/zone1_1.ogg", true);
+                Music::Tempo::ReadTempoFile(ASSETS_DIR "/music/zone1_1.txt");
+                m_AniCameraDestination = {0, 0};
+                m_AniPlayerDestination = {0, 0};
+            }
+        },
+        Util::Keycode::R
     );
 
     //    m_EventHandler.AddEvent({Util::Keycode::W}, ThrowWeapon);
