@@ -8,7 +8,10 @@
 #include <Util/Keycode.hpp>
 #include <Util/Text.hpp>
 
+#include "GameElement.h"
 #include "Settings/DeadScreen.h"
+#include "Settings/UGameElement.h"
+#include "Util/GameObject.hpp"
 #include "pch.hpp"  // IWYU pragma: export
 
 #include "Background.hpp"
@@ -83,6 +86,10 @@ private:
     };
 
     std::shared_ptr<Settings::DeadScreen> m_DeadScreen;
+    std::shared_ptr<Util::GameObject>     m_InvincibleMode;
+    std::shared_ptr<Util::GameObject>     m_OneShotMode;
+    bool                                  m_NoBeatMode = false;
+    std::shared_ptr<Util::GameObject>     m_NoBeatModeText;
     // addition
 };
 

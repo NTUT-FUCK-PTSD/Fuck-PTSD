@@ -40,6 +40,10 @@ void Music::Tempo::ReadTempoFile(const std::string& path) {
 
     // save to class member
     m_BeatListLen = elems.size();
+    m_CurrentBeatIdx = 0;
+    m_CurrentBeatLopTimes = 0;
+    m_IsBeatSwitch = false;
+    m_IsPause = false;
     m_IsBeatClick = std::vector<bool>(m_BeatListLen, false);
     m_BeatList = std::move(elems);
 
@@ -63,20 +67,14 @@ bool Music::Tempo::IsTempoInRange(
     }
 
     auto time_int = static_cast<std::size_t>(time);
-    if (time_int > m_BeatList.back()) {
-        return false;
-    }
+    if (time_int > m_BeatList.back()) { return false; }
 
     auto [isOnTempo, BeforeTempo, AfterTempo] =
         Helper::BinarySearch(m_BeatList, time_int);
 
-    if (isOnTempo) {
-        return true;
-    }
+    if (isOnTempo) { return true; }
 
-    if (BeforeTempo < 0 || AfterTempo >= m_BeatListLen - 1) {
-        return false;
-    }
+    if (BeforeTempo < 0 || AfterTempo >= m_BeatListLen - 1) { return false; }
 
     const auto BeforeTempoTime = m_BeatList.at(BeforeTempo);
     const auto AfterTempoTime = m_BeatList.at(AfterTempo);
@@ -140,18 +138,14 @@ void Music::Tempo::Update(
     const std::size_t triggerOffset,
     const std::size_t MusicLoopCounter
 ) {
-    if (m_IsPause) {
-        return;
-    }
+    if (m_IsPause) { return; }
 
     if (m_CurrentBeatLopTimes != MusicLoopCounter) {
         m_CurrentBeatLopTimes = MusicLoopCounter;
         LopReset();
     }
 
-    if (m_CurrentBeatIdx == m_BeatList.size() - 1) {
-        return;
-    }
+    if (m_CurrentBeatIdx == m_BeatList.size() - 1) { return; }
 
     if (m_BeatList.back() < musicPlaytTime) {
         return;

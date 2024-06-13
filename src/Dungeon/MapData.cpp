@@ -94,6 +94,9 @@ bool MapData::EnemyCompare(
     rhsPriority += fmt::format("{:0>2}", rhs->GetHealth());
     lhsPriority += fmt::format("{:0>2}", lhs->GetCoin());
     rhsPriority += fmt::format("{:0>2}", rhs->GetCoin());
+    lhsPriority += fmt::format("{:0>2}", lhs->GetPriority());
+    rhsPriority += fmt::format("{:0>2}", rhs->GetPriority());
+
     if (lhsPriority < rhsPriority) {
         return true;
     } else if (lhsPriority > rhsPriority) {
@@ -159,8 +162,15 @@ void MapData::SetLevelIndexMin(const glm::ivec2& levelIndexMin) {
 }
 
 std::size_t MapData::GamePosition2MapIndex(const glm::ivec2& position) const {
-    return (position.x - GetLevelIndexMin().x + 1)
-           + (position.y - GetLevelIndexMin().y + 1) * m_Size.x;
+    return (position.x - (GetLevelIndexMin().x - 1))
+           + ((position.y - (GetLevelIndexMin().y - 1)) * m_Size.x);
+}
+
+glm::ivec2 MapData::MapIndex2GamePosition(const std::size_t index) const {
+    return {
+      static_cast<int>(index % m_Size.x) + GetLevelIndexMin().x - 1,
+      static_cast<int>(index / m_Size.x) + GetLevelIndexMin().y - 1
+    };
 }
 
 bool MapData::IsPositionValid(const glm::ivec2& position) const {

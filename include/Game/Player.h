@@ -94,6 +94,12 @@ public:
 
     void RevertAnimation();
 
+    void        InvincibleMode(bool mode);
+    bool        GetInvincibleMode() const;
+    void        OneShotMode(bool mode);
+    bool        GetOneShotMode() const;
+    std::size_t GetDamage() const;
+
 private:
     // ShovelEnum::Type m_ShovelType = ShovelEnum::Type::Normal;
     // WeaponEnum::Type m_WeaponType = WeaponEnum::Type::DAGGER;
@@ -129,6 +135,10 @@ private:
     void SetPosition(const glm::vec2& position);
 
     std::unique_ptr<Animation> m_Animation;
+
+    bool        m_Invincible = false;
+    bool        m_OneShot = false;
+    std::size_t m_Damage = 2;
 };
 
 #endif  // FUCK_PTSD_PLAYER_H

@@ -8,7 +8,8 @@ std::vector<glm::ivec2> AStar::FindPath(
     const glm::ivec2&              start,
     const glm::ivec2&              end,
     const std::shared_ptr<MapData> mapData,
-    float                          maxDistance
+    float                          maxDistance,
+    bool                           isExtraDirections
 ) {
     std::vector<glm::ivec2> path;
     std::vector<glm::ivec2> directions = {
@@ -17,6 +18,12 @@ std::vector<glm::ivec2> AStar::FindPath(
       {1, 0},
       {-1, 0},
     };
+    if (isExtraDirections) {
+        directions.push_back({1, 1});
+        directions.push_back({1, -1});
+        directions.push_back({-1, 1});
+        directions.push_back({-1, -1});
+    }
 
     std::priority_queue<
         std::pair<float, glm::ivec2>,

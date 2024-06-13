@@ -1,3 +1,4 @@
+#include <memory>
 #include "Dungeon/Map.h"
 
 #include "Dungeon/EnemyFactory.h"
@@ -18,7 +19,10 @@ Map::Map(
     m_ZIndex = 98;
     m_Transform.scale = {Window::Scale + 1, Window::Scale + 1};
     m_Transform.translation = {0, 0};
-    m_Level = std::make_unique<Level>(path);
+    m_Path = path;
+    m_Level = std::make_shared<Level>(path);
+    m_BossLevel =
+        std::make_shared<Level>(ASSETS_DIR "/dungeon/boss_room.xml", 1);
     m_Available = LoadLevel(levelNum, player);
     AddChild(m_TileHead);
     AddChild(m_EnemyHead);
@@ -53,25 +57,37 @@ bool Map::LoadLevel(
     const std::size_t             levelNum,
     const std::shared_ptr<Player> player
 ) {
+    return LoadLevel(m_Level, levelNum, player);
+}
+
+bool Map::LoadLevel(
+    const std::shared_ptr<Level>  level,
+    const std::size_t             levelNum,
+    const std::shared_ptr<Player> player
+) {
+    if (static_cast<int>(levelNum) > level->GetNumLevels()) {
+        KingConga();
+        return false;
+    }
     Event::EventQueue.dispatch(this, EventArgs(EventType::ResetMap));
 
-    if (!m_Level->LoadLevel(levelNum)) {
+    if (!level->LoadLevel(levelNum)) {
         m_Available = false;
         return false;
     }
     m_LevelNum = levelNum;
 
-    m_Size = m_Level->GetLevelIndexMax() - m_Level->GetLevelIndexMin()
-             + 3;  // add 3 for the border
+    m_Size = (level->GetLevelIndexMax() + glm::ivec2(1, 1))
+             - (level->GetLevelIndexMin() - glm::ivec2(1, 1));
     m_MapData = std::make_shared<MapData>(
-        m_Level->GetLevelIndexMin(),
-        m_Level->GetLevelIndexMax(),
+        level->GetLevelIndexMin(),
+        level->GetLevelIndexMax(),
         m_Size,
         player
     );
 
-    LoadTile();
-    LoadEnemy();
+    LoadTile(level);
+    LoadEnemy(level);
     m_MiniMap = std::make_shared<MiniMap>(m_MapData);
     m_Camera->AddUIChild(m_MiniMap);
 

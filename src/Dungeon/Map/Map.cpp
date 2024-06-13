@@ -26,15 +26,17 @@ bool Map::CheckShowPosition(
 }
 
 std::size_t Map::GamePostion2MapIndex(const glm::ivec2& position) const {
-    return (position.x - m_Level->GetLevelIndexMin().x + 1)
-           + (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
+    return m_MapData->GamePosition2MapIndex(position);
+    // return (position.x - m_Level->GetLevelIndexMin().x + 1)
+    //        + (position.y - m_Level->GetLevelIndexMin().y + 1) * m_Size.x;
 }
 
 glm::ivec2 Map::MapIndex2GamePosition(const std::size_t index) const {
-    return {
-      static_cast<int>(index % m_Size.x) + m_Level->GetLevelIndexMin().x - 1,
-      static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1
-    };
+    return m_MapData->MapIndex2GamePosition(index);
+    // return {
+    //   static_cast<int>(index % m_Size.x) + m_Level->GetLevelIndexMin().x - 1,
+    //   static_cast<int>(index / m_Size.x) + m_Level->GetLevelIndexMin().y - 1
+    // };
 }
 
 std::shared_ptr<MapData> Map::GetMapData() const {
@@ -183,5 +185,4 @@ void Map::RemoveItem(const std::size_t position) {
 }
 }  // namespace Dungeon
 
-glm::ivec2                      Dungeon::Map::m_Size = {0, 0};
-std::unique_ptr<Dungeon::Level> Dungeon::Map::m_Level = nullptr;
+glm::ivec2 Dungeon::Map::m_Size = {0, 0};

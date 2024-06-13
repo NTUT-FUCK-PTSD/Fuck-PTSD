@@ -3,11 +3,11 @@
 #include "Dungeon/TileFactory.h"
 
 namespace Dungeon {
-void Map::LoadTile() {
+void Map::LoadTile(std::shared_ptr<Level> level) {
     m_MapData->ClearTiles();
 
     std::size_t mapIndex = 0, tmpMapIndex = 0;
-    for (auto& tile : m_Level->GetTiles()) {
+    for (auto& tile : level->GetTiles()) {
         mapIndex = GamePostion2MapIndex({tile.x, tile.y});
         m_MapData->AddTile(mapIndex, TileFactory::CreateTile(tile));
     }
@@ -15,9 +15,7 @@ void Map::LoadTile() {
     for (int i = 1; i < m_Size.y - 1; i++) {
         for (int j = 1; j < m_Size.x - 1; j++) {
             mapIndex = j + i * m_Size.x;
-            if (m_MapData->IsTileEmpty(mapIndex)) {
-                continue;
-            }
+            if (m_MapData->IsTileEmpty(mapIndex)) { continue; }
             DoorUpdate(i, j);
             // generate border
             if (!m_MapData->IsTileEmpty(mapIndex)
@@ -30,8 +28,8 @@ void Map::LoadTile() {
                         m_MapData->AddTile(
                             tmpMapIndex,
                             TileFactory::CreateTile(s_Tile{
-                              j + dir.x + m_Level->GetLevelIndexMin().x - 1,
-                              i + dir.y + m_Level->GetLevelIndexMin().y - 1,
+                              j + dir.x + level->GetLevelIndexMin().x - 1,
+                              i + dir.y + level->GetLevelIndexMin().y - 1,
                               102,
                               0,
                               0,
@@ -48,9 +46,7 @@ void Map::LoadTile() {
     for (int i = 0; i < m_Size.y; i++) {
         for (int j = 0; j < m_Size.x; j++) {
             mapIndex = j + i * m_Size.x;
-            if (m_MapData->IsTileEmpty(mapIndex)) {
-                continue;
-            }
+            if (m_MapData->IsTileEmpty(mapIndex)) { continue; }
             if ((1 + i >= m_Size.y)
                 || (1 + i >= 0 && m_MapData->IsTileEmpty(mapIndex + m_Size.x)
                 )) {

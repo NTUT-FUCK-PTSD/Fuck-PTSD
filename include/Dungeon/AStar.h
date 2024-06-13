@@ -10,7 +10,8 @@ public:
         const glm::ivec2&              start,
         const glm::ivec2&              end,
         const std::shared_ptr<MapData> mapData,
-        float                          maxDistance = -1
+        float                          maxDistance = -1,
+        bool                           isExtraDirections = false
     );
     static float Heuristic(const glm::vec2& start, const glm::vec2& end);
 

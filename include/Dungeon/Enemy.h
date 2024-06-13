@@ -28,6 +28,7 @@ public:
     void SetDamage(const std::size_t damage) { m_Damage = damage; }
     void InitHealth(const std::size_t health);
     void SetCoin(const std::size_t coin) { m_Coin = coin; }
+    void SetPriority(const std::size_t priority) { m_Priority = priority; }
     void CanMove();
 
     void SetFace(bool faceTo);
@@ -44,11 +45,14 @@ public:
         return 2 * m_HealthBar->GetChildren().size();
     }
     std::size_t      GetCoin() const { return m_Coin; }
+    std::size_t      GetPriority() const { return m_Priority; }
     const glm::vec2& GetWillMovePosition() const { return m_WillMovePosition; }
     bool             GetVisible() const { return m_Visible; }
 
-    virtual glm::vec2 FindNextToPlayer();  // Set available WillMovePosition to
-                                           // slowly close PlayerPosition
+    virtual glm::vec2 FindNextToPlayer(
+        bool isExtraDirections = false
+    );  // Set available WillMovePosition to
+        // slowly close PlayerPosition
     void         TempoMove();
     bool         IsVaildMove(const glm::vec2& position);
     std::size_t  GamePostion2MapIndex(const glm::ivec2& position) const;
@@ -110,6 +114,7 @@ private:
     std::size_t m_Damage = 0;
     std::size_t m_Health = 0;  // Notice: 1 heart = 2 health(same as damage)
     std::size_t m_Coin = 0;
+    std::size_t m_Priority = 0;
 
     bool m_Seen = false;
 

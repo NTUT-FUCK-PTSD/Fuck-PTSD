@@ -61,6 +61,7 @@ public:
     void SetSize(const glm::ivec2& size);
 
     std::size_t GamePosition2MapIndex(const glm::ivec2& position) const;
+    glm::ivec2  MapIndex2GamePosition(const std::size_t index) const;
 
     bool IsPositionValid(const glm::ivec2& position) const;
     bool IsWalkable(const std::size_t position) const;
