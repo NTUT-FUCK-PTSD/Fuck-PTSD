@@ -155,6 +155,7 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
+            if (m_DungeonMap->GetBossRoomValue() > 0) { return; }
             bool loadLevel = m_DungeonMap->LoadLevel(
                 m_DungeonMap->GetLevelNum() + 1,
                 m_MainCharacter
