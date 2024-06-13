@@ -1,6 +1,7 @@
 #include "Dungeon/Map.h"
 
 #include "Dungeon/Enemy.h"
+#include "Event/Event.h"
 #include "Event/EventArgs.h"
 #include "Event/EventType.h"
 #include "Util/Logger.hpp"

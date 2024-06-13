@@ -31,6 +31,11 @@ public:
         const std::size_t             levelNum,
         const std::shared_ptr<Player> player
     );
+    bool LoadLevel(
+        const std::shared_ptr<Level>  level,
+        const std::size_t             levelNum,
+        const std::shared_ptr<Player> player
+    );
     std::size_t GetLevelNum() const;
 
     std::size_t GamePostion2MapIndex(const glm::ivec2& position) const;
@@ -50,17 +55,20 @@ public:
 
     bool IsOverlayRed() const { return m_OverlayRed; }
 
-    static glm::ivec2 GetSize() { return m_Size; }
-    static glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
-    static glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
+    glm::ivec2 GetSize() { return m_Size; }
+    // glm::ivec2 GetLevelIndexMin() { return m_Level->GetLevelIndexMin(); }
+    // glm::ivec2 GetLevelIndexMax() { return m_Level->GetLevelIndexMax(); }
 
     void AddItem(const std::size_t position, const std::shared_ptr<Item> item);
     void RemoveItem(const std::size_t position);
 
+    void        KingConga();
+    std::size_t GetBossRoomValue() const { return m_BossRoom; }
+
 private:
     bool m_Available;
-    void LoadTile();
-    void LoadEnemy();
+    void LoadTile(std::shared_ptr<Level> level);
+    void LoadEnemy(std::shared_ptr<Level> level);
     void LoadItem();  // TODO
 
     void TempoUpdate(bool isPlayer);
@@ -87,9 +95,11 @@ private:
 
     void DoorUpdate(std::size_t i, std::size_t j);
 
-    static glm::ivec2             m_Size;
-    std::size_t                   m_LevelNum;
-    static std::unique_ptr<Level> m_Level;
+    static glm::ivec2      m_Size;
+    std::size_t            m_LevelNum;
+    std::shared_ptr<Level> m_Level;
+    std::shared_ptr<Level> m_BossLevel;
+    std::string            m_Path;
 
     std::shared_ptr<MapData> m_MapData;  // Use map index to store MapDate
     std::shared_ptr<Camera>  m_Camera;
@@ -110,6 +120,7 @@ private:
     std::shared_ptr<GameElement> m_ItemHead = std::make_shared<GameElement>();
 
     std::size_t m_CoinMultiple = 0;
+    std::size_t m_BossRoom = 0;
 };
 
 }  // namespace Dungeon

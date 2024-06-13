@@ -14,6 +14,7 @@
 #include <Util/Input.hpp>
 #include <algorithm>
 #include "Actions.h"
+#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 #include "Game/Systems/HandItem.h"
@@ -155,6 +156,7 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
+            if (m_DungeonMap->GetBossRoomValue() > 0) { return; }
             bool loadLevel = m_DungeonMap->LoadLevel(
                 m_DungeonMap->GetLevelNum() + 1,
                 m_MainCharacter
@@ -175,6 +177,14 @@ void App::ClickEvent() {
     );
 
     /**
+     * @details To Boss Room
+     */
+    m_EventHandler.AddEvent(
+        [this]() { m_DungeonMap->KingConga(); },
+        Util::Keycode::B
+    );
+
+    /**
      * @details Exit the Game
      */
     m_EventHandler.AddEvent(
@@ -188,12 +198,13 @@ void App::ClickEvent() {
     m_EventHandler.AddEvent(
         [this]() {
             if (m_MainCharacter->GetHealth() == 0) { return; }
-            if (m_ThrowMode
-                || !Music::Tempo::IsTempoInRange(
-                    500,
-                    musicTime(),
-                    Music::Player::LoopCounter()
-                )) {
+            if (!m_NoBeatMode
+                && (m_ThrowMode
+                    || !Music::Tempo::IsTempoInRange(
+                        500,
+                        musicTime(),
+                        Music::Player::LoopCounter()
+                    ))) {
                 return;
             }
 
@@ -254,7 +265,7 @@ void App::ClickEvent() {
                                 )) {
                                 m_DungeonMap->GetMapData()
                                     ->GetEnemy(mapIndex)
-                                    ->Struck(2);
+                                    ->Struck(m_MainCharacter->GetDamage());
 
                                 m_Camera->Shake(150, 10);
                             } else if (m_DungeonMap->GetMapData()
@@ -309,6 +320,9 @@ void App::ClickEvent() {
         Util::Keycode::A
     );
 
+    /**
+     * @details Stair to Next Level
+     */
     m_EventHandler.AddEvent(
         [this]() {
             const auto tile = m_DungeonMap->GetMapData()->GetTile(
@@ -320,6 +334,13 @@ void App::ClickEvent() {
             // LOG_INFO(tile->GetTile().type);
             if (tile->GetTile().type == 2
                 && m_DungeonMap->GetMapData()->IsBossDead()) {
+                if (m_DungeonMap->GetBossRoomValue() > 0) {
+                    // m_CurrentState = State::END;
+                    m_YouWin->SetVisible(true);
+                    Music::Tempo::Pause(true);
+                    Display::BeatIndicator::Pause(true);
+                    return;
+                }
                 bool loadLevel = m_DungeonMap->LoadLevel(
                     m_DungeonMap->GetLevelNum() + 1,
                     m_MainCharacter
@@ -343,8 +364,12 @@ void App::ClickEvent() {
         Util::Keycode::A
     );
 
+    /**
+     * @details Restart the game.
+     */
     m_EventHandler.AddEvent(
         [this]() {
+            m_YouWin->SetVisible(false);
             m_MainCharacter->resetHP();
             bool loadLevel = m_DungeonMap->LoadLevel(1, m_MainCharacter);
             if (loadLevel) {
@@ -355,6 +380,42 @@ void App::ClickEvent() {
             }
         },
         Util::Keycode::R
+    );
+
+    /**
+     * @details InvincibleMode
+     */
+    m_EventHandler.AddEvent(
+        [this]() {
+            m_MainCharacter->InvincibleMode(!m_MainCharacter->GetInvincibleMode(
+            ));
+            m_InvincibleMode->SetVisible(m_MainCharacter->GetInvincibleMode());
+        },
+        Util::Keycode::I
+    );
+
+    /**
+     * @details OneShotMode
+     */
+    m_EventHandler.AddEvent(
+        [this]() {
+            m_MainCharacter->OneShotMode(!m_MainCharacter->GetOneShotMode());
+            m_OneShotMode->SetVisible(m_MainCharacter->GetOneShotMode());
+        },
+        Util::Keycode::O
+    );
+
+    /**
+     * @details NoBeatMode
+     */
+    m_EventHandler.AddEvent(
+        [this]() {
+            m_NoBeatMode = !m_NoBeatMode;
+            m_NoBeatModeText->SetVisible(m_NoBeatMode);
+            Music::Tempo::Pause(m_NoBeatMode);
+            Display::BeatIndicator::Pause(m_NoBeatMode);
+        },
+        Util::Keycode::M
     );
 
     //    m_EventHandler.AddEvent({Util::Keycode::W}, ThrowWeapon);

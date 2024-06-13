@@ -51,6 +51,13 @@ void Animation::MoveByTime(
 bool Animation::UpdateAnimation() {
     Util::ms_t elapsedTimeMs = Util::Time::GetElapsedTimeMs();
     bool       flag = false;
+    // quick pass
+    if (m_AnimationData.size() >= 2) {
+        m_AnimationPosition = m_AnimationData.front().destination;
+        m_AnimationData.pop_front();
+        m_AnimationZIndex = CalculateZIndex(m_AnimationPosition);
+        return true;
+    }
 
     if (!m_AnimationData.empty()) {
         flag = true;

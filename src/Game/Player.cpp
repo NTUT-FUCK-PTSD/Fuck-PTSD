@@ -159,6 +159,7 @@ void Player::gainCoin(std::size_t number) {
 }
 
 void Player::lostCoin(std::size_t number) {
+    if (m_Invincible) { return; }
     m_Coin->plusCoinNumber(number * -1);
 }
 
@@ -167,6 +168,7 @@ void Player::gainDiamond(std::size_t number) {
 }
 
 void Player::lostDiamond(std::size_t number) {
+    if (m_Invincible) { return; }
     m_Diamond->plusDiamondNumber(number * -1);
 }
 
@@ -175,6 +177,7 @@ std::size_t Player::GetHealth() const {
 }
 
 void Player::lostHP(std::size_t value) {
+    if (m_Invincible) { return; }
     m_Heart->minusHP(value);
 }
 
@@ -230,4 +233,25 @@ void Player::MoveByTime(
 void Player::RevertAnimation() {
     m_Animation->SetAnimationStop();
     m_Animation->UpdateGamePosition(m_BeforeGamePosition);
+}
+
+void Player::InvincibleMode(bool mode) {
+    m_Invincible = mode;
+}
+
+bool Player::GetInvincibleMode() const {
+    return m_Invincible;
+}
+
+void Player::OneShotMode(bool mode) {
+    m_OneShot = mode;
+}
+
+bool Player::GetOneShotMode() const {
+    return m_OneShot;
+}
+
+std::size_t Player::GetDamage() const {
+    if (m_OneShot) { return 999; }
+    return m_Damage;
 }
