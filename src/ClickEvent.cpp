@@ -14,6 +14,7 @@
 #include <Util/Input.hpp>
 #include <algorithm>
 #include "Actions.h"
+#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 #include "Game/Systems/HandItem.h"
@@ -23,6 +24,7 @@
 #include "Music/Tempo.h"
 #include "Systems/HEIS.h"
 #include "Systems/HandThrow.h"
+
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -336,6 +338,8 @@ void App::ClickEvent() {
                 if (m_DungeonMap->GetBossRoomValue() > 0) {
                     // m_CurrentState = State::END;
                     m_YouWin->SetVisible(true);
+                    Music::Tempo::Pause(true);
+                    Display::BeatIndicator::Pause(true);
                     return;
                 }
                 bool loadLevel = m_DungeonMap->LoadLevel(
