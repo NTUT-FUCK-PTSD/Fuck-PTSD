@@ -39,7 +39,6 @@ Enemies::KingConga::KingConga(
 }  // namespace Dungeon
 namespace Dungeon::Enemies {
 void KingConga::Move() {
-    LOG_INFO("Status: {}", static_cast<std::size_t>(m_State));
     if (m_Bridge->LeftSnake && m_Bridge->RightSnake) { SetState(State::WALK); }
     if (m_State == State::RIGHTSIT) {
         SetState(State::LEFTSIT);
