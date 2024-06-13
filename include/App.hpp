@@ -90,6 +90,7 @@ private:
     std::shared_ptr<Util::GameObject>     m_OneShotMode;
     bool                                  m_NoBeatMode = false;
     std::shared_ptr<Util::GameObject>     m_NoBeatModeText;
+    std::shared_ptr<Util::GameObject>     m_YouWin;
     // addition
 };
 

@@ -333,7 +333,8 @@ void App::ClickEvent() {
             if (tile->GetTile().type == 2
                 && m_DungeonMap->GetMapData()->IsBossDead()) {
                 if (m_DungeonMap->GetBossRoomValue() > 0) {
-                    m_CurrentState = State::END;
+                    // m_CurrentState = State::END;
+                    m_YouWin->SetVisible(true);
                     return;
                 }
                 bool loadLevel = m_DungeonMap->LoadLevel(
@@ -364,6 +365,7 @@ void App::ClickEvent() {
      */
     m_EventHandler.AddEvent(
         [this]() {
+            m_YouWin->SetVisible(false);
             m_MainCharacter->resetHP();
             bool loadLevel = m_DungeonMap->LoadLevel(1, m_MainCharacter);
             if (loadLevel) {

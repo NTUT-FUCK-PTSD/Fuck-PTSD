@@ -56,6 +56,19 @@ App::App() {
     m_NoBeatModeText->m_Transform.translation = glm::vec2(0, 200);
     m_NoBeatModeText->SetVisible(false);
     m_Camera->AddUIChild(m_NoBeatModeText);
+
+    m_YouWin = std::make_shared<Util::GameObject>();
+    m_YouWin->SetDrawable(std::make_shared<Util::Text>(
+        ASSETS_DIR "/font/necrosans-18/necrosans-18.otf",
+        18,
+        "YOU WIN!",
+        Players::Config::VAL_COLOR_WHITE
+    ));
+    m_YouWin->SetZIndex(Players::Config::VAL_ZINDEX);
+    m_YouWin->m_Transform.scale = {10, 10};
+    m_YouWin->m_Transform.translation = glm::vec2(50, 0);
+    m_YouWin->SetVisible(false);
+    m_Camera->AddUIChild(m_YouWin);
 };
 
 void App::SetDeadScreen(const bool deadScreenVisible) {
