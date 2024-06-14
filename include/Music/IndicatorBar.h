@@ -86,6 +86,7 @@ private:
     static std::vector<std::shared_ptr<Animation>> m_AnimationsRight;
     static std::size_t                             m_LastIdxLeft;
     static std::size_t                             m_LastIdxRight;
+    static bool                                    m_Flag;
 };
 }  // namespace Music
 
