@@ -5,6 +5,7 @@
 
 #include "Dungeon/Enemies/KingCongaBridge.h"
 #include "Dungeon/Enemy.h"
+#include "Util/GameObject.hpp"
 
 namespace Dungeon {
 namespace Enemies {

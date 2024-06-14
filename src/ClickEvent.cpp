@@ -26,7 +26,6 @@
 #include "Systems/HEIS.h"
 #include "Systems/HandThrow.h"
 
-
 struct ClickEventType {
     std::vector<Util::Keycode> code;
     std::function<void()>      fptr;
@@ -417,8 +416,8 @@ void App::ClickEvent() {
         [this]() {
             m_NoBeatMode = !m_NoBeatMode;
             m_NoBeatModeText->SetVisible(m_NoBeatMode);
-            Music::Tempo::Pause(m_NoBeatMode);
-            Music::IndicatorBar::Pause(m_NoBeatMode);
+            // Music::Tempo::Pause(m_NoBeatMode);
+            // Music::IndicatorBar::Pause(m_NoBeatMode);
             m_DungeonMap->NoBeat();
         },
         Util::Keycode::M

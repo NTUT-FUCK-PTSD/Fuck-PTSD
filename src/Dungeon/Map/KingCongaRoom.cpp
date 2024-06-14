@@ -42,7 +42,8 @@ void Map::KingConga() {
     chairObj->SetPosition(
         ToolBoxs::GamePostoPos({gamePos.x, gamePos.y}) + glm::vec2(3, 0)
     );
-    chairObj->SetZIndex(kingConga->GetZIndex() - 0.00001);
+    chairObj->SetZIndex(kingConga->GetZIndex());
+    chairObj->SetVisible(false);
     kingConga->AddChild(chairObj);
     // Add Left Ghost
     gamePos = glm::ivec2(-7, -17);

@@ -88,6 +88,9 @@ void KingConga::SetState(const State state) {
     case State::WALK:
         m_NormalFrames = m_NormalFramesWalk;
         m_ShadowFrames = m_ShadowFramesWalk;
+        for (auto& elem : m_Children) {
+            elem->SetVisible(true);
+        }
         break;
     }
     m_SpriteSheet->SetFrames(GetShadow() ? m_ShadowFrames : m_NormalFrames);
