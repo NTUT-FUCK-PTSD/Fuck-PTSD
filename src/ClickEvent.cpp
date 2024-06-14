@@ -417,6 +417,7 @@ void App::ClickEvent() {
             m_NoBeatModeText->SetVisible(m_NoBeatMode);
             Music::Tempo::Pause(m_NoBeatMode);
             Display::BeatIndicator::Pause(m_NoBeatMode);
+            m_DungeonMap->NoBeat();
         },
         Util::Keycode::M
     );

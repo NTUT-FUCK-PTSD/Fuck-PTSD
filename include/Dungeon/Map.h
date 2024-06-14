@@ -65,6 +65,8 @@ public:
     void        KingConga();
     std::size_t GetBossRoomValue() const { return m_BossRoom; }
 
+    void NoBeat() { m_NoBeat = true; }
+
 private:
     bool m_Available;
     void LoadTile(std::shared_ptr<Level> level);
@@ -121,6 +123,7 @@ private:
 
     std::size_t m_CoinMultiple = 0;
     std::size_t m_BossRoom = 0;
+    bool        m_NoBeat = false;
 };
 
 }  // namespace Dungeon
