@@ -63,6 +63,12 @@ void Map::PlayerTrigger() {
 }
 
 void Map::TempoTrigger(const std::size_t index) {
+    if (m_NoBeat && m_TempoIndex != index) {
+        m_TempoIndex = index;
+        return;
+    } else {
+        m_NoBeat = false;
+    }
     Event::EventQueue.dispatch(
         this,
         FloorUpdateEventArgs(index, m_CoinMultiple > 0)
