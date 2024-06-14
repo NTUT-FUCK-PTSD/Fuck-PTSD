@@ -112,16 +112,16 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
 
     // I don't know why but the target and source position are reversed
     // so I have to reverse them
-    glm::vec2 targetPosition = m_MapData->GetPlayerPosition();
-    glm::vec2 sourcePosition = position;
+    glm::ivec2 targetPosition = m_MapData->GetPlayerPosition();
+    glm::ivec2 sourcePosition = position;
 
-    std::vector<glm::vec2> integerCoordinates;
+    std::vector<glm::ivec2> integerCoordinates;
 
-    glm::vec2 delta = targetPosition - sourcePosition;
-    glm::vec2 sign = glm::sign(delta);
+    glm::ivec2 delta = targetPosition - sourcePosition;
+    glm::ivec2 sign = glm::sign(delta);
     delta = glm::abs(delta);
-    int       error = 0;
-    glm::vec2 current = sourcePosition;
+    int        error = 0;
+    glm::ivec2 current = sourcePosition;
 
     if (delta.x > delta.y) {
         for (int i = 0; i <= delta.x; ++i) {
@@ -150,7 +150,7 @@ bool Map::CanPlayerSeePosition(const glm::vec2& position) {
     // so we have to reverse it
     for (int i = integerCoordinates.size() - 1; i >= 0; --i) {
         mapIndex = m_MapData->GamePosition2MapIndex(integerCoordinates[i]);
-        if (position == integerCoordinates[i]) {
+        if (position == static_cast<glm::vec2>(integerCoordinates[i])) {
             m_ShadowRenderDP[mapIndex] = true;
             return true;
         }
