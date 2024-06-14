@@ -131,9 +131,6 @@ void Music::IndicatorBar::Update() {
         UpdateIndicatorRight(m_BeatIndex, m_IIT, m_IIS);
     }
 
-    LOG_INFO("left: {}, right: {}", m_LastIdxLeft, m_LastIdxRight);
-    LOG_INFO("{} {}", m_BeatIndex, Music::Tempo::GetBeatListLen());
-    LOG_INFO("{}", Music::Player::GetMusicTimeLoop());
     // if (m_BeatIndex + m_TempoNumber >= Music::Tempo::GetBeatListLen()) {
     //     m_BeatIndex = 0;
     // } else if (Music::Tempo::GetBeatIdx() != m_BeatIndex) {
