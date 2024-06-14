@@ -35,6 +35,7 @@ public:
     glm::vec2 GetAnimationPosition();
     float     GetAnimationZIndex();
     void      UpdateGamePosition(const glm::vec2& gamePosition);
+    void      SetAnimationPosition(const glm::vec2& position);
 
     glm::vec2  GetAnimationDestination();
     Util::ms_t GetAnimationStartMs();

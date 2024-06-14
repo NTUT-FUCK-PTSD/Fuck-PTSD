@@ -46,6 +46,8 @@ public:
     [[nodiscard]]
     static std::size_t GetBeatListLen();
 
+    static std::vector<size_t> GetBeatList();
+
     static void Update(
         const std::size_t musicPlaytTime,
         const std::size_t triggerOffset,

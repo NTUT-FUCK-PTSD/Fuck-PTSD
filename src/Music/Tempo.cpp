@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+#include "Music/IndicatorBar.h"
 #include "Music/Player.h"
 
 // TODO: OUT of Range
@@ -49,6 +50,7 @@ void Music::Tempo::ReadTempoFile(const std::string& path) {
 
     // 关闭文件流
     txtTempoFile.close();
+    Music::IndicatorBar::Reset();
 }
 
 void Music::Tempo::Pause(bool state) {
@@ -131,6 +133,10 @@ std::size_t Music::Tempo::GetBeatValue(std::size_t idx) {
 
 std::size_t Music::Tempo::GetBeatListLen() {
     return m_BeatListLen;
+}
+
+std::vector<size_t> Music::Tempo::GetBeatList() {
+    return m_BeatList;
 }
 
 void Music::Tempo::Update(

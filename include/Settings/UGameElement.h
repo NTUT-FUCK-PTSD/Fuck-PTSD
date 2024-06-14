@@ -40,6 +40,8 @@ public:
     bool GetVisibility() const {
         return m_Visible;
     }
+
+    void ClearChildren() { m_Children.clear(); }
 };
 
 }  // namespace Util

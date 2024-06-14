@@ -107,6 +107,12 @@ void Animation::UpdateGamePosition(const glm::vec2& gamePosition) {
     m_AnimationZIndex = CalculateZIndex(m_AnimationPosition);
 }
 
+void Animation::SetAnimationPosition(const glm::vec2& position) {
+    SetAnimationStop();
+    m_AnimationPosition = position;
+    m_AnimationZIndex = CalculateZIndex(m_AnimationPosition);
+}
+
 Util::ms_t Animation::GetAnimationStartMs() {
     return m_AnimationStartTimeMs;
 }
