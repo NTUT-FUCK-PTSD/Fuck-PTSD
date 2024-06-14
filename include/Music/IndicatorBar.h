@@ -3,6 +3,7 @@
 
 #include <Util/Image.hpp>
 #include <memory>
+#include "Animation.h"
 #include "UGameElement.h"
 #include "Util/Time.hpp"
 
@@ -16,6 +17,8 @@ public:
     static std::shared_ptr<Util::GameElement> GetGameElement();
 
     static void Update();
+
+    static void Reset();
 
 private:
     using ms_t = std::size_t;
@@ -78,6 +81,11 @@ private:
     static std::shared_ptr<Util::Image> m_IndicatorBlue;
 
     static std::shared_ptr<Util::GameElement> m_GameElement;
+
+    static std::vector<std::shared_ptr<Animation>> m_AnimationsLeft;
+    static std::vector<std::shared_ptr<Animation>> m_AnimationsRight;
+    static std::size_t                             m_LastIdxLeft;
+    static std::size_t                             m_LastIdxRight;
 };
 }  // namespace Music
 

@@ -20,10 +20,12 @@
 #include "Game/Systems/HandItem.h"
 #include "Hash.h"
 #include "Helper.hpp"
+#include "Music/IndicatorBar.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
 #include "Systems/HEIS.h"
 #include "Systems/HandThrow.h"
+
 
 struct ClickEventType {
     std::vector<Util::Keycode> code;
@@ -340,7 +342,7 @@ void App::ClickEvent() {
                     // m_CurrentState = State::END;
                     m_YouWin->SetVisible(true);
                     Music::Tempo::Pause(true);
-                    Display::BeatIndicator::Pause(true);
+                    Music::IndicatorBar::Pause(true);
                     return;
                 }
                 bool loadLevel = m_DungeonMap->LoadLevel(
@@ -416,7 +418,7 @@ void App::ClickEvent() {
             m_NoBeatMode = !m_NoBeatMode;
             m_NoBeatModeText->SetVisible(m_NoBeatMode);
             Music::Tempo::Pause(m_NoBeatMode);
-            Display::BeatIndicator::Pause(m_NoBeatMode);
+            Music::IndicatorBar::Pause(m_NoBeatMode);
             m_DungeonMap->NoBeat();
         },
         Util::Keycode::M

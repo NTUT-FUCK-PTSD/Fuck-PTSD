@@ -2,6 +2,7 @@
 
 #include "Display/BeatIndicator.h"
 #include "Event/Event.h"
+#include "Music/IndicatorBar.h"
 #include "Music/Tempo.h"
 #include "Player_config.h"
 
@@ -75,5 +76,5 @@ void App::SetDeadScreen(const bool deadScreenVisible) {
     m_MainCharacter->SetVisible(!deadScreenVisible);
     m_DeadScreen->SetVisibleRecursive(deadScreenVisible);
     Music::Tempo::Pause(deadScreenVisible);
-    Display::BeatIndicator::Pause(deadScreenVisible);
+    Music::IndicatorBar::Pause(deadScreenVisible);
 }
