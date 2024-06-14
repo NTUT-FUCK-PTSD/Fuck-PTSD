@@ -52,6 +52,7 @@ public:
     // set player's item
     void gainCoin(std::size_t number);
     void lostCoin(std::size_t number);
+    void resetCoin();
     void gainDiamond(std::size_t number);
     void lostDiamond(std::size_t number);
 

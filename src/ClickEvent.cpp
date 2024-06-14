@@ -371,6 +371,7 @@ void App::ClickEvent() {
         [this]() {
             m_YouWin->SetVisible(false);
             m_MainCharacter->resetHP();
+            m_MainCharacter->resetCoin();
             bool loadLevel = m_DungeonMap->LoadLevel(1, m_MainCharacter);
             if (loadLevel) {
                 Music::Player::PlayMusic(ASSETS_DIR "/music/zone1_1.ogg", true);

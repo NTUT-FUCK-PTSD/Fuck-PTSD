@@ -163,6 +163,10 @@ void Player::lostCoin(std::size_t number) {
     m_Coin->plusCoinNumber(number * -1);
 }
 
+void Player::resetCoin() {
+    m_Coin->resetCoinNumber();
+}
+
 void Player::gainDiamond(std::size_t number) {
     m_Diamond->plusDiamondNumber(number);
 }

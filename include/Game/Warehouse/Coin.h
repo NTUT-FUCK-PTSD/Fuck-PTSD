@@ -34,6 +34,8 @@ public:
         const uint16_t      direction
     );
 
+    void resetCoinNumber();
+
 private:
     void toLeftSideCoinText();
 

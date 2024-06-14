@@ -56,6 +56,14 @@ void Coin::plusCoinNumber(const int number) {
     toLeftSideCoinText();
 }
 
+void Coin::resetCoinNumber() {
+    m_Number = 0;
+    const std::string str = '*' + std::to_string(m_Number);
+    m_text->SetText(str);
+
+    toLeftSideCoinText();
+}
+
 void Coin::SetPosition(const glm::vec2& position) {
     m_CoinText->SetPosition(position);
     m_CoinImage->SetPosition(position);
