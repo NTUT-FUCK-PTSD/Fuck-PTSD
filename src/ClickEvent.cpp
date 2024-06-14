@@ -243,7 +243,9 @@ void App::ClickEvent() {
             auto mapIndex = m_DungeonMap->GamePostion2MapIndex(playerDestination
             );
             if (m_DungeonMap->GetMapData()->IsEnemyEmpty(mapIndex)) {
-                m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(2);
+                m_DungeonMap->GetMapData()->GetEnemy(mapIndex)->Struck(
+                    m_MainCharacter->GetDamage()
+                );
                 m_Camera->Shake(150, 10);
                 m_PlayerMoveDirect = Player::UP;
 
