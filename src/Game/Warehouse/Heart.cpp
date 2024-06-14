@@ -112,6 +112,7 @@ void Heart::UpdateHP() {
 void Heart::minusHP(const std::size_t number) {
     if (number > m_currentHP) {
         m_currentHP = 0;
+        UpdateHP();
         return;
     }
     m_currentHP -= number;
