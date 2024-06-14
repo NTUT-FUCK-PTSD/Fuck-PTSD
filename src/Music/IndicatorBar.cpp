@@ -117,9 +117,10 @@ void Music::IndicatorBar::Update() {
     UpdateIndicatorLeft(m_BeatIndex, m_IIT, m_IIS);
     UpdateIndicatorRight(m_BeatIndex, m_IIT, m_IIS);
 
-    // if (m_BeatIndex + m_TempoNumber >= Music::Tempo::GetBeatListLen()) {
-    //     m_BeatIndex = 0;
-    // } else if (Music::Tempo::GetBeatIdx() != m_BeatIndex) {
+    if (m_BeatIndex + m_TempoNumber >= Music::Tempo::GetBeatListLen()) {
+        m_BeatIndex = 0;
+    }
+    // else if (Music::Tempo::GetBeatIdx() != m_BeatIndex) {
     //     m_BeatIndex++;
     // }
 }
