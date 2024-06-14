@@ -119,8 +119,6 @@ void Music::IndicatorBar::Update() {
 
     if (m_BeatIndex + m_TempoNumber >= Music::Tempo::GetBeatListLen()) {
         m_BeatIndex = 0;
-        m_LastIdxLeft = 0;
-        m_LastIdxRight = 0;
     }
     // else if (Music::Tempo::GetBeatIdx() != m_BeatIndex) {
     //     m_BeatIndex++;
