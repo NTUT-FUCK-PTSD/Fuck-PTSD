@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <config.hpp>
 #include <memory>
+#include "Util/Logger.hpp"
 #include "glm/fwd.hpp"
 
 #include "Animation.h"
@@ -113,10 +114,26 @@ void Music::IndicatorBar::Update() {
 
     UpdateTimer();
     if (m_IIT >= FRAME_UPDATE_MAX) { return; }
+    if (m_Flag && m_TempoNumber < Music::Tempo::GetBeatListLen() - 1) {
+        m_Flag = false;
+    }
+    if (m_Flag
+        || (static_cast<int>(m_LastIdxLeft) - static_cast<int>(m_TempoNumber)
+                > static_cast<int>(m_BeatIndex)
+            && static_cast<int>(m_LastIdxRight)
+                       - static_cast<int>(m_TempoNumber)
+                   > static_cast<int>(m_BeatIndex))) {
+        m_Flag = true;
+        m_LastIdxRight = 0;
+        m_LastIdxLeft = 0;
+    } else {
+        UpdateIndicatorLeft(m_BeatIndex, m_IIT, m_IIS);
+        UpdateIndicatorRight(m_BeatIndex, m_IIT, m_IIS);
+    }
 
-    UpdateIndicatorLeft(m_BeatIndex, m_IIT, m_IIS);
-    UpdateIndicatorRight(m_BeatIndex, m_IIT, m_IIS);
-
+    LOG_INFO("left: {}, right: {}", m_LastIdxLeft, m_LastIdxRight);
+    LOG_INFO("{} {}", m_BeatIndex, Music::Tempo::GetBeatListLen());
+    LOG_INFO("{}", Music::Player::GetMusicTimeLoop());
     // if (m_BeatIndex + m_TempoNumber >= Music::Tempo::GetBeatListLen()) {
     //     m_BeatIndex = 0;
     // } else if (Music::Tempo::GetBeatIdx() != m_BeatIndex) {
@@ -148,12 +165,22 @@ void Music::IndicatorBar::UpdateIndicatorLeft(
             m_IndicatLeft[i]->SetPosition(
                 m_AnimationsLeft[i]->GetAnimationPosition()
             );
+        } else if (m_LastIdxLeft >= Music::Tempo::GetBeatListLen()) {
+            continue;
         } else {
-            m_AnimationsLeft[i]->SetAnimationPosition({-720.f, m_CenterPos.y});
+            if (m_LastIdxLeft < m_TempoNumber) {
+                m_AnimationsLeft[i]->SetAnimationPosition(
+                    {m_LastIdxLeft * (-730.f / m_TempoNumber), m_CenterPos.y}
+                );
+            } else {
+                m_AnimationsLeft[i]->SetAnimationPosition(
+                    {-730.f, m_CenterPos.y}
+                );
+            }
             // m_IndicatLeft[i]->SetPosition({-720.0f, m_CenterPos.y});
             m_AnimationsLeft[i]->MoveByTime(
                 Music::Tempo::GetBeatValue(m_LastIdxLeft)
-                    - Music::Player::GetMusicTime() * 1000,
+                    - Music::Player::GetMusicTimeLoop(),
                 {0, m_CenterPos.y}
             );
             m_LastIdxLeft++;
@@ -193,12 +220,22 @@ void Music::IndicatorBar::UpdateIndicatorRight(
             m_IndicatRight[i]->SetPosition(
                 m_AnimationsRight[i]->GetAnimationPosition()
             );
+        } else if (m_LastIdxRight >= Music::Tempo::GetBeatListLen()) {
+            continue;
         } else {
-            m_AnimationsRight[i]->SetAnimationPosition({720.f, m_CenterPos.y});
+            if (m_LastIdxRight < m_TempoNumber) {
+                m_AnimationsRight[i]->SetAnimationPosition(
+                    {m_LastIdxRight * (730.f / m_TempoNumber), m_CenterPos.y}
+                );
+            } else {
+                m_AnimationsRight[i]->SetAnimationPosition(
+                    {730.f, m_CenterPos.y}
+                );
+            }
             // m_IndicatRight[i]->SetPosition({-720.0f, m_CenterPos.y});
             m_AnimationsRight[i]->MoveByTime(
                 Music::Tempo::GetBeatValue(m_LastIdxRight)
-                    - Music::Player::GetMusicTime() * 1000,
+                    - Music::Player::GetMusicTimeLoop(),
                 {0, m_CenterPos.y}
             );
             m_LastIdxRight++;
@@ -291,3 +328,4 @@ std::vector<std::shared_ptr<Animation>> Music::IndicatorBar::m_AnimationsLeft;
 std::vector<std::shared_ptr<Animation>> Music::IndicatorBar::m_AnimationsRight;
 std::size_t                             Music::IndicatorBar::m_LastIdxLeft = 0;
 std::size_t                             Music::IndicatorBar::m_LastIdxRight = 0;
+bool                                    Music::IndicatorBar::m_Flag = false;
