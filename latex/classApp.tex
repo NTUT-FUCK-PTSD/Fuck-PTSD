@@ -1,0 +1,227 @@
+\hypertarget{classApp}{}\doxysection{App Class Reference}
+\label{classApp}\index{App@{App}}
+
+
+{\ttfamily \#include $<$App.\+hpp$>$}
+
+
+
+Collaboration diagram for App\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classApp__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93f}{State}} \{ \mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93fab078ffd28db767c502ac367053f6e0ac}{START}}
+, \mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93fa15a8022d0ed9cd9c2a2e756822703eb4}{UPDATE}}
+, \mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93fab1a326c06d88bf042f73d70f50197905}{END}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classApp_acb8cbf3e285b91d0170ffe87df5989c5}{App}} ()
+\item 
+\mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93f}{State}} \mbox{\hyperlink{classApp_af934470a206fe3aad2931e85cdf0ca85}{Get\+Current\+State}} () const
+\item 
+void \mbox{\hyperlink{classApp_aa798cf01ee41cddd138eb1a7cfb02e78}{Start}} ()
+\item 
+void \mbox{\hyperlink{classApp_a17cd9a7e31dd928fb713da54b40e7f2a}{initialize\+Game}} ()
+\item 
+void \mbox{\hyperlink{classApp_a6606a3240145863a2169eebd4435e9ca}{Click\+Event}} ()
+\item 
+void \mbox{\hyperlink{classApp_ab080252cbdac21758081b29324351e34}{Update}} ()
+\item 
+void \mbox{\hyperlink{classApp_ac8e48348341fc349528c7713f6b2b275}{End}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classApp_ae85bc91c1efed0537cd7e06414969590}{m\+\_\+\+Throw\+Mode}} = false
+\item 
+static std\+::map$<$ Util\+::\+Keycode, \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} $>$ \mbox{\hyperlink{classApp_a625d4948b73365395fcb50dca4cad8ad}{m\+\_\+\+Map\+Table\+Code\+Dire}}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Map}{Dungeon\+::\+Map}} $>$ \mbox{\hyperlink{classApp_ae5a437f5f4899d25a7f9078d3a577e00}{m\+\_\+\+Dungeon\+Map}} = nullptr
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayer}{Player}} $>$ \mbox{\hyperlink{classApp_aca2ea4d6c0ff2ac447cdea7f9486fdab}{m\+\_\+\+Main\+Character}} = nullptr
+\item 
+static glm\+::vec2 \mbox{\hyperlink{classApp_a545cd101c3edb9689df7a5a4ae41d40e}{m\+\_\+\+Ani\+Player\+Destination}} = \{0, 0\}
+\item 
+static glm\+::vec2 \mbox{\hyperlink{classApp_a102cb373fb4321741004143529cf50d8}{m\+\_\+\+Ani\+Camera\+Destination}} = \{0, 0\}
+\item 
+static \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} \mbox{\hyperlink{classApp_a433114390ef6d1d6dd68fd701021cda2}{m\+\_\+\+Player\+Move\+Direct}} = Player\+::\+Direction\+::\+NONE
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCamera}{Camera}} $>$ \mbox{\hyperlink{classApp_a2f72291e534186398abe9b608f53101b}{m\+\_\+\+Camera}} = std\+::make\+\_\+shared$<$\mbox{\hyperlink{classCamera}{Camera}}$>$()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classApp_aad82e325d8f78bd52f1256df7ad1d93f}\label{classApp_aad82e325d8f78bd52f1256df7ad1d93f}} 
+\index{App@{App}!State@{State}}
+\index{State@{State}!App@{App}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93f}{App\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{START@{START}!App@{App}}\index{App@{App}!START@{START}}}\mbox{\Hypertarget{classApp_aad82e325d8f78bd52f1256df7ad1d93fab078ffd28db767c502ac367053f6e0ac}\label{classApp_aad82e325d8f78bd52f1256df7ad1d93fab078ffd28db767c502ac367053f6e0ac}} 
+START&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UPDATE@{UPDATE}!App@{App}}\index{App@{App}!UPDATE@{UPDATE}}}\mbox{\Hypertarget{classApp_aad82e325d8f78bd52f1256df7ad1d93fa15a8022d0ed9cd9c2a2e756822703eb4}\label{classApp_aad82e325d8f78bd52f1256df7ad1d93fa15a8022d0ed9cd9c2a2e756822703eb4}} 
+UPDATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{END@{END}!App@{App}}\index{App@{App}!END@{END}}}\mbox{\Hypertarget{classApp_aad82e325d8f78bd52f1256df7ad1d93fab1a326c06d88bf042f73d70f50197905}\label{classApp_aad82e325d8f78bd52f1256df7ad1d93fab1a326c06d88bf042f73d70f50197905}} 
+END&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classApp_acb8cbf3e285b91d0170ffe87df5989c5}\label{classApp_acb8cbf3e285b91d0170ffe87df5989c5}} 
+\index{App@{App}!App@{App}}
+\index{App@{App}!App@{App}}
+\doxysubsubsection{\texorpdfstring{App()}{App()}}
+{\footnotesize\ttfamily App\+::\+App (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classApp_a6606a3240145863a2169eebd4435e9ca}\label{classApp_a6606a3240145863a2169eebd4435e9ca}} 
+\index{App@{App}!ClickEvent@{ClickEvent}}
+\index{ClickEvent@{ClickEvent}!App@{App}}
+\doxysubsubsection{\texorpdfstring{ClickEvent()}{ClickEvent()}}
+{\footnotesize\ttfamily void App\+::\+Click\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Use to test functional.
+
+When the player move, detect how to hand item if exist.
+
+The \mbox{\hyperlink{classPlayer}{Player}} throw out the weapon.
+
+Prepare to throw out weapon.
+
+To Next Level
+
+To Boss Room
+
+Exit the \mbox{\hyperlink{namespaceGame}{Game}}
+
+Move the player
+
+Stair to Next Level
+
+Restart the game.
+
+Invincible\+Mode
+
+One\+Shot\+Mode
+
+No\+Beat\+Mode\mbox{\Hypertarget{classApp_ac8e48348341fc349528c7713f6b2b275}\label{classApp_ac8e48348341fc349528c7713f6b2b275}} 
+\index{App@{App}!End@{End}}
+\index{End@{End}!App@{App}}
+\doxysubsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily void App\+::\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classApp_af934470a206fe3aad2931e85cdf0ca85}\label{classApp_af934470a206fe3aad2931e85cdf0ca85}} 
+\index{App@{App}!GetCurrentState@{GetCurrentState}}
+\index{GetCurrentState@{GetCurrentState}!App@{App}}
+\doxysubsubsection{\texorpdfstring{GetCurrentState()}{GetCurrentState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classApp_aad82e325d8f78bd52f1256df7ad1d93f}{State}} App\+::\+Get\+Current\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classApp_a17cd9a7e31dd928fb713da54b40e7f2a}\label{classApp_a17cd9a7e31dd928fb713da54b40e7f2a}} 
+\index{App@{App}!initializeGame@{initializeGame}}
+\index{initializeGame@{initializeGame}!App@{App}}
+\doxysubsubsection{\texorpdfstring{initializeGame()}{initializeGame()}}
+{\footnotesize\ttfamily void App\+::initialize\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classApp_aa798cf01ee41cddd138eb1a7cfb02e78}\label{classApp_aa798cf01ee41cddd138eb1a7cfb02e78}} 
+\index{App@{App}!Start@{Start}}
+\index{Start@{Start}!App@{App}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily void App\+::\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classApp_ab080252cbdac21758081b29324351e34}\label{classApp_ab080252cbdac21758081b29324351e34}} 
+\index{App@{App}!Update@{Update}}
+\index{Update@{Update}!App@{App}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void App\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classApp_a102cb373fb4321741004143529cf50d8}\label{classApp_a102cb373fb4321741004143529cf50d8}} 
+\index{App@{App}!m\_AniCameraDestination@{m\_AniCameraDestination}}
+\index{m\_AniCameraDestination@{m\_AniCameraDestination}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_AniCameraDestination}{m\_AniCameraDestination}}
+{\footnotesize\ttfamily glm\+::vec2 App\+::m\+\_\+\+Ani\+Camera\+Destination = \{0, 0\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classApp_a545cd101c3edb9689df7a5a4ae41d40e}\label{classApp_a545cd101c3edb9689df7a5a4ae41d40e}} 
+\index{App@{App}!m\_AniPlayerDestination@{m\_AniPlayerDestination}}
+\index{m\_AniPlayerDestination@{m\_AniPlayerDestination}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_AniPlayerDestination}{m\_AniPlayerDestination}}
+{\footnotesize\ttfamily glm\+::vec2 App\+::m\+\_\+\+Ani\+Player\+Destination = \{0, 0\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classApp_a2f72291e534186398abe9b608f53101b}\label{classApp_a2f72291e534186398abe9b608f53101b}} 
+\index{App@{App}!m\_Camera@{m\_Camera}}
+\index{m\_Camera@{m\_Camera}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_Camera}{m\_Camera}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCamera}{Camera}} $>$ App\+::m\+\_\+\+Camera = std\+::make\+\_\+shared$<$\mbox{\hyperlink{classCamera}{Camera}}$>$()\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classApp_ae5a437f5f4899d25a7f9078d3a577e00}\label{classApp_ae5a437f5f4899d25a7f9078d3a577e00}} 
+\index{App@{App}!m\_DungeonMap@{m\_DungeonMap}}
+\index{m\_DungeonMap@{m\_DungeonMap}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_DungeonMap}{m\_DungeonMap}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Map}{Dungeon\+::\+Map}} $>$ App\+::m\+\_\+\+Dungeon\+Map = nullptr\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classApp_aca2ea4d6c0ff2ac447cdea7f9486fdab}\label{classApp_aca2ea4d6c0ff2ac447cdea7f9486fdab}} 
+\index{App@{App}!m\_MainCharacter@{m\_MainCharacter}}
+\index{m\_MainCharacter@{m\_MainCharacter}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_MainCharacter}{m\_MainCharacter}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayer}{Player}} $>$ App\+::m\+\_\+\+Main\+Character = nullptr\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classApp_a625d4948b73365395fcb50dca4cad8ad}\label{classApp_a625d4948b73365395fcb50dca4cad8ad}} 
+\index{App@{App}!m\_MapTableCodeDire@{m\_MapTableCodeDire}}
+\index{m\_MapTableCodeDire@{m\_MapTableCodeDire}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_MapTableCodeDire}{m\_MapTableCodeDire}}
+{\footnotesize\ttfamily std\+::map$<$ Util\+::\+Keycode, \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} $>$ App\+::m\+\_\+\+Map\+Table\+Code\+Dire\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{  \{Util::Keycode::W, Player::Direction::UP\},}
+\DoxyCodeLine{  \{Util::Keycode::D, Player::Direction::RIGHT\},}
+\DoxyCodeLine{  \{Util::Keycode::S, Player::Direction::DOWN\},}
+\DoxyCodeLine{  \{Util::Keycode::A, Player::Direction::LEFT\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classApp_a433114390ef6d1d6dd68fd701021cda2}\label{classApp_a433114390ef6d1d6dd68fd701021cda2}} 
+\index{App@{App}!m\_PlayerMoveDirect@{m\_PlayerMoveDirect}}
+\index{m\_PlayerMoveDirect@{m\_PlayerMoveDirect}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_PlayerMoveDirect}{m\_PlayerMoveDirect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} App\+::m\+\_\+\+Player\+Move\+Direct = Player\+::\+Direction\+::\+NONE\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classApp_ae85bc91c1efed0537cd7e06414969590}\label{classApp_ae85bc91c1efed0537cd7e06414969590}} 
+\index{App@{App}!m\_ThrowMode@{m\_ThrowMode}}
+\index{m\_ThrowMode@{m\_ThrowMode}!App@{App}}
+\doxysubsubsection{\texorpdfstring{m\_ThrowMode}{m\_ThrowMode}}
+{\footnotesize\ttfamily bool App\+::m\+\_\+\+Throw\+Mode = false\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{App_8hpp}{App.\+hpp}}\item 
+src/\mbox{\hyperlink{App_8cpp}{App.\+cpp}}\item 
+src/\mbox{\hyperlink{ClickEvent_8cpp}{Click\+Event.\+cpp}}\item 
+src/\mbox{\hyperlink{End_8cpp}{End.\+cpp}}\item 
+src/\mbox{\hyperlink{initialGame_8cpp}{initial\+Game.\+cpp}}\item 
+src/\mbox{\hyperlink{Start_8cpp}{Start.\+cpp}}\item 
+src/\mbox{\hyperlink{Update_8cpp}{Update.\+cpp}}\end{DoxyCompactItemize}

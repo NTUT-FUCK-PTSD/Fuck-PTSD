@@ -1,0 +1,231 @@
+\hypertarget{classDungeon_1_1Level}{}\doxysection{Dungeon\+::Level Class Reference}
+\label{classDungeon_1_1Level}\index{Dungeon::Level@{Dungeon::Level}}
+
+
+{\ttfamily \#include $<$Level.\+h$>$}
+
+
+
+Collaboration diagram for Dungeon\+::Level\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classDungeon_1_1Level__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDungeon_1_1Level_a71d6abbd2ff4c7a60875e8cf60d696e5}{Level}} (const std\+::string \&path, const int level\+Num)
+\item 
+\mbox{\hyperlink{classDungeon_1_1Level_a7fa5b16b87fe2dc5011c7594c75ec2b0}{Level}} (const std\+::string \&path)
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Level_adeeb10d60515ed15ac8be328f0a09d7a}{Load\+File}} (const std\+::string \&path)
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Level_ac50d5753f162ebebfab326f2340f6d87}{Load\+Level}} (const int level\+Num)
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Level_a814334bb77c7c85defcf5233b57c1414}{Is\+Available}} ()
+\item 
+int \mbox{\hyperlink{classDungeon_1_1Level_aa97cc3b0a0fb049871a354383ded04e2}{Get\+Num\+Levels}} ()
+\item 
+int \mbox{\hyperlink{classDungeon_1_1Level_a9e90eb40144b31567c53c219b04174d8}{Get\+Boss\+Num}} ()
+\item 
+int \mbox{\hyperlink{classDungeon_1_1Level_a3f8ffd5ac6c92104d50e959df918ec46}{Get\+Music}} ()
+\item 
+int \mbox{\hyperlink{classDungeon_1_1Level_a95ad0d3891285c665c08ee5a2eba4bf6}{Get\+Current\+Level}} ()
+\item 
+glm\+::ivec2 \mbox{\hyperlink{classDungeon_1_1Level_a2374bbcb4fec05d7dc499b47ef428d71}{Get\+Level\+Index\+Min}} ()
+\item 
+glm\+::ivec2 \mbox{\hyperlink{classDungeon_1_1Level_a659d8524f9a7ca5925123ba8664c1e3d}{Get\+Level\+Index\+Max}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_a0be11a291711959138dd7cb01eb807bf}{Get\+Tiles}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Trap}{s\+\_\+\+Trap}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_a6a183662fb541344b47d9f51adbee2cf}{Get\+Traps}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_aefbb6d82814fe6398fad6def38112ff7}{Get\+Enemies}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Item}{s\+\_\+\+Item}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_a066df5b0429a847e218bec786089c987}{Get\+Items}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Chest}{s\+\_\+\+Chest}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_ad26027cc55b90469b847de54041f57d4}{Get\+Chests}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Crate}{s\+\_\+\+Crate}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_ac238eba751766b47d546bbee6f8f9907}{Get\+Crates}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structDungeon_1_1s__Shrine}{s\+\_\+\+Shrine}} $>$ \mbox{\hyperlink{classDungeon_1_1Level_a22e946a6f538f690a594b6db8b37725c}{Get\+Shrines}} ()
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_af681e5df3a8518dfd039568e5e971735}{Add\+Tile}} (const \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \&tiles)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_a11941be6fd2fddd8b852aed12edf6adf}{Add\+Trap}} (const \mbox{\hyperlink{structDungeon_1_1s__Trap}{s\+\_\+\+Trap}} \&traps)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_ab272aceb620a3a1f196fdef2ec7a9e83}{Add\+Enemy}} (const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&enemies)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_a87c4ab52478e7cc0584f9c31dd083793}{Add\+Item}} (const \mbox{\hyperlink{structDungeon_1_1s__Item}{s\+\_\+\+Item}} \&items)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_a47e240f51c3e679b9fd0805e01ded4b4}{Add\+Chest}} (const \mbox{\hyperlink{structDungeon_1_1s__Chest}{s\+\_\+\+Chest}} \&chests)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_a8c22513a9f3252f5be6578ac831eeb97}{Add\+Crate}} (const \mbox{\hyperlink{structDungeon_1_1s__Crate}{s\+\_\+\+Crate}} \&crates)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Level_a5445db8870769079114a2bb83d84301c}{Add\+Shrine}} (const \mbox{\hyperlink{structDungeon_1_1s__Shrine}{s\+\_\+\+Shrine}} \&shrines)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Level_a71d6abbd2ff4c7a60875e8cf60d696e5}\label{classDungeon_1_1Level_a71d6abbd2ff4c7a60875e8cf60d696e5}} 
+\index{Dungeon::Level@{Dungeon::Level}!Level@{Level}}
+\index{Level@{Level}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{Level()}{Level()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Dungeon\+::\+Level\+::\+Level (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{const int}]{level\+Num }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a7fa5b16b87fe2dc5011c7594c75ec2b0}\label{classDungeon_1_1Level_a7fa5b16b87fe2dc5011c7594c75ec2b0}} 
+\index{Dungeon::Level@{Dungeon::Level}!Level@{Level}}
+\index{Level@{Level}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{Level()}{Level()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Dungeon\+::\+Level\+::\+Level (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Level_a47e240f51c3e679b9fd0805e01ded4b4}\label{classDungeon_1_1Level_a47e240f51c3e679b9fd0805e01ded4b4}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddChest@{AddChest}}
+\index{AddChest@{AddChest}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddChest()}{AddChest()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Chest (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Chest}{s\+\_\+\+Chest}} \&}]{chests }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a8c22513a9f3252f5be6578ac831eeb97}\label{classDungeon_1_1Level_a8c22513a9f3252f5be6578ac831eeb97}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddCrate@{AddCrate}}
+\index{AddCrate@{AddCrate}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddCrate()}{AddCrate()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Crate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Crate}{s\+\_\+\+Crate}} \&}]{crates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_ab272aceb620a3a1f196fdef2ec7a9e83}\label{classDungeon_1_1Level_ab272aceb620a3a1f196fdef2ec7a9e83}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddEnemy@{AddEnemy}}
+\index{AddEnemy@{AddEnemy}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddEnemy()}{AddEnemy()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Enemy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&}]{enemies }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a87c4ab52478e7cc0584f9c31dd083793}\label{classDungeon_1_1Level_a87c4ab52478e7cc0584f9c31dd083793}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Item (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Item}{s\+\_\+\+Item}} \&}]{items }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a5445db8870769079114a2bb83d84301c}\label{classDungeon_1_1Level_a5445db8870769079114a2bb83d84301c}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddShrine@{AddShrine}}
+\index{AddShrine@{AddShrine}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddShrine()}{AddShrine()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Shrine (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Shrine}{s\+\_\+\+Shrine}} \&}]{shrines }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_af681e5df3a8518dfd039568e5e971735}\label{classDungeon_1_1Level_af681e5df3a8518dfd039568e5e971735}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddTile@{AddTile}}
+\index{AddTile@{AddTile}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddTile()}{AddTile()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Tile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \&}]{tiles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a11941be6fd2fddd8b852aed12edf6adf}\label{classDungeon_1_1Level_a11941be6fd2fddd8b852aed12edf6adf}} 
+\index{Dungeon::Level@{Dungeon::Level}!AddTrap@{AddTrap}}
+\index{AddTrap@{AddTrap}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{AddTrap()}{AddTrap()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Level\+::\+Add\+Trap (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Trap}{s\+\_\+\+Trap}} \&}]{traps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a9e90eb40144b31567c53c219b04174d8}\label{classDungeon_1_1Level_a9e90eb40144b31567c53c219b04174d8}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetBossNum@{GetBossNum}}
+\index{GetBossNum@{GetBossNum}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetBossNum()}{GetBossNum()}}
+{\footnotesize\ttfamily int Dungeon\+::\+Level\+::\+Get\+Boss\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_ad26027cc55b90469b847de54041f57d4}\label{classDungeon_1_1Level_ad26027cc55b90469b847de54041f57d4}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetChests@{GetChests}}
+\index{GetChests@{GetChests}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetChests()}{GetChests()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Chest}{s\+\_\+\+Chest}}$>$ Dungeon\+::\+Level\+::\+Get\+Chests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_ac238eba751766b47d546bbee6f8f9907}\label{classDungeon_1_1Level_ac238eba751766b47d546bbee6f8f9907}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetCrates@{GetCrates}}
+\index{GetCrates@{GetCrates}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetCrates()}{GetCrates()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Crate}{s\+\_\+\+Crate}}$>$ Dungeon\+::\+Level\+::\+Get\+Crates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a95ad0d3891285c665c08ee5a2eba4bf6}\label{classDungeon_1_1Level_a95ad0d3891285c665c08ee5a2eba4bf6}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetCurrentLevel@{GetCurrentLevel}}
+\index{GetCurrentLevel@{GetCurrentLevel}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetCurrentLevel()}{GetCurrentLevel()}}
+{\footnotesize\ttfamily int Dungeon\+::\+Level\+::\+Get\+Current\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_aefbb6d82814fe6398fad6def38112ff7}\label{classDungeon_1_1Level_aefbb6d82814fe6398fad6def38112ff7}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetEnemies@{GetEnemies}}
+\index{GetEnemies@{GetEnemies}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetEnemies()}{GetEnemies()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}}$>$ Dungeon\+::\+Level\+::\+Get\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a066df5b0429a847e218bec786089c987}\label{classDungeon_1_1Level_a066df5b0429a847e218bec786089c987}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetItems@{GetItems}}
+\index{GetItems@{GetItems}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetItems()}{GetItems()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Item}{s\+\_\+\+Item}}$>$ Dungeon\+::\+Level\+::\+Get\+Items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a659d8524f9a7ca5925123ba8664c1e3d}\label{classDungeon_1_1Level_a659d8524f9a7ca5925123ba8664c1e3d}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetLevelIndexMax@{GetLevelIndexMax}}
+\index{GetLevelIndexMax@{GetLevelIndexMax}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetLevelIndexMax()}{GetLevelIndexMax()}}
+{\footnotesize\ttfamily glm\+::ivec2 Dungeon\+::\+Level\+::\+Get\+Level\+Index\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a2374bbcb4fec05d7dc499b47ef428d71}\label{classDungeon_1_1Level_a2374bbcb4fec05d7dc499b47ef428d71}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetLevelIndexMin@{GetLevelIndexMin}}
+\index{GetLevelIndexMin@{GetLevelIndexMin}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetLevelIndexMin()}{GetLevelIndexMin()}}
+{\footnotesize\ttfamily glm\+::ivec2 Dungeon\+::\+Level\+::\+Get\+Level\+Index\+Min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a3f8ffd5ac6c92104d50e959df918ec46}\label{classDungeon_1_1Level_a3f8ffd5ac6c92104d50e959df918ec46}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetMusic@{GetMusic}}
+\index{GetMusic@{GetMusic}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetMusic()}{GetMusic()}}
+{\footnotesize\ttfamily int Dungeon\+::\+Level\+::\+Get\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_aa97cc3b0a0fb049871a354383ded04e2}\label{classDungeon_1_1Level_aa97cc3b0a0fb049871a354383ded04e2}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetNumLevels@{GetNumLevels}}
+\index{GetNumLevels@{GetNumLevels}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetNumLevels()}{GetNumLevels()}}
+{\footnotesize\ttfamily int Dungeon\+::\+Level\+::\+Get\+Num\+Levels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a22e946a6f538f690a594b6db8b37725c}\label{classDungeon_1_1Level_a22e946a6f538f690a594b6db8b37725c}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetShrines@{GetShrines}}
+\index{GetShrines@{GetShrines}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetShrines()}{GetShrines()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Shrine}{s\+\_\+\+Shrine}}$>$ Dungeon\+::\+Level\+::\+Get\+Shrines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a0be11a291711959138dd7cb01eb807bf}\label{classDungeon_1_1Level_a0be11a291711959138dd7cb01eb807bf}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetTiles@{GetTiles}}
+\index{GetTiles@{GetTiles}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetTiles()}{GetTiles()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}}$>$ Dungeon\+::\+Level\+::\+Get\+Tiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a6a183662fb541344b47d9f51adbee2cf}\label{classDungeon_1_1Level_a6a183662fb541344b47d9f51adbee2cf}} 
+\index{Dungeon::Level@{Dungeon::Level}!GetTraps@{GetTraps}}
+\index{GetTraps@{GetTraps}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{GetTraps()}{GetTraps()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structDungeon_1_1s__Trap}{s\+\_\+\+Trap}}$>$ Dungeon\+::\+Level\+::\+Get\+Traps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_a814334bb77c7c85defcf5233b57c1414}\label{classDungeon_1_1Level_a814334bb77c7c85defcf5233b57c1414}} 
+\index{Dungeon::Level@{Dungeon::Level}!IsAvailable@{IsAvailable}}
+\index{IsAvailable@{IsAvailable}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{IsAvailable()}{IsAvailable()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Level\+::\+Is\+Available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_adeeb10d60515ed15ac8be328f0a09d7a}\label{classDungeon_1_1Level_adeeb10d60515ed15ac8be328f0a09d7a}} 
+\index{Dungeon::Level@{Dungeon::Level}!LoadFile@{LoadFile}}
+\index{LoadFile@{LoadFile}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{LoadFile()}{LoadFile()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Level\+::\+Load\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Level_ac50d5753f162ebebfab326f2340f6d87}\label{classDungeon_1_1Level_ac50d5753f162ebebfab326f2340f6d87}} 
+\index{Dungeon::Level@{Dungeon::Level}!LoadLevel@{LoadLevel}}
+\index{LoadLevel@{LoadLevel}!Dungeon::Level@{Dungeon::Level}}
+\doxysubsubsection{\texorpdfstring{LoadLevel()}{LoadLevel()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Level\+::\+Load\+Level (\begin{DoxyParamCaption}\item[{const int}]{level\+Num }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Dungeon/\mbox{\hyperlink{Level_8h}{Level.\+h}}\item 
+src/\+Dungeon/\mbox{\hyperlink{Level_8cpp}{Level.\+cpp}}\end{DoxyCompactItemize}

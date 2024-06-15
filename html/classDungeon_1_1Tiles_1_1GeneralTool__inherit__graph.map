@@ -1,0 +1,5 @@
+<map id="Dungeon::Tiles::GeneralTool" name="Dungeon::Tiles::GeneralTool">
+<area shape="rect" id="node1" title=" " alt="" coords="5,652,209,788"/>
+<area shape="rect" id="node2" href="$classDungeon_1_1Tile.html" title=" " alt="" coords="18,131,197,604"/>
+<area shape="rect" id="node3" title=" " alt="" coords="40,5,175,83"/>
+</map>

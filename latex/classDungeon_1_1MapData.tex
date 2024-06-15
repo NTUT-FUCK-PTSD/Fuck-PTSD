@@ -1,0 +1,407 @@
+\hypertarget{classDungeon_1_1MapData}{}\doxysection{Dungeon\+::Map\+Data Class Reference}
+\label{classDungeon_1_1MapData}\index{Dungeon::MapData@{Dungeon::MapData}}
+
+
+{\ttfamily \#include $<$Map\+Data.\+h$>$}
+
+
+
+Collaboration diagram for Dungeon\+::Map\+Data\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classDungeon_1_1MapData__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDungeon_1_1MapData_a7637f02260d5fe9ef974f1a7844bc4aa}{Map\+Data}} (const glm\+::vec2 \&level\+Index\+Min, const glm\+::vec2 \&level\+Index\+Max, const glm\+::vec2 \&size, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayer}{Player}} $>$ player)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_a958d1e185f23a01168960663bfe29b9f}{Add\+Tile}} (const std\+::size\+\_\+t position, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ tile)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_a46865f6243695dfec963d643dedb223b}{Remove\+Tile}} (const std\+::size\+\_\+t position)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_a58762de5e3bf4b1b543a23ff42c9a028}{Clear\+Tiles}} ()
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a9a71d285ec7cb870174b46b0f806d70d}{Get\+Tiles}} () const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a1bae4d29c81539e16f40d8ab086aefc1}{Is\+Tile\+Empty}} (const std\+::size\+\_\+t position) const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ \mbox{\hyperlink{classDungeon_1_1MapData_aeb1a457cd71355f5e67c08333206f29e}{Get\+Tile}} (const std\+::size\+\_\+t position) const
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a3b486dacf022ef4e24515fb61ca49755}{Get\+Unsorted\+Tiles}} () const
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_a1a3d3ac64cece0bb71c45a66dddf2c4c}{Add\+Enemy}} (const std\+::size\+\_\+t position, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ enemy)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_aeda3bf1bd88d3a8e70d579e170b52fa4}{Remove\+Enemy}} (const std\+::size\+\_\+t position)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_ad1814f47a0c591dd325d98b7d7368817}{Move\+Enemy}} (const std\+::size\+\_\+t src, const std\+::size\+\_\+t dest)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_aa4da08477104c489c6b43516fca11bfb}{Clear\+Enemies}} ()
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a7220db0921eb2fd0f9e9ae04e889bc1e}{Get\+Enemies}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a9259158086734011f939f640003ead2a}{Get\+Enemy}} (const std\+::size\+\_\+t position) const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a83d8c554bfae6a7102c6a683d3840080}{Get\+Boss}} () const
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a3c547a4cf0a6d765e9a8465b9fd08c29}{Get\+Enemy\+Queue}} () const
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a1bf839b800e92341583c3cd8ae2c3584}{Get\+Unsorted\+Enemies}} () const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a3a7a212c1410ca838b83034bccd8143e}{Is\+Enemy\+Empty}} (const std\+::size\+\_\+t position) const
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_aec7ab9c95880769e233fdb881098fe41}{Add\+Item}} (const std\+::size\+\_\+t position, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Item}{Item}} $>$ item)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_a51261f043150d4ad5423543153c88374}{Remove\+Item}} (const std\+::size\+\_\+t position)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_aeea22f226591a62df1974dc95ed936a9}{Clear\+Items}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Item}{Item}} $>$ \mbox{\hyperlink{classDungeon_1_1MapData_a37374b16b6b92af0083114877d872dae}{Get\+Item}} (const std\+::size\+\_\+t position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_abac9d82f932b4a945a964f7e533dcbd5}{Is\+Item\+Empty}} (const std\+::size\+\_\+t position) const
+\item 
+glm\+::ivec2 \mbox{\hyperlink{classDungeon_1_1MapData_ad12a9247402538cc1c9bbd7ac983e734}{Get\+Level\+Index\+Max}} () const
+\item 
+glm\+::ivec2 \mbox{\hyperlink{classDungeon_1_1MapData_aff3cb16795e09466e4fc270b45506109}{Get\+Level\+Index\+Min}} () const
+\item 
+glm\+::ivec2 \mbox{\hyperlink{classDungeon_1_1MapData_afaa64800223a5e15bdef85ea23ed4c50}{Get\+Size}} () const
+\item 
+glm\+::vec2 \mbox{\hyperlink{classDungeon_1_1MapData_aac2a7f7f5f5f80a89a86e5c1b5a51232}{Get\+Player\+Position}} () const
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_ab7d814f61021e52be5c5e134b200645f}{Set\+Level\+Index\+Max}} (const glm\+::ivec2 \&level\+Index\+Max)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_a5f27254a7f7558a180462ec88fa28fbb}{Set\+Level\+Index\+Min}} (const glm\+::ivec2 \&level\+Index\+Min)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1MapData_ab81dd993dc6fb4c85552659bfcfb2a6d}{Set\+Size}} (const glm\+::ivec2 \&size)
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1MapData_a8a5b8b511cadd357767e388cce281f7e}{Game\+Position2\+Map\+Index}} (const glm\+::ivec2 \&position) const
+\item 
+glm\+::ivec2 \mbox{\hyperlink{classDungeon_1_1MapData_a535a875a27fc6dc4d9595c5b9db6a751}{Map\+Index2\+Game\+Position}} (const std\+::size\+\_\+t index) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_af8a059b391adb56f261e76b1a2462fe6}{Is\+Position\+Valid}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a5110cb0a2ad78e94898df7946d084c0b}{Is\+Walkable}} (const std\+::size\+\_\+t position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a156301dd3d5bf56481795d7fa0dac62c}{Is\+Position\+Walkable}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a92d685a68510c662be76621e07205159}{Is\+Position\+Door}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a9db87fe2e681abaf9ceede1ee055c568}{Is\+Position\+Wall}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_af5ba7b35f48e1c943cfe7af55e07779a}{Is\+Position\+Coin}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_acc82092b35a1c3cb96c7859417faa7c2}{Is\+Position\+Diamond}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a6d5f00d9b92daf62869586629cd6e096}{Is\+Position\+Heart}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_ac1fa137fe9ef41e6a4bb02a991ef6e09}{Is\+Position\+Tool}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a60f23ca61d72d4d7b59058a7d3612a6e}{Is\+Position\+Player}} (const glm\+::vec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a2b8fc20d2f17d1bb27205ff794e2f240}{Is\+Position\+Interactive}} (const glm\+::ivec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a50a1757877f2f9589e1e0311e08f93e0}{Is\+Position\+Player\+Act}} (const glm\+::vec2 \&position) const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1MapData_a98af689a69780668c2ac5e22ee61065e}{Is\+Boss\+Dead}} () const
+\item 
+float \mbox{\hyperlink{classDungeon_1_1MapData_a527189307cbe97ff17ed01ee767b8baf}{Heuristic}} (const glm\+::vec2 \&start, const glm\+::vec2 \&end)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayer}{Player}} $>$ \mbox{\hyperlink{classDungeon_1_1MapData_ad304ccd69f2681ada6495159378f6d63}{Get\+Player}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDungeon_1_1MapData_a7637f02260d5fe9ef974f1a7844bc4aa}\label{classDungeon_1_1MapData_a7637f02260d5fe9ef974f1a7844bc4aa}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!MapData@{MapData}}
+\index{MapData@{MapData}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{MapData()}{MapData()}}
+{\footnotesize\ttfamily Dungeon\+::\+Map\+Data\+::\+Map\+Data (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{level\+Index\+Min,  }\item[{const glm\+::vec2 \&}]{level\+Index\+Max,  }\item[{const glm\+::vec2 \&}]{size,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayer}{Player}} $>$}]{player }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDungeon_1_1MapData_a1a3d3ac64cece0bb71c45a66dddf2c4c}\label{classDungeon_1_1MapData_a1a3d3ac64cece0bb71c45a66dddf2c4c}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!AddEnemy@{AddEnemy}}
+\index{AddEnemy@{AddEnemy}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{AddEnemy()}{AddEnemy()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Add\+Enemy (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$}]{enemy }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aec7ab9c95880769e233fdb881098fe41}\label{classDungeon_1_1MapData_aec7ab9c95880769e233fdb881098fe41}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Add\+Item (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Item}{Item}} $>$}]{item }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a958d1e185f23a01168960663bfe29b9f}\label{classDungeon_1_1MapData_a958d1e185f23a01168960663bfe29b9f}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!AddTile@{AddTile}}
+\index{AddTile@{AddTile}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{AddTile()}{AddTile()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Add\+Tile (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$}]{tile }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aa4da08477104c489c6b43516fca11bfb}\label{classDungeon_1_1MapData_aa4da08477104c489c6b43516fca11bfb}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!ClearEnemies@{ClearEnemies}}
+\index{ClearEnemies@{ClearEnemies}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{ClearEnemies()}{ClearEnemies()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Clear\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aeea22f226591a62df1974dc95ed936a9}\label{classDungeon_1_1MapData_aeea22f226591a62df1974dc95ed936a9}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!ClearItems@{ClearItems}}
+\index{ClearItems@{ClearItems}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{ClearItems()}{ClearItems()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Clear\+Items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a58762de5e3bf4b1b543a23ff42c9a028}\label{classDungeon_1_1MapData_a58762de5e3bf4b1b543a23ff42c9a028}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!ClearTiles@{ClearTiles}}
+\index{ClearTiles@{ClearTiles}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{ClearTiles()}{ClearTiles()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Clear\+Tiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a8a5b8b511cadd357767e388cce281f7e}\label{classDungeon_1_1MapData_a8a5b8b511cadd357767e388cce281f7e}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GamePosition2MapIndex@{GamePosition2MapIndex}}
+\index{GamePosition2MapIndex@{GamePosition2MapIndex}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GamePosition2MapIndex()}{GamePosition2MapIndex()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Map\+Data\+::\+Game\+Position2\+Map\+Index (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a83d8c554bfae6a7102c6a683d3840080}\label{classDungeon_1_1MapData_a83d8c554bfae6a7102c6a683d3840080}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetBoss@{GetBoss}}
+\index{GetBoss@{GetBoss}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetBoss()}{GetBoss()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Boss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a7220db0921eb2fd0f9e9ae04e889bc1e}\label{classDungeon_1_1MapData_a7220db0921eb2fd0f9e9ae04e889bc1e}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetEnemies@{GetEnemies}}
+\index{GetEnemies@{GetEnemies}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetEnemies()}{GetEnemies()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a9259158086734011f939f640003ead2a}\label{classDungeon_1_1MapData_a9259158086734011f939f640003ead2a}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetEnemy@{GetEnemy}}
+\index{GetEnemy@{GetEnemy}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetEnemy()}{GetEnemy()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Enemy (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a3c547a4cf0a6d765e9a8465b9fd08c29}\label{classDungeon_1_1MapData_a3c547a4cf0a6d765e9a8465b9fd08c29}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetEnemyQueue@{GetEnemyQueue}}
+\index{GetEnemyQueue@{GetEnemyQueue}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetEnemyQueue()}{GetEnemyQueue()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Enemy\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a37374b16b6b92af0083114877d872dae}\label{classDungeon_1_1MapData_a37374b16b6b92af0083114877d872dae}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetItem@{GetItem}}
+\index{GetItem@{GetItem}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetItem()}{GetItem()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Item}{Item}} $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Item (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_ad12a9247402538cc1c9bbd7ac983e734}\label{classDungeon_1_1MapData_ad12a9247402538cc1c9bbd7ac983e734}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetLevelIndexMax@{GetLevelIndexMax}}
+\index{GetLevelIndexMax@{GetLevelIndexMax}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetLevelIndexMax()}{GetLevelIndexMax()}}
+{\footnotesize\ttfamily glm\+::ivec2 Dungeon\+::\+Map\+Data\+::\+Get\+Level\+Index\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aff3cb16795e09466e4fc270b45506109}\label{classDungeon_1_1MapData_aff3cb16795e09466e4fc270b45506109}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetLevelIndexMin@{GetLevelIndexMin}}
+\index{GetLevelIndexMin@{GetLevelIndexMin}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetLevelIndexMin()}{GetLevelIndexMin()}}
+{\footnotesize\ttfamily glm\+::ivec2 Dungeon\+::\+Map\+Data\+::\+Get\+Level\+Index\+Min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_ad304ccd69f2681ada6495159378f6d63}\label{classDungeon_1_1MapData_ad304ccd69f2681ada6495159378f6d63}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetPlayer@{GetPlayer}}
+\index{GetPlayer@{GetPlayer}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetPlayer()}{GetPlayer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayer}{Player}} $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aac2a7f7f5f5f80a89a86e5c1b5a51232}\label{classDungeon_1_1MapData_aac2a7f7f5f5f80a89a86e5c1b5a51232}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetPlayerPosition@{GetPlayerPosition}}
+\index{GetPlayerPosition@{GetPlayerPosition}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetPlayerPosition()}{GetPlayerPosition()}}
+{\footnotesize\ttfamily glm\+::vec2 Dungeon\+::\+Map\+Data\+::\+Get\+Player\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_afaa64800223a5e15bdef85ea23ed4c50}\label{classDungeon_1_1MapData_afaa64800223a5e15bdef85ea23ed4c50}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily glm\+::ivec2 Dungeon\+::\+Map\+Data\+::\+Get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aeb1a457cd71355f5e67c08333206f29e}\label{classDungeon_1_1MapData_aeb1a457cd71355f5e67c08333206f29e}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetTile@{GetTile}}
+\index{GetTile@{GetTile}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetTile()}{GetTile()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Tile (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a9a71d285ec7cb870174b46b0f806d70d}\label{classDungeon_1_1MapData_a9a71d285ec7cb870174b46b0f806d70d}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetTiles@{GetTiles}}
+\index{GetTiles@{GetTiles}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetTiles()}{GetTiles()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Tiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a1bf839b800e92341583c3cd8ae2c3584}\label{classDungeon_1_1MapData_a1bf839b800e92341583c3cd8ae2c3584}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetUnsortedEnemies@{GetUnsortedEnemies}}
+\index{GetUnsortedEnemies@{GetUnsortedEnemies}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetUnsortedEnemies()}{GetUnsortedEnemies()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Enemy}{Enemy}} $>$ $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Unsorted\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a3b486dacf022ef4e24515fb61ca49755}\label{classDungeon_1_1MapData_a3b486dacf022ef4e24515fb61ca49755}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!GetUnsortedTiles@{GetUnsortedTiles}}
+\index{GetUnsortedTiles@{GetUnsortedTiles}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{GetUnsortedTiles()}{GetUnsortedTiles()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1Tile}{Tile}} $>$ $>$ Dungeon\+::\+Map\+Data\+::\+Get\+Unsorted\+Tiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a527189307cbe97ff17ed01ee767b8baf}\label{classDungeon_1_1MapData_a527189307cbe97ff17ed01ee767b8baf}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!Heuristic@{Heuristic}}
+\index{Heuristic@{Heuristic}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{Heuristic()}{Heuristic()}}
+{\footnotesize\ttfamily float Dungeon\+::\+Map\+Data\+::\+Heuristic (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{start,  }\item[{const glm\+::vec2 \&}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a98af689a69780668c2ac5e22ee61065e}\label{classDungeon_1_1MapData_a98af689a69780668c2ac5e22ee61065e}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsBossDead@{IsBossDead}}
+\index{IsBossDead@{IsBossDead}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsBossDead()}{IsBossDead()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Boss\+Dead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a3a7a212c1410ca838b83034bccd8143e}\label{classDungeon_1_1MapData_a3a7a212c1410ca838b83034bccd8143e}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsEnemyEmpty@{IsEnemyEmpty}}
+\index{IsEnemyEmpty@{IsEnemyEmpty}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsEnemyEmpty()}{IsEnemyEmpty()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Enemy\+Empty (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_abac9d82f932b4a945a964f7e533dcbd5}\label{classDungeon_1_1MapData_abac9d82f932b4a945a964f7e533dcbd5}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsItemEmpty@{IsItemEmpty}}
+\index{IsItemEmpty@{IsItemEmpty}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsItemEmpty()}{IsItemEmpty()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Item\+Empty (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_af5ba7b35f48e1c943cfe7af55e07779a}\label{classDungeon_1_1MapData_af5ba7b35f48e1c943cfe7af55e07779a}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionCoin@{IsPositionCoin}}
+\index{IsPositionCoin@{IsPositionCoin}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionCoin()}{IsPositionCoin()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Coin (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_acc82092b35a1c3cb96c7859417faa7c2}\label{classDungeon_1_1MapData_acc82092b35a1c3cb96c7859417faa7c2}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionDiamond@{IsPositionDiamond}}
+\index{IsPositionDiamond@{IsPositionDiamond}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionDiamond()}{IsPositionDiamond()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Diamond (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a92d685a68510c662be76621e07205159}\label{classDungeon_1_1MapData_a92d685a68510c662be76621e07205159}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionDoor@{IsPositionDoor}}
+\index{IsPositionDoor@{IsPositionDoor}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionDoor()}{IsPositionDoor()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Door (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a6d5f00d9b92daf62869586629cd6e096}\label{classDungeon_1_1MapData_a6d5f00d9b92daf62869586629cd6e096}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionHeart@{IsPositionHeart}}
+\index{IsPositionHeart@{IsPositionHeart}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionHeart()}{IsPositionHeart()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Heart (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a2b8fc20d2f17d1bb27205ff794e2f240}\label{classDungeon_1_1MapData_a2b8fc20d2f17d1bb27205ff794e2f240}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionInteractive@{IsPositionInteractive}}
+\index{IsPositionInteractive@{IsPositionInteractive}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionInteractive()}{IsPositionInteractive()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Interactive (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a60f23ca61d72d4d7b59058a7d3612a6e}\label{classDungeon_1_1MapData_a60f23ca61d72d4d7b59058a7d3612a6e}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionPlayer@{IsPositionPlayer}}
+\index{IsPositionPlayer@{IsPositionPlayer}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionPlayer()}{IsPositionPlayer()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Player (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a50a1757877f2f9589e1e0311e08f93e0}\label{classDungeon_1_1MapData_a50a1757877f2f9589e1e0311e08f93e0}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionPlayerAct@{IsPositionPlayerAct}}
+\index{IsPositionPlayerAct@{IsPositionPlayerAct}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionPlayerAct()}{IsPositionPlayerAct()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Player\+Act (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_ac1fa137fe9ef41e6a4bb02a991ef6e09}\label{classDungeon_1_1MapData_ac1fa137fe9ef41e6a4bb02a991ef6e09}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionTool@{IsPositionTool}}
+\index{IsPositionTool@{IsPositionTool}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionTool()}{IsPositionTool()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Tool (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_af8a059b391adb56f261e76b1a2462fe6}\label{classDungeon_1_1MapData_af8a059b391adb56f261e76b1a2462fe6}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionValid@{IsPositionValid}}
+\index{IsPositionValid@{IsPositionValid}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionValid()}{IsPositionValid()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Valid (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a156301dd3d5bf56481795d7fa0dac62c}\label{classDungeon_1_1MapData_a156301dd3d5bf56481795d7fa0dac62c}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionWalkable@{IsPositionWalkable}}
+\index{IsPositionWalkable@{IsPositionWalkable}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionWalkable()}{IsPositionWalkable()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Walkable (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a9db87fe2e681abaf9ceede1ee055c568}\label{classDungeon_1_1MapData_a9db87fe2e681abaf9ceede1ee055c568}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsPositionWall@{IsPositionWall}}
+\index{IsPositionWall@{IsPositionWall}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsPositionWall()}{IsPositionWall()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Position\+Wall (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a1bae4d29c81539e16f40d8ab086aefc1}\label{classDungeon_1_1MapData_a1bae4d29c81539e16f40d8ab086aefc1}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsTileEmpty@{IsTileEmpty}}
+\index{IsTileEmpty@{IsTileEmpty}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsTileEmpty()}{IsTileEmpty()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Tile\+Empty (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a5110cb0a2ad78e94898df7946d084c0b}\label{classDungeon_1_1MapData_a5110cb0a2ad78e94898df7946d084c0b}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!IsWalkable@{IsWalkable}}
+\index{IsWalkable@{IsWalkable}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{IsWalkable()}{IsWalkable()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Map\+Data\+::\+Is\+Walkable (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a535a875a27fc6dc4d9595c5b9db6a751}\label{classDungeon_1_1MapData_a535a875a27fc6dc4d9595c5b9db6a751}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!MapIndex2GamePosition@{MapIndex2GamePosition}}
+\index{MapIndex2GamePosition@{MapIndex2GamePosition}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{MapIndex2GamePosition()}{MapIndex2GamePosition()}}
+{\footnotesize\ttfamily glm\+::ivec2 Dungeon\+::\+Map\+Data\+::\+Map\+Index2\+Game\+Position (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{index }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_ad1814f47a0c591dd325d98b7d7368817}\label{classDungeon_1_1MapData_ad1814f47a0c591dd325d98b7d7368817}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!MoveEnemy@{MoveEnemy}}
+\index{MoveEnemy@{MoveEnemy}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{MoveEnemy()}{MoveEnemy()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Move\+Enemy (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{src,  }\item[{const std\+::size\+\_\+t}]{dest }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_aeda3bf1bd88d3a8e70d579e170b52fa4}\label{classDungeon_1_1MapData_aeda3bf1bd88d3a8e70d579e170b52fa4}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!RemoveEnemy@{RemoveEnemy}}
+\index{RemoveEnemy@{RemoveEnemy}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{RemoveEnemy()}{RemoveEnemy()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Remove\+Enemy (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a51261f043150d4ad5423543153c88374}\label{classDungeon_1_1MapData_a51261f043150d4ad5423543153c88374}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Remove\+Item (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a46865f6243695dfec963d643dedb223b}\label{classDungeon_1_1MapData_a46865f6243695dfec963d643dedb223b}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!RemoveTile@{RemoveTile}}
+\index{RemoveTile@{RemoveTile}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{RemoveTile()}{RemoveTile()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Remove\+Tile (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_ab7d814f61021e52be5c5e134b200645f}\label{classDungeon_1_1MapData_ab7d814f61021e52be5c5e134b200645f}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!SetLevelIndexMax@{SetLevelIndexMax}}
+\index{SetLevelIndexMax@{SetLevelIndexMax}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{SetLevelIndexMax()}{SetLevelIndexMax()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Set\+Level\+Index\+Max (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{level\+Index\+Max }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_a5f27254a7f7558a180462ec88fa28fbb}\label{classDungeon_1_1MapData_a5f27254a7f7558a180462ec88fa28fbb}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!SetLevelIndexMin@{SetLevelIndexMin}}
+\index{SetLevelIndexMin@{SetLevelIndexMin}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{SetLevelIndexMin()}{SetLevelIndexMin()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Set\+Level\+Index\+Min (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{level\+Index\+Min }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1MapData_ab81dd993dc6fb4c85552659bfcfb2a6d}\label{classDungeon_1_1MapData_ab81dd993dc6fb4c85552659bfcfb2a6d}} 
+\index{Dungeon::MapData@{Dungeon::MapData}!SetSize@{SetSize}}
+\index{SetSize@{SetSize}!Dungeon::MapData@{Dungeon::MapData}}
+\doxysubsubsection{\texorpdfstring{SetSize()}{SetSize()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Map\+Data\+::\+Set\+Size (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{size }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Dungeon/\mbox{\hyperlink{MapData_8h}{Map\+Data.\+h}}\item 
+src/\+Dungeon/\mbox{\hyperlink{MapData_8cpp}{Map\+Data.\+cpp}}\end{DoxyCompactItemize}

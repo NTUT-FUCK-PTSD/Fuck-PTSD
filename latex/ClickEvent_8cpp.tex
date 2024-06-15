@@ -1,0 +1,64 @@
+\hypertarget{ClickEvent_8cpp}{}\doxysection{src/\+Click\+Event.cpp File Reference}
+\label{ClickEvent_8cpp}\index{src/ClickEvent.cpp@{src/ClickEvent.cpp}}
+{\ttfamily \#include \char`\"{}App.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Game\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Util/\+Logger.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$Util/\+Input.\+hpp$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include \char`\"{}Dungeon/\+Enemy.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Event/\+Event.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Game/\+Systems/\+Hand\+Item.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Helper.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Music/\+Indicator\+Bar.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Music/\+Player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Music/\+Tempo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Systems/\+Hand\+Throw.\+h\char`\"{}}\newline
+Include dependency graph for Click\+Event.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ClickEvent_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structClickEventType}{Click\+Event\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{ClickEvent_8cpp_a4f952d1089c18aab2e3c20eded530420}{CET}} = \mbox{\hyperlink{structClickEventType}{Click\+Event\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{ClickEvent_8cpp_ad648106ec99621cbd996c8f569808ee1}{music\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{ClickEvent_8cpp_a4f952d1089c18aab2e3c20eded530420}\label{ClickEvent_8cpp_a4f952d1089c18aab2e3c20eded530420}} 
+\index{ClickEvent.cpp@{ClickEvent.cpp}!CET@{CET}}
+\index{CET@{CET}!ClickEvent.cpp@{ClickEvent.cpp}}
+\doxysubsubsection{\texorpdfstring{CET}{CET}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{ClickEvent_8cpp_a4f952d1089c18aab2e3c20eded530420}{CET}} =  \mbox{\hyperlink{structClickEventType}{Click\+Event\+Type}}}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ClickEvent_8cpp_ad648106ec99621cbd996c8f569808ee1}\label{ClickEvent_8cpp_ad648106ec99621cbd996c8f569808ee1}} 
+\index{ClickEvent.cpp@{ClickEvent.cpp}!musicTime@{musicTime}}
+\index{musicTime@{musicTime}!ClickEvent.cpp@{ClickEvent.cpp}}
+\doxysubsubsection{\texorpdfstring{musicTime}{musicTime}}
+{\footnotesize\ttfamily auto music\+Time}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= []() \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(\mbox{\hyperlink{classMusic_1_1Player_a9fb912898f42cb4b5d570111fe0cd866}{Music::Player::GetMusicTime}}() * 1000)}
+\DoxyCodeLine{           \% \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(\mbox{\hyperlink{classMusic_1_1Player_adaa82a1dc1a2d9ad1589ce6961aa4af8}{Music::Player::GetMusicLength}}() * 1000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

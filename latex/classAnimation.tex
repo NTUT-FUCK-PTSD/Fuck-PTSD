@@ -1,0 +1,135 @@
+\hypertarget{classAnimation}{}\doxysection{Animation Class Reference}
+\label{classAnimation}\index{Animation@{Animation}}
+
+
+{\ttfamily \#include $<$Animation.\+h$>$}
+
+
+
+Collaboration diagram for Animation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classAnimation__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAnimation_a6e0f243db5c19ebd5c82051dfc8a0249}{Animation}} (const glm\+::vec2 \&animation\+Position)
+\item 
+void \mbox{\hyperlink{classAnimation_afc0e28acfc7c75f2609646d58e046832}{Move\+By\+Time}} (const Util\+::ms\+\_\+t during\+Time\+Ms, const glm\+::vec2 \&destination)
+\item 
+void \mbox{\hyperlink{classAnimation_a8bfed50f72db004e1cdb6fd42005a727}{Move\+By\+Time}} (const Util\+::ms\+\_\+t during\+Time\+Ms, const glm\+::vec2 \&destination, const uint16\+\_\+t direction)
+\item 
+bool \mbox{\hyperlink{classAnimation_afc7995c88f3882506eaf1d6e5bbeb225}{Update\+Animation}} ()
+\item 
+bool \mbox{\hyperlink{classAnimation_a350cfe78aea89e8ff2f38688f19210ec}{Is\+Animating}} ()
+\item 
+glm\+::vec2 \mbox{\hyperlink{classAnimation_a8ea8cf0b8e957f6097d5f7b0e7c1d339}{Get\+Animation\+Position}} ()
+\item 
+float \mbox{\hyperlink{classAnimation_a4e385e17d7de0b8076f61868c1ead1fe}{Get\+Animation\+ZIndex}} ()
+\item 
+void \mbox{\hyperlink{classAnimation_ad59afba21b2d4f3c4dccb934750fbf62}{Update\+Game\+Position}} (const glm\+::vec2 \&game\+Position)
+\item 
+void \mbox{\hyperlink{classAnimation_a32adb2aa246d05efab0da43af1ace51c}{Set\+Animation\+Position}} (const glm\+::vec2 \&position)
+\item 
+glm\+::vec2 \mbox{\hyperlink{classAnimation_ae1a3e3762d6c1c077f2f5da6198a5de1}{Get\+Animation\+Destination}} ()
+\item 
+Util\+::ms\+\_\+t \mbox{\hyperlink{classAnimation_afa7524230130bda44a864e9bc3333f15}{Get\+Animation\+Start\+Ms}} ()
+\item 
+Util\+::ms\+\_\+t \mbox{\hyperlink{classAnimation_a30163485e24b783493230dbaeedf3d7b}{Get\+Animation\+During\+Time\+Ms}} ()
+\item 
+void \mbox{\hyperlink{classAnimation_a941be9fe9ea60e1175c6ad8a25c2d293}{Set\+Animation\+Stop}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAnimation_a6e0f243db5c19ebd5c82051dfc8a0249}\label{classAnimation_a6e0f243db5c19ebd5c82051dfc8a0249}} 
+\index{Animation@{Animation}!Animation@{Animation}}
+\index{Animation@{Animation}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{Animation()}{Animation()}}
+{\footnotesize\ttfamily Animation\+::\+Animation (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{animation\+Position }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAnimation_ae1a3e3762d6c1c077f2f5da6198a5de1}\label{classAnimation_ae1a3e3762d6c1c077f2f5da6198a5de1}} 
+\index{Animation@{Animation}!GetAnimationDestination@{GetAnimationDestination}}
+\index{GetAnimationDestination@{GetAnimationDestination}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{GetAnimationDestination()}{GetAnimationDestination()}}
+{\footnotesize\ttfamily glm\+::vec2 Animation\+::\+Get\+Animation\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a30163485e24b783493230dbaeedf3d7b}\label{classAnimation_a30163485e24b783493230dbaeedf3d7b}} 
+\index{Animation@{Animation}!GetAnimationDuringTimeMs@{GetAnimationDuringTimeMs}}
+\index{GetAnimationDuringTimeMs@{GetAnimationDuringTimeMs}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{GetAnimationDuringTimeMs()}{GetAnimationDuringTimeMs()}}
+{\footnotesize\ttfamily Util\+::ms\+\_\+t Animation\+::\+Get\+Animation\+During\+Time\+Ms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a8ea8cf0b8e957f6097d5f7b0e7c1d339}\label{classAnimation_a8ea8cf0b8e957f6097d5f7b0e7c1d339}} 
+\index{Animation@{Animation}!GetAnimationPosition@{GetAnimationPosition}}
+\index{GetAnimationPosition@{GetAnimationPosition}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{GetAnimationPosition()}{GetAnimationPosition()}}
+{\footnotesize\ttfamily glm\+::vec2 Animation\+::\+Get\+Animation\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_afa7524230130bda44a864e9bc3333f15}\label{classAnimation_afa7524230130bda44a864e9bc3333f15}} 
+\index{Animation@{Animation}!GetAnimationStartMs@{GetAnimationStartMs}}
+\index{GetAnimationStartMs@{GetAnimationStartMs}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{GetAnimationStartMs()}{GetAnimationStartMs()}}
+{\footnotesize\ttfamily Util\+::ms\+\_\+t Animation\+::\+Get\+Animation\+Start\+Ms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a4e385e17d7de0b8076f61868c1ead1fe}\label{classAnimation_a4e385e17d7de0b8076f61868c1ead1fe}} 
+\index{Animation@{Animation}!GetAnimationZIndex@{GetAnimationZIndex}}
+\index{GetAnimationZIndex@{GetAnimationZIndex}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{GetAnimationZIndex()}{GetAnimationZIndex()}}
+{\footnotesize\ttfamily float Animation\+::\+Get\+Animation\+ZIndex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a350cfe78aea89e8ff2f38688f19210ec}\label{classAnimation_a350cfe78aea89e8ff2f38688f19210ec}} 
+\index{Animation@{Animation}!IsAnimating@{IsAnimating}}
+\index{IsAnimating@{IsAnimating}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{IsAnimating()}{IsAnimating()}}
+{\footnotesize\ttfamily bool Animation\+::\+Is\+Animating (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_afc0e28acfc7c75f2609646d58e046832}\label{classAnimation_afc0e28acfc7c75f2609646d58e046832}} 
+\index{Animation@{Animation}!MoveByTime@{MoveByTime}}
+\index{MoveByTime@{MoveByTime}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{MoveByTime()}{MoveByTime()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Animation\+::\+Move\+By\+Time (\begin{DoxyParamCaption}\item[{const Util\+::ms\+\_\+t}]{during\+Time\+Ms,  }\item[{const glm\+::vec2 \&}]{destination }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a8bfed50f72db004e1cdb6fd42005a727}\label{classAnimation_a8bfed50f72db004e1cdb6fd42005a727}} 
+\index{Animation@{Animation}!MoveByTime@{MoveByTime}}
+\index{MoveByTime@{MoveByTime}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{MoveByTime()}{MoveByTime()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Animation\+::\+Move\+By\+Time (\begin{DoxyParamCaption}\item[{const Util\+::ms\+\_\+t}]{during\+Time\+Ms,  }\item[{const glm\+::vec2 \&}]{destination,  }\item[{const uint16\+\_\+t}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a32adb2aa246d05efab0da43af1ace51c}\label{classAnimation_a32adb2aa246d05efab0da43af1ace51c}} 
+\index{Animation@{Animation}!SetAnimationPosition@{SetAnimationPosition}}
+\index{SetAnimationPosition@{SetAnimationPosition}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{SetAnimationPosition()}{SetAnimationPosition()}}
+{\footnotesize\ttfamily void Animation\+::\+Set\+Animation\+Position (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_a941be9fe9ea60e1175c6ad8a25c2d293}\label{classAnimation_a941be9fe9ea60e1175c6ad8a25c2d293}} 
+\index{Animation@{Animation}!SetAnimationStop@{SetAnimationStop}}
+\index{SetAnimationStop@{SetAnimationStop}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{SetAnimationStop()}{SetAnimationStop()}}
+{\footnotesize\ttfamily void Animation\+::\+Set\+Animation\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_afc7995c88f3882506eaf1d6e5bbeb225}\label{classAnimation_afc7995c88f3882506eaf1d6e5bbeb225}} 
+\index{Animation@{Animation}!UpdateAnimation@{UpdateAnimation}}
+\index{UpdateAnimation@{UpdateAnimation}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{UpdateAnimation()}{UpdateAnimation()}}
+{\footnotesize\ttfamily bool Animation\+::\+Update\+Animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classAnimation_ad59afba21b2d4f3c4dccb934750fbf62}\label{classAnimation_ad59afba21b2d4f3c4dccb934750fbf62}} 
+\index{Animation@{Animation}!UpdateGamePosition@{UpdateGamePosition}}
+\index{UpdateGamePosition@{UpdateGamePosition}!Animation@{Animation}}
+\doxysubsubsection{\texorpdfstring{UpdateGamePosition()}{UpdateGamePosition()}}
+{\footnotesize\ttfamily void Animation\+::\+Update\+Game\+Position (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{game\+Position }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Settings/\mbox{\hyperlink{Animation_8h}{Animation.\+h}}\item 
+src/\+Settings/\mbox{\hyperlink{Animation_8cpp}{Animation.\+cpp}}\end{DoxyCompactItemize}

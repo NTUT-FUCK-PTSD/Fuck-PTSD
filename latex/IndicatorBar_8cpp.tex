@@ -1,0 +1,64 @@
+\hypertarget{IndicatorBar_8cpp}{}\doxysection{src/\+Music/\+Indicator\+Bar.cpp File Reference}
+\label{IndicatorBar_8cpp}\index{src/Music/IndicatorBar.cpp@{src/Music/IndicatorBar.cpp}}
+{\ttfamily \#include \char`\"{}Music/\+Indicator\+Bar.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$config.\+hpp$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include \char`\"{}Util/\+Logger.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}glm/fwd.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Animation.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Music/\+Music\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Music/\+Player.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Music/\+Tempo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}UGame\+Element.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Util/\+Time.\+hpp\char`\"{}}\newline
+Include dependency graph for Indicator\+Bar.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{IndicatorBar_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceMusic}{Music}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const auto \mbox{\hyperlink{IndicatorBar_8cpp_ae3eb1574dd317b1fc3eba1caecb8b6e6}{Tempo\+Interval\+Time}}
+\item 
+const auto \mbox{\hyperlink{IndicatorBar_8cpp_adb2447ce8573a2b071a6dfd4974f408e}{Move\+Speed}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{IndicatorBar_8cpp_adb2447ce8573a2b071a6dfd4974f408e}\label{IndicatorBar_8cpp_adb2447ce8573a2b071a6dfd4974f408e}} 
+\index{IndicatorBar.cpp@{IndicatorBar.cpp}!MoveSpeed@{MoveSpeed}}
+\index{MoveSpeed@{MoveSpeed}!IndicatorBar.cpp@{IndicatorBar.cpp}}
+\doxysubsubsection{\texorpdfstring{MoveSpeed}{MoveSpeed}}
+{\footnotesize\ttfamily const auto Move\+Speed}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= [](std::size\_t iis, std::size\_t tit, std::size\_t iit) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(iis) / \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(tit)) * iit;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{IndicatorBar_8cpp_ae3eb1574dd317b1fc3eba1caecb8b6e6}\label{IndicatorBar_8cpp_ae3eb1574dd317b1fc3eba1caecb8b6e6}} 
+\index{IndicatorBar.cpp@{IndicatorBar.cpp}!TempoIntervalTime@{TempoIntervalTime}}
+\index{TempoIntervalTime@{TempoIntervalTime}!IndicatorBar.cpp@{IndicatorBar.cpp}}
+\doxysubsubsection{\texorpdfstring{TempoIntervalTime}{TempoIntervalTime}}
+{\footnotesize\ttfamily const auto Tempo\+Interval\+Time}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= [](std::size\_t idx) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{classMusic_1_1Tempo_a555f92d8cd9fe4692b7843703802bd14}{Music::Tempo::GetBeatValue}}(idx + 1)}
+\DoxyCodeLine{           -\/ \mbox{\hyperlink{classMusic_1_1Tempo_a555f92d8cd9fe4692b7843703802bd14}{Music::Tempo::GetBeatValue}}(idx);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

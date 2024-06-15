@@ -1,0 +1,104 @@
+\hypertarget{classPlayers_1_1Tools}{}\doxysection{Players\+::Tools Class Reference}
+\label{classPlayers_1_1Tools}\index{Players::Tools@{Players::Tools}}
+
+
+{\ttfamily \#include $<$Tools.\+h$>$}
+
+
+
+Collaboration diagram for Players\+::Tools\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classPlayers_1_1Tools__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPlayers_1_1Tools_a491484b9256a8c84dad58227697b8b07}{Tools}} ()
+\item 
+void \mbox{\hyperlink{classPlayers_1_1Tools_a16ee9ee4617b101ca80009b41f5bce97}{Add\+Tool}} (const std\+::string \&name, const std\+::string \&type)
+\item 
+void \mbox{\hyperlink{classPlayers_1_1Tools_a3c313557477bbe27db50574c57635bbb}{Add\+Tool}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classIEquip}{IEquip}} $>$ \&ge, const std\+::string \&name, const std\+::string \&type)
+\item 
+void \mbox{\hyperlink{classPlayers_1_1Tools_a689df3cdb47d2b7b18ec2f0556da74ef}{Remove\+Tool}} (const std\+::string \&name, const std\+::string \&type)
+\item 
+void \mbox{\hyperlink{classPlayers_1_1Tools_ab88753fed8f7aec0315e996bc70dcf34}{Disappear\+Tool}} (bool visiable, const std\+::string \&name, const std\+::string \&type)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classIEquip}{IEquip}} $>$ \mbox{\hyperlink{classPlayers_1_1Tools_abdb3667972c2a46f552c26e214a248e5}{Get\+Weapon}} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classPlayers_1_1Tools_a5ef5a6ec0c0960b31b8c8a1e0046e972}{Get\+Tool}} (std\+::size\+\_\+t idx, const std\+::string \&expected\+Type)
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classIEquip}{IEquip}} $>$ $>$ \mbox{\hyperlink{classPlayers_1_1Tools_a0c6302f91a92c500552047b7801cfee0}{Get\+All\+Tools}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ \mbox{\hyperlink{classPlayers_1_1Tools_a08fe554a4e8b6cee79f88d2b28eaa717}{Get\+Game\+Object}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPlayers_1_1Tools_a491484b9256a8c84dad58227697b8b07}\label{classPlayers_1_1Tools_a491484b9256a8c84dad58227697b8b07}} 
+\index{Players::Tools@{Players::Tools}!Tools@{Tools}}
+\index{Tools@{Tools}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{Tools()}{Tools()}}
+{\footnotesize\ttfamily Players\+::\+Tools\+::\+Tools (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPlayers_1_1Tools_a3c313557477bbe27db50574c57635bbb}\label{classPlayers_1_1Tools_a3c313557477bbe27db50574c57635bbb}} 
+\index{Players::Tools@{Players::Tools}!AddTool@{AddTool}}
+\index{AddTool@{AddTool}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{AddTool()}{AddTool()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Players\+::\+Tools\+::\+Add\+Tool (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classIEquip}{IEquip}} $>$ \&}]{ge,  }\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_a16ee9ee4617b101ca80009b41f5bce97}\label{classPlayers_1_1Tools_a16ee9ee4617b101ca80009b41f5bce97}} 
+\index{Players::Tools@{Players::Tools}!AddTool@{AddTool}}
+\index{AddTool@{AddTool}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{AddTool()}{AddTool()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Players\+::\+Tools\+::\+Add\+Tool (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_ab88753fed8f7aec0315e996bc70dcf34}\label{classPlayers_1_1Tools_ab88753fed8f7aec0315e996bc70dcf34}} 
+\index{Players::Tools@{Players::Tools}!DisappearTool@{DisappearTool}}
+\index{DisappearTool@{DisappearTool}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{DisappearTool()}{DisappearTool()}}
+{\footnotesize\ttfamily void Players\+::\+Tools\+::\+Disappear\+Tool (\begin{DoxyParamCaption}\item[{bool}]{visiable,  }\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{type }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_a0c6302f91a92c500552047b7801cfee0}\label{classPlayers_1_1Tools_a0c6302f91a92c500552047b7801cfee0}} 
+\index{Players::Tools@{Players::Tools}!GetAllTools@{GetAllTools}}
+\index{GetAllTools@{GetAllTools}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{GetAllTools()}{GetAllTools()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classIEquip}{IEquip}} $>$ $>$ Players\+::\+Tools\+::\+Get\+All\+Tools (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_a08fe554a4e8b6cee79f88d2b28eaa717}\label{classPlayers_1_1Tools_a08fe554a4e8b6cee79f88d2b28eaa717}} 
+\index{Players::Tools@{Players::Tools}!GetGameObject@{GetGameObject}}
+\index{GetGameObject@{GetGameObject}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{GetGameObject()}{GetGameObject()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ Players\+::\+Tools\+::\+Get\+Game\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_a5ef5a6ec0c0960b31b8c8a1e0046e972}\label{classPlayers_1_1Tools_a5ef5a6ec0c0960b31b8c8a1e0046e972}} 
+\index{Players::Tools@{Players::Tools}!GetTool@{GetTool}}
+\index{GetTool@{GetTool}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{GetTool()}{GetTool()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$T$>$ Players\+::\+Tools\+::\+Get\+Tool (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{idx,  }\item[{const std\+::string \&}]{expected\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_abdb3667972c2a46f552c26e214a248e5}\label{classPlayers_1_1Tools_abdb3667972c2a46f552c26e214a248e5}} 
+\index{Players::Tools@{Players::Tools}!GetWeapon@{GetWeapon}}
+\index{GetWeapon@{GetWeapon}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{GetWeapon()}{GetWeapon()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classIEquip}{IEquip}} $>$ Players\+::\+Tools\+::\+Get\+Weapon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayers_1_1Tools_a689df3cdb47d2b7b18ec2f0556da74ef}\label{classPlayers_1_1Tools_a689df3cdb47d2b7b18ec2f0556da74ef}} 
+\index{Players::Tools@{Players::Tools}!RemoveTool@{RemoveTool}}
+\index{RemoveTool@{RemoveTool}!Players::Tools@{Players::Tools}}
+\doxysubsubsection{\texorpdfstring{RemoveTool()}{RemoveTool()}}
+{\footnotesize\ttfamily void Players\+::\+Tools\+::\+Remove\+Tool (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{type }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Game/\+Warehouse/\mbox{\hyperlink{Tools_8h}{Tools.\+h}}\item 
+src/\+Game/\+Warehouse/\mbox{\hyperlink{Tool_8cpp}{Tool.\+cpp}}\end{DoxyCompactItemize}

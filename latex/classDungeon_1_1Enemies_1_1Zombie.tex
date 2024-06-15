@@ -1,0 +1,130 @@
+\hypertarget{classDungeon_1_1Enemies_1_1Zombie}{}\doxysection{Dungeon\+::Enemies\+::Zombie Class Reference}
+\label{classDungeon_1_1Enemies_1_1Zombie}\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+
+
+{\ttfamily \#include $<$Zombie.\+h$>$}
+
+
+
+Inheritance diagram for Dungeon\+::Enemies\+::Zombie\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDungeon_1_1Enemies_1_1Zombie__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Dungeon\+::Enemies\+::Zombie\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDungeon_1_1Enemies_1_1Zombie__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a2d9b69f4c2dcdcadb1842511d6a80993}{Zombie}} (const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&\+\_\+\+Enemy, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$ map\+Data)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a75e8a8987a04409bc831043afa1f1743}{Move}} () override
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_ad9eb3bad534d6c62a7f35c32670219c9}{Struck}} (const std\+::size\+\_\+t damage) override
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a3adf68bf458ee921b89bacd951e086f5}{Update\+Face}} ()
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a508a8e7946fa816caea31060ee0b843d}{Snake\+Version}} (const std\+::size\+\_\+t priority, const bool direction)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a1666a80f2173925bb8eba3c12543bc2e}{Set\+Snake\+Head}} ()
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_ac157fe5088190058d374630ab0e58a08}{Set\+Previous\+Snake}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCSnake}{CSnake}} $>$ snake)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a679f6ba33b795d2c28a0637525852a18}{Set\+Next\+Snake}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCSnake}{CSnake}} $>$ snake)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCSnake}{CSnake}} $>$ \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_ad53756fad0415bbf0af897747a7c237b}{Get\+Snake}} () const
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_aab32af8045e481238613db109a90b593}{Set\+Bridge}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classKingCongaBridge}{King\+Conga\+Bridge}} $>$ bridge)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_a2d9b69f4c2dcdcadb1842511d6a80993}\label{classDungeon_1_1Enemies_1_1Zombie_a2d9b69f4c2dcdcadb1842511d6a80993}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!Zombie@{Zombie}}
+\index{Zombie@{Zombie}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{Zombie()}{Zombie()}}
+{\footnotesize\ttfamily Dungeon\+::\+Enemies\+::\+Zombie\+::\+Zombie (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&}]{\+\_\+\+Enemy,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$}]{map\+Data }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_ad53756fad0415bbf0af897747a7c237b}\label{classDungeon_1_1Enemies_1_1Zombie_ad53756fad0415bbf0af897747a7c237b}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!GetSnake@{GetSnake}}
+\index{GetSnake@{GetSnake}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{GetSnake()}{GetSnake()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classCSnake}{CSnake}}$>$ Dungeon\+::\+Enemies\+::\+Zombie\+::\+Get\+Snake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_a75e8a8987a04409bc831043afa1f1743}\label{classDungeon_1_1Enemies_1_1Zombie_a75e8a8987a04409bc831043afa1f1743}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!Move@{Move}}
+\index{Move@{Move}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classDungeon_1_1Enemy_a4f4352fbff7eac22425ee977b00dab23}{Dungeon\+::\+Enemy}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_aab32af8045e481238613db109a90b593}\label{classDungeon_1_1Enemies_1_1Zombie_aab32af8045e481238613db109a90b593}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!SetBridge@{SetBridge}}
+\index{SetBridge@{SetBridge}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{SetBridge()}{SetBridge()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Set\+Bridge (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classKingCongaBridge}{King\+Conga\+Bridge}} $>$}]{bridge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_a679f6ba33b795d2c28a0637525852a18}\label{classDungeon_1_1Enemies_1_1Zombie_a679f6ba33b795d2c28a0637525852a18}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!SetNextSnake@{SetNextSnake}}
+\index{SetNextSnake@{SetNextSnake}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{SetNextSnake()}{SetNextSnake()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Set\+Next\+Snake (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCSnake}{CSnake}} $>$}]{snake }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_ac157fe5088190058d374630ab0e58a08}\label{classDungeon_1_1Enemies_1_1Zombie_ac157fe5088190058d374630ab0e58a08}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!SetPreviousSnake@{SetPreviousSnake}}
+\index{SetPreviousSnake@{SetPreviousSnake}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{SetPreviousSnake()}{SetPreviousSnake()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Set\+Previous\+Snake (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classCSnake}{CSnake}} $>$}]{snake }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_a1666a80f2173925bb8eba3c12543bc2e}\label{classDungeon_1_1Enemies_1_1Zombie_a1666a80f2173925bb8eba3c12543bc2e}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!SetSnakeHead@{SetSnakeHead}}
+\index{SetSnakeHead@{SetSnakeHead}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{SetSnakeHead()}{SetSnakeHead()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Set\+Snake\+Head (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_a508a8e7946fa816caea31060ee0b843d}\label{classDungeon_1_1Enemies_1_1Zombie_a508a8e7946fa816caea31060ee0b843d}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!SnakeVersion@{SnakeVersion}}
+\index{SnakeVersion@{SnakeVersion}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{SnakeVersion()}{SnakeVersion()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Snake\+Version (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{priority,  }\item[{const bool}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_ad9eb3bad534d6c62a7f35c32670219c9}\label{classDungeon_1_1Enemies_1_1Zombie_ad9eb3bad534d6c62a7f35c32670219c9}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!Struck@{Struck}}
+\index{Struck@{Struck}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{Struck()}{Struck()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Struck (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classDungeon_1_1Enemy_a7b5c6aa54090afce6ffba15fd0092d91}{Dungeon\+::\+Enemy}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1Zombie_a3adf68bf458ee921b89bacd951e086f5}\label{classDungeon_1_1Enemies_1_1Zombie_a3adf68bf458ee921b89bacd951e086f5}} 
+\index{Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}!UpdateFace@{UpdateFace}}
+\index{UpdateFace@{UpdateFace}!Dungeon::Enemies::Zombie@{Dungeon::Enemies::Zombie}}
+\doxysubsubsection{\texorpdfstring{UpdateFace()}{UpdateFace()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+Zombie\+::\+Update\+Face (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Dungeon/\+Enemies/\mbox{\hyperlink{Zombie_8h}{Zombie.\+h}}\item 
+src/\+Dungeon/\+Enemies/\mbox{\hyperlink{Zombie_8cpp}{Zombie.\+cpp}}\end{DoxyCompactItemize}

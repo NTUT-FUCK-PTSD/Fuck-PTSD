@@ -1,0 +1,7 @@
+<map id="Dungeon::Tiles::ConductorWallPipe" name="Dungeon::Tiles::ConductorWallPipe">
+<area shape="rect" id="node1" title=" " alt="" coords="53,927,247,1033"/>
+<area shape="rect" id="node2" href="$classDungeon_1_1Tiles_1_1GeneralWall.html" title=" " alt="" coords="47,727,253,877"/>
+<area shape="rect" id="node3" href="$classDungeon_1_1Tile.html" title=" " alt="" coords="61,219,239,677"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,42,140,119"/>
+<area shape="rect" id="node5" href="$structDungeon_1_1s__Tile.html" title=" " alt="" coords="164,5,291,156"/>
+</map>

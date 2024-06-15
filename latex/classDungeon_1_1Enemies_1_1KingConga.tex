@@ -1,0 +1,133 @@
+\hypertarget{classDungeon_1_1Enemies_1_1KingConga}{}\doxysection{Dungeon\+::Enemies\+::King\+Conga Class Reference}
+\label{classDungeon_1_1Enemies_1_1KingConga}\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+
+
+{\ttfamily \#include $<$King\+Conga.\+h$>$}
+
+
+
+Inheritance diagram for Dungeon\+::Enemies\+::King\+Conga\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDungeon_1_1Enemies_1_1KingConga__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Dungeon\+::Enemies\+::King\+Conga\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDungeon_1_1Enemies_1_1KingConga__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782}{State}} \{ \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782a780ee166dfb2632c7d09a82a73e368be}{RIGHTSIT}}
+, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782acb2c95517b39d92e31d7f3e7552d982a}{LEFTSIT}}
+, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782abb2dfc184fa2e91373d3ff304cb01b8a}{WALK}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a8305b808247283153760535856fd5797}{King\+Conga}} (const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&\+\_\+\+Enemy, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$ map\+Data)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_acb551ac4deeaf455f7e4c2e37b6438d6}{Move}} () override
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a579cda77add5aecb9032f14a2412065e}{Struck}} (const std\+::size\+\_\+t damage) override
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a4ef843b401bd27ee3509b6de93a32e96}{Set\+State}} (const \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782}{State}} state)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classKingCongaBridge}{King\+Conga\+Bridge}} $>$ \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_acb5f17a6f3688b131f7c19980ab42f8f}{Get\+Bridge}} () const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a529fa10aabbb13a1ab7f58a38d005519}{Is\+Boss}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782}\label{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!State@{State}}
+\index{State@{State}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782}{Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHTSIT@{RIGHTSIT}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!RIGHTSIT@{RIGHTSIT}}}\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782a780ee166dfb2632c7d09a82a73e368be}\label{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782a780ee166dfb2632c7d09a82a73e368be}} 
+RIGHTSIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFTSIT@{LEFTSIT}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!LEFTSIT@{LEFTSIT}}}\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782acb2c95517b39d92e31d7f3e7552d982a}\label{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782acb2c95517b39d92e31d7f3e7552d982a}} 
+LEFTSIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WALK@{WALK}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!WALK@{WALK}}}\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782abb2dfc184fa2e91373d3ff304cb01b8a}\label{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782abb2dfc184fa2e91373d3ff304cb01b8a}} 
+WALK&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a8305b808247283153760535856fd5797}\label{classDungeon_1_1Enemies_1_1KingConga_a8305b808247283153760535856fd5797}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!KingConga@{KingConga}}
+\index{KingConga@{KingConga}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{KingConga()}{KingConga()}}
+{\footnotesize\ttfamily Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+King\+Conga (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&}]{\+\_\+\+Enemy,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$}]{map\+Data }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_acb5f17a6f3688b131f7c19980ab42f8f}\label{classDungeon_1_1Enemies_1_1KingConga_acb5f17a6f3688b131f7c19980ab42f8f}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!GetBridge@{GetBridge}}
+\index{GetBridge@{GetBridge}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{GetBridge()}{GetBridge()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classKingCongaBridge}{King\+Conga\+Bridge}}$>$ Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+Get\+Bridge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a529fa10aabbb13a1ab7f58a38d005519}\label{classDungeon_1_1Enemies_1_1KingConga_a529fa10aabbb13a1ab7f58a38d005519}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!IsBoss@{IsBoss}}
+\index{IsBoss@{IsBoss}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{IsBoss()}{IsBoss()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+Is\+Boss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classDungeon_1_1Enemy_af125a117deeb0f0464a3bdd20ec5d950}{Dungeon\+::\+Enemy}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_acb551ac4deeaf455f7e4c2e37b6438d6}\label{classDungeon_1_1Enemies_1_1KingConga_acb551ac4deeaf455f7e4c2e37b6438d6}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!Move@{Move}}
+\index{Move@{Move}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classDungeon_1_1Enemy_a4f4352fbff7eac22425ee977b00dab23}{Dungeon\+::\+Enemy}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a4ef843b401bd27ee3509b6de93a32e96}\label{classDungeon_1_1Enemies_1_1KingConga_a4ef843b401bd27ee3509b6de93a32e96}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!SetState@{SetState}}
+\index{SetState@{SetState}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+Set\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a36b05c76a472d4c74c9730a3da3de782}{State}}}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemies_1_1KingConga_a579cda77add5aecb9032f14a2412065e}\label{classDungeon_1_1Enemies_1_1KingConga_a579cda77add5aecb9032f14a2412065e}} 
+\index{Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}!Struck@{Struck}}
+\index{Struck@{Struck}!Dungeon::Enemies::KingConga@{Dungeon::Enemies::KingConga}}
+\doxysubsubsection{\texorpdfstring{Struck()}{Struck()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemies\+::\+King\+Conga\+::\+Struck (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classDungeon_1_1Enemy_a7b5c6aa54090afce6ffba15fd0092d91}{Dungeon\+::\+Enemy}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Dungeon/\+Enemies/\mbox{\hyperlink{KingConga_8h}{King\+Conga.\+h}}\item 
+src/\+Dungeon/\+Enemies/\mbox{\hyperlink{KingConga_8cpp}{King\+Conga.\+cpp}}\end{DoxyCompactItemize}

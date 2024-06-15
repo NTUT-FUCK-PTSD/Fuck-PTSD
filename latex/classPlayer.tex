@@ -1,0 +1,412 @@
+\hypertarget{classPlayer}{}\doxysection{Player Class Reference}
+\label{classPlayer}\index{Player@{Player}}
+
+
+{\ttfamily \#include $<$Player.\+h$>$}
+
+
+
+Inheritance diagram for Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classPlayer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{classPlayer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Direction}} \{ \newline
+\mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a8fb684778002e188c1ad364644afcf62}{UP}} = 0
+, \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a683319d9619529614f076103d96c2ffb}{RIGHT}}
+, \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a02f4439219b5171c3c2df29c9e42c8fb}{DOWN}}
+, \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936af5dcca8e4e5fc82198b5ef8f13b831f5}{LEFT}}
+, \newline
+\mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a334abbb73d93c2c0308ae25652cb521d}{NONE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPlayer_affe0cc3cb714f6deb4e62f0c0d3f1fd8}{Player}} ()
+\item 
+virtual \mbox{\hyperlink{classPlayer_a11017c0ed8a639f3b1308ab167fbeca2}{$\sim$\+Player}} ()=default
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ \mbox{\hyperlink{classPlayer_a0671d38698a3844baef2e87f29451cf9}{Get\+Game\+Element}} ()
+\item 
+glm\+::vec2 \mbox{\hyperlink{classPlayer_a0aaab6dae43abe5b8ebc011c637274ce}{Get\+Game\+Position}} () const
+\item 
+glm\+::vec2 \mbox{\hyperlink{classPlayer_ad2d440a6e05a08c362382d3e648ac6be}{Get\+Translation}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ \mbox{\hyperlink{classPlayer_a902c2539f362759164932c106dc63c9c}{Get\+Window\+Element}} ()
+\item 
+\mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Direction}} \mbox{\hyperlink{classPlayer_a8d46bf5e4e859ccf32c8f5d235c3f564}{Get\+Face\+To}} () const
+\item 
+\mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Direction}} \mbox{\hyperlink{classPlayer_aba92542dc0e97b097da0b5f6228b0266}{Get\+Direction}} () const
+\item 
+float \mbox{\hyperlink{classPlayer_a95cb78ef7a26469cf77d764087d75823}{Get\+ZIndex}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classPlayer_a1e7c21fd5204c4066890b3d992009ee4}{Get\+Health}} () const
+\item 
+void \mbox{\hyperlink{classPlayer_a7132efaef0c2f66a03b6f8cd451987ac}{Set\+Game\+Position}} (const glm\+::vec2 \&position)
+\item 
+void \mbox{\hyperlink{classPlayer_a83012a9eb2825c1090327f7fabdaf2d9}{Set\+Body\+Image\+Path}} (const std\+::string \&Path)
+\item 
+void \mbox{\hyperlink{classPlayer_a57ba1cb4fc5df14993fc31a5bf855b40}{Set\+Head\+Image\+Path}} (const std\+::string \&Path)
+\item 
+void \mbox{\hyperlink{classPlayer_abb83fdc41e88577c3f8afcf428f92d06}{Set\+Visible}} (bool status)
+\item 
+void \mbox{\hyperlink{classPlayer_ae2ecebb2bdcc9f7e7038bbae864896b4}{Set\+Face\+To}} (\mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Direction}} direction)
+\item 
+void \mbox{\hyperlink{classPlayer_a4b3e5b394029cebd8d82a416aab81e8c}{Set\+ZIndex}} (float index)
+\item 
+void \mbox{\hyperlink{classPlayer_a2e68902b34385fda6e49ba924e291347}{Set\+Head\+Image}} (const std\+::string \&path)
+\item 
+void \mbox{\hyperlink{classPlayer_a4748e8ea0bdcd397afe02f6e046a9bac}{Set\+Head\+Image}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} $>$ image)
+\item 
+void \mbox{\hyperlink{classPlayer_ae18b01ce254f959cd3435e60d0294018}{Set\+Body\+Image}} (const std\+::string \&path)
+\item 
+void \mbox{\hyperlink{classPlayer_a08eb673c69a1cec688e662da45728158}{Set\+Body\+Image}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} $>$ image)
+\item 
+void \mbox{\hyperlink{classPlayer_abf3bf34f0da86b730b58ed193cbd5718}{gain\+Coin}} (std\+::size\+\_\+t number)
+\item 
+void \mbox{\hyperlink{classPlayer_ac973feac109be6822d695222ba7ab1f5}{lost\+Coin}} (std\+::size\+\_\+t number)
+\item 
+void \mbox{\hyperlink{classPlayer_a1ea66ca20b996c0b1dc4666a6c62ced4}{reset\+Coin}} ()
+\item 
+void \mbox{\hyperlink{classPlayer_ae4330fb4a5d22ff665f2661118a7dcb2}{gain\+Diamond}} (std\+::size\+\_\+t number)
+\item 
+void \mbox{\hyperlink{classPlayer_af195cf8f5d0deff13dda2cd9d388766f}{lost\+Diamond}} (std\+::size\+\_\+t number)
+\item 
+void \mbox{\hyperlink{classPlayer_a77ffe4980ba173679b065e85567b7efb}{lost\+HP}} (std\+::size\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classPlayer_ae1c4cc067af816de1b43fbe621f9828b}{gain\+Heart}} (std\+::size\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classPlayer_a9e112ada434c7de874f08f3a4b177da4}{get\+HP}} (std\+::size\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classPlayer_ab3e9b107b9e52847c293628df6a3c082}{reset\+HP}} ()
+\item 
+void \mbox{\hyperlink{classPlayer_abf9920db59fdaaa9887eda435c4d9907}{use\+Default\+Settings\+Tool}} ()
+\item 
+void \mbox{\hyperlink{classPlayer_a05b60cac1922c5be5c1be16baffa4497}{Update}} ()
+\item 
+void \mbox{\hyperlink{classPlayer_ad9546ab6845495354a6f0b248a551e03}{Update\+Coin}} (const unsigned long during\+Time\+Ms, const glm\+::vec2 \&destination, const uint16\+\_\+t direction)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayers_1_1Tools}{Players\+::\+Tools}} $>$ \mbox{\hyperlink{classPlayer_a24e209d97fb3e26cd840cec846855d3e}{Get\+Tool\+Mod}} ()
+\item 
+void \mbox{\hyperlink{classPlayer_afc0fbe7f9b205b01b3755646c1954c5d}{Prepare\+Throw\+Out}} (bool state)
+\item 
+void \mbox{\hyperlink{classPlayer_a09f5b47bc4d1c2c244fdb3d5f7a9d789}{Move\+By\+Time}} (const unsigned long during\+Time\+Ms, const glm\+::vec2 \&destination, const uint16\+\_\+t direction)
+\item 
+void \mbox{\hyperlink{classPlayer_a4dfa432e68e54b4e95249d4cc1a8c98e}{Revert\+Animation}} ()
+\item 
+void \mbox{\hyperlink{classPlayer_a9c9d62ab11623a9cce12824a21d95a47}{Invincible\+Mode}} (bool mode)
+\item 
+bool \mbox{\hyperlink{classPlayer_abca68b6c2dceaef25ee6699a98140799}{Get\+Invincible\+Mode}} () const
+\item 
+void \mbox{\hyperlink{classPlayer_a0bd4223151e2e890530df0f75fd97bf1}{One\+Shot\+Mode}} (bool mode)
+\item 
+bool \mbox{\hyperlink{classPlayer_af002d2675ec5f647d440cb02c36f87fa}{Get\+One\+Shot\+Mode}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classPlayer_a9b8736d644ec58430e2d09630d38e0d6}{Get\+Damage}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}\label{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}} 
+\index{Player@{Player}!Direction@{Direction}}
+\index{Direction@{Direction}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Direction}{Direction}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UP@{UP}!Player@{Player}}\index{Player@{Player}!UP@{UP}}}\mbox{\Hypertarget{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a8fb684778002e188c1ad364644afcf62}\label{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a8fb684778002e188c1ad364644afcf62}} 
+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHT@{RIGHT}!Player@{Player}}\index{Player@{Player}!RIGHT@{RIGHT}}}\mbox{\Hypertarget{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a683319d9619529614f076103d96c2ffb}\label{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a683319d9619529614f076103d96c2ffb}} 
+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOWN@{DOWN}!Player@{Player}}\index{Player@{Player}!DOWN@{DOWN}}}\mbox{\Hypertarget{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a02f4439219b5171c3c2df29c9e42c8fb}\label{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a02f4439219b5171c3c2df29c9e42c8fb}} 
+DOWN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFT@{LEFT}!Player@{Player}}\index{Player@{Player}!LEFT@{LEFT}}}\mbox{\Hypertarget{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936af5dcca8e4e5fc82198b5ef8f13b831f5}\label{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936af5dcca8e4e5fc82198b5ef8f13b831f5}} 
+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!Player@{Player}}\index{Player@{Player}!NONE@{NONE}}}\mbox{\Hypertarget{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a334abbb73d93c2c0308ae25652cb521d}\label{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936a334abbb73d93c2c0308ae25652cb521d}} 
+NONE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPlayer_affe0cc3cb714f6deb4e62f0c0d3f1fd8}\label{classPlayer_affe0cc3cb714f6deb4e62f0c0d3f1fd8}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classPlayer_a11017c0ed8a639f3b1308ab167fbeca2}\label{classPlayer_a11017c0ed8a639f3b1308ab167fbeca2}} 
+\index{Player@{Player}!````~Player@{$\sim$Player}}
+\index{````~Player@{$\sim$Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{$\sim$Player()}{~Player()}}
+{\footnotesize\ttfamily virtual Player\+::$\sim$\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPlayer_abf3bf34f0da86b730b58ed193cbd5718}\label{classPlayer_abf3bf34f0da86b730b58ed193cbd5718}} 
+\index{Player@{Player}!gainCoin@{gainCoin}}
+\index{gainCoin@{gainCoin}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{gainCoin()}{gainCoin()}}
+{\footnotesize\ttfamily void Player\+::gain\+Coin (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ae4330fb4a5d22ff665f2661118a7dcb2}\label{classPlayer_ae4330fb4a5d22ff665f2661118a7dcb2}} 
+\index{Player@{Player}!gainDiamond@{gainDiamond}}
+\index{gainDiamond@{gainDiamond}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{gainDiamond()}{gainDiamond()}}
+{\footnotesize\ttfamily void Player\+::gain\+Diamond (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ae1c4cc067af816de1b43fbe621f9828b}\label{classPlayer_ae1c4cc067af816de1b43fbe621f9828b}} 
+\index{Player@{Player}!gainHeart@{gainHeart}}
+\index{gainHeart@{gainHeart}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{gainHeart()}{gainHeart()}}
+{\footnotesize\ttfamily void Player\+::gain\+Heart (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a9b8736d644ec58430e2d09630d38e0d6}\label{classPlayer_a9b8736d644ec58430e2d09630d38e0d6}} 
+\index{Player@{Player}!GetDamage@{GetDamage}}
+\index{GetDamage@{GetDamage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetDamage()}{GetDamage()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Player\+::\+Get\+Damage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_aba92542dc0e97b097da0b5f6228b0266}\label{classPlayer_aba92542dc0e97b097da0b5f6228b0266}} 
+\index{Player@{Player}!GetDirection@{GetDirection}}
+\index{GetDirection@{GetDirection}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetDirection()}{GetDirection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} Player\+::\+Get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a8d46bf5e4e859ccf32c8f5d235c3f564}\label{classPlayer_a8d46bf5e4e859ccf32c8f5d235c3f564}} 
+\index{Player@{Player}!GetFaceTo@{GetFaceTo}}
+\index{GetFaceTo@{GetFaceTo}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetFaceTo()}{GetFaceTo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} Player\+::\+Get\+Face\+To (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a0671d38698a3844baef2e87f29451cf9}\label{classPlayer_a0671d38698a3844baef2e87f29451cf9}} 
+\index{Player@{Player}!GetGameElement@{GetGameElement}}
+\index{GetGameElement@{GetGameElement}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetGameElement()}{GetGameElement()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ Player\+::\+Get\+Game\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a0aaab6dae43abe5b8ebc011c637274ce}\label{classPlayer_a0aaab6dae43abe5b8ebc011c637274ce}} 
+\index{Player@{Player}!GetGamePosition@{GetGamePosition}}
+\index{GetGamePosition@{GetGamePosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetGamePosition()}{GetGamePosition()}}
+{\footnotesize\ttfamily glm\+::vec2 Player\+::\+Get\+Game\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a1e7c21fd5204c4066890b3d992009ee4}\label{classPlayer_a1e7c21fd5204c4066890b3d992009ee4}} 
+\index{Player@{Player}!GetHealth@{GetHealth}}
+\index{GetHealth@{GetHealth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetHealth()}{GetHealth()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Player\+::\+Get\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a9e112ada434c7de874f08f3a4b177da4}\label{classPlayer_a9e112ada434c7de874f08f3a4b177da4}} 
+\index{Player@{Player}!getHP@{getHP}}
+\index{getHP@{getHP}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getHP()}{getHP()}}
+{\footnotesize\ttfamily void Player\+::get\+HP (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_abca68b6c2dceaef25ee6699a98140799}\label{classPlayer_abca68b6c2dceaef25ee6699a98140799}} 
+\index{Player@{Player}!GetInvincibleMode@{GetInvincibleMode}}
+\index{GetInvincibleMode@{GetInvincibleMode}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetInvincibleMode()}{GetInvincibleMode()}}
+{\footnotesize\ttfamily bool Player\+::\+Get\+Invincible\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_af002d2675ec5f647d440cb02c36f87fa}\label{classPlayer_af002d2675ec5f647d440cb02c36f87fa}} 
+\index{Player@{Player}!GetOneShotMode@{GetOneShotMode}}
+\index{GetOneShotMode@{GetOneShotMode}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetOneShotMode()}{GetOneShotMode()}}
+{\footnotesize\ttfamily bool Player\+::\+Get\+One\+Shot\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a24e209d97fb3e26cd840cec846855d3e}\label{classPlayer_a24e209d97fb3e26cd840cec846855d3e}} 
+\index{Player@{Player}!GetToolMod@{GetToolMod}}
+\index{GetToolMod@{GetToolMod}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetToolMod()}{GetToolMod()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classPlayers_1_1Tools}{Players\+::\+Tools}} $>$ Player\+::\+Get\+Tool\+Mod (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ad2d440a6e05a08c362382d3e648ac6be}\label{classPlayer_ad2d440a6e05a08c362382d3e648ac6be}} 
+\index{Player@{Player}!GetTranslation@{GetTranslation}}
+\index{GetTranslation@{GetTranslation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetTranslation()}{GetTranslation()}}
+{\footnotesize\ttfamily glm\+::vec2 Player\+::\+Get\+Translation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a902c2539f362759164932c106dc63c9c}\label{classPlayer_a902c2539f362759164932c106dc63c9c}} 
+\index{Player@{Player}!GetWindowElement@{GetWindowElement}}
+\index{GetWindowElement@{GetWindowElement}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetWindowElement()}{GetWindowElement()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ Player\+::\+Get\+Window\+Element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a95cb78ef7a26469cf77d764087d75823}\label{classPlayer_a95cb78ef7a26469cf77d764087d75823}} 
+\index{Player@{Player}!GetZIndex@{GetZIndex}}
+\index{GetZIndex@{GetZIndex}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{GetZIndex()}{GetZIndex()}}
+{\footnotesize\ttfamily float Player\+::\+Get\+ZIndex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classPlayer_a9c9d62ab11623a9cce12824a21d95a47}\label{classPlayer_a9c9d62ab11623a9cce12824a21d95a47}} 
+\index{Player@{Player}!InvincibleMode@{InvincibleMode}}
+\index{InvincibleMode@{InvincibleMode}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{InvincibleMode()}{InvincibleMode()}}
+{\footnotesize\ttfamily void Player\+::\+Invincible\+Mode (\begin{DoxyParamCaption}\item[{bool}]{mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ac973feac109be6822d695222ba7ab1f5}\label{classPlayer_ac973feac109be6822d695222ba7ab1f5}} 
+\index{Player@{Player}!lostCoin@{lostCoin}}
+\index{lostCoin@{lostCoin}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{lostCoin()}{lostCoin()}}
+{\footnotesize\ttfamily void Player\+::lost\+Coin (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_af195cf8f5d0deff13dda2cd9d388766f}\label{classPlayer_af195cf8f5d0deff13dda2cd9d388766f}} 
+\index{Player@{Player}!lostDiamond@{lostDiamond}}
+\index{lostDiamond@{lostDiamond}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{lostDiamond()}{lostDiamond()}}
+{\footnotesize\ttfamily void Player\+::lost\+Diamond (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a77ffe4980ba173679b065e85567b7efb}\label{classPlayer_a77ffe4980ba173679b065e85567b7efb}} 
+\index{Player@{Player}!lostHP@{lostHP}}
+\index{lostHP@{lostHP}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{lostHP()}{lostHP()}}
+{\footnotesize\ttfamily void Player\+::lost\+HP (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a09f5b47bc4d1c2c244fdb3d5f7a9d789}\label{classPlayer_a09f5b47bc4d1c2c244fdb3d5f7a9d789}} 
+\index{Player@{Player}!MoveByTime@{MoveByTime}}
+\index{MoveByTime@{MoveByTime}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{MoveByTime()}{MoveByTime()}}
+{\footnotesize\ttfamily void Player\+::\+Move\+By\+Time (\begin{DoxyParamCaption}\item[{const unsigned long}]{during\+Time\+Ms,  }\item[{const glm\+::vec2 \&}]{destination,  }\item[{const uint16\+\_\+t}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a0bd4223151e2e890530df0f75fd97bf1}\label{classPlayer_a0bd4223151e2e890530df0f75fd97bf1}} 
+\index{Player@{Player}!OneShotMode@{OneShotMode}}
+\index{OneShotMode@{OneShotMode}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{OneShotMode()}{OneShotMode()}}
+{\footnotesize\ttfamily void Player\+::\+One\+Shot\+Mode (\begin{DoxyParamCaption}\item[{bool}]{mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_afc0fbe7f9b205b01b3755646c1954c5d}\label{classPlayer_afc0fbe7f9b205b01b3755646c1954c5d}} 
+\index{Player@{Player}!PrepareThrowOut@{PrepareThrowOut}}
+\index{PrepareThrowOut@{PrepareThrowOut}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{PrepareThrowOut()}{PrepareThrowOut()}}
+{\footnotesize\ttfamily void Player\+::\+Prepare\+Throw\+Out (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a1ea66ca20b996c0b1dc4666a6c62ced4}\label{classPlayer_a1ea66ca20b996c0b1dc4666a6c62ced4}} 
+\index{Player@{Player}!resetCoin@{resetCoin}}
+\index{resetCoin@{resetCoin}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{resetCoin()}{resetCoin()}}
+{\footnotesize\ttfamily void Player\+::reset\+Coin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ab3e9b107b9e52847c293628df6a3c082}\label{classPlayer_ab3e9b107b9e52847c293628df6a3c082}} 
+\index{Player@{Player}!resetHP@{resetHP}}
+\index{resetHP@{resetHP}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{resetHP()}{resetHP()}}
+{\footnotesize\ttfamily void Player\+::reset\+HP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a4dfa432e68e54b4e95249d4cc1a8c98e}\label{classPlayer_a4dfa432e68e54b4e95249d4cc1a8c98e}} 
+\index{Player@{Player}!RevertAnimation@{RevertAnimation}}
+\index{RevertAnimation@{RevertAnimation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{RevertAnimation()}{RevertAnimation()}}
+{\footnotesize\ttfamily void Player\+::\+Revert\+Animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ae18b01ce254f959cd3435e60d0294018}\label{classPlayer_ae18b01ce254f959cd3435e60d0294018}} 
+\index{Player@{Player}!SetBodyImage@{SetBodyImage}}
+\index{SetBodyImage@{SetBodyImage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetBodyImage()}{SetBodyImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Body\+Image (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a08eb673c69a1cec688e662da45728158}\label{classPlayer_a08eb673c69a1cec688e662da45728158}} 
+\index{Player@{Player}!SetBodyImage@{SetBodyImage}}
+\index{SetBodyImage@{SetBodyImage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetBodyImage()}{SetBodyImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Body\+Image (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} $>$}]{image }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a83012a9eb2825c1090327f7fabdaf2d9}\label{classPlayer_a83012a9eb2825c1090327f7fabdaf2d9}} 
+\index{Player@{Player}!SetBodyImagePath@{SetBodyImagePath}}
+\index{SetBodyImagePath@{SetBodyImagePath}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetBodyImagePath()}{SetBodyImagePath()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Body\+Image\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPlayer_ae2ecebb2bdcc9f7e7038bbae864896b4}\label{classPlayer_ae2ecebb2bdcc9f7e7038bbae864896b4}} 
+\index{Player@{Player}!SetFaceTo@{SetFaceTo}}
+\index{SetFaceTo@{SetFaceTo}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetFaceTo()}{SetFaceTo()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Face\+To (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Direction}}}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a7132efaef0c2f66a03b6f8cd451987ac}\label{classPlayer_a7132efaef0c2f66a03b6f8cd451987ac}} 
+\index{Player@{Player}!SetGamePosition@{SetGamePosition}}
+\index{SetGamePosition@{SetGamePosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetGamePosition()}{SetGamePosition()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Game\+Position (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a2e68902b34385fda6e49ba924e291347}\label{classPlayer_a2e68902b34385fda6e49ba924e291347}} 
+\index{Player@{Player}!SetHeadImage@{SetHeadImage}}
+\index{SetHeadImage@{SetHeadImage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetHeadImage()}{SetHeadImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Head\+Image (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a4748e8ea0bdcd397afe02f6e046a9bac}\label{classPlayer_a4748e8ea0bdcd397afe02f6e046a9bac}} 
+\index{Player@{Player}!SetHeadImage@{SetHeadImage}}
+\index{SetHeadImage@{SetHeadImage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetHeadImage()}{SetHeadImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Head\+Image (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} $>$}]{image }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a57ba1cb4fc5df14993fc31a5bf855b40}\label{classPlayer_a57ba1cb4fc5df14993fc31a5bf855b40}} 
+\index{Player@{Player}!SetHeadImagePath@{SetHeadImagePath}}
+\index{SetHeadImagePath@{SetHeadImagePath}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetHeadImagePath()}{SetHeadImagePath()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Head\+Image\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPlayer_abb83fdc41e88577c3f8afcf428f92d06}\label{classPlayer_abb83fdc41e88577c3f8afcf428f92d06}} 
+\index{Player@{Player}!SetVisible@{SetVisible}}
+\index{SetVisible@{SetVisible}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetVisible()}{SetVisible()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+Visible (\begin{DoxyParamCaption}\item[{bool}]{status }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a4b3e5b394029cebd8d82a416aab81e8c}\label{classPlayer_a4b3e5b394029cebd8d82a416aab81e8c}} 
+\index{Player@{Player}!SetZIndex@{SetZIndex}}
+\index{SetZIndex@{SetZIndex}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetZIndex()}{SetZIndex()}}
+{\footnotesize\ttfamily void Player\+::\+Set\+ZIndex (\begin{DoxyParamCaption}\item[{float}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_a05b60cac1922c5be5c1be16baffa4497}\label{classPlayer_a05b60cac1922c5be5c1be16baffa4497}} 
+\index{Player@{Player}!Update@{Update}}
+\index{Update@{Update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Player\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_ad9546ab6845495354a6f0b248a551e03}\label{classPlayer_ad9546ab6845495354a6f0b248a551e03}} 
+\index{Player@{Player}!UpdateCoin@{UpdateCoin}}
+\index{UpdateCoin@{UpdateCoin}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{UpdateCoin()}{UpdateCoin()}}
+{\footnotesize\ttfamily void Player\+::\+Update\+Coin (\begin{DoxyParamCaption}\item[{const unsigned long}]{during\+Time\+Ms,  }\item[{const glm\+::vec2 \&}]{destination,  }\item[{const uint16\+\_\+t}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classPlayer_abf9920db59fdaaa9887eda435c4d9907}\label{classPlayer_abf9920db59fdaaa9887eda435c4d9907}} 
+\index{Player@{Player}!useDefaultSettingsTool@{useDefaultSettingsTool}}
+\index{useDefaultSettingsTool@{useDefaultSettingsTool}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{useDefaultSettingsTool()}{useDefaultSettingsTool()}}
+{\footnotesize\ttfamily void Player\+::use\+Default\+Settings\+Tool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Game/\mbox{\hyperlink{Game_2Player_8h}{Player.\+h}}\item 
+src/\+Game/\mbox{\hyperlink{Game_2Player_8cpp}{Player.\+cpp}}\end{DoxyCompactItemize}

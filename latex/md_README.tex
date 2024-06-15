@@ -1,0 +1,144 @@
+
+\begin{DoxyItemize}
+\item {\bfseries{這是期末報告的md版本，此外\+Release中有編譯好的\+Windows版本可以直接執行}}
+\end{DoxyItemize}
+
+{\bfseries{國立臺北科技大學 2024 資工系物件導向程式設計實習期末報告}}
+
+{\bfseries{第 P03 組}}
+
+
+\begin{DoxyItemize}
+\item 111590028 張睿恩
+\item 111590009 陳世昂
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md2}{}\doxysection{目錄}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item \href{\#\%E5\%B0\%88\%E6\%A1\%88\%E7\%B0\%A1\%E4\%BB\%8B}{\texttt{ 專案簡介}}
+\begin{DoxyItemize}
+\item \href{\#\%E9\%81\%8A\%E6\%88\%B2\%E7\%B0\%A1\%E4\%BB\%8B}{\texttt{ 遊戲簡介}}
+\item \href{\#\%E7\%B5\%84\%E5\%88\%A5\%E5\%88\%86\%E5\%B7\%A5}{\texttt{ 組別分工}}
+\end{DoxyItemize}
+\item \href{\#\%E9\%81\%8A\%E6\%88\%B2\%E4\%BB\%8B\%E7\%B4\%B9}{\texttt{ 遊戲介紹}}
+\begin{DoxyItemize}
+\item \href{\#\%E9\%81\%8A\%E6\%88\%B2\%E8\%A6\%8F\%E5\%89\%87}{\texttt{ 遊戲規則}}
+\item \href{\#\%E9\%81\%8A\%E6\%88\%B2\%E7\%95\%AB\%E9\%9D\%A2}{\texttt{ 遊戲畫面}}
+\end{DoxyItemize}
+\item \href{\#\%E7\%A8\%8B\%E5\%BC\%8F\%E8\%A8\%AD\%E8\%A8\%88}{\texttt{ 程式設計}}
+\begin{DoxyItemize}
+\item \href{\#\%E7\%A8\%8B\%E5\%BC\%8F\%E6\%9E\%B6\%E6\%A7\%8B}{\texttt{ 程式架構}}
+\item \href{\#\%E7\%A8\%8B\%E5\%BC\%8F\%E6\%8A\%80\%E8\%A1\%93}{\texttt{ 程式技術}}
+\end{DoxyItemize}
+\item \href{\#\%E7\%B5\%90\%E8\%AA\%9E}{\texttt{ 結語}}
+\begin{DoxyItemize}
+\item \href{\#\%E5\%95\%8F\%E9\%A1\%8C\%E5\%8F\%8A\%E8\%A7\%A3\%E6\%B1\%BA\%E6\%96\%B9\%E6\%B3\%95}{\texttt{ 問題及解決方法}}
+\item \href{\#\%E8\%B2\%A2\%E7\%8D\%BB\%E6\%AF\%94\%E4\%BE\%8B}{\texttt{ 貢獻比例}}
+\item \href{\#\%E8\%87\%AA\%E6\%88\%91\%E6\%AA\%A2\%E6\%A0\%B8\%E8\%A1\%A8}{\texttt{ 自我檢核表}}
+\item \href{\#\%E6\%94\%B6\%E7\%A9\%AB}{\texttt{ 收穫}}
+\item \href{\#\%E5\%BF\%83\%E5\%BE\%97\%E6\%84\%9F\%E6\%83\%B3}{\texttt{ 心得、感想}}
+\item \href{\#\%E5\%B0\%8D\%E6\%96\%BC\%E6\%9C\%AC\%E8\%AA\%B2\%E7\%A8\%8B\%E7\%9A\%84\%E5\%BB\%BA\%E8\%AD\%B0}{\texttt{ 對於本課程的建議}}
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysection{專案簡介}\label{md_README_autotoc_md3}
+\hypertarget{md_README_autotoc_md4}{}\doxysubsection{遊戲簡介}\label{md_README_autotoc_md4}
+Crypt of the Necro\+Dancer 是一款結合 Rogue-\/like 和音樂遊戲元素的遊戲。玩家需要在隨機生成的地下城中，跟隨音樂節奏來移動和戰鬥。這款遊戲的獨特之處在於，玩家的所有動作都必須跟隨音樂的節奏，這不僅增加了遊戲的挑戰性，還讓遊戲充滿了音樂的樂趣。
+
+遊戲的原版包含四個主要區域，每個區域都有其獨特的地圖生成機率和 Boss 強度。此外，\+DLC 版本還添加了一個額外的區域。在本專案中，我們實現了其中一個區域，確保了遊戲的核心玩法得以呈現。\hypertarget{md_README_autotoc_md5}{}\doxysubsection{組別分工}\label{md_README_autotoc_md5}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 學號/姓名   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 負責項目    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 學號/姓名   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 負責項目    }\\\cline{1-2}
+\endhead
+111590028 張睿恩   &地圖讀取、\+Tiles 和 Enemy 產生    \\\cline{1-2}
+111590009 陳世昂   &音樂節奏處理、\+UI 控制   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md6}{}\doxysection{遊戲介紹}\label{md_README_autotoc_md6}
+\hypertarget{md_README_autotoc_md7}{}\doxysubsection{遊戲規則}\label{md_README_autotoc_md7}
+在 Crypt of the Necro\+Dancer 中，玩家的主要目標是到達下一關。由於遊戲過程中無法回復生命值，玩家需要在不受傷的情況下盡量前進。在每一關的最後，玩家需要擊敗 mini\+Boss 才能開啟前往下一關的樓梯。
+
+我們在本次專案中實現了 Zone1 的三個關卡（\+Zone1\+\_\+1、\+Zone1\+\_\+2、\+Zone1\+\_\+3），以及 Zone1 的 Boss 關卡 King Conga。\+King Conga 是一個非常有特色的 Boss，具備獨特的攻擊模式和挑戰性。\hypertarget{md_README_autotoc_md8}{}\doxysubsection{遊戲畫面}\label{md_README_autotoc_md8}
+以下是遊戲的一些主要功能鍵說明，包含了常規操作和 Debug 用的按鍵：
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 按鍵   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 功能    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 按鍵   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 功能    }\\\cline{1-2}
+\endhead
+WASD   &控制角色操作    \\\cline{1-2}
+Esc   &退出遊戲    \\\cline{1-2}
+R   &重新開始遊戲    \\\cline{1-2}
+{\bfseries{Debug Mode}}   &\\\cline{1-2}
+B   &前往 Boss 關卡    \\\cline{1-2}
+I   &無敵模式    \\\cline{1-2}
+M   &無節奏模式（太快會導致畫面卡頓，但功能正常）~\newline
+備註\+:會暫停全域 Tempo 更新    \\\cline{1-2}
+N   &前往下一關卡    \\\cline{1-2}
+O   &一拳超人模式（攻擊力 999）   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md9}{}\doxysection{程式設計}\label{md_README_autotoc_md9}
+\hypertarget{md_README_autotoc_md10}{}\doxysubsection{程式架構}\label{md_README_autotoc_md10}
+
+\begin{DoxyItemize}
+\item 程式架構介紹的內容可以在這裡補充，說明整個程式的模組劃分和主要的程式流。
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md11}{}\doxysubsection{程式技術}\label{md_README_autotoc_md11}
+在這次實作中學習與研究到了許多技術，讓這個遊戲的開發更加順利，以下是我們一些重要的技術：\hypertarget{md_README_autotoc_md12}{}\doxysubsubsection{事件處理(\+Event)}\label{md_README_autotoc_md12}
+由於我們的遊戲中擁有大量的互動事件，例如怪物攻擊玩家、玩家攻擊怪物、玩家移動、節奏移動等事件，這些事件往往需要雙方進行控制。我們採用了一個事件庫來處理這類事件，這樣可以減少程式的相互依賴性，提高可讀性及可維護性。\hypertarget{md_README_autotoc_md13}{}\doxysubsubsection{路徑搜尋(\+A$\ast$演算法)}\label{md_README_autotoc_md13}
+在怪物搜尋路徑的地方，我們採用 A$\ast$ 演算法完成，因為 A$\ast$ 是在這裡最適合我們的演算法之一，並且有著不錯的效率。\hypertarget{md_README_autotoc_md14}{}\doxysubsubsection{視野計算(布雷森漢姆直線演算法)}\label{md_README_autotoc_md14}
+在視野的處理上，我們使用了 Bresenham\textquotesingle{}s line algorithm，因為我們的視野是以一個方格去處理，因此使用這個演算法的優勢在於我們不需要使用浮點計算，只需要用到整數加法、減法。\hypertarget{md_README_autotoc_md15}{}\doxysubsubsection{XML 地圖讀取(反序列化)}\label{md_README_autotoc_md15}
+這個 XML 檔相容於原版遊戲中的地圖，主要操作是將 XML 檔先進行反序列化，接著再進行每個 level 的物件生成。在這過程中，因為 XML 檔會丟失一些細節，我們需要補上，例如地圖邊界、地圖大小，我們需要在讀取時額外加入這些部分。\hypertarget{md_README_autotoc_md16}{}\doxysubsubsection{怪物優先級(\+Priority)}\label{md_README_autotoc_md16}
+由於我們這款遊戲是根據節奏為中心，因此我們必須決定怪物在每次節奏的優先級。目前我們的算法是先計算怪物自身的優先度，從血量、攻擊、金幣及隱藏的優先度進行第一次優先度檢查，而當以上均相等時，我們進行第二次優先度判斷，根據距離玩家的距離進行怪物的更新。
+
+我們不是使用 priority queue，因為我們在每個 tempo 都需要進行優先度調整，而使用 priority queue 需要建立新的 priority queue，這樣改動會較大，因此我們選擇對 vector 做 sort。\hypertarget{md_README_autotoc_md17}{}\doxysection{結語}\label{md_README_autotoc_md17}
+\hypertarget{md_README_autotoc_md18}{}\doxysubsection{問題及解決方法}\label{md_README_autotoc_md18}
+在這次實作中我們遇到了很多問題：
+
+
+\begin{DoxyEnumerate}
+\item $\ast$$\ast$音樂的問題$\ast$$\ast$：我們需要取得音樂的時間來產生對應的節奏，原版的 PTSD 中無法簡單完成這件事，所以我們改用了外部的音樂庫。
+\item $\ast$$\ast$性能問題$\ast$$\ast$：在進行怪物、地圖更新時，我們一直關注性能優化，使用了多種計算方式，目前的方式在能接受的性能下是最好的解決方案，特別是在處理視野的部分。
+\item $\ast$$\ast$互動事件處理$\ast$$\ast$：在每個節奏中處理不同的事件時常遇到問題，我們採用事件庫來提高處理的效率和準確性。
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md19}{}\doxysubsection{貢獻比例}\label{md_README_autotoc_md19}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 學號/姓名   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 貢獻比例    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 學號/姓名   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 貢獻比例    }\\\cline{1-2}
+\endhead
+111590028 張睿恩   &50\%    \\\cline{1-2}
+111590009 陳世昂   &50\%   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md20}{}\doxysubsection{自我檢核表}\label{md_README_autotoc_md20}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 項目   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 完成    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 項目   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 完成    }\\\cline{1-2}
+\endhead
+完成協議書上所描述的最小關卡數量   &V    \\\cline{1-2}
+完成專案權限改為 public   &V    \\\cline{1-2}
+具有 debug mode 的功能   &V    \\\cline{1-2}
+解決專案上所有 Memory Leak 的問題   &V    \\\cline{1-2}
+報告中沒有任何錯字，以及沒有任何一項遺漏   &V    \\\cline{1-2}
+報告至少保持基本的美感，人類可讀   &V   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md21}{}\doxysubsection{收穫}\label{md_README_autotoc_md21}
+這堂課對我而言最大的收穫在於如何使用 C++ 完成一個遊戲專案，並讓我認識到了與別人共同開發專案會面臨的問題。在這過程中，我們會有一些盲點，透過討論也能增進我們的程式技巧。此外，在開發這次專案的過程中，讓我掌握了很多新的技巧，特別是 Github、\+CMake 及演算法在實際專案中的應用。\hypertarget{md_README_autotoc_md22}{}\doxysubsection{心得、感想}\label{md_README_autotoc_md22}
+這次遊戲開發讓我認識到了自己的不足之處，例如該如何處理多人專案。在此之前我對這了解甚少，在這次之後我對於這方面的能力有了些許增強。但這次專案有個遺憾之處，就是由於時間有限，有些功能無法完全呈現，但我們已經盡力做到最好，希望這款遊戲能給予玩家好的遊戲體驗。\hypertarget{md_README_autotoc_md23}{}\doxysubsection{對於本課程的建議}\label{md_README_autotoc_md23}
+沒有，謝謝老師。 

@@ -1,0 +1,8 @@
+<map id="include/Dungeon/Tiles/NecroDancerStage.h" name="include/Dungeon/Tiles/NecroDancerStage.h">
+<area shape="rect" id="node1" title=" " alt="" coords="382,5,549,47"/>
+<area shape="rect" id="node2" href="$TileFactory_8h.html" title=" " alt="" coords="235,102,451,129"/>
+<area shape="rect" id="node6" href="$NecroDancerStage_8cpp.html" title=" " alt="" coords="475,95,701,136"/>
+<area shape="rect" id="node3" href="$Dungeon_2Map_2Event_8cpp.html" title=" " alt="" coords="5,184,208,211"/>
+<area shape="rect" id="node4" href="$LoadTile_8cpp.html" title=" " alt="" coords="232,184,453,211"/>
+<area shape="rect" id="node5" href="$Map_8cpp.html" title=" " alt="" coords="477,184,672,211"/>
+</map>

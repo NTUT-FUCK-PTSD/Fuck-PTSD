@@ -1,0 +1,144 @@
+\hypertarget{classMusic_1_1Tempo}{}\doxysection{Music\+::Tempo Class Reference}
+\label{classMusic_1_1Tempo}\index{Music::Tempo@{Music::Tempo}}
+
+
+{\ttfamily \#include $<$Tempo.\+h$>$}
+
+
+
+Collaboration diagram for Music\+::Tempo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classMusic_1_1Tempo__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMusic_1_1Tempo_a83273ea3f4188421a637472b66ae2a7e}{Tempo}} ()
+\item 
+virtual \mbox{\hyperlink{classMusic_1_1Tempo_ad89c5693bdc7149f05b618960cc856bb}{$\sim$\+Tempo}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classMusic_1_1Tempo_a17445421b310e5d0341b72d3e17b6fe6}{Read\+Tempo\+File}} (const std\+::string \&path)
+\item 
+static void \mbox{\hyperlink{classMusic_1_1Tempo_a879f3be80908c974bcc1796903fd9e43}{Pause}} (bool state)
+\item 
+static bool \mbox{\hyperlink{classMusic_1_1Tempo_a9532015df2b8fb07de7edd4886e8bb94}{Is\+Switch}} ()
+\item 
+static bool \mbox{\hyperlink{classMusic_1_1Tempo_addf7b880f72567d0b1e56a8bbe1c9a2a}{Is\+Tempo\+In\+Range}} (const std\+::size\+\_\+t trigger\+Range, const std\+::size\+\_\+t time, const std\+::size\+\_\+t Music\+Loop\+Counter)
+\item 
+static std\+::size\+\_\+t \mbox{\hyperlink{classMusic_1_1Tempo_a321c67bb448f9bacea36847027bea870}{Get\+Beat\+Idx}} ()
+\item 
+static std\+::size\+\_\+t \mbox{\hyperlink{classMusic_1_1Tempo_af2dc0bce44c4f9bdcee5bb6c8fea75ac}{Get\+Beat\+Time}} ()
+\item 
+static std\+::size\+\_\+t \mbox{\hyperlink{classMusic_1_1Tempo_a555f92d8cd9fe4692b7843703802bd14}{Get\+Beat\+Value}} (std\+::size\+\_\+t idx)
+\item 
+static std\+::size\+\_\+t \mbox{\hyperlink{classMusic_1_1Tempo_adf986300b7ea67d73250274ef9dc1622}{Get\+Beat\+List\+Len}} ()
+\item 
+static std\+::vector$<$ size\+\_\+t $>$ \mbox{\hyperlink{classMusic_1_1Tempo_a6a21d3d8fbc4363c6b20ccea86b32946}{Get\+Beat\+List}} ()
+\item 
+static void \mbox{\hyperlink{classMusic_1_1Tempo_a2bc362374acb4e8b69109fa3943ae1a2}{Update}} (const std\+::size\+\_\+t music\+Playt\+Time, const std\+::size\+\_\+t trigger\+Offset, const std\+::size\+\_\+t Music\+Loop\+Counter)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::size\+\_\+t \mbox{\hyperlink{classMusic_1_1Tempo_a3df8e616315fb7dafc71e12759f27d0f}{m\+\_\+\+Beat\+List\+Len}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMusic_1_1Tempo_a83273ea3f4188421a637472b66ae2a7e}\label{classMusic_1_1Tempo_a83273ea3f4188421a637472b66ae2a7e}} 
+\index{Music::Tempo@{Music::Tempo}!Tempo@{Tempo}}
+\index{Tempo@{Tempo}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{Tempo()}{Tempo()}}
+{\footnotesize\ttfamily Music\+::\+Tempo\+::\+Tempo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_ad89c5693bdc7149f05b618960cc856bb}\label{classMusic_1_1Tempo_ad89c5693bdc7149f05b618960cc856bb}} 
+\index{Music::Tempo@{Music::Tempo}!````~Tempo@{$\sim$Tempo}}
+\index{````~Tempo@{$\sim$Tempo}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{$\sim$Tempo()}{~Tempo()}}
+{\footnotesize\ttfamily virtual Music\+::\+Tempo\+::$\sim$\+Tempo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMusic_1_1Tempo_a321c67bb448f9bacea36847027bea870}\label{classMusic_1_1Tempo_a321c67bb448f9bacea36847027bea870}} 
+\index{Music::Tempo@{Music::Tempo}!GetBeatIdx@{GetBeatIdx}}
+\index{GetBeatIdx@{GetBeatIdx}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{GetBeatIdx()}{GetBeatIdx()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Music\+::\+Tempo\+::\+Get\+Beat\+Idx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_a6a21d3d8fbc4363c6b20ccea86b32946}\label{classMusic_1_1Tempo_a6a21d3d8fbc4363c6b20ccea86b32946}} 
+\index{Music::Tempo@{Music::Tempo}!GetBeatList@{GetBeatList}}
+\index{GetBeatList@{GetBeatList}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{GetBeatList()}{GetBeatList()}}
+{\footnotesize\ttfamily std\+::vector$<$ size\+\_\+t $>$ Music\+::\+Tempo\+::\+Get\+Beat\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_adf986300b7ea67d73250274ef9dc1622}\label{classMusic_1_1Tempo_adf986300b7ea67d73250274ef9dc1622}} 
+\index{Music::Tempo@{Music::Tempo}!GetBeatListLen@{GetBeatListLen}}
+\index{GetBeatListLen@{GetBeatListLen}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{GetBeatListLen()}{GetBeatListLen()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Music\+::\+Tempo\+::\+Get\+Beat\+List\+Len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_af2dc0bce44c4f9bdcee5bb6c8fea75ac}\label{classMusic_1_1Tempo_af2dc0bce44c4f9bdcee5bb6c8fea75ac}} 
+\index{Music::Tempo@{Music::Tempo}!GetBeatTime@{GetBeatTime}}
+\index{GetBeatTime@{GetBeatTime}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{GetBeatTime()}{GetBeatTime()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Music\+::\+Tempo\+::\+Get\+Beat\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_a555f92d8cd9fe4692b7843703802bd14}\label{classMusic_1_1Tempo_a555f92d8cd9fe4692b7843703802bd14}} 
+\index{Music::Tempo@{Music::Tempo}!GetBeatValue@{GetBeatValue}}
+\index{GetBeatValue@{GetBeatValue}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{GetBeatValue()}{GetBeatValue()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Music\+::\+Tempo\+::\+Get\+Beat\+Value (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_a9532015df2b8fb07de7edd4886e8bb94}\label{classMusic_1_1Tempo_a9532015df2b8fb07de7edd4886e8bb94}} 
+\index{Music::Tempo@{Music::Tempo}!IsSwitch@{IsSwitch}}
+\index{IsSwitch@{IsSwitch}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{IsSwitch()}{IsSwitch()}}
+{\footnotesize\ttfamily bool Music\+::\+Tempo\+::\+Is\+Switch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_addf7b880f72567d0b1e56a8bbe1c9a2a}\label{classMusic_1_1Tempo_addf7b880f72567d0b1e56a8bbe1c9a2a}} 
+\index{Music::Tempo@{Music::Tempo}!IsTempoInRange@{IsTempoInRange}}
+\index{IsTempoInRange@{IsTempoInRange}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{IsTempoInRange()}{IsTempoInRange()}}
+{\footnotesize\ttfamily bool Music\+::\+Tempo\+::\+Is\+Tempo\+In\+Range (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{trigger\+Range,  }\item[{const std\+::size\+\_\+t}]{time,  }\item[{const std\+::size\+\_\+t}]{Music\+Loop\+Counter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_a879f3be80908c974bcc1796903fd9e43}\label{classMusic_1_1Tempo_a879f3be80908c974bcc1796903fd9e43}} 
+\index{Music::Tempo@{Music::Tempo}!Pause@{Pause}}
+\index{Pause@{Pause}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{Pause()}{Pause()}}
+{\footnotesize\ttfamily void Music\+::\+Tempo\+::\+Pause (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_a17445421b310e5d0341b72d3e17b6fe6}\label{classMusic_1_1Tempo_a17445421b310e5d0341b72d3e17b6fe6}} 
+\index{Music::Tempo@{Music::Tempo}!ReadTempoFile@{ReadTempoFile}}
+\index{ReadTempoFile@{ReadTempoFile}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{ReadTempoFile()}{ReadTempoFile()}}
+{\footnotesize\ttfamily void Music\+::\+Tempo\+::\+Read\+Tempo\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classMusic_1_1Tempo_a2bc362374acb4e8b69109fa3943ae1a2}\label{classMusic_1_1Tempo_a2bc362374acb4e8b69109fa3943ae1a2}} 
+\index{Music::Tempo@{Music::Tempo}!Update@{Update}}
+\index{Update@{Update}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Music\+::\+Tempo\+::\+Update (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{music\+Playt\+Time,  }\item[{const std\+::size\+\_\+t}]{trigger\+Offset,  }\item[{const std\+::size\+\_\+t}]{Music\+Loop\+Counter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMusic_1_1Tempo_a3df8e616315fb7dafc71e12759f27d0f}\label{classMusic_1_1Tempo_a3df8e616315fb7dafc71e12759f27d0f}} 
+\index{Music::Tempo@{Music::Tempo}!m\_BeatListLen@{m\_BeatListLen}}
+\index{m\_BeatListLen@{m\_BeatListLen}!Music::Tempo@{Music::Tempo}}
+\doxysubsubsection{\texorpdfstring{m\_BeatListLen}{m\_BeatListLen}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Music\+::\+Tempo\+::m\+\_\+\+Beat\+List\+Len = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Music/\mbox{\hyperlink{Tempo_8h}{Tempo.\+h}}\item 
+src/\+Music/\mbox{\hyperlink{Tempo_8cpp}{Tempo.\+cpp}}\end{DoxyCompactItemize}
