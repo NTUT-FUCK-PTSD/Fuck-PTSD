@@ -114,7 +114,9 @@ void Music::IndicatorBar::Update() {
 
     UpdateTimer();
     if (m_IIT >= FRAME_UPDATE_MAX) { return; }
-    if (m_Flag && m_TempoNumber < Music::Tempo::GetBeatListLen() - 1) {
+    if (m_Flag
+        && (Music::Player::GetMusicTimeLoop()
+            < Music::Tempo::GetBeatValue(m_TempoNumber))) {
         m_Flag = false;
     }
     if (m_Flag
@@ -174,13 +176,16 @@ void Music::IndicatorBar::UpdateIndicatorLeft(
                     {-730.f, m_CenterPos.y}
                 );
             }
-            // m_IndicatLeft[i]->SetPosition({-720.0f, m_CenterPos.y});
-            m_AnimationsLeft[i]->MoveByTime(
-                Music::Tempo::GetBeatValue(m_LastIdxLeft)
-                    - Music::Player::GetMusicTimeLoop(),
-                {0, m_CenterPos.y}
-            );
-            m_LastIdxLeft++;
+            if (m_LastIdxLeft <= m_BeatIndex + m_TempoNumber
+                && m_LastIdxLeft < Music::Tempo::GetBeatListLen()) {
+                // m_IndicatLeft[i]->SetPosition({-720.0f, m_CenterPos.y});
+                m_AnimationsLeft[i]->MoveByTime(
+                    Music::Tempo::GetBeatValue(m_LastIdxLeft)
+                        - Music::Player::GetMusicTimeLoop(),
+                    {0, m_CenterPos.y}
+                );
+                m_LastIdxLeft++;
+            }
         }
     }
     // std::for_each(
@@ -230,12 +235,15 @@ void Music::IndicatorBar::UpdateIndicatorRight(
                 );
             }
             // m_IndicatRight[i]->SetPosition({-720.0f, m_CenterPos.y});
-            m_AnimationsRight[i]->MoveByTime(
-                Music::Tempo::GetBeatValue(m_LastIdxRight)
-                    - Music::Player::GetMusicTimeLoop(),
-                {0, m_CenterPos.y}
-            );
-            m_LastIdxRight++;
+            if (m_LastIdxRight <= m_BeatIndex + m_TempoNumber
+                && m_LastIdxRight < Music::Tempo::GetBeatListLen()) {
+                m_AnimationsRight[i]->MoveByTime(
+                    Music::Tempo::GetBeatValue(m_LastIdxRight)
+                        - Music::Player::GetMusicTimeLoop(),
+                    {0, m_CenterPos.y}
+                );
+                m_LastIdxRight++;
+            }
         }
     }
     // std::for_each(
@@ -250,9 +258,8 @@ void Music::IndicatorBar::UpdateIndicatorRight(
     //         const auto&  pos = elem->GetPosition();
     //         const auto&& x_pos = pos.x - moveSpeed;
 
-    //         // LOG_INFO("idx: {}, pos: {}, speed:{}", idx, pos.x, moveSpeed);
-    //         glm::ivec2 movePos = {0, 0};
-    //         if (x_pos <= 0) {
+    //         // LOG_INFO("idx: {}, pos: {}, speed:{}", idx, pos.x,
+    //         moveSpeed); glm::ivec2 movePos = {0, 0}; if (x_pos <= 0) {
     //             movePos = {720.0f + x_pos, m_CenterPos.y};
     //         } else {
     //             movePos = {x_pos, m_CenterPos.y};

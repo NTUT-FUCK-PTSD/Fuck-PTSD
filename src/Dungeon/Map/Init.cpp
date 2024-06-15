@@ -77,8 +77,7 @@ bool Map::LoadLevel(
     }
     m_LevelNum = levelNum;
 
-    m_Size = (level->GetLevelIndexMax() + glm::ivec2(1, 1))
-             - (level->GetLevelIndexMin() - glm::ivec2(1, 1));
+    m_Size = level->GetLevelIndexMax() - level->GetLevelIndexMin() + 3;
     m_MapData = std::make_shared<MapData>(
         level->GetLevelIndexMin(),
         level->GetLevelIndexMax(),
