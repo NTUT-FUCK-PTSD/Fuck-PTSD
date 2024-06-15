@@ -71,7 +71,7 @@ Crypt of the NecroDancer 是一款結合 Rogue-like 和音樂遊戲元素的遊�
 
 ### 程式架構
 
-* 程式架構介紹的內容可以在這裡補充，說明整個程式的模組劃分和主要的程式流。
+* [Doxygen](https://ntut-fuck-ptsd.github.io/Fuck-PTSD/html/index.html)
 
 ### 程式技術
 
