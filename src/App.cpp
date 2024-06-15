@@ -1,6 +1,5 @@
 #include "App.hpp"
 
-#include "Display/BeatIndicator.h"
 #include "Event/Event.h"
 #include "Music/IndicatorBar.h"
 #include "Music/Tempo.h"

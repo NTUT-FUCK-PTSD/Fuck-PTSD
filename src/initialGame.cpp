@@ -1,23 +1,15 @@
 #include "App.hpp"
 #include "Music/IndicatorBar.h"
 #include "Player.h"
-#include "Util/Logger.hpp"
 #include "eventpp/utilities/argumentadapter.h"
 #include "eventpp/utilities/conditionalfunctor.h"
 
 #include <Util/Input.hpp>
 #include <future>
 #include <memory>
-#include <thread>
 #include "Display/BeatHeart.h"
-#include "Display/BeatIndicator.h"
-#include "Dungeon/Enemies/DragonGreen.h"
 #include "Dungeon/MapHandler.h"
 #include "Event/Event.h"
-#include "Game/Graphs/BlackChest.h"
-#include "Game/Graphs/Food_1.h"
-#include "Game/Graphs/Food_2.h"
-#include "Graphs/Coin.h"
 #include "HPIS.h"
 #include "Helper.hpp"
 #include "Music/Player.h"

@@ -2,28 +2,20 @@
 // Created by adven on 2024/5/10.
 //
 
-#include <future>
-#include <typeinfo>
 #include "App.hpp"
 
 #include "Game_config.h"
 #include "Util/Logger.hpp"
-#include "eventpp/utilities/argumentadapter.h"
-#include "eventpp/utilities/conditionalfunctor.h"
 
 #include <Util/Input.hpp>
 #include <algorithm>
-#include "Actions.h"
-#include "Display/BeatIndicator.h"
 #include "Dungeon/Enemy.h"
 #include "Event/Event.h"
 #include "Game/Systems/HandItem.h"
-#include "Hash.h"
 #include "Helper.hpp"
 #include "Music/IndicatorBar.h"
 #include "Music/Player.h"
 #include "Music/Tempo.h"
-#include "Systems/HEIS.h"
 #include "Systems/HandThrow.h"
 
 struct ClickEventType {
