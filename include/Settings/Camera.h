@@ -72,7 +72,7 @@ private:
 
     // glm::vec2     m_OrginalPosition = {0, 0};
     // bool          m_IsShaking = false;
-    Util::ms_t m_ShakeStartMs;
+    Util::ms_t m_ShakeStartMs = 0;
     Util::ms_t m_ShakeDuringTimeMs = 0;
     float      m_ShakeStrength = 0;
     // bool          m_ShakeHold = false;

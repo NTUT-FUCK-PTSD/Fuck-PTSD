@@ -5,7 +5,6 @@
 #ifndef FUCK_PTSD_TOOLFACTORY_H
 #define FUCK_PTSD_TOOLFACTORY_H
 
-#include <any>
 #include <memory>
 #include "Game/Warehouse/IEquip.h"
 #include "Settings/Hash.h"

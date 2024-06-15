@@ -40,9 +40,7 @@ void SpriteSheet::SetCurrentFrame(std::size_t index) {
 }
 
 void SpriteSheet::Draw(const Core::Matrices& data) {
-    if (m_Index >= m_Frames.size()) {
-        m_Index = 0;
-    }
+    if (m_Index >= m_Frames.size()) { m_Index = 0; }
     SDL_Rect displayRect{
       static_cast<int>(m_FrameSize.x * (m_Frames[m_Index] % m_col)),
       static_cast<int>(m_FrameSize.y * (m_Frames[m_Index] / m_col)),
@@ -56,8 +54,7 @@ void SpriteSheet::Draw(const Core::Matrices& data) {
 }
 
 void SpriteSheet::Play() {
-    if (m_State == State::PLAY)
-        return;
+    if (m_State == State::PLAY) return;
     if (m_State == State::ENDED || m_State == State::COOLDOWN) {
         m_Index = m_IsChangeFrame ? m_Index : 0;
         m_IsChangeFrame = false;
@@ -79,9 +76,7 @@ void SpriteSheet::Update() {
     }
 
     if (m_State == State::COOLDOWN) {
-        if (nowTime >= m_CooldownEndTime) {
-            Play();
-        }
+        if (nowTime >= m_CooldownEndTime) { Play(); }
         return;
     }
 
@@ -90,17 +85,14 @@ void SpriteSheet::Update() {
         m_TimeBetweenFrameUpdate / m_Interval
     );
 
-    if (updateFrameCount <= 0)
-        return;
+    if (updateFrameCount <= 0) return;
 
     m_Index += updateFrameCount;
     m_TimeBetweenFrameUpdate = 0;
 
     std::size_t const totalFramesCount = m_Frames.size();
     if (m_Index >= totalFramesCount) {
-        if (m_Looping) {
-            m_CooldownEndTime = nowTime + m_Cooldown;
-        }
+        if (m_Looping) { m_CooldownEndTime = nowTime + m_Cooldown; }
         m_State = m_Looping ? State::COOLDOWN : State::ENDED;
         m_Index = m_Frames.size() - 1;
     }
