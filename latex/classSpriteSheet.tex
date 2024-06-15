@@ -1,0 +1,387 @@
+\hypertarget{classSpriteSheet}{}\doxysection{Sprite\+Sheet Class Reference}
+\label{classSpriteSheet}\index{SpriteSheet@{SpriteSheet}}
+
+
+Class representing an \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} animation with frames.  
+
+
+
+
+{\ttfamily \#include $<$Sprite\+Sheet.\+hpp$>$}
+
+
+
+Inheritance diagram for Sprite\+Sheet\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classSpriteSheet__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sprite\+Sheet\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classSpriteSheet__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39}{State}} \{ \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39a6a216efc529825c60a4a4c0bc99ad77f}{PLAY}}
+, \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39a291554596c183e837f0a6bec3767c891}{PAUSE}}
+, \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39a6397c936615b97b70adb188970dfc31b}{COOLDOWN}}
+, \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39a3032bcfd5e671852750a0304cd2b024a}{ENDED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing the state of the animation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSpriteSheet_abcd2046ea42268e08b7064f832dbee6a}{Sprite\+Sheet}} (const std\+::string filepath, glm\+::vec2 size, const std\+::vector$<$ std\+::size\+\_\+t $>$ \&frames, bool play, std\+::size\+\_\+t interval, bool looping, std\+::size\+\_\+t cooldown)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} class. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classSpriteSheet_aa0d3164a9f31107419272f71f26ea7a9}{Get\+Interval}} () const
+\begin{DoxyCompactList}\small\item\em Get the interval between frames. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classSpriteSheet_a1741263d6e78c1abcf76e7f1de116af9}{Get\+Looping}} () const
+\begin{DoxyCompactList}\small\item\em Check if the animation loops. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classSpriteSheet_a96b3dcac3614584fd80f175eb9054225}{Get\+Cooldown}} () const
+\begin{DoxyCompactList}\small\item\em Get the cooldown time. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classSpriteSheet_a363cf92c4f7b3914284c7764c57c62eb}{Get\+Current\+Frame\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Get the index of the current frame. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classSpriteSheet_a85f288be5ca06950022ed64b1f68beb0}{Get\+Frame\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get the total number of frames in the animation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39}{State}} \mbox{\hyperlink{classSpriteSheet_af6d4a335835cfd400a19bbc804e0b1b5}{Get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Get the current state of the animation. \end{DoxyCompactList}\item 
+glm\+::vec2 \mbox{\hyperlink{classSpriteSheet_ad5e244fb9f6341c3d257bc5727995f07}{Get\+Size}} () const override
+\begin{DoxyCompactList}\small\item\em Get the size of the current frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a9c3fbd93b6081fb9fe0c06cc0e5098ba}{Set\+Interval}} (int interval)
+\begin{DoxyCompactList}\small\item\em Set the interval between frames. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a7d876f814f0e888aa5a5b02086c7cfd7}{Set\+Looping}} (bool looping)
+\begin{DoxyCompactList}\small\item\em Set whether the animation loops. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a1676928b19798a27bf140c10e672aa5e}{Set\+Cooldown}} (int cooldown)
+\begin{DoxyCompactList}\small\item\em Set the cooldown time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a94511b0ee0eba269e5debd3999fdfd77}{Set\+Current\+Frame}} (std\+::size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Set the current frame of the animation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_abdf9b54d11c30bf49dcbd5dcc333bcf0}{Draw}} (const Core\+::\+Matrices \&data) override
+\begin{DoxyCompactList}\small\item\em Draw the current frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a955e0f7ea64b731a4681b07c004d01ec}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset the animation to its initial frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a7a1f2955e9caa259100a482c88b5cacb}{Play}} ()
+\begin{DoxyCompactList}\small\item\em Start playing the animation. If the animation is already playing, this method won\textquotesingle{}t do anything. If the animation has ended and {\ttfamily looping} is set to {\ttfamily false}, this would replay the animation once. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a9e6322489267c42b2730f01d1601c242}{Pause}} ()
+\begin{DoxyCompactList}\small\item\em Pause the animation. If the animation has already been paused, this method won\textquotesingle{}t do anything. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_a20d4293506460f0d1656806962b701c8}{Set\+Draw\+Rect}} (const SDL\+\_\+\+Rect display\+Rect)
+\begin{DoxyCompactList}\small\item\em Set draw range. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSpriteSheet_ab6246922c5f5f1dfee3b6c5bd0195fa0}{Set\+Frames}} (const std\+::vector$<$ std\+::size\+\_\+t $>$ \&frames)
+\item 
+void \mbox{\hyperlink{classSpriteSheet_a40e42c2a50cb4d19d3feb770ac9159ed}{Set\+Alpha}} (const Uint8 alpha)
+\item 
+void \mbox{\hyperlink{classSpriteSheet_af860181edc12e08e7789fce97db5e6f5}{Set\+Color\+Mod}} (const SDL\+\_\+\+Color \&color)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing an \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} animation with frames. 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classSpriteSheet_ac554a591624db801afdc966c7c417c39}\label{classSpriteSheet_ac554a591624db801afdc966c7c417c39}} 
+\index{SpriteSheet@{SpriteSheet}!State@{State}}
+\index{State@{State}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39}{Sprite\+Sheet\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum representing the state of the animation. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PLAY@{PLAY}!SpriteSheet@{SpriteSheet}}\index{SpriteSheet@{SpriteSheet}!PLAY@{PLAY}}}\mbox{\Hypertarget{classSpriteSheet_ac554a591624db801afdc966c7c417c39a6a216efc529825c60a4a4c0bc99ad77f}\label{classSpriteSheet_ac554a591624db801afdc966c7c417c39a6a216efc529825c60a4a4c0bc99ad77f}} 
+PLAY&\mbox{\hyperlink{classAnimation}{Animation}} is playing. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PAUSE@{PAUSE}!SpriteSheet@{SpriteSheet}}\index{SpriteSheet@{SpriteSheet}!PAUSE@{PAUSE}}}\mbox{\Hypertarget{classSpriteSheet_ac554a591624db801afdc966c7c417c39a291554596c183e837f0a6bec3767c891}\label{classSpriteSheet_ac554a591624db801afdc966c7c417c39a291554596c183e837f0a6bec3767c891}} 
+PAUSE&\mbox{\hyperlink{classAnimation}{Animation}} is paused. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COOLDOWN@{COOLDOWN}!SpriteSheet@{SpriteSheet}}\index{SpriteSheet@{SpriteSheet}!COOLDOWN@{COOLDOWN}}}\mbox{\Hypertarget{classSpriteSheet_ac554a591624db801afdc966c7c417c39a6397c936615b97b70adb188970dfc31b}\label{classSpriteSheet_ac554a591624db801afdc966c7c417c39a6397c936615b97b70adb188970dfc31b}} 
+COOLDOWN&\mbox{\hyperlink{classAnimation}{Animation}} is COOLDOWN. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ENDED@{ENDED}!SpriteSheet@{SpriteSheet}}\index{SpriteSheet@{SpriteSheet}!ENDED@{ENDED}}}\mbox{\Hypertarget{classSpriteSheet_ac554a591624db801afdc966c7c417c39a3032bcfd5e671852750a0304cd2b024a}\label{classSpriteSheet_ac554a591624db801afdc966c7c417c39a3032bcfd5e671852750a0304cd2b024a}} 
+ENDED&\mbox{\hyperlink{classAnimation}{Animation}} is Ended(looping == false \&\& Animate end.). \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSpriteSheet_abcd2046ea42268e08b7064f832dbee6a}\label{classSpriteSheet_abcd2046ea42268e08b7064f832dbee6a}} 
+\index{SpriteSheet@{SpriteSheet}!SpriteSheet@{SpriteSheet}}
+\index{SpriteSheet@{SpriteSheet}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SpriteSheet()}{SpriteSheet()}}
+{\footnotesize\ttfamily Sprite\+Sheet\+::\+Sprite\+Sheet (\begin{DoxyParamCaption}\item[{const std\+::string}]{filepath,  }\item[{glm\+::vec2}]{size,  }\item[{const std\+::vector$<$ std\+::size\+\_\+t $>$ \&}]{frames,  }\item[{bool}]{play,  }\item[{std\+::size\+\_\+t}]{interval,  }\item[{bool}]{looping,  }\item[{std\+::size\+\_\+t}]{cooldown }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & file paths for the frames. \\
+\hline
+{\em size} & size of the frame. \\
+\hline
+{\em frames} & Frame indices. \\
+\hline
+{\em play} & Whether the animation should play right away. \\
+\hline
+{\em interval} & Interval between frames in milliseconds. \\
+\hline
+{\em looping} & Whether the animation should loop. \\
+\hline
+{\em cooldown} & Cooldown time in milliseconds before the animation can restart. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSpriteSheet_abdf9b54d11c30bf49dcbd5dcc333bcf0}\label{classSpriteSheet_abdf9b54d11c30bf49dcbd5dcc333bcf0}} 
+\index{SpriteSheet@{SpriteSheet}!Draw@{Draw}}
+\index{Draw@{Draw}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Draw (\begin{DoxyParamCaption}\item[{const Core\+::\+Matrices \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Draw the current frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & Transformation matrix for drawing. \\
+\hline
+{\em z\+Index} & Z-\/index for drawing. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSpriteSheet_a96b3dcac3614584fd80f175eb9054225}\label{classSpriteSheet_a96b3dcac3614584fd80f175eb9054225}} 
+\index{SpriteSheet@{SpriteSheet}!GetCooldown@{GetCooldown}}
+\index{GetCooldown@{GetCooldown}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetCooldown()}{GetCooldown()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Sprite\+Sheet\+::\+Get\+Cooldown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the cooldown time. 
+
+\begin{DoxyReturn}{Returns}
+Cooldown time in milliseconds. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_a363cf92c4f7b3914284c7764c57c62eb}\label{classSpriteSheet_a363cf92c4f7b3914284c7764c57c62eb}} 
+\index{SpriteSheet@{SpriteSheet}!GetCurrentFrameIndex@{GetCurrentFrameIndex}}
+\index{GetCurrentFrameIndex@{GetCurrentFrameIndex}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetCurrentFrameIndex()}{GetCurrentFrameIndex()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Sprite\+Sheet\+::\+Get\+Current\+Frame\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the index of the current frame. 
+
+\begin{DoxyReturn}{Returns}
+Index of the current frame. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_a85f288be5ca06950022ed64b1f68beb0}\label{classSpriteSheet_a85f288be5ca06950022ed64b1f68beb0}} 
+\index{SpriteSheet@{SpriteSheet}!GetFrameCount@{GetFrameCount}}
+\index{GetFrameCount@{GetFrameCount}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetFrameCount()}{GetFrameCount()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Sprite\+Sheet\+::\+Get\+Frame\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the total number of frames in the animation. 
+
+\begin{DoxyReturn}{Returns}
+Total number of frames. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_aa0d3164a9f31107419272f71f26ea7a9}\label{classSpriteSheet_aa0d3164a9f31107419272f71f26ea7a9}} 
+\index{SpriteSheet@{SpriteSheet}!GetInterval@{GetInterval}}
+\index{GetInterval@{GetInterval}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetInterval()}{GetInterval()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Sprite\+Sheet\+::\+Get\+Interval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the interval between frames. 
+
+\begin{DoxyReturn}{Returns}
+Interval between frames in milliseconds. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_a1741263d6e78c1abcf76e7f1de116af9}\label{classSpriteSheet_a1741263d6e78c1abcf76e7f1de116af9}} 
+\index{SpriteSheet@{SpriteSheet}!GetLooping@{GetLooping}}
+\index{GetLooping@{GetLooping}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetLooping()}{GetLooping()}}
+{\footnotesize\ttfamily bool Sprite\+Sheet\+::\+Get\+Looping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the animation loops. 
+
+\begin{DoxyReturn}{Returns}
+True if the animation loops, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_ad5e244fb9f6341c3d257bc5727995f07}\label{classSpriteSheet_ad5e244fb9f6341c3d257bc5727995f07}} 
+\index{SpriteSheet@{SpriteSheet}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily glm\+::vec2 Sprite\+Sheet\+::\+Get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Get the size of the current frame. 
+
+\begin{DoxyReturn}{Returns}
+Size of the current frame. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_af6d4a335835cfd400a19bbc804e0b1b5}\label{classSpriteSheet_af6d4a335835cfd400a19bbc804e0b1b5}} 
+\index{SpriteSheet@{SpriteSheet}!GetState@{GetState}}
+\index{GetState@{GetState}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSpriteSheet_ac554a591624db801afdc966c7c417c39}{State}} Sprite\+Sheet\+::\+Get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the current state of the animation. 
+
+\begin{DoxyReturn}{Returns}
+The current state of the animation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSpriteSheet_a9e6322489267c42b2730f01d1601c242}\label{classSpriteSheet_a9e6322489267c42b2730f01d1601c242}} 
+\index{SpriteSheet@{SpriteSheet}!Pause@{Pause}}
+\index{Pause@{Pause}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{Pause()}{Pause()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pause the animation. If the animation has already been paused, this method won\textquotesingle{}t do anything. 
+
+\mbox{\Hypertarget{classSpriteSheet_a7a1f2955e9caa259100a482c88b5cacb}\label{classSpriteSheet_a7a1f2955e9caa259100a482c88b5cacb}} 
+\index{SpriteSheet@{SpriteSheet}!Play@{Play}}
+\index{Play@{Play}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{Play()}{Play()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Play (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start playing the animation. If the animation is already playing, this method won\textquotesingle{}t do anything. If the animation has ended and {\ttfamily looping} is set to {\ttfamily false}, this would replay the animation once. 
+
+\mbox{\Hypertarget{classSpriteSheet_a955e0f7ea64b731a4681b07c004d01ec}\label{classSpriteSheet_a955e0f7ea64b731a4681b07c004d01ec}} 
+\index{SpriteSheet@{SpriteSheet}!Reset@{Reset}}
+\index{Reset@{Reset}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset the animation to its initial frame. 
+
+\mbox{\Hypertarget{classSpriteSheet_a40e42c2a50cb4d19d3feb770ac9159ed}\label{classSpriteSheet_a40e42c2a50cb4d19d3feb770ac9159ed}} 
+\index{SpriteSheet@{SpriteSheet}!SetAlpha@{SetAlpha}}
+\index{SetAlpha@{SetAlpha}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetAlpha()}{SetAlpha()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Alpha (\begin{DoxyParamCaption}\item[{const Uint8}]{alpha }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSpriteSheet_af860181edc12e08e7789fce97db5e6f5}\label{classSpriteSheet_af860181edc12e08e7789fce97db5e6f5}} 
+\index{SpriteSheet@{SpriteSheet}!SetColorMod@{SetColorMod}}
+\index{SetColorMod@{SetColorMod}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetColorMod()}{SetColorMod()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Color\+Mod (\begin{DoxyParamCaption}\item[{const SDL\+\_\+\+Color \&}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSpriteSheet_a1676928b19798a27bf140c10e672aa5e}\label{classSpriteSheet_a1676928b19798a27bf140c10e672aa5e}} 
+\index{SpriteSheet@{SpriteSheet}!SetCooldown@{SetCooldown}}
+\index{SetCooldown@{SetCooldown}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetCooldown()}{SetCooldown()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Cooldown (\begin{DoxyParamCaption}\item[{int}]{cooldown }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the cooldown time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cooldown} & Cooldown time in milliseconds. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSpriteSheet_a94511b0ee0eba269e5debd3999fdfd77}\label{classSpriteSheet_a94511b0ee0eba269e5debd3999fdfd77}} 
+\index{SpriteSheet@{SpriteSheet}!SetCurrentFrame@{SetCurrentFrame}}
+\index{SetCurrentFrame@{SetCurrentFrame}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetCurrentFrame()}{SetCurrentFrame()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Current\+Frame (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Set the current frame of the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the frame to set as current. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSpriteSheet_a20d4293506460f0d1656806962b701c8}\label{classSpriteSheet_a20d4293506460f0d1656806962b701c8}} 
+\index{SpriteSheet@{SpriteSheet}!SetDrawRect@{SetDrawRect}}
+\index{SetDrawRect@{SetDrawRect}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetDrawRect()}{SetDrawRect()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Draw\+Rect (\begin{DoxyParamCaption}\item[{const SDL\+\_\+\+Rect}]{display\+Rect }\end{DoxyParamCaption})}
+
+
+
+Set draw range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em display\+Rect} & The Rect of draw range \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSpriteSheet_ab6246922c5f5f1dfee3b6c5bd0195fa0}\label{classSpriteSheet_ab6246922c5f5f1dfee3b6c5bd0195fa0}} 
+\index{SpriteSheet@{SpriteSheet}!SetFrames@{SetFrames}}
+\index{SetFrames@{SetFrames}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetFrames()}{SetFrames()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Frames (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::size\+\_\+t $>$ \&}]{frames }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSpriteSheet_a9c3fbd93b6081fb9fe0c06cc0e5098ba}\label{classSpriteSheet_a9c3fbd93b6081fb9fe0c06cc0e5098ba}} 
+\index{SpriteSheet@{SpriteSheet}!SetInterval@{SetInterval}}
+\index{SetInterval@{SetInterval}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetInterval()}{SetInterval()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Interval (\begin{DoxyParamCaption}\item[{int}]{interval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the interval between frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval} & Interval between frames in milliseconds. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSpriteSheet_a7d876f814f0e888aa5a5b02086c7cfd7}\label{classSpriteSheet_a7d876f814f0e888aa5a5b02086c7cfd7}} 
+\index{SpriteSheet@{SpriteSheet}!SetLooping@{SetLooping}}
+\index{SetLooping@{SetLooping}!SpriteSheet@{SpriteSheet}}
+\doxysubsubsection{\texorpdfstring{SetLooping()}{SetLooping()}}
+{\footnotesize\ttfamily void Sprite\+Sheet\+::\+Set\+Looping (\begin{DoxyParamCaption}\item[{bool}]{looping }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set whether the animation loops. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em looping} & True to enable looping, false to disable. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Settings/\mbox{\hyperlink{SpriteSheet_8hpp}{Sprite\+Sheet.\+hpp}}\item 
+src/\+Settings/\mbox{\hyperlink{SpriteSheet_8cpp}{Sprite\+Sheet.\+cpp}}\end{DoxyCompactItemize}

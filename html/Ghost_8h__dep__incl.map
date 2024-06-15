@@ -1,0 +1,8 @@
+<map id="include/Dungeon/Enemies/Ghost.h" name="include/Dungeon/Enemies/Ghost.h">
+<area shape="rect" id="node1" title=" " alt="" coords="338,5,529,47"/>
+<area shape="rect" id="node2" href="$EnemyFactory_8h.html" title=" " alt="" coords="203,102,440,129"/>
+<area shape="rect" id="node6" href="$Ghost_8cpp.html" title=" " alt="" coords="464,95,627,136"/>
+<area shape="rect" id="node3" href="$Init_8cpp.html" title=" " alt="" coords="5,191,192,218"/>
+<area shape="rect" id="node4" href="$KingCongaRoom_8cpp.html" title=" " alt="" coords="217,184,426,225"/>
+<area shape="rect" id="node5" href="$LoadEnemy_8cpp.html" title=" " alt="" coords="451,191,691,218"/>
+</map>

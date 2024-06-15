@@ -1,0 +1,5 @@
+<map id="include/Dungeon/Enemies/KingConga.h" name="include/Dungeon/Enemies/KingConga.h">
+<area shape="rect" id="node1" title=" " alt="" coords="97,5,287,47"/>
+<area shape="rect" id="node2" href="$KingConga_8cpp.html" title=" " alt="" coords="5,95,168,136"/>
+<area shape="rect" id="node3" href="$KingCongaRoom_8cpp.html" title=" " alt="" coords="193,95,402,136"/>
+</map>

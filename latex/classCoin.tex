@@ -1,0 +1,111 @@
+\hypertarget{classCoin}{}\doxysection{Coin Class Reference}
+\label{classCoin}\index{Coin@{Coin}}
+
+
+{\ttfamily \#include $<$Coin.\+h$>$}
+
+
+
+Collaboration diagram for Coin\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classCoin__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCoin_a94b2130e2d3ac956ba47271ad81c64f5}{Coin}} ()
+\item 
+virtual \mbox{\hyperlink{classCoin_a38c9d54171428501163214dbcc95d809}{$\sim$\+Coin}} ()=default
+\item 
+void \mbox{\hyperlink{classCoin_a7d7cf498f8001f09bc0e6b589b86fa00}{plus\+Coin\+Number}} (const int number)
+\item 
+void \mbox{\hyperlink{classCoin_a4eab47144f1f5a7beff7bf9c8293999a}{Set\+Position}} (const glm\+::vec2 \&position)
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classCoin_a06d96fb28e877fc455fc82168ceab71a}{get\+Coin}} ()
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ $>$ \mbox{\hyperlink{classCoin_a6593c495ba29400d8e6be2915c0e831f}{get\+Game\+Object}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ \mbox{\hyperlink{classCoin_ae604dce583f95c7d328f3c61a972fbef}{Get\+Game\+Object}} ()
+\item 
+void \mbox{\hyperlink{classCoin_a95ce4a7bb2d9cdd12828c0eabec8ba89}{Update}} ()
+\item 
+void \mbox{\hyperlink{classCoin_ab25239d319e56080d0ab05a063f91bb4}{Move\+By\+Time}} (const unsigned long during\+Time\+Ms, const glm\+::vec2 \&destination, const uint16\+\_\+t direction)
+\item 
+void \mbox{\hyperlink{classCoin_ad15b1c7b5368369697d5b67ef5525763}{reset\+Coin\+Number}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCoin_a94b2130e2d3ac956ba47271ad81c64f5}\label{classCoin_a94b2130e2d3ac956ba47271ad81c64f5}} 
+\index{Coin@{Coin}!Coin@{Coin}}
+\index{Coin@{Coin}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{Coin()}{Coin()}}
+{\footnotesize\ttfamily Coin\+::\+Coin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_a38c9d54171428501163214dbcc95d809}\label{classCoin_a38c9d54171428501163214dbcc95d809}} 
+\index{Coin@{Coin}!````~Coin@{$\sim$Coin}}
+\index{````~Coin@{$\sim$Coin}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{$\sim$Coin()}{~Coin()}}
+{\footnotesize\ttfamily virtual Coin\+::$\sim$\+Coin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCoin_a06d96fb28e877fc455fc82168ceab71a}\label{classCoin_a06d96fb28e877fc455fc82168ceab71a}} 
+\index{Coin@{Coin}!getCoin@{getCoin}}
+\index{getCoin@{getCoin}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{getCoin()}{getCoin()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Coin\+::get\+Coin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_a6593c495ba29400d8e6be2915c0e831f}\label{classCoin_a6593c495ba29400d8e6be2915c0e831f}} 
+\index{Coin@{Coin}!getGameObject@{getGameObject}}
+\index{getGameObject@{getGameObject}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{getGameObject()}{getGameObject()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ $>$ Coin\+::get\+Game\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_ae604dce583f95c7d328f3c61a972fbef}\label{classCoin_ae604dce583f95c7d328f3c61a972fbef}} 
+\index{Coin@{Coin}!GetGameObject@{GetGameObject}}
+\index{GetGameObject@{GetGameObject}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{GetGameObject()}{GetGameObject()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ Coin\+::\+Get\+Game\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_ab25239d319e56080d0ab05a063f91bb4}\label{classCoin_ab25239d319e56080d0ab05a063f91bb4}} 
+\index{Coin@{Coin}!MoveByTime@{MoveByTime}}
+\index{MoveByTime@{MoveByTime}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{MoveByTime()}{MoveByTime()}}
+{\footnotesize\ttfamily void Coin\+::\+Move\+By\+Time (\begin{DoxyParamCaption}\item[{const unsigned long}]{during\+Time\+Ms,  }\item[{const glm\+::vec2 \&}]{destination,  }\item[{const uint16\+\_\+t}]{direction }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_a7d7cf498f8001f09bc0e6b589b86fa00}\label{classCoin_a7d7cf498f8001f09bc0e6b589b86fa00}} 
+\index{Coin@{Coin}!plusCoinNumber@{plusCoinNumber}}
+\index{plusCoinNumber@{plusCoinNumber}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{plusCoinNumber()}{plusCoinNumber()}}
+{\footnotesize\ttfamily void Coin\+::plus\+Coin\+Number (\begin{DoxyParamCaption}\item[{const int}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_ad15b1c7b5368369697d5b67ef5525763}\label{classCoin_ad15b1c7b5368369697d5b67ef5525763}} 
+\index{Coin@{Coin}!resetCoinNumber@{resetCoinNumber}}
+\index{resetCoinNumber@{resetCoinNumber}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{resetCoinNumber()}{resetCoinNumber()}}
+{\footnotesize\ttfamily void Coin\+::reset\+Coin\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_a4eab47144f1f5a7beff7bf9c8293999a}\label{classCoin_a4eab47144f1f5a7beff7bf9c8293999a}} 
+\index{Coin@{Coin}!SetPosition@{SetPosition}}
+\index{SetPosition@{SetPosition}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{SetPosition()}{SetPosition()}}
+{\footnotesize\ttfamily void Coin\+::\+Set\+Position (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCoin_a95ce4a7bb2d9cdd12828c0eabec8ba89}\label{classCoin_a95ce4a7bb2d9cdd12828c0eabec8ba89}} 
+\index{Coin@{Coin}!Update@{Update}}
+\index{Update@{Update}!Coin@{Coin}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Coin\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Game/\+Warehouse/\mbox{\hyperlink{Warehouse_2Coin_8h}{Coin.\+h}}\item 
+src/\+Game/\+Warehouse/\mbox{\hyperlink{Warehouse_2Coin_8cpp}{Coin.\+cpp}}\end{DoxyCompactItemize}

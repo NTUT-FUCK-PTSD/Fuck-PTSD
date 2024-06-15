@@ -1,0 +1,345 @@
+\hypertarget{classDungeon_1_1Tile}{}\doxysection{Dungeon\+::Tile Class Reference}
+\label{classDungeon_1_1Tile}\index{Dungeon::Tile@{Dungeon::Tile}}
+
+
+{\ttfamily \#include $<$Tile.\+h$>$}
+
+
+
+Inheritance diagram for Dungeon\+::Tile\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDungeon_1_1Tile__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Dungeon\+::Tile\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDungeon_1_1Tile__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDungeon_1_1Tile_a69e051f478cdf2e8fc57239fdf2c7114}{Tile}} (const \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \&\+\_\+\+Tile)
+\item 
+\mbox{\hyperlink{classDungeon_1_1Tile_a2a73c6ed3190c11e11575683c15f86e3}{Tile}} (const \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \&\+\_\+\+Tile, const std\+::string \&filepath)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_a0a5a94d63dbedbf391dd94b1954944a2}{Initialize}} ()
+\item 
+virtual \mbox{\hyperlink{classDungeon_1_1Tile_a7e9c8319c9ce9ea21285334d8f37a66a}{$\sim$\+Tile}} () override=default
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_ab3dc5cc638d56a51150c43f6ab77f618}{Set\+Index}} (std\+::size\+\_\+t index)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_a522da5d45cb74040ffc3254bb9bfc769}{Set\+Close\+Display\+B24}} (bool close\+Displayb24)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_ac64ce17b0d414f99857cbeca1dad88b1}{Set\+Rotation}} (float rotation)
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Tile_a0a574e57615fe6e494602b3769152f06}{Set\+Overlay}} (bool visible)
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Tile_ae8f7a86f9432c4c9701899254e5f432c}{Get\+Index}} ()
+\item 
+\mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \mbox{\hyperlink{classDungeon_1_1Tile_a866659c3cd555d37bc2ba3976c6995ad}{Get\+Tile}} ()
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Tile_addca51d6b15a31f8ef75d0cbee2348a5}{Get\+Overlay}} ()
+\item 
+virtual bool \mbox{\hyperlink{classDungeon_1_1Tile_aa43fa59caaba34f268f0b360e444b42f}{Is\+Wall}} ()=0
+\item 
+virtual bool \mbox{\hyperlink{classDungeon_1_1Tile_a7eed320127ca89ad0075ce79ac4919d7}{Is\+Door}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Tile_a73f876834ef2f437303223c8182fa581}{Update\+Drawable}} ()
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Tile_a73e4529433a6aa0be6350e81affb9078}{Get\+Seen}} () const
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_a4997d7f716d1aca94931885dd99e5ee4}{Set\+Camera\+Update}} (bool camera\+Update)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classDungeon_1_1Tile_aa40674f07359532d3a7c7e21cb2526fc}{m\+\_\+\+Filepath}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_aa946ce484055c4986ca32440f5595555}{Update\+Scale}} ()
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Tile_a380e567255afe5d322a3b431042e5962}{Update\+Translation}} ()
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Tile_ac1b183525dbaa2d7d989c6e8d6a324b2}{Set\+Torch}} (bool torch)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \mbox{\hyperlink{classDungeon_1_1Tile_a61c1f036b93478f9d906208742359395}{m\+\_\+\+Tile}}
+\item 
+glm\+::vec2 \mbox{\hyperlink{classDungeon_1_1Tile_af79793c1e2c209616eb263ee8175722f}{m\+\_\+\+Tile\+Size}}
+\item 
+glm\+::vec2 \mbox{\hyperlink{classDungeon_1_1Tile_a06d72928521259f5cc8556c5e16cbff1}{m\+\_\+\+Img\+Size}}
+\item 
+int8\+\_\+t \mbox{\hyperlink{classDungeon_1_1Tile_a0cd12fa5acded4fda5e700e2cdbfab25}{m\+\_\+\+Magic\+Number}} = 0
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Tile_a93bb9e019c1ce049085bc3b4acc6b841}{m\+\_\+\+Index}} = 0
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Tile_a24103744ca59bc6bde445a1f59e2e5d6}{m\+\_\+\+Close\+Displayb24}} = false
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Tile_a947bac5677a00d9e36b3d6a04199e808}{m\+\_\+\+Off\+SetY}} = 0
+\item 
+std\+::shared\+\_\+ptr$<$ Util\+::\+Sprite\+Sheet $>$ \mbox{\hyperlink{classDungeon_1_1Tile_aef26e6574d08f7daa3ce2b5f2e150447}{m\+\_\+\+Sprite\+Sheet}}
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Tile_a8ac4d7db93340c98472b8f082e051200}{m\+\_\+\+Seen}} = false
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Tile_ae0e15266cb4b2ab138e253d2a643e7d6}{m\+\_\+\+Is\+Overlay}} = true
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} $>$ \mbox{\hyperlink{classDungeon_1_1Tile_ac4645e6e018f770c08e8bb123b0ea6fc}{m\+\_\+\+Torch\+Animation}}
+\item 
+std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ \mbox{\hyperlink{classDungeon_1_1Tile_a2ee8400410ecaf2fe7db08f0b499aa1a}{m\+\_\+\+Torch}}
+\item 
+\mbox{\hyperlink{classEvent_a82eebad744abb6003384781c20aee62a}{Event\+::\+Remover}} \mbox{\hyperlink{classDungeon_1_1Tile_ad6c76cc8c939964ecb238dc5399c1003}{m\+\_\+\+Event}}
+\item 
+SDL\+\_\+\+Color \mbox{\hyperlink{classDungeon_1_1Tile_a0f9d180c4de4715430b1e198dacf91c3}{m\+\_\+\+Color}} = \{0, 0, 0, 255\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Tile_a69e051f478cdf2e8fc57239fdf2c7114}\label{classDungeon_1_1Tile_a69e051f478cdf2e8fc57239fdf2c7114}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!Tile@{Tile}}
+\index{Tile@{Tile}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{Tile()}{Tile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Dungeon\+::\+Tile\+::\+Tile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \&}]{\+\_\+\+Tile }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a2a73c6ed3190c11e11575683c15f86e3}\label{classDungeon_1_1Tile_a2a73c6ed3190c11e11575683c15f86e3}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!Tile@{Tile}}
+\index{Tile@{Tile}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{Tile()}{Tile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Dungeon\+::\+Tile\+::\+Tile (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} \&}]{\+\_\+\+Tile,  }\item[{const std\+::string \&}]{filepath }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a7e9c8319c9ce9ea21285334d8f37a66a}\label{classDungeon_1_1Tile_a7e9c8319c9ce9ea21285334d8f37a66a}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!````~Tile@{$\sim$Tile}}
+\index{````~Tile@{$\sim$Tile}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{$\sim$Tile()}{~Tile()}}
+{\footnotesize\ttfamily virtual Dungeon\+::\+Tile\+::$\sim$\+Tile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Tile_ae8f7a86f9432c4c9701899254e5f432c}\label{classDungeon_1_1Tile_ae8f7a86f9432c4c9701899254e5f432c}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!GetIndex@{GetIndex}}
+\index{GetIndex@{GetIndex}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{GetIndex()}{GetIndex()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Tile\+::\+Get\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_addca51d6b15a31f8ef75d0cbee2348a5}\label{classDungeon_1_1Tile_addca51d6b15a31f8ef75d0cbee2348a5}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!GetOverlay@{GetOverlay}}
+\index{GetOverlay@{GetOverlay}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{GetOverlay()}{GetOverlay()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Tile\+::\+Get\+Overlay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a73e4529433a6aa0be6350e81affb9078}\label{classDungeon_1_1Tile_a73e4529433a6aa0be6350e81affb9078}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!GetSeen@{GetSeen}}
+\index{GetSeen@{GetSeen}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{GetSeen()}{GetSeen()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Tile\+::\+Get\+Seen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a866659c3cd555d37bc2ba3976c6995ad}\label{classDungeon_1_1Tile_a866659c3cd555d37bc2ba3976c6995ad}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!GetTile@{GetTile}}
+\index{GetTile@{GetTile}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{GetTile()}{GetTile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} Dungeon\+::\+Tile\+::\+Get\+Tile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a0a5a94d63dbedbf391dd94b1954944a2}\label{classDungeon_1_1Tile_a0a5a94d63dbedbf391dd94b1954944a2}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a7eed320127ca89ad0075ce79ac4919d7}\label{classDungeon_1_1Tile_a7eed320127ca89ad0075ce79ac4919d7}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!IsDoor@{IsDoor}}
+\index{IsDoor@{IsDoor}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{IsDoor()}{IsDoor()}}
+{\footnotesize\ttfamily virtual bool Dungeon\+::\+Tile\+::\+Is\+Door (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralWall_a1c314b772601a5e465f80b3ded3dd5c7}{Dungeon\+::\+Tiles\+::\+General\+Wall}}, \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralTool_aeba7f29bb9e09b0f4ca0ae0df3111715}{Dungeon\+::\+Tiles\+::\+General\+Tool}}, \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralFloor_ae6e6641565a81f72e74cf3e3cc14f18e}{Dungeon\+::\+Tiles\+::\+General\+Floor}}, and \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralDoor_a4c607c0480899a82ddf55e724bf18526}{Dungeon\+::\+Tiles\+::\+General\+Door}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_aa43fa59caaba34f268f0b360e444b42f}\label{classDungeon_1_1Tile_aa43fa59caaba34f268f0b360e444b42f}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!IsWall@{IsWall}}
+\index{IsWall@{IsWall}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{IsWall()}{IsWall()}}
+{\footnotesize\ttfamily virtual bool Dungeon\+::\+Tile\+::\+Is\+Wall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralWall_aae612f285b8c55ae8affd0d7801c44af}{Dungeon\+::\+Tiles\+::\+General\+Wall}}, \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralTool_a13cacf6ab63028828bd88bc32f1f3a71}{Dungeon\+::\+Tiles\+::\+General\+Tool}}, \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralFloor_aaf10bc0bfdadb3c7fcad27bdddd8dbad}{Dungeon\+::\+Tiles\+::\+General\+Floor}}, and \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralDoor_a11b8e94eab2b187e40c30db10883169a}{Dungeon\+::\+Tiles\+::\+General\+Door}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a4997d7f716d1aca94931885dd99e5ee4}\label{classDungeon_1_1Tile_a4997d7f716d1aca94931885dd99e5ee4}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!SetCameraUpdate@{SetCameraUpdate}}
+\index{SetCameraUpdate@{SetCameraUpdate}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{SetCameraUpdate()}{SetCameraUpdate()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Set\+Camera\+Update (\begin{DoxyParamCaption}\item[{bool}]{camera\+Update }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a522da5d45cb74040ffc3254bb9bfc769}\label{classDungeon_1_1Tile_a522da5d45cb74040ffc3254bb9bfc769}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!SetCloseDisplayB24@{SetCloseDisplayB24}}
+\index{SetCloseDisplayB24@{SetCloseDisplayB24}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{SetCloseDisplayB24()}{SetCloseDisplayB24()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Set\+Close\+Display\+B24 (\begin{DoxyParamCaption}\item[{bool}]{close\+Displayb24 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_ab3dc5cc638d56a51150c43f6ab77f618}\label{classDungeon_1_1Tile_ab3dc5cc638d56a51150c43f6ab77f618}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!SetIndex@{SetIndex}}
+\index{SetIndex@{SetIndex}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{SetIndex()}{SetIndex()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Set\+Index (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a0a574e57615fe6e494602b3769152f06}\label{classDungeon_1_1Tile_a0a574e57615fe6e494602b3769152f06}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!SetOverlay@{SetOverlay}}
+\index{SetOverlay@{SetOverlay}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{SetOverlay()}{SetOverlay()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Set\+Overlay (\begin{DoxyParamCaption}\item[{bool}]{visible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralDoor_ae675d4b1fd08cb4cd283baeb397e75a9}{Dungeon\+::\+Tiles\+::\+General\+Door}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_ac64ce17b0d414f99857cbeca1dad88b1}\label{classDungeon_1_1Tile_ac64ce17b0d414f99857cbeca1dad88b1}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!SetRotation@{SetRotation}}
+\index{SetRotation@{SetRotation}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{SetRotation()}{SetRotation()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Set\+Rotation (\begin{DoxyParamCaption}\item[{float}]{rotation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_ac1b183525dbaa2d7d989c6e8d6a324b2}\label{classDungeon_1_1Tile_ac1b183525dbaa2d7d989c6e8d6a324b2}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!SetTorch@{SetTorch}}
+\index{SetTorch@{SetTorch}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{SetTorch()}{SetTorch()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Set\+Torch (\begin{DoxyParamCaption}\item[{bool}]{torch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a73f876834ef2f437303223c8182fa581}\label{classDungeon_1_1Tile_a73f876834ef2f437303223c8182fa581}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!UpdateDrawable@{UpdateDrawable}}
+\index{UpdateDrawable@{UpdateDrawable}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{UpdateDrawable()}{UpdateDrawable()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Update\+Drawable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Tiles_1_1DoorMetalSide_a60c22e2e86192840aaffb9aebce3687c}{Dungeon\+::\+Tiles\+::\+Door\+Metal\+Side}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_aa946ce484055c4986ca32440f5595555}\label{classDungeon_1_1Tile_aa946ce484055c4986ca32440f5595555}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!UpdateScale@{UpdateScale}}
+\index{UpdateScale@{UpdateScale}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{UpdateScale()}{UpdateScale()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Update\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a380e567255afe5d322a3b431042e5962}\label{classDungeon_1_1Tile_a380e567255afe5d322a3b431042e5962}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!UpdateTranslation@{UpdateTranslation}}
+\index{UpdateTranslation@{UpdateTranslation}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{UpdateTranslation()}{UpdateTranslation()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Tile\+::\+Update\+Translation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Tiles_1_1GeneralWall_ad287e000eff9a3d794cf5f388af0818f}{Dungeon\+::\+Tiles\+::\+General\+Wall}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Tile_a24103744ca59bc6bde445a1f59e2e5d6}\label{classDungeon_1_1Tile_a24103744ca59bc6bde445a1f59e2e5d6}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_CloseDisplayb24@{m\_CloseDisplayb24}}
+\index{m\_CloseDisplayb24@{m\_CloseDisplayb24}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_CloseDisplayb24}{m\_CloseDisplayb24}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Tile\+::m\+\_\+\+Close\+Displayb24 = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a0f9d180c4de4715430b1e198dacf91c3}\label{classDungeon_1_1Tile_a0f9d180c4de4715430b1e198dacf91c3}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Color@{m\_Color}}
+\index{m\_Color@{m\_Color}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Color}{m\_Color}}
+{\footnotesize\ttfamily SDL\+\_\+\+Color Dungeon\+::\+Tile\+::m\+\_\+\+Color = \{0, 0, 0, 255\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_ad6c76cc8c939964ecb238dc5399c1003}\label{classDungeon_1_1Tile_ad6c76cc8c939964ecb238dc5399c1003}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Event@{m\_Event}}
+\index{m\_Event@{m\_Event}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Event}{m\_Event}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEvent_a82eebad744abb6003384781c20aee62a}{Event\+::\+Remover}} Dungeon\+::\+Tile\+::m\+\_\+\+Event\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_aa40674f07359532d3a7c7e21cb2526fc}\label{classDungeon_1_1Tile_aa40674f07359532d3a7c7e21cb2526fc}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Filepath@{m\_Filepath}}
+\index{m\_Filepath@{m\_Filepath}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Filepath}{m\_Filepath}}
+{\footnotesize\ttfamily std\+::string Dungeon\+::\+Tile\+::m\+\_\+\+Filepath}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a06d72928521259f5cc8556c5e16cbff1}\label{classDungeon_1_1Tile_a06d72928521259f5cc8556c5e16cbff1}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_ImgSize@{m\_ImgSize}}
+\index{m\_ImgSize@{m\_ImgSize}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_ImgSize}{m\_ImgSize}}
+{\footnotesize\ttfamily glm\+::vec2 Dungeon\+::\+Tile\+::m\+\_\+\+Img\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a93bb9e019c1ce049085bc3b4acc6b841}\label{classDungeon_1_1Tile_a93bb9e019c1ce049085bc3b4acc6b841}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Index@{m\_Index}}
+\index{m\_Index@{m\_Index}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Index}{m\_Index}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Tile\+::m\+\_\+\+Index = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_ae0e15266cb4b2ab138e253d2a643e7d6}\label{classDungeon_1_1Tile_ae0e15266cb4b2ab138e253d2a643e7d6}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_IsOverlay@{m\_IsOverlay}}
+\index{m\_IsOverlay@{m\_IsOverlay}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_IsOverlay}{m\_IsOverlay}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Tile\+::m\+\_\+\+Is\+Overlay = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a0cd12fa5acded4fda5e700e2cdbfab25}\label{classDungeon_1_1Tile_a0cd12fa5acded4fda5e700e2cdbfab25}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_MagicNumber@{m\_MagicNumber}}
+\index{m\_MagicNumber@{m\_MagicNumber}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_MagicNumber}{m\_MagicNumber}}
+{\footnotesize\ttfamily int8\+\_\+t Dungeon\+::\+Tile\+::m\+\_\+\+Magic\+Number = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a947bac5677a00d9e36b3d6a04199e808}\label{classDungeon_1_1Tile_a947bac5677a00d9e36b3d6a04199e808}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_OffSetY@{m\_OffSetY}}
+\index{m\_OffSetY@{m\_OffSetY}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_OffSetY}{m\_OffSetY}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Tile\+::m\+\_\+\+Off\+SetY = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a8ac4d7db93340c98472b8f082e051200}\label{classDungeon_1_1Tile_a8ac4d7db93340c98472b8f082e051200}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Seen@{m\_Seen}}
+\index{m\_Seen@{m\_Seen}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Seen}{m\_Seen}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Tile\+::m\+\_\+\+Seen = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_aef26e6574d08f7daa3ce2b5f2e150447}\label{classDungeon_1_1Tile_aef26e6574d08f7daa3ce2b5f2e150447}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_SpriteSheet@{m\_SpriteSheet}}
+\index{m\_SpriteSheet@{m\_SpriteSheet}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_SpriteSheet}{m\_SpriteSheet}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$Util\+::\+Sprite\+Sheet$>$ Dungeon\+::\+Tile\+::m\+\_\+\+Sprite\+Sheet\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a61c1f036b93478f9d906208742359395}\label{classDungeon_1_1Tile_a61c1f036b93478f9d906208742359395}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Tile@{m\_Tile}}
+\index{m\_Tile@{m\_Tile}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Tile}{m\_Tile}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDungeon_1_1s__Tile}{s\+\_\+\+Tile}} Dungeon\+::\+Tile\+::m\+\_\+\+Tile\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_af79793c1e2c209616eb263ee8175722f}\label{classDungeon_1_1Tile_af79793c1e2c209616eb263ee8175722f}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_TileSize@{m\_TileSize}}
+\index{m\_TileSize@{m\_TileSize}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_TileSize}{m\_TileSize}}
+{\footnotesize\ttfamily glm\+::vec2 Dungeon\+::\+Tile\+::m\+\_\+\+Tile\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_a2ee8400410ecaf2fe7db08f0b499aa1a}\label{classDungeon_1_1Tile_a2ee8400410ecaf2fe7db08f0b499aa1a}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_Torch@{m\_Torch}}
+\index{m\_Torch@{m\_Torch}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_Torch}{m\_Torch}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$Util\+::\+Game\+Object$>$ Dungeon\+::\+Tile\+::m\+\_\+\+Torch\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Tile_ac4645e6e018f770c08e8bb123b0ea6fc}\label{classDungeon_1_1Tile_ac4645e6e018f770c08e8bb123b0ea6fc}} 
+\index{Dungeon::Tile@{Dungeon::Tile}!m\_TorchAnimation@{m\_TorchAnimation}}
+\index{m\_TorchAnimation@{m\_TorchAnimation}!Dungeon::Tile@{Dungeon::Tile}}
+\doxysubsubsection{\texorpdfstring{m\_TorchAnimation}{m\_TorchAnimation}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}}$>$ Dungeon\+::\+Tile\+::m\+\_\+\+Torch\+Animation\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Dungeon/\mbox{\hyperlink{Tile_8h}{Tile.\+h}}\item 
+src/\+Dungeon/\mbox{\hyperlink{Tile_8cpp}{Tile.\+cpp}}\end{DoxyCompactItemize}

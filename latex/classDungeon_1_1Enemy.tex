@@ -1,0 +1,510 @@
+\hypertarget{classDungeon_1_1Enemy}{}\doxysection{Dungeon\+::Enemy Class Reference}
+\label{classDungeon_1_1Enemy}\index{Dungeon::Enemy@{Dungeon::Enemy}}
+
+
+{\ttfamily \#include $<$Enemy.\+h$>$}
+
+
+
+Inheritance diagram for Dungeon\+::Enemy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDungeon_1_1Enemy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Dungeon\+::Enemy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDungeon_1_1Enemy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDungeon_1_1Enemy_a82c02dbe482d84c62ea438aedd430d62}{Enemy}} (const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&\+\_\+\+Enemy, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$ map\+Data)
+\item 
+virtual \mbox{\hyperlink{classDungeon_1_1Enemy_a192051ed4b17c37014ba03f4c416bb81}{$\sim$\+Enemy}} ()=default
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a507101d637fde3007644f1212fc2398d}{Set\+Shadow}} (const bool shadow)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a72d9f115b1ece6af7f679b62c8c02e58}{Set\+Game\+Position}} (const glm\+::vec2 \&game\+Position)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_ade0783f7f5bdacbac4a8a734391ab04c}{Set\+Beat\+Delay}} (const std\+::size\+\_\+t beat\+Delay)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a039b8671d67e1a00b6fe9a2e58360b80}{Set\+Lord}} (const bool lord)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_ae72f532336242299683a49b7706d0f29}{Set\+Damage}} (const std\+::size\+\_\+t damage)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a19138ead20e385902915c193f19adac9}{Init\+Health}} (const std\+::size\+\_\+t health)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a277138a098d8f4bc750cacb47b11f551}{Set\+Coin}} (const std\+::size\+\_\+t coin)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a5efb6e622b0007cf9335752622141667}{Set\+Priority}} (const std\+::size\+\_\+t priority)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a78fd06534316407a7df991f850ec72c8}{Can\+Move}} ()
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a4e4c62c32daea4f392d7bd3a4a4019a1}{Set\+Face}} (bool face\+To)
+\item 
+glm\+::vec2 \mbox{\hyperlink{classDungeon_1_1Enemy_af5cb6154fe75a36a2a2cc3b95ba9418a}{Get\+Player\+Position}} () const
+\item 
+const glm\+::vec2 \& \mbox{\hyperlink{classDungeon_1_1Enemy_a4c9c64d2862dd84b615908161a3141e6}{Get\+Game\+Position}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_aebd5df836e96b6b37926dacb98621cae}{Get\+ID}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a9d85e2077c079887b808c6d8de9da84c}{Get\+Beat\+Delay}} () const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_a56524b2c07cd46e26de5fdefc82c708d}{Get\+Lord}} () const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_aa1dbb5508ae8504226be104c9d3ec925}{Get\+Shadow}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a702be463ad3109c5988c2b8aa3c2c36b}{Get\+Damage}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a09b31a9bcfd2f6a50b6004296b9556e1}{Get\+Health}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a515853d944e16e17c9a12af3a4c9accc}{Get\+Max\+Health}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a76673ddd0f210254322a79e6347b800a}{Get\+Coin}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a0ce19c0b6fdd7cff2588eb3ee1e646de}{Get\+Priority}} () const
+\item 
+const glm\+::vec2 \& \mbox{\hyperlink{classDungeon_1_1Enemy_a8c5985337ac35928f2838f71916a3f4e}{Get\+Will\+Move\+Position}} () const
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_a4399c26560a4d6ed08dfc2fee00a67fe}{Get\+Visible}} () const
+\item 
+virtual glm\+::vec2 \mbox{\hyperlink{classDungeon_1_1Enemy_a4c6039ff5a94e12b2f50ee983e61b8c9}{Find\+Next\+To\+Player}} (bool is\+Extra\+Directions=false)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_add8cb41dfa4aee17b538c9a58486969b}{Tempo\+Move}} ()
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_a121e4d59e981425733f392fede860ba1}{Is\+Vaild\+Move}} (const glm\+::vec2 \&position)
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a13559f909a7b794ee58343ed7c1a58df}{Game\+Postion2\+Map\+Index}} (const glm\+::ivec2 \&position) const
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Enemy_a7b5c6aa54090afce6ffba15fd0092d91}{Struck}} (const std\+::size\+\_\+t damage)
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Enemy_a97e0f0ba098147470b6a953cda749124}{Update}} ()
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_aa3cc465cc38baec14ad0be9f6c661516}{Get\+Seen}} () const
+\item 
+float \mbox{\hyperlink{classDungeon_1_1Enemy_aa41592c0144286d468f5d687770c1f2e}{Heuristic}} (const glm\+::vec2 \&start, const glm\+::vec2 \&end)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a7b5e9639d789d19c3f7ae92bb9af3986}{Set\+Camera\+Update}} (bool camera\+Update)
+\item 
+virtual bool \mbox{\hyperlink{classDungeon_1_1Enemy_af125a117deeb0f0464a3bdd20ec5d950}{Is\+Boss}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Enemy_a4f4352fbff7eac22425ee977b00dab23}{Move}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Enemy_a44a53ed54f741a477607eae0d2352b36}{Attack\+Player}} ()
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Enemy_aa367e324934ebc22ee11eeebe1d0ef80}{Update\+Animation\+Type}} (const glm\+::vec2 \&direction)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_ab6d584ed5a44471082864563d2091b7a}{Init\+Health\+Bar\+Image}} (const glm\+::vec2 \&pixel\+Pos)
+\item 
+virtual void \mbox{\hyperlink{classDungeon_1_1Enemy_aef60002db25d94c28d1b979a329eefe1}{Update\+Heart}} (const glm\+::vec2 \&pixel\+Pos)
+\item 
+void \mbox{\hyperlink{classDungeon_1_1Enemy_a5262201047625ef6c7a7989b3612f297}{Change\+Health\+Bar}} (const std\+::size\+\_\+t health)
+\item 
+std\+::set$<$ \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_a2782930fc9b7d5dac8e52ece61e70936}{Get\+Relative\+Direction\+Set}} (const glm\+::vec2 \&direction)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ Util\+::\+Image $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_af765e4ca7988c7163c37148323277f81}{m\+\_\+\+Full\+Heart}}
+\item 
+std\+::shared\+\_\+ptr$<$ Util\+::\+Image $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_ab3438fb8d4d9fa5817c49e5f6ef0232b}{m\+\_\+\+Empty\+Heart}}
+\item 
+std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_adda2232d26c8e4bfa04eda7585045578}{m\+\_\+\+Health\+Bar}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_a867edb40765e5d524794d65c64bd7f11}{m\+\_\+\+Map\+Data}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}} $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_a5646488e0945a393886958d9ac067685}{m\+\_\+\+Sprite\+Sheet}}
+\item 
+std\+::vector$<$ std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_a263c09e6146b5b2c30ac59136f2501a8}{m\+\_\+\+Normal\+Frames}}
+\item 
+std\+::vector$<$ std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_a26bcb4941e82d932ca191bca70e85713}{m\+\_\+\+Shadow\+Frames}}
+\item 
+glm\+::vec2 \mbox{\hyperlink{classDungeon_1_1Enemy_a9519218dc9db4b7ffdfd71ef2ba13c36}{m\+\_\+\+Will\+Move\+Position}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classAnimation}{Animation}} $>$ \mbox{\hyperlink{classDungeon_1_1Enemy_a6f6f068434845e0a9a596d14d8d58209}{m\+\_\+\+Animation}}
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDungeon_1_1Enemy_a87df4427bd61c71509c84fd170b37318}{m\+\_\+\+Animation\+Type}} = 0
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_a962c5a30c28c1997bfa4fafe957cf289}{m\+\_\+\+Knockback\+Able}} = false
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_adc3ca26913040a8b75a546f71070b4a8}{m\+\_\+\+Dead}} = false
+\item 
+bool \mbox{\hyperlink{classDungeon_1_1Enemy_a882c9da4f66aed3d0391c2aa5f94e4c4}{m\+\_\+\+Unnecssary\+Animation}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a82c02dbe482d84c62ea438aedd430d62}\label{classDungeon_1_1Enemy_a82c02dbe482d84c62ea438aedd430d62}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!Enemy@{Enemy}}
+\index{Enemy@{Enemy}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{Enemy()}{Enemy()}}
+{\footnotesize\ttfamily Dungeon\+::\+Enemy\+::\+Enemy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDungeon_1_1s__Enemy}{s\+\_\+\+Enemy}} \&}]{\+\_\+\+Enemy,  }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}} $>$}]{map\+Data }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a192051ed4b17c37014ba03f4c416bb81}\label{classDungeon_1_1Enemy_a192051ed4b17c37014ba03f4c416bb81}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!````~Enemy@{$\sim$Enemy}}
+\index{````~Enemy@{$\sim$Enemy}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{$\sim$Enemy()}{~Enemy()}}
+{\footnotesize\ttfamily virtual Dungeon\+::\+Enemy\+::$\sim$\+Enemy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a44a53ed54f741a477607eae0d2352b36}\label{classDungeon_1_1Enemy_a44a53ed54f741a477607eae0d2352b36}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!AttackPlayer@{AttackPlayer}}
+\index{AttackPlayer@{AttackPlayer}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{AttackPlayer()}{AttackPlayer()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Attack\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Monkey_acddf5bbf8e453ae46f1393fd8d9b1222}{Dungeon\+::\+Enemies\+::\+Monkey}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Minotaur_aa659d97b6f859b82c440d4a23e355ced}{Dungeon\+::\+Enemies\+::\+Minotaur}}, and \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Ghost_ad9652b5b9f675900dbe4a2231e9b224c}{Dungeon\+::\+Enemies\+::\+Ghost}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a78fd06534316407a7df991f850ec72c8}\label{classDungeon_1_1Enemy_a78fd06534316407a7df991f850ec72c8}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!CanMove@{CanMove}}
+\index{CanMove@{CanMove}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{CanMove()}{CanMove()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Can\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a5262201047625ef6c7a7989b3612f297}\label{classDungeon_1_1Enemy_a5262201047625ef6c7a7989b3612f297}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!ChangeHealthBar@{ChangeHealthBar}}
+\index{ChangeHealthBar@{ChangeHealthBar}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{ChangeHealthBar()}{ChangeHealthBar()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Change\+Health\+Bar (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{health }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a4c6039ff5a94e12b2f50ee983e61b8c9}\label{classDungeon_1_1Enemy_a4c6039ff5a94e12b2f50ee983e61b8c9}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!FindNextToPlayer@{FindNextToPlayer}}
+\index{FindNextToPlayer@{FindNextToPlayer}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{FindNextToPlayer()}{FindNextToPlayer()}}
+{\footnotesize\ttfamily glm\+::vec2 Dungeon\+::\+Enemy\+::\+Find\+Next\+To\+Player (\begin{DoxyParamCaption}\item[{bool}]{is\+Extra\+Directions = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a13559f909a7b794ee58343ed7c1a58df}\label{classDungeon_1_1Enemy_a13559f909a7b794ee58343ed7c1a58df}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GamePostion2MapIndex@{GamePostion2MapIndex}}
+\index{GamePostion2MapIndex@{GamePostion2MapIndex}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GamePostion2MapIndex()}{GamePostion2MapIndex()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Game\+Postion2\+Map\+Index (\begin{DoxyParamCaption}\item[{const glm\+::ivec2 \&}]{position }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a9d85e2077c079887b808c6d8de9da84c}\label{classDungeon_1_1Enemy_a9d85e2077c079887b808c6d8de9da84c}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetBeatDelay@{GetBeatDelay}}
+\index{GetBeatDelay@{GetBeatDelay}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetBeatDelay()}{GetBeatDelay()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+Beat\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a76673ddd0f210254322a79e6347b800a}\label{classDungeon_1_1Enemy_a76673ddd0f210254322a79e6347b800a}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetCoin@{GetCoin}}
+\index{GetCoin@{GetCoin}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetCoin()}{GetCoin()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+Coin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a702be463ad3109c5988c2b8aa3c2c36b}\label{classDungeon_1_1Enemy_a702be463ad3109c5988c2b8aa3c2c36b}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetDamage@{GetDamage}}
+\index{GetDamage@{GetDamage}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetDamage()}{GetDamage()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+Damage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a4c9c64d2862dd84b615908161a3141e6}\label{classDungeon_1_1Enemy_a4c9c64d2862dd84b615908161a3141e6}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetGamePosition@{GetGamePosition}}
+\index{GetGamePosition@{GetGamePosition}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetGamePosition()}{GetGamePosition()}}
+{\footnotesize\ttfamily const glm\+::vec2\& Dungeon\+::\+Enemy\+::\+Get\+Game\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a09b31a9bcfd2f6a50b6004296b9556e1}\label{classDungeon_1_1Enemy_a09b31a9bcfd2f6a50b6004296b9556e1}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetHealth@{GetHealth}}
+\index{GetHealth@{GetHealth}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetHealth()}{GetHealth()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_aebd5df836e96b6b37926dacb98621cae}\label{classDungeon_1_1Enemy_aebd5df836e96b6b37926dacb98621cae}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetID@{GetID}}
+\index{GetID@{GetID}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetID()}{GetID()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a56524b2c07cd46e26de5fdefc82c708d}\label{classDungeon_1_1Enemy_a56524b2c07cd46e26de5fdefc82c708d}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetLord@{GetLord}}
+\index{GetLord@{GetLord}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetLord()}{GetLord()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::\+Get\+Lord (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a515853d944e16e17c9a12af3a4c9accc}\label{classDungeon_1_1Enemy_a515853d944e16e17c9a12af3a4c9accc}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetMaxHealth@{GetMaxHealth}}
+\index{GetMaxHealth@{GetMaxHealth}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetMaxHealth()}{GetMaxHealth()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+Max\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_af5cb6154fe75a36a2a2cc3b95ba9418a}\label{classDungeon_1_1Enemy_af5cb6154fe75a36a2a2cc3b95ba9418a}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetPlayerPosition@{GetPlayerPosition}}
+\index{GetPlayerPosition@{GetPlayerPosition}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetPlayerPosition()}{GetPlayerPosition()}}
+{\footnotesize\ttfamily glm\+::vec2 Dungeon\+::\+Enemy\+::\+Get\+Player\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a0ce19c0b6fdd7cff2588eb3ee1e646de}\label{classDungeon_1_1Enemy_a0ce19c0b6fdd7cff2588eb3ee1e646de}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetPriority@{GetPriority}}
+\index{GetPriority@{GetPriority}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetPriority()}{GetPriority()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::\+Get\+Priority (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a2782930fc9b7d5dac8e52ece61e70936}\label{classDungeon_1_1Enemy_a2782930fc9b7d5dac8e52ece61e70936}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetRelativeDirectionSet@{GetRelativeDirectionSet}}
+\index{GetRelativeDirectionSet@{GetRelativeDirectionSet}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetRelativeDirectionSet()}{GetRelativeDirectionSet()}}
+{\footnotesize\ttfamily std\+::set$<$ \mbox{\hyperlink{classPlayer_ad1b5932229b5d87c3dbca5bfcacb6936}{Player\+::\+Direction}} $>$ Dungeon\+::\+Enemy\+::\+Get\+Relative\+Direction\+Set (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_aa3cc465cc38baec14ad0be9f6c661516}\label{classDungeon_1_1Enemy_aa3cc465cc38baec14ad0be9f6c661516}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetSeen@{GetSeen}}
+\index{GetSeen@{GetSeen}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetSeen()}{GetSeen()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::\+Get\+Seen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_aa1dbb5508ae8504226be104c9d3ec925}\label{classDungeon_1_1Enemy_aa1dbb5508ae8504226be104c9d3ec925}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetShadow@{GetShadow}}
+\index{GetShadow@{GetShadow}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetShadow()}{GetShadow()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::\+Get\+Shadow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a4399c26560a4d6ed08dfc2fee00a67fe}\label{classDungeon_1_1Enemy_a4399c26560a4d6ed08dfc2fee00a67fe}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetVisible@{GetVisible}}
+\index{GetVisible@{GetVisible}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetVisible()}{GetVisible()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::\+Get\+Visible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a8c5985337ac35928f2838f71916a3f4e}\label{classDungeon_1_1Enemy_a8c5985337ac35928f2838f71916a3f4e}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!GetWillMovePosition@{GetWillMovePosition}}
+\index{GetWillMovePosition@{GetWillMovePosition}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{GetWillMovePosition()}{GetWillMovePosition()}}
+{\footnotesize\ttfamily const glm\+::vec2\& Dungeon\+::\+Enemy\+::\+Get\+Will\+Move\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_aa41592c0144286d468f5d687770c1f2e}\label{classDungeon_1_1Enemy_aa41592c0144286d468f5d687770c1f2e}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!Heuristic@{Heuristic}}
+\index{Heuristic@{Heuristic}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{Heuristic()}{Heuristic()}}
+{\footnotesize\ttfamily float Dungeon\+::\+Enemy\+::\+Heuristic (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{start,  }\item[{const glm\+::vec2 \&}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a19138ead20e385902915c193f19adac9}\label{classDungeon_1_1Enemy_a19138ead20e385902915c193f19adac9}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!InitHealth@{InitHealth}}
+\index{InitHealth@{InitHealth}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{InitHealth()}{InitHealth()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Init\+Health (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{health }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_ab6d584ed5a44471082864563d2091b7a}\label{classDungeon_1_1Enemy_ab6d584ed5a44471082864563d2091b7a}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!InitHealthBarImage@{InitHealthBarImage}}
+\index{InitHealthBarImage@{InitHealthBarImage}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{InitHealthBarImage()}{InitHealthBarImage()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Init\+Health\+Bar\+Image (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{pixel\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_af125a117deeb0f0464a3bdd20ec5d950}\label{classDungeon_1_1Enemy_af125a117deeb0f0464a3bdd20ec5d950}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!IsBoss@{IsBoss}}
+\index{IsBoss@{IsBoss}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{IsBoss()}{IsBoss()}}
+{\footnotesize\ttfamily virtual bool Dungeon\+::\+Enemy\+::\+Is\+Boss (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a529fa10aabbb13a1ab7f58a38d005519}{Dungeon\+::\+Enemies\+::\+King\+Conga}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1DragonGreen_a1f25cb5be0017a7146d2a287860ed98d}{Dungeon\+::\+Enemies\+::\+Dragon\+Green}}, and \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Bat_a3fd701ccb7773c92f4d33624800bb2d9}{Dungeon\+::\+Enemies\+::\+Bat}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a121e4d59e981425733f392fede860ba1}\label{classDungeon_1_1Enemy_a121e4d59e981425733f392fede860ba1}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!IsVaildMove@{IsVaildMove}}
+\index{IsVaildMove@{IsVaildMove}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{IsVaildMove()}{IsVaildMove()}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::\+Is\+Vaild\+Move (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a4f4352fbff7eac22425ee977b00dab23}\label{classDungeon_1_1Enemy_a4f4352fbff7eac22425ee977b00dab23}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!Move@{Move}}
+\index{Move@{Move}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily virtual void Dungeon\+::\+Enemy\+::\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_a75e8a8987a04409bc831043afa1f1743}{Dungeon\+::\+Enemies\+::\+Zombie}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Wraith_a9a5847a1d6c5e9442afb5249d66eb88e}{Dungeon\+::\+Enemies\+::\+Wraith}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Skeleton_a9ead3d63800896216f6f932ec92f3cdb}{Dungeon\+::\+Enemies\+::\+Skeleton}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Shopkeeper_a76e9acd89428e59c04b7250aec347c3e}{Dungeon\+::\+Enemies\+::\+Shopkeeper}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1OrangeSlime_ad59ea106f3919154692d54f9fcd3557f}{Dungeon\+::\+Enemies\+::\+Orange\+Slime}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Monkey_a6e7ba85fa2fcc3054a2a63f16a48898c}{Dungeon\+::\+Enemies\+::\+Monkey}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Minotaur_a6b13d3449966e5693bae449b01572819}{Dungeon\+::\+Enemies\+::\+Minotaur}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_acb551ac4deeaf455f7e4c2e37b6438d6}{Dungeon\+::\+Enemies\+::\+King\+Conga}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1GreenSlime_a8c825dda30ab06ed433c90ad26126fab}{Dungeon\+::\+Enemies\+::\+Green\+Slime}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Ghost_a0c5e8253c5fbb60749e7d93185b48ecc}{Dungeon\+::\+Enemies\+::\+Ghost}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1DragonGreen_a0b2dbd5578b8c0b8a991787bcd69868c}{Dungeon\+::\+Enemies\+::\+Dragon\+Green}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1BlueSlime_a48365f0277f2c79c7dab31f90c740799}{Dungeon\+::\+Enemies\+::\+Blue\+Slime}}, and \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Bat_a43ce83413f87496552eb0c5998f1cf33}{Dungeon\+::\+Enemies\+::\+Bat}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_ade0783f7f5bdacbac4a8a734391ab04c}\label{classDungeon_1_1Enemy_ade0783f7f5bdacbac4a8a734391ab04c}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetBeatDelay@{SetBeatDelay}}
+\index{SetBeatDelay@{SetBeatDelay}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetBeatDelay()}{SetBeatDelay()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Beat\+Delay (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{beat\+Delay }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a7b5e9639d789d19c3f7ae92bb9af3986}\label{classDungeon_1_1Enemy_a7b5e9639d789d19c3f7ae92bb9af3986}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetCameraUpdate@{SetCameraUpdate}}
+\index{SetCameraUpdate@{SetCameraUpdate}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetCameraUpdate()}{SetCameraUpdate()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Camera\+Update (\begin{DoxyParamCaption}\item[{bool}]{camera\+Update }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a277138a098d8f4bc750cacb47b11f551}\label{classDungeon_1_1Enemy_a277138a098d8f4bc750cacb47b11f551}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetCoin@{SetCoin}}
+\index{SetCoin@{SetCoin}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetCoin()}{SetCoin()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Coin (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{coin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_ae72f532336242299683a49b7706d0f29}\label{classDungeon_1_1Enemy_ae72f532336242299683a49b7706d0f29}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetDamage@{SetDamage}}
+\index{SetDamage@{SetDamage}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetDamage()}{SetDamage()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Damage (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a4e4c62c32daea4f392d7bd3a4a4019a1}\label{classDungeon_1_1Enemy_a4e4c62c32daea4f392d7bd3a4a4019a1}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetFace@{SetFace}}
+\index{SetFace@{SetFace}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetFace()}{SetFace()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Face (\begin{DoxyParamCaption}\item[{bool}]{face\+To }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a72d9f115b1ece6af7f679b62c8c02e58}\label{classDungeon_1_1Enemy_a72d9f115b1ece6af7f679b62c8c02e58}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetGamePosition@{SetGamePosition}}
+\index{SetGamePosition@{SetGamePosition}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetGamePosition()}{SetGamePosition()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Game\+Position (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{game\+Position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a039b8671d67e1a00b6fe9a2e58360b80}\label{classDungeon_1_1Enemy_a039b8671d67e1a00b6fe9a2e58360b80}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetLord@{SetLord}}
+\index{SetLord@{SetLord}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetLord()}{SetLord()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Lord (\begin{DoxyParamCaption}\item[{const bool}]{lord }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a5efb6e622b0007cf9335752622141667}\label{classDungeon_1_1Enemy_a5efb6e622b0007cf9335752622141667}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetPriority@{SetPriority}}
+\index{SetPriority@{SetPriority}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetPriority()}{SetPriority()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Priority (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{priority }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a507101d637fde3007644f1212fc2398d}\label{classDungeon_1_1Enemy_a507101d637fde3007644f1212fc2398d}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!SetShadow@{SetShadow}}
+\index{SetShadow@{SetShadow}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{SetShadow()}{SetShadow()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Set\+Shadow (\begin{DoxyParamCaption}\item[{const bool}]{shadow }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a7b5c6aa54090afce6ffba15fd0092d91}\label{classDungeon_1_1Enemy_a7b5c6aa54090afce6ffba15fd0092d91}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!Struck@{Struck}}
+\index{Struck@{Struck}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{Struck()}{Struck()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Struck (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Zombie_ad9eb3bad534d6c62a7f35c32670219c9}{Dungeon\+::\+Enemies\+::\+Zombie}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Minotaur_ad5eeb964e74a3874e908e4d5e4c0ee09}{Dungeon\+::\+Enemies\+::\+Minotaur}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1KingConga_a579cda77add5aecb9032f14a2412065e}{Dungeon\+::\+Enemies\+::\+King\+Conga}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Ghost_aee0d233b671f8f997f7ba41fc1efdac1}{Dungeon\+::\+Enemies\+::\+Ghost}}, \mbox{\hyperlink{classDungeon_1_1Enemies_1_1DragonGreen_af0fc2aa9b3775784806306c7e426cd21}{Dungeon\+::\+Enemies\+::\+Dragon\+Green}}, and \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Bat_a023c1ed7c3e3bd7782eef89acac4251b}{Dungeon\+::\+Enemies\+::\+Bat}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_add8cb41dfa4aee17b538c9a58486969b}\label{classDungeon_1_1Enemy_add8cb41dfa4aee17b538c9a58486969b}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!TempoMove@{TempoMove}}
+\index{TempoMove@{TempoMove}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{TempoMove()}{TempoMove()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Tempo\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a97e0f0ba098147470b6a953cda749124}\label{classDungeon_1_1Enemy_a97e0f0ba098147470b6a953cda749124}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!Update@{Update}}
+\index{Update@{Update}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{classDungeon_1_1Enemies_1_1Monkey_a1ae3111dddc2a0b880ec39a93b6d2b16}{Dungeon\+::\+Enemies\+::\+Monkey}}.
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_aa367e324934ebc22ee11eeebe1d0ef80}\label{classDungeon_1_1Enemy_aa367e324934ebc22ee11eeebe1d0ef80}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!UpdateAnimationType@{UpdateAnimationType}}
+\index{UpdateAnimationType@{UpdateAnimationType}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{UpdateAnimationType()}{UpdateAnimationType()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Update\+Animation\+Type (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{direction }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_aef60002db25d94c28d1b979a329eefe1}\label{classDungeon_1_1Enemy_aef60002db25d94c28d1b979a329eefe1}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!UpdateHeart@{UpdateHeart}}
+\index{UpdateHeart@{UpdateHeart}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{UpdateHeart()}{UpdateHeart()}}
+{\footnotesize\ttfamily void Dungeon\+::\+Enemy\+::\+Update\+Heart (\begin{DoxyParamCaption}\item[{const glm\+::vec2 \&}]{pixel\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a6f6f068434845e0a9a596d14d8d58209}\label{classDungeon_1_1Enemy_a6f6f068434845e0a9a596d14d8d58209}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_Animation@{m\_Animation}}
+\index{m\_Animation@{m\_Animation}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_Animation}{m\_Animation}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classAnimation}{Animation}}$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Animation\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a87df4427bd61c71509c84fd170b37318}\label{classDungeon_1_1Enemy_a87df4427bd61c71509c84fd170b37318}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_AnimationType@{m\_AnimationType}}
+\index{m\_AnimationType@{m\_AnimationType}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_AnimationType}{m\_AnimationType}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Dungeon\+::\+Enemy\+::m\+\_\+\+Animation\+Type = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_adc3ca26913040a8b75a546f71070b4a8}\label{classDungeon_1_1Enemy_adc3ca26913040a8b75a546f71070b4a8}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_Dead@{m\_Dead}}
+\index{m\_Dead@{m\_Dead}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_Dead}{m\_Dead}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::m\+\_\+\+Dead = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_ab3438fb8d4d9fa5817c49e5f6ef0232b}\label{classDungeon_1_1Enemy_ab3438fb8d4d9fa5817c49e5f6ef0232b}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_EmptyHeart@{m\_EmptyHeart}}
+\index{m\_EmptyHeart@{m\_EmptyHeart}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_EmptyHeart}{m\_EmptyHeart}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$Util\+::\+Image$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Empty\+Heart\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_af765e4ca7988c7163c37148323277f81}\label{classDungeon_1_1Enemy_af765e4ca7988c7163c37148323277f81}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_FullHeart@{m\_FullHeart}}
+\index{m\_FullHeart@{m\_FullHeart}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_FullHeart}{m\_FullHeart}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$Util\+::\+Image$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Full\+Heart\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_adda2232d26c8e4bfa04eda7585045578}\label{classDungeon_1_1Enemy_adda2232d26c8e4bfa04eda7585045578}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_HealthBar@{m\_HealthBar}}
+\index{m\_HealthBar@{m\_HealthBar}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_HealthBar}{m\_HealthBar}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$Util\+::\+Game\+Object$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Health\+Bar\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a962c5a30c28c1997bfa4fafe957cf289}\label{classDungeon_1_1Enemy_a962c5a30c28c1997bfa4fafe957cf289}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_KnockbackAble@{m\_KnockbackAble}}
+\index{m\_KnockbackAble@{m\_KnockbackAble}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_KnockbackAble}{m\_KnockbackAble}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::m\+\_\+\+Knockback\+Able = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a867edb40765e5d524794d65c64bd7f11}\label{classDungeon_1_1Enemy_a867edb40765e5d524794d65c64bd7f11}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_MapData@{m\_MapData}}
+\index{m\_MapData@{m\_MapData}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_MapData}{m\_MapData}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classDungeon_1_1MapData}{Map\+Data}}$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Map\+Data\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a263c09e6146b5b2c30ac59136f2501a8}\label{classDungeon_1_1Enemy_a263c09e6146b5b2c30ac59136f2501a8}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_NormalFrames@{m\_NormalFrames}}
+\index{m\_NormalFrames@{m\_NormalFrames}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_NormalFrames}{m\_NormalFrames}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::size\+\_\+t$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Normal\+Frames\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a26bcb4941e82d932ca191bca70e85713}\label{classDungeon_1_1Enemy_a26bcb4941e82d932ca191bca70e85713}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_ShadowFrames@{m\_ShadowFrames}}
+\index{m\_ShadowFrames@{m\_ShadowFrames}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_ShadowFrames}{m\_ShadowFrames}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::size\+\_\+t$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Shadow\+Frames\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a5646488e0945a393886958d9ac067685}\label{classDungeon_1_1Enemy_a5646488e0945a393886958d9ac067685}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_SpriteSheet@{m\_SpriteSheet}}
+\index{m\_SpriteSheet@{m\_SpriteSheet}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_SpriteSheet}{m\_SpriteSheet}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classSpriteSheet}{Sprite\+Sheet}}$>$ Dungeon\+::\+Enemy\+::m\+\_\+\+Sprite\+Sheet\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a882c9da4f66aed3d0391c2aa5f94e4c4}\label{classDungeon_1_1Enemy_a882c9da4f66aed3d0391c2aa5f94e4c4}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_UnnecssaryAnimation@{m\_UnnecssaryAnimation}}
+\index{m\_UnnecssaryAnimation@{m\_UnnecssaryAnimation}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_UnnecssaryAnimation}{m\_UnnecssaryAnimation}}
+{\footnotesize\ttfamily bool Dungeon\+::\+Enemy\+::m\+\_\+\+Unnecssary\+Animation = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classDungeon_1_1Enemy_a9519218dc9db4b7ffdfd71ef2ba13c36}\label{classDungeon_1_1Enemy_a9519218dc9db4b7ffdfd71ef2ba13c36}} 
+\index{Dungeon::Enemy@{Dungeon::Enemy}!m\_WillMovePosition@{m\_WillMovePosition}}
+\index{m\_WillMovePosition@{m\_WillMovePosition}!Dungeon::Enemy@{Dungeon::Enemy}}
+\doxysubsubsection{\texorpdfstring{m\_WillMovePosition}{m\_WillMovePosition}}
+{\footnotesize\ttfamily glm\+::vec2 Dungeon\+::\+Enemy\+::m\+\_\+\+Will\+Move\+Position\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Dungeon/\mbox{\hyperlink{Enemy_8h}{Enemy.\+h}}\item 
+src/\+Dungeon/\mbox{\hyperlink{Enemy_8cpp}{Enemy.\+cpp}}\end{DoxyCompactItemize}

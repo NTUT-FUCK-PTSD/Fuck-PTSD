@@ -1,0 +1,121 @@
+\hypertarget{Elements_8h}{}\doxysection{include/\+Dungeon/\+Elements.h File Reference}
+\label{Elements_8h}\index{include/Dungeon/Elements.h@{include/Dungeon/Elements.h}}
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}config.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}glm/glm.\+hpp\char`\"{}}\newline
+Include dependency graph for Elements.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Elements_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Elements_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Tile}{Dungeon\+::s\+\_\+\+Tile}}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Trap}{Dungeon\+::s\+\_\+\+Trap}}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Enemy}{Dungeon\+::s\+\_\+\+Enemy}}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Item}{Dungeon\+::s\+\_\+\+Item}}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Chest}{Dungeon\+::s\+\_\+\+Chest}}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Crate}{Dungeon\+::s\+\_\+\+Crate}}
+\item 
+struct \mbox{\hyperlink{structDungeon_1_1s__Shrine}{Dungeon\+::s\+\_\+\+Shrine}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceDungeon}{Dungeon}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::map$<$ std\+::size\+\_\+t, std\+::string $>$ \mbox{\hyperlink{Elements_8h_ad3312e1c15078a7288cbca8d5270a779}{DUNGEON\+\_\+\+TILETYPES}}
+\item 
+const std\+::unordered\+\_\+map$<$ std\+::size\+\_\+t, std\+::string $>$ \mbox{\hyperlink{Elements_8h_ac36316f2d00811c350107c3ccbc05bb9}{DUNGEON\+\_\+\+TOOLTYPE}}
+\item 
+const std\+::unordered\+\_\+map$<$ std\+::size\+\_\+t, glm\+::ivec2 $>$ \mbox{\hyperlink{Elements_8h_aa1bf9a927fb4c8a6cd20e322ce657ca5}{DUNGEON\+\_\+\+TOOLSIZES}}
+\item 
+const std\+::map$<$ std\+::size\+\_\+t, glm\+::ivec2 $>$ \mbox{\hyperlink{Elements_8h_a99eb73d7dddab79a8bd6b72b40fd9f60}{DUNGEON\+\_\+\+TILESIZES}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{Elements_8h_a99eb73d7dddab79a8bd6b72b40fd9f60}\label{Elements_8h_a99eb73d7dddab79a8bd6b72b40fd9f60}} 
+\index{Elements.h@{Elements.h}!DUNGEON\_TILESIZES@{DUNGEON\_TILESIZES}}
+\index{DUNGEON\_TILESIZES@{DUNGEON\_TILESIZES}!Elements.h@{Elements.h}}
+\doxysubsubsection{\texorpdfstring{DUNGEON\_TILESIZES}{DUNGEON\_TILESIZES}}
+{\footnotesize\ttfamily const std\+::map$<$std\+::size\+\_\+t, glm\+::ivec2$>$ DUNGEON\+\_\+\+TILESIZES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{  \{0, \{3, 2\}\},    \{1, \{3, 2\}\},    \{2, \{1, 1\}\},   \{3, \{3, 1\}\},    \{4, \{3, 1\}\},}
+\DoxyCodeLine{  \{5, \{3, 1\}\},    \{6, \{1, 1\}\},    \{7, \{3, 1\}\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \{8, \{3, 4\}\},    \{9, \{1, 1\}\},    \{10, \{3, 1\}\},  \{11, \{3, 1\}\},   \{12, \{3, 2\}\},}
+\DoxyCodeLine{  \{13, \{3, 1\}\},   \{15, \{1, 1\}\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \{16, \{1, 1\}\},   \{17, \{3, 1\}\},   \{18, \{3, 5\}\},  \{20, \{16, 8\}\},  \{21, \{3, 1\}\},}
+\DoxyCodeLine{  \{22, \{3, 1\}\},   \{23, \{7, 5\}\},   \{24, \{3, 5\}\},  \{25, \{3, 2\}\},   \{26, \{3, 2\}\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \{50, \{1, 1\}\},   \{51, \{1, 1\}\},   \{52, \{2, 1\}\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \{100, \{16, 1\}\}, \{101, \{16, 1\}\}, \{102, \{8, 1\}\}, \{103, \{1, 1\}\},  \{104, \{1, 1\}\},}
+\DoxyCodeLine{  \{105, \{1, 1\}\},  \{106, \{1, 1\}\},  \{107, \{1, 1\}\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \{108, \{1, 1\}\},  \{109, \{5, 1\}\},  \{110, \{1, 1\}\}, \{111, \{2, 2\}\},  \{112, \{6, 1\}\},}
+\DoxyCodeLine{  \{113, \{6, 1\}\},  \{114, \{6, 1\}\},  \{115, \{6, 1\}\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \{116, \{6, 1\}\},  \{117, \{6, 1\}\},  \{118, \{1, 1\}\}, \{119, \{16, 1\}\}, \{120, \{1, 1\}\},}
+\DoxyCodeLine{  \{121, \{1, 1\}\},  \{122, \{1, 1\}\},  \{123, \{1, 1\}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{Elements_8h_ad3312e1c15078a7288cbca8d5270a779}\label{Elements_8h_ad3312e1c15078a7288cbca8d5270a779}} 
+\index{Elements.h@{Elements.h}!DUNGEON\_TILETYPES@{DUNGEON\_TILETYPES}}
+\index{DUNGEON\_TILETYPES@{DUNGEON\_TILETYPES}!Elements.h@{Elements.h}}
+\doxysubsubsection{\texorpdfstring{DUNGEON\_TILETYPES}{DUNGEON\_TILETYPES}}
+{\footnotesize\ttfamily const std\+::map$<$std\+::size\+\_\+t, std\+::string$>$ DUNGEON\+\_\+\+TILETYPES}
+
+\mbox{\Hypertarget{Elements_8h_aa1bf9a927fb4c8a6cd20e322ce657ca5}\label{Elements_8h_aa1bf9a927fb4c8a6cd20e322ce657ca5}} 
+\index{Elements.h@{Elements.h}!DUNGEON\_TOOLSIZES@{DUNGEON\_TOOLSIZES}}
+\index{DUNGEON\_TOOLSIZES@{DUNGEON\_TOOLSIZES}!Elements.h@{Elements.h}}
+\doxysubsubsection{\texorpdfstring{DUNGEON\_TOOLSIZES}{DUNGEON\_TOOLSIZES}}
+{\footnotesize\ttfamily const std\+::unordered\+\_\+map$<$std\+::size\+\_\+t, glm\+::ivec2$>$ DUNGEON\+\_\+\+TOOLSIZES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{  \{\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(1e6), \{1, 2\}\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{Elements_8h_ac36316f2d00811c350107c3ccbc05bb9}\label{Elements_8h_ac36316f2d00811c350107c3ccbc05bb9}} 
+\index{Elements.h@{Elements.h}!DUNGEON\_TOOLTYPE@{DUNGEON\_TOOLTYPE}}
+\index{DUNGEON\_TOOLTYPE@{DUNGEON\_TOOLTYPE}!Elements.h@{Elements.h}}
+\doxysubsubsection{\texorpdfstring{DUNGEON\_TOOLTYPE}{DUNGEON\_TOOLTYPE}}
+{\footnotesize\ttfamily const std\+::unordered\+\_\+map$<$std\+::size\+\_\+t, std\+::string$>$ DUNGEON\+\_\+\+TOOLTYPE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{  \{1e6, \textcolor{stringliteral}{"{}weapon\_dagger"{}}\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

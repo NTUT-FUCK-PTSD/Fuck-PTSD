@@ -1,0 +1,12 @@
+<map id="include/Game/Warehouse/Throw.h" name="include/Game/Warehouse/Throw.h">
+<area shape="rect" id="node1" title=" " alt="" coords="550,5,738,47"/>
+<area shape="rect" id="node2" href="$HandItem_8h.html" title=" " alt="" coords="205,95,377,136"/>
+<area shape="rect" id="node5" href="$HPIS_8h.html" title=" " alt="" coords="558,95,730,136"/>
+<area shape="rect" id="node10" href="$Throw_8cpp.html" title=" " alt="" coords="755,95,915,136"/>
+<area shape="rect" id="node3" href="$ClickEvent_8cpp.html" title=" " alt="" coords="5,191,147,218"/>
+<area shape="rect" id="node4" href="$HandItem_8cpp.html" title=" " alt="" coords="171,191,410,218"/>
+<area shape="rect" id="node6" href="$ISC_8h.html" title=" " alt="" coords="434,184,606,225"/>
+<area shape="rect" id="node7" href="$HPIS_8cpp.html" title=" " alt="" coords="479,273,684,300"/>
+<area shape="rect" id="node8" href="$HandThrow_8cpp.html" title=" " alt="" coords="681,191,929,218"/>
+<area shape="rect" id="node9" href="$initialGame_8cpp.html" title=" " alt="" coords="953,191,1101,218"/>
+</map>

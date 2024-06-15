@@ -1,0 +1,8 @@
+<map id="Dungeon::Tiles::GeneralDoor" name="Dungeon::Tiles::GeneralDoor">
+<area shape="rect" id="node1" title=" " alt="" coords="231,652,441,803"/>
+<area shape="rect" id="node4" href="$classDungeon_1_1Tiles_1_1DoorMetalFront.html" title=" " alt="" coords="5,851,200,957"/>
+<area shape="rect" id="node5" href="$classDungeon_1_1Tiles_1_1DoorMetalSide.html" title=" " alt="" coords="225,851,447,957"/>
+<area shape="rect" id="node6" href="$classDungeon_1_1Tiles_1_1WireDoor.html" title=" " alt="" coords="471,858,659,950"/>
+<area shape="rect" id="node2" href="$classDungeon_1_1Tile.html" title=" " alt="" coords="247,131,425,604"/>
+<area shape="rect" id="node3" title=" " alt="" coords="269,5,403,83"/>
+</map>

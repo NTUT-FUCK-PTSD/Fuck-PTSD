@@ -1,0 +1,10 @@
+<map id="include/Game/Factory" name="include/Game/Factory">
+<area shape="rect" id="node1" href="dir_ffc68b22a6650ab9ede1f0a0d9b4c41e.html" title="Warehouse" alt="" coords="27,52,122,100"/>
+<area shape="rect" id="node2" href="dir_abe7634b7991a79b2e58fc32cc135096.html" title="Factory" alt="" coords="39,148,111,196"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000009_000007.html" title="1" alt="" coords="69,122,79,137"/>
+<area shape="rect" id="node3" href="dir_9f260e40a4e2832526f2634517da5baf.html" title="Settings" alt="" coords="73,244,148,292"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000009_000012.html" title="5" alt="" coords="126,221,136,236"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000007_000009.html" title="1" alt="" coords="71,112,80,126"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000007_000012.html" title="1" alt="" coords="99,217,108,231"/>
+<area shape="rect" id="clust1" href="dir_42f88387b2411e5d672af5da212cf282.html" title="Game" alt="" coords="16,16,133,207"/>
+</map>

@@ -1,0 +1,158 @@
+\hypertarget{classHeart}{}\doxysection{Heart Class Reference}
+\label{classHeart}\index{Heart@{Heart}}
+
+
+{\ttfamily \#include $<$Heart.\+h$>$}
+
+
+
+Collaboration diagram for Heart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{classHeart__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3}{STATE}} \{ \mbox{\hyperlink{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3aa1dcd1ef7c3ee6ee3c1f0f73a4fa411f}{FULL}} = 0
+, \mbox{\hyperlink{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3a4d901f6c03c3b1c452c389e5aa651cea}{HALF}}
+, \mbox{\hyperlink{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3a9e6eed40faf82a752c48268be0af3bb1}{EMPTY}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHeart_a11aad67a0567c38ba3141038f97670bf}{Heart}} ()
+\item 
+void \mbox{\hyperlink{classHeart_a36be02977b56abf302c80a8fb29ba780}{plus\+HP}} (const std\+::size\+\_\+t number)
+\item 
+void \mbox{\hyperlink{classHeart_a53ca9d453e50a59f20367c50dd21f4bc}{minus\+HP}} (const std\+::size\+\_\+t number)
+\item 
+void \mbox{\hyperlink{classHeart_aeae18a739facf229e78012566b162f72}{minus\+Heart}} (const float number)
+\item 
+void \mbox{\hyperlink{classHeart_a58a05bdaa04557c7307d97e0742466dd}{hit\+Heart}} (const std\+::size\+\_\+t index)
+\item 
+void \mbox{\hyperlink{classHeart_abf0dcf657af135d97bc9546e3872f8e5}{gain\+Heart}} (const std\+::size\+\_\+t number=2)
+\item 
+void \mbox{\hyperlink{classHeart_a5f112804abd15e23e9e5967bc141dda6}{Update\+HP}} ()
+\item 
+void \mbox{\hyperlink{classHeart_a64e365fbd7d801d1825ee0a5bff82e23}{reset\+HP}} ()
+\item 
+void \mbox{\hyperlink{classHeart_a56bc09687a7535bbbb6d4bff1ef5db1f}{Set\+Heart\+Max\+Hp}} (const std\+::size\+\_\+t value)
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ $>$ \mbox{\hyperlink{classHeart_a16677d740ddff68eae4a47403fcf89be}{get\+Game\+Objects}} () const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classHeart_a26991b5f360413a5bda4a79f47ac5258}{Get\+Health}} () const
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ \mbox{\hyperlink{classHeart_a0ab40aac1ff3a71f83c88f6bde2b2ee1}{Get\+Game\+Object}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3}\label{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3}} 
+\index{Heart@{Heart}!STATE@{STATE}}
+\index{STATE@{STATE}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{STATE}{STATE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3}{Heart\+::\+STATE}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FULL@{FULL}!Heart@{Heart}}\index{Heart@{Heart}!FULL@{FULL}}}\mbox{\Hypertarget{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3aa1dcd1ef7c3ee6ee3c1f0f73a4fa411f}\label{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3aa1dcd1ef7c3ee6ee3c1f0f73a4fa411f}} 
+FULL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HALF@{HALF}!Heart@{Heart}}\index{Heart@{Heart}!HALF@{HALF}}}\mbox{\Hypertarget{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3a4d901f6c03c3b1c452c389e5aa651cea}\label{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3a4d901f6c03c3b1c452c389e5aa651cea}} 
+HALF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMPTY@{EMPTY}!Heart@{Heart}}\index{Heart@{Heart}!EMPTY@{EMPTY}}}\mbox{\Hypertarget{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3a9e6eed40faf82a752c48268be0af3bb1}\label{classHeart_a01c05d59ef2cce01e40c0f9b88c74ab3a9e6eed40faf82a752c48268be0af3bb1}} 
+EMPTY&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHeart_a11aad67a0567c38ba3141038f97670bf}\label{classHeart_a11aad67a0567c38ba3141038f97670bf}} 
+\index{Heart@{Heart}!Heart@{Heart}}
+\index{Heart@{Heart}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{Heart()}{Heart()}}
+{\footnotesize\ttfamily Heart\+::\+Heart (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHeart_abf0dcf657af135d97bc9546e3872f8e5}\label{classHeart_abf0dcf657af135d97bc9546e3872f8e5}} 
+\index{Heart@{Heart}!gainHeart@{gainHeart}}
+\index{gainHeart@{gainHeart}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{gainHeart()}{gainHeart()}}
+{\footnotesize\ttfamily void Heart\+::gain\+Heart (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{number = {\ttfamily 2} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_a0ab40aac1ff3a71f83c88f6bde2b2ee1}\label{classHeart_a0ab40aac1ff3a71f83c88f6bde2b2ee1}} 
+\index{Heart@{Heart}!GetGameObject@{GetGameObject}}
+\index{GetGameObject@{GetGameObject}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{GetGameObject()}{GetGameObject()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGameElement}{Game\+Element}} $>$ Heart\+::\+Get\+Game\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classHeart_a16677d740ddff68eae4a47403fcf89be}\label{classHeart_a16677d740ddff68eae4a47403fcf89be}} 
+\index{Heart@{Heart}!getGameObjects@{getGameObjects}}
+\index{getGameObjects@{getGameObjects}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{getGameObjects()}{getGameObjects()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ $>$ Heart\+::get\+Game\+Objects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classHeart_a26991b5f360413a5bda4a79f47ac5258}\label{classHeart_a26991b5f360413a5bda4a79f47ac5258}} 
+\index{Heart@{Heart}!GetHealth@{GetHealth}}
+\index{GetHealth@{GetHealth}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{GetHealth()}{GetHealth()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Heart\+::\+Get\+Health (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classHeart_a58a05bdaa04557c7307d97e0742466dd}\label{classHeart_a58a05bdaa04557c7307d97e0742466dd}} 
+\index{Heart@{Heart}!hitHeart@{hitHeart}}
+\index{hitHeart@{hitHeart}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{hitHeart()}{hitHeart()}}
+{\footnotesize\ttfamily void Heart\+::hit\+Heart (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_aeae18a739facf229e78012566b162f72}\label{classHeart_aeae18a739facf229e78012566b162f72}} 
+\index{Heart@{Heart}!minusHeart@{minusHeart}}
+\index{minusHeart@{minusHeart}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{minusHeart()}{minusHeart()}}
+{\footnotesize\ttfamily void Heart\+::minus\+Heart (\begin{DoxyParamCaption}\item[{const float}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_a53ca9d453e50a59f20367c50dd21f4bc}\label{classHeart_a53ca9d453e50a59f20367c50dd21f4bc}} 
+\index{Heart@{Heart}!minusHP@{minusHP}}
+\index{minusHP@{minusHP}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{minusHP()}{minusHP()}}
+{\footnotesize\ttfamily void Heart\+::minus\+HP (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_a36be02977b56abf302c80a8fb29ba780}\label{classHeart_a36be02977b56abf302c80a8fb29ba780}} 
+\index{Heart@{Heart}!plusHP@{plusHP}}
+\index{plusHP@{plusHP}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{plusHP()}{plusHP()}}
+{\footnotesize\ttfamily void Heart\+::plus\+HP (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_a64e365fbd7d801d1825ee0a5bff82e23}\label{classHeart_a64e365fbd7d801d1825ee0a5bff82e23}} 
+\index{Heart@{Heart}!resetHP@{resetHP}}
+\index{resetHP@{resetHP}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{resetHP()}{resetHP()}}
+{\footnotesize\ttfamily void Heart\+::reset\+HP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_a56bc09687a7535bbbb6d4bff1ef5db1f}\label{classHeart_a56bc09687a7535bbbb6d4bff1ef5db1f}} 
+\index{Heart@{Heart}!SetHeartMaxHp@{SetHeartMaxHp}}
+\index{SetHeartMaxHp@{SetHeartMaxHp}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{SetHeartMaxHp()}{SetHeartMaxHp()}}
+{\footnotesize\ttfamily void Heart\+::\+Set\+Heart\+Max\+Hp (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classHeart_a5f112804abd15e23e9e5967bc141dda6}\label{classHeart_a5f112804abd15e23e9e5967bc141dda6}} 
+\index{Heart@{Heart}!UpdateHP@{UpdateHP}}
+\index{UpdateHP@{UpdateHP}!Heart@{Heart}}
+\doxysubsubsection{\texorpdfstring{UpdateHP()}{UpdateHP()}}
+{\footnotesize\ttfamily void Heart\+::\+Update\+HP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Game/\+Warehouse/\mbox{\hyperlink{Heart_8h}{Heart.\+h}}\item 
+src/\+Game/\+Warehouse/\mbox{\hyperlink{Heart_8cpp}{Heart.\+cpp}}\end{DoxyCompactItemize}

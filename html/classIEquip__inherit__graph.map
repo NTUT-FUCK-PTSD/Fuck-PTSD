@@ -1,0 +1,12 @@
+<map id="IEquip" name="IEquip">
+<area shape="rect" id="node1" title=" " alt="" coords="577,344,716,465"/>
+<area shape="rect" id="node4" href="$classBomb.html" title=" " alt="" coords="5,521,144,686"/>
+<area shape="rect" id="node5" href="$classDagger.html" title=" " alt="" coords="168,521,307,686"/>
+<area shape="rect" id="node6" href="$classGame_1_1Warehouse_1_1Food__1.html" title=" " alt="" coords="331,521,525,686"/>
+<area shape="rect" id="node7" href="$classGame_1_1Warehouse_1_1Food__2.html" title=" " alt="" coords="549,521,744,686"/>
+<area shape="rect" id="node8" href="$classGame_1_1Warehouse_1_1Throw.html" title=" " alt="" coords="768,513,957,693"/>
+<area shape="rect" id="node9" href="$classShovel.html" title=" " alt="" coords="981,521,1120,686"/>
+<area shape="rect" id="node10" href="$classSpear.html" title=" " alt="" coords="1144,521,1283,686"/>
+<area shape="rect" id="node2" href="$classUtil_1_1GameElement.html" title=" " alt="" coords="571,131,722,296"/>
+<area shape="rect" id="node3" title=" " alt="" coords="579,5,714,83"/>
+</map>

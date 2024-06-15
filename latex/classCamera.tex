@@ -1,0 +1,170 @@
+\hypertarget{classCamera}{}\doxysection{Camera Class Reference}
+\label{classCamera}\index{Camera@{Camera}}
+
+
+{\ttfamily \#include $<$Camera.\+h$>$}
+
+
+
+Collaboration diagram for Camera\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{classCamera__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCamera_a6aaf4c738fb4e729a17fd3212054b7c1}{Camera}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$$>$ \&children=\{\})
+\begin{DoxyCompactList}\small\item\em Parameterized constructor. \`{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a66f5b1172241f61ad7988b33e159edeb}{Add\+Child}} (const std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ child)
+\begin{DoxyCompactList}\small\item\em Add a child to Renderer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a0b65e8d316fab97f9b15836935882dd3}{Add\+Children}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$$>$ \&children)
+\begin{DoxyCompactList}\small\item\em Add children to Renderer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a09e934f05081222f74d5d10dd1354a0c}{Remove\+Child}} (std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ child)
+\begin{DoxyCompactList}\small\item\em Remove the child. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a4a596a3ea1fdc7d244ba4268031a360b}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Draw children according to their z-\/index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a856e360f79004549be3084794d1c934b}{Set\+Position}} (const glm\+::vec2 position)
+\item 
+glm\+::vec2 \mbox{\hyperlink{classCamera_aeebc38ca3ca30379285155cf23c7b293}{Get\+Position}} ()
+\item 
+void \mbox{\hyperlink{classCamera_a5f39f7cef142f1f6d281fe4429962151}{Move\+By\+Time}} (const unsigned long during\+Time\+Ms, const glm\+::vec2 \&destination)
+\item 
+void \mbox{\hyperlink{classCamera_a603b8b975762ec41007111ddaa566b2c}{Shake}} (const unsigned long during\+Time\+Ms, const float strength)
+\item 
+void \mbox{\hyperlink{classCamera_a9a19b7634f513a57b4dcadcc31f2e0a6}{Add\+UIChild}} (const std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ child)
+\item 
+void \mbox{\hyperlink{classCamera_accff81a84d3eb7afac0a6a8ecd921e15}{Add\+UIChildren}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$$>$ \&children)
+\item 
+void \mbox{\hyperlink{classCamera_a288b3f909cda4875d6d6f008d782550f}{Remove\+UIChild}} (std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$ child)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCamera_a6aaf4c738fb4e729a17fd3212054b7c1}\label{classCamera_a6aaf4c738fb4e729a17fd3212054b7c1}} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$$>$ \&}]{children = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+
+
+Parameterized constructor. \`{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em children} & The Game\+Object needing to be managed by Renderer. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCamera_a66f5b1172241f61ad7988b33e159edeb}\label{classCamera_a66f5b1172241f61ad7988b33e159edeb}} 
+\index{Camera@{Camera}!AddChild@{AddChild}}
+\index{AddChild@{AddChild}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{AddChild()}{AddChild()}}
+{\footnotesize\ttfamily void Camera\+::\+Add\+Child (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$}]{child }\end{DoxyParamCaption})}
+
+
+
+Add a child to Renderer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The Game\+Object needing to be managed by Renderer. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCamera_a0b65e8d316fab97f9b15836935882dd3}\label{classCamera_a0b65e8d316fab97f9b15836935882dd3}} 
+\index{Camera@{Camera}!AddChildren@{AddChildren}}
+\index{AddChildren@{AddChildren}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{AddChildren()}{AddChildren()}}
+{\footnotesize\ttfamily void Camera\+::\+Add\+Children (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$$>$ \&}]{children }\end{DoxyParamCaption})}
+
+
+
+Add children to Renderer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em children} & The Game\+Objects needing to be managed by Renderer. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCamera_a9a19b7634f513a57b4dcadcc31f2e0a6}\label{classCamera_a9a19b7634f513a57b4dcadcc31f2e0a6}} 
+\index{Camera@{Camera}!AddUIChild@{AddUIChild}}
+\index{AddUIChild@{AddUIChild}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{AddUIChild()}{AddUIChild()}}
+{\footnotesize\ttfamily void Camera\+::\+Add\+UIChild (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$}]{child }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCamera_accff81a84d3eb7afac0a6a8ecd921e15}\label{classCamera_accff81a84d3eb7afac0a6a8ecd921e15}} 
+\index{Camera@{Camera}!AddUIChildren@{AddUIChildren}}
+\index{AddUIChildren@{AddUIChildren}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{AddUIChildren()}{AddUIChildren()}}
+{\footnotesize\ttfamily void Camera\+::\+Add\+UIChildren (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$$>$ \&}]{children }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCamera_aeebc38ca3ca30379285155cf23c7b293}\label{classCamera_aeebc38ca3ca30379285155cf23c7b293}} 
+\index{Camera@{Camera}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily glm\+::vec2 Camera\+::\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classCamera_a5f39f7cef142f1f6d281fe4429962151}\label{classCamera_a5f39f7cef142f1f6d281fe4429962151}} 
+\index{Camera@{Camera}!MoveByTime@{MoveByTime}}
+\index{MoveByTime@{MoveByTime}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{MoveByTime()}{MoveByTime()}}
+{\footnotesize\ttfamily void Camera\+::\+Move\+By\+Time (\begin{DoxyParamCaption}\item[{const unsigned long}]{during\+Time\+Ms,  }\item[{const glm\+::vec2 \&}]{destination }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCamera_a09e934f05081222f74d5d10dd1354a0c}\label{classCamera_a09e934f05081222f74d5d10dd1354a0c}} 
+\index{Camera@{Camera}!RemoveChild@{RemoveChild}}
+\index{RemoveChild@{RemoveChild}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{RemoveChild()}{RemoveChild()}}
+{\footnotesize\ttfamily void Camera\+::\+Remove\+Child (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$}]{child }\end{DoxyParamCaption})}
+
+
+
+Remove the child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The Game\+Object being removed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCamera_a288b3f909cda4875d6d6f008d782550f}\label{classCamera_a288b3f909cda4875d6d6f008d782550f}} 
+\index{Camera@{Camera}!RemoveUIChild@{RemoveUIChild}}
+\index{RemoveUIChild@{RemoveUIChild}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{RemoveUIChild()}{RemoveUIChild()}}
+{\footnotesize\ttfamily void Camera\+::\+Remove\+UIChild (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Util\+::\+Game\+Object $>$}]{child }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCamera_a856e360f79004549be3084794d1c934b}\label{classCamera_a856e360f79004549be3084794d1c934b}} 
+\index{Camera@{Camera}!SetPosition@{SetPosition}}
+\index{SetPosition@{SetPosition}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{SetPosition()}{SetPosition()}}
+{\footnotesize\ttfamily void Camera\+::\+Set\+Position (\begin{DoxyParamCaption}\item[{const glm\+::vec2}]{position }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCamera_a603b8b975762ec41007111ddaa566b2c}\label{classCamera_a603b8b975762ec41007111ddaa566b2c}} 
+\index{Camera@{Camera}!Shake@{Shake}}
+\index{Shake@{Shake}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Shake()}{Shake()}}
+{\footnotesize\ttfamily void Camera\+::\+Shake (\begin{DoxyParamCaption}\item[{const unsigned long}]{during\+Time\+Ms,  }\item[{const float}]{strength }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classCamera_a4a596a3ea1fdc7d244ba4268031a360b}\label{classCamera_a4a596a3ea1fdc7d244ba4268031a360b}} 
+\index{Camera@{Camera}!Update@{Update}}
+\index{Update@{Update}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Camera\+::\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draw children according to their z-\/index. 
+
+\begin{DoxyNote}{Note}
+The user is not recommended to modify this function. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Settings/\mbox{\hyperlink{Camera_8h}{Camera.\+h}}\item 
+src/\+Settings/\mbox{\hyperlink{Camera_8cpp}{Camera.\+cpp}}\end{DoxyCompactItemize}

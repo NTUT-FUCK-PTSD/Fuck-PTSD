@@ -1,0 +1,6 @@
+<map id="Dungeon::Enemies::Monkey" name="Dungeon::Enemies::Monkey">
+<area shape="rect" id="node1" title=" " alt="" coords="25,696,227,832"/>
+<area shape="rect" id="node2" href="$classDungeon_1_1Enemy.html" title=" " alt="" coords="24,145,228,648"/>
+<area shape="rect" id="node3" href="$classObject.html" title=" " alt="" coords="5,5,105,97"/>
+<area shape="rect" id="node4" title=" " alt="" coords="129,13,264,90"/>
+</map>

@@ -1,0 +1,24 @@
+\hypertarget{namespaceUpdate}{}\doxysection{Update Namespace Reference}
+\label{namespaceUpdate}\index{Update@{Update}}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{namespaceUpdate_a3a2ba337c45826f2ae9b169bd8306e41}{music\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceUpdate_a3a2ba337c45826f2ae9b169bd8306e41}\label{namespaceUpdate_a3a2ba337c45826f2ae9b169bd8306e41}} 
+\index{Update@{Update}!musicTime@{musicTime}}
+\index{musicTime@{musicTime}!Update@{Update}}
+\doxysubsubsection{\texorpdfstring{musicTime}{musicTime}}
+{\footnotesize\ttfamily auto Update\+::music\+Time}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= []() \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(\mbox{\hyperlink{classMusic_1_1Player_a9fb912898f42cb4b5d570111fe0cd866}{Music::Player::GetMusicTime}}() * 1000)}
+\DoxyCodeLine{           \% \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(\mbox{\hyperlink{classMusic_1_1Player_adaa82a1dc1a2d9ad1589ce6961aa4af8}{Music::Player::GetMusicLength}}() * 1000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
